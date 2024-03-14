@@ -20,5 +20,12 @@ public class ChaState : MonoBehaviour
 
     public ChaProperty[] buffProp = new ChaProperty[2] { ChaProperty.zero, ChaProperty.zero };
     //临时的变量，用于先简单的判断是否读档
+
+    public BattleDice battleDice = new BattleDice();
     public bool ifExist;
+
+    private void Start()
+    {
+        
+    }
 }

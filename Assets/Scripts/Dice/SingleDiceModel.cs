@@ -19,13 +19,32 @@ public class SingleDiceModel
     /// </summary>
     public ChaResource cost;
     /// <summary>
-    /// 基础伤害
+    /// 基础伤害,这个伤害是不包含等级的伤害
     /// </summary>
-    public int Damage;
+    public Damage damage;
     /// <summary>
     /// 等级
     /// </summary>
     public int level;
+    /// <summary>
+    /// 使用骰面的特效
+    /// </summary>
+    public BuffInfo[] buffInfos;
+    /// <summary>
+    /// 骰子的特效
+    /// </summary>
+    public VisualEffect visualEffect;
+
+    public SingleDiceModel(string id, ChaResource condition, ChaResource cost, Damage damage, int level, BuffInfo[] buffInfos, VisualEffect visualEffect)
+    {
+        this.id = id;
+        this.condition = condition;
+        this.cost = cost;
+        this.damage = damage;
+        this.level = level;
+        this.buffInfos = buffInfos;
+        this.visualEffect = visualEffect;
+    }
 }
 
 
