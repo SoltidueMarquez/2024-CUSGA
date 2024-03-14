@@ -1,9 +1,27 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using DG.Tweening;
+using TMPro;
+using UnityEngine.UI;
 
+
+public class FSMParameter
+{
+    /// <summary>
+    /// 记录回合数
+    /// </summary>
+    public int turns;
+    /// <summary>
+    /// 玩家重新投掷的次数
+    /// </summary>
+    public int playerRerollCount;
+
+    public ChaState playerChaStates;
+    public ChaState[] enemyChaState;
+
+}
 
 public enum GameState
 {
@@ -31,7 +49,10 @@ public class BattleManager : MonoBehaviour
 
     private Dictionary<GameState, IState> states = new Dictionary<GameState, IState>();
 
-    
+    [Header("战斗系统参数")]
+    public FSMParameter parameter;
+
+
     public static BattleManager Instance
     {
         get; private set;
