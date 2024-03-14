@@ -76,5 +76,20 @@ public class BuffHandler : MonoBehaviour
             RemoveBuff(removeList[i]);
         }
     }
-}
+    public void BuffRoundEndTick()
+    {
+        for (int i = 0; i < buffList.Count; i++)
+        {
+            buffList[i].buffData.onRoundEnd?.Invoke(buffList[i]);
+        }
+    }
+    public void RecheckBuff(ChaProperty[] buffProp,ref ChaControlState chaControlState)
+    {
+        foreach (var buff in buffList)
+        {
+            buffProp[0] += buff.buffData.propMod[0] * buff.curStack;
+            buffProp[1] += buff.buffData.propMod[1];
+            chaControlState += buff.buffData.stateMod;
+        }
+    }
 }
