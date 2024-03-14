@@ -6,11 +6,35 @@ using UnityEngine;
 /// </summary>
 public class ChaResource
 {
+    /// <summary>
+    /// 玩家当前的生命值
+    /// </summary>
     public int currentHp;
-
+    /// <summary>
+    /// 玩家当前的金钱
+    /// </summary>
     public int currentMoney;
-
+    /// <summary>
+    /// 玩家当前的重投次数
+    /// </summary>
     public int currentRollTimes;
-
+    /// <summary>
+    /// 玩家当前的护盾
+    /// </summary>
     public int currentShield;
+
+    public ChaResource(int currentHp = 0, int currentMoney = 0, int currentRollTimes = 0, int currentShield = 0)
+    {
+        this.currentHp = currentHp;
+        this.currentMoney = currentMoney;
+        this.currentRollTimes = currentRollTimes;
+        this.currentShield = currentShield;
+    }
+
+    public static ChaResource zero = new ChaResource(0, 0, 0, 0);
+
+    public bool Enough(ChaResource cost)
+    {
+        return currentHp >= cost.currentHp && currentMoney >= cost.currentMoney && currentRollTimes >= cost.currentRollTimes && currentShield >= cost.currentShield;
+    }
 }

@@ -26,6 +26,10 @@ public class BuffData
     /// buff的最高层数
     /// </summary>
     public int maxStack;
+    //当buff的层数发生变化时，buff的更新策略
+    public BuffUpdateEnum buffUpdateEnum;
+
+    public BuffRemoveStackUpdateEnum removeStackUpdateEnum;
 
     //buff的时间信息
     public int duringCount;
@@ -116,6 +120,7 @@ public class BuffData
     /// <param name="stateMod"></param>
     public BuffData(
         string id, string name, string icon, string[] tags, int maxStack, int duringCount, bool isPermanent,
+        BuffUpdateEnum buffUpdateEnum, BuffRemoveStackUpdateEnum removeStackUpdateEnum,
         string onCreate, object[] onCreateParams,
         string onRemove, object[] onRemoveParams,
         string onRoundStart, object[] onRoundStartParams,

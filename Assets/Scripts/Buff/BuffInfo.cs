@@ -31,11 +31,11 @@ public class BuffInfo : MonoBehaviour
     /// </summary>
     public int curStack;
 
-    public Dictionary<string,object> buffParam = new Dictionary<string, object>();
+    public Dictionary<string, object> buffParam = new Dictionary<string, object>();
 
     public BuffInfo(
-        BuffData buffData, GameObject creator,GameObject target,int stack =1,bool isPermanent = false,
-        Dictionary<string,object> buffParam = null
+        BuffData buffData, GameObject creator, GameObject target, int stack = 1, bool isPermanent = false,
+        Dictionary<string, object> buffParam = null
         )
     {
         this.buffData = buffData;
@@ -43,12 +43,27 @@ public class BuffInfo : MonoBehaviour
         this.target = target;
         this.curStack = stack;
         this.isPermanent = isPermanent;
-        if(buffParam != null)
+        this.roundCount = buffData.duringCount;
+        if (buffParam != null)
         {
-            foreach(var item in buffParam)
+            foreach (var item in buffParam)
             {
-                this.buffParam.Add(item.Key,item.Value);
+                this.buffParam.Add(item.Key, item.Value);
             }
         }
     }
 }
+
+public enum BuffRemoveStackUpdateEnum
+{
+    Clear,
+    Reduce
+}
+
+public enum  BuffUpdateEnum
+{
+    Add,
+    Replace,
+    Keep
+}
+

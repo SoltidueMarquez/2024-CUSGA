@@ -30,6 +30,9 @@ public struct ChaControlState
         canUseDice = true;
         ifImmune = false;
     }
-
+    public static ChaControlState operator +(ChaControlState a, ChaControlState b)
+    {
+        return new ChaControlState(a.ifCanChangePosition && b.ifCanChangePosition, a.canUseDice && b.canUseDice, a.ifImmune || b.ifImmune);
+    }
     //TODO:重载运算符，用于状态的合并，以及一些static的默认状态
 }
