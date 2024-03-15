@@ -34,8 +34,22 @@ public class SingleDiceModel
     /// 骰子的特效
     /// </summary>
     public VisualEffect visualEffect;
-
-    public SingleDiceModel(string id, ChaResource condition, ChaResource cost, Damage damage, int level, BuffInfo[] buffInfos, VisualEffect visualEffect)
+    /// <summary>
+    /// 骰面的售价
+    /// </summary>
+    public int value;
+    /// <summary>
+    /// 最基础的构造函数
+    /// </summary>
+    /// <param name="id">每一个单独的骰面的唯一id,用于查找信息与逻辑视觉共享</param>
+    /// <param name="condition">使用骰面需要的条件</param>
+    /// <param name="cost">使用骰面需要扣除的资源</param>
+    /// <param name="damage">可以造成的基础伤害</param>
+    /// <param name="value">售卖的时候的价格</param>
+    /// <param name="level">等级</param>
+    /// <param name="buffInfos">附带的特效</param>
+    /// <param name="visualEffect">播放的视觉效果</param>
+    public SingleDiceModel(string id, ChaResource condition, ChaResource cost, Damage damage, int value, int level, BuffInfo[] buffInfos, VisualEffect visualEffect)
     {
         this.id = id;
         this.condition = condition;
@@ -44,6 +58,7 @@ public class SingleDiceModel
         this.level = level;
         this.buffInfos = buffInfos;
         this.visualEffect = visualEffect;
+        this.value = value;
     }
 }
 

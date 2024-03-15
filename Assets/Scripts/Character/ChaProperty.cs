@@ -23,21 +23,29 @@ public class ChaProperty
     /// </summary>
     public int shield;
 
-   //TODO:运算符重载
-   /// <summary>
-   /// 这边是最基础的构造函数，用于初始化
-   /// </summary>
-   /// <param name="health"></param>
-   /// <param name="money"></param>
-   /// <param name="maxRollTimes"></param>
-   /// <param name="shield"></param>
-   public ChaProperty(int health = 0, int money = 0, int maxRollTimes = 0, int shield = 0)
+    //TODO:运算符重载
+    /// <summary>
+    /// 这边是最基础的构造函数，用于初始化
+    /// </summary>
+    /// <param name="health"></param>
+    /// <param name="money"></param>
+    /// <param name="maxRollTimes"></param>
+    /// <param name="shield"></param>
+    public ChaProperty(int health = 0, int money = 0, int maxRollTimes = 0, int shield = 0)
     {
-       this.health = health;
-       this.money = money;
-       this.maxRollTimes = maxRollTimes;
-       this.shield = shield;
-   }
+        this.health = health;
+        this.money = money;
+        this.maxRollTimes = maxRollTimes;
+        this.shield = shield;
+    }
+    public void Zero()
+    {
+        health = 0;
+        money = 0;
+        maxRollTimes = 0;
+        shield = 0;
+    }
+
     public static ChaProperty zero = new ChaProperty(0, 0, 0, 0);
 
 
@@ -54,5 +62,14 @@ public class ChaProperty
             Mathf.RoundToInt(chaProperty.maxRollTimes * times),
             Mathf.RoundToInt(chaProperty.shield * times)
             );
+    }
+    public static ChaProperty operator *(ChaProperty chaProperty, ChaProperty chaProperty1)
+    {
+        return new ChaProperty(
+            Mathf.RoundToInt(chaProperty.money * (1.000f + Mathf.Max(chaProperty1.health, -0.9999f))),
+            Mathf.RoundToInt(chaProperty.money * (1.000f + Mathf.Max(chaProperty1.money, -0.9999f))),
+            Mathf.RoundToInt(chaProperty.money * (1.000f + Mathf.Max(chaProperty1.maxRollTimes, -0.9999f))),
+            Mathf.RoundToInt(chaProperty.money * (1.000f + Mathf.Max(chaProperty1.shield, -0.9999f))
+        ));
     }
 }
