@@ -19,6 +19,7 @@ public class SingleDiceObj
     ///  €º€
     /// </summary>
     public int value;
+    
     public SingleDiceObj(SingleDiceModel model, int idInDice)
     {
         this.model = model;

@@ -10,7 +10,9 @@ public class BattleDice
     /// BattleDice的骰面
     /// </summary>
     List<SingleDiceObj> diceObjs = new List<SingleDiceObj>();
-
+    /// <summary>
+    /// 该战斗骰子的种类，用于区分不同的战斗骰子
+    /// </summary>
     public DiceType diceType;
 
     public BattleDice(DiceType diceType)
@@ -26,6 +28,9 @@ public class BattleDice
         SingleDiceObj singleDiceObj = new SingleDiceObj(singleDiceModel, idInDice);
         diceObjs.Add(singleDiceObj);
     }
+
+
+    
 }
 /// <summary>
 /// 战斗骰子的种类
