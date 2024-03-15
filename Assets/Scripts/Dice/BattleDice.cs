@@ -2,27 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// 鐜╁鍜屾晫浜鸿韩涓婃寕杞界殑鎴樻枟楠板瓙
+/// 单个战斗骰子的runtime数据
 /// </summary>
 public class BattleDice
 {
-   /// <summary>
-   /// 鐜╁褰撳墠鐨勬垬鏂楃敤楠伴潰
-   /// </summary>
-    public List<SingleDiceObj> currentBattleDice = new List<SingleDiceObj>();
+    /// <summary>
+    /// BattleDice的骰面
+    /// </summary>
+    List<SingleDiceObj> diceObjs = new List<SingleDiceObj>();
 
-    public List<SingleDiceObj> bagDices = new List<SingleDiceObj>();
+    public DiceType diceType;
 
-    public void AddDice(SingleDiceModel dice)
+    public BattleDice(DiceType diceType)
     {
-        
+        this.diceType = diceType;
     }
     /// <summary>
-    /// 浣跨敤楠伴潰
+    /// 初始化单个骰子的时候，需要传入单个骰子的数据
     /// </summary>
-    /// <param name="dice"></param>
-    public void UseDice(SingleDiceObj dice)
+    /// <param name="singleDiceModel"></param>
+    public void AddDice(SingleDiceModel singleDiceModel, int idInDice)
     {
-        
+        SingleDiceObj singleDiceObj = new SingleDiceObj(singleDiceModel, idInDice);
+        diceObjs.Add(singleDiceObj);
     }
+}
+/// <summary>
+/// 战斗骰子的种类
+/// </summary>
+public enum DiceType
+{
+    Attack,
+    Defense,
+    Support
 }
