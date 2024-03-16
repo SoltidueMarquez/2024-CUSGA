@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class SacredObjectsUIEffects : UIObjectEffects, IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler,IBeginDragHandler,IEndDragHandler,IDragHandler
+    public class SacredObjectsUIEffects : UIObjectEffects, IBeginDragHandler,IEndDragHandler,IDragHandler
     {
         private void Start()
         {
@@ -13,49 +13,6 @@ namespace UI
             Init();
         }
         
-        /// <summary>
-        /// 鼠标移动函数
-        /// </summary>
-        /// <param name="eventData"></param>
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            UIManager.Instance.EnterPreview(this.gameObject);
-            UIManager.Instance.DoShake(this.GetComponent<Image>());
-            descriptionCanvas.SetActive(true);
-        }
-        
-        /// <summary>
-        /// 鼠标移开函数
-        /// </summary>
-        /// <param name="eventData"></param>
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            if (_state != State.PointerChosen)//鼠标没有点击就退出预览
-            {
-                UIManager.Instance.ExitPreview(this.gameObject);
-            }
-            descriptionCanvas.SetActive(false);
-        }
-
-        /// <summary>
-        /// 鼠标点击函数
-        /// </summary>
-        /// <param name="eventData"></param>
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            if (_state != State.PointerChosen)
-            {
-                UIManager.Instance.ClickFlow(this.gameObject);
-                _state = State.PointerChosen;//设置选中状态
-                saleButton.SetActive(true);//显示销售按钮
-            }
-            else
-            {
-                EndClick();
-                this.transform.position = _currentColumn.transform.position;//回复位置
-            }
-        }
-
         /// <summary>
         /// 开始拖动函数
         /// </summary>
@@ -66,6 +23,7 @@ namespace UI
             EndClick();
             _currentColumn =
                 UIManager.Instance.DetectColumn(gameObject, UIManager.Instance.sacredObjectColumns); //记录原来的物品栏位置
+            oldParent = gameObject.transform.parent;//记录原来的父物体
         }
 
         /// <summary>
@@ -79,6 +37,7 @@ namespace UI
             UIManager.Instance.DetectPosition(gameObject, UIManager.Instance.sacredObjectColumns, _currentColumn);
             _currentColumn =
                 UIManager.Instance.DetectColumn(gameObject, UIManager.Instance.sacredObjectColumns); //记录原来的物品栏位置
+            gameObject.transform.SetParent(oldParent);//设置为原来的图层
         }
 
         /// <summary>
@@ -88,17 +47,11 @@ namespace UI
         /// <exception cref="NotImplementedException"></exception>
         public void OnDrag(PointerEventData eventData)
         {
-            UIManager.Instance.OnDrag(this.gameObject);
+            gameObject.transform.SetParent(UIManager.Instance.dragCanvas);//设置为拖拽图层
+            UIManager.Instance.OnDrag(gameObject);
         }
 
-
-        private void EndClick()
-        {
-            //结束选中状态
-            UIManager.Instance.CancelClick(this.gameObject);
-            _state = State.None;//重置状态
-            saleButton.SetActive(false);//隐藏销售按钮
-        }
+        
         
     }
 }
