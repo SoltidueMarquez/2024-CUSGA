@@ -14,7 +14,7 @@ namespace UI
     /// <summary>
     /// 所有UI物品的基类
     /// </summary>
-    public class UIObjectEffects : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
+    public class UIObjectEffects : MonoBehaviour
     {
         //TODO:之后要和逻辑上的价格合并
         [Header("物品信息")]
@@ -45,55 +45,6 @@ namespace UI
             _currentColumn.bagObject = gameObject;//初始化当前所在的物品栏
         }
         
-        /// <summary>
-        /// 鼠标移动函数
-        /// </summary>
-        /// <param name="eventData"></param>
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            UIManager.Instance.EnterPreview(this.gameObject);
-            UIManager.Instance.DoShake(this.GetComponent<Image>());
-            descriptionCanvas.SetActive(true);
-        }
         
-        /// <summary>
-        /// 鼠标移开函数
-        /// </summary>
-        /// <param name="eventData"></param>
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            if (_state != State.PointerChosen)//鼠标没有点击就退出预览
-            {
-                UIManager.Instance.ExitPreview(this.gameObject);
-            }
-            descriptionCanvas.SetActive(false);
-        }
-        
-        /// <summary>
-        /// 鼠标点击函数
-        /// </summary>
-        /// <param name="eventData"></param>
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            if (_state != State.PointerChosen)
-            {
-                UIManager.Instance.ClickFlow(this.gameObject);
-                _state = State.PointerChosen;//设置选中状态
-                saleButton.SetActive(true);//显示销售按钮
-            }
-            else
-            {
-                EndClick();
-                this.transform.position = _currentColumn.transform.position;//回复位置
-            }
-        }
-        
-        protected void EndClick()
-        {
-            //结束选中状态
-            UIManager.Instance.CancelClick(this.gameObject);
-            _state = State.None;//重置状态
-            saleButton.SetActive(false);//隐藏销售按钮
-        }
     }
 }
