@@ -5,16 +5,26 @@ using UnityEngine.UI;
 
 namespace UI
 {
+    /// <summary>
+    /// UI管理器
+    /// </summary>
     public class UIManager : MonoBehaviour
     {
         public static UIManager Instance; //单例调用
-
+        [Header("通用")] 
+        [Tooltip("拖拽图层")] public Transform dragCanvas;
+        
         [Header("圣物相关")] 
-        [SerializeField, Tooltip("圣物晃动的角度")] private float shakeAngle;
-        [SerializeField, Tooltip("圣物变大的倍数")] private float previewSize;
+        [Tooltip("圣物晃动的角度")] public float shakeAngleS;
+        [Tooltip("圣物变大的倍数")] public float previewSizeS;
         [Tooltip("圣物栏列表")] public List<Column> sacredObjectColumns;
-        [Tooltip("圣物栏目判定")] public float offset;
-        [Tooltip("圣物模板")] public GameObject template;
+        [Tooltip("栏目判定")] public float offsetS;
+
+        [Header("背包骰面相关")]
+        [Tooltip("骰面晃动的角度")] public float shakeAngleB;
+        [Tooltip("骰面变大的倍数")] public float previewSizeB;
+        [Tooltip("背包栏列表")] public List<Column> bagColumns;
+        [Tooltip("栏目判定")] public float offsetB;
 
         private void Awake()
         {
@@ -25,19 +35,21 @@ namespace UI
         /// 鼠标移动预览效果
         /// </summary>
         /// <param name="uiObject"></param>
-        public void EnterPreview(GameObject uiObject)
+        /// <param name="pSize"></param>
+        public void EnterPreview(GameObject uiObject, float pSize)
         {
-            uiObject.transform.DOScale(new Vector3(previewSize, previewSize, previewSize), 0.2f);
+            uiObject.transform.DOScale(new Vector3(pSize, pSize, pSize), 0.2f);
         }
 
         /// <summary>
         /// 晃动效果
         /// </summary>
         /// <param name="uiObject"></param>
-        public void DoShake(Image uiObject)
+        /// <param name="sAngle"></param>
+        public void DoShake(Image uiObject, float sAngle)
         {
-            Vector3 angle = new Vector3(0, 0, shakeAngle);
-            Vector3 backAngle = new Vector3(0, 0, -shakeAngle);
+            Vector3 angle = new Vector3(0, 0, sAngle);
+            Vector3 backAngle = new Vector3(0, 0, -sAngle);
 
             uiObject.rectTransform.DOLocalRotate(angle, 0.1f).OnComplete(() =>
             {
@@ -96,10 +108,12 @@ namespace UI
         /// <summary>
         /// 物品栏拖拽换位函数
         /// </summary>
+        /// <param name="uiObject"></param>
         /// <param name="columns"></param>
-        /// <param name="oldPosition"></param>
+        /// <param name="oldColumn"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
-        public void DetectPosition(GameObject uiObject, List<Column> columns, Column oldColumn)
+        public void DetectPosition(GameObject uiObject, List<Column> columns, Column oldColumn, float offset)
         {
             Vector3 pos = oldColumn.transform.position;;
             foreach (var column in columns)
@@ -136,8 +150,9 @@ namespace UI
         /// </summary>
         /// <param name="uiObject"></param>
         /// <param name="columns"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
-        public Column DetectColumn(GameObject uiObject,List<Column> columns)
+        public Column DetectColumn(GameObject uiObject, List<Column> columns, float offset)
         {
             foreach (var column in columns)
             {
@@ -149,6 +164,7 @@ namespace UI
                     return column;
                 }
             }
+
             return null;
         }
 

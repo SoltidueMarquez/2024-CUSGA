@@ -5,14 +5,14 @@ using UnityEngine.UI;
 namespace UI
 {
     /// <summary>
-    /// 圣物UI动效实现类
+    /// 背包骰面动效实现类
     /// </summary>
-    public class SacredObjectsUIEffects : UIObjectEffects, IBeginDragHandler,IEndDragHandler,IDragHandler,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
+    public class BagDiceUIEffects : UIObjectEffects, IBeginDragHandler,IEndDragHandler,IDragHandler,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
     {
         private void Start()
         {
             //TODO:初始化信息，之后要删掉
-            Init(UIManager.Instance.sacredObjectColumns, UIManager.Instance.offsetS);
+            Init(UIManager.Instance.bagColumns, UIManager.Instance.offsetB);
         }
         
         /// <summary>
@@ -21,8 +21,8 @@ namespace UI
         /// <param name="eventData"></param>
         public void OnPointerEnter(PointerEventData eventData)
         {
-            UIManager.Instance.EnterPreview(this.gameObject,UIManager.Instance.previewSizeS);
-            UIManager.Instance.DoShake(this.GetComponent<Image>(),UIManager.Instance.shakeAngleS);
+            UIManager.Instance.EnterPreview(this.gameObject,UIManager.Instance.previewSizeB);
+            UIManager.Instance.DoShake(this.GetComponent<Image>(),UIManager.Instance.shakeAngleB);
             descriptionCanvas.SetActive(true);
         }
         
@@ -54,7 +54,7 @@ namespace UI
             else
             {
                 EndClick();
-                this.transform.position = _currentColumn.transform.position;//回复位置
+                transform.position = _currentColumn.transform.position;//回复位置
             }
         }
         
@@ -75,7 +75,7 @@ namespace UI
         {
             EndClick();
             _currentColumn =
-                UIManager.Instance.DetectColumn(gameObject, UIManager.Instance.sacredObjectColumns, UIManager.Instance.offsetS); //记录原来的物品栏位置
+                UIManager.Instance.DetectColumn(gameObject, UIManager.Instance.bagColumns, UIManager.Instance.offsetB); //记录原来的物品栏位置
             oldParent = gameObject.transform.parent;//记录原来的父物体
         }
 
@@ -87,8 +87,8 @@ namespace UI
         {
             EndClick();
             //更改位置
-            UIManager.Instance.DetectPosition(gameObject, UIManager.Instance.sacredObjectColumns, _currentColumn, UIManager.Instance.offsetS);
-            _currentColumn = UIManager.Instance.DetectColumn(gameObject, UIManager.Instance.sacredObjectColumns, UIManager.Instance.offsetS); //记录原来的物品栏位置
+            UIManager.Instance.DetectPosition(gameObject, UIManager.Instance.bagColumns, _currentColumn, UIManager.Instance.offsetB);
+            _currentColumn = UIManager.Instance.DetectColumn(gameObject, UIManager.Instance.bagColumns, UIManager.Instance.offsetB); //记录原来的物品栏位置
             gameObject.transform.SetParent(oldParent);//设置为原来的图层
         }
 
@@ -102,6 +102,5 @@ namespace UI
             gameObject.transform.SetParent(UIManager.Instance.dragCanvas);//设置为拖拽图层
             UIManager.Instance.OnDrag(gameObject);
         }
-
     }
 }
