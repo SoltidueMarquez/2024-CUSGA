@@ -30,3 +30,12 @@ public class DamageInfo
     }
 
 }
+/// <summary>
+/// 伤害类型,暂时用不到
+/// </summary>
+public enum DamageType
+{
+    Physical,
+    Magic,
+    True
+}

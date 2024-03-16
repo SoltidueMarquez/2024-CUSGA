@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 /// <summary>
 /// 角色的基础属性，最大生命值，金钱，重投次数，基础护盾,也是buff系统用来修改的依据
@@ -38,6 +39,13 @@ public class ChaProperty
         this.maxRollTimes = maxRollTimes;
         this.shield = shield;
     }
+    public ChaProperty(ChaProperty chaProperty)
+    {
+        this.health = chaProperty.health;
+        this.money = chaProperty.money;
+        this.maxRollTimes = chaProperty.maxRollTimes;
+        this.shield = chaProperty.shield;
+    }
     public void Zero()
     {
         health = 0;
@@ -53,7 +61,10 @@ public class ChaProperty
     {
         return new ChaProperty(a.health + b.health, a.money + b.money, a.maxRollTimes + b.maxRollTimes, a.shield + b.shield);
     }
-
+    public static ChaProperty operator -(ChaProperty a, ChaProperty b)
+    {
+        return new ChaProperty(a.health - b.health, a.money - b.money, a.maxRollTimes - b.maxRollTimes, a.shield - b.shield);
+    }
     public static ChaProperty operator *(ChaProperty chaProperty, float times)
     {
         return new ChaProperty(

@@ -5,15 +5,17 @@ using UnityEngine;
 public struct Damage
 {
     public int baseDamage;
-    public Damage(int baseDamage)
+    public int indexDamage;
+    public Damage(int baseDamage,int indexDamage)
     {
         this.baseDamage = baseDamage;
+        this.indexDamage = indexDamage;
     }
 
 
     public static Damage operator +(Damage a, Damage b)
     {
-        return new Damage(a.baseDamage + b.baseDamage);
+        return new Damage(a.baseDamage + b.baseDamage,a.indexDamage + b.indexDamage);
     }
 
 }
