@@ -92,8 +92,8 @@ public class ChaState : MonoBehaviour
     /// <returns></returns>
     public bool CanBeKilledByDamageInfo(DamageInfo damageInfo)
     {
-        //return damageInfo.damage >= this.prop.health;
-        return false;
+        if(damageInfo.isHeal) return false;
+        return true;
     }
     public void Kill()
     {
@@ -131,4 +131,15 @@ public class ChaState : MonoBehaviour
     {
 
     }
+
+    #region 获取组件
+    public BuffHandler GetBuffHandler()
+    {
+        return buffHandler;
+    }
+    public BattleDiceHandler GetBattleDiceHandler()
+    {
+        return battleDiceHandler;
+    }
+    #endregion 
 }

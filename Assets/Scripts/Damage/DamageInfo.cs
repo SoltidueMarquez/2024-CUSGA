@@ -20,7 +20,8 @@ public class DamageInfo
     /// 伤害可能产生的buff
     /// </summary>
     public List<BuffInfo> addBuffs = new List<BuffInfo>();
-
+    
+    public int finalDamage;
     public DamageInfo(GameObject attacker, GameObject defender, Damage damage, bool isHeal = false)
     {
         this.attacker = attacker;

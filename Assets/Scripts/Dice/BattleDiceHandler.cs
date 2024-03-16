@@ -49,14 +49,37 @@ public class BattleDiceHandler : MonoBehaviour
     /// 释放单个骰子
     /// </summary>
     public void CastSingleDice(int index,ChaState chaState)//这边的函数
-    {   //先判断资源够不够使用
+    {   SingleDiceObj singleDiceObj = diceCardsInUse[index];
+        if(chaState.resource.Enough(singleDiceObj.model.condition) == true)
+        {
+            //减少资源
+            chaState.ModResources(-1 * singleDiceObj.model.cost);
+            //造成伤害
+            Damage damage = singleDiceObj.model.damage;
+            //DamageInfo damageInfo = new DamageInfo(chaState.gameObject,damage);
+            //视觉逻辑
+            diceCardsInUse.Remove(singleDiceObj);
+        }
+        else
+        {
+            Debug.Log("资源不足");
+        }
+        //先判断资源够不够使用
     }
     /// <summary>
     /// 释放所有的骰面
     /// </summary>
     public void CastDiceAll(ChaState chaState)
     {
+        for(int i = 0;i<diceCardsInUse.Count;i++)
+        {
+            CastSingleDice(i,chaState);
+        }
+    }
 
+    public void ClearBattleSingleDices()
+    {
+        diceCardsInUse.Clear();
     }
     /// <summary>
     /// 没有存档的情况下，默认初始化骰子

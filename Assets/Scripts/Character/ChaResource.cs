@@ -41,6 +41,15 @@ public class ChaResource
     {
         return new ChaResource(a.currentHp - b.currentHp, a.currentMoney - b.currentMoney, a.currentRollTimes - b.currentRollTimes, a.currentShield - b.currentShield);
     }
+    public static ChaResource operator *(ChaResource a, int b)
+    {
+        return new ChaResource(a.currentHp * b, a.currentMoney * b, a.currentRollTimes * b, a.currentShield * b);
+
+    }
+    public static ChaResource operator *(int a, ChaResource b)
+    {
+        return b * a;
+    }
     public bool Enough(ChaResource cost)
     {
         return currentHp >= cost.currentHp && currentMoney >= cost.currentMoney && currentRollTimes >= cost.currentRollTimes && currentShield >= cost.currentShield;
