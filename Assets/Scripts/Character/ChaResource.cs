@@ -33,6 +33,14 @@ public class ChaResource
 
     public static ChaResource zero = new ChaResource(0, 0, 0, 0);
 
+    public static ChaResource operator +(ChaResource a, ChaResource b)
+    {
+        return new ChaResource(a.currentHp + b.currentHp, a.currentMoney + b.currentMoney, a.currentRollTimes + b.currentRollTimes, a.currentShield + b.currentShield);
+    }
+    public static ChaResource operator -(ChaResource a, ChaResource b)
+    {
+        return new ChaResource(a.currentHp - b.currentHp, a.currentMoney - b.currentMoney, a.currentRollTimes - b.currentRollTimes, a.currentShield - b.currentShield);
+    }
     public bool Enough(ChaResource cost)
     {
         return currentHp >= cost.currentHp && currentMoney >= cost.currentMoney && currentRollTimes >= cost.currentRollTimes && currentShield >= cost.currentShield;

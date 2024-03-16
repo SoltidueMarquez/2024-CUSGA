@@ -48,14 +48,13 @@ public class BattleDiceHandler : MonoBehaviour
     /// <summary>
     /// 释放单个骰子
     /// </summary>
-    public void CastSingleDice(int index)
-    {
-
+    public void CastSingleDice(int index,ChaState chaState)//这边的函数
+    {   //先判断资源够不够使用
     }
     /// <summary>
     /// 释放所有的骰面
     /// </summary>
-    public void CastDiceAll()
+    public void CastDiceAll(ChaState chaState)
     {
 
     }
