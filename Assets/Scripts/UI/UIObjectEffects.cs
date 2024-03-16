@@ -14,7 +14,7 @@ namespace UI
     /// <summary>
     /// 所有UI物品的基类
     /// </summary>
-    public class UIObjectEffects : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+    public class UIObjectEffects : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
     {
         //TODO:之后要和逻辑上的价格合并
         [Header("物品信息")]
