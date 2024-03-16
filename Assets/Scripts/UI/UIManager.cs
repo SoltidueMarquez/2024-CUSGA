@@ -8,7 +8,9 @@ namespace UI
     public class UIManager : MonoBehaviour
     {
         public static UIManager Instance; //单例调用
-
+        [Header("通用")] 
+        [Tooltip("拖拽图层")] public Transform dragCanvas;
+        
         [Header("圣物相关")] 
         [SerializeField, Tooltip("圣物晃动的角度")] private float shakeAngle;
         [SerializeField, Tooltip("圣物变大的倍数")] private float previewSize;
