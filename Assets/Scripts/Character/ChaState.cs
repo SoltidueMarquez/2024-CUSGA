@@ -24,7 +24,7 @@ public class ChaState : MonoBehaviour
         200, 400, 4, 0
     );
     /// <summary>
-    /// buff的属性加成
+    /// buff的属性加成,buffProp[0]是加法，buffProp[1]是乘法
     /// </summary>
     public ChaProperty[] buffProp = new ChaProperty[2] { ChaProperty.zero, ChaProperty.zero };
     /// <summary>
@@ -104,15 +104,20 @@ public class ChaState : MonoBehaviour
     /// </summary>
     private void AttrAndResourceRecheck()
     {
-        //先把原本的属性保存下来，用于后续计算差值
+        //创建一个新变量，先把原本的属性保存下来，用于后续计算差值
         ChaProperty chaProperty = new ChaProperty(this.prop);
+        //清空buff属性加成
         for (var i = 0; i < buffProp.Length; i++)
         {
             buffProp[i].Zero();
         }
+        //重新获取所有buff的加法总和和乘法总和
         buffHandler.RecheckBuff(buffProp,ref controlState);
+        //重新计算属性
         this.prop = (this.baseProp + buffProp[0]) * this.buffProp[1];
+        //计算差值
         chaProperty = this.prop - chaProperty;
+        //根据差值，重新计算资源
         this.resource+= new ChaResource(chaProperty.health,chaProperty.money,chaProperty.maxRollTimes,chaProperty.shield);
     }
     public void ModResources(ChaResource value)
