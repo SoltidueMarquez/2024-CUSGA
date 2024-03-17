@@ -17,6 +17,9 @@ public struct Damage
     {
         return new Damage(a.baseDamage + b.baseDamage,a.indexDamage + b.indexDamage);
     }
-
+    public static int FinalDamage(Damage damage, int level)
+    {
+        return (damage.baseDamage + damage.indexDamage) * level;
+    }
 }
 

@@ -58,18 +58,18 @@ public class ChaState : MonoBehaviour
     }
     #endregion
     #region 使用骰面
-    public void UseDice(int index)
+    public void UseDice(int index, GameObject target)
     {
         if(this.controlState.canUseDice == false)//如果不能使用骰子
         {
             return;
         }
-        battleDiceHandler.CastSingleDice(index,this);
+        battleDiceHandler.CastSingleDice(index,this,target);
     }
 
-    public void UseAllDice()
+    public void UseAllDice(GameObject target)
     {
-        battleDiceHandler.CastDiceAll(this);
+        battleDiceHandler.CastDiceAll(this,target);
     }
     #endregion
     #region buff的操作

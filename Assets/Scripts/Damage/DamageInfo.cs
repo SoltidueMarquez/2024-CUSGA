@@ -28,6 +28,7 @@ public class DamageInfo
         this.defender = defender;
         this.damage = damage;
         this.isHeal = isHeal;
+        this.finalDamage = Damage.FinalDamage(damage, 1);
     }
 
 }

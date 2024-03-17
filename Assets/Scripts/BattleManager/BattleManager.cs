@@ -51,7 +51,8 @@ public class BattleManager : MonoBehaviour
 
     [Header("战斗系统参数")]
     public FSMParameter parameter;
-
+    public GameObject currentSelectEnemy;
+    
 
     public static BattleManager Instance
     {

@@ -48,15 +48,16 @@ public class BattleDiceHandler : MonoBehaviour
     /// <summary>
     /// 释放单个骰子
     /// </summary>
-    public void CastSingleDice(int index,ChaState chaState)//这边的函数
-    {   SingleDiceObj singleDiceObj = diceCardsInUse[index];
-        if(chaState.resource.Enough(singleDiceObj.model.condition) == true)
+    public void CastSingleDice(int index, ChaState chaState, GameObject target)//这边的函数
+    {
+        SingleDiceObj singleDiceObj = diceCardsInUse[index];
+        if (chaState.resource.Enough(singleDiceObj.model.condition) == true)
         {
             //减少资源
             chaState.ModResources(-1 * singleDiceObj.model.cost);
             //造成伤害
             Damage damage = singleDiceObj.model.damage;
-            //DamageInfo damageInfo = new DamageInfo(chaState.gameObject,damage);
+            DamageManager.Instance.DoDamage(chaState.gameObject, target, damage,false);
             //视觉逻辑
             diceCardsInUse.Remove(singleDiceObj);
         }
@@ -69,11 +70,11 @@ public class BattleDiceHandler : MonoBehaviour
     /// <summary>
     /// 释放所有的骰面
     /// </summary>
-    public void CastDiceAll(ChaState chaState)
+    public void CastDiceAll(ChaState chaState, GameObject target)
     {
-        for(int i = 0;i<diceCardsInUse.Count;i++)
+        for (int i = 0; i < diceCardsInUse.Count; i++)
         {
-            CastSingleDice(i,chaState);
+            CastSingleDice(i, chaState, target);
         }
     }
 
