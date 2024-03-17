@@ -111,6 +111,15 @@ public class BattleManager : MonoBehaviour
         currentState.OnEnter();
 
     }
+    public void ResetTurns()
+    {
+        this.parameter.turns = 0;
 
-   
+    }
+    public void AddTurns()
+    {
+        this.parameter.turns++;
+    }
+
+
 }
