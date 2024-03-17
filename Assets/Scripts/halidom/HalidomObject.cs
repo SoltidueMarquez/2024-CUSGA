@@ -25,6 +25,7 @@ public class HalidomObject:MonoBehaviour
     /// </summary>
     public int halidomIndex;
     
+    
 
     public HalidomObject(string id, string halidomName, string description,  List<BuffInfo> buffinfo )
     {
