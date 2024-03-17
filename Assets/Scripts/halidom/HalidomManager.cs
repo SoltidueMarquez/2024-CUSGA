@@ -22,10 +22,15 @@ public class HalidomManager : MonoBehaviour
     /// </summary>
     public ChaProperty deltaCharacterProperty = ChaProperty.zero;
     /// <summary>
-    /// 
+    /// 存加和乘法的
     /// </summary>
     public ChaProperty[] buffProp = new ChaProperty[2] { ChaProperty.zero, ChaProperty.zero };
-
+    /// <summary>
+    /// 初始属性
+    /// </summary>
+    public ChaProperty baseProp = new ChaProperty(
+        200, 400, 4, 0
+    );
 
 
 
@@ -70,6 +75,7 @@ public class HalidomManager : MonoBehaviour
                 {
                     buffInfo.buffData.onCreate?.Invoke(buffInfo);
                 }
+                RefreshAllHalidoms();
 
             }
             else
@@ -95,6 +101,8 @@ public class HalidomManager : MonoBehaviour
                 halidomList[i].halidomIndex = 0;
                 //将圣物从圣物列表中移除
                 halidomList[i] = null;
+                //重新计算属性
+                RefreshAllHalidoms();
                 
             }
         }
@@ -102,8 +110,7 @@ public class HalidomManager : MonoBehaviour
 
     public void RefreshAllHalidoms()
     {
-        //记录当前
-        ChaProperty lastCharacterProperty = new ChaProperty(this.currentCharacterProperty);
+        
         //清空之前的加和乘
         for (var i = 0; i < buffProp.Length; i++)
         {
@@ -119,13 +126,15 @@ public class HalidomManager : MonoBehaviour
                 foreach(var buffinfo in halidom.buffInfo)
                 {
                     //计算相加和相乘
-                    buffProp[0] += buffProp[0] += buffinfo.buffData.propMod[0] * buff.curStack;
+                    buffProp[0] += buffProp[0] += buffinfo.buffData.propMod[0] * buffinfo.curStack;
                     buffProp[1] += buffinfo.buffData.propMod[1];
+
                 }
             }
         }
         //重新计算属性
-        
+        this.currentCharacterProperty = (this.baseProp + buffProp[0]) * this.buffProp[1];
+        this.deltaCharacterProperty = this.currentCharacterProperty - this.baseProp;
     }
 
     

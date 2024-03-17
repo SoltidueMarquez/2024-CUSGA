@@ -96,4 +96,23 @@ public class BattleDiceHandler : MonoBehaviour
     {
 
     }
+    public void AddBattleSingleDice(List<SingleDiceObj> singleDiceObjs)
+    {
+        ClearBattleSingleDices();
+        for (int i = 0; i < singleDiceObjs.Count; i++)
+        {
+            diceCardsInUse.Add(singleDiceObjs[i]);
+        }
+    }
+
+    public List<SingleDiceObj> GetRandomSingleDices()
+    {
+        List<SingleDiceObj> singleDiceObjs = new List<SingleDiceObj>();
+        for (int i = 0; i < battleDices.Count; i++)
+        {
+            int index = battleDices[i].GetRandomDice(out SingleDiceObj singleDiceObj);
+            singleDiceObjs.Add(singleDiceObj);
+        }
+        return singleDiceObjs;
+    }
 }

@@ -77,7 +77,10 @@ public class PlayerRoundStartResolutionState : IState
         manager.AddTurns();
         //TODO 更新UI
 
-        
+        //触发圣物里所有buff的OnRoundStart回调点
+        HalidomManager.Instance.OnRoundStart();
+        //触发角色里所有buff的OnRoundStart回调点
+        manager.parameter.playerChaStates.OnRoundStart();
 
 
     }
@@ -85,11 +88,19 @@ public class PlayerRoundStartResolutionState : IState
     public void OnExit()
     {
         Debug.Log("Exit PlayerRoundStartResolutionState");
+        //TODO播放自动投骰子动画
+        //自动投骰子
+        List<SingleDiceObj> singleDiceObjs = manager.parameter.playerChaStates.GetBattleDiceHandler().GetRandomSingleDices();
+        manager.parameter.playerChaStates.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs);
+        //TODO:封装投骰子函数给UI调用
+        //TODO:更新UI
+        //TODO:敌人投骰子
+
     }
 
     public void OnUpdate()
     {
-
+        manager.TransitionState(GameState.PlayerAction);
     }
 
 
@@ -106,9 +117,8 @@ public class PlayerActionState : IState
     }
     public void OnEnter()
     {
-
-
         Debug.Log("Enter PlayerActionState");
+        //TODO:UI动画
 
 
     }
@@ -120,7 +130,7 @@ public class PlayerActionState : IState
 
     public void OnUpdate()
     {
-
+        
     }
 }
 

@@ -2,38 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// µ¥¸öÕ½¶·÷»×ÓµÄruntimeÊı¾İ
+/// å•ä¸ªæˆ˜æ–—éª°å­çš„runtimeæ•°æ®
 /// </summary>
 public class BattleDice
 {
     /// <summary>
-    /// BattleDiceµÄ÷»Ãæ
+    /// BattleDiceçš„éª°é¢
     /// </summary>
     List<SingleDiceObj> diceObjs = new List<SingleDiceObj>();
     /// <summary>
-    /// ¸ÃÕ½¶·÷»×ÓµÄÖÖÀà£¬ÓÃÓÚÇø·Ö²»Í¬µÄÕ½¶·÷»×Ó
+    /// è¯¥æˆ˜æ–—éª°å­çš„ç§ç±»ï¼Œç”¨äºåŒºåˆ†ä¸åŒçš„æˆ˜æ–—éª°å­
     /// </summary>
     public DiceType diceType;
+    /// <summary>
+    /// åœ¨éª°å­åˆ—è¡¨ä¸­çš„åºå·
+    /// </summary>
+    public int diceIndexInList;
 
     public BattleDice(DiceType diceType)
     {
         this.diceType = diceType;
     }
     /// <summary>
-    /// ³õÊ¼»¯µ¥¸ö÷»×ÓµÄÊ±ºò£¬ĞèÒª´«Èëµ¥¸ö÷»×ÓµÄÊı¾İ
+    /// åˆå§‹åŒ–å•ä¸ªéª°å­çš„æ—¶å€™ï¼Œéœ€è¦ä¼ å…¥å•ä¸ªéª°å­çš„æ•°æ®
     /// </summary>
     /// <param name="singleDiceModel"></param>
     public void AddDice(SingleDiceModel singleDiceModel, int idInDice)
     {
+        //TODO:å¦‚æœæœ‰è¶…å‡ºä¸Šç•Œæ€ä¹ˆåŠ
         SingleDiceObj singleDiceObj = new SingleDiceObj(singleDiceModel, idInDice);
         diceObjs.Add(singleDiceObj);
     }
 
-
+    public int GetRandomDice(out SingleDiceObj singleDiceObj)
+    {
+        //TODO:è¿™è¾¹çš„éšæœºæ•°ç”Ÿæˆæœ‰é—®é¢˜,åº”è¯¥æ˜¯æ ¹æ®æƒé‡æ¥ç”Ÿæˆ
+        singleDiceObj = diceObjs[Random.Range(0, diceObjs.Count)];
+        return Random.Range(0, diceObjs.Count);
+    }
     
 }
 /// <summary>
-/// Õ½¶·÷»×ÓµÄÖÖÀà
+/// æˆ˜æ–—éª°å­çš„ç§ç±»
 /// </summary>
 public enum DiceType
 {

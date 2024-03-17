@@ -17,6 +17,7 @@ public class FSMParameter
     /// 玩家重新投掷的次数
     /// </summary>
     public int playerRerollCount;
+    
 
     public ChaState playerChaStates;
     public ChaState[] enemyChaState;
@@ -122,5 +123,18 @@ public class BattleManager : MonoBehaviour
         this.parameter.turns++;
     }
 
+    public void ReducePlayerRerollCount()
+    {
+        this.parameter.playerRerollCount--;
+    }
 
+    /// <summary>
+    /// 给ui调用的方法，结束玩家回合
+    /// </summary>
+    public void EndPlayerRound()
+    {
+        TransitionState(GameState.PlayerRoundEndResolution);
+    }
+
+    
 }
