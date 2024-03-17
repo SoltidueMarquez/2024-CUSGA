@@ -14,11 +14,10 @@ public class GameStartState : IState
     }
     public void OnEnter()
     {
-       
-        
         Debug.Log("游戏开始");
-
-        
+        //TODO  读入所有数据
+        //清空回合计数器
+        manager.ResetTurns();
     }
 
     public void OnExit()
@@ -28,7 +27,7 @@ public class GameStartState : IState
 
     public void OnUpdate()
     {
-       
+        manager.TransitionState(GameState.Preparation);
     }
 }
 
@@ -46,7 +45,7 @@ public class PreparationState : IState
 
 
         Debug.Log("Enter PreparationState");
-
+        //TODO 播动画
 
     }
 
@@ -57,7 +56,8 @@ public class PreparationState : IState
 
     public void OnUpdate()
     {
-
+        //跳转到玩家判定阶段
+        manager.TransitionState(GameState.PlayerRoundStartResolution);
     }
 }
 
@@ -72,9 +72,12 @@ public class PlayerRoundStartResolutionState : IState
     }
     public void OnEnter()
     {
-
-
         Debug.Log("Enter PlayerRoundStartResolutionState");
+        //回合数加一
+        manager.AddTurns();
+        //TODO 更新UI
+
+        
 
 
     }
