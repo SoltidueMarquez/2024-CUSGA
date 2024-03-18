@@ -32,12 +32,12 @@ public class BattleDiceHandler : MonoBehaviour
     /// </summary>
     /// <param name="indexInBag">骰面在背包中的下标</param>
     /// <param name="indexInBattle">骰面在战斗中的下标</param>
-    public void ChangeDiceInBattle(int indexInBag, int indexInBattle)
-    {
-        SingleDiceObj temp = bagDiceCards[indexInBattle];
-        bagDiceCards[indexInBattle] = bagDiceCards[indexInBag];
-        bagDiceCards[indexInBag] = temp;
-    }
+    //public void ChangeDiceInBattle(int indexInBag, int indexInBattle)
+    //{
+    //    SingleDiceObj temp = bagDiceCards[indexInBattle];
+    //    bagDiceCards[indexInBattle] = bagDiceCards[indexInBag];
+    //    bagDiceCards[indexInBag] = temp;
+    //}
     /// <summary>
     /// 清楚战斗中的骰面
     /// </summary>
@@ -67,7 +67,9 @@ public class BattleDiceHandler : MonoBehaviour
             Debug.Log("资源不足");
         }
         //先判断资源够不够使用
+        Debug.Log("释放单个骰子");
     }
+
     /// <summary>
     /// 释放所有的骰面
     /// </summary>
@@ -91,12 +93,12 @@ public class BattleDiceHandler : MonoBehaviour
         for (int i = 0; i < battleDiceCount; i++)
         {
             BattleDice battleDice = new BattleDice(DiceType.Attack);//这边需要修改
+            battleDices.Add(battleDice);
             for (int j = 0; j < 6; j++)
             {
                 SingleDiceModel singleDiceModel = RandomManager.Instance.GetSingleDiceModel(battleDices[i].diceType, 1); 
                 battleDice.AddDice(singleDiceModel, j);
             }
-            battleDices.Add(battleDice);
         }
     }
     /// <summary>

@@ -12,11 +12,11 @@ public class HalidomManager : MonoBehaviour
     /// <summary>
     /// 最大圣物上限
     /// </summary>
-    public int halidomMaxCount;
+    public int halidomMaxCount = 6;
     /// <summary>
     /// 记录上一次的玩家属性
     /// </summary>
-    public ChaProperty currentCharacterProperty= ChaProperty.zero;
+    public ChaProperty currentCharacterProperty = ChaProperty.zero;
     /// <summary>
     /// 记录玩家属性的差值
     /// </summary>
@@ -36,7 +36,7 @@ public class HalidomManager : MonoBehaviour
 
     public static HalidomManager Instance
     {
-        get;private set;
+        get; private set;
     }
 
 
@@ -61,7 +61,7 @@ public class HalidomManager : MonoBehaviour
 
     public void AddHalidom(HalidomObject halidom)
     {
-        for(int i = 0; i < halidomList.Length; i++)
+        for (int i = 0; i < halidomList.Length; i++)
         {
             //找到第一个空的格子
             if (halidomList[i] == null)
@@ -69,9 +69,9 @@ public class HalidomManager : MonoBehaviour
                 //将圣物加入圣物列表
                 halidomList[i] = halidom;
                 //获得圣物在格子中的序号
-                halidom.halidomIndex = i+1;
+                halidom.halidomIndex = i + 1;
                 //触发圣物OnCreate回调点
-                foreach(var buffInfo in halidom.buffInfo)
+                foreach (var buffInfo in halidom.buffInfo)
                 {
                     buffInfo.buffData.onCreate?.Invoke(buffInfo);
                 }
@@ -90,7 +90,7 @@ public class HalidomManager : MonoBehaviour
         for (int i = 0; i < halidomList.Length; i++)
         {
             //index为实际数组下标+1
-            if (i == index-1 )
+            if (i == index - 1)
             {
                 //触发圣物OnRemove回调点
                 foreach (var buffInfo in halidomList[i].buffInfo)
@@ -103,27 +103,27 @@ public class HalidomManager : MonoBehaviour
                 halidomList[i] = null;
                 //重新计算属性
                 RefreshAllHalidoms();
-                
+
             }
         }
-    }   
+    }
 
     public void RefreshAllHalidoms()
     {
-        
+
         //清空之前的加和乘
         for (var i = 0; i < buffProp.Length; i++)
         {
             buffProp[i].Zero();
         }
         //遍历圣物数组
-        foreach(var halidom in halidomList)
+        foreach (var halidom in halidomList)
         {
             //如果不为空
             if (halidom != null)
             {
                 //遍历当前圣物的所有buffinfo
-                foreach(var buffinfo in halidom.buffInfo)
+                foreach (var buffinfo in halidom.buffInfo)
                 {
                     //计算相加和相乘
                     buffProp[0] += buffProp[0] += buffinfo.buffData.propMod[0] * buffinfo.curStack;
@@ -137,9 +137,9 @@ public class HalidomManager : MonoBehaviour
         this.deltaCharacterProperty = this.currentCharacterProperty - this.baseProp;
     }
 
-    
 
-    
+
+
 
     //交换圣物顺序
     public void SwapHalidom(int index1, int index2)
@@ -151,7 +151,7 @@ public class HalidomManager : MonoBehaviour
     //所有回调点触发Invoke
     public void OnRoundStart()
     {
-        for(int i = 0; i < halidomList.Length; i++)
+        for (int i = 0; i < halidomList.Length; i++)
         {
             if (halidomList[i] != null)
             {

@@ -85,6 +85,7 @@ public class BuffHandler : MonoBehaviour
     }
     public void RecheckBuff(ChaProperty[] buffProp,ref ChaControlState chaControlState)
     {
+
         foreach (var buff in buffList)
         {
             buffProp[0] += buff.buffData.propMod[0] * buff.curStack;

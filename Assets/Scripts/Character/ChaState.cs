@@ -47,6 +47,13 @@ public class ChaState : MonoBehaviour
         //获取battleDiceHandler暂时写在这边，因为还没有写完
         battleDiceHandler = GetComponent<BattleDiceHandler>();
     }
+    /// <summary>
+    /// 到时候删除
+    /// </summary>
+    private void Start()
+    {
+        AttrAndResourceRecheck();
+    }
     #region 回调点
     /// <summary>
     /// 供外部调用的方法，用于调用回调点
@@ -64,16 +71,18 @@ public class ChaState : MonoBehaviour
     #region 使用骰面
     public void UseDice(int index, GameObject target)
     {
-        if(this.controlState.canUseDice == false)//如果不能使用骰子
-        {
-            return;
-        }
+        //if(this.controlState.canUseDice == false)//如果不能使用骰子
+        //{
+        //    Debug.Log("不能使用骰子");
+        //    return;
+        //}
         battleDiceHandler.CastSingleDice(index,this,target);
+        DamageManager.Instance.DealWithAllDamage();
     }
 
-    public void UseAllDice(GameObject target)
+    public void UseAllDice()
     {
-        battleDiceHandler.CastDiceAll(this,target);
+        battleDiceHandler.CastDiceAll(this,BattleManager.Instance.currentSelectEnemy);
     }
     #endregion
     #region buff的操作
@@ -102,6 +111,7 @@ public class ChaState : MonoBehaviour
     public void Kill()
     {
         //TODO:玩家死亡的逻辑
+        Debug.Log(this.gameObject.name);
         Debug.Log("玩家死亡");
         
     }
@@ -130,6 +140,7 @@ public class ChaState : MonoBehaviour
     }
     public void ModResources(ChaResource value)
     {
+        CharacterUIManager.Instance.ChangeHealthSlider(this.resource.currentHp,this.prop.health);
         this.resource += value;
         this.resource.currentHp = Mathf.Clamp(this.resource.currentHp, 0, this.prop.health);
         this.resource.currentShield = Mathf.Clamp(this.resource.currentShield, 0, this.prop.shield);
@@ -139,6 +150,8 @@ public class ChaState : MonoBehaviour
         {
             this.Kill();
         }
+        Debug.Log(this.gameObject.name + this.resource.currentHp);
+
     }
     public void Initialize()
     {

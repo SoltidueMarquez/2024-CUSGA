@@ -11,6 +11,7 @@ namespace UI
         [Tooltip("骰子页面列表")] public List<GameObject> fightDiceLists;
         [SerializeField, Tooltip("向左翻按钮")] private Button switchButtonLeft;
         [SerializeField, Tooltip("向右翻按钮")] private Button switchButtonRight;
+        [SerializeField, Tooltip("页码标识文本")] private Text pageText;
         private int curPageNum;
 
         private void Start()
@@ -33,6 +34,7 @@ namespace UI
                 }
                 fightDiceLists[0].SetActive(true);
                 curPageNum = 0;
+                pageText.text = $"{curPageNum + 1}/{fightDiceLists.Count}";
             }
         }
 
@@ -44,6 +46,7 @@ namespace UI
             fightDiceLists[curPageNum].SetActive(false);
             curPageNum = (curPageNum - 1 >= 0) ? curPageNum - 1 : fightDiceLists.Count - 1;
             fightDiceLists[curPageNum].SetActive(true);
+            pageText.text = $"{curPageNum + 1}/{fightDiceLists.Count}";
         }
         
         /// <summary>
@@ -54,6 +57,7 @@ namespace UI
             fightDiceLists[curPageNum].SetActive(false);
             curPageNum = (curPageNum + 1 <= fightDiceLists.Count - 1) ? curPageNum + 1 : 0;
             fightDiceLists[curPageNum].SetActive(true);
+            pageText.text = $"{curPageNum + 1}/{fightDiceLists.Count}";
         }
     }
 }

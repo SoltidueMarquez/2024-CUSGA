@@ -7,14 +7,15 @@ public class DamageManager : MonoSingleton<DamageManager>
     [SerializeField]
     private Queue<DamageInfo> damageInfos = new Queue<DamageInfo>();
     /// <summary>
-    /// ¶Ôµ±Ç°ËùÓĞµÄÉËº¦Êı¾İ½øĞĞ´¦Àí
+    /// å¯¹å½“å‰æ‰€æœ‰çš„ä¼¤å®³æ•°æ®è¿›è¡Œå¤„ç†
     /// </summary>
     public void DealWithAllDamage()
     {
-        //Èç¹ûÒªÅäºÏÊÓ¾õĞ§¹û£¬¿ÉÒÔÔÚÕâÀïÌí¼ÓÒ»¸öĞ­³Ì£¬Ã¿´Î´¦ÀíÒ»¸öÉËº¦
+        //å¦‚æœè¦é…åˆè§†è§‰æ•ˆæœï¼Œå¯ä»¥åœ¨è¿™é‡Œæ·»åŠ ä¸€ä¸ªåç¨‹ï¼Œæ¯æ¬¡å¤„ç†ä¸€ä¸ªä¼¤å®³
         while(damageInfos.Count > 0)
         {
             DealWithDamage(damageInfos.Peek());
+            Debug.Log(damageInfos.Peek().finalDamage);
             damageInfos.Dequeue();
         }
     }
@@ -31,7 +32,7 @@ public class DamageManager : MonoSingleton<DamageManager>
         {
             buff.buffData.onBeHurt?.Invoke(buff, damageInfo, damageInfo.attacker);
         }
-        //Èç¹ûÄÜ±»É±ËÀ£¬¾Í»á×ßOnKillºÍOnBeKilled
+        //å¦‚æœèƒ½è¢«æ€æ­»ï¼Œå°±ä¼šèµ°OnKillå’ŒOnBeKilled
         if(defenderChaState.CanBeKilledByDamageInfo(damageInfo))
         {
             if(attackerChaState != null)
@@ -54,8 +55,8 @@ public class DamageManager : MonoSingleton<DamageManager>
         {
             defenderChaState.ModResources(new ChaResource(-damageInfo.finalDamage));
         }
-        //TODO:ÊÓ¾õÉÏµÄ±ä»¯
-        //ÉËº¦Á÷³Ì×ßÍê£¬Ìí¼Óbuff
+        //TODO:è§†è§‰ä¸Šçš„å˜åŒ–
+        //ä¼¤å®³æµç¨‹èµ°å®Œï¼Œæ·»åŠ buff
         for(int i = 0;i<damageInfo.addBuffs.Count;i++)
         {
             GameObject toCha = damageInfo.addBuffs[i].target;

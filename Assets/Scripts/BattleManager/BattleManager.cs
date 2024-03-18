@@ -5,8 +5,9 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
-
+[Serializable]
 public class FSMParameter
 {
     /// <summary>

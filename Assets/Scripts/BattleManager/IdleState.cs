@@ -16,6 +16,7 @@ public class GameStartState : IState
     {
         Debug.Log("游戏开始");
         //TODO  读入所有数据
+        manager.parameter.playerChaStates.GetBattleDiceHandler().InitDice();
         //清空回合计数器
         manager.ResetTurns();
     }
@@ -77,8 +78,8 @@ public class PlayerRoundStartResolutionState : IState
         Debug.Log("Enter PlayerRoundStartResolutionState");
         //回合数加一
         manager.AddTurns();
-        //TODO 更新UI
-
+        // 更新UI
+        DataUIManager.Instance.UpdateRunTimeText(manager.parameter.turns);
         //触发圣物里所有buff的OnRoundStart回调点
         HalidomManager.Instance.OnRoundStart();
         //触发角色里所有buff的OnRoundStart回调点
@@ -91,13 +92,19 @@ public class PlayerRoundStartResolutionState : IState
     {
         Debug.Log("Exit PlayerRoundStartResolutionState");
         //TODO播放自动投骰子动画
+        Debug.Log("播骰子动画");
         //自动投骰子
         List<SingleDiceObj> singleDiceObjs = manager.parameter.playerChaStates.GetBattleDiceHandler().GetRandomSingleDices();
         manager.parameter.playerChaStates.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs);
         //TODO:封装投骰子函数给UI调用
+        foreach(var singleDiceObj in singleDiceObjs)
+        {
+            Debug.Log(singleDiceObj.model.name);
+        }
         //TODO:更新UI
+        Debug.Log("根据投掷结果更新UI");
         //TODO:敌人投骰子
-
+        Debug.Log("敌人投骰子"); 
     }
 
     public void OnUpdate()
@@ -151,6 +158,10 @@ public class PlayerRoundEndResolutionState : IState
     }
     public void OnEnter()
     {
+        
+        //触发圣物里所有buff的OnRoundEnd回调点
+        HalidomManager.Instance.OnRoundEnd();
+        //触发角色里所有buff的OnRoundEnd回调点
         manager.parameter.playerChaStates.OnRoundEnd();
 
         Debug.Log("Enter PlayerRoundEndResolutionState");
@@ -165,7 +176,7 @@ public class PlayerRoundEndResolutionState : IState
 
     public void OnUpdate()
     {
-
+        manager.TransitionState(GameState.EnemyRoundStartResolution);
     }
 }
 
@@ -180,7 +191,12 @@ public class EnemyRoundStartResolutionState : IState
     }
     public void OnEnter()
     {
-
+        //TODO：圣物所有在敌人判定阶段触发的回调点
+        //触发所有敌人身上挂载的buff的OnRoundStart回调点
+        foreach (var enemy in manager.parameter.enemyChaState)
+        {
+            enemy.OnRoundStart();
+        }
 
         Debug.Log("Enter EnemyRoundStartResolutionState");
 
@@ -194,7 +210,7 @@ public class EnemyRoundStartResolutionState : IState
 
     public void OnUpdate()
     {
-
+        manager.TransitionState(GameState.EnemyAction);
     }
 }
 
@@ -223,7 +239,8 @@ public class EnemyActionState : IState
 
     public void OnUpdate()
     {
-
+        //TODO:敌人AI逻辑
+        manager.TransitionState(GameState.EnemyRoundEndResolution);
     }
 }
 
@@ -239,7 +256,12 @@ public class EnemyRoundEndResolutionState : IState
     public void OnEnter()
     {
         Debug.Log("Enter EnemyRoundEndResolutionState");
-
+        //TODO：圣物所有在敌人回合结束判定阶段触发的回调点
+        //触发所有敌人身上挂载的buff的OnRoundEnd回调点
+        foreach (var enemy in manager.parameter.enemyChaState)
+        {
+            enemy.OnRoundEnd();
+        }
     }
 
     public void OnExit()
@@ -249,7 +271,7 @@ public class EnemyRoundEndResolutionState : IState
 
     public void OnUpdate()
     {
-
+        manager.TransitionState(GameState.PlayerRoundStartResolution);
     }
 }
 
