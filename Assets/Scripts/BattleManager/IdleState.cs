@@ -30,7 +30,9 @@ public class GameStartState : IState
         manager.TransitionState(GameState.Preparation);
     }
 }
-
+/// <summary>
+/// 预备阶段
+/// </summary>
 public class PreparationState : IState
 {
     private BattleManager manager;
@@ -42,7 +44,7 @@ public class PreparationState : IState
     }
     public void OnEnter()
     {
-
+        
 
         Debug.Log("Enter PreparationState");
         //TODO 播动画
@@ -105,7 +107,9 @@ public class PlayerRoundStartResolutionState : IState
 
 
 }
-
+/// <summary>
+/// 玩家实时操作的阶段
+/// </summary>
 public class PlayerActionState : IState
 {
     private BattleManager manager;
@@ -133,7 +137,9 @@ public class PlayerActionState : IState
         
     }
 }
-
+/// <summary>
+/// 在玩家回合结束的时候会触发的东西
+/// </summary>
 public class PlayerRoundEndResolutionState : IState
 {
     private BattleManager manager;
@@ -145,7 +151,7 @@ public class PlayerRoundEndResolutionState : IState
     }
     public void OnEnter()
     {
-
+        manager.parameter.playerChaStates.OnRoundEnd();
 
         Debug.Log("Enter PlayerRoundEndResolutionState");
 

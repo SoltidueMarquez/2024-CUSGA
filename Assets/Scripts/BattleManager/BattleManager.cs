@@ -136,5 +136,17 @@ public class BattleManager : MonoBehaviour
         TransitionState(GameState.PlayerRoundEndResolution);
     }
 
+    public void EndGame(int side)
+    {
+        if(side == 0)
+        {
+            Debug.Log("玩家死亡");
+        }
+        else
+        {
+            Debug.Log("敌人死亡");
+        }
+    }
+
     
 }

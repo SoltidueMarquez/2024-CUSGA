@@ -57,6 +57,7 @@ public class BattleDiceHandler : MonoBehaviour
             chaState.ModResources(-1 * singleDiceObj.model.cost);
             //造成伤害
             Damage damage = singleDiceObj.model.damage;
+            damage.indexDamage = singleDiceObj.idInDice;//将index的值赋值给index
             DamageManager.Instance.DoDamage(chaState.gameObject, target, damage,false);
             //视觉逻辑
             diceCardsInUse.Remove(singleDiceObj);
@@ -83,11 +84,20 @@ public class BattleDiceHandler : MonoBehaviour
         diceCardsInUse.Clear();
     }
     /// <summary>
-    /// 没有存档的情况下，默认初始化骰子
+    /// 没有存档的情况下，默认初始化骰子,应该是在一开始去加载？？，暂时先算战斗开始的时候加载,这边需要修改
     /// </summary>
     public void InitDice()
     {
-
+        for (int i = 0; i < battleDiceCount; i++)
+        {
+            BattleDice battleDice = new BattleDice(DiceType.Attack);//这边需要修改
+            for (int j = 0; j < 6; j++)
+            {
+                SingleDiceModel singleDiceModel = RandomManager.Instance.GetSingleDiceModel(battleDices[i].diceType, 1); 
+                battleDice.AddDice(singleDiceModel, j);
+            }
+            battleDices.Add(battleDice);
+        }
     }
     /// <summary>
     /// 有存档的情况下，初始化骰子
@@ -113,6 +123,6 @@ public class BattleDiceHandler : MonoBehaviour
             int index = battleDices[i].GetRandomDice(out SingleDiceObj singleDiceObj);
             singleDiceObjs.Add(singleDiceObj);
         }
-        return singleDiceObjs;
+        return singleDiceObjs; 
     }
 }

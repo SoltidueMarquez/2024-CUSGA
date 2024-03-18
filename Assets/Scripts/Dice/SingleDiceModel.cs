@@ -11,6 +11,14 @@ public class SingleDiceModel
     /// </summary>
     public string id;
     /// <summary>
+    /// 骰面的名字
+    /// </summary>
+    public string name;
+    /// <summary>
+    /// 属于哪种类型的骰子
+    /// </summary>
+    public DiceType type;
+    /// <summary>
     /// 骰子的使用条件
     /// </summary>
     public ChaResource condition;
@@ -49,8 +57,10 @@ public class SingleDiceModel
     /// <param name="level">等级</param>
     /// <param name="buffInfos">附带的特效</param>
     /// <param name="visualEffect">播放的视觉效果</param>
-    public SingleDiceModel(string id, ChaResource condition, ChaResource cost, Damage damage, int value, int level, BuffInfo[] buffInfos, VisualEffect visualEffect)
+    public SingleDiceModel(DiceType diceType,string name,string id, ChaResource condition, ChaResource cost, Damage damage, int value, int level, BuffInfo[] buffInfos, VisualEffect visualEffect)
     {
+        this.name = name;
+        this.type = diceType;
         this.id = id;
         this.condition = condition;
         this.cost = cost;

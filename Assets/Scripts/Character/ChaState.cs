@@ -1,8 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/// <summary>
+/// 玩家和敌人共有的类，是玩家和敌人的的总控，敌人通过AI控制，玩家通过在战斗时对UI进行交互，调用chaState中的函数
+/// </summary>
 [RequireComponent(typeof(BuffHandler))]
 [RequireComponent(typeof(BattleDiceHandler))]
+
 public class ChaState : MonoBehaviour
 {
     [Header("需要的组件")]
@@ -11,11 +15,6 @@ public class ChaState : MonoBehaviour
     /// 负责玩家战斗的骰子管理器，其中包含了骰面的各种信息，骰子的面数，骰子的加成
     /// </summary>
     [SerializeField] private BattleDiceHandler battleDiceHandler;
-    private void Awake()
-    {
-        buffHandler = GetComponent<BuffHandler>();
-        battleDiceHandler = GetComponent<BattleDiceHandler>();
-    }
     /// <summary>
     /// 角色的基础属性，每个角色不带任何buff的纯粹数值
     /// 先写死，正式的应该是从配置文件中读取
@@ -32,16 +31,21 @@ public class ChaState : MonoBehaviour
     /// </summary>
     public ChaProperty prop { get; private set; } = ChaProperty.zero;
     /// <summary>
-    /// 玩家当前的资源
+    /// 玩家当前的资源,这个在全局的过程中都不变，可能在局外变化
     /// </summary>
     public ChaResource resource = new ChaResource();
     public ChaControlState controlState = new ChaControlState();
     //临时的变量，用于先简单的判断是否读档
     public bool ifExist;
-
-    private void Start()
+    /// <summary>
+    /// 哪一边的
+    /// </summary>
+    public int side;
+    private void Awake()
     {
-        
+        buffHandler = GetComponent<BuffHandler>();
+        //获取battleDiceHandler暂时写在这边，因为还没有写完
+        battleDiceHandler = GetComponent<BattleDiceHandler>();
     }
     #region 回调点
     /// <summary>
@@ -93,11 +97,13 @@ public class ChaState : MonoBehaviour
     public bool CanBeKilledByDamageInfo(DamageInfo damageInfo)
     {
         if(damageInfo.isHeal) return false;
-        return true;
+        return damageInfo.finalDamage < this.resource.currentHp;
     }
     public void Kill()
     {
         //TODO:玩家死亡的逻辑
+        Debug.Log("玩家死亡");
+        
     }
     /// <summary>
     /// 重新计算属性,在buff添加或者删除的时候调用
@@ -113,8 +119,10 @@ public class ChaState : MonoBehaviour
         }
         //重新获取所有buff的加法总和和乘法总和
         buffHandler.RecheckBuff(buffProp,ref controlState);
+        //获取玩家的圣物所有给的属性
+        ChaProperty halidomProp = HalidomManager.Instance.deltaCharacterProperty;
         //重新计算属性
-        this.prop = (this.baseProp + buffProp[0]) * this.buffProp[1];
+        this.prop = (this.baseProp + buffProp[0]) * this.buffProp[1]+halidomProp;
         //计算差值
         chaProperty = this.prop - chaProperty;
         //根据差值，重新计算资源
@@ -132,9 +140,9 @@ public class ChaState : MonoBehaviour
             this.Kill();
         }
     }
-    private void InitializeResource()
+    public void Initialize()
     {
-
+        
     }
 
     #region 获取组件
