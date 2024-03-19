@@ -9,7 +9,7 @@ namespace UI
         [SerializeField, Tooltip("投掷结果栏位")] private List<Transform> columns;
         [SerializeField, Tooltip("生成模板")] private GameObject template;
         [SerializeField, Tooltip("生成模板")] private Transform parent;
-        private List<GameObject> _resultList;
+        [SerializeField, Tooltip("结果列表")] private List<GameObject> _resultList;
 
         /// <summary>
         /// 生成投掷结果函数,请按投掷顺序有序生成

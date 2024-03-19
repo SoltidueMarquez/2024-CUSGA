@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 /// <summary>
@@ -83,7 +84,7 @@ public class ChaState : MonoBehaviour
         }
         battleDiceHandler.CastDiceAll(this,BattleManager.Instance.currentSelectEnemy);
         DamageManager.Instance.DealWithAllDamage();
-
+        RollingResultManager.Instance.RemoveAllResultUI();
     }
     #endregion
     #region buff的操作
