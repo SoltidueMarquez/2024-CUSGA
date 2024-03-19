@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 /// <summary>
 /// 玩家和敌人共有的类，是玩家和敌人的的总控，敌人通过AI控制，玩家通过在战斗时对UI进行交互，调用chaState中的函数
@@ -20,7 +21,7 @@ public class ChaState : MonoBehaviour
     /// 先写死，正式的应该是从配置文件中读取
     /// </summary>
     public ChaProperty baseProp = new ChaProperty(
-        200, 400, 4, 0
+        50, 400, 4, 0
     );
     /// <summary>
     /// buff的属性加成,buffProp[0]是加法，buffProp[1]是乘法
@@ -33,10 +34,9 @@ public class ChaState : MonoBehaviour
     /// <summary>
     /// 玩家当前的资源,这个在全局的过程中都不变，可能在局外变化
     /// </summary>
-    public ChaResource resource = new ChaResource();
-    public ChaControlState controlState = new ChaControlState();
-    //临时的变量，用于先简单的判断是否读档
-    public bool ifExist;
+    public ChaResource resource = new ();
+    public ChaControlState controlState = new ChaControlState(true,true,false);
+    
     /// <summary>
     /// 哪一边的
     /// </summary>
@@ -46,13 +46,6 @@ public class ChaState : MonoBehaviour
         buffHandler = GetComponent<BuffHandler>();
         //获取battleDiceHandler暂时写在这边，因为还没有写完
         battleDiceHandler = GetComponent<BattleDiceHandler>();
-    }
-    /// <summary>
-    /// 到时候删除
-    /// </summary>
-    private void Start()
-    {
-        AttrAndResourceRecheck();
     }
     #region 回调点
     /// <summary>
@@ -71,11 +64,11 @@ public class ChaState : MonoBehaviour
     #region 使用骰面
     public void UseDice(int index, GameObject target)
     {
-        //if(this.controlState.canUseDice == false)//如果不能使用骰子
-        //{
-        //    Debug.Log("不能使用骰子");
-        //    return;
-        //}
+        if(this.controlState.canUseDice == false)//如果不能使用骰子
+        {
+            Debug.Log("不能使用骰子");
+            return;
+        }
         battleDiceHandler.CastSingleDice(index,this,target);
         DamageManager.Instance.DealWithAllDamage();
     }
@@ -111,8 +104,7 @@ public class ChaState : MonoBehaviour
     public void Kill()
     {
         //TODO:玩家死亡的逻辑
-        Debug.Log(this.gameObject.name);
-        Debug.Log("玩家死亡");
+        Debug.Log(this.gameObject.name + "死亡");
         
     }
     /// <summary>
@@ -122,6 +114,7 @@ public class ChaState : MonoBehaviour
     {
         //创建一个新变量，先把原本的属性保存下来，用于后续计算差值
         ChaProperty chaProperty = new ChaProperty(this.prop);
+        //输出chaProperty
         //清空buff属性加成
         for (var i = 0; i < buffProp.Length; i++)
         {
@@ -132,7 +125,9 @@ public class ChaState : MonoBehaviour
         //获取玩家的圣物所有给的属性
         ChaProperty halidomProp = HalidomManager.Instance.deltaCharacterProperty;
         //重新计算属性
-        this.prop = (this.baseProp + buffProp[0]) * this.buffProp[1]+halidomProp;
+        this.prop = (this.baseProp + buffProp[0]) * (this.buffProp[1])+halidomProp;
+        Debug.Log(this.baseProp.health + this.buffProp[0].health);
+        Debug.Log(this.buffProp[1].health);
         //计算差值
         chaProperty = this.prop - chaProperty;
         //根据差值，重新计算资源
@@ -142,10 +137,10 @@ public class ChaState : MonoBehaviour
     {
         CharacterUIManager.Instance.ChangeHealthSlider(this.resource.currentHp,this.prop.health);
         this.resource += value;
-        this.resource.currentHp = Mathf.Clamp(this.resource.currentHp, 0, this.prop.health);
-        this.resource.currentShield = Mathf.Clamp(this.resource.currentShield, 0, this.prop.shield);
+        this.resource.currentMoney = Mathf.Clamp(this.resource.currentMoney, 0, this.prop.money);
         this.resource.currentRollTimes = Mathf.Clamp(this.resource.currentRollTimes, 0, this.prop.maxRollTimes);
         this.resource.currentShield = Mathf.Clamp(this.resource.currentShield, 0, this.prop.shield);
+        this.resource.currentHp = Mathf.Clamp(this.resource.currentHp, 0, this.prop.health);
         if(this.resource.currentHp <= 0)
         {
             this.Kill();
@@ -153,9 +148,12 @@ public class ChaState : MonoBehaviour
         Debug.Log(this.gameObject.name + this.resource.currentHp);
 
     }
+    /// <summary>
+    /// 初始化
+    /// </summary>
     public void Initialize()
     {
-        
+        AttrAndResourceRecheck();
     }
 
     #region 获取组件

@@ -15,6 +15,7 @@ public class DamageManager : MonoSingleton<DamageManager>
         while(damageInfos.Count > 0)
         {
             DealWithDamage(damageInfos.Peek());
+            Debug.Log(damageInfos.Peek().damage.baseDamage + " " + damageInfos.Peek().damage.indexDamage);
             Debug.Log(damageInfos.Peek().finalDamage);
             damageInfos.Dequeue();
         }
