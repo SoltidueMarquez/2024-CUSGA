@@ -6,9 +6,10 @@ namespace UI
 {
     public class RollingResultManager : MonoSingleton<RollingResultManager>
     {
-        [SerializeField,Tooltip("投掷结果栏位")] private List<Transform> columns;
+        [SerializeField, Tooltip("投掷结果栏位")] private List<Transform> columns;
         [SerializeField, Tooltip("生成模板")] private GameObject template;
         [SerializeField, Tooltip("生成模板")] private Transform parent;
+        private List<GameObject> _resultList;
 
         /// <summary>
         /// 生成投掷结果函数,请按投掷顺序有序生成
@@ -22,6 +23,19 @@ namespace UI
             tmp.transform.position = columns[index].position;//更改位置
             tmp.GetComponent<RollingResultDiceUI>().Init(index, location, id);//初始化
             tmp.SetActive(true);
+            _resultList.Add(tmp);
+        }
+
+        /// <summary>
+        /// 摧毁所有结果
+        /// </summary>
+        public void RemoveAllResultUI()
+        {
+            foreach (var result in _resultList)
+            {
+                Destroy(result);
+            }
+            _resultList.Clear();
         }
     }
 }

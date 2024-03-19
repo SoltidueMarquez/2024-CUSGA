@@ -24,7 +24,7 @@ namespace UI
             this.GetComponent<Button>().onClick.AddListener(() =>
             {
                 BattleManager.Instance.parameter.playerChaStates.UseDice(index, BattleManager.Instance.currentSelectEnemy);
-                Destroy(gameObject);
+                Destroy(gameObject);//摧毁物体
             });
             
             //ToDo:根据id初始化信息
