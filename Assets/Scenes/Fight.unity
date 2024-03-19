@@ -298,6 +298,7 @@ MonoBehaviour:
   - {fileID: 1743260800}
   - {fileID: 491353055}
   - {fileID: 708600108}
+  columns: []
   switchButtonLeft: {fileID: 717025139}
   switchButtonRight: {fileID: 584777150}
   pageText: {fileID: 742696118}
@@ -1037,7 +1038,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &283352641
 RectTransform:
   m_ObjectHideFlags: 0
