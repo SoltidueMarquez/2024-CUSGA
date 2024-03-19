@@ -105,11 +105,13 @@ public class PlayerRoundStartResolutionState : IState
         //自动投骰子
         List<SingleDiceObj> singleDiceObjs = manager.parameter.playerChaStates.GetBattleDiceHandler().GetRandomSingleDices();
         manager.parameter.playerChaStates.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs);
-        //TODO:封装投骰子函数给UI调用
-        foreach(var singleDiceObj in singleDiceObjs)
+        for (int i = 0;i<singleDiceObjs.Count;i++)
         {
-            Debug.Log(singleDiceObj.model.name);
+            Vector2Int pos = new Vector2Int(i, singleDiceObjs[i].idInDice);
+            RollingResultManager.Instance.CreateResult(i, singleDiceObjs[i].model.id,pos);
+
         }
+        //TODO:封装投骰子函数给UI调用
         //TODO:更新UI
         Debug.Log("根据投掷结果更新UI");
         //TODO:敌人投骰子
