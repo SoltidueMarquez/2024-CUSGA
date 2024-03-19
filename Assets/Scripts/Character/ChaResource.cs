@@ -35,6 +35,22 @@ public class ChaResource
 
     public static ChaResource operator +(ChaResource a, ChaResource b)
     {
+        int resultHp;
+        int resultShield = a.currentShield;
+        if(b.currentHp < 0)
+        {
+            resultShield += b.currentHp ;
+            if(resultShield < 0)
+            {
+                resultHp = a.currentHp + resultShield;
+                resultShield = 0;
+            }
+            else
+            {
+                resultHp = a.currentHp;
+            }
+            return new ChaResource(resultHp, a.currentMoney + b.currentMoney, a.currentRollTimes + b.currentRollTimes, resultShield);
+        }
         return new ChaResource(a.currentHp + b.currentHp, a.currentMoney + b.currentMoney, a.currentRollTimes + b.currentRollTimes, a.currentShield + b.currentShield);
     }
     public static ChaResource operator -(ChaResource a, ChaResource b)

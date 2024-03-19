@@ -77,10 +77,10 @@ public class ChaProperty
     public static ChaProperty operator *(ChaProperty chaProperty, ChaProperty chaProperty1)
     {
         return new ChaProperty(
-            Mathf.RoundToInt(chaProperty.money * (1.000f + Mathf.Max(chaProperty1.health, -0.9999f))),
+            Mathf.RoundToInt(chaProperty.health * (1.000f + chaProperty1.health)),
             Mathf.RoundToInt(chaProperty.money * (1.000f + Mathf.Max(chaProperty1.money, -0.9999f))),
-            Mathf.RoundToInt(chaProperty.money * (1.000f + Mathf.Max(chaProperty1.maxRollTimes, -0.9999f))),
-            Mathf.RoundToInt(chaProperty.money * (1.000f + Mathf.Max(chaProperty1.shield, -0.9999f))
+            Mathf.RoundToInt(chaProperty.maxRollTimes * (1.000f + Mathf.Max(chaProperty1.maxRollTimes, -0.9999f))),
+            Mathf.RoundToInt(chaProperty.shield * (1.000f + Mathf.Max(chaProperty1.shield, -0.9999f))
         ));
     }
 }
