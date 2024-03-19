@@ -96,7 +96,7 @@ namespace UI
         /// 取消标记函数
         /// </summary>
         /// <param name="columnNum">栏位序号</param>
-        private void RevertMarkColumn()
+        public void RevertMarkColumn()
         {
             if (lastMarked >= 0 && lastMarked < columns.Count)//溢出避免
             {
