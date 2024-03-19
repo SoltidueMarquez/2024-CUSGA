@@ -9,7 +9,6 @@ namespace UI
         [SerializeField,Tooltip("投掷结果栏位")] private List<Transform> columns;
         [SerializeField, Tooltip("生成模板")] private GameObject template;
         [SerializeField, Tooltip("生成模板")] private Transform parent;
-        private List<GameObject> results;//投掷结果的列表
 
         /// <summary>
         /// 生成投掷结果函数,请按投掷顺序有序生成
@@ -23,10 +22,6 @@ namespace UI
             tmp.transform.position = columns[index].position;//更改位置
             tmp.GetComponent<RollingResultDiceUI>().Init(index, location, id);//初始化
             tmp.SetActive(true);
-            results.Add(tmp);
         }
-        
-        
-        
     }
 }
