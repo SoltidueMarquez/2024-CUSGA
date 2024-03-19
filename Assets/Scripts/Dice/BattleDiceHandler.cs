@@ -60,6 +60,7 @@ public class BattleDiceHandler : MonoBehaviour
             damage.indexDamage = singleDiceObj.idInDice;//将index的值赋值给index
             DamageManager.Instance.DoDamage(chaState.gameObject, target, damage,false);
             //视觉逻辑
+            Debug.Log(singleDiceObj.model.name);
             foreach(var buffinfo in singleDiceObj.model.buffInfos)
             {
                 Debug.Log("success");
@@ -123,7 +124,10 @@ public class BattleDiceHandler : MonoBehaviour
             diceCardsInUse.Add(singleDiceObjs[i]);
         }
     }
-
+    /// <summary>
+    /// 获取随机的战斗骰子数量的骰面
+    /// </summary>
+    /// <returns>骰面的list</returns>
     public List<SingleDiceObj> GetRandomSingleDices()
     {
         List<SingleDiceObj> singleDiceObjs = new List<SingleDiceObj>();

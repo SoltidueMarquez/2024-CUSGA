@@ -24,6 +24,13 @@ public class BuffHandler : MonoBehaviour
                 //TODO:提示buff层数已满
             }
         }
+        else
+        {
+            buffInfo.creator = creator;
+            buffInfo.target = this.gameObject;
+            buffInfo.buffData.onCreate?.Invoke(buffInfo);
+            buffList.Add(buffInfo);
+        }
     }
 
     /// <summary>

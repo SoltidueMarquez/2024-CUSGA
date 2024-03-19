@@ -33,12 +33,17 @@ public class BattleDice
         SingleDiceObj singleDiceObj = new SingleDiceObj(singleDiceModel, idInDice);
         diceObjs.Add(singleDiceObj);
     }
-
+    /// <summary>
+    /// 获得随机的一个骰面
+    /// </summary>
+    /// <param name="singleDiceObj"></param>
+    /// <returns></returns>
     public int GetRandomDice(out SingleDiceObj singleDiceObj)
     {
         //TODO:这边的随机数生成有问题,应该是根据权重来生成
-        singleDiceObj = diceObjs[Random.Range(0, diceObjs.Count)];
-        return Random.Range(0, diceObjs.Count);
+        int randomIndex = Random.Range(0, diceObjs.Count);
+        singleDiceObj = diceObjs[randomIndex];
+        return randomIndex;
     }
     
 }

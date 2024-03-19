@@ -76,7 +76,14 @@ public class ChaState : MonoBehaviour
 
     public void UseAllDice()
     {
+        if (this.controlState.canUseDice == false)//如果不能使用骰子
+        {
+            Debug.Log("不能使用骰子");
+            return;
+        }
         battleDiceHandler.CastDiceAll(this,BattleManager.Instance.currentSelectEnemy);
+        DamageManager.Instance.DealWithAllDamage();
+
     }
     #endregion
     #region buff的操作

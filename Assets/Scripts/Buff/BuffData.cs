@@ -153,6 +153,25 @@ public class BuffData
             }
         }
         this.stateMod = stateMod;
+
+        this.onCreate = (onCreate == "" )? null : DesignerScripts.BuffEvents.onCreateFunc[onCreate];
+        this.onCreateParams = onCreateParams;
+        this.onRemove = (onRemove == "") ? null : DesignerScripts.BuffEvents.onRemoveFunc[onRemove];
+        this.onRemoveParams = onRemoveParams;
+        this.onRoundStart = (onRoundStart == "") ? null : DesignerScripts.BuffEvents.onRoundStartFunc[onRoundStart];
+        this.onRoundStartParams = onRoundStartParams;
+        this.onRoundEnd = (onRoundEnd == "") ? null : DesignerScripts.BuffEvents.onRoundEndFunc[onRoundEnd];
+        this.onRoundEndParams = onRoundEndParams;
+        this.onHit = (onHit == "") ? null : DesignerScripts.BuffEvents.onBuffHitFunc[onHit];
+        this.onHitParams = onHitParams;
+        this.onBeHurt = (onBeHurt == "") ? null : DesignerScripts.BuffEvents.onBeHurtFuc[onBeHurt];
+        this.onBeHurtParams = onBeHurtParams;
+        this.onRoll = (onRoll == "") ? null : DesignerScripts.BuffEvents.onRollFunc[onRoll];
+        this.onRollParams = onRollParams;
+        this.onKill = (onKill == "") ? null : DesignerScripts.BuffEvents.onKillFunc[onKill];
+        this.onKillParams = onKillParams;
+        this.onBeKilled = (onBeKilled == "") ? null : DesignerScripts.BuffEvents.onBeKillFunc[onBeKilled];
+        this.onBeKilledParams = onBeKilledParams;
     }
 
 
