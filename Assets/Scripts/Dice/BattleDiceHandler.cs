@@ -60,7 +60,14 @@ public class BattleDiceHandler : MonoBehaviour
             damage.indexDamage = singleDiceObj.idInDice;//将index的值赋值给index
             DamageManager.Instance.DoDamage(chaState.gameObject, target, damage,false);
             //视觉逻辑
+            foreach(var buffinfo in singleDiceObj.model.buffInfos)
+            {
+                Debug.Log("success");
+                chaState.AddBuff(buffinfo,chaState.gameObject);
+            }
             diceCardsInUse.Remove(singleDiceObj);
+            //添加技能特殊效果Buff
+            
         }
         else
         {

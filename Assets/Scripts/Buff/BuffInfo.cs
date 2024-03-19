@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuffInfo : MonoBehaviour
+public class BuffInfo
 {
     /// <summary>
     /// buff数据的模板

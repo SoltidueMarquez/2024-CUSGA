@@ -55,7 +55,7 @@ public class SingleDiceModel
     /// <param name="damage">可以造成的基础伤害</param>
     /// <param name="value">售卖的时候的价格</param>
     /// <param name="level">等级</param>
-    /// <param name="buffInfos">附带的特效</param>
+    /// <param name="buffInfos">附带的buffs</param>
     /// <param name="visualEffect">播放的视觉效果</param>
     public SingleDiceModel(DiceType diceType,string name,string id, ChaResource condition, ChaResource cost, Damage damage, int value, int level, BuffInfo[] buffInfos, VisualEffect visualEffect)
     {

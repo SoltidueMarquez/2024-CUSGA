@@ -1660,7 +1660,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676dab65478c37e46a3f941aac266ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffList: []
 --- !u!4 &341200666
 Transform:
   m_ObjectHideFlags: 0
@@ -2611,7 +2610,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676dab65478c37e46a3f941aac266ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffList: []
 --- !u!4 &589276659
 Transform:
   m_ObjectHideFlags: 0

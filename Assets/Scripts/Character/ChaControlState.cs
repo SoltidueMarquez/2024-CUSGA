@@ -17,7 +17,7 @@ public struct ChaControlState
     /// </summary>
     public bool ifImmune;
 
-    public  ChaControlState(bool ifCanChangePosition = true, bool canUseDice = true, bool ifImmune = false)
+    public ChaControlState(bool ifCanChangePosition = true, bool canUseDice = true, bool ifImmune = false)
     {
         this.ifCanChangePosition = ifCanChangePosition;
         this.canUseDice = canUseDice;
@@ -30,6 +30,7 @@ public struct ChaControlState
         canUseDice = true;
         ifImmune = false;
     }
+    public static ChaControlState origin = new ChaControlState(true, true, false);
     public static ChaControlState operator +(ChaControlState a, ChaControlState b)
     {
         return new ChaControlState(a.ifCanChangePosition && b.ifCanChangePosition, a.canUseDice && b.canUseDice, a.ifImmune || b.ifImmune);
