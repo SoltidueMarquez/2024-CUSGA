@@ -29,6 +29,7 @@ namespace UI
             
             //ToDo:根据id初始化信息
             infoText.text = id;
+            Debug.Log("根据id初始化投掷结果信息");
         }
 
         private void JumpToPosition(Vector2Int position)
@@ -41,7 +42,10 @@ namespace UI
             FightDicePageManager.Instance.RevertMarkColumn();
         }
 
-        //ToDo:写骰面预览效果
+        /// <summary>
+        /// 骰面预览
+        /// </summary>
+        /// <param name="eventData"></param>
         public void OnPointerEnter(PointerEventData eventData)
         {
             UIManager.Instance.EnterPreview(this.gameObject,UIManager.Instance.previewSizeS);
@@ -50,6 +54,10 @@ namespace UI
             infoCanvas.SetActive(true);
         }
 
+        /// <summary>
+        /// 停止预览
+        /// </summary>
+        /// <param name="eventData"></param>
         public void OnPointerExit(PointerEventData eventData)
         {
             UIManager.Instance.ExitPreview(gameObject);
