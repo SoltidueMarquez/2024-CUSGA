@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HalidomObject:MonoBehaviour
+public class HalidomObject
 {
     /// <summary>
     /// 圣物唯一id标识
@@ -19,7 +19,7 @@ public class HalidomObject:MonoBehaviour
     /// <summary>
     /// 圣物身上存的buff信息
     /// </summary>
-    public List<BuffInfo> buffInfo;
+    public List<BuffInfo> buffInfos;
     /// <summary>
     /// 圣物在格子中的序号
     /// </summary>
@@ -32,7 +32,7 @@ public class HalidomObject:MonoBehaviour
         this.id = id;
         this.halidomName = halidomName;
         this.description = description;
-        this.buffInfo = buffinfo;
+        this.buffInfos = buffinfo;
     }
 
     

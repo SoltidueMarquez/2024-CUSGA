@@ -57,6 +57,15 @@ public class HalidomManager : MonoBehaviour
         halidomList = new HalidomObject[halidomMaxCount];
     }
 
+    private void Start()
+    {
+        //初始化圣物
+        AddHalidom(HalidomData.halidomDictionary["Halidom_1"]);
+
+        
+    }
+    
+
     //配置圣物是不配圣物在格子里的顺序的，加进去的时候才获得序号
 
     public void AddHalidom(HalidomObject halidom)
@@ -71,12 +80,18 @@ public class HalidomManager : MonoBehaviour
                 //获得圣物在格子中的序号
                 halidom.halidomIndex = i + 1;
                 //触发圣物OnCreate回调点
-                foreach (var buffInfo in halidom.buffInfo)
+                foreach (var buffInfo in halidom.buffInfos)
                 {
+                    //获取圣物的创建者 给予buffinfo
+                    buffInfo.creator = BattleManager.Instance.parameter.playerChaStates.gameObject;
+                    //获取圣物buff的对象（暂定 没有给敌人上buff）
+                    buffInfo.target=BattleManager.Instance.parameter.playerChaStates.gameObject;
+                    //触发圣物的OnCreate回调点
                     buffInfo.buffData.onCreate?.Invoke(buffInfo);
                 }
                 RefreshAllHalidoms();
-
+                //找到空的格子后就跳出循环
+                break;
             }
             else
             {
@@ -93,7 +108,7 @@ public class HalidomManager : MonoBehaviour
             if (i == index - 1)
             {
                 //触发圣物OnRemove回调点
-                foreach (var buffInfo in halidomList[i].buffInfo)
+                foreach (var buffInfo in halidomList[i].buffInfos)
                 {
                     buffInfo.buffData.onRemove?.Invoke(buffInfo);
                 }
@@ -123,7 +138,7 @@ public class HalidomManager : MonoBehaviour
             if (halidom != null)
             {
                 //遍历当前圣物的所有buffinfo
-                foreach (var buffinfo in halidom.buffInfo)
+                foreach (var buffinfo in halidom.buffInfos)
                 {
                     //计算相加和相乘
                     buffProp[0] += buffProp[0] += buffinfo.buffData.propMod[0] * buffinfo.curStack;
@@ -151,24 +166,58 @@ public class HalidomManager : MonoBehaviour
     //所有回调点触发Invoke
     public void OnRoundStart()
     {
+        //存储要删除的buff
+        List<BuffInfo> removeList = new List<BuffInfo>();
         for (int i = 0; i < halidomList.Length; i++)
         {
             if (halidomList[i] != null)
             {
-                foreach (var buffInfo in halidomList[i].buffInfo)
+                foreach (var buffInfo in halidomList[i].buffInfos)
                 {
                     buffInfo.buffData.onRoundStart?.Invoke(buffInfo);
+                    if (buffInfo.isPermanent == false)//非永久buff
+                    {
+                        buffInfo.roundCount--;
+                        //Test
+                        Debug.Log(buffInfo.roundCount);
+                        if (buffInfo.roundCount == 0)
+                        {
+                            removeList.Add(buffInfo);
+                        }
+                    }
+                }
+                foreach(var removeBuff in removeList)
+                {
+                    switch (removeBuff.buffData.removeStackUpdateEnum)
+                    {
+                        case BuffRemoveStackUpdateEnum.Clear:
+                            removeBuff.buffData.onRemove?.Invoke(removeBuff);
+                            halidomList[i].buffInfos.Remove(removeBuff);
+                            break;
+                        case BuffRemoveStackUpdateEnum.Reduce:
+                            removeBuff.curStack--;
+                            removeBuff.buffData.onRemove?.Invoke(removeBuff);
+                            if (removeBuff.curStack == 0)
+                            {
+                                halidomList[i].buffInfos.Remove(removeBuff);
+                            }
+                            //TODO:关于buff层数减少的刷新
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
     }
+
     public void OnRoundEnd()
     {
         for (int i = 0; i < halidomList.Length; i++)
         {
             if (halidomList[i] != null)
             {
-                foreach (var buffInfo in halidomList[i].buffInfo)
+                foreach (var buffInfo in halidomList[i].buffInfos)
                 {
                     buffInfo.buffData.onRoundEnd?.Invoke(buffInfo);
                 }
@@ -181,7 +230,7 @@ public class HalidomManager : MonoBehaviour
         {
             if (halidomList[i] != null)
             {
-                foreach (var buffInfo in halidomList[i].buffInfo)
+                foreach (var buffInfo in halidomList[i].buffInfos)
                 {
                     buffInfo.buffData.onHit?.Invoke(buffInfo, damageInfo, damageInfo.defender);
                 }
@@ -194,7 +243,7 @@ public class HalidomManager : MonoBehaviour
         {
             if (halidomList[i] != null)
             {
-                foreach (var buffInfo in halidomList[i].buffInfo)
+                foreach (var buffInfo in halidomList[i].buffInfos)
                 {
                     buffInfo.buffData.onBeHurt?.Invoke(buffInfo, damageInfo, damageInfo.attacker);
                 }
@@ -207,7 +256,7 @@ public class HalidomManager : MonoBehaviour
         {
             if (halidomList[i] != null)
             {
-                foreach (var buffInfo in halidomList[i].buffInfo)
+                foreach (var buffInfo in halidomList[i].buffInfos)
                 {
                     buffInfo.buffData.onKill?.Invoke(buffInfo, damageInfo, damageInfo.defender);
                 }
@@ -220,7 +269,7 @@ public class HalidomManager : MonoBehaviour
         {
             if (halidomList[i] != null)
             {
-                foreach (var buffInfo in halidomList[i].buffInfo)
+                foreach (var buffInfo in halidomList[i].buffInfos)
                 {
                     buffInfo.buffData.onBeKilled?.Invoke(buffInfo, damageInfo, damageInfo.attacker);
                 }
@@ -233,7 +282,7 @@ public class HalidomManager : MonoBehaviour
         {
             if (halidomList[i] != null)
             {
-                foreach (var buffInfo in halidomList[i].buffInfo)
+                foreach (var buffInfo in halidomList[i].buffInfos)
                 {
                     buffInfo.buffData.onRoll?.Invoke(buffInfo);
                 }
