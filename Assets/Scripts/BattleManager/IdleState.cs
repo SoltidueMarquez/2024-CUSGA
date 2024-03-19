@@ -18,6 +18,13 @@ public class GameStartState : IState
         Debug.Log("游戏开始");
         //TODO  读入所有数据
         manager.parameter.playerChaStates.GetBattleDiceHandler().InitDice();
+        manager.parameter.playerChaStates.Initialize();
+        //根据敌人的数量初始化敌人
+        for (int i = 0; i < manager.parameter.enemyChaState.Length; i++)
+        {
+            manager.parameter.enemyChaState[i].GetBattleDiceHandler().InitDice();
+            manager.parameter.enemyChaState[i].Initialize();
+        }
         //清空回合计数器
         manager.ResetTurns();
     }
@@ -49,6 +56,7 @@ public class PreparationState : IState
         
 
         Debug.Log("Enter PreparationState");
+
         //TODO 播动画
 
     }
