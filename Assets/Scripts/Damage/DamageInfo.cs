@@ -17,11 +17,12 @@ public class DamageInfo
     /// </summary>
     public Damage damage;
     /// <summary>
-    /// 伤害可能产生的buff
+    /// 伤害可能产生的buff,这边需要在骰面里面或者每次OnHit的时候
     /// </summary>
     public List<BuffInfo> addBuffs = new List<BuffInfo>();
     
     public int finalDamage;
+    
     public DamageInfo(GameObject attacker, GameObject defender, Damage damage, bool isHeal = false)
     {
         this.attacker = attacker;

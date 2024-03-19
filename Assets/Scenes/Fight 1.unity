@@ -1517,7 +1517,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffHandler: {fileID: 0}
   battleDiceHandler: {fileID: 0}
-  ifExist: 0
   side: 1
 --- !u!114 &341200664
 MonoBehaviour:
@@ -1545,7 +1544,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676dab65478c37e46a3f941aac266ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffList: []
 --- !u!4 &341200666
 Transform:
   m_ObjectHideFlags: 0
@@ -2424,7 +2422,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffHandler: {fileID: 0}
   battleDiceHandler: {fileID: 0}
-  ifExist: 0
   side: 0
 --- !u!114 &589276657
 MonoBehaviour:
@@ -2452,7 +2449,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676dab65478c37e46a3f941aac266ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffList: []
 --- !u!4 &589276659
 Transform:
   m_ObjectHideFlags: 0

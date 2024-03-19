@@ -9,7 +9,12 @@ namespace DesignerScripts
 {
     public class BuffEvents
     {
-        public static Dictionary<string, OnBuffCreate> onCreateFunc = new Dictionary<string, OnBuffCreate>();
+        public static Dictionary<string, OnBuffCreate> onCreateFunc = new Dictionary<string, OnBuffCreate>()
+        {
+            {"test1",TestShow },
+            {"test2",TestShow }
+
+        };
         public static Dictionary<string, OnBuffRemove> onRemoveFunc = new Dictionary<string, OnBuffRemove>();
         public static Dictionary<string, OnRoundStart> onRoundStartFunc = new Dictionary<string, OnRoundStart>();
         public static Dictionary<string, OnRoundEnd> onRoundEndFunc = new Dictionary<string, OnRoundEnd>();
@@ -20,5 +25,25 @@ namespace DesignerScripts
 
         public static Dictionary<string, BuffOnRoll> onRollFunc = new Dictionary<string, BuffOnRoll>();
 
+
+        public static void TestShow(BuffInfo buffInfo)
+        {
+            Debug.Log("在回合开始的时候触发的东西触发了");
+        }
+        public static void TestonRemove(BuffInfo buffInfo)
+        {
+            Debug.Log("在回合结束的时候触发的东西触发了");
+        }
+        public static void TestOnRoundStart(BuffInfo buffInfo)
+        {
+            Debug.Log("回合开始的时候触发的东西触发了");
+        }
+        public static void TestOnRoundEnd(BuffInfo buffInfo)
+        {
+            Debug.Log("回合结束的时候触发的东西触发了");
+        }
     }
+
+
+
 }

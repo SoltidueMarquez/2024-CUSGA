@@ -54,6 +54,7 @@ public class ChaState : MonoBehaviour
     public void OnRoundStart()
     {
         buffHandler.BuffRoundStartTick();
+        Debug.Log("当前玩家的buff数："+this.buffHandler.buffList.Count);
     }
 
     public void OnRoundEnd()
@@ -126,8 +127,6 @@ public class ChaState : MonoBehaviour
         ChaProperty halidomProp = HalidomManager.Instance.deltaCharacterProperty;
         //重新计算属性
         this.prop = (this.baseProp + buffProp[0]) * (this.buffProp[1])+halidomProp;
-        Debug.Log(this.baseProp.health + this.buffProp[0].health);
-        Debug.Log(this.buffProp[1].health);
         //计算差值
         chaProperty = this.prop - chaProperty;
         //根据差值，重新计算资源
