@@ -39,13 +39,6 @@ public class BattleDiceHandler : MonoBehaviour
     //    bagDiceCards[indexInBag] = temp;
     //}
     /// <summary>
-    /// 清楚战斗中的骰面
-    /// </summary>
-    public void ClearDiceInBattle()
-    {
-        bagDiceCards.Clear();
-    }
-    /// <summary>
     /// 释放单个骰子
     /// </summary>
     public void CastSingleDice(int index, ChaState chaState, GameObject target)//这边的函数

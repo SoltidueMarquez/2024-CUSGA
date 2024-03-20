@@ -6,6 +6,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using UI;
 
 [Serializable]
 public class FSMParameter
@@ -134,6 +135,8 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void EndPlayerRound()
     {
+        this.parameter.playerChaStates.GetBattleDiceHandler().ClearBattleSingleDices();
+        RollingResultUIManager.Instance.RemoveAllResultUI();
         TransitionState(GameState.PlayerRoundEndResolution);
     }
 
@@ -149,5 +152,14 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    
+    public void RollDice()
+    {
+        List<SingleDiceObj> singleDiceObjs = this.parameter.playerChaStates.GetBattleDiceHandler().GetRandomSingleDices();
+        this.parameter.playerChaStates.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs);
+        for (int i = 0; i < singleDiceObjs.Count; i++)
+        {
+            Vector2Int pos = new Vector2Int(i, singleDiceObjs[i].idInDice);
+            RollingResultUIManager.Instance.CreateResult(i, singleDiceObjs[i].model.id, pos);
+        }
+    }
 }
