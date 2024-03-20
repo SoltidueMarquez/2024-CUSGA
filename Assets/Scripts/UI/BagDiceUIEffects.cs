@@ -9,20 +9,14 @@ namespace UI
     /// </summary>
     public class BagDiceUIEffects : UIObjectEffects, IBeginDragHandler,IEndDragHandler,IDragHandler,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
     {
-        private void Start()
-        {
-            //TODO:初始化信息，之后要删掉
-            Init(UIManager.Instance.bagColumns, UIManager.Instance.offsetB,"???");
-        }
-        
         /// <summary>
         /// 鼠标移动函数
         /// </summary>
         /// <param name="eventData"></param>
         public void OnPointerEnter(PointerEventData eventData)
         {
-            UIManager.Instance.EnterPreview(this.gameObject,UIManager.Instance.previewSizeB);
-            UIManager.Instance.DoShake(this.GetComponent<Image>(),UIManager.Instance.shakeAngleB);
+            UIManager.Instance.EnterPreview(this.gameObject,BagDiceUIManager.Instance.previewSizeB);
+            UIManager.Instance.DoShake(this.GetComponent<Image>(),BagDiceUIManager.Instance.shakeAngleB);
             descriptionCanvas.SetActive(true);
         }
         
@@ -75,7 +69,7 @@ namespace UI
         {
             EndClick();
             _currentColumn =
-                UIManager.Instance.DetectColumn(gameObject, UIManager.Instance.bagColumns, UIManager.Instance.offsetB); //记录原来的物品栏位置
+                UIManager.Instance.DetectColumn(gameObject, BagDiceUIManager.Instance.bagColumns, BagDiceUIManager.Instance.offsetB); //记录原来的物品栏位置
             oldParent = gameObject.transform.parent;//记录原来的父物体
         }
 
@@ -87,8 +81,8 @@ namespace UI
         {
             EndClick();
             //更改位置
-            UIManager.Instance.DetectPosition(gameObject, UIManager.Instance.bagColumns, _currentColumn, UIManager.Instance.offsetB);
-            _currentColumn = UIManager.Instance.DetectColumn(gameObject, UIManager.Instance.bagColumns, UIManager.Instance.offsetB); //记录原来的物品栏位置
+            UIManager.Instance.DetectPosition(gameObject, BagDiceUIManager.Instance.bagColumns, _currentColumn, BagDiceUIManager.Instance.offsetB);
+            _currentColumn = UIManager.Instance.DetectColumn(gameObject, BagDiceUIManager.Instance.bagColumns, BagDiceUIManager.Instance.offsetB); //记录原来的物品栏位置
             gameObject.transform.SetParent(oldParent);//设置为原来的图层
         }
 

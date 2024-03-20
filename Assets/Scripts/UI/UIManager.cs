@@ -14,12 +14,6 @@ namespace UI
         [Header("通用")] 
         [Tooltip("拖拽图层")] public Transform dragCanvas;
 
-        [Header("背包骰面相关")]
-        [Tooltip("骰面晃动的角度")] public float shakeAngleB;
-        [Tooltip("骰面变大的倍数")] public float previewSizeB;
-        [Tooltip("背包栏列表")] public List<Column> bagColumns;
-        [Tooltip("栏目判定")] public float offsetB;
-
         private void Awake()
         {
             Instance = this;
