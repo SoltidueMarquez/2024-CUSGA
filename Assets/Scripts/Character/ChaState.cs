@@ -144,12 +144,12 @@ public class ChaState : MonoBehaviour
     }
     public void ModResources(ChaResource value)
     {
-        CharacterUIManager.Instance.ChangeHealthSlider(this.resource.currentHp,this.prop.health);
         this.resource += value;
         this.resource.currentMoney = Mathf.Clamp(this.resource.currentMoney, 0, this.prop.money);
         this.resource.currentRollTimes = Mathf.Clamp(this.resource.currentRollTimes, 0, this.prop.maxRollTimes);
         this.resource.currentShield = Mathf.Clamp(this.resource.currentShield, 0, this.prop.shield);
         this.resource.currentHp = Mathf.Clamp(this.resource.currentHp, 0, this.prop.health);
+        CharacterUIManager.Instance.ChangeHealthSlider(this.side,this.resource.currentHp,this.prop.health);
         if(this.resource.currentHp <= 0)
         {
             this.Kill();
@@ -163,6 +163,9 @@ public class ChaState : MonoBehaviour
     public void Initialize()
     {
         AttrAndResourceRecheck();
+
+        //UI初始化
+        CharacterUIManager.Instance.ChangeHealthSlider(this.side,this.resource.currentHp,this.prop.health);
     }
 
     #region 获取组件

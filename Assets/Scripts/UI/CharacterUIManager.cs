@@ -40,9 +40,6 @@ namespace UI
             }
         }
         
-        public void ChangeHealthSlider(int currentHealth, int maxHealth)
-        {
-            enemyHealthSlider.value = (float)currentHealth / maxHealth;
-        }
+        
     }
 }
