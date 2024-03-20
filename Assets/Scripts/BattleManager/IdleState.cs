@@ -108,7 +108,7 @@ public class PlayerRoundStartResolutionState : IState
         for (int i = 0;i<singleDiceObjs.Count;i++)
         {
             Vector2Int pos = new Vector2Int(i, singleDiceObjs[i].idInDice);
-            RollingResultManager.Instance.CreateResult(i, singleDiceObjs[i].model.id,pos);
+            RollingResultUIManager.Instance.CreateResult(i, singleDiceObjs[i].model.id,pos);
 
         }
         //TODO:封装投骰子函数给UI调用

@@ -84,7 +84,7 @@ public class ChaState : MonoBehaviour
         }
         battleDiceHandler.CastDiceAll(this,BattleManager.Instance.currentSelectEnemy);
         DamageManager.Instance.DealWithAllDamage();
-        RollingResultManager.Instance.RemoveAllResultUI();
+        RollingResultUIManager.Instance.RemoveAllResultUI();
     }
     #endregion
     #region buff的操作

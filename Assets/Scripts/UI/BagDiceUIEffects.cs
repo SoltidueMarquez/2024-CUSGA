@@ -12,7 +12,7 @@ namespace UI
         private void Start()
         {
             //TODO:初始化信息，之后要删掉
-            Init(UIManager.Instance.bagColumns, UIManager.Instance.offsetB);
+            Init(UIManager.Instance.bagColumns, UIManager.Instance.offsetB,"???");
         }
         
         /// <summary>

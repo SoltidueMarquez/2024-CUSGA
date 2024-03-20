@@ -48,8 +48,8 @@ namespace UI
         /// <param name="eventData"></param>
         public void OnPointerEnter(PointerEventData eventData)
         {
-            UIManager.Instance.EnterPreview(this.gameObject,UIManager.Instance.previewSizeS);
-            UIManager.Instance.DoShake(this.GetComponent<Image>(),UIManager.Instance.shakeAngleS);
+            UIManager.Instance.EnterPreview(this.gameObject,SacredObjectUIManager.Instance.previewSizeS);
+            UIManager.Instance.DoShake(this.GetComponent<Image>(),SacredObjectUIManager.Instance.shakeAngleS);
             JumpToPosition(pageAndIndex);
             infoCanvas.SetActive(true);
         }

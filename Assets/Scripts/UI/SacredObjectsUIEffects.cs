@@ -9,20 +9,14 @@ namespace UI
     /// </summary>
     public class SacredObjectsUIEffects : UIObjectEffects, IBeginDragHandler,IEndDragHandler,IDragHandler,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
     {
-        private void Start()
-        {
-            //TODO:初始化信息，之后要删掉
-            Init(UIManager.Instance.sacredObjectColumns, UIManager.Instance.offsetS);
-        }
-        
         /// <summary>
         /// 鼠标移动函数
         /// </summary>
         /// <param name="eventData"></param>
         public void OnPointerEnter(PointerEventData eventData)
         {
-            UIManager.Instance.EnterPreview(this.gameObject,UIManager.Instance.previewSizeS);
-            UIManager.Instance.DoShake(this.GetComponent<Image>(),UIManager.Instance.shakeAngleS);
+            UIManager.Instance.EnterPreview(this.gameObject,SacredObjectUIManager.Instance.previewSizeS);
+            UIManager.Instance.DoShake(this.GetComponent<Image>(),SacredObjectUIManager.Instance.shakeAngleS);
             descriptionCanvas.SetActive(true);
         }
         
@@ -75,7 +69,7 @@ namespace UI
         {
             EndClick();
             _currentColumn =
-                UIManager.Instance.DetectColumn(gameObject, UIManager.Instance.sacredObjectColumns, UIManager.Instance.offsetS); //记录原来的物品栏位置
+                UIManager.Instance.DetectColumn(gameObject, SacredObjectUIManager.Instance.sacredObjectColumns, SacredObjectUIManager.Instance.offsetS); //记录原来的物品栏位置
             oldParent = gameObject.transform.parent;//记录原来的父物体
         }
 
@@ -87,8 +81,8 @@ namespace UI
         {
             EndClick();
             //更改位置
-            UIManager.Instance.DetectPosition(gameObject, UIManager.Instance.sacredObjectColumns, _currentColumn, UIManager.Instance.offsetS);
-            _currentColumn = UIManager.Instance.DetectColumn(gameObject, UIManager.Instance.sacredObjectColumns, UIManager.Instance.offsetS); //记录原来的物品栏位置
+            UIManager.Instance.DetectPosition(gameObject, SacredObjectUIManager.Instance.sacredObjectColumns, _currentColumn, SacredObjectUIManager.Instance.offsetS);
+            _currentColumn = UIManager.Instance.DetectColumn(gameObject, SacredObjectUIManager.Instance.sacredObjectColumns, SacredObjectUIManager.Instance.offsetS); //记录原来的物品栏位置
             gameObject.transform.SetParent(oldParent);//设置为原来的图层
         }
 

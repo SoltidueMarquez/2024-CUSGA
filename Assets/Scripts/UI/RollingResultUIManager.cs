@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace UI
 {
-    public class RollingResultManager : MonoSingleton<RollingResultManager>
+    public class RollingResultUIManager : MonoSingleton<RollingResultUIManager>
     {
         [SerializeField, Tooltip("投掷结果栏位")] private List<Transform> columns;
         [SerializeField, Tooltip("生成模板")] private GameObject template;

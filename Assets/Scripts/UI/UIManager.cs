@@ -13,12 +13,6 @@ namespace UI
         public static UIManager Instance; //单例调用
         [Header("通用")] 
         [Tooltip("拖拽图层")] public Transform dragCanvas;
-        
-        [Header("圣物相关")] 
-        [Tooltip("圣物晃动的角度")] public float shakeAngleS;
-        [Tooltip("圣物变大的倍数")] public float previewSizeS;
-        [Tooltip("圣物栏列表")] public List<Column> sacredObjectColumns;
-        [Tooltip("栏目判定")] public float offsetS;
 
         [Header("背包骰面相关")]
         [Tooltip("骰面晃动的角度")] public float shakeAngleB;
@@ -167,12 +161,5 @@ namespace UI
 
             return null;
         }
-
-        // public void AddItem(string id)
-        // {
-        //     //TODO:根据id读取数据
-        //     GameObject newSacredObject = Instantiate(template);
-        //     newSacredObject.GetComponent<SacredObjectsUIEffects>().Init();
-        // }
     }
 }

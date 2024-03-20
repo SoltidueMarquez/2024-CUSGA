@@ -17,10 +17,7 @@ namespace UI
     {
         //TODO:之后要和逻辑上的价格合并
         [Header("物品信息")]
-        [SerializeField, Tooltip("id")] protected string id;
         [SerializeField,Tooltip("出售价格")]protected float salePrice;
-        [Multiline(4)]
-        [SerializeField, Tooltip("描述")] protected string desc;
 
         [Header("UI组件")]
         [SerializeField,Tooltip("说明UI")]protected GameObject descriptionCanvas;
@@ -35,9 +32,9 @@ namespace UI
         /// <summary>
         /// 初始化函数
         /// </summary>
-        public void Init(List<Column> columns, float offset)
+        public void Init(List<Column> columns, float offset, string id)
         {
-            descriptionText.text = desc;
+            descriptionText.text = id;
             saleButtonText.text = $"出售\n￥{salePrice}";
             _state = State.None;
             _currentColumn = UIManager.Instance.DetectColumn(gameObject, columns, offset); //检测当前所在的物品栏
