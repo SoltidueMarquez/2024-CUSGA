@@ -1,14 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterUIManager : MonoSingleton<CharacterUIManager>
+namespace UI
 {
-    [SerializeField, Tooltip("血条")] private Slider healthSlider;
-
-    public void ChangeHealthSlider(int currentHealth,int maxHealth)
+    public class CharacterUIManager : MonoSingleton<CharacterUIManager>
     {
-        healthSlider.value = (float)currentHealth / maxHealth;
+        [SerializeField, Tooltip("敌人血条")] private Slider enemyHealthSlider;
+        
+        [SerializeField, Tooltip("玩家血条")] private Slider playerHealthSlider;
+
+        private void Start()
+        {
+            Init();
+        }
+
+        private void Init()
+        {
+            enemyHealthSlider.value = 1;
+            playerHealthSlider.value = 1;
+        }
+        
+        /// <summary>
+        /// 血条控制函数，0表示玩家，1表示敌人
+        /// </summary>
+        /// <param name="id">0表示玩家，1表示敌人</param>
+        /// <param name="currentHealth">当前生命值</param>
+        /// <param name="maxHealth">最大生命值</param>
+        public void ChangeHealthSlider(int id, int currentHealth, int maxHealth)
+        {
+            switch (id)
+            {
+                case 1:
+                    enemyHealthSlider.value = (float)currentHealth / maxHealth;
+                    break;
+                case 0:
+                    playerHealthSlider.value = (float)currentHealth / maxHealth;
+                    break;
+            }
+        }
+        
+        public void ChangeHealthSlider(int currentHealth, int maxHealth)
+        {
+            enemyHealthSlider.value = (float)currentHealth / maxHealth;
+        }
     }
 }
