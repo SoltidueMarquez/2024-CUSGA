@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+[Serializable]
 /// <summary>
 /// 角色的资源类属性，包括生命值，金钱，重投次数，护盾
 /// </summary>

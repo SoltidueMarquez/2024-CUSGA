@@ -16,9 +16,10 @@ public class GameStartState : IState
     public void OnEnter()
     {
         Debug.Log("游戏开始");
-        //TODO  读入所有数据
+        //TODO:读入所有数据
         manager.parameter.playerChaStates.GetBattleDiceHandler().InitDice();
         manager.parameter.playerChaStates.Initialize();
+        //HalidomManager.Instance.AddHalidom(DesignerScripts.HalidomData.halidomDictionary["Halidom_1"]);
         //根据敌人的数量初始化敌人
         for (int i = 0; i < manager.parameter.enemyChaState.Length; i++)
         {
@@ -103,14 +104,7 @@ public class PlayerRoundStartResolutionState : IState
         //TODO播放自动投骰子动画
         Debug.Log("播骰子动画");
         //自动投骰子
-        List<SingleDiceObj> singleDiceObjs = manager.parameter.playerChaStates.GetBattleDiceHandler().GetRandomSingleDices();
-        manager.parameter.playerChaStates.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs);
-        for (int i = 0;i<singleDiceObjs.Count;i++)
-        {
-            Vector2Int pos = new Vector2Int(i, singleDiceObjs[i].idInDice);
-            RollingResultUIManager.Instance.CreateResult(i, singleDiceObjs[i].model.id,pos);
-
-        }
+        manager.RollDice();
         //TODO:封装投骰子函数给UI调用
         //TODO:更新UI
         Debug.Log("根据投掷结果更新UI");

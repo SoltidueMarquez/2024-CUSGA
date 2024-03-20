@@ -59,9 +59,6 @@ public class HalidomManager : MonoBehaviour
 
     private void Start()
     {
-        //初始化圣物
-        AddHalidom(HalidomData.halidomDictionary["Halidom_1"]);
-
         
     }
     
