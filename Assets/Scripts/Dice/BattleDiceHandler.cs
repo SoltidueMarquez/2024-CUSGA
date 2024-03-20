@@ -90,6 +90,23 @@ public class BattleDiceHandler : MonoBehaviour
         }
     }
     /// <summary>
+    /// 判断战斗骰面是否为空
+    /// </summary>
+    /// <returns></returns>
+    public bool IfSingleBattleDiceEmpty()
+    {
+        bool result;
+        for(int i = 0;i< diceCardsInUse.Length;i++)
+        {
+            if (diceCardsInUse[i] != null)
+            {
+                result = false;
+                return result;
+            }
+        }
+        return true;
+    }
+    /// <summary>
     /// 没有存档的情况下，默认初始化骰子,应该是在一开始去加载？？，暂时先算战斗开始的时候加载,这边需要修改
     /// </summary>
     public void InitDice()

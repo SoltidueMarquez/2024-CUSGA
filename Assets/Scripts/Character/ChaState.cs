@@ -82,6 +82,8 @@ public class ChaState : MonoBehaviour
             Debug.Log("不能使用骰子");
             return;
         }
+        //当没有骰子的时候，直接返回
+        if (this.battleDiceHandler.IfSingleBattleDiceEmpty()) return;
         battleDiceHandler.CastDiceAll(this,BattleManager.Instance.currentSelectEnemy);
         DamageManager.Instance.DealWithAllDamage();
         RollingResultUIManager.Instance.RemoveAllResultUI();
