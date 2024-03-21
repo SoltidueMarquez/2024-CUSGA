@@ -23,7 +23,7 @@ namespace UI
             pageAndIndex = position;
             this.GetComponent<Button>().onClick.AddListener(() =>
             {
-                BattleManager.Instance.parameter.playerChaStates.UseDice(index, BattleManager.Instance.currentSelectEnemy);
+                BattleManager.Instance.parameter.playerChaState.UseDice(index, BattleManager.Instance.currentSelectEnemy);
                 Destroy(gameObject);//摧毁物体
             });
             

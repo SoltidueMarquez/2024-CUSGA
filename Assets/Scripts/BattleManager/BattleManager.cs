@@ -21,8 +21,8 @@ public class FSMParameter
     public int playerRerollCount;
     
 
-    public ChaState playerChaStates;
-    public ChaState[] enemyChaState;
+    public ChaState playerChaState;
+    public ChaState[] enemyChaStates;
 
 }
 
@@ -135,7 +135,7 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void EndPlayerRound()
     {
-        this.parameter.playerChaStates.GetBattleDiceHandler().ClearBattleSingleDices();
+        this.parameter.playerChaState.GetBattleDiceHandler().ClearBattleSingleDices();
         RollingResultUIManager.Instance.RemoveAllResultUI();
         TransitionState(GameState.PlayerRoundEndResolution);
     }
@@ -154,12 +154,17 @@ public class BattleManager : MonoBehaviour
 
     public void RollDice()
     {
-        List<SingleDiceObj> singleDiceObjs = this.parameter.playerChaStates.GetBattleDiceHandler().GetRandomSingleDices();
-        this.parameter.playerChaStates.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs);
+        List<SingleDiceObj> singleDiceObjs = this.parameter.playerChaState.GetBattleDiceHandler().GetRandomSingleDices();
+        this.parameter.playerChaState.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs);
         for (int i = 0; i < singleDiceObjs.Count; i++)
         {
             Vector2Int pos = new Vector2Int(i, singleDiceObjs[i].idInDice);
             RollingResultUIManager.Instance.CreateResult(i, singleDiceObjs[i].model.id, pos);
         }
+    }
+    public void RollDiceForEnemy(ChaState chaState)
+    {
+        var singleDiceObjs = chaState.GetBattleDiceHandler().GetRandomSingleDices();
+        chaState.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs);
     }
 }

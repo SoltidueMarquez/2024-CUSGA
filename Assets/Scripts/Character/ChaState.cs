@@ -35,9 +35,9 @@ public class ChaState : MonoBehaviour
     /// <summary>
     /// 玩家当前的资源,这个在全局的过程中都不变，可能在局外变化
     /// </summary>
-    public ChaResource resource = new ();
-    public ChaControlState controlState = new ChaControlState(true,true,false);
-    
+    public ChaResource resource = new();
+    public ChaControlState controlState = new ChaControlState(true, true, false);
+
     /// <summary>
     /// 哪一边的
     /// </summary>
@@ -55,7 +55,7 @@ public class ChaState : MonoBehaviour
     public void OnRoundStart()
     {
         buffHandler.BuffRoundStartTick();
-        Debug.Log("当前玩家的buff数："+this.buffHandler.buffList.Count);
+        Debug.Log("当前玩家的buff数：" + this.buffHandler.buffList.Count);
     }
 
     public void OnRoundEnd()
@@ -66,15 +66,17 @@ public class ChaState : MonoBehaviour
     #region 使用骰面
     public void UseDice(int index, GameObject target)
     {
-        if(this.controlState.canUseDice == false)//如果不能使用骰子
+        if (this.controlState.canUseDice == false)//如果不能使用骰子
         {
             Debug.Log("不能使用骰子");
             return;
         }
-        battleDiceHandler.CastSingleDice(index,this,target);
+        battleDiceHandler.CastSingleDice(index, this, target);
         DamageManager.Instance.DealWithAllDamage();
     }
-
+    /// <summary>
+    /// 使用所有的骰面
+    /// </summary>
     public void UseAllDice()
     {
         if (this.controlState.canUseDice == false)//如果不能使用骰子
@@ -84,9 +86,12 @@ public class ChaState : MonoBehaviour
         }
         //当没有骰子的时候，直接返回
         if (this.battleDiceHandler.IfSingleBattleDiceEmpty()) return;
-        battleDiceHandler.CastDiceAll(this,BattleManager.Instance.currentSelectEnemy);
+        battleDiceHandler.CastDiceAll(this, BattleManager.Instance.currentSelectEnemy);
         DamageManager.Instance.DealWithAllDamage();
-        RollingResultUIManager.Instance.RemoveAllResultUI();
+        if (this.side == 0)
+        {
+            RollingResultUIManager.Instance.RemoveAllResultUI();
+        }
     }
     #endregion
     #region buff的操作
@@ -109,7 +114,7 @@ public class ChaState : MonoBehaviour
     /// <returns></returns>
     public bool CanBeKilledByDamageInfo(DamageInfo damageInfo)
     {
-        if(damageInfo.diceType == DiceType.Support || damageInfo.diceType == DiceType.Defense)
+        if (damageInfo.diceType == DiceType.Support || damageInfo.diceType == DiceType.Defense)
         {
             return false;
         }
@@ -119,7 +124,7 @@ public class ChaState : MonoBehaviour
     {
         //TODO:玩家死亡的逻辑
         Debug.Log(this.gameObject.name + "死亡");
-        
+
     }
     /// <summary>
     /// 重新计算属性,在buff添加或者删除的时候调用
@@ -135,15 +140,15 @@ public class ChaState : MonoBehaviour
             buffProp[i].Zero();
         }
         //重新获取所有buff的加法总和和乘法总和
-        buffHandler.RecheckBuff(buffProp,ref controlState);
+        buffHandler.RecheckBuff(buffProp, ref controlState);
         //获取玩家的圣物所有给的属性
         ChaProperty halidomProp = HalidomManager.Instance.deltaCharacterProperty;
         //重新计算属性
-        this.prop = (this.baseProp + buffProp[0]) * (this.buffProp[1])+halidomProp;
+        this.prop = (this.baseProp + buffProp[0]) * (this.buffProp[1]) + halidomProp;
         //计算差值
         chaProperty = this.prop - chaProperty;
         //根据差值，重新计算资源
-        this.resource+= new ChaResource(chaProperty.health,chaProperty.money,chaProperty.maxRollTimes,chaProperty.shield);
+        this.resource += new ChaResource(chaProperty.health, chaProperty.money, chaProperty.maxRollTimes, chaProperty.shield);
     }
     public void ModResources(ChaResource value)
     {
@@ -152,8 +157,8 @@ public class ChaState : MonoBehaviour
         this.resource.currentRollTimes = Mathf.Clamp(this.resource.currentRollTimes, 0, this.prop.maxRollTimes);
         this.resource.currentShield = Mathf.Clamp(this.resource.currentShield, 0, this.prop.shield);
         this.resource.currentHp = Mathf.Clamp(this.resource.currentHp, 0, this.prop.health);
-        CharacterUIManager.Instance.ChangeHealthSlider(this.side,this.resource.currentHp,this.prop.health);
-        if(this.resource.currentHp <= 0)
+        CharacterUIManager.Instance.ChangeHealthSlider(this.side, this.resource.currentHp, this.prop.health);
+        if (this.resource.currentHp <= 0)
         {
             this.Kill();
         }
@@ -168,7 +173,7 @@ public class ChaState : MonoBehaviour
         AttrAndResourceRecheck();
 
         //UI初始化
-        CharacterUIManager.Instance.ChangeHealthSlider(this.side,this.resource.currentHp,this.prop.health);
+        CharacterUIManager.Instance.ChangeHealthSlider(this.side, this.resource.currentHp, this.prop.health);
     }
 
     #region 获取组件

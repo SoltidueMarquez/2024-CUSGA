@@ -80,9 +80,9 @@ public class HalidomManager : MonoBehaviour
                 foreach (var buffInfo in halidom.buffInfos)
                 {
                     //获取圣物的创建者 给予buffinfo
-                    buffInfo.creator = BattleManager.Instance.parameter.playerChaStates.gameObject;
+                    buffInfo.creator = BattleManager.Instance.parameter.playerChaState.gameObject;
                     //获取圣物buff的对象（暂定 没有给敌人上buff）
-                    buffInfo.target=BattleManager.Instance.parameter.playerChaStates.gameObject;
+                    buffInfo.target=BattleManager.Instance.parameter.playerChaState.gameObject;
                     //触发圣物的OnCreate回调点
                     buffInfo.buffData.onCreate?.Invoke(buffInfo);
                 }

@@ -4671,8 +4671,8 @@ MonoBehaviour:
   parameter:
     turns: 0
     playerRerollCount: 0
-    playerChaStates: {fileID: 589276656}
-    enemyChaState:
+    playerChaState: {fileID: 589276656}
+    enemyChaStates:
     - {fileID: 341200663}
   currentSelectEnemy: {fileID: 341200662}
 --- !u!4 &1590396381

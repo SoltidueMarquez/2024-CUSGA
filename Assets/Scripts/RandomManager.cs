@@ -24,7 +24,6 @@ public class RandomManager : MonoSingleton<RandomManager>
         {
             return singleDiceModel.type == diceType && singleDiceModel.level == level && (singleDiceModel.side == side|| singleDiceModel.side == 2) ;
         }).ToList();
-        Debug.Log(singleDiceModellegal.Count);
         return singleDiceModellegal[Random.Range(0, singleDiceModellegal.Count)];
     }
 }
