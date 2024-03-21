@@ -17,13 +17,13 @@ public class GameStartState : IState
     {
         Debug.Log("游戏开始");
         //TODO:读入所有数据
-        manager.parameter.playerChaStates.GetBattleDiceHandler().InitDice();
+        manager.parameter.playerChaStates.GetBattleDiceHandler().InitDice(0);
         manager.parameter.playerChaStates.Initialize();
         //HalidomManager.Instance.AddHalidom(DesignerScripts.HalidomData.halidomDictionary["Halidom_1"]);
         //根据敌人的数量初始化敌人
         for (int i = 0; i < manager.parameter.enemyChaState.Length; i++)
         {
-            manager.parameter.enemyChaState[i].GetBattleDiceHandler().InitDice();
+            manager.parameter.enemyChaState[i].GetBattleDiceHandler().InitDice(1);
             manager.parameter.enemyChaState[i].Initialize();
         }
         //清空回合计数器

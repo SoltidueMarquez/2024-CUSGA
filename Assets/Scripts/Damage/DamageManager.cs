@@ -55,10 +55,11 @@ public class DamageManager : MonoSingleton<DamageManager>
                 Debug.Log("攻击伤害："+damageInfo.finalDamage);
                 break;
             case DiceType.Defense:
-                defenderChaState.ModResources(new ChaResource(0, 0, 0, damageInfo.finalDamage));
+                //这边暂时做成只对玩家生效
+                attackerChaState.ModResources(new ChaResource(0, 0, 0, damageInfo.finalDamage));
                 break;
             case DiceType.Support:
-                defenderChaState.ModResources(new ChaResource(damageInfo.finalDamage, 0, 0, 0 ));
+                attackerChaState.ModResources(new ChaResource(damageInfo.finalDamage, 0, 0, 0 ));
                 break;
         }
         //TODO:视觉上的变化

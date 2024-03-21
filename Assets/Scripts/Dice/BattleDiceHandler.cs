@@ -51,7 +51,7 @@ public class BattleDiceHandler : MonoBehaviour
             //造成伤害
             Damage damage = singleDiceObj.model.damage;
             damage.indexDamageRate = singleDiceObj.idInDice + 1;//根据骰子的id来计算倍率
-            DamageManager.Instance.DoDamage(chaState.gameObject, target, damage, singleDiceObj.model.type,singleDiceObj.level);
+            DamageManager.Instance.DoDamage(chaState.gameObject, target, damage, singleDiceObj.model.type, singleDiceObj.level);
             //视觉逻辑
             Debug.Log(singleDiceObj.model.name);
             foreach (var buffinfo in singleDiceObj.model.buffInfos)
@@ -109,7 +109,7 @@ public class BattleDiceHandler : MonoBehaviour
     /// <summary>
     /// 没有存档的情况下，默认初始化骰子,应该是在一开始去加载？？，暂时先算战斗开始的时候加载,这边需要修改
     /// </summary>
-    public void InitDice()
+    public void InitDice(int side)
     {
         for (int i = 0; i < battleDiceCount; i++)
         {
@@ -117,7 +117,7 @@ public class BattleDiceHandler : MonoBehaviour
             battleDices.Add(battleDice);
             for (int j = 0; j < 6; j++)
             {
-                SingleDiceModel singleDiceModel = RandomManager.Instance.GetSingleDiceModel(battleDices[i].diceType, 1);
+                SingleDiceModel singleDiceModel = RandomManager.Instance.GetSingleDiceModel(battleDices[i].diceType, 1, side);
                 battleDice.AddDice(singleDiceModel, j);
             }
         }

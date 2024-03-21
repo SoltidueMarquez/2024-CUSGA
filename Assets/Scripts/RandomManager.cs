@@ -12,23 +12,19 @@ public class RandomManager : MonoSingleton<RandomManager>
     /// </summary>
     /// <param name="diceType">骰子的种类</param>
     /// <param name="level">骰子的等级</param>
+    /// <param name="side">骰面属于那一类</param>
     /// <returns></returns>
-    public SingleDiceModel GetSingleDiceModel(DiceType diceType,int level)
+    public SingleDiceModel GetSingleDiceModel(DiceType diceType, int level, int side)
     {
         Dictionary<string, SingleDiceModel> diceDictionary = SingleDiceData.diceDictionary;
         List<SingleDiceModel> singleDiceModels = new List<SingleDiceModel>();
-        foreach (var item in diceDictionary)
-        {
-            if (item.Value.type == diceType && item.Value.level == level)
-            {
-                singleDiceModels.Add(item.Value);
-            }
-        }
+        singleDiceModels.AddRange(diceDictionary.Values);
         //从中选取符合要求的骰子
         List<SingleDiceModel> singleDiceModellegal = singleDiceModels.Where((SingleDiceModel singleDiceModel) =>
         {
-            return singleDiceModel.type == diceType && singleDiceModel.level == level;
+            return singleDiceModel.type == diceType && singleDiceModel.level == level && (singleDiceModel.side == side|| singleDiceModel.side == 2) ;
         }).ToList();
+        Debug.Log(singleDiceModellegal.Count);
         return singleDiceModellegal[Random.Range(0, singleDiceModellegal.Count)];
     }
 }

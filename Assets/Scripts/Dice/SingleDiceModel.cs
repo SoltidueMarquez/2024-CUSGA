@@ -47,8 +47,15 @@ public class SingleDiceModel
     /// </summary>
     public int value;
     /// <summary>
+    /// 分辨骰面属于玩家拥有的还是敌人拥有的，还是共有的
+    /// 0表示玩家，1表示敌人，2表示共有
+    /// </summary>
+    public int side;
+    /// <summary>
     /// 最基础的构造函数
     /// </summary>
+    /// <param name="side">分辨骰面属于玩家拥有的还是敌人拥有的，还是共有的</param>
+    /// <param name="name">骰面的名字</param>"
     /// <param name="id">每一个单独的骰面的唯一id,用于查找信息与逻辑视觉共享</param>
     /// <param name="condition">使用骰面需要的条件</param>
     /// <param name="cost">使用骰面需要扣除的资源</param>
@@ -57,8 +64,9 @@ public class SingleDiceModel
     /// <param name="level">等级</param>
     /// <param name="buffInfos">附带的buffs</param>
     /// <param name="visualEffect">播放的视觉效果</param>
-    public SingleDiceModel(DiceType diceType,string name,string id, ChaResource condition, ChaResource cost, int value, int level, BuffInfo[] buffInfos, VisualEffect visualEffect)
+    public SingleDiceModel(int side,DiceType diceType,string name,string id, ChaResource condition, ChaResource cost, int value, int level, BuffInfo[] buffInfos, VisualEffect visualEffect)
     {
+        this.side = side;
         this.name = name;
         this.type = diceType;
         this.id = id;
