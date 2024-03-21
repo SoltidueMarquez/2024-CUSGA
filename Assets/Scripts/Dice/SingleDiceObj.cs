@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// buff的runtime数据
+/// buff鐨剅untime鏁版嵁
 /// </summary>
 public class SingleDiceObj
 {
     public SingleDiceModel model;
     /// <summary>
-    /// 在骰子中的id
+    /// 鍦ㄩ瀛愪腑鐨刬d
     /// </summary>
     public int idInDice;
     /// <summary>
-    /// 等级
+    /// 绛夌骇锛岀敤浜庤绠椾激瀹筹紝鍥犱负鏄痳untime锛屾墍浠ヨ繖杈圭殑绛夌骇鏄彲浠ュ彉鍖栫殑
     /// </summary>
     public int level;
     /// <summary>
-    /// 售价
+    /// 鍞环,鐢ㄤ簬鍗栧嚭,鍥犱负鏄痳untime锛屾墍浠ヨ繖杈圭殑鍞环鏄彲浠ュ彉鍖栫殑
     /// </summary>
     public int value;
     
@@ -25,5 +25,6 @@ public class SingleDiceObj
         this.model = model;
         this.idInDice = idInDice;
         this.value = model.value;
+        this.level = model.level;
     }
 }

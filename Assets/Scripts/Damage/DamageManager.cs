@@ -15,8 +15,7 @@ public class DamageManager : MonoSingleton<DamageManager>
         while(damageInfos.Count > 0)
         {
             DealWithDamage(damageInfos.Peek());
-            Debug.Log(damageInfos.Peek().damage.baseDamage + " " + damageInfos.Peek().damage.indexDamage);
-            Debug.Log(damageInfos.Peek().finalDamage);
+            //Debug.Log(damageInfos.Peek().finalDamage;
             damageInfos.Dequeue();
         }
     }
@@ -48,13 +47,19 @@ public class DamageManager : MonoSingleton<DamageManager>
                 buff.buffData.onBeKilled?.Invoke(buff, damageInfo, damageInfo.attacker);
             }
         }
-        if (damageInfo.isHeal)
+        //根据类型不同执行不同的逻辑
+        switch(damageInfo.diceType)
         {
-            defenderChaState.ModResources(new ChaResource(damageInfo.finalDamage));
-        }
-        else
-        {
-            defenderChaState.ModResources(new ChaResource(-damageInfo.finalDamage));
+            case DiceType.Attack:
+                defenderChaState.ModResources(new ChaResource(-damageInfo.finalDamage,0,0,0));
+                Debug.Log("攻击伤害："+damageInfo.finalDamage);
+                break;
+            case DiceType.Defense:
+                defenderChaState.ModResources(new ChaResource(0, 0, 0, damageInfo.finalDamage));
+                break;
+            case DiceType.Support:
+                defenderChaState.ModResources(new ChaResource(damageInfo.finalDamage, 0, 0, 0 ));
+                break;
         }
         //TODO:视觉上的变化
         //伤害流程走完，添加buff
@@ -69,8 +74,8 @@ public class DamageManager : MonoSingleton<DamageManager>
 
 
 
-    public void DoDamage(GameObject attacker, GameObject target, Damage damage, bool isHeal)
+    public void DoDamage(GameObject attacker, GameObject target, Damage damage, DiceType diceType,int level)
     {
-        damageInfos.Enqueue(new DamageInfo(attacker, target, damage, isHeal));
+        damageInfos.Enqueue(new DamageInfo(attacker, target, damage, diceType,level));
     }
 }

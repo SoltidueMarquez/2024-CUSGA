@@ -10,7 +10,6 @@ public class DamageInfo
 
     public GameObject defender;
 
-    public bool isHeal;
     //TODO:伤害类型?
     /// <summary>
     /// 最简单的伤害数据
@@ -20,16 +19,18 @@ public class DamageInfo
     /// 伤害可能产生的buff,这边需要在骰面里面或者每次OnHit的时候
     /// </summary>
     public List<BuffInfo> addBuffs = new List<BuffInfo>();
-    
+    /// <summary>
+    /// 骰子的类型,决定了具体逻辑计算方式
+    /// </summary>
+    public DiceType diceType;
     public int finalDamage;
-    
-    public DamageInfo(GameObject attacker, GameObject defender, Damage damage, bool isHeal = false)
+
+    public DamageInfo(GameObject attacker, GameObject defender, Damage damage, DiceType diceType, int level)
     {
         this.attacker = attacker;
         this.defender = defender;
         this.damage = damage;
-        this.isHeal = isHeal;
-        this.finalDamage = Damage.FinalDamage(damage, 1);
+        this.finalDamage = Damage.FinalDamage(damage, level, diceType);
     }
 
 }

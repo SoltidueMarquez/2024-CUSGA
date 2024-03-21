@@ -50,8 +50,8 @@ public class BattleDiceHandler : MonoBehaviour
             chaState.ModResources(-1 * singleDiceObj.model.cost);
             //造成伤害
             Damage damage = singleDiceObj.model.damage;
-            damage.indexDamage = singleDiceObj.idInDice;//将index的值赋值给index
-            DamageManager.Instance.DoDamage(chaState.gameObject, target, damage, false);
+            damage.indexDamageRate = singleDiceObj.idInDice + 1;//根据骰子的id来计算倍率
+            DamageManager.Instance.DoDamage(chaState.gameObject, target, damage, singleDiceObj.model.type,singleDiceObj.level);
             //视觉逻辑
             Debug.Log(singleDiceObj.model.name);
             foreach (var buffinfo in singleDiceObj.model.buffInfos)
@@ -96,7 +96,7 @@ public class BattleDiceHandler : MonoBehaviour
     public bool IfSingleBattleDiceEmpty()
     {
         bool result;
-        for(int i = 0;i< diceCardsInUse.Length;i++)
+        for (int i = 0; i < diceCardsInUse.Length; i++)
         {
             if (diceCardsInUse[i] != null)
             {

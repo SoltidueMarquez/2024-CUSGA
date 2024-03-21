@@ -57,14 +57,14 @@ public class SingleDiceModel
     /// <param name="level">等级</param>
     /// <param name="buffInfos">附带的buffs</param>
     /// <param name="visualEffect">播放的视觉效果</param>
-    public SingleDiceModel(DiceType diceType,string name,string id, ChaResource condition, ChaResource cost, Damage damage, int value, int level, BuffInfo[] buffInfos, VisualEffect visualEffect)
+    public SingleDiceModel(DiceType diceType,string name,string id, ChaResource condition, ChaResource cost, int value, int level, BuffInfo[] buffInfos, VisualEffect visualEffect)
     {
         this.name = name;
         this.type = diceType;
         this.id = id;
         this.condition = condition;
         this.cost = cost;
-        this.damage = damage;
+        this.damage = new Damage(0, 1);
         this.level = level;
         this.buffInfos = buffInfos;
         this.visualEffect = visualEffect;

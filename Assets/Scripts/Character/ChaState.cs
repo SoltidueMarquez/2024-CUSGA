@@ -109,7 +109,10 @@ public class ChaState : MonoBehaviour
     /// <returns></returns>
     public bool CanBeKilledByDamageInfo(DamageInfo damageInfo)
     {
-        if(damageInfo.isHeal) return false;
+        if(damageInfo.diceType == DiceType.Support || damageInfo.diceType == DiceType.Defense)
+        {
+            return false;
+        }
         return damageInfo.finalDamage < this.resource.currentHp;
     }
     public void Kill()
