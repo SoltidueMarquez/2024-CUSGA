@@ -54,10 +54,13 @@ public class BattleDiceHandler : MonoBehaviour
             DamageManager.Instance.DoDamage(chaState.gameObject, target, damage, singleDiceObj.model.type, singleDiceObj.level);
             //视觉逻辑
             Debug.Log(singleDiceObj.model.name);
-            foreach (var buffinfo in singleDiceObj.model.buffInfos)
+            if (singleDiceObj.model.buffInfos != null)
             {
-                Debug.Log("success");
-                chaState.AddBuff(buffinfo, chaState.gameObject);
+                foreach (var buffinfo in singleDiceObj.model.buffInfos)
+                {
+                    Debug.Log("success");
+                    chaState.AddBuff(buffinfo, chaState.gameObject);
+                }
             }
             diceCardsInUse[index] = null;
             //添加技能特殊效果Buff

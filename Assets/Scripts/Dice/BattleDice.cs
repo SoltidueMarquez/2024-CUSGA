@@ -45,7 +45,10 @@ public class BattleDice
         singleDiceObj = diceObjs[randomIndex];
         return randomIndex;
     }
-    
+    public List<SingleDiceObj> GetBattleDiceSingleDices()
+    {
+        return diceObjs;
+    }
 }
 /// <summary>
 /// 战斗骰子的种类

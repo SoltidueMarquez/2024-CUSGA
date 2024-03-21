@@ -16,8 +16,15 @@ public class GameStartState : IState
     public void OnEnter()
     {
         Debug.Log("游戏开始");
-        //TODO:读入所有数据
+        //TODO:读入所有数据，暂时是这样，后面会改
         manager.parameter.playerChaStates.GetBattleDiceHandler().InitDice(0);
+        for(int i = 0;i< manager.parameter.playerChaStates.GetBattleDiceHandler().battleDiceCount; i++)
+        {
+            //获取
+            var singleDices = manager.parameter.playerChaStates.GetBattleDiceHandler().battleDices[i].GetBattleDiceSingleDices();
+            var name = $"页面:{i + 1}";
+            FightDicePageManager.Instance.CreatePageUI(name, singleDices);
+        }
         manager.parameter.playerChaStates.Initialize();
         //HalidomManager.Instance.AddHalidom(DesignerScripts.HalidomData.halidomDictionary["Halidom_1"]);
         //根据敌人的数量初始化敌人
