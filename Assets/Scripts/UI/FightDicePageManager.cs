@@ -1,21 +1,66 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
 {
     public class FightDicePageManager : MonoSingleton<FightDicePageManager>
     {
+        [FormerlySerializedAs("fightDiceLists")]
         [Header("战斗骰面相关")] 
-        [Tooltip("骰子页面列表")] public List<GameObject> fightDiceLists;
+        [Tooltip("骰子页面列表")] public List<GameObject> fightDicePageLists;
         [Tooltip("骰子栏位列表")] public List<GameObject> columns;
         [SerializeField, Tooltip("向左翻按钮")] private Button switchButtonLeft;
         [SerializeField, Tooltip("向右翻按钮")] private Button switchButtonRight;
         [SerializeField, Tooltip("页码标识文本")] private Text pageText;
+        [SerializeField, Tooltip("页面模板")] private GameObject pageTemplate;
+        [SerializeField, Tooltip("骰子模板")] private GameObject diceTemplate;
+        [SerializeField, Tooltip("父物体")] private Transform parent;
+
         private int curPageNum;
         private int lastMarked;
 
+        /// <summary>
+        /// 创建战斗骰子页
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="diceObjs"></param>
+        public void CreatePageUI(string name, List<SingleDiceObj> diceObjs)
+        {
+            var tmp = Instantiate(pageTemplate, parent, true);
+            tmp.GetComponent<FightDicePageUIEffect>().Init(name);//初始化页面
+            tmp.SetActive(true);
+            if (diceObjs.Count == 0)
+            {
+                Debug.Log("没有骰子列表");
+            }
+            else
+            {
+                for (int i = 0; i < diceObjs.Count; i++)//创建骰面
+                {
+                    CreateDiceUI(diceObjs[i].model.id, diceObjs[i].idInDice, tmp.transform);
+                }
+            }
+            fightDicePageLists.Add(tmp);
+            InitPageVisibility();
+        }
+
+        /// <summary>
+        /// 创建战斗骰函数
+        /// </summary>
+        /// <param name="id">id标识</param>
+        /// <param name="index">栏位索引</param>
+        /// <param name="page">页面</param>
+        public void CreateDiceUI(string id, int index, Transform page)
+        {
+            var tmp = Instantiate(diceTemplate, page, true);
+            tmp.transform.position = columns[index].transform.position;//更改位置
+            tmp.GetComponent<FightDiceUIEffect>().Init(id);//初始化
+            tmp.SetActive(true);
+        }
+        
         private void Start()
         {
             InitPageVisibility();
@@ -28,15 +73,15 @@ namespace UI
         /// </summary>
         private void InitPageVisibility()
         {
-            if (fightDiceLists != null)
+            if (fightDicePageLists.Count != 0)
             {
-                foreach (var page in fightDiceLists)
+                foreach (var page in fightDicePageLists)
                 {
                     page.SetActive(false);
                 }
-                fightDiceLists[0].SetActive(true);
+                fightDicePageLists[0].SetActive(true);
                 curPageNum = 0;
-                pageText.text = $"{curPageNum + 1}/{fightDiceLists.Count}";
+                pageText.text = $"{curPageNum + 1}/{fightDicePageLists.Count}";
             }
         }
 
@@ -45,7 +90,7 @@ namespace UI
         /// </summary>
         private void SwitchLeft()
         {
-            SwitchPage((curPageNum - 1 >= 0) ? curPageNum - 1 : fightDiceLists.Count - 1);
+            SwitchPage((curPageNum - 1 >= 0) ? curPageNum - 1 : fightDicePageLists.Count - 1);
         }
         
         /// <summary>
@@ -53,7 +98,7 @@ namespace UI
         /// </summary>
         private void SwitchRight()
         {
-            SwitchPage((curPageNum + 1 <= fightDiceLists.Count - 1) ? curPageNum + 1 : 0);
+            SwitchPage((curPageNum + 1 <= fightDicePageLists.Count - 1) ? curPageNum + 1 : 0);
         }
 
         /// <summary>
@@ -62,6 +107,16 @@ namespace UI
         /// <param name="position">坐标位置，先页面位置再页内位置</param>
         public void SwitchToPosition(Vector2Int position)
         {
+            if (fightDicePageLists.Count < position.x)
+            {
+                Debug.Log("页面不存在");
+                return;
+            }
+            if (columns.Count < position.y)
+            {
+                Debug.Log("栏位不存在骰面");
+                return;
+            }
             SwitchPage(position.x);
             MarkColumn(position.y);
         }
@@ -72,10 +127,15 @@ namespace UI
         /// <param name="page">页面序号</param>
         private void SwitchPage(int page)
         {
-            fightDiceLists[curPageNum].SetActive(false);
+            if (fightDicePageLists.Count == 0)
+            {
+                Debug.Log("没有页面存在");
+                return;
+            }
+            fightDicePageLists[curPageNum].SetActive(false);
             curPageNum = page;
-            fightDiceLists[curPageNum].SetActive(true);
-            pageText.text = $"{curPageNum + 1}/{fightDiceLists.Count}";
+            fightDicePageLists[curPageNum].SetActive(true);
+            pageText.text = $"{curPageNum + 1}/{fightDicePageLists.Count}";
         }
 
         /// <summary>
