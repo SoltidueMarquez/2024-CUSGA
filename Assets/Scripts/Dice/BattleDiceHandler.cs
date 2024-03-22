@@ -14,7 +14,7 @@ public class BattleDiceHandler : MonoBehaviour
     /// <summary>
     /// 玩家和敌人身上的战斗骰子数量
     /// </summary>
-    public int battleDiceCount = 2;
+    public int battleDiceCount = 3;
     /// <summary>
     /// 玩家和敌人身上的背包骰面
     /// </summary>
@@ -116,7 +116,8 @@ public class BattleDiceHandler : MonoBehaviour
     {
         for (int i = 0; i < battleDiceCount; i++)
         {
-            BattleDice battleDice = new BattleDice(DiceType.Attack);//这边需要修改
+            DiceType diceType =(DiceType)i;//这边需要修改
+            BattleDice battleDice = new BattleDice(diceType);//这边需要修改
             battleDices.Add(battleDice);
             for (int j = 0; j < 6; j++)
             {
@@ -153,6 +154,7 @@ public class BattleDiceHandler : MonoBehaviour
         {
             int index = battleDices[i].GetRandomDice(out SingleDiceObj singleDiceObj);
             singleDiceObjs.Add(singleDiceObj);
+            Debug.Log(singleDiceObj.model.type.ToString());
         }
         return singleDiceObjs;
     }

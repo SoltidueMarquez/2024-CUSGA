@@ -2190,7 +2190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6622fbbeaf715744fa0067d94cb0f8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battleDiceCount: 2
+  battleDiceCount: 3
   maxDiceInBag: 8
 --- !u!114 &589276658
 MonoBehaviour:

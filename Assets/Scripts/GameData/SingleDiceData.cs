@@ -24,9 +24,12 @@ public class SingleDiceData
             , null)
         },
         {
-            "Dice_5",new SingleDiceModel(1,DiceType.Attack, "normal5", "5", ChaResource.zero, ChaResource.zero, 1, 1, null
+            "Dice_5",new SingleDiceModel(1,DiceType.Support, "normal5", "5", ChaResource.zero, ChaResource.zero, 1, 1, null
             , null)
         },
-
+        {
+            "Dice_6",new SingleDiceModel(1,DiceType.Defense, "normal6", "6", ChaResource.zero, ChaResource.zero, 1, 1, null
+            , null)
+        },
     };
 }
