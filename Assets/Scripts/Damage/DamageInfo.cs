@@ -30,6 +30,7 @@ public class DamageInfo
         this.attacker = attacker;
         this.defender = defender;
         this.damage = damage;
+        this.diceType = diceType;
         this.finalDamage = Damage.FinalDamage(damage, level, diceType);
     }
 

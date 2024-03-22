@@ -155,7 +155,8 @@ public class ChaState : MonoBehaviour
         this.resource += value;
         this.resource.currentMoney = Mathf.Clamp(this.resource.currentMoney, 0, this.prop.money);
         this.resource.currentRollTimes = Mathf.Clamp(this.resource.currentRollTimes, 0, this.prop.maxRollTimes);
-        this.resource.currentShield = Mathf.Clamp(this.resource.currentShield, 0, this.prop.shield);
+        //这边对盾条还是需要斟酌一下
+        //this.resource.currentShield = Mathf.Clamp(this.resource.currentShield, 0, this.prop.shield);
         this.resource.currentHp = Mathf.Clamp(this.resource.currentHp, 0, this.prop.health);
         CharacterUIManager.Instance.ChangeHealthSlider(this.side, this.resource.currentHp, this.prop.health);
         if (this.resource.currentHp <= 0)
