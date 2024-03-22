@@ -164,7 +164,7 @@ public class BuffData
         this.onRoundEndParams = onRoundEndParams;
         this.onHit = (onHit == "") ? null : DesignerScripts.BuffEvents.onBuffHitFunc[onHit];
         this.onHitParams = onHitParams;
-        this.onBeHurt = (onBeHurt == "") ? null : DesignerScripts.BuffEvents.onBeHurtFuc[onBeHurt];
+        this.onBeHurt = (onBeHurt == "") ? null : DesignerScripts.BuffEvents.onBeHurtFunc[onBeHurt];
         this.onBeHurtParams = onBeHurtParams;
         this.onRoll = (onRoll == "") ? null : DesignerScripts.BuffEvents.onRollFunc[onRoll];
         this.onRollParams = onRollParams;

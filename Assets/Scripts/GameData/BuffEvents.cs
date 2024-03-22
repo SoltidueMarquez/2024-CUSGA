@@ -7,59 +7,135 @@ using UnityEngine;
 /// </summary>
 namespace DesignerScripts
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    public enum BuffEventName
+    {
+        
+        Bleed,//流血
+        
+        Spirit,//精力
+        
+        Vulnerable,//易伤
+
+        Tough,//坚韧
+
+        Weak,//虚弱
+
+        Strength,//力量
+
+        Enhance,//强化
+
+        BuffStackMinus1,//Buff层数减1
+    }
     public class BuffEvents
     {
         public static Dictionary<string, OnBuffCreate> onCreateFunc = new Dictionary<string, OnBuffCreate>()
         {
-            {"test1",TestShow },
-            {"test2",TestShow }
+            
 
         };
         public static Dictionary<string, OnBuffRemove> onRemoveFunc = new Dictionary<string, OnBuffRemove>();
-        public static Dictionary<string, OnRoundStart> onRoundStartFunc = new Dictionary<string, OnRoundStart>();
+        public static Dictionary<string, OnRoundStart> onRoundStartFunc = new Dictionary<string, OnRoundStart>()
+        {
+            {
+                BuffEventName.BuffStackMinus1.ToString(),BuffStackMinus1
+            },
+        };
         public static Dictionary<string, OnRoundEnd> onRoundEndFunc = new Dictionary<string, OnRoundEnd>() 
         {
-            {"CheckMoneyAddHealth" ,CheckMoneyOnRoundEnd},
+            
         }
             ;
-        public static Dictionary<string, BuffOnHit> onBuffHitFunc = new Dictionary<string, BuffOnHit>();
-        public static Dictionary<string, BuffOnBeHurt> onBeHurtFuc = new Dictionary<string, BuffOnBeHurt>();
+        public static Dictionary<string, BuffOnHit> onBuffHitFunc = new Dictionary<string, BuffOnHit>() 
+        {
+            {
+                BuffEventName.Weak.ToString(),Weak
+            },
+            {
+                BuffEventName.Strength.ToString(),Strength   
+            },
+            
+        };
+        public static Dictionary<string, BuffOnBeHurt> onBeHurtFunc = new Dictionary<string, BuffOnBeHurt>() 
+        {
+            {
+                BuffEventName.Vulnerable.ToString(),Vulnerable
+            },
+            {
+                BuffEventName.Tough.ToString(),Tough
+            },
+        };
         public static Dictionary<string, BuffOnkill> onKillFunc = new Dictionary<string, BuffOnkill>();
         public static Dictionary<string, BuffOnBeKilled> onBeKillFunc = new Dictionary<string, BuffOnBeKilled>();
 
         public static Dictionary<string, BuffOnRoll> onRollFunc = new Dictionary<string, BuffOnRoll>();
 
 
-        public static void TestShow(BuffInfo buffInfo)
-        {
-            Debug.Log("在回合开始的时候触发的东西触发了");
-        }
-        public static void TestonRemove(BuffInfo buffInfo)
-        {
-            Debug.Log("在回合结束的时候触发的东西触发了");
-        }
-        public static void TestOnRoundStart(BuffInfo buffInfo)
-        {
-            Debug.Log("回合开始的时候触发的东西触发了");
-        }
-        public static void TestOnRoundEnd(BuffInfo buffInfo)
-        {
-            Debug.Log("回合结束的时候触发的东西触发了");
-        }
-
         
 
-        public static void CheckMoneyOnRoundEnd(BuffInfo buffInfo)
+        public static void Bleed(BuffInfo buffInfo)
         {
-            //访问Player（即PlayerController）
-            ChaState tempChaState = buffInfo.creator.GetComponent<ChaState>();
-            //访问当前的资源
-            if (tempChaState.resource.currentMoney > 0)
+
+        }
+
+        public static void Vulnerable(BuffInfo buffInfo, DamageInfo damageInfo, GameObject attack)
+        {
+            if(damageInfo.diceType == DiceType.Attack)
             {
-                tempChaState.ModResources(new ChaResource(-4,0,0,0));
-                Debug.Log(tempChaState.resource.currentHp);
+                damageInfo.addDamageArea += 0.25f;
+            }
+            
+        }
+
+
+        public static void Tough(BuffInfo buffInfo, DamageInfo damageInfo, GameObject attack)
+        {
+            if (damageInfo.diceType == DiceType.Attack)
+            {
+                damageInfo.addDamageArea -= 0.25f;
+            }
+                
+        }
+
+        public static void Weak(BuffInfo buffInfo,DamageInfo damageInfo,GameObject target)
+        {
+            if (damageInfo.diceType == DiceType.Attack)
+            {
+
+                damageInfo.addDamageArea -= 0.25f;
             }
         }
+
+        public static void Strength(BuffInfo buffInfo,DamageInfo damageInfo,GameObject target)
+        {
+            if (damageInfo.diceType == DiceType.Attack)
+            {
+
+                damageInfo.addDamageArea += 0.25f;
+            }
+        }
+
+        public static void Enhance(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            if (damageInfo.diceType == DiceType.Attack)
+            {
+                damageInfo.addDamageArea += 0.5f;
+
+            }
+        }
+
+        public static void BuffStackMinus1(BuffInfo buffInfo)
+        {
+            buffInfo.curStack--;
+        }
+
+
+       
+
+
+
     }
 
 

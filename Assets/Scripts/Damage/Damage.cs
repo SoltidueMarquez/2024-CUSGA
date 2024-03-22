@@ -25,12 +25,19 @@ public struct Damage
     /// <param name="damage">用于计算最终伤害的damage</param>
     /// <param name="level">骰面当前的等级</param>
     /// <param name="diceType">骰子的种类，决定是哪种类型的数值</param>
+    /// <param name="addDamageArea">增伤区总和</param>
+    ///  <param name="reduceDamageArea">减伤区总和</param>
     /// <returns></returns>
-    public static int FinalDamage(Damage damage, int level,DiceType diceType)
+    public static int FinalDamage(Damage damage, int level,DiceType diceType,float addDamageArea,float reduceDamageArea)
     {
         //这边可以加入一些策划的计算,先向下取整
+
+        //计算基础伤害
         int baseDamage = DamageUtil.GetlevelBasedDamage(level);
-        return Mathf.FloorToInt((baseDamage ) * (1+damage.indexDamageRate * 0.1f));
+        //计算总增伤
+        float addDamageRatio =1+addDamageArea- reduceDamageArea+ 1 + damage.indexDamageRate * 0.1f;
+        //返回最终伤害
+        return Mathf.FloorToInt((baseDamage ) * addDamageArea);
     }
 }
 

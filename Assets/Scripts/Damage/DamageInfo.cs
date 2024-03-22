@@ -23,7 +23,24 @@ public class DamageInfo
     /// 骰子的类型,决定了具体逻辑计算方式
     /// </summary>
     public DiceType diceType;
+    /// <summary>
+    /// 使用公式计算完的最终伤害
+    /// </summary>
     public int finalDamage;
+    /// <summary>
+    /// 增伤区
+    /// </summary>
+    public float addDamageArea = 0;
+    /// <summary>
+    /// 减伤区
+    /// </summary>
+    public float reduceDamageArea = 0;
+    /// <summary>
+    /// 伤害等级
+    /// </summary>
+    public int level;
+
+
 
     public DamageInfo(GameObject attacker, GameObject defender, Damage damage, DiceType diceType, int level)
     {
@@ -31,7 +48,7 @@ public class DamageInfo
         this.defender = defender;
         this.damage = damage;
         this.diceType = diceType;
-        this.finalDamage = Damage.FinalDamage(damage, level, diceType);
+        
     }
 
 }

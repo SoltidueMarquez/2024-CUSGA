@@ -3,17 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace DesignerScripts
 {
+    public enum BuffDataName
+    {
+        Bleed,//流血
+
+        Spirit,//精力
+
+        Vulnerable,//易伤
+
+        Tough,//坚韧
+
+        Weak,//虚弱
+
+        Strength,//力量
+
+        Enhance,//强化
+    }
     public class BuffDataTable
     {
         public static Dictionary<string, BuffData> buffData = new Dictionary<string, BuffData>()
         {
             { "test",new BuffData(
                 //buff的唯一id
-                "1",
+                "0",
                 //buff的名字
-                "TestBuff1",
+                "TestBuff0",
                 //存储buff的icon图标图片的名字（Resources文件夹下）
-                "icon1",
+                "icon0",
                 //用于方便检索的tag，例如：火焰，冰冻，中毒等
                 null,
                 //buff的最高层数
@@ -50,23 +66,49 @@ namespace DesignerScripts
             null
             ) 
             },
-
+            {
+                BuffDataName.Bleed.ToString(),new BuffData
+                (
+                    "1",
+                    BuffDataName.Bleed.ToString(),
+                    "icon1",
+                    null,
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    BuffEventName.BuffStackMinus1.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null, 
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+                
+            },
 
             {
-                "CheckMoneyAddHealth",new BuffData(
+                BuffDataName.Spirit.ToString(),new BuffData
+                (
                     "2",
-                    "CheckMoneyAddHealth",
+                    BuffDataName.Spirit.ToString(),
                     "icon2",
                     null,
-                    1,
-                    10,
-                    false,
-                    BuffUpdateEnum.Keep,
-                    BuffRemoveStackUpdateEnum.Clear,
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
                     "",null,
                     "",null,
+                    BuffEventName.BuffStackMinus1.ToString(),null,
                     "",null,
-                    "CheckMoneyAddHealth",null,
                     "",null,
                     "",null,
                     "",null,
@@ -74,8 +116,146 @@ namespace DesignerScripts
                     "",null,
                     ChaControlState.origin,
                     null
-                    )
-            }
+                 )
+
+            },
+
+            {
+                BuffDataName.Vulnerable.ToString(),new BuffData
+                (
+                    "3",
+                    BuffDataName.Vulnerable.ToString(),
+                    "icon3",
+                    null,
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    BuffEventName.BuffStackMinus1.ToString(),null,
+                    "",null,
+                    "",null,
+                    BuffEventName.Vulnerable.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+            },
+
+            {
+                BuffDataName.Tough.ToString(),new BuffData
+                (
+                    "4",
+                    BuffDataName.Tough.ToString(),
+                    "icon4",
+                    null,
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    BuffEventName.BuffStackMinus1.ToString(),null,
+                    "",null,
+                    "",null,
+                    BuffEventName.Tough.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+            },
+
+            {
+                BuffDataName.Weak.ToString(),new BuffData
+                (
+                    "5",
+                    BuffDataName.Weak.ToString(),
+                    "icon5",
+                    null,
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    BuffEventName.BuffStackMinus1.ToString(),null,
+                    "",null,
+                    BuffEventName.Weak.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+            },
+
+             {
+                BuffDataName.Strength.ToString(),new BuffData
+                (
+                    "6",
+                    BuffDataName.Strength.ToString(),
+                    "icon6",
+                    null,
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    BuffEventName.BuffStackMinus1.ToString(),null,
+                    "",null,
+                    BuffEventName.Strength.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.Enhance.ToString(),new BuffData
+                (
+                    "7",
+                    BuffDataName.Enhance.ToString(),
+                    "icon7",
+                    null,
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    BuffEventName.BuffStackMinus1.ToString(),null,
+                    "",null,
+                    BuffEventName.Enhance.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+
 
         };
 

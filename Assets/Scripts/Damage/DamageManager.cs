@@ -47,6 +47,8 @@ public class DamageManager : MonoSingleton<DamageManager>
                 buff.buffData.onBeKilled?.Invoke(buff, damageInfo, damageInfo.attacker);
             }
         }
+        damageInfo.finalDamage = Damage.FinalDamage(damageInfo.damage,damageInfo.level,damageInfo.diceType,damageInfo.addDamageArea,damageInfo.reduceDamageArea);
+
         //根据类型不同执行不同的逻辑
         switch(damageInfo.diceType)
         {
