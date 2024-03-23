@@ -18,6 +18,19 @@ public class BuffHandler : MonoBehaviour
             if (findBuffInfo.curStack < findBuffInfo.buffData.maxStack)
             {
                 findBuffInfo.curStack++;
+                switch (findBuffInfo.buffData.buffUpdateEnum)
+                {
+                    case BuffUpdateEnum.Add:
+                        findBuffInfo.roundCount += findBuffInfo.buffData.duringCount;
+                        break;
+                    case BuffUpdateEnum.Replace:
+                        findBuffInfo.roundCount = findBuffInfo.buffData.duringCount;
+                        break;
+                    case BuffUpdateEnum.Keep:
+                        break;
+                    default:
+                        break;
+                }
                 //TODO:提示buff层数增加,根据buff的类型进行不同的处理
                 findBuffInfo.buffData.onCreate?.Invoke(findBuffInfo);
             }

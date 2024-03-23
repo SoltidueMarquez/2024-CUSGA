@@ -165,6 +165,7 @@ public class ChaState : MonoBehaviour
             this.Kill();
         }
         Debug.Log(this.gameObject.name + this.resource.currentHp);
+        Debug.Log(this.gameObject.name + this.resource.currentShield);
 
     }
     /// <summary>

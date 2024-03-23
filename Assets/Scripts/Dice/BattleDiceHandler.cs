@@ -171,7 +171,6 @@ public class BattleDiceHandler : MonoBehaviour
         {
             int index = battleDices[i].GetRandomDice(out SingleDiceObj singleDiceObj);
             singleDiceObjs.Add(singleDiceObj);
-            //Debug.Log(singleDiceObj.model.type.ToString());
         }
         return singleDiceObjs;
     }

@@ -57,7 +57,7 @@ namespace DesignerScripts
             null
             ) 
             },
-            {
+            {//这边是流血的buff,要实现层数衰减为延迟回合数的效果，将permanent设置为false,初始持续回合数设置为0
                 BuffDataName.Bleed.ToString(),new BuffData
                 (
                     "1",
@@ -65,9 +65,9 @@ namespace DesignerScripts
                     "icon1",
                     new [] {"Target"},
                     5,
-                    100,
-                    true,
-                    BuffUpdateEnum.Add,
+                    0,
+                    false,
+                    BuffUpdateEnum.Keep,
                     BuffRemoveStackUpdateEnum.Reduce,
                     "",null,
                     "",null,
