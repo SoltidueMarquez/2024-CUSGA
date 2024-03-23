@@ -133,7 +133,7 @@ namespace DesignerScripts
 
             }
         }
-        //层数--，如果层数为0，则移除buff
+        //这边不需要了，因为在BuffInfo里面已经有了
         public static void BuffStackMinus1(BuffInfo buffInfo)
         {
             buffInfo.target.GetComponent<ChaState>().RemoveBuff(buffInfo);

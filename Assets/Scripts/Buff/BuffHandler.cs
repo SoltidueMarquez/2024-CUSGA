@@ -7,6 +7,8 @@ public class BuffHandler : MonoBehaviour
 {
     [Description("Buff列表")]
     public List<BuffInfo> buffList = new List<BuffInfo>();
+    //所有判断的时候如果buff需要移除，先加入这个列表，然后再进行移除
+    private List<BuffInfo> removeList = new List<BuffInfo>();
 
     public void AddBuff(BuffInfo buffInfo, GameObject creator)
     {
@@ -69,31 +71,15 @@ public class BuffHandler : MonoBehaviour
         {
             buffInfo.buffData.onRoundStart?.Invoke(buffInfo);
         }
-        for (int i = 0; i < buffList.Count; i++)
-        {
-            if (buffList[i].isPermanent == false)//非永久buff
-            {
-                buffList[i].roundCount--;
-                if (buffList[i].roundCount == 0)
-                {
-                    removeList.Add(buffList[i]);
-                }
-            }
-        }
-
-        for (int i = 0; i < removeList.Count; i++)
-        {
-            RemoveBuff(removeList[i]);
-        }
+        
     }
     //TODO:每个回合结束的时候，对buff的时间进行处理
     public void BuffRoundEndTick()
     {
         List<BuffInfo> removeList = new List<BuffInfo>();
-        BuffInfo[] buffArray = buffList.ToArray();
-        for (int i = 0; i < buffArray.Length; i++)
+        foreach (var buff in buffList)
         {
-            buffArray[i].buffData.onRoundEnd?.Invoke(buffArray[i]);
+            buff.buffData.onRoundEnd?.Invoke(buff);
         }
 
         for (int i = 0; i < buffList.Count; i++)
@@ -101,11 +87,16 @@ public class BuffHandler : MonoBehaviour
             if (buffList[i].isPermanent == false)//非永久buff
             {
                 buffList[i].roundCount--;
+                buffList[i].roundCount = Mathf.Max(0, buffList[i].roundCount);//可能出现负数的情况
                 if (buffList[i].roundCount == 0)
                 {
                     removeList.Add(buffList[i]);
                 }
             }
+        }
+        for (int i = 0; i < removeList.Count; i++)
+        {
+            RemoveBuff(removeList[i]);
         }
     }
     public void RecheckBuff(ChaProperty[] buffProp,ref ChaControlState chaControlState)

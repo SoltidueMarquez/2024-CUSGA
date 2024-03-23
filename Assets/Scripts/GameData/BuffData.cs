@@ -71,7 +71,7 @@ namespace DesignerScripts
                     BuffRemoveStackUpdateEnum.Reduce,
                     "",null,
                     "",null,
-                    BuffEventName.BuffStackMinus1.ToString(),null,
+                    "",null,
                     BuffEventName.Bleed.ToString(),null,
                     "",null,
                     "",null,
