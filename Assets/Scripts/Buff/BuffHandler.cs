@@ -65,9 +65,12 @@ public class BuffHandler : MonoBehaviour
     public void BuffRoundStartTick()
     {
         List<BuffInfo> removeList = new List<BuffInfo>();
+        foreach (BuffInfo buffInfo in buffList)//遍历buff列表,先执行回合开始的事件
+        {
+            buffInfo.buffData.onRoundStart?.Invoke(buffInfo);
+        }
         for (int i = 0; i < buffList.Count; i++)
         {
-            buffList[i].buffData.onRoundStart?.Invoke(buffList[i]);
             if (buffList[i].isPermanent == false)//非永久buff
             {
                 buffList[i].roundCount--;
@@ -83,11 +86,26 @@ public class BuffHandler : MonoBehaviour
             RemoveBuff(removeList[i]);
         }
     }
+    //TODO:每个回合结束的时候，对buff的时间进行处理
     public void BuffRoundEndTick()
     {
+        List<BuffInfo> removeList = new List<BuffInfo>();
+        BuffInfo[] buffArray = buffList.ToArray();
+        for (int i = 0; i < buffArray.Length; i++)
+        {
+            buffArray[i].buffData.onRoundEnd?.Invoke(buffArray[i]);
+        }
+
         for (int i = 0; i < buffList.Count; i++)
         {
-            buffList[i].buffData.onRoundEnd?.Invoke(buffList[i]);
+            if (buffList[i].isPermanent == false)//非永久buff
+            {
+                buffList[i].roundCount--;
+                if (buffList[i].roundCount == 0)
+                {
+                    removeList.Add(buffList[i]);
+                }
+            }
         }
     }
     public void RecheckBuff(ChaProperty[] buffProp,ref ChaControlState chaControlState)

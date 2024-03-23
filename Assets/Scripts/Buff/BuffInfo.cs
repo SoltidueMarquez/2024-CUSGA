@@ -13,18 +13,20 @@ public class BuffInfo
     /// </summary>
     public bool isPermanent;
     /// <summary>
-    /// buff地创建者
+    /// buff的创建者
     /// </summary>
-    public GameObject creator;
+    public GameObject creator = null;
     /// <summary>
     /// buff的目标
     /// </summary>
-    public GameObject target;
+    public GameObject target = null;
     /// <summary>
     /// 回合计数器
     /// </summary>
     public int roundCount;
-
+    /// <summary>
+    /// 执行次数
+    /// </summary>
     public int ticked = 0;
     /// <summary>
     /// 当前buff的层数
@@ -41,6 +43,24 @@ public class BuffInfo
         this.buffData = buffData;
         this.creator = creator;
         this.target = target;
+        this.curStack = stack;
+        this.isPermanent = isPermanent;
+        this.roundCount = buffData.duringCount;
+        if (buffParam != null)
+        {
+            foreach (var item in buffParam)
+            {
+                this.buffParam.Add(item.Key, item.Value);
+            }
+        }
+    }
+
+    public BuffInfo(
+        BuffData buffData,int stack = 1, bool isPermanent = false,
+        Dictionary<string, object> buffParam = null
+        )
+    {
+        this.buffData = buffData;
         this.curStack = stack;
         this.isPermanent = isPermanent;
         this.roundCount = buffData.duringCount;

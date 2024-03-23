@@ -35,9 +35,9 @@ public struct Damage
         //计算基础伤害
         int baseDamage = DamageUtil.GetlevelBasedDamage(level);
         //计算总增伤
-        float addDamageRatio =1+addDamageArea- reduceDamageArea+ 1 + damage.indexDamageRate * 0.1f;
+        float addDamageRatio =1+addDamageArea- reduceDamageArea + damage.indexDamageRate * 0.1f;
         //返回最终伤害
-        return Mathf.FloorToInt((baseDamage ) * addDamageArea);
+        return Mathf.FloorToInt(baseDamage  * addDamageRatio);
     }
 }
 

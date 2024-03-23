@@ -42,24 +42,15 @@ namespace DesignerScripts
             BuffUpdateEnum.Keep,
             //buff移除层数时的策略（Reduce：减少层数，Clear：清除所有层数）
             BuffRemoveStackUpdateEnum.Clear,
-            //OnCreate回调点 ，回调点参数额外设置
-            "test1",null,
-            //OnRemove回调点 ，回调点参数额外设置
-            "",null,
-            //OnRoundStart回调点 ，回调点参数额外设置
-            "",null,
-            //OnRoundEnd回调点 ，回调点参数额外设置
-            "",null,
-            //OnHit回调点 ，回调点参数额外设置
-            "",null,
-            //OnBeHurt回调点 ，回调点参数额外设置
-            "",null,
-            //OnRoll回调点 ，回调点参数额外设置
-            "",null,
-            //OnKill回调点 ，回调点参数额外设置
-            "",null,
-            //OnBeKill回调点 ，回调点参数额外设置
-            "",null,
+            "",null,//OnCreate回调点 ，回调点参数额外设置
+            "",null,//OnRemove回调点 ，回调点参数额外设置
+            "",null,//OnRoundStart回调点 ，回调点参数额外设置
+            "",null,//OnRoundEnd回调点 ，回调点参数额外设置
+            "",null,//OnHit回调点 ，回调点参数额外设置
+            "",null,//OnBeHurt回调点 ，回调点参数额外设置
+            "",null,//OnRoll回调点 ，回调点参数额外设置
+            "",null,//OnKill回调点 ，回调点参数额外设置
+            "",null,//OnBeKill回调点 ，回调点参数额外设置
             //buff对玩家的状态修改（无敌，能否出牌，局内骰面更改），
             ChaControlState.origin,
             //buff对玩家的属性(血量，金钱，护盾，重新投掷次数）修改
@@ -72,7 +63,7 @@ namespace DesignerScripts
                     "1",
                     BuffDataName.Bleed.ToString(),
                     "icon1",
-                    null,
+                    new [] {"Target"},
                     5,
                     100,
                     true,
@@ -81,7 +72,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     BuffEventName.BuffStackMinus1.ToString(),null,
-                    "",null,
+                    BuffEventName.Bleed.ToString(),null,
                     "",null,
                     "",null,
                     "",null,
@@ -99,7 +90,7 @@ namespace DesignerScripts
                     "2",
                     BuffDataName.Spirit.ToString(),
                     "icon2",
-                    null,
+                    new [] {"Self"},
                     5,
                     100,
                     true,
@@ -126,7 +117,7 @@ namespace DesignerScripts
                     "3",
                     BuffDataName.Vulnerable.ToString(),
                     "icon3",
-                    null,
+                    new [] {"Target"},
                     5,
                     100,
                     true,
@@ -153,7 +144,7 @@ namespace DesignerScripts
                     "4",
                     BuffDataName.Tough.ToString(),
                     "icon4",
-                    null,
+                    new [] {"Self"},
                     5,
                     100,
                     true,
@@ -180,7 +171,7 @@ namespace DesignerScripts
                     "5",
                     BuffDataName.Weak.ToString(),
                     "icon5",
-                    null,
+                    new []{"Target"},
                     5,
                     100,
                     true,
@@ -207,7 +198,7 @@ namespace DesignerScripts
                     "6",
                     BuffDataName.Strength.ToString(),
                     "icon6",
-                    null,
+                    new []{"Self"},
                     5,
                     100,
                     true,
@@ -234,7 +225,7 @@ namespace DesignerScripts
                     "7",
                     BuffDataName.Enhance.ToString(),
                     "icon7",
-                    null,
+                    new [] {"Self"},
                     5,
                     100,
                     true,

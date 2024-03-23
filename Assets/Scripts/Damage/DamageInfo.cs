@@ -26,7 +26,7 @@ public class DamageInfo
     /// <summary>
     /// 使用公式计算完的最终伤害
     /// </summary>
-    public int finalDamage;
+    public int finalDamage = 0;
     /// <summary>
     /// 增伤区
     /// </summary>
@@ -42,13 +42,16 @@ public class DamageInfo
 
 
 
-    public DamageInfo(GameObject attacker, GameObject defender, Damage damage, DiceType diceType, int level)
+    public DamageInfo(GameObject attacker, GameObject defender, Damage damage, DiceType diceType, int level, List<BuffInfo> buffInfos)
     {
         this.attacker = attacker;
         this.defender = defender;
         this.damage = damage;
         this.diceType = diceType;
-        
+        if (buffInfos != null)
+        {
+            addBuffs.AddRange(buffInfos);
+        }
     }
 
 }

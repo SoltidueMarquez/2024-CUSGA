@@ -48,13 +48,13 @@ public class DamageManager : MonoSingleton<DamageManager>
             }
         }
         damageInfo.finalDamage = Damage.FinalDamage(damageInfo.damage,damageInfo.level,damageInfo.diceType,damageInfo.addDamageArea,damageInfo.reduceDamageArea);
+        Debug.Log("攻击伤害：" + damageInfo.finalDamage);
 
         //根据类型不同执行不同的逻辑
-        switch(damageInfo.diceType)
+        switch (damageInfo.diceType)
         {
             case DiceType.Attack:
                 defenderChaState.ModResources(new ChaResource(-damageInfo.finalDamage,0,0,0));
-                Debug.Log("攻击伤害："+damageInfo.finalDamage);
                 break;
             case DiceType.Defense:
                 //这边暂时做成只对玩家生效
@@ -68,8 +68,7 @@ public class DamageManager : MonoSingleton<DamageManager>
         //伤害流程走完，添加buff
         for(int i = 0;i<damageInfo.addBuffs.Count;i++)
         {
-            GameObject toCha = damageInfo.addBuffs[i].target;
-            ChaState toChaState = toCha.Equals(damageInfo.attacker) ? attackerChaState : defenderChaState;
+            ChaState toChaState = defenderChaState;
             toChaState.GetBuffHandler().AddBuff(damageInfo.addBuffs[i], damageInfo.attacker);
         }
         
@@ -77,8 +76,8 @@ public class DamageManager : MonoSingleton<DamageManager>
 
 
 
-    public void DoDamage(GameObject attacker, GameObject target, Damage damage, DiceType diceType,int level)
+    public void DoDamage(DamageInfo damageInfo)
     {
-        damageInfos.Enqueue(new DamageInfo(attacker, target, damage, diceType,level));
+        damageInfos.Enqueue(damageInfo);
     }
 }

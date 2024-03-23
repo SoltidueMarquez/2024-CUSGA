@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 /// <summary>
 /// 玩家和敌人身上挂载的战斗骰子管理器
@@ -51,19 +52,31 @@ public class BattleDiceHandler : MonoBehaviour
             //造成伤害
             Damage damage = singleDiceObj.model.damage;
             damage.indexDamageRate = singleDiceObj.idInDice + 1;//根据骰子的id来计算倍率
-            DamageManager.Instance.DoDamage(chaState.gameObject, target, damage, singleDiceObj.model.type, singleDiceObj.level);
+            //再次通过tag查找需要加入damageInfo类中的加给敌人的buffInfo
+            List<BuffInfo> addToEnemyBuffs = null;
+            if(singleDiceObj.model.buffInfos != null)
+            {
+                addToEnemyBuffs = FindBuffInfoWithTag(singleDiceObj.model.buffInfos.ToList<BuffInfo>(), "Target");
+            }
+            //拼装buffInfo
+            var damageInfo = new DamageInfo(chaState.gameObject, target, damage ,singleDiceObj.model.type,singleDiceObj.level,addToEnemyBuffs);
+            DamageManager.Instance.DoDamage(damageInfo);
             //视觉逻辑
             Debug.Log(singleDiceObj.model.name);
             if (singleDiceObj.model.buffInfos != null)
             {
+            //添加技能特殊效果Buff
                 foreach (var buffinfo in singleDiceObj.model.buffInfos)
                 {
-                    Debug.Log("success");
-                    chaState.AddBuff(buffinfo, chaState.gameObject);
+                    //通过tag进行buff的查找，对施法者添加buff,如果包含self就添加给自己，如果包含target就添加给目标,具体添加给对方的函数走DamageManager中的DealWithDamage函数
+                    if(buffinfo.buffData.tags.Contains("Self"))
+                    {
+                        chaState.AddBuff(buffinfo, chaState.gameObject);
+                    }
                 }
             }
+            //释放骰子
             diceCardsInUse[index] = null;
-            //添加技能特殊效果Buff
 
         }
         else
@@ -135,6 +148,10 @@ public class BattleDiceHandler : MonoBehaviour
     {
 
     }
+    /// <summary>
+    /// 将单个战斗骰面加入当前的战斗骰面数组中
+    /// </summary>
+    /// <param name="singleDiceObjs"></param>
     public void AddBattleSingleDice(List<SingleDiceObj> singleDiceObjs)
     {
         ClearBattleSingleDices();
@@ -154,8 +171,22 @@ public class BattleDiceHandler : MonoBehaviour
         {
             int index = battleDices[i].GetRandomDice(out SingleDiceObj singleDiceObj);
             singleDiceObjs.Add(singleDiceObj);
-            Debug.Log(singleDiceObj.model.type.ToString());
+            //Debug.Log(singleDiceObj.model.type.ToString());
         }
         return singleDiceObjs;
+    }
+    /// <summary>
+    /// 根据tag查找buffInfo
+    /// </summary>
+    /// <param name="buffInfos"></param>
+    /// <param name="tag"></param>
+    /// <returns></returns>
+    public List<BuffInfo>  FindBuffInfoWithTag(List<BuffInfo> buffInfos, string tag)
+    {
+        if(buffInfos == null)
+        {
+            return null;
+        }
+        return buffInfos.Where(x => x.buffData.tags.Contains(tag)).ToList();
     }
 }

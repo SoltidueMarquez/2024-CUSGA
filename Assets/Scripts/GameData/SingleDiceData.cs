@@ -8,7 +8,11 @@ public class SingleDiceData
     public static Dictionary<string, SingleDiceModel> diceDictionary = new Dictionary<string, SingleDiceModel>()
     {
         {
-            "Dice_1",new SingleDiceModel(0,DiceType.Attack,"normal1", "1",ChaResource.zero,ChaResource.zero, 1, 1,null
+            "Dice_1",new SingleDiceModel(0,DiceType.Attack,"normal1", "1",ChaResource.zero,ChaResource.zero, 1, 1,
+                new[]
+                {
+                    new BuffInfo(DesignerScripts.BuffDataTable.buffData[BuffDataName.Bleed.ToString()],1, false,null)
+                }
                 ,null)
         },
         {

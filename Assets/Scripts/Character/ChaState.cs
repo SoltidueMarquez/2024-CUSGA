@@ -55,7 +55,8 @@ public class ChaState : MonoBehaviour
     public void OnRoundStart()
     {
         buffHandler.BuffRoundStartTick();
-        Debug.Log("当前玩家的buff数：" + this.buffHandler.buffList.Count);
+        string temp = this.side == 0 ? "当前玩家的buff数" : "当前敌人的buff数";
+        Debug.Log(temp+ this.buffHandler.buffList.Count);
     }
 
     public void OnRoundEnd()
