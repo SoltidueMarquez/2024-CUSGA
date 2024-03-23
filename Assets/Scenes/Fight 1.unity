@@ -429,6 +429,7 @@ MonoBehaviour:
   pageTemplate: {fileID: 443951045228448848, guid: 223fb0c0618de034b9bf9a27955a9951, type: 3}
   diceTemplate: {fileID: 3046983917528316593, guid: 9dd0ce6afb709d940a2930b308f1ef6f, type: 3}
   parent: {fileID: 2093746834}
+  pageTransform: {fileID: 2093746834}
 --- !u!114 &81981822
 MonoBehaviour:
   m_ObjectHideFlags: 0

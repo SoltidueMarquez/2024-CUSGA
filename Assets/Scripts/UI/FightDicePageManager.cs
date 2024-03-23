@@ -30,6 +30,7 @@ namespace UI
         public void CreatePageUI(string name, List<SingleDiceObj> diceObjs)
         {
             var tmp = Instantiate(pageTemplate, parent, true);
+            tmp.transform.position = parent.position;
             tmp.GetComponent<FightDicePageUIEffect>().Init(name);//初始化页面
             tmp.SetActive(true);
             if (diceObjs.Count == 0)
