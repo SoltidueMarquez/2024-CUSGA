@@ -148,7 +148,7 @@ namespace UI
             RevertMarkColumn();//取消上一次的标记
             if (columnNum >= 0 && columnNum < columns.Count)//溢出避免
             {
-                columns[columnNum].GetComponent<Image>().color = new Color(255,0,0,0.33f);
+                columns[columnNum].GetComponent<Image>().color = new Color(255,0,0,1f);
                 lastMarked = columnNum;
             }
         }
@@ -161,7 +161,7 @@ namespace UI
         {
             if (lastMarked >= 0 && lastMarked < columns.Count)//溢出避免
             {
-                columns[lastMarked].GetComponent<Image>().color = new Color(255,255,255,0.33f);
+                columns[lastMarked].GetComponent<Image>().color = new Color(255,255,255,1f);
             }
         }
     }
