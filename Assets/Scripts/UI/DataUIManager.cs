@@ -8,7 +8,7 @@ namespace UI
         [SerializeField, Tooltip("回合数文本")] private Text RunText;
         public void UpdateRunTimeText(int run)
         {
-            RunText.text = $"当前回合:{run}";
+            RunText.text = $"{run}";
         }
     }
 }
