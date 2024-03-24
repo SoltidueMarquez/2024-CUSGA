@@ -101,7 +101,7 @@ public class PlayerRoundStartResolutionState : IState
         HalidomManager.Instance.OnRoundStart();
         //触发角色里所有buff的OnRoundStart回调点
         manager.parameter.playerChaState.OnRoundStart();
-        ProcessPromptUIManager.Instance.ShowTip(Turn.Player);
+        ProcessPromptUIManager.Instance.ShowTip(Turn.Player, null);
 
 
     }
@@ -216,7 +216,8 @@ public class EnemyRoundStartResolutionState : IState
         {
             enemy.OnRoundStart();
         }
-        ProcessPromptUIManager.Instance.ShowTip(Turn.Enemy);
+
+        ProcessPromptUIManager.Instance.ShowTip(Turn.Enemy, null);
         Debug.Log("Enter EnemyRoundStartResolutionState");
 
 

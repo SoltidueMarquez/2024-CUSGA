@@ -23,7 +23,8 @@ namespace UI
         /// 显示流程提示
         /// </summary>
         /// <param name="who">提示对象的枚举</param>
-        public void ShowTip(Turn who)
+        /// <param name="onUIAnimFinished">结束委托</param>
+        public void ShowTip(Turn who,OnUIAnimFinished onUIAnimFinished)
         {
             panel.SetActive(true);
             string tip;
@@ -41,6 +42,11 @@ namespace UI
             }
             processPrompt.Appear(appearDurationTime, tip); //出现提示
             Invoke(nameof(HideTip),appearDurationTime);
+            
+            if (onUIAnimFinished != null)
+            {
+                Invoke(nameof(onUIAnimFinished), appearDurationTime + fadeDurationTime); //结束时调用
+            }
         }
         
         private void HideTip()
@@ -49,13 +55,9 @@ namespace UI
             Invoke(nameof(HidePanel),fadeDurationTime);
         }
 
-        private void HidePanel(OnUIAnimFinished onUIAnimFinished)
+        private void HidePanel()
         {
             panel.SetActive(false);
-            if (onUIAnimFinished != null)
-            {
-                Invoke(nameof(onUIAnimFinished),0f);//结束时调用
-            }
         }
     }
 }
