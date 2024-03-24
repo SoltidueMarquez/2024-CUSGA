@@ -168,3 +168,5 @@ public class BattleManager : MonoBehaviour
         chaState.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs);
     }
 }
+//定义了一个回调，用于在UI动画结束时调用
+public  delegate void OnUIAnimFinished();
