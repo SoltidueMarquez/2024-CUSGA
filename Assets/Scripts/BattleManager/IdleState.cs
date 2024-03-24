@@ -7,10 +7,10 @@ using UnityEngine;
 public class GameStartState : IState
 {
     private BattleManager manager;
-    
+
     public GameStartState(BattleManager manager)
     {
-       
+
         this.manager = manager;
     }
     public void OnEnter()
@@ -18,7 +18,7 @@ public class GameStartState : IState
         Debug.Log("游戏开始");
         //TODO:读入所有数据，暂时是这样，后面会改
         manager.parameter.playerChaState.GetBattleDiceHandler().InitDice(0);
-        for(int i = 0;i< manager.parameter.playerChaState.GetBattleDiceHandler().battleDiceCount; i++)
+        for (int i = 0; i < manager.parameter.playerChaState.GetBattleDiceHandler().battleDiceCount; i++)
         {
             //获取
             var singleDices = manager.parameter.playerChaState.GetBattleDiceHandler().battleDices[i].GetBattleDiceSingleDices();
@@ -61,7 +61,7 @@ public class PreparationState : IState
     }
     public void OnEnter()
     {
-        
+
 
         Debug.Log("Enter PreparationState");
 
@@ -101,7 +101,7 @@ public class PlayerRoundStartResolutionState : IState
         HalidomManager.Instance.OnRoundStart();
         //触发角色里所有buff的OnRoundStart回调点
         manager.parameter.playerChaState.OnRoundStart();
-        ProcessPromptUIManager.Instance.ShowTip(Turn.Player, null);
+        ProcessPromptUIManager.Instance.ShowTip(Turn.Player, () => { manager.TransitionState(GameState.PlayerAction); });
 
 
     }
@@ -115,18 +115,18 @@ public class PlayerRoundStartResolutionState : IState
         manager.RollDice();
         //TODO:封装投骰子函数给UI调用
         //TODO:更新UI
-        foreach(var enemy in manager.parameter.enemyChaStates)
+        foreach (var enemy in manager.parameter.enemyChaStates)
         {
             manager.RollDiceForEnemy(enemy);
         }
         Debug.Log("根据投掷结果更新UI");
         //TODO:敌人投骰子
-        Debug.Log("敌人投骰子"); 
+        Debug.Log("敌人投骰子");
     }
 
     public void OnUpdate()
     {
-        manager.TransitionState(GameState.PlayerAction);
+
     }
 
 
@@ -158,7 +158,7 @@ public class PlayerActionState : IState
 
     public void OnUpdate()
     {
-        
+
     }
 }
 /// <summary>
@@ -175,13 +175,13 @@ public class PlayerRoundEndResolutionState : IState
     }
     public void OnEnter()
     {
-        
+
         //触发圣物里所有buff的OnRoundEnd回调点
         HalidomManager.Instance.OnRoundEnd();
         Debug.Log("触发所有的圣物了");
         //触发角色里所有buff的OnRoundEnd回调点
         manager.parameter.playerChaState.OnRoundEnd();
-        
+
 
         Debug.Log("Enter PlayerRoundEndResolutionState");
 
@@ -217,7 +217,7 @@ public class EnemyRoundStartResolutionState : IState
             enemy.OnRoundStart();
         }
 
-        ProcessPromptUIManager.Instance.ShowTip(Turn.Enemy, null);
+        ProcessPromptUIManager.Instance.ShowTip(Turn.Enemy, () => { manager.TransitionState(GameState.EnemyAction); });
         Debug.Log("Enter EnemyRoundStartResolutionState");
 
 
@@ -230,7 +230,7 @@ public class EnemyRoundStartResolutionState : IState
 
     public void OnUpdate()
     {
-        manager.TransitionState(GameState.EnemyAction);
+
     }
 }
 

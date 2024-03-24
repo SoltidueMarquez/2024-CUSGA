@@ -47,6 +47,7 @@ namespace UI
             if (onUIAnimFinished != null)
             {
                 Invoke(nameof(onUIAnimFinished), appearDurationTime + fadeDurationTime); //结束时调用
+                onUIAnimFinished?.Invoke();
             }
         }
         
