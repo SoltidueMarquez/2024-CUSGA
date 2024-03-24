@@ -45,6 +45,7 @@ public class BattleDiceHandler : MonoBehaviour
     public void CastSingleDice(int index, ChaState chaState, GameObject target)//这边的函数
     {
         SingleDiceObj singleDiceObj = diceCardsInUse[index];
+        if (singleDiceObj == null) return;//非空判断
         if (chaState.resource.Enough(singleDiceObj.model.condition) == true)
         {
             //减少资源
