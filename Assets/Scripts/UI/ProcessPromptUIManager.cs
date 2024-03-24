@@ -1,3 +1,5 @@
+using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace UI
@@ -47,12 +49,13 @@ namespace UI
             Invoke(nameof(HidePanel),fadeDurationTime);
         }
 
-        private void HidePanel()
+        private void HidePanel(OnUIAnimFinished onUIAnimFinished)
         {
             panel.SetActive(false);
-            Invoke(nameof(OnProcessPromptUIAnimFinished),0f);//结束时调用
+            if (onUIAnimFinished != null)
+            {
+                Invoke(nameof(onUIAnimFinished),0f);//结束时调用
+            }
         }
-
-        public delegate void OnProcessPromptUIAnimFinished();
     }
 }
