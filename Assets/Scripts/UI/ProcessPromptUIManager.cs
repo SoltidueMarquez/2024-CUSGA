@@ -32,6 +32,7 @@ namespace UI
             {
                 case Turn.Player:
                     tip = playerTip;
+                    ProcessAnimationManager.Instance.PlayerTurnStart();
                     break;
                 case Turn.Enemy:
                     tip = enemyTip;

@@ -8,7 +8,6 @@ namespace UI
     {
         [SerializeField, Tooltip("投掷结果栏位")] private List<Transform> columns;
         [SerializeField, Tooltip("生成模板")] private GameObject template;
-        [SerializeField, Tooltip("生成模板")] private Transform parent;
         [SerializeField, Tooltip("结果列表")] private List<GameObject> _resultList;
 
         /// <summary>
@@ -19,7 +18,7 @@ namespace UI
         /// <param name="location">坐标位置，先页面位置再页内位置</param>
         public void CreateResult(int index, string id, Vector2Int location)
         {
-            var tmp = Instantiate(template, parent, true);
+            var tmp = Instantiate(template, columns[index], true);
             tmp.transform.position = columns[index].position;//更改位置
             tmp.GetComponent<RollingResultDiceUI>().Init(index, location, id);//初始化
             tmp.SetActive(true);
