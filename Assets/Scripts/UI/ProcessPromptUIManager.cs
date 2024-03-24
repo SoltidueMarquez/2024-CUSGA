@@ -50,6 +50,9 @@ namespace UI
         private void HidePanel()
         {
             panel.SetActive(false);
+            Invoke(nameof(OnProcessPromptUIAnimFinished),0f);//结束时调用
         }
+
+        public delegate void OnProcessPromptUIAnimFinished();
     }
 }
