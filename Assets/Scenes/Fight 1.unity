@@ -637,8 +637,8 @@ MonoBehaviour:
   processPrompt: {fileID: 457780117}
   playerTip: "\u73A9\u5BB6\u56DE\u5408"
   enemyTip: "\u654C\u4EBA\u56DE\u5408"
-  appearDurationTime: 1.5
-  fadeDurationTime: 1.2
+  appearDurationTime: 1
+  fadeDurationTime: 1
   panel: {fileID: 1772109970}
 --- !u!114 &81981828
 MonoBehaviour:

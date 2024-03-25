@@ -43,7 +43,7 @@ namespace UI
                     break;
             }
             processPrompt.Appear(appearDurationTime, tip); //出现提示
-            Invoke(nameof(HideTip),appearDurationTime);
+            StartCoroutine(HideTip());
             
             if (onUIAnimFinished != null)
             {
@@ -55,17 +55,18 @@ namespace UI
         {
             yield return new WaitForSeconds(appearDurationTime + fadeDurationTime);
             onUIAnimFinished.Invoke();
-            Debug.Log("协程调用");
         }
         
-        private void HideTip()
+        IEnumerator HideTip()
         {
+            yield return new WaitForSeconds(appearDurationTime);
             processPrompt.Fade(fadeDurationTime);//出现提示
-            Invoke(nameof(HidePanel),fadeDurationTime);
+            StartCoroutine(HidePanel());
         }
 
-        private void HidePanel()
+        IEnumerator HidePanel()
         {
+            yield return new WaitForSeconds(fadeDurationTime);
             panel.SetActive(false);
         }
     }
