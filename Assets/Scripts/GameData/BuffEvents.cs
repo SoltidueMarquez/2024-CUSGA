@@ -28,6 +28,35 @@ namespace DesignerScripts
         Enhance,//强化
 
         BuffStackMinus1,//Buff层数减1
+
+        #region 圣物buff
+        Add2ValueIfResultIsEven,
+        Add2ValueIfResultIsOdd,
+        Add3ValueIfResultBelow3,
+        Add3ValueIfResultAbove4,
+        GainAndChoose2DicesGiveRandomCoating,
+        GainAndChoose2DicesGive1PermanentEnhance,
+        EnhanceEnemyVulnerability,
+        Add1StackIfEnemyHaveBleed,
+        Add1StackIfEnemyHaveDebuff,
+        Add1StackIfPlayerHaveStrength,
+        Add1StackIfPlayerHavePositiveBuff,
+        Add4MoneyWhenBattleEnd,
+        Add50PercentAttackEvery3TimesLoseHealth,
+        Add90PercentAttackEvery9TimesUseDice,
+        Recover20HealthWhenEnterStore,
+        Get5MaxHealthWhenGain,
+        Recover25HealthWhenHealthBelowHalf,
+        Add1Reroll,
+        HalfInStore,
+        ReuseDiceWhenDiceIs1,
+        Add2MoneyWhenDiceIs2,
+        Recover5HealthWhenDiceIs3,
+        Add1EnemyBleedStackWhenDiceIs4,
+        Add1PlayerStrengthStackWhenDiceIs5,
+        Add1PermanentValueWhenDiceIs6,
+
+        #endregion
     }
     public class BuffEvents
     {
@@ -90,7 +119,7 @@ namespace DesignerScripts
 
         public static void Vulnerable(BuffInfo buffInfo, DamageInfo damageInfo, GameObject attack)
         {
-            if (damageInfo.diceType == DiceType.Attack)  
+            if (damageInfo.diceType == DiceType.Attack)
             {
                 damageInfo.addDamageArea += 0.25f;
             }
@@ -138,6 +167,158 @@ namespace DesignerScripts
         {
             buffInfo.target.GetComponent<ChaState>().RemoveBuff(buffInfo);
         }
+
+        public static void Add2ValueIfResultIsEven(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            if (damageInfo.damage.indexDamageRate % 2 == 0)
+            {
+                damageInfo.damage.indexDamageRate += 2;
+            }
+
+        }
+        public static void Add2ValueIfResultIsOdd(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            if (damageInfo.damage.indexDamageRate % 2 == 1)
+            {
+                damageInfo.damage.indexDamageRate += 2;
+            }
+        }
+
+        public static void Add3ValueIfResultBelow3(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            if (damageInfo.damage.indexDamageRate <= 3)
+            {
+                damageInfo.damage.indexDamageRate += 3;
+            }
+        }
+
+        public static void Add3ValueIfResultAbove4(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            if (damageInfo.damage.indexDamageRate >= 4)
+            {
+                damageInfo.damage.indexDamageRate += 3;
+            }
+        }
+
+
+
+
+
+        public static void EnhanceEnemyVulnerability(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            if (target.GetComponent<BuffHandler>() != null)
+            {
+                BuffHandler targetBuffHandler = target.GetComponent<BuffHandler>();
+                //查询流血buff
+                BuffInfo findBuffInfo = targetBuffHandler.buffList.Find(x => x.buffData.id == "1");
+
+                //如果找到流血buff
+                if (findBuffInfo != null)
+                {
+                    //再增伤0.15f即0.25->0.4
+                    damageInfo.addDamageArea += 0.15f;
+                }
+
+            }
+        }
+
+        public static void Add50PercentAttackEvery3TimesLoseHealth(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            //在buffinfo的额外参数字典中存储了玩家受到伤害的次数
+            //每次OnBeHurt回调点触发时，将次数+1
+            //如果次数是3的倍数，增加0.5f的攻击力
+            if (buffInfo.buffParam.ContainsKey("PlayerLoseHealthCount"))
+            {
+                int attackCount = (int)buffInfo.buffParam["PlayerLoseHealthCount"];
+                attackCount++;
+                if (attackCount % 3 == 0)
+                {
+                    damageInfo.addDamageArea += 0.5f;
+                }
+                buffInfo.buffParam["PlayerLoseHealthCount"] = attackCount;
+            }
+            else
+            {
+                buffInfo.buffParam.Add("PlayerLoseHealthCount", 0);
+            }
+        }
+
+
+        public static void Add90PercentAttackEvery9TimesUseDice(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            if (buffInfo.buffParam.ContainsKey("PlayerUseDiceCount"))
+            {
+                int attackCount = (int)buffInfo.buffParam["PlayerUseDiceCount"];
+                attackCount++;
+                if (attackCount % 9 == 0)
+                {
+                    damageInfo.addDamageArea += 0.5f;
+                }
+                buffInfo.buffParam["PlayerUseDiceCount"] = attackCount;
+            }
+            else
+            {
+                buffInfo.buffParam.Add("PlayerUseDiceCount", 0);
+            }
+        }
+
+        public static void Get5MaxHealthWhenGain(BuffInfo buffInfo)
+        {
+            
+            buffInfo.buffData.propMod = new ChaProperty[]
+            {
+                //加算
+                new ChaProperty(5,0,0,0),
+                //乘算 Property乘法重载加过1了
+                new ChaProperty(0,0,0,0)
+            };
+
+        }
+
+        public static void Add1Reroll(BuffInfo buffInfo)
+        {
+            //RerollCount在BattleManager中
+            BattleManager.Instance.parameter.playerRerollCount++;
+        }
+
+        //暂定不加回调点了，判断回合数是否是1判断游戏开始
+        public static void Recover25HealthWhenHealthBelowHalf(BuffInfo buffInfo)
+        {
+            if (BattleManager.Instance.parameter.turns == 1)
+            {
+                //获取玩家的状态
+                ChaState tempChaState = buffInfo.creator.GetComponent<ChaState>();
+                //访问当前的资源
+                if (tempChaState.resource.currentHp > 0)
+                {
+                    tempChaState.ModResources(new ChaResource(25, 0, 0, 0));
+                   
+                }
+            }
+        }
+
+        public static void ReuseDiceWhenDiceIs1(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            if(damageInfo.damage.indexDamageRate == 1)
+            {
+                //TODO:Reuse
+            }
+        }
+
+        public static void Add2MoneyWhenDiceIs2(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            if (damageInfo.damage.indexDamageRate == 2)
+            {
+                ChaState tempChaState = buffInfo.creator.GetComponent<ChaState>();
+                //访问当前的资源
+                if (tempChaState.resource.currentMoney > 0)
+                {
+                    tempChaState.ModResources(new ChaResource(0, 4, 0, 0));
+
+                }
+            }
+        }
+
 
 
 

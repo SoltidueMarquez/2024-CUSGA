@@ -6,10 +6,9 @@ namespace DesignerScripts
 {
     public enum HalidomName
     {
-        Add1BattleDice,
-        AllDicesIdAre5,
-        Add3ValueIfResultIsEven,
-        Add3ValueIfResultIsOdd,
+        
+        Add2ValueIfResultIsEven,
+        Add2ValueIfResultIsOdd,
         Add3ValueIfResultBelow3,
         Add3ValueIfResultAbove4,
         GainAndChoose2DicesGiveRandomCoating,
@@ -56,21 +55,21 @@ namespace DesignerScripts
                         })
             }*/
             {
-             HalidomName.Add3ValueIfResultIsEven.ToString(),new HalidomObject(
+             HalidomName.Add2ValueIfResultIsEven.ToString(),new HalidomObject(
              "1",
-             HalidomName.Add3ValueIfResultIsEven.ToString(),
-             "当骰子点数为偶数时，增加3点伤害",
+             HalidomName.Add2ValueIfResultIsEven.ToString(),
+             "当骰子点数为偶数时，增加2点伤害",
             new List<BuffInfo>()
                 {
                     new BuffInfo(BuffDataTable.buffData["Add3ValueIfResultIsEven"],null,null,1,false,null)
                 })
             },
             {
-             HalidomName.Add3ValueIfResultIsOdd.ToString(),
+             HalidomName.Add2ValueIfResultIsOdd.ToString(),
             new HalidomObject(
              "2",
-            HalidomName.Add3ValueIfResultIsOdd.ToString(),
-             "当骰子点数为奇数时，增加3点伤害",
+            HalidomName.Add2ValueIfResultIsOdd.ToString(),
+             "当骰子点数为奇数时，增加2点伤害",
             new List<BuffInfo>()
                 {
                     new BuffInfo(BuffDataTable.buffData["Add3ValueIfResultIsOdd"],null,null,1,false,null)
