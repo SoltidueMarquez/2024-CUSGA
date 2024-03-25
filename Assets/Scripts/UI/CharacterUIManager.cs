@@ -25,6 +25,8 @@ namespace UI
         [SerializeField, Tooltip("玩家")] private Transform player;
         [SerializeField, Tooltip("玩家血条")] private Slider playerHealthSlider;
 
+        private Vector3 offsetPosition;
+
         /// <summary>
         /// 角色受击动画
         /// </summary>
@@ -43,6 +45,23 @@ namespace UI
         }
 
         /// <summary>
+        /// 角色攻击动画
+        /// </summary>
+        /// <param name="character"></param>
+        public void Attack(Character character)
+        {
+            switch (character)
+            {
+                case Character.Enemy:
+                    //enemy.
+                    break;
+                case Character.Player:
+                    //player.
+                    break;
+            }
+        }
+        
+        /// <summary>
         /// 血条控制函数，0表示玩家，1表示敌人
         /// </summary>
         /// <param name="character">0表示玩家，1表示敌人</param>
@@ -60,7 +79,5 @@ namespace UI
                     break;
             }
         }
-        
-        
     }
 }
