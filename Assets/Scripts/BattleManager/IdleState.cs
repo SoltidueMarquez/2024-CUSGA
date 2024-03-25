@@ -101,14 +101,7 @@ public class PlayerRoundStartResolutionState : IState
         HalidomManager.Instance.OnRoundStart();
         //触发角色里所有buff的OnRoundStart回调点
         manager.parameter.playerChaState.OnRoundStart();
-        ProcessPromptUIManager.Instance.ShowTip(Turn.Player, () => { manager.TransitionState(GameState.PlayerAction); });
 
-
-    }
-
-    public void OnExit()
-    {
-        Debug.Log("Exit PlayerRoundStartResolutionState");
         //TODO播放自动投骰子动画
         Debug.Log("播骰子动画");
         //自动投骰子
@@ -122,6 +115,15 @@ public class PlayerRoundStartResolutionState : IState
         Debug.Log("根据投掷结果更新UI");
         //TODO:敌人投骰子
         Debug.Log("敌人投骰子");
+        ProcessPromptUIManager.Instance.ShowTip(Turn.Player, () => { manager.TransitionState(GameState.PlayerAction); });
+
+
+    }
+
+    public void OnExit()
+    {
+        Debug.Log("Exit PlayerRoundStartResolutionState");
+        
     }
 
     public void OnUpdate()
