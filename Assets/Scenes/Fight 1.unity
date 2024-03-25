@@ -525,7 +525,7 @@ MonoBehaviour:
   punchAmplitude: {x: 10, y: 0, z: 0}
   durationTime: 0.5
   punchTime: 20
-  attackAmplitude: 20
+  attackAmplitude: 40
   attackTime: 0.5
   enemy: {fileID: 93368173}
   enemyHealthSlider: {fileID: 1519014322}
