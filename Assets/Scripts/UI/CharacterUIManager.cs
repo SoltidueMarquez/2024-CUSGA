@@ -16,6 +16,7 @@ namespace UI
         [SerializeField, Tooltip("晃动幅度")] private Vector3 punchAmplitude;
         [SerializeField, Tooltip("晃动时间")] private float durationTime;
         [SerializeField, Tooltip("晃动次数")] private int punchTime;
+        [SerializeField, Tooltip("攻击幅度")] private int attackAmplitude;
         
         [Header("敌人相关")] 
         [SerializeField, Tooltip("敌人")] private Transform enemy;
@@ -53,10 +54,20 @@ namespace UI
             switch (character)
             {
                 case Character.Enemy:
-                    //enemy.
+                    offsetPosition = enemy.position + (enemy.position - player.position).normalized * attackAmplitude;
+                    enemy.DOMove(offsetPosition, 0.5f).OnComplete(() =>
+                    {
+                        offsetPosition = enemy.position - (enemy.position - player.position).normalized * attackAmplitude;
+                        enemy.DOMove(offsetPosition, 0.5f);
+                    });
                     break;
                 case Character.Player:
-                    //player.
+                    offsetPosition = player.position + (player.position - enemy.position).normalized * attackAmplitude;
+                    player.DOMove(offsetPosition, 0.5f).OnComplete(() =>
+                    {
+                        offsetPosition = player.position - (player.position - enemy.position).normalized * attackAmplitude;
+                        player.DOMove(offsetPosition, 0.5f);
+                    });
                     break;
             }
         }
