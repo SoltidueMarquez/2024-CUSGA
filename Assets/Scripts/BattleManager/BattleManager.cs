@@ -20,6 +20,8 @@ public class FSMParameter
     /// </summary>
     public int playerRerollCount;
     
+    
+    
 
     public ChaState playerChaState;
     public ChaState[] enemyChaStates;
