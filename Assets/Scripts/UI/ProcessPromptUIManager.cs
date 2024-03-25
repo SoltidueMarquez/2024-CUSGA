@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -46,8 +47,15 @@ namespace UI
             
             if (onUIAnimFinished != null)
             {
-                Invoke(nameof(onUIAnimFinished), appearDurationTime + fadeDurationTime); //结束时调用
+                StartCoroutine(AnimFish(onUIAnimFinished)); //结束时调用
             }
+        }
+        
+        IEnumerator AnimFish(OnUIAnimFinished onUIAnimFinished)
+        {
+            yield return new WaitForSeconds(appearDurationTime + fadeDurationTime);
+            onUIAnimFinished.Invoke();
+            Debug.Log("协程调用");
         }
         
         private void HideTip()
