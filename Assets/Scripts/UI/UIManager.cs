@@ -18,7 +18,7 @@ namespace UI
         {
             Instance = this;
         }
-
+        
         /// <summary>
         /// 鼠标移动预览效果
         /// </summary>

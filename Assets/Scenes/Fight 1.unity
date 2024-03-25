@@ -522,7 +522,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ff892bba58d59540a8f4de859bcd4ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 93368173}
   enemyHealthSlider: {fileID: 1519014322}
+  enemyPunchAmplitude: {x: 10, y: 0, z: 0}
+  enemyDurationTime: 0.5
+  enemyPunchTime: 10
   playerHealthSlider: {fileID: 987176127}
 --- !u!114 &81981823
 MonoBehaviour:

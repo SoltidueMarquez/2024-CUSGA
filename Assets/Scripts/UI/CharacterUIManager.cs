@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,21 +7,25 @@ namespace UI
 {
     public class CharacterUIManager : MonoSingleton<CharacterUIManager>
     {
+        [Header("敌人相关")] 
+        [SerializeField, Tooltip("敌人")] private Transform enemy;
         [SerializeField, Tooltip("敌人血条")] private Slider enemyHealthSlider;
+        
+        
+        [SerializeField, Tooltip("晃动幅度")] private Vector3 punchAmplitude;
+        [SerializeField, Tooltip("晃动时间")] private float durationTime;
+        [SerializeField, Tooltip("晃动次数")] private int punchTime;
         
         [SerializeField, Tooltip("玩家血条")] private Slider playerHealthSlider;
 
-        private void Start()
+        private void Update()
         {
-            Init();
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                enemy.DOPunchPosition(punchAmplitude, durationTime, punchTime);
+            }
         }
 
-        private void Init()
-        {
-            enemyHealthSlider.value = 1;
-            playerHealthSlider.value = 1;
-        }
-        
         /// <summary>
         /// 血条控制函数，0表示玩家，1表示敌人
         /// </summary>
