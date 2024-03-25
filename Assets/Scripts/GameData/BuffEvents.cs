@@ -63,7 +63,12 @@ namespace DesignerScripts
         #region 存回调点函数的字典
         public static Dictionary<string, OnBuffCreate> onCreateFunc = new Dictionary<string, OnBuffCreate>()
         {
-
+            {
+                BuffEventName.Get5MaxHealthWhenGain.ToString(),Get5MaxHealthWhenGain
+            },
+            {
+                BuffEventName.Add1Reroll.ToString(),Add1Reroll
+            }
 
         };
         public static Dictionary<string, OnBuffRemove> onRemoveFunc = new Dictionary<string, OnBuffRemove>();
@@ -72,6 +77,9 @@ namespace DesignerScripts
             {
                 BuffEventName.BuffStackMinus1.ToString(),BuffStackMinus1
             },
+            {
+                BuffEventName.Recover25HealthWhenHealthBelowHalf.ToString(),Recover25HealthWhenHealthBelowHalf    
+            }
         };
         public static Dictionary<string, OnRoundEnd> onRoundEndFunc = new Dictionary<string, OnRoundEnd>()
         {
