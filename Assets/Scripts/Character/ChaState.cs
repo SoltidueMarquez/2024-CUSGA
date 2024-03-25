@@ -159,7 +159,7 @@ public class ChaState : MonoBehaviour
         //这边对盾条还是需要斟酌一下
         //this.resource.currentShield = Mathf.Clamp(this.resource.currentShield, 0, this.prop.shield);
         this.resource.currentHp = Mathf.Clamp(this.resource.currentHp, 0, this.prop.health);
-        CharacterUIManager.Instance.ChangeHealthSlider(this.side, this.resource.currentHp, this.prop.health);
+        CharacterUIManager.Instance.ChangeHealthSlider((Character)side, this.resource.currentHp, this.prop.health);
         if (this.resource.currentHp <= 0)
         {
             this.Kill();
@@ -176,7 +176,7 @@ public class ChaState : MonoBehaviour
         AttrAndResourceRecheck();
 
         //UI初始化
-        CharacterUIManager.Instance.ChangeHealthSlider(this.side, this.resource.currentHp, this.prop.health);
+        CharacterUIManager.Instance.ChangeHealthSlider((Character)side, this.resource.currentHp, this.prop.health);
     }
 
     #region 获取组件
