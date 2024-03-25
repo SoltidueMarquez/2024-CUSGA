@@ -54,7 +54,7 @@ namespace DesignerScripts
         Recover5HealthWhenDiceIs3,
         Add1EnemyBleedStackWhenDiceIs4,
         Add1PlayerStrengthStackWhenDiceIs5,
-        Add1PermanentValueWhenDiceIs6,
+        Add1PermanentValueWhenDiceIs6
 
         #endregion
     }

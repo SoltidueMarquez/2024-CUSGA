@@ -23,7 +23,7 @@ namespace DesignerScripts
         Add90PercentAttackEvery9TimesUseDice,
         Recover20HealthWhenEnterStore,
         Get5MaxHealthWhenGain,
-        Recover25HealthWhenHealthBelowHalf
+        Recover25HealthWhenHealthBelowHalf,
         Add1Reroll,
         HalfInStore,
         ReuseDiceWhenDiceIs1,
