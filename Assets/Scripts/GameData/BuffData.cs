@@ -18,6 +18,36 @@ namespace DesignerScripts
         Strength,//力量
 
         Enhance,//强化
+
+
+        #region 圣物buff
+        Add2ValueIfResultIsEven,
+        Add2ValueIfResultIsOdd,
+        Add3ValueIfResultBelow3,
+        Add3ValueIfResultAbove4,
+        GainAndChoose2DicesGiveRandomCoating,
+        GainAndChoose2DicesGive1PermanentEnhance,
+        EnhanceEnemyVulnerability,
+        Add1StackIfEnemyHaveBleed,
+        Add1StackIfEnemyHaveDebuff,
+        Add1StackIfPlayerHaveStrength,
+        Add1StackIfPlayerHavePositiveBuff,
+        Add4MoneyWhenBattleEnd,
+        Add50PercentAttackEvery3TimesLoseHealth,
+        Add90PercentAttackEvery9TimesUseDice,
+        Recover20HealthWhenEnterStore,
+        Get5MaxHealthWhenGain,
+        Recover25HealthWhenHealthBelowHalf,
+        Add1Reroll,
+        HalfInStore,
+        ReuseDiceWhenDiceIs1,
+        Add2MoneyWhenDiceIs2,
+        Recover5HealthWhenDiceIs3,
+        Add1EnemyBleedStackWhenDiceIs4,
+        Add1PlayerStrengthStackWhenDiceIs5,
+        Add1PermanentValueWhenDiceIs6,
+
+        #endregion
     }
     public class BuffDataTable
     {
@@ -236,6 +266,682 @@ namespace DesignerScripts
                     BuffEventName.BuffStackMinus1.ToString(),null,
                     "",null,
                     BuffEventName.Enhance.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.Add2ValueIfResultIsEven.ToString(),new BuffData
+                (
+                    "8",
+                    BuffDataName.Add2ValueIfResultIsEven.ToString(),
+                    "icon8",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    BuffEventName.Add2ValueIfResultIsEven.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.Add2ValueIfResultIsOdd.ToString(),new BuffData
+                (
+                    "9",
+                    BuffDataName.Add2ValueIfResultIsOdd.ToString(),
+                    "icon9",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    BuffEventName.Add2ValueIfResultIsOdd.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.Add3ValueIfResultBelow3.ToString(),new BuffData
+                (
+                    "10",
+                    BuffDataName.Add3ValueIfResultBelow3.ToString(),
+                    "icon10",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    BuffEventName.Add3ValueIfResultBelow3.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.Add3ValueIfResultAbove4.ToString(),new BuffData
+                (
+                    "11",
+                    BuffDataName.Add3ValueIfResultAbove4.ToString(),
+                    "icon11",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    BuffEventName.Add3ValueIfResultAbove4.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+             //TODO:没加event
+             {
+                BuffDataName.GainAndChoose2DicesGiveRandomCoating.ToString(),new BuffData
+                (
+                    "12",
+                    BuffDataName.GainAndChoose2DicesGiveRandomCoating.ToString(),
+                    "icon12",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+             //TODO：没加event
+             {
+                BuffDataName.GainAndChoose2DicesGive1PermanentEnhance.ToString(),new BuffData
+                (
+                    "13",
+                    BuffDataName.GainAndChoose2DicesGive1PermanentEnhance.ToString(),
+                    "icon13",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.EnhanceEnemyVulnerability.ToString(),new BuffData
+                (
+                    "14",
+                    BuffDataName.EnhanceEnemyVulnerability.ToString(),
+                    "icon14",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    BuffEventName.EnhanceEnemyVulnerability.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+             //TODO:没加event
+             {
+                BuffDataName.Add1StackIfEnemyHaveBleed.ToString(),new BuffData
+                (
+                    "15",
+                    BuffDataName.Add1StackIfEnemyHaveBleed.ToString(),
+                    "icon15",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+             //TODO:没加event
+             {
+                BuffDataName.Add1StackIfEnemyHaveDebuff.ToString(),new BuffData
+                (
+                    "16",
+                    BuffDataName.Add1StackIfEnemyHaveDebuff.ToString(),
+                    "icon16",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             //TODO:没加event
+             {
+                BuffDataName.Add1StackIfPlayerHaveStrength.ToString(),new BuffData
+                (
+                    "17",
+                    BuffDataName.Add1StackIfPlayerHaveStrength.ToString(),
+                    "icon17",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             //TODO:没加event
+             {
+                BuffDataName.Add1StackIfPlayerHavePositiveBuff.ToString(),new BuffData
+                (
+                    "18",
+                    BuffDataName.Add1StackIfPlayerHavePositiveBuff.ToString(),
+                    "icon18",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.Add4MoneyWhenBattleEnd.ToString(),new BuffData
+                (
+                    "19",
+                    BuffDataName.Add4MoneyWhenBattleEnd.ToString(),
+                    "icon19",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    BuffEventName.Add4MoneyWhenBattleEnd.ToString(),null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.Add50PercentAttackEvery3TimesLoseHealth.ToString(),new BuffData
+                (
+                    "20",
+                    BuffDataName.Add50PercentAttackEvery3TimesLoseHealth.ToString(),
+                    "icon20",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    BuffEventName.Add50PercentAttackEvery3TimesLoseHealth.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.Add90PercentAttackEvery9TimesUseDice.ToString(),new BuffData
+                (
+                    "21",
+                    BuffDataName.Add90PercentAttackEvery9TimesUseDice.ToString(),
+                    "icon21",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    BuffEventName.Add90PercentAttackEvery9TimesUseDice.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+             //TODO:没加event
+             {
+                BuffDataName.Recover20HealthWhenEnterStore.ToString(),new BuffData
+                (
+                    "22",
+                    BuffDataName.Recover20HealthWhenEnterStore.ToString(),
+                    "icon22",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+             {
+                BuffDataName.Get5MaxHealthWhenGain.ToString(),new BuffData
+                (
+                    "23",
+                    BuffDataName.Get5MaxHealthWhenGain.ToString(),
+                    "icon23",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    BuffEventName.Get5MaxHealthWhenGain.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.Recover25HealthWhenHealthBelowHalf.ToString(),new BuffData
+                (
+                    "24",
+                    BuffDataName.Recover25HealthWhenHealthBelowHalf.ToString(),
+                    "icon24",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    BuffEventName.Recover25HealthWhenHealthBelowHalf.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.Add1Reroll.ToString(),new BuffData
+                (
+                    "25",
+                    BuffDataName.Add1Reroll.ToString(),
+                    "icon25",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    BuffEventName.Add1Reroll.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+             //TODO:没加event
+             {
+                BuffDataName.HalfInStore.ToString(),new BuffData
+                (
+                    "26",
+                    BuffDataName.HalfInStore.ToString(),
+                    "icon26",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+             //TODO:没加event
+             {
+                BuffDataName.ReuseDiceWhenDiceIs1.ToString(),new BuffData
+                (
+                    "27",
+                    BuffDataName.ReuseDiceWhenDiceIs1.ToString(),
+                    "icon27",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.Add2MoneyWhenDiceIs2.ToString(),new BuffData
+                (
+                    "28",
+                    BuffDataName.Add2MoneyWhenDiceIs2.ToString(),
+                    "icon28",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    BuffEventName.Add2MoneyWhenDiceIs2.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.Recover5HealthWhenDiceIs3.ToString(),new BuffData
+                (
+                    "29",
+                    BuffDataName.Recover5HealthWhenDiceIs3.ToString(),
+                    "icon29",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    BuffEventName.Recover5HealthWhenDiceIs3.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.Add1EnemyBleedStackWhenDiceIs4.ToString(),new BuffData
+                (
+                    "30",
+                    BuffDataName.Add1EnemyBleedStackWhenDiceIs4.ToString(),
+                    "icon30",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    BuffEventName.Add1EnemyBleedStackWhenDiceIs4.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.Add1PlayerStrengthStackWhenDiceIs5.ToString(),new BuffData
+                (
+                    "31",
+                    BuffDataName.Add1PlayerStrengthStackWhenDiceIs5.ToString(),
+                    "icon31",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    BuffEventName.Add1PlayerStrengthStackWhenDiceIs5.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.Add1PermanentValueWhenDiceIs6.ToString(),new BuffData
+                (
+                    "32",
+                    BuffDataName.Add1PermanentValueWhenDiceIs6.ToString(),
+                    "icon32",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    BuffEventName.Add1PermanentValueWhenDiceIs6.ToString(),null,
                     "",null,
                     "",null,
                     "",null,
