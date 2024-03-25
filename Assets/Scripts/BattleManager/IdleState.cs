@@ -123,7 +123,7 @@ public class PlayerRoundStartResolutionState : IState
     public void OnExit()
     {
         Debug.Log("Exit PlayerRoundStartResolutionState");
-        
+
     }
 
     public void OnUpdate()
@@ -250,7 +250,10 @@ public class EnemyActionState : IState
 
 
         Debug.Log("进入EnemyActionState");
-
+        foreach (var enemy in manager.parameter.enemyChaStates)
+        {
+            enemy.gameObject.GetComponent<EnemyAI>().SimpleAI();
+        }
 
     }
 
@@ -261,14 +264,16 @@ public class EnemyActionState : IState
 
     public void OnUpdate()
     {
-        //TODO:敌人AI逻辑
-        foreach (var enemy in manager.parameter.enemyChaStates)
-        {
-            enemy.GetBattleDiceHandler().CastDiceAll(enemy, manager.parameter.playerChaState.gameObject);
-            DamageManager.Instance.DealWithAllDamage();
-        }
-        manager.TransitionState(GameState.EnemyRoundEndResolution);
+    ////TODO: 敌人AI逻辑
+    //    foreach (var enemy in manager.parameter.enemyChaStates)
+    //    {
+    //        enemy.GetBattleDiceHandler().CastDiceAll(enemy, manager.parameter.playerChaState.gameObject);
+    //        DamageManager.Instance.DealWithAllDamage();
+    //    }
+    //    manager.TransitionState(GameState.EnemyRoundEndResolution);
+    
     }
+    
 }
 
 public class EnemyRoundEndResolutionState : IState

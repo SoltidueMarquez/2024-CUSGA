@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 
 public class DamageManager : MonoSingleton<DamageManager>
@@ -55,6 +56,8 @@ public class DamageManager : MonoSingleton<DamageManager>
         {
             case DiceType.Attack:
                 defenderChaState.ModResources(new ChaResource(-damageInfo.finalDamage,0,0,0));
+                Character character = defenderChaState.side == 0 ? Character.Player : Character.Enemy;
+                CharacterUIManager.Instance.BeAttacked(character);
                 break;
             case DiceType.Defense:
                 //这边暂时做成只对玩家生效
