@@ -24,7 +24,7 @@ namespace UI
         [SerializeField, Tooltip("敌人血条")] private Slider enemyHealthSlider;
         
         [Header("玩家相关")]
-        [SerializeField, Tooltip("玩家")] private Transform player;
+        [SerializeField, Tooltip("玩家")] public Transform player;
         [SerializeField, Tooltip("玩家血条")] private Slider playerHealthSlider;
 
         private Vector3 offsetPosition;
@@ -71,11 +71,6 @@ namespace UI
                     });
                     break;
             }
-        }
-
-        private void Start()
-        {
-            Attack(Character.Enemy);
         }
 
         /// <summary>

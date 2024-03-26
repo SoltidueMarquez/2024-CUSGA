@@ -138,7 +138,7 @@ public class BattleManager : MonoBehaviour
     public void EndPlayerRound()
     {
         this.parameter.playerChaState.GetBattleDiceHandler().ClearBattleSingleDices();
-        RollingResultUIManager.Instance.RemoveAllResultUI();
+        RollingResultUIManager.Instance.RemoveAllResultUI(false);
         TransitionState(GameState.PlayerRoundEndResolution);
     }
 

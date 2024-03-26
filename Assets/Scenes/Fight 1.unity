@@ -526,7 +526,7 @@ MonoBehaviour:
   durationTime: 0.5
   punchTime: 20
   attackAmplitude: 40
-  attackTime: 0.5
+  attackTime: 0.25
   enemy: {fileID: 93368173}
   enemyHealthSlider: {fileID: 1519014322}
   player: {fileID: 1161813748}
@@ -569,6 +569,9 @@ MonoBehaviour:
   - {fileID: 74985877}
   template: {fileID: 1304177038515510442, guid: 3c51c8c40f7233c4f8ed2772adc6df54, type: 3}
   _resultList: []
+  useTime: 1
+  scale: 2
+  moveOffset: 200
 --- !u!114 &81981825
 MonoBehaviour:
   m_ObjectHideFlags: 0

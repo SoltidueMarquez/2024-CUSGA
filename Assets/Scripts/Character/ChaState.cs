@@ -91,7 +91,7 @@ public class ChaState : MonoBehaviour
         DamageManager.Instance.DealWithAllDamage();
         if (this.side == 0)
         {
-            RollingResultUIManager.Instance.RemoveAllResultUI();
+            RollingResultUIManager.Instance.RemoveAllResultUI(true);
         }
     }
     #endregion

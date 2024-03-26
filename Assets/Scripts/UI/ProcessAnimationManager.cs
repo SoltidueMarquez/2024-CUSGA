@@ -19,8 +19,8 @@ namespace UI
         [Header("我方回合开始动画相关设置:")] 
         [SerializeField, Tooltip("旋转物体列表")] private List<RotateObject> rotateObjects;
         [SerializeField, Tooltip("出现结果列表")] private List<Transform> results;
-        [SerializeField, Tooltip("出现时间间隔")] private float timeInterval;
-        [SerializeField, Tooltip("出现时间间隔")] private float finalPosition;
+        [SerializeField, Tooltip("出现时间间隔")] public float timeInterval;
+        [SerializeField, Tooltip("出现位置(Y)")] private float finalPosition;
         
         /// <summary>
         /// 轮盘与按钮旋转进入

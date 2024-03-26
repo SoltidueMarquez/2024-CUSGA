@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace UI
 {
@@ -9,7 +10,11 @@ namespace UI
         [SerializeField, Tooltip("投掷结果栏位")] private List<Transform> columns;
         [SerializeField, Tooltip("生成模板")] private GameObject template;
         [SerializeField, Tooltip("结果列表")] private List<GameObject> _resultList;
-
+        
+        [Tooltip("使用动画时长")]public float useTime;
+        [Tooltip("使用放大倍数")]public float scale;
+        [Tooltip("距离使用者上方位置")] public float moveOffset;
+        
         /// <summary>
         /// 生成投掷结果函数,请按投掷顺序有序生成
         /// </summary>
@@ -28,13 +33,56 @@ namespace UI
         /// <summary>
         /// 摧毁所有结果
         /// </summary>
-        public void RemoveAllResultUI()
+        public void RemoveAllResultUI(bool ifUse)
         {
-            foreach (var result in _resultList)
+            var tmpList = new List<GameObject>();//备份队列
+            while (_resultList.Count != 0)
             {
-                Destroy(result);
+                tmpList.Add(_resultList[0]);
+                _resultList.Remove(_resultList[0]);
             }
-            _resultList.Clear();
+            _resultList.Clear();//立刻清空队列避免报错
+            
+            if (!ifUse)
+            {
+                StartCoroutine(WaitForDestroyAll(ProcessAnimationManager.Instance.timeInterval,tmpList));//等待一段时间后销毁
+                return;
+            }
+
+            StartCoroutine(WaitForDestroy(useTime / 2, tmpList));
         }
+
+        IEnumerator WaitForDestroy(float time, List<GameObject> tmp)
+        {
+            while (tmp.Count != 0)
+            {
+                if (tmp[0] != null)
+                {
+                    tmp[0].GetComponent<RollingResultDiceUI>().OnUseDestory();
+                }
+                yield return new WaitForSeconds(time);
+                tmp.Remove(tmp[0]);
+            }
+        }
+
+        /// <summary>
+        /// 延时摧毁所有结果协程
+        /// </summary>
+        /// <param name="time">延迟时间</param>
+        /// <returns></returns>
+        IEnumerator WaitForDestroyAll(float time, List<GameObject> tmp)
+        {
+            while (tmp.Count != 0)
+            {
+                if (tmp[0] != null)
+                {
+                    yield return new WaitForSeconds(time);
+                    Destroy(tmp[0].gameObject);
+                }
+                tmp.Remove(tmp[0]);
+            }
+        }
+
+
     }
 }
