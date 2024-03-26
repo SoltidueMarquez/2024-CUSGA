@@ -35,6 +35,8 @@ namespace UI
         /// </summary>
         public void RemoveAllResultUI(bool ifUse)
         {
+            if (_resultList.Count == 0) { return;}
+
             var tmpList = new List<GameObject>();//备份队列
             while (_resultList.Count != 0)
             {
@@ -82,7 +84,6 @@ namespace UI
                 tmp.Remove(tmp[0]);
             }
         }
-
 
     }
 }
