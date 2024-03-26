@@ -57,6 +57,8 @@ public class DamageManager : MonoSingleton<DamageManager>
             case DiceType.Attack:
                 defenderChaState.ModResources(new ChaResource(-damageInfo.finalDamage,0,0,0));
                 Character character = defenderChaState.side == 0 ? Character.Player : Character.Enemy;
+                Character attackCharacter = attackerChaState.side == 0 ? Character.Player : Character.Enemy;
+                CharacterUIManager.Instance.Attack(attackCharacter);
                 CharacterUIManager.Instance.BeAttacked(character);
                 break;
             case DiceType.Defense:
