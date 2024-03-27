@@ -113,12 +113,17 @@ namespace UI
             switch (character)
             {
                 case Character.Enemy:
-                    enemyHealthSlider.value = (float)currentHealth / maxHealth;
+                    StartCoroutine(DoChangeEnemyHp(currentHealth, maxHealth));
                     break;
                 case Character.Player:
                     playerHealthSlider.value = (float)currentHealth / maxHealth;
                     break;
             }
+        }
+        IEnumerator DoChangeEnemyHp(int currentHealth, int maxHealth)
+        {
+            yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
+            enemyHealthSlider.value = (float)currentHealth / maxHealth;
         }
 
         /// <summary>

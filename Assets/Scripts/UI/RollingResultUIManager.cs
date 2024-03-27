@@ -5,6 +5,12 @@ using System.Collections;
 
 namespace UI
 {
+    public enum Strategy
+    {
+        UseAll,
+        ReRoll,
+        End
+    }
     public class RollingResultUIManager : MonoSingleton<RollingResultUIManager>
     {
         [SerializeField, Tooltip("投掷结果栏位")] private List<Transform> columns;
@@ -33,7 +39,7 @@ namespace UI
         /// <summary>
         /// 摧毁所有结果
         /// </summary>
-        public void RemoveAllResultUI(bool ifUse)
+        public void RemoveAllResultUI(Strategy strategy)
         {
             if (_resultList.Count == 0) { return;}
 
@@ -44,16 +50,29 @@ namespace UI
                 _resultList.Remove(_resultList[0]);
             }
             _resultList.Clear();//立刻清空队列避免报错
-            
-            if (!ifUse)
+
+            switch (strategy)
             {
-                StartCoroutine(WaitForDestroyAll(ProcessAnimationManager.Instance.timeInterval,tmpList));//等待一段时间后销毁
-                return;
+                case Strategy.End:
+                    StartCoroutine(WaitForDestroyAll(ProcessAnimationManager.Instance.timeInterval,tmpList));//等待一段时间后销毁
+                    return;
+                case Strategy.UseAll:
+                    StartCoroutine(WaitForDestroy(useTime / 2, tmpList));
+                    return;
+                case Strategy.ReRoll:
+                    StartCoroutine(DestroyAll(tmpList));
+                    return;
             }
-
-            StartCoroutine(WaitForDestroy(useTime / 2, tmpList));
+            
+            
         }
-
+        
+        /// <summary>
+        /// 使用所有骰面的函数
+        /// </summary>
+        /// <param name="time"></param>
+        /// <param name="tmp"></param>
+        /// <returns></returns>
         IEnumerator WaitForDestroy(float time, List<GameObject> tmp)
         {
             while (tmp.Count != 0)
@@ -79,6 +98,24 @@ namespace UI
                 if (tmp[0] != null)
                 {
                     yield return new WaitForSeconds(time);
+                    Destroy(tmp[0].gameObject);
+                }
+                tmp.Remove(tmp[0]);
+            }
+        }
+        
+        /// <summary>
+        /// 无延时摧毁所有结果协程
+        /// </summary>
+        /// <param name="time">延迟时间</param>
+        /// <returns></returns>
+        IEnumerator DestroyAll(List<GameObject> tmp)
+        {
+            while (tmp.Count != 0)
+            {
+                if (tmp[0] != null)
+                {
+                    yield return new WaitForSeconds(0);
                     Destroy(tmp[0].gameObject);
                 }
                 tmp.Remove(tmp[0]);
