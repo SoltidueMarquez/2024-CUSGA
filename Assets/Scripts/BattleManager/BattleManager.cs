@@ -164,6 +164,23 @@ public class BattleManager : MonoBehaviour
             RollingResultUIManager.Instance.CreateResult(i, singleDiceObjs[i].model.id, pos);
         }
     }
+    public void ReRollDice()
+    {
+        //如果玩家的重新投掷次数小于等于0，就不执行
+        if(this.parameter.playerChaState.resource.currentRollTimes <= 0)
+        {
+            return;
+        }
+        this.parameter.playerChaState.ModResources(new ChaResource(0, 0, -1, 0));
+        List<SingleDiceObj> singleDiceObjs = this.parameter.playerChaState.GetBattleDiceHandler().GetRandomSingleDices();
+        this.parameter.playerChaState.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs);
+        //这边需要删除所有当前骰面的视觉
+        for (int i = 0; i < singleDiceObjs.Count; i++)
+        {
+            Vector2Int pos = new Vector2Int(i, singleDiceObjs[i].idInDice);
+            RollingResultUIManager.Instance.CreateResult(i, singleDiceObjs[i].model.id, pos);
+        }
+    }
     public void RollDiceForEnemy(ChaState chaState)
     {
         var singleDiceObjs = chaState.GetBattleDiceHandler().GetRandomSingleDices();
