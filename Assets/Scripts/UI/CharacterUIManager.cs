@@ -30,7 +30,7 @@ namespace UI
         [SerializeField, Tooltip("伤害文字偏移量")] private Vector3 attackTextOffset;
         
         [Header("敌人相关")] 
-        [SerializeField, Tooltip("敌人")] private Transform enemy;
+        [SerializeField, Tooltip("敌人")] public Transform enemy;
         [SerializeField, Tooltip("敌人血条")] private Slider enemyHealthSlider;
         
         [Header("玩家相关")]
