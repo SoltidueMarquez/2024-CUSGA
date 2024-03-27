@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,9 @@ namespace UI
         Player,
         Enemy
     }
+    /// <summary>
+    /// TODO:动画的顺序播放队列需要实现，因为之后的动画可能会打断之前的动画，但是要求是即选即用，感觉不能用队列，暂时先这样吧
+    /// </summary>
     public class CharacterUIManager : MonoSingleton<CharacterUIManager>
     {
         [Header("受击")]
@@ -50,21 +54,29 @@ namespace UI
         /// <param name="character">0表示玩家，1表示敌人</param>
         public void BeAttacked(Character character, int hitNum)
         {
-            Vector3 attackTextPosition = attackTextOffset;
             switch (character)
             {
                 case Character.Enemy:
-                    enemy.DOPunchPosition(punchAmplitude, durationTime, punchTime);
-                    attackTextPosition += enemy.position;
+                    StartCoroutine(DoEnemyBeAtkAnim(hitNum));
                     break;
                 case Character.Player:
-                    player.DOPunchPosition(punchAmplitude, durationTime, punchTime);
-                    attackTextPosition += player.position;
+                    PlayBeAttackedAnim(player, hitNum);
                     break;
             }
-
+        }
+        IEnumerator DoEnemyBeAtkAnim(int hitNum)
+        {
+            yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
+            PlayBeAttackedAnim(enemy, hitNum);
+        }
+        private void PlayBeAttackedAnim(Transform character,int hitNum)
+        {
+            Vector3 attackTextPosition = attackTextOffset;
+            character.DOPunchPosition(punchAmplitude, durationTime, punchTime);
+            attackTextPosition += character.position;
             CreateAttackText(attackTextParent, hitNum, attackTextPosition);//创建伤害数字
         }
+        
 
         /// <summary>
         /// 角色攻击动画
@@ -79,12 +91,17 @@ namespace UI
                     enemy.DOPunchPosition(offsetPosition, attackTime, 1);
                     break;
                 case Character.Player:
-                    offsetPosition = (enemy.position - player.position).normalized * attackAmplitude;
-                    player.DOPunchPosition(offsetPosition, attackTime, 1);
+                    StartCoroutine(DoPlayerAtkAnim());
                     break;
             }
         }
-
+        IEnumerator DoPlayerAtkAnim()
+        {
+            yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
+            offsetPosition = (enemy.position - player.position).normalized * attackAmplitude;
+            player.DOPunchPosition(offsetPosition, attackTime, 1);
+        }
+        
         /// <summary>
         /// 血条控制函数，0表示玩家，1表示敌人
         /// </summary>
@@ -115,9 +132,14 @@ namespace UI
                     enemy.DOPunchPosition(useOtherOffset, attackTime, 1);
                     break;
                 case Character.Player:
-                    player.DOPunchPosition(useOtherOffset, attackTime, 1);
+                    StartCoroutine(DoPlayerOtherAnim());
                     break;
             }
+        }
+        IEnumerator DoPlayerOtherAnim()
+        {
+            yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
+            player.DOPunchPosition(useOtherOffset, attackTime, 1);
         }
         
     }
