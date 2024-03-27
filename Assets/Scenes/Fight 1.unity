@@ -654,6 +654,8 @@ MonoBehaviour:
   appearDurationTime: 1
   fadeDurationTime: 1
   panel: {fileID: 1772109970}
+  enemyYPosition: 740
+  playerYPosition: 340
 --- !u!114 &81981828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -727,7 +729,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 273, y: 123}
+  m_AnchoredPosition: {x: 450, y: 900}
   m_SizeDelta: {x: 257.498, y: 256.8486}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &93368174
@@ -3878,7 +3880,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -340, y: -247}
+  m_AnchoredPosition: {x: -340, y: -900}
   m_SizeDelta: {x: 257.498, y: 256.8486}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1161813749

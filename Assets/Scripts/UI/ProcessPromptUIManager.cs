@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using DG.Tweening;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -19,7 +20,21 @@ namespace UI
         [SerializeField,Tooltip("出现时间")]private float appearDurationTime;
         [SerializeField,Tooltip("消失时间")]private float fadeDurationTime;
         [SerializeField, Tooltip("UI")] private GameObject panel;
+        [SerializeField, Tooltip("敌人的位置(Y)")] private float enemyYPosition;
+        [SerializeField, Tooltip("玩家的位置(Y)")] private float playerYPosition;
 
+        public void DoFightStartUIAnim()
+        {
+            panel.SetActive(true);
+            string tip = "战斗开始";
+            processPrompt.Appear(appearDurationTime, tip); //出现提示
+            StartCoroutine(HideTip());
+            
+            //敌人从屏幕外依次下降出现
+            CharacterUIManager.Instance.enemy.DOMoveY(enemyYPosition, appearDurationTime);
+            CharacterUIManager.Instance.player.DOMoveY(playerYPosition, appearDurationTime);
+        }
+        
         /// <summary>
         /// 显示流程提示
         /// </summary>
