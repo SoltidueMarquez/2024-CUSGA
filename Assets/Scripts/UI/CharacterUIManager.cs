@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,12 +11,17 @@ namespace UI
     }
     public class CharacterUIManager : MonoSingleton<CharacterUIManager>
     {
-        [Header("通用")]
+        [Header("受击")]
         [SerializeField, Tooltip("晃动幅度")] private Vector3 punchAmplitude;
         [SerializeField, Tooltip("晃动时间")] private float durationTime;
         [SerializeField, Tooltip("晃动次数")] private int punchTime;
+        
+        [Header("攻击")]
         [SerializeField, Tooltip("攻击幅度")] private int attackAmplitude;
         [SerializeField, Tooltip("攻击时间")] private float attackTime;
+        [SerializeField, Tooltip("伤害文字模板")] private GameObject attackTextTemplate;
+        [SerializeField, Tooltip("伤害文字父物体")] private Transform attackTextParent;
+        [SerializeField, Tooltip("伤害文字偏移量")] private Vector3 attackTextOffset;
         
         [Header("敌人相关")] 
         [SerializeField, Tooltip("敌人")] private Transform enemy;
@@ -29,21 +33,35 @@ namespace UI
 
         private Vector3 offsetPosition;
 
+
+        private void CreateAttackText(Transform parent,int hit,Vector3 position)
+        {
+            var tmp = Instantiate(attackTextTemplate, parent, true);
+            tmp.transform.position = position;//更改位置
+            tmp.GetComponent<AttackText>().Init(hit,attackTime);//初始化
+            tmp.SetActive(true);
+        }
+
         /// <summary>
         /// 角色受击动画
         /// </summary>
         /// <param name="character">0表示玩家，1表示敌人</param>
-        public void BeAttacked(Character character)
+        public void BeAttacked(Character character, int hitNum)
         {
+            Vector3 attackTextPosition = attackTextOffset;
             switch (character)
             {
                 case Character.Enemy:
                     enemy.DOPunchPosition(punchAmplitude, durationTime, punchTime);
+                    attackTextPosition += enemy.position;
                     break;
                 case Character.Player:
                     player.DOPunchPosition(punchAmplitude, durationTime, punchTime);
+                    attackTextPosition += player.position;
                     break;
             }
+
+            CreateAttackText(attackTextParent, hitNum, attackTextPosition);
         }
 
         /// <summary>

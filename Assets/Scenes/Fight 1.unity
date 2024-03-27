@@ -527,6 +527,9 @@ MonoBehaviour:
   punchTime: 20
   attackAmplitude: 40
   attackTime: 0.25
+  attackTextTemplate: {fileID: 6026842765821486614, guid: 7677b61fe4fd11547affcc2f6285e1dd, type: 3}
+  attackTextParent: {fileID: 1714525885}
+  attackTextOffset: {x: 200, y: 0, z: 0}
   enemy: {fileID: 93368173}
   enemyHealthSlider: {fileID: 1519014322}
   player: {fileID: 1161813748}
