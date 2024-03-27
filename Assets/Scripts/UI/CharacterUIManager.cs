@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,7 @@ namespace UI
         [SerializeField, Tooltip("晃动次数")] private int punchTime;
         
         [Header("攻击")]
+        [SerializeField, Tooltip("使用其他骰面时的跳跃偏移量")] private Vector3 useOtherOffset;
         [SerializeField, Tooltip("攻击幅度")] private int attackAmplitude;
         [SerializeField, Tooltip("攻击时间")] private float attackTime;
         [SerializeField, Tooltip("伤害文字模板")] private GameObject attackTextTemplate;
@@ -61,7 +63,7 @@ namespace UI
                     break;
             }
 
-            CreateAttackText(attackTextParent, hitNum, attackTextPosition);
+            CreateAttackText(attackTextParent, hitNum, attackTextPosition);//创建伤害数字
         }
 
         /// <summary>
@@ -73,20 +75,12 @@ namespace UI
             switch (character)
             {
                 case Character.Enemy:
-                    offsetPosition = enemy.position - (enemy.position - player.position).normalized * attackAmplitude;
-                    enemy.DOMove(offsetPosition, attackTime / 2).OnComplete(() =>
-                    {
-                        offsetPosition = enemy.position + (enemy.position - player.position).normalized * attackAmplitude;
-                        enemy.DOMove(offsetPosition, attackTime / 2);
-                    });
+                    offsetPosition = (player.position - enemy.position).normalized * attackAmplitude;
+                    enemy.DOPunchPosition(offsetPosition, attackTime, 1);
                     break;
                 case Character.Player:
-                    offsetPosition = player.position - (player.position - enemy.position).normalized * attackAmplitude;
-                    player.DOMove(offsetPosition, attackTime/2).OnComplete(() =>
-                    {
-                        offsetPosition = player.position + (player.position - enemy.position).normalized * attackAmplitude;
-                        player.DOMove(offsetPosition, attackTime / 2);
-                    });
+                    offsetPosition = (enemy.position - player.position).normalized * attackAmplitude;
+                    player.DOPunchPosition(offsetPosition, attackTime, 1);
                     break;
             }
         }
@@ -109,5 +103,22 @@ namespace UI
                     break;
             }
         }
+
+        /// <summary>
+        /// 角色使用其他骰面的动画
+        /// </summary>
+        public void UseOtherDice(Character character)
+        {
+            switch (character)
+            {
+                case Character.Enemy:
+                    enemy.DOPunchPosition(useOtherOffset, attackTime, 1);
+                    break;
+                case Character.Player:
+                    player.DOPunchPosition(useOtherOffset, attackTime, 1);
+                    break;
+            }
+        }
+        
     }
 }

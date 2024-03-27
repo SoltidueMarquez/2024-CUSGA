@@ -59,7 +59,7 @@ public class DamageManager : MonoSingleton<DamageManager>
                 Character character = defenderChaState.side == 0 ? Character.Player : Character.Enemy;
                 Character attackCharacter = attackerChaState.side == 0 ? Character.Player : Character.Enemy;
                 CharacterUIManager.Instance.Attack(attackCharacter);
-                CharacterUIManager.Instance.BeAttacked(character);
+                CharacterUIManager.Instance.BeAttacked(character, 0);
                 break;
             case DiceType.Defense:
                 //这边暂时做成只对玩家生效
