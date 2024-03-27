@@ -1,7 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum RareType
+{
+    Common,
+    Rare,
+    Legendary
+}
 public class HalidomObject
 {
     /// <summary>
@@ -24,11 +29,20 @@ public class HalidomObject
     /// 圣物在格子中的序号
     /// </summary>
     public int halidomIndex;
+    /// <summary>
+    /// 圣物的稀有度
+    /// </summary>
+    public RareType rareType;
+    /// <summary>
+    /// 圣物的售价
+    /// </summary>
+    public int value;
     
     
 
-    public HalidomObject(string id, string halidomName, string description,  List<BuffInfo> buffinfo )
+    public HalidomObject(RareType rareType,string id, string halidomName, string description,  List<BuffInfo> buffinfo )
     {
+        this.rareType = rareType;
         this.id = id;
         this.halidomName = halidomName;
         this.description = description;
