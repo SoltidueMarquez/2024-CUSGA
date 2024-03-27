@@ -25,8 +25,6 @@ namespace DesignerScripts
         Add2ValueIfResultIsOdd,
         Add3ValueIfResultBelow3,
         Add3ValueIfResultAbove4,
-        GainAndChoose2DicesGiveRandomCoating,
-        GainAndChoose2DicesGive1PermanentEnhance,
         EnhanceEnemyVulnerability,
         Add1StackIfEnemyHaveBleed,
         Add1StackIfEnemyHaveDebuff,
@@ -383,61 +381,6 @@ namespace DesignerScripts
                  )
 
              },
-             //TODO:没加event
-             {
-                BuffDataName.GainAndChoose2DicesGiveRandomCoating.ToString(),new BuffData
-                (
-                    "12",
-                    BuffDataName.GainAndChoose2DicesGiveRandomCoating.ToString(),
-                    "icon12",
-                    new [] {"Self"},
-                    5,
-                    100,
-                    true,
-                    BuffUpdateEnum.Add,
-                    BuffRemoveStackUpdateEnum.Reduce,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    ChaControlState.origin,
-                    null
-                 )
-
-             },
-             //TODO：没加event
-             {
-                BuffDataName.GainAndChoose2DicesGive1PermanentEnhance.ToString(),new BuffData
-                (
-                    "13",
-                    BuffDataName.GainAndChoose2DicesGive1PermanentEnhance.ToString(),
-                    "icon13",
-                    new [] {"Self"},
-                    5,
-                    100,
-                    true,
-                    BuffUpdateEnum.Add,
-                    BuffRemoveStackUpdateEnum.Reduce,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    ChaControlState.origin,
-                    null
-                 )
-
-             },
-
              {
                 BuffDataName.EnhanceEnemyVulnerability.ToString(),new BuffData
                 (
