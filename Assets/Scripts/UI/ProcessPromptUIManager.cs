@@ -23,7 +23,7 @@ namespace UI
         [SerializeField, Tooltip("敌人的位置(Y)")] private float enemyYPosition;
         [SerializeField, Tooltip("玩家的位置(Y)")] private float playerYPosition;
 
-        public void DoFightStartUIAnim()
+        public void DoFightStartUIAnim(OnUIAnimFinished onUIAnimFinished)
         {
             panel.SetActive(true);
             string tip = "战斗开始";
@@ -33,6 +33,11 @@ namespace UI
             //敌人从屏幕外依次下降出现
             CharacterUIManager.Instance.enemy.DOMoveY(enemyYPosition, appearDurationTime);
             CharacterUIManager.Instance.player.DOMoveY(playerYPosition, appearDurationTime);
+            
+            if (onUIAnimFinished != null)
+            {
+                StartCoroutine(AnimFish(onUIAnimFinished)); //结束时调用
+            }
         }
         
         /// <summary>
