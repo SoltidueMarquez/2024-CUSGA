@@ -20,9 +20,33 @@ namespace UI
         [SerializeField,Tooltip("出现时间")]private float appearDurationTime;
         [SerializeField,Tooltip("消失时间")]private float fadeDurationTime;
         [SerializeField, Tooltip("UI")] private GameObject panel;
-        [SerializeField, Tooltip("敌人的位置(Y)")] private float enemyYPosition;
-        [SerializeField, Tooltip("玩家的位置(Y)")] private float playerYPosition;
+        [SerializeField, Tooltip("敌人的出现位置(Y)")] private float enemyStartYPosition;
+        [SerializeField, Tooltip("敌人的离开位置(Y)")] private float enemyEndYPosition;
+        [SerializeField, Tooltip("玩家的出现位置(Y)")] private float playerStartYPosition;
+        [SerializeField, Tooltip("玩家的离开位置(Y)")] private float playerEndYPosition;
 
+        public void DoFightEndUIAnim(OnUIAnimFinished onUIAnimFinished)
+        {
+            panel.SetActive(true);
+            string tip = "你赢了";
+            processPrompt.Appear(appearDurationTime, tip); //出现提示
+            StartCoroutine(HideTip());
+            //敌人与玩家离开
+            CharacterUIManager.Instance.enemy.DOMoveY(enemyEndYPosition, appearDurationTime);
+            CharacterUIManager.Instance.player.DOMoveY(playerEndYPosition, appearDurationTime);
+            
+            if (onUIAnimFinished != null)
+            {
+                StartCoroutine(AnimFish(onUIAnimFinished)); //结束时调用
+            }
+            
+            //TODO：奖励结算UI
+        }
+        
+        /// <summary>
+        /// 战斗开始流程UI动画
+        /// </summary>
+        /// <param name="onUIAnimFinished"></param>
         public void DoFightStartUIAnim(OnUIAnimFinished onUIAnimFinished)
         {
             panel.SetActive(true);
@@ -30,9 +54,9 @@ namespace UI
             processPrompt.Appear(appearDurationTime, tip); //出现提示
             StartCoroutine(HideTip());
             
-            //敌人从屏幕外依次下降出现
-            CharacterUIManager.Instance.enemy.DOMoveY(enemyYPosition, appearDurationTime);
-            CharacterUIManager.Instance.player.DOMoveY(playerYPosition, appearDurationTime);
+            //敌人与玩家出现
+            CharacterUIManager.Instance.enemy.DOMoveY(enemyStartYPosition, appearDurationTime);
+            CharacterUIManager.Instance.player.DOMoveY(playerStartYPosition, appearDurationTime);
             
             if (onUIAnimFinished != null)
             {
