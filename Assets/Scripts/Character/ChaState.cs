@@ -125,7 +125,7 @@ public class ChaState : MonoBehaviour
     {
         //TODO:玩家死亡的逻辑
         Debug.Log(this.gameObject.name + "死亡");
-
+        BattleManager.Instance.EndGame(this.side);
     }
     /// <summary>
     /// 重新计算属性,在buff添加或者删除的时候调用

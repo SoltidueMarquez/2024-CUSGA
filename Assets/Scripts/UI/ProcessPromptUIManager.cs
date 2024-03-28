@@ -52,7 +52,7 @@ namespace UI
             panel.SetActive(true);
             string tip = "战斗开始";
             processPrompt.Appear(appearDurationTime, tip); //出现提示
-            StartCoroutine(HideTip());
+            StartCoroutine(HideStartTip());
             
             //敌人与玩家出现
             CharacterUIManager.Instance.enemy.DOMoveY(enemyStartYPosition, appearDurationTime);
@@ -63,7 +63,12 @@ namespace UI
                 StartCoroutine(AnimFish(onUIAnimFinished)); //结束时调用
             }
         }
-        
+        IEnumerator HideStartTip()
+        {
+            yield return new WaitForSeconds(appearDurationTime);
+            processPrompt.Fade(fadeDurationTime);//出现提示
+        }
+
         /// <summary>
         /// 显示流程提示
         /// </summary>
@@ -105,7 +110,7 @@ namespace UI
         {
             yield return new WaitForSeconds(appearDurationTime);
             processPrompt.Fade(fadeDurationTime);//出现提示
-            StartCoroutine(HidePanel());
+            yield return StartCoroutine(HidePanel());
         }
 
         IEnumerator HidePanel()

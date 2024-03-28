@@ -65,7 +65,7 @@ public class PreparationState : IState
 
         Debug.Log("Enter PreparationState");
 
-        //TODO 播动画
+        ProcessPromptUIManager.Instance.DoFightStartUIAnim(() => { manager.TransitionState(GameState.PlayerRoundStartResolution); });
 
     }
 
@@ -77,7 +77,7 @@ public class PreparationState : IState
     public void OnUpdate()
     {
         //跳转到玩家判定阶段
-        manager.TransitionState(GameState.PlayerRoundStartResolution);
+        //manager.TransitionState(GameState.PlayerRoundStartResolution);
     }
 }
 
@@ -318,7 +318,7 @@ public class PlayerLoseState : IState
     }
     public void OnEnter()
     {
-
+        ProcessPromptUIManager.Instance.DoFightEndUIAnim(null);
         Debug.Log("Enter PlayerLoseState");
 
     }
@@ -374,7 +374,7 @@ public class PlayerWinState : IState
     {
 
         Debug.Log("Enter PlayerWinState");
-
+        ProcessPromptUIManager.Instance.DoFightEndUIAnim(null);
     }
 
     public void OnExit()

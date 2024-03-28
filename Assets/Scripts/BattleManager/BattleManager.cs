@@ -142,10 +142,12 @@ public class BattleManager : MonoBehaviour
         if(side == 0)
         {
             Debug.Log("玩家死亡");
+            TransitionState(GameState.PlayerLose);
         }
         else
         {
             Debug.Log("敌人死亡");
+            TransitionState(GameState.PlayerWin);
         }
     }
 
