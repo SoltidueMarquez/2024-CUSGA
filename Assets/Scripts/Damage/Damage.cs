@@ -32,12 +32,29 @@ public struct Damage
     {
         //这边可以加入一些策划的计算,先向下取整
 
-        //计算基础伤害
-        int baseDamage = DamageUtil.GetlevelBasedDamage(level);
+        
         //计算总增伤
         float addDamageRatio =1+addDamageArea- reduceDamageArea + damage.indexDamageRate * 0.1f;
         //返回最终伤害
-        return Mathf.FloorToInt(baseDamage  * addDamageRatio);
+        return Mathf.FloorToInt(damage.baseDamage  * addDamageRatio);
+    }
+    public void SetBaseDamage(int level,DiceType diceType)
+    {
+        //计算基础伤害
+        switch (diceType)
+        {
+            case DiceType.Attack:
+                baseDamage = DamageUtil.GetlevelBasedDamage(level);
+                break;
+            case DiceType.Defense:
+                baseDamage = DamageUtil.GetIndexLevelBasedShield(level);
+                break;
+            case DiceType.Support:
+                baseDamage = DamageUtil.GetIndexLevelBasedHeal(level);
+                break;
+            default:
+                break;
+        }
     }
 }
 

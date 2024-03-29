@@ -25,6 +25,7 @@ public class DamageManager : MonoSingleton<DamageManager>
         if (!damageInfo.defender) return;
         ChaState attackerChaState = damageInfo.attacker.GetComponent<ChaState>();
         ChaState defenderChaState = damageInfo.defender.GetComponent<ChaState>();
+        damageInfo.damage.SetBaseDamage(damageInfo.level,damageInfo.diceType);
         foreach (var buff in attackerChaState.GetBuffHandler().buffList)
         {
             buff.buffData.onHit?.Invoke(buff, damageInfo, damageInfo.defender);
