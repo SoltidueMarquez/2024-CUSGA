@@ -31,7 +31,7 @@ public class BattleDice
     {
         //TODO:如果有超出上界怎么办
         SingleDiceObj singleDiceObj = new SingleDiceObj(singleDiceModel, idInDice);
-        diceIndexInList = diceIndexInList;
+        this.diceIndexInList = diceIndexInList;
         diceObjs.Add(singleDiceObj);
     }
     /// <summary>

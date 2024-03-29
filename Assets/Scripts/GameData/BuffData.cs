@@ -79,6 +79,7 @@ namespace DesignerScripts
             "",null,//OnRoll回调点 ，回调点参数额外设置
             "",null,//OnKill回调点 ，回调点参数额外设置
             "",null,//OnBeKill回调点 ，回调点参数额外设置
+             "",null,//OnCasr回调点 ，回调点参数额外设置
             //buff对玩家的状态修改（无敌，能否出牌，局内骰面更改），
             ChaControlState.origin,
             //buff对玩家的属性(血量，金钱，护盾，重新投掷次数）修改
@@ -106,6 +107,7 @@ namespace DesignerScripts
                     "",null,
                     "",null, 
                     "",null,
+                    "",null,
                     ChaControlState.origin,
                     null
                  )
@@ -127,6 +129,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     BuffEventName.BuffStackMinus1.ToString(),null,
+                    "",null,
                     "",null,
                     "",null,
                     "",null,
@@ -160,6 +163,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
+                    "",null,
                     ChaControlState.origin,
                     null
                  )
@@ -187,6 +191,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
+                    "",null,
                     ChaControlState.origin,
                     null
                  )
@@ -210,6 +215,7 @@ namespace DesignerScripts
                     BuffEventName.BuffStackMinus1.ToString(),null,
                     "",null,
                     BuffEventName.Weak.ToString(),null,
+                    "",null,
                     "",null,
                     "",null,
                     "",null,
@@ -241,6 +247,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
+                    "",null,
                     ChaControlState.origin,
                     null
                  )
@@ -264,6 +271,7 @@ namespace DesignerScripts
                     BuffEventName.BuffStackMinus1.ToString(),null,
                     "",null,
                     BuffEventName.Enhance.ToString(),null,
+                    "",null,
                     "",null,
                     "",null,
                     "",null,
@@ -295,6 +303,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
+                    "",null,
                     ChaControlState.origin,
                     null
                  )
@@ -318,6 +327,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     BuffEventName.Add2ValueIfResultIsOdd.ToString(),null,
+                    "",null,
                     "",null,
                     "",null,
                     "",null,
@@ -349,6 +359,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
+                    "",null,
                     ChaControlState.origin,
                     null
                  )
@@ -376,6 +387,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
+                    "",null,
                     ChaControlState.origin,
                     null
                  )
@@ -398,6 +410,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     BuffEventName.EnhanceEnemyVulnerability.ToString(),null,
+                    "",null,
                     "",null,
                     "",null,
                     "",null,
@@ -429,6 +442,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
+                    "",null,
                     ChaControlState.origin,
                     null
                  )
@@ -447,6 +461,7 @@ namespace DesignerScripts
                     true,
                     BuffUpdateEnum.Add,
                     BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
                     "",null,
                     "",null,
                     "",null,
@@ -484,6 +499,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
+                    "",null,
                     ChaControlState.origin,
                     null
                  )
@@ -503,6 +519,7 @@ namespace DesignerScripts
                     true,
                     BuffUpdateEnum.Add,
                     BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
                     "",null,
                     "",null,
                     "",null,
@@ -537,6 +554,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
+                    "",null,
                     BuffEventName.Add4MoneyWhenBattleEnd.ToString(),null,
                     "",null,
                     ChaControlState.origin,
@@ -557,6 +575,7 @@ namespace DesignerScripts
                     true,
                     BuffUpdateEnum.Add,
                     BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
                     "",null,
                     "",null,
                     "",null,
@@ -593,6 +612,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
+                    "",null,
                     ChaControlState.origin,
                     null
                  )
@@ -611,6 +631,7 @@ namespace DesignerScripts
                     true,
                     BuffUpdateEnum.Add,
                     BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
                     "",null,
                     "",null,
                     "",null,
@@ -646,6 +667,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
+                    "",null,
                     ChaControlState.origin,
                     null
                  )
@@ -667,6 +689,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     BuffEventName.Recover25HealthWhenHealthBelowHalf.ToString(),null,
+                    "",null,
                     "",null,
                     "",null,
                     "",null,
@@ -700,6 +723,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
+                    "",null,
                     ChaControlState.origin,
                     null
                  )
@@ -718,6 +742,7 @@ namespace DesignerScripts
                     true,
                     BuffUpdateEnum.Add,
                     BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
                     "",null,
                     "",null,
                     "",null,
@@ -754,6 +779,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
+                    "",null,
                     ChaControlState.origin,
                     null
                  )
@@ -777,6 +803,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     BuffEventName.Add2MoneyWhenDiceIs2.ToString(),null,
+                    "",null,
                     "",null,
                     "",null,
                     "",null,
@@ -808,6 +835,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
+                    "",null,
                     ChaControlState.origin,
                     null
                  )
@@ -831,6 +859,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     BuffEventName.Add1EnemyBleedStackWhenDiceIs4.ToString(),null,
+                    "",null,
                     "",null,
                     "",null,
                     "",null,
@@ -862,6 +891,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
+                    "",null,
                     ChaControlState.origin,
                     null
                  )
@@ -885,6 +915,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     BuffEventName.Add1PermanentValueWhenDiceIs6.ToString(),null,
+                    "",null,
                     "",null,
                     "",null,
                     "",null,

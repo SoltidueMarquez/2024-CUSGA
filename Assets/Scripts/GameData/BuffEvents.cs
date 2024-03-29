@@ -174,6 +174,8 @@ namespace DesignerScripts
 
         public static Dictionary<string, BuffOnRoll> onRollFunc = new Dictionary<string, BuffOnRoll>();
 
+        public static Dictionary<string, BuffOnCast> onCastFunc = new Dictionary<string, BuffOnCast>();
+
 
         #endregion
         #region 具体buff效果函数
@@ -237,6 +239,30 @@ namespace DesignerScripts
         {
             damageInfo.damage.baseDamage = 0;
         }
+        //这里根据buffhandler的逻辑应该是判断是否为1，是1就变为4层
+        public static void EnergyStorage(BuffInfo buffInfo)
+        {
+            if(buffInfo.curStack == 1)
+            {
+                buffInfo.curStack += 3;
+                //TODO:获得一层怒气
+            }
+        }
+
+        public static void Anger(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            damageInfo.addDamageArea += buffInfo.curStack * 5 * 0.1f;
+        }
+
+        public static SingleDiceObj LoseEnergy(BuffInfo buffInfo, SingleDiceObj singleDiceObj)
+        {
+            singleDiceObj.model.damage.baseDamage = 0;
+            singleDiceObj.model.damage.indexDamageRate = 0;
+            singleDiceObj.model.buffInfos = null;
+            return singleDiceObj;
+
+        }
+        
         //这边不需要了，因为在BuffInfo里面已经有了
         public static void BuffStackMinus1(BuffInfo buffInfo)
         {
