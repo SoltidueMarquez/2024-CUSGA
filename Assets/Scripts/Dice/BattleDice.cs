@@ -27,17 +27,18 @@ public class BattleDice
     /// 初始化单个骰子的时候，需要传入单个骰子的数据
     /// </summary>
     /// <param name="singleDiceModel"></param>
-    public void AddDice(SingleDiceModel singleDiceModel, int idInDice)
+    public void AddDice(SingleDiceModel singleDiceModel, int idInDice,int diceIndexInList)
     {
         //TODO:如果有超出上界怎么办
         SingleDiceObj singleDiceObj = new SingleDiceObj(singleDiceModel, idInDice);
+        diceIndexInList = diceIndexInList;
         diceObjs.Add(singleDiceObj);
     }
     /// <summary>
     /// 获得随机的一个骰面
     /// </summary>
     /// <param name="singleDiceObj"></param>
-    /// <returns></returns>
+    /// <returns>当前骰面在骰子中的位置</returns>
     public int GetRandomDice(out SingleDiceObj singleDiceObj)
     {
         //TODO:这边的随机数生成有问题,应该是根据权重来生成

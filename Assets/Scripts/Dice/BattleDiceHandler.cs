@@ -55,22 +55,22 @@ public class BattleDiceHandler : MonoBehaviour
             damage.indexDamageRate = singleDiceObj.idInDice + 1;//根据骰子的id来计算倍率
             //再次通过tag查找需要加入damageInfo类中的加给敌人的buffInfo
             List<BuffInfo> addToEnemyBuffs = null;
-            if(singleDiceObj.model.buffInfos != null)
+            if (singleDiceObj.model.buffInfos != null)
             {
                 addToEnemyBuffs = FindBuffInfoWithTag(singleDiceObj.model.buffInfos.ToList<BuffInfo>(), "Target");
             }
             //拼装buffInfo
-            var damageInfo = new DamageInfo(chaState.gameObject, target, damage ,singleDiceObj.model.type,singleDiceObj.level,addToEnemyBuffs);
+            var damageInfo = new DamageInfo(chaState.gameObject, target, damage, singleDiceObj.model.type, singleDiceObj.level, addToEnemyBuffs);
             DamageManager.Instance.DoDamage(damageInfo);
             //视觉逻辑
             Debug.Log(singleDiceObj.model.name);
             if (singleDiceObj.model.buffInfos != null)
             {
-            //添加技能特殊效果Buff
+                //添加技能特殊效果Buff
                 foreach (var buffinfo in singleDiceObj.model.buffInfos)
                 {
                     //通过tag进行buff的查找，对施法者添加buff,如果包含self就添加给自己，如果包含target就添加给目标,具体添加给对方的函数走DamageManager中的DealWithDamage函数
-                    if(buffinfo.buffData.tags.Contains("Self"))
+                    if (buffinfo.buffData.tags.Contains("Self"))
                     {
                         chaState.AddBuff(buffinfo, chaState.gameObject);
                     }
@@ -130,13 +130,13 @@ public class BattleDiceHandler : MonoBehaviour
     {
         for (int i = 0; i < battleDiceCount; i++)
         {
-            DiceType diceType =(DiceType)i;//这边需要修改
+            DiceType diceType = (DiceType)i;//这边需要修改
             BattleDice battleDice = new BattleDice(diceType);//这边需要修改
             battleDices.Add(battleDice);
             for (int j = 0; j < 6; j++)
             {
                 SingleDiceModel singleDiceModel = RandomManager.Instance.GetSingleDiceModel(battleDices[i].diceType, 1, side);
-                battleDice.AddDice(singleDiceModel, j);
+                battleDice.AddDice(singleDiceModel, j, i);
             }
         }
         //初始化战斗时骰子的数组大小
@@ -176,14 +176,25 @@ public class BattleDiceHandler : MonoBehaviour
         return singleDiceObjs;
     }
     /// <summary>
+    /// 根据index获取相应的战斗骰子，然后获取随机的骰面
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public SingleDiceObj GetRandomSingleDice(int index)
+    {
+        SingleDiceObj singleDiceObj;
+        battleDices[index].GetRandomDice(out singleDiceObj);
+        return singleDiceObj;
+    }
+    /// <summary>
     /// 根据tag查找buffInfo
     /// </summary>
     /// <param name="buffInfos"></param>
     /// <param name="tag"></param>
     /// <returns></returns>
-    public List<BuffInfo>  FindBuffInfoWithTag(List<BuffInfo> buffInfos, string tag)
+    public List<BuffInfo> FindBuffInfoWithTag(List<BuffInfo> buffInfos, string tag)
     {
-        if(buffInfos == null)
+        if (buffInfos == null)
         {
             return null;
         }

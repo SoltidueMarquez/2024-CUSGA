@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UI;
+using System.Linq;
 
 [Serializable]
 public class FSMParameter
@@ -169,11 +170,27 @@ public class BattleManager : MonoBehaviour
             return;
         }
         this.parameter.playerChaState.ModResources(new ChaResource(0, 0, -1, 0));
-        List<SingleDiceObj> singleDiceObjs = this.parameter.playerChaState.GetBattleDiceHandler().GetRandomSingleDices();
-        this.parameter.playerChaState.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs);
-        //这边需要删除所有当前骰面的视觉
-        for (int i = 0; i < singleDiceObjs.Count; i++)
+        //放置重新投掷的骰面的数组
+        SingleDiceObj[] singleDiceObjs = new SingleDiceObj[this.parameter.playerChaState.GetBattleDiceHandler().battleDiceCount];
+        //根据当前还剩多少战斗骰面，来决定重新投掷多少个
+        for (int i = 0; i < singleDiceObjs.Length; i++)
         {
+            if (this.parameter.playerChaState.GetBattleDiceHandler().diceCardsInUse[i] != null)
+            {
+                //获取剩余的骰面的战斗骰子在战斗骰子列表中的位置,并重新投掷
+                singleDiceObjs[i] = this.parameter.playerChaState.GetBattleDiceHandler().GetRandomSingleDice(i);
+            }
+        }
+        this.parameter.playerChaState.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs.ToList<SingleDiceObj>());
+        //这边需要删除所有当前骰面的视觉
+
+        RollingResultUIManager.Instance.RemoveAllResultUI(Strategy.ReRoll);
+        for (int i = 0; i < singleDiceObjs.Length; i++)
+        {
+            if (singleDiceObjs[i] == null)
+            {
+                continue;
+            }
             Vector2Int pos = new Vector2Int(i, singleDiceObjs[i].idInDice);
             RollingResultUIManager.Instance.CreateResult(i, singleDiceObjs[i].model.id, pos);
         }
