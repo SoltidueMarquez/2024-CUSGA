@@ -183,9 +183,9 @@ namespace DesignerScripts
             HalidomName.Add50PercentAttackEvery3TimesLoseHealth.ToString(),
             new HalidomObject(
             RareType.Rare,
-            "13",
-            "事不过三",
-            "每失去血量3次，下一次攻击造成伤害提升50%",
+            "14",
+            "分裂金币",
+            "拾取时，获得数量等同于当前金钱一半的金钱",
             new List<BuffInfo>()
             {
                     new BuffInfo(BuffDataTable.buffData["Add50PercentAttackEvery3TimesLoseHealth"],null,null,1,false,null)
@@ -196,9 +196,9 @@ namespace DesignerScripts
             HalidomName.Add90PercentAttackEvery9TimesUseDice.ToString(),
             new HalidomObject(
             RareType.Common,
-            "14",
-            "999",
-            "每打出9个骰面，下一次攻击造成伤害提升90%",
+            "15",
+            "打折券",
+            "商店半价",
             new List<BuffInfo>()
             {
                     new BuffInfo(BuffDataTable.buffData["Add90PercentAttackEvery9TimesUseDice"],null,null,1,false,null)
@@ -209,9 +209,9 @@ namespace DesignerScripts
             HalidomName.Recover20HealthWhenEnterStore.ToString(),
             new HalidomObject(
             RareType.Common,
-            "15",
-            "饭票",
-            "每进入商店，回复20血量",
+            "16",
+            "讲究手套",
+            "杀死敌人时，获得溢出伤害的金钱",
             new List<BuffInfo>()
             {
                     new BuffInfo(BuffDataTable.buffData["Recover20HealthWhenEnterStore"],null,null,1,false,null)
@@ -222,9 +222,9 @@ namespace DesignerScripts
             HalidomName.Get5MaxHealthWhenGain.ToString(),
             new HalidomObject(
             RareType.Common,
-            "16",
-            "烤土豆",
-            "拾取时，获得5点最大血量",
+            "17",
+            "事不过三",
+            "每失去血量3次，下一次攻击造成伤害提升50%",
             new List<BuffInfo>()
             {
                     new BuffInfo(BuffDataTable.buffData["Get5MaxHealthWhenGain"],null,null,1,false,null)
@@ -235,9 +235,9 @@ namespace DesignerScripts
             HalidomName.Recover25HealthWhenHealthBelowHalf.ToString(),
             new HalidomObject(
             RareType.Common,
-            "17",
-            "医疗包",
-            "战斗开始时，血量不满一半则+25",
+            "18",
+            "饭票",
+            "每进入商店，回复20血量",
             new List<BuffInfo>()
             {
                     new BuffInfo(BuffDataTable.buffData["Recover25HealthWhenHealthBelowHalf"],null,null,1,false,null)
@@ -248,9 +248,9 @@ namespace DesignerScripts
             HalidomName.Add1Reroll.ToString(),
             new HalidomObject(
             RareType.Common,
-            "18",
-            "圣手",
-            "重投次数+1",
+            "19",
+            "烤土豆",
+            "拾取时，获得5点最大血量",
             new List<BuffInfo>()
             {
                     new BuffInfo(BuffDataTable.buffData["Add1Reroll"],null,null,1,false,null)
@@ -261,9 +261,9 @@ namespace DesignerScripts
             HalidomName.HalfInStore.ToString(),
             new HalidomObject(
             RareType.Common,
-            "19",
-            "打折券",
-            "商店半价",
+            "20",
+            "创可贴",
+            "拾取时，回复一半血量",
             new List<BuffInfo>()
             {
                     new BuffInfo(BuffDataTable.buffData["HalfInStore"],null,null,1,false,null)
@@ -274,9 +274,9 @@ namespace DesignerScripts
             HalidomName.ReuseDiceWhenDiceIs1.ToString(),
             new HalidomObject(
             RareType.Common,
-            "20",
-            "1号球",
-            "点数为1，则打出时重复打出",
+            "21",
+            "医疗包",
+            "战斗开始时，血量不满一半则+25",
             new List<BuffInfo>()
             {
                     new BuffInfo(BuffDataTable.buffData["ReuseDiceWhenDiceIs1"],null,null,1,false,null)
@@ -287,9 +287,9 @@ namespace DesignerScripts
             HalidomName.Add2MoneyWhenDiceIs2.ToString(),
             new HalidomObject(
             RareType.Common,
-            "21",
-            "2号球",
-            "点数为2，则打出时金钱+2",
+            "22",
+            "铅笔",
+            "每对敌方造成15次伤害，下一次攻击伤害+20",
             new List<BuffInfo>()
             {
                     new BuffInfo(BuffDataTable.buffData["Add2MoneyWhenDiceIs2"],null,null,1,false,null)
@@ -299,9 +299,9 @@ namespace DesignerScripts
             HalidomName.Recover5HealthWhenDiceIs3.ToString(),
             new HalidomObject(
             RareType.Common,
-            "22",
-            "3号球",
-            "点数为3，则打出时回复5点血量",
+            "23",
+            "三指(断的)",
+            "重投时不消耗重投次数，触发3次后失效",
             new List<BuffInfo>()
             {
                     new BuffInfo(BuffDataTable.buffData["Recover5HealthWhenDiceIs3"],null,null,1,false,null)
@@ -312,9 +312,9 @@ namespace DesignerScripts
             HalidomName.Add1EnemyBleedStackWhenDiceIs4.ToString(),
             new HalidomObject(
             RareType.Common,
-            "23",
-            "4号球",
-            "点数为4，则打出时敌方流血+1",
+            "24",
+            "1号球(台球)",
+            "点数为1，则打出时重复打出",
             new List<BuffInfo>()
             {
                     new BuffInfo(BuffDataTable.buffData["Add1EnemyBleedStackWhenDiceIs4"],null,null,1,false,null)
@@ -324,9 +324,9 @@ namespace DesignerScripts
             HalidomName.Add1PlayerStrengthStackWhenDiceIs5.ToString(),
             new HalidomObject(
             RareType.Common,
-            "24",
-            "5号球",
-            "点数为5，则打出时我方力量+1",
+            "25",
+            "2号球",
+            "点数为2，则打出时金钱+2",
             new List<BuffInfo>()
             {
                     new BuffInfo(BuffDataTable.buffData["Add1PlayerStrengthStackWhenDiceIs5"],null,null,1,false,null)
@@ -337,9 +337,9 @@ namespace DesignerScripts
             HalidomName.Add1PermanentValueWhenDiceIs6.ToString(),
             new HalidomObject(
             RareType.Common,
-            "25",
-            "6号球",
-            "点数为6，则打出时value永久+1",
+            "26",
+            "3号球",
+            "点数为3，则打出时回复5点血量",
             new List<BuffInfo>()
             {
                     new BuffInfo(BuffDataTable.buffData["Add1PermanentValueWhenDiceIs6"],null,null,1,false,null)
