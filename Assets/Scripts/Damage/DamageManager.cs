@@ -25,7 +25,19 @@ public class DamageManager : MonoSingleton<DamageManager>
         if (!damageInfo.defender) return;
         ChaState attackerChaState = damageInfo.attacker.GetComponent<ChaState>();
         ChaState defenderChaState = damageInfo.defender.GetComponent<ChaState>();
-        damageInfo.damage.SetBaseDamage(damageInfo.level,damageInfo.diceType);
+        damageInfo.damage.SetBaseDamage(damageInfo.level, damageInfo.diceType);
+        //这边先执行所有的圣物的onhit
+        if (attackerChaState.side == 0)
+        {
+            foreach (var halidom in HalidomManager.Instance.halidomList)
+            {
+                foreach (var buff in halidom.buffInfos)
+                {
+                    buff.buffData.onHit?.Invoke(buff, damageInfo, damageInfo.defender);
+                }
+            }
+        }
+
         foreach (var buff in attackerChaState.GetBuffHandler().buffList)
         {
             buff.buffData.onHit?.Invoke(buff, damageInfo, damageInfo.defender);
