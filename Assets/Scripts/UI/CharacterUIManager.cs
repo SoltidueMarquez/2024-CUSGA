@@ -32,10 +32,12 @@ namespace UI
         [Header("敌人相关")] 
         [SerializeField, Tooltip("敌人")] public Transform enemy;
         [SerializeField, Tooltip("敌人血条")] private Slider enemyHealthSlider;
+        [SerializeField, Tooltip("敌人血量Text")] private Text enemyHealthText;
         
         [Header("玩家相关")]
         [SerializeField, Tooltip("玩家")] public Transform player;
         [SerializeField, Tooltip("玩家血条")] private Slider playerHealthSlider;
+        [SerializeField, Tooltip("敌人血量Text")] private Text playerHealthText;
 
         private Vector3 offsetPosition;
 
@@ -117,6 +119,7 @@ namespace UI
                     break;
                 case Character.Player:
                     playerHealthSlider.value = (float)currentHealth / maxHealth;
+                    playerHealthText.text = $"{currentHealth}/{maxHealth}";
                     break;
             }
         }
@@ -124,6 +127,7 @@ namespace UI
         {
             yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
             enemyHealthSlider.value = (float)currentHealth / maxHealth;
+            enemyHealthText.text = $"{currentHealth}/{maxHealth}";
         }
 
         /// <summary>
