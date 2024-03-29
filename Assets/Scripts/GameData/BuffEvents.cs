@@ -27,6 +27,14 @@ namespace DesignerScripts
 
         Enhance,//强化
 
+        Dodge,//闪避
+
+        EnergyStorage,//蓄能
+
+        Anger,//怒气
+
+        LoseEnergy,//失能
+
         BuffStackMinus1,//Buff层数减1
 
         #region 圣物buff
@@ -223,6 +231,11 @@ namespace DesignerScripts
                 damageInfo.addDamageArea += 0.5f;
 
             }
+        }
+
+        public static void Dodge(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            damageInfo.damage.baseDamage = 0;
         }
         //这边不需要了，因为在BuffInfo里面已经有了
         public static void BuffStackMinus1(BuffInfo buffInfo)
