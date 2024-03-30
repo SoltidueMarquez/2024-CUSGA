@@ -16,7 +16,11 @@ public class SingleDiceData
                 ,null)
         },
         {
-            "Dice_2",new SingleDiceModel(0,DiceType.Defense, "normal2", "2", ChaResource.zero, ChaResource.zero, 1, 1, null
+            "Dice_2",new SingleDiceModel(0,DiceType.Defense, "normal2", "2", ChaResource.zero, ChaResource.zero, 1, 1,
+                new[]
+                {
+                    new BuffInfo(DesignerScripts.BuffDataTable.buffData[BuffDataName.Spirit.ToString()],1, false,null)
+                }
             , null)
         },
         {

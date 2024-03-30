@@ -45,6 +45,7 @@ namespace DesignerScripts
         GainAndChoose2DicesGiveRandomCoating,
         GainAndChoose2DicesGive1PermanentEnhance,
         EnhanceEnemyVulnerability,
+        EnhancePlayerStrength,
         Add1StackIfEnemyHaveBleed,
         Add1StackIfEnemyHaveDebuff,
         Add1StackIfPlayerHaveStrength,
@@ -71,6 +72,7 @@ namespace DesignerScripts
         #region 存回调点函数的字典
         public static Dictionary<string, OnBuffCreate> onCreateFunc = new Dictionary<string, OnBuffCreate>()
         {
+            //圣物buff
             {
                 BuffEventName.Get5MaxHealthWhenGain.ToString(),Get5MaxHealthWhenGain
             },
@@ -82,19 +84,21 @@ namespace DesignerScripts
         public static Dictionary<string, OnBuffRemove> onRemoveFunc = new Dictionary<string, OnBuffRemove>();
         public static Dictionary<string, OnRoundStart> onRoundStartFunc = new Dictionary<string, OnRoundStart>()
         {
+            //普通buff
             {
                 BuffEventName.BuffStackMinus1.ToString(),BuffStackMinus1
             },
             {
                 BuffEventName.EnergyStorage.ToString(),EnergyStorage
             },
-
+            //圣物buff
             {
                 BuffEventName.Recover25HealthWhenHealthBelowHalf.ToString(),Recover25HealthWhenHealthBelowHalf
             }
         };
         public static Dictionary<string, OnRoundEnd> onRoundEndFunc = new Dictionary<string, OnRoundEnd>()
         {
+            //普通buff
             {
                 BuffEventName.Bleed.ToString(),Bleed
             },
@@ -108,6 +112,7 @@ namespace DesignerScripts
             ;
         public static Dictionary<string, BuffOnHit> onBuffHitFunc = new Dictionary<string, BuffOnHit>()
         {
+            //普通buff
             {
                 BuffEventName.Weak.ToString(),Weak
             },
@@ -123,6 +128,7 @@ namespace DesignerScripts
             {
                 BuffEventName.Anger.ToString(),Anger
             },
+            //圣物buff
             {
                 BuffEventName.Add2ValueIfResultIsEven.ToString(),Add2ValueIfResultIsEven
             },
@@ -136,7 +142,10 @@ namespace DesignerScripts
                 BuffEventName.Add3ValueIfResultAbove4.ToString(),Add3ValueIfResultAbove4
             },
             {
-                BuffEventName.EnhanceEnemyVulnerability.ToString(),EnhanceEnemyVulnerability
+                BuffEventName.Add1StackIfEnemyHaveBleed.ToString(),Add1StackIfEnemyHaveBleed
+            },
+            {
+                BuffEventName.EnhancePlayerStrength.ToString(),EnhancePlayerStrength
             },
 
             {
@@ -168,20 +177,25 @@ namespace DesignerScripts
         };
         public static Dictionary<string, BuffOnBeHurt> onBeHurtFunc = new Dictionary<string, BuffOnBeHurt>()
         {
+            //普通buff
             {
                 BuffEventName.Vulnerable.ToString(),Vulnerable
             },
             {
                 BuffEventName.Tough.ToString(),Tough
             },
-
+            //圣物buff
             {
                 BuffEventName.Add50PercentAttackEvery3TimesLoseHealth.ToString(),Add50PercentAttackEvery3TimesLoseHealth
+            },
+            {
+                BuffEventName.EnhanceEnemyVulnerability.ToString(),EnhanceEnemyVulnerability
             },
         };
         //Player胜利回调点
         public static Dictionary<string, BuffOnkill> onKillFunc = new Dictionary<string, BuffOnkill>()
         {
+            //圣物buff
             {
                 BuffEventName.Add4MoneyWhenBattleEnd.ToString(),Add4MoneyWhenBattleEnd
             }
@@ -193,16 +207,22 @@ namespace DesignerScripts
 
         public static Dictionary<string, BuffOnCast> onCastFunc = new Dictionary<string, BuffOnCast>()
         {
+            //普通buff
             {
                 BuffEventName.LoseEnergy.ToString(),LoseEnergy
+            },
+            //圣物buff
+            {
+                BuffEventName.Add1StackIfPlayerHaveStrength.ToString(),Add1StackIfPlayerHaveStrength
             }
         };
 
 
         #endregion
 
-        #region 具体buff效果函数
+        #region 所有buff效果函数
 
+        #region 普通buff效果函数
         //流血效果，每回合造成2*层数的伤害（数值脚填）
         public static void Bleed(BuffInfo buffInfo)
         {
@@ -302,7 +322,7 @@ namespace DesignerScripts
                 buffInfo.curStack += 3;
                 //获得一层怒气
                 BuffInfo newAngerBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Anger.ToString()], buffInfo.creator, buffInfo.target);
-                buffInfo.target.GetComponent<ChaState>().AddBuff(newAngerBuff,buffInfo.target);
+                buffInfo.target.GetComponent<ChaState>().AddBuff(newAngerBuff, buffInfo.target);
                 Debug.Log("蓄能生效，增加3层并获得怒气");
             }
         }
@@ -331,12 +351,15 @@ namespace DesignerScripts
         {
             buffInfo.target.GetComponent<ChaState>().RemoveBuff(buffInfo);
         }
+        #endregion
 
+        #region 圣物buff效果函数
         public static void Add2ValueIfResultIsEven(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
             if (damageInfo.damage.indexDamageRate % 2 == 0)
             {
                 damageInfo.damage.indexDamageRate += 2;
+                Debug.Log("骰子为偶数，增加2点伤害");
             }
 
         }
@@ -345,6 +368,7 @@ namespace DesignerScripts
             if (damageInfo.damage.indexDamageRate % 2 == 1)
             {
                 damageInfo.damage.indexDamageRate += 2;
+                Debug.Log("骰子为奇数，增加2点伤害");
             }
         }
 
@@ -353,6 +377,7 @@ namespace DesignerScripts
             if (damageInfo.damage.indexDamageRate <= 3)
             {
                 damageInfo.damage.indexDamageRate += 3;
+                Debug.Log("骰子小于等于3，增加3点伤害");
             }
         }
 
@@ -361,28 +386,73 @@ namespace DesignerScripts
             if (damageInfo.damage.indexDamageRate >= 4)
             {
                 damageInfo.damage.indexDamageRate += 3;
+                Debug.Log("骰子大于等于4，增加3点伤害");
             }
         }
 
+        public static void Add1StackIfEnemyHaveBleed(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            //找damageinfo中的addbuffs有没有流血
+            if (damageInfo.addBuffs != null)
+            {
+                BuffInfo findBuffInfo = damageInfo.addBuffs.Find(x => x.buffData.id == "1_1");
+                if (findBuffInfo != null)
+                {
+                    findBuffInfo.curStack++;
+                    Debug.Log("敌人流血层数+1");
+                }
+            }
+        }
 
+        public static SingleDiceObj Add1StackIfPlayerHaveStrength(BuffInfo buffInfo, SingleDiceObj singleDiceObj)
+        {
+            if (singleDiceObj.model.buffInfos != null)
+            {
+                foreach(var  diceBuffInfo in singleDiceObj.model.buffInfos)
+                {
+                    //查询到力量buff
+                    if(diceBuffInfo.buffData.id == "1_6")
+                    {
+                        diceBuffInfo.curStack++;
+                        Debug.Log("玩家力量层数+1");
+                    }
+                }
+            }
+            return singleDiceObj;
+        }
 
+        public static void EnhancePlayerStrength(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            if(target.GetComponent<BuffHandler>() != null)
+            {
+                BuffHandler targetBuffHandler = target.GetComponent<BuffHandler>();
+                //查询力量buff
+                BuffInfo findBuffInfo = targetBuffHandler.buffList.Find(x => x.buffData.id == "1_6");
 
-
+                //如果找到力量buff
+                if(findBuffInfo != null)
+                {
+                    //再增伤0.15f即0.25->0.4
+                    damageInfo.addDamageArea += 0.15f;
+                    Debug.Log("增加玩家力量效果");
+                }
+            }
+        }
         public static void EnhanceEnemyVulnerability(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
             if (target.GetComponent<BuffHandler>() != null)
             {
                 BuffHandler targetBuffHandler = target.GetComponent<BuffHandler>();
                 //查询流血buff
-                BuffInfo findBuffInfo = targetBuffHandler.buffList.Find(x => x.buffData.id == "1");
+                BuffInfo findBuffInfo = targetBuffHandler.buffList.Find(x => x.buffData.id == "1_3");
 
                 //如果找到流血buff
                 if (findBuffInfo != null)
                 {
                     //再增伤0.15f即0.25->0.4
                     damageInfo.addDamageArea += 0.15f;
+                    Debug.Log("增加敌人易伤效果");
                 }
-
             }
         }
 
@@ -394,7 +464,7 @@ namespace DesignerScripts
             if (tempChaState.resource.currentMoney > 0)
             {
                 tempChaState.ModResources(new ChaResource(0, 4, 0, 0));
-
+                Debug.Log("增加4金币");
             }
         }
 
@@ -412,6 +482,7 @@ namespace DesignerScripts
                     damageInfo.addDamageArea += 0.5f;
                 }
                 buffInfo.buffParam["PlayerLoseHealthCount"] = attackCount;
+                Debug.Log("受到伤害次数" + attackCount);
             }
             else
             {
@@ -431,6 +502,7 @@ namespace DesignerScripts
                     damageInfo.addDamageArea += 0.5f;
                 }
                 buffInfo.buffParam["PlayerUseDiceCount"] = attackCount;
+                Debug.Log("使用骰子次数" + attackCount);
             }
             else
             {
@@ -448,6 +520,7 @@ namespace DesignerScripts
                 //乘算 Property乘法重载加过1了
                 new ChaProperty(0,0,0,0)
             };
+            Debug.Log("获得5点最大生命值");
 
         }
 
@@ -455,6 +528,7 @@ namespace DesignerScripts
         {
             //RerollCount在BattleManager中
             BattleManager.Instance.parameter.playerRerollCount++;
+            Debug.Log("永久增加1次重投机会");
         }
 
         //暂定不加回调点了，判断回合数是否是1判断游戏开始
@@ -468,6 +542,7 @@ namespace DesignerScripts
                 if (tempChaState.resource.currentHp > 0)
                 {
                     tempChaState.ModResources(new ChaResource(25, 0, 0, 0));
+                    Debug.Log("回合1回复25点生命");
 
                 }
             }
@@ -475,9 +550,12 @@ namespace DesignerScripts
 
         public static void ReuseDiceWhenDiceIs1(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
+            //深拷贝一条damageinfo信息加入伤害队列
             if (damageInfo.damage.indexDamageRate == 1)
             {
-                //TODO:Reuse
+                DamageInfo damageInfoCopy = new DamageInfo(damageInfo.attacker,damageInfo.defender,damageInfo.damage,damageInfo.diceType,damageInfo.level,damageInfo.addBuffs);
+                DamageManager.Instance.DoDamage(damageInfoCopy);
+                Debug.Log("重复打出");
             }
         }
 
@@ -489,7 +567,8 @@ namespace DesignerScripts
                 //访问当前的资源
                 if (tempChaState.resource.currentMoney > 0)
                 {
-                    tempChaState.ModResources(new ChaResource(0, 4, 0, 0));
+                    tempChaState.ModResources(new ChaResource(0, 2, 0, 0));
+                    Debug.Log("增加2金币");
 
                 }
             }
@@ -504,6 +583,7 @@ namespace DesignerScripts
                 if (tempChaState.resource.currentHp > 0)
                 {
                     tempChaState.ModResources(new ChaResource(5, 0, 0, 0));
+                    Debug.Log("回复5点生命");
 
                 }
             }
@@ -524,6 +604,7 @@ namespace DesignerScripts
                     {
                         //增加层数(引用传递）
                         findBuffInfo.curStack++;
+                        Debug.Log("敌人流血层数+1");
                     }
 
                 }
@@ -545,6 +626,7 @@ namespace DesignerScripts
                     {
                         //增加层数(引用传递）
                         findBuffInfo.curStack++;
+                        Debug.Log("玩家力量层数+1");
                     }
 
                 }
@@ -555,12 +637,13 @@ namespace DesignerScripts
         {
             if (damageInfo.damage.indexDamageRate == 6)
             {
-                //TODO
+                damageInfo.damage.indexDamageRate += 6;
+                Debug.Log("骰子为6，增加6点伤害");
             }
         }
 
 
-
+        #endregion
 
         #endregion
 

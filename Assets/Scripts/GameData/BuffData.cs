@@ -29,11 +29,12 @@ namespace DesignerScripts
 
 
         #region 圣物buff
-        Add2ValueIfResultIsEven,
-        Add2ValueIfResultIsOdd,
-        Add3ValueIfResultBelow3,
-        Add3ValueIfResultAbove4,
+        Add2ValueIfResultIsEven,//1
+        Add2ValueIfResultIsOdd,//2
+        Add3ValueIfResultBelow3,//4
+        Add3ValueIfResultAbove4,//5
         EnhanceEnemyVulnerability,
+        EnhancePlayerStrength,
         Add1StackIfEnemyHaveBleed,
         Add1StackIfEnemyHaveDebuff,
         Add1StackIfPlayerHaveStrength,
@@ -94,6 +95,8 @@ namespace DesignerScripts
             null
             ) 
             },
+
+            #region 基础buff
             {//这边是流血的buff,要实现层数衰减为延迟回合数的效果，将permanent设置为false,初始持续回合数设置为0
                 //回合结束收到伤害+层数-1
                 BuffDataName.Bleed.ToString(),new BuffData
@@ -398,15 +401,17 @@ namespace DesignerScripts
                  )
             },
 
+            #endregion
 
-#region 圣物buff
+
+            #region 圣物buff
 
             {
                 BuffDataName.Add2ValueIfResultIsEven.ToString(),new BuffData
                 (
-                    "8",
+                    "2_1",
                     BuffDataName.Add2ValueIfResultIsEven.ToString(),
-                    "icon8",
+                    "icon2_1",
                     new [] {"Self"},
                     5,
                     100,
@@ -432,9 +437,9 @@ namespace DesignerScripts
              {
                 BuffDataName.Add2ValueIfResultIsOdd.ToString(),new BuffData
                 (
-                    "9",
+                    "2_2",
                     BuffDataName.Add2ValueIfResultIsOdd.ToString(),
-                    "icon9",
+                    "icon2_2",
                     new [] {"Self"},
                     5,
                     100,
@@ -460,9 +465,9 @@ namespace DesignerScripts
              {
                 BuffDataName.Add3ValueIfResultBelow3.ToString(),new BuffData
                 (
-                    "10",
+                    "2_5",
                     BuffDataName.Add3ValueIfResultBelow3.ToString(),
-                    "icon10",
+                    "icon2_5",
                     new [] {"Self"},
                     5,
                     100,
@@ -488,9 +493,9 @@ namespace DesignerScripts
              {
                 BuffDataName.Add3ValueIfResultAbove4.ToString(),new BuffData
                 (
-                    "11",
+                    "2_6",
                     BuffDataName.Add3ValueIfResultAbove4.ToString(),
-                    "icon11",
+                    "icon2_6",
                     new [] {"Self"},
                     5,
                     100,
@@ -513,17 +518,99 @@ namespace DesignerScripts
 
              },
              {
-                BuffDataName.EnhanceEnemyVulnerability.ToString(),new BuffData
+                BuffDataName.Add1StackIfEnemyHaveBleed.ToString(),new BuffData
                 (
-                    "14",
-                    BuffDataName.EnhanceEnemyVulnerability.ToString(),
-                    "icon14",
+                    "2_8",
+                    BuffDataName.Add1StackIfEnemyHaveBleed.ToString(),
+                    "icon2_8",
+                    new [] {"Target"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    BuffEventName.Add1StackIfEnemyHaveBleed.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+             {
+                BuffDataName.Add1StackIfPlayerHaveStrength.ToString(),new BuffData
+                (
+                    "2_9",
+                    BuffDataName.Add1StackIfPlayerHaveStrength.ToString(),
+                    "icon2_9",
                     new [] {"Self"},
                     5,
                     100,
                     true,
                     BuffUpdateEnum.Add,
                     BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    BuffEventName.Add1StackIfPlayerHaveStrength.ToString(),null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+             {
+                BuffDataName.EnhancePlayerStrength.ToString(),new BuffData
+                (
+                    "2_10",
+                    BuffDataName.EnhancePlayerStrength.ToString(),
+                    "icon2_10",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    BuffEventName.EnhancePlayerStrength.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+             {
+                BuffDataName.EnhanceEnemyVulnerability.ToString(),new BuffData
+                (
+                    "2_11",
+                    BuffDataName.EnhanceEnemyVulnerability.ToString(),
+                    "icon2_11",
+                    new [] {"Target"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
                     "",null,
                     "",null,
                     "",null,
@@ -533,140 +620,25 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
-                    "",null,
                     ChaControlState.origin,
                     null
                  )
 
              },
-             //TODO:没加event
-             {
-                BuffDataName.Add1StackIfEnemyHaveBleed.ToString(),new BuffData
-                (
-                    "15",
-                    BuffDataName.Add1StackIfEnemyHaveBleed.ToString(),
-                    "icon15",
-                    new [] {"Self"},
-                    5,
-                    100,
-                    true,
-                    BuffUpdateEnum.Add,
-                    BuffRemoveStackUpdateEnum.Reduce,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    ChaControlState.origin,
-                    null
-                 )
-
-             },
-             //TODO:没加event
-             {
-                BuffDataName.Add1StackIfEnemyHaveDebuff.ToString(),new BuffData
-                (
-                    "16",
-                    BuffDataName.Add1StackIfEnemyHaveDebuff.ToString(),
-                    "icon16",
-                    new [] {"Self"},
-                    5,
-                    100,
-                    true,
-                    BuffUpdateEnum.Add,
-                    BuffRemoveStackUpdateEnum.Reduce,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    ChaControlState.origin,
-                    null
-                 )
-
-             },
-
-             //TODO:没加event
-             {
-                BuffDataName.Add1StackIfPlayerHaveStrength.ToString(),new BuffData
-                (
-                    "17",
-                    BuffDataName.Add1StackIfPlayerHaveStrength.ToString(),
-                    "icon17",
-                    new [] {"Self"},
-                    5,
-                    100,
-                    true,
-                    BuffUpdateEnum.Add,
-                    BuffRemoveStackUpdateEnum.Reduce,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    ChaControlState.origin,
-                    null
-                 )
-
-             },
-
-             //TODO:没加event
-             {
-                BuffDataName.Add1StackIfPlayerHavePositiveBuff.ToString(),new BuffData
-                (
-                    "18",
-                    BuffDataName.Add1StackIfPlayerHavePositiveBuff.ToString(),
-                    "icon18",
-                    new [] {"Self"},
-                    5,
-                    100,
-                    true,
-                    BuffUpdateEnum.Add,
-                    BuffRemoveStackUpdateEnum.Reduce,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    ChaControlState.origin,
-                    null
-                 )
-
-             },
+             
 
              {
                 BuffDataName.Add4MoneyWhenBattleEnd.ToString(),new BuffData
                 (
-                    "19",
+                    "2_12",
                     BuffDataName.Add4MoneyWhenBattleEnd.ToString(),
-                    "icon19",
+                    "icon2_12",
                     new [] {"Self"},
                     5,
                     100,
                     true,
                     BuffUpdateEnum.Add,
                     BuffRemoveStackUpdateEnum.Reduce,
-                    "",null,
                     "",null,
                     "",null,
                     "",null,
@@ -675,6 +647,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     BuffEventName.Add4MoneyWhenBattleEnd.ToString(),null,
+                    "",null,
                     "",null,
                     ChaControlState.origin,
                     null
@@ -685,9 +658,9 @@ namespace DesignerScripts
              {
                 BuffDataName.Add50PercentAttackEvery3TimesLoseHealth.ToString(),new BuffData
                 (
-                    "20",
+                    "2_16",
                     BuffDataName.Add50PercentAttackEvery3TimesLoseHealth.ToString(),
-                    "icon20",
+                    "icon2_16",
                     new [] {"Self"},
                     5,
                     100,
@@ -699,8 +672,8 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
-                    "",null,
                     BuffEventName.Add50PercentAttackEvery3TimesLoseHealth.ToString(),null,
+                    "",null,
                     "",null,
                     "",null,
                     "",null,
@@ -768,9 +741,9 @@ namespace DesignerScripts
              {
                 BuffDataName.Get5MaxHealthWhenGain.ToString(),new BuffData
                 (
-                    "23",
+                    "2_18",
                     BuffDataName.Get5MaxHealthWhenGain.ToString(),
-                    "icon23",
+                    "icon2_18",
                     new [] {"Self"},
                     5,
                     100,
@@ -796,9 +769,9 @@ namespace DesignerScripts
              {
                 BuffDataName.Recover25HealthWhenHealthBelowHalf.ToString(),new BuffData
                 (
-                    "24",
+                    "2_20",
                     BuffDataName.Recover25HealthWhenHealthBelowHalf.ToString(),
-                    "icon24",
+                    "icon2_20",
                     new [] {"Self"},
                     5,
                     100,
@@ -821,33 +794,7 @@ namespace DesignerScripts
 
              },
 
-             {
-                BuffDataName.Add1Reroll.ToString(),new BuffData
-                (
-                    "25",
-                    BuffDataName.Add1Reroll.ToString(),
-                    "icon25",
-                    new [] {"Self"},
-                    5,
-                    100,
-                    true,
-                    BuffUpdateEnum.Add,
-                    BuffRemoveStackUpdateEnum.Reduce,
-                    BuffEventName.Add1Reroll.ToString(),null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    ChaControlState.origin,
-                    null
-                 )
-
-             },
+             
              //TODO:没加event
              {
                 BuffDataName.HalfInStore.ToString(),new BuffData
@@ -880,9 +827,9 @@ namespace DesignerScripts
              {
                 BuffDataName.ReuseDiceWhenDiceIs1.ToString(),new BuffData
                 (
-                    "27",
+                    "2_23",
                     BuffDataName.ReuseDiceWhenDiceIs1.ToString(),
-                    "icon27",
+                    "icon2_23",
                     new [] {"Self"},
                     5,
                     100,
@@ -893,7 +840,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
-                    "",null,
+                    BuffEventName.ReuseDiceWhenDiceIs1.ToString(),null,
                     "",null,
                     "",null,
                     "",null,
@@ -908,9 +855,9 @@ namespace DesignerScripts
              {
                 BuffDataName.Add2MoneyWhenDiceIs2.ToString(),new BuffData
                 (
-                    "28",
+                    "2_24",
                     BuffDataName.Add2MoneyWhenDiceIs2.ToString(),
-                    "icon28",
+                    "icon2_24",
                     new [] {"Self"},
                     5,
                     100,
@@ -936,9 +883,9 @@ namespace DesignerScripts
              {
                 BuffDataName.Recover5HealthWhenDiceIs3.ToString(),new BuffData
                 (
-                    "29",
+                    "2_25",
                     BuffDataName.Recover5HealthWhenDiceIs3.ToString(),
-                    "icon29",
+                    "icon2_25",
                     new [] {"Self"},
                     5,
                     100,
@@ -964,9 +911,9 @@ namespace DesignerScripts
              {
                 BuffDataName.Add1EnemyBleedStackWhenDiceIs4.ToString(),new BuffData
                 (
-                    "30",
+                    "2_26",
                     BuffDataName.Add1EnemyBleedStackWhenDiceIs4.ToString(),
-                    "icon30",
+                    "icon2_26",
                     new [] {"Self"},
                     5,
                     100,
@@ -992,9 +939,9 @@ namespace DesignerScripts
              {
                 BuffDataName.Add1PlayerStrengthStackWhenDiceIs5.ToString(),new BuffData
                 (
-                    "31",
+                    "2_27",
                     BuffDataName.Add1PlayerStrengthStackWhenDiceIs5.ToString(),
-                    "icon31",
+                    "icon2_27",
                     new [] {"Self"},
                     5,
                     100,
@@ -1020,9 +967,9 @@ namespace DesignerScripts
              {
                 BuffDataName.Add1PermanentValueWhenDiceIs6.ToString(),new BuffData
                 (
-                    "32",
+                    "2_28",
                     BuffDataName.Add1PermanentValueWhenDiceIs6.ToString(),
-                    "icon32",
+                    "icon2_28",
                     new [] {"Self"},
                     5,
                     100,
@@ -1034,6 +981,33 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     BuffEventName.Add1PermanentValueWhenDiceIs6.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+             {
+                BuffDataName.Add1Reroll.ToString(),new BuffData
+                (
+                    "3_13",
+                    BuffDataName.Add1Reroll.ToString(),
+                    "icon3_13",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    BuffEventName.Add1Reroll.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
                     "",null,
                     "",null,
                     "",null,
