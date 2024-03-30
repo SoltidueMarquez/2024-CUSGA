@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,6 +34,10 @@ namespace UI
         [SerializeField, Tooltip("敌人")] public Transform enemy;
         [SerializeField, Tooltip("敌人血条")] private Slider enemyHealthSlider;
         [SerializeField, Tooltip("敌人血量Text")] private Text enemyHealthText;
+        [Header("意图相关")]
+        [SerializeField, Tooltip("父物体")] private Transform intentionParent;
+        [SerializeField, Tooltip("生成模板")] private GameObject intentionTemplate;
+        [SerializeField] private List<IntentionUIObjectEffect> intentionList;
         
         [Header("玩家相关")]
         [SerializeField, Tooltip("玩家")] public Transform player;
@@ -151,5 +156,31 @@ namespace UI
             player.DOPunchPosition(useOtherOffset, attackTime, 1);
         }
         
+        /// <summary>
+        /// 创建意图
+        /// </summary>
+        /// <param name="id"></param>
+        public void CreateIntentionUIObject(string id)
+        {
+            var tmp = Instantiate(intentionTemplate, intentionParent, true);
+            var tmpIntention = tmp.GetComponent<IntentionUIObjectEffect>();
+            tmpIntention.Init(id);//初始化
+            tmp.SetActive(true);
+            intentionList.Add(tmpIntention);
+        }
+        
+        /// <summary>
+        /// 移除所有意图UI
+        /// </summary>
+        public void RemoveAllIntentionUIObject()
+        {
+            if (intentionList == null) return;
+            if (intentionList.Count <= 0) { return;}
+            foreach (var intention in intentionList)
+            {
+                intention.DoDestroy();
+            }
+            intentionList.Clear();
+        }
     }
 }
