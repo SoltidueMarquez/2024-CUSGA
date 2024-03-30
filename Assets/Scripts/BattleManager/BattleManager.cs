@@ -199,6 +199,11 @@ public class BattleManager : MonoBehaviour
     {
         var singleDiceObjs = chaState.GetBattleDiceHandler().GetRandomSingleDices();
         chaState.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs);
+        CharacterUIManager.Instance.RemoveAllIntentionUIObject();
+        foreach (var singleDice in singleDiceObjs)
+        {
+            CharacterUIManager.Instance.CreateIntentionUIObject(singleDice.model.id);
+        }
     }
 }
 //定义了一个回调，用于在UI动画结束时调用

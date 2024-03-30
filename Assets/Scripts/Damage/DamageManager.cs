@@ -29,11 +29,17 @@ public class DamageManager : MonoSingleton<DamageManager>
         //这边先执行所有的圣物的onhit
         if (attackerChaState.side == 0)
         {
-            foreach (var halidom in HalidomManager.Instance.halidomList)
+            if (HalidomManager.Instance.halidomList.Length > 0)
             {
-                foreach (var buff in halidom.buffInfos)
+                foreach (var halidom in HalidomManager.Instance.halidomList)
                 {
-                    buff.buffData.onHit?.Invoke(buff, damageInfo, damageInfo.defender);
+                    if (halidom != null)
+                    {
+                        foreach (var buff in halidom.buffInfos)
+                        {
+                            buff.buffData.onHit?.Invoke(buff, damageInfo, damageInfo.defender);
+                        }
+                    }
                 }
             }
         }
