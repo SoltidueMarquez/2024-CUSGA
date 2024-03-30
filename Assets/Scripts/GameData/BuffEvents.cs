@@ -86,7 +86,11 @@ namespace DesignerScripts
                 BuffEventName.BuffStackMinus1.ToString(),BuffStackMinus1
             },
             {
-                BuffEventName.Recover25HealthWhenHealthBelowHalf.ToString(),Recover25HealthWhenHealthBelowHalf    
+                BuffEventName.EnergyStorage.ToString(),EnergyStorage
+            },
+
+            {
+                BuffEventName.Recover25HealthWhenHealthBelowHalf.ToString(),Recover25HealthWhenHealthBelowHalf
             }
         };
         public static Dictionary<string, OnRoundEnd> onRoundEndFunc = new Dictionary<string, OnRoundEnd>()
@@ -94,6 +98,12 @@ namespace DesignerScripts
             {
                 BuffEventName.Bleed.ToString(),Bleed
             },
+            {
+                BuffEventName.Spirit.ToString(),Spirit
+            },
+            {
+                BuffEventName.BuffStackMinus1.ToString(),BuffStackMinus1
+            }
         }
             ;
         public static Dictionary<string, BuffOnHit> onBuffHitFunc = new Dictionary<string, BuffOnHit>()
@@ -106,6 +116,12 @@ namespace DesignerScripts
             },
             {
                 BuffEventName.Enhance.ToString(),Enhance
+            },
+            {
+                BuffEventName.Dodge.ToString(),Dodge
+            },
+            {
+                BuffEventName.Anger.ToString(),Anger
             },
             {
                 BuffEventName.Add2ValueIfResultIsEven.ToString(),Add2ValueIfResultIsEven
@@ -122,11 +138,11 @@ namespace DesignerScripts
             {
                 BuffEventName.EnhanceEnemyVulnerability.ToString(),EnhanceEnemyVulnerability
             },
-            
+
             {
                 BuffEventName.Add90PercentAttackEvery9TimesUseDice.ToString(),Add90PercentAttackEvery9TimesUseDice
             },
-            
+
             {
                 BuffEventName.ReuseDiceWhenDiceIs1.ToString(),ReuseDiceWhenDiceIs1
             },
@@ -145,9 +161,9 @@ namespace DesignerScripts
             {
                 BuffEventName.Add1PermanentValueWhenDiceIs6.ToString(),Add1PermanentValueWhenDiceIs6
             },
-            
-                
-            
+
+
+
 
         };
         public static Dictionary<string, BuffOnBeHurt> onBeHurtFunc = new Dictionary<string, BuffOnBeHurt>()
@@ -158,6 +174,7 @@ namespace DesignerScripts
             {
                 BuffEventName.Tough.ToString(),Tough
             },
+
             {
                 BuffEventName.Add50PercentAttackEvery3TimesLoseHealth.ToString(),Add50PercentAttackEvery3TimesLoseHealth
             },
@@ -174,10 +191,16 @@ namespace DesignerScripts
 
         public static Dictionary<string, BuffOnRoll> onRollFunc = new Dictionary<string, BuffOnRoll>();
 
-        public static Dictionary<string, BuffOnCast> onCastFunc = new Dictionary<string, BuffOnCast>();
+        public static Dictionary<string, BuffOnCast> onCastFunc = new Dictionary<string, BuffOnCast>()
+        {
+            {
+                BuffEventName.LoseEnergy.ToString(),LoseEnergy
+            }
+        };
 
 
         #endregion
+
         #region 具体buff效果函数
 
         //流血效果，每回合造成2*层数的伤害（数值脚填）
@@ -187,6 +210,18 @@ namespace DesignerScripts
             //这边还没决定好，是直接扣血，还是调用伤害函数，因为可能在damageManager里会有接视觉表现，例如跳数字的效果，但是如果直接在这边扣血，那就需要在这边也调用视觉表现
             buffInfo.target.GetComponent<ChaState>().ModResources(new ChaResource(-bleedDamage, 0, 0, 0));
             Debug.Log("流血造成" + bleedDamage + "伤害");
+            buffInfo.target.GetComponent<ChaState>().RemoveBuff(buffInfo);
+            Debug.Log("回合结束层数-1");
+
+        }
+
+        public static void Spirit(BuffInfo buffInfo)
+        {
+            int health = buffInfo.curStack * 2;
+            buffInfo.target.GetComponent<ChaState>().ModResources(new ChaResource(health, 0, 0, 0));
+            Debug.Log("精力回复" + health + "生命");
+            buffInfo.target.GetComponent<ChaState>().RemoveBuff(buffInfo);
+            Debug.Log("回合结束层数-1");
         }
 
         public static void Vulnerable(BuffInfo buffInfo, DamageInfo damageInfo, GameObject attack)
@@ -194,7 +229,10 @@ namespace DesignerScripts
             if (damageInfo.diceType == DiceType.Attack)
             {
                 damageInfo.addDamageArea += 0.25f;
+                Debug.Log("易伤效果生效");
+
             }
+
 
         }
 
@@ -204,7 +242,9 @@ namespace DesignerScripts
             if (damageInfo.diceType == DiceType.Attack)
             {
                 damageInfo.addDamageArea -= 0.25f;
+                Debug.Log("坚韧效果生效");
             }
+
 
         }
 
@@ -212,18 +252,20 @@ namespace DesignerScripts
         {
             if (damageInfo.diceType == DiceType.Attack)
             {
-
                 damageInfo.addDamageArea -= 0.25f;
+                Debug.Log("虚弱效果生效");
             }
+
         }
 
         public static void Strength(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
             if (damageInfo.diceType == DiceType.Attack)
             {
-
                 damageInfo.addDamageArea += 0.25f;
+                Debug.Log("力量效果生效");
             }
+
         }
 
         public static void Enhance(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
@@ -231,27 +273,44 @@ namespace DesignerScripts
             if (damageInfo.diceType == DiceType.Attack)
             {
                 damageInfo.addDamageArea += 0.5f;
-
+                Debug.Log("强化效果生效，增加50%伤害");
+                //触发后-1层
+                buffInfo.target.GetComponent<ChaState>().RemoveBuff(buffInfo);
+                Debug.Log("buff层数-1");
             }
+
         }
 
         public static void Dodge(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
             damageInfo.damage.baseDamage = 0;
+            Debug.Log("闪避生效，伤害为0");
+            //触发后-1层
+            buffInfo.target.GetComponent<ChaState>().RemoveBuff(buffInfo);
+            Debug.Log("buff层数-1");
         }
+
+
         //这里根据buffhandler的逻辑应该是判断是否为1，是1就变为4层
         public static void EnergyStorage(BuffInfo buffInfo)
         {
-            if(buffInfo.curStack == 1)
+            //回合开始时-1层
+            buffInfo.target.GetComponent<ChaState>().RemoveBuff(buffInfo);
+            Debug.Log("buff层数-1");
+            if (buffInfo.curStack == 1)
             {
                 buffInfo.curStack += 3;
-                //TODO:获得一层怒气
+                //获得一层怒气
+                BuffInfo newAngerBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Anger.ToString()], buffInfo.creator, buffInfo.target);
+                buffInfo.target.GetComponent<ChaState>().AddBuff(newAngerBuff,buffInfo.target);
+                Debug.Log("蓄能生效，增加3层并获得怒气");
             }
         }
 
         public static void Anger(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
             damageInfo.addDamageArea += buffInfo.curStack * 5 * 0.1f;
+            Debug.Log("怒气生效，增加" + buffInfo.curStack * 5 * 0.1f + "伤害");
         }
 
         public static SingleDiceObj LoseEnergy(BuffInfo buffInfo, SingleDiceObj singleDiceObj)
@@ -259,10 +318,14 @@ namespace DesignerScripts
             singleDiceObj.model.damage.baseDamage = 0;
             singleDiceObj.model.damage.indexDamageRate = 0;
             singleDiceObj.model.buffInfos = null;
+            Debug.Log("失能生效，伤害为0");
+            //触发后-1层
+            buffInfo.target.GetComponent<ChaState>().RemoveBuff(buffInfo);
+            Debug.Log("buff层数-1");
             return singleDiceObj;
 
         }
-        
+
         //这边不需要了，因为在BuffInfo里面已经有了
         public static void BuffStackMinus1(BuffInfo buffInfo)
         {
@@ -322,8 +385,8 @@ namespace DesignerScripts
 
             }
         }
-        
-        public static void Add4MoneyWhenBattleEnd(BuffInfo buffInfo,DamageInfo damageInfo,GameObject attacker)
+
+        public static void Add4MoneyWhenBattleEnd(BuffInfo buffInfo, DamageInfo damageInfo, GameObject attacker)
         {
             //creator就是玩家
             ChaState tempChaState = buffInfo.creator.GetComponent<ChaState>();
@@ -377,7 +440,7 @@ namespace DesignerScripts
 
         public static void Get5MaxHealthWhenGain(BuffInfo buffInfo)
         {
-            
+
             buffInfo.buffData.propMod = new ChaProperty[]
             {
                 //加算
@@ -405,14 +468,14 @@ namespace DesignerScripts
                 if (tempChaState.resource.currentHp > 0)
                 {
                     tempChaState.ModResources(new ChaResource(25, 0, 0, 0));
-                   
+
                 }
             }
         }
 
         public static void ReuseDiceWhenDiceIs1(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
-            if(damageInfo.damage.indexDamageRate == 1)
+            if (damageInfo.damage.indexDamageRate == 1)
             {
                 //TODO:Reuse
             }
@@ -462,10 +525,10 @@ namespace DesignerScripts
                         //增加层数(引用传递）
                         findBuffInfo.curStack++;
                     }
-                    
+
                 }
             }
-        }   
+        }
 
         public static void Add1PlayerStrengthStackWhenDiceIs5(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {

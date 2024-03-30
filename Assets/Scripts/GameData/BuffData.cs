@@ -19,6 +19,14 @@ namespace DesignerScripts
 
         Enhance,//强化
 
+        Dodge,//闪避
+
+        EnergyStorage,//蓄能
+
+        Anger,//怒气
+
+        LoseEnergy,//失能
+
 
         #region 圣物buff
         Add2ValueIfResultIsEven,
@@ -79,7 +87,7 @@ namespace DesignerScripts
             "",null,//OnRoll回调点 ，回调点参数额外设置
             "",null,//OnKill回调点 ，回调点参数额外设置
             "",null,//OnBeKill回调点 ，回调点参数额外设置
-             "",null,//OnCasr回调点 ，回调点参数额外设置
+             "",null,//OnCast回调点 ，回调点参数额外设置
             //buff对玩家的状态修改（无敌，能否出牌，局内骰面更改），
             ChaControlState.origin,
             //buff对玩家的属性(血量，金钱，护盾，重新投掷次数）修改
@@ -87,16 +95,17 @@ namespace DesignerScripts
             ) 
             },
             {//这边是流血的buff,要实现层数衰减为延迟回合数的效果，将permanent设置为false,初始持续回合数设置为0
+                //回合结束收到伤害+层数-1
                 BuffDataName.Bleed.ToString(),new BuffData
                 (
-                    "1",
+                    "1_1",
                     BuffDataName.Bleed.ToString(),
-                    "icon1",
+                    "icon1_1",
                     new [] {"Target"},
                     5,
                     0,
-                    false,
-                    BuffUpdateEnum.Keep,
+                    true,
+                    BuffUpdateEnum.Add,
                     BuffRemoveStackUpdateEnum.Reduce,
                     "",null,
                     "",null,
@@ -113,23 +122,23 @@ namespace DesignerScripts
                  )
                 
             },
-
+            //回合结束加血+层数-1
             {
                 BuffDataName.Spirit.ToString(),new BuffData
                 (
-                    "2",
+                    "1_2",
                     BuffDataName.Spirit.ToString(),
-                    "icon2",
+                    "icon1_2",
                     new [] {"Self"},
                     5,
-                    100,
+                    0,
                     true,
                     BuffUpdateEnum.Add,
                     BuffRemoveStackUpdateEnum.Reduce,
                     "",null,
                     "",null,
-                    BuffEventName.BuffStackMinus1.ToString(),null,
                     "",null,
+                    BuffEventName.Spirit.ToString(),null,
                     "",null,
                     "",null,
                     "",null,
@@ -141,23 +150,23 @@ namespace DesignerScripts
                  )
 
             },
-
+            //OnBehurt触发增加伤害，在对方的回合结束-1层
             {
                 BuffDataName.Vulnerable.ToString(),new BuffData
                 (
-                    "3",
+                    "1_3",
                     BuffDataName.Vulnerable.ToString(),
-                    "icon3",
+                    "icon1_3",
                     new [] {"Target"},
                     5,
-                    100,
+                    0,
                     true,
                     BuffUpdateEnum.Add,
                     BuffRemoveStackUpdateEnum.Reduce,
                     "",null,
                     "",null,
-                    BuffEventName.BuffStackMinus1.ToString(),null,
                     "",null,
+                    BuffEventName.BuffStackMinus1.ToString(),null,
                     "",null,
                     BuffEventName.Vulnerable.ToString(),null,
                     "",null,
@@ -169,13 +178,14 @@ namespace DesignerScripts
                  )
 
             },
-
+            //不走回合数走层数，将isPermanent设置为true
+            //OnBehurt触发减少伤害，在自己的回合结束-1层
             {
                 BuffDataName.Tough.ToString(),new BuffData
                 (
-                    "4",
+                    "1_4",
                     BuffDataName.Tough.ToString(),
-                    "icon4",
+                    "icon1_4",
                     new [] {"Self"},
                     5,
                     100,
@@ -184,8 +194,8 @@ namespace DesignerScripts
                     BuffRemoveStackUpdateEnum.Reduce,
                     "",null,
                     "",null,
-                    BuffEventName.BuffStackMinus1.ToString(),null,
                     "",null,
+                    BuffEventName.BuffStackMinus1.ToString(),null,
                     "",null,
                     BuffEventName.Tough.ToString(),null,
                     "",null,
@@ -197,13 +207,14 @@ namespace DesignerScripts
                  )
 
             },
-
+            //不走回合数走层数，将isPermanent设置为true
+            //OnHit触发减少伤害，在自己的回合结束-1层
             {
                 BuffDataName.Weak.ToString(),new BuffData
                 (
-                    "5",
+                    "1_5",
                     BuffDataName.Weak.ToString(),
-                    "icon5",
+                    "icon1_5",
                     new []{"Target"},
                     5,
                     100,
@@ -212,8 +223,8 @@ namespace DesignerScripts
                     BuffRemoveStackUpdateEnum.Reduce,
                     "",null,
                     "",null,
-                    BuffEventName.BuffStackMinus1.ToString(),null,
                     "",null,
+                    BuffEventName.BuffStackMinus1.ToString(),null,
                     BuffEventName.Weak.ToString(),null,
                     "",null,
                     "",null,
@@ -225,13 +236,14 @@ namespace DesignerScripts
                  )
 
             },
-
+            //不走回合数走层数，将isPermanent设置为true
+            //OnHit触发增加伤害，在自己的回合结束-1层
              {
                 BuffDataName.Strength.ToString(),new BuffData
                 (
-                    "6",
+                    "1_6",
                     BuffDataName.Strength.ToString(),
-                    "icon6",
+                    "icon1_6",
                     new []{"Self"},
                     5,
                     100,
@@ -240,8 +252,8 @@ namespace DesignerScripts
                     BuffRemoveStackUpdateEnum.Reduce,
                     "",null,
                     "",null,
-                    BuffEventName.BuffStackMinus1.ToString(),null,
                     "",null,
+                    BuffEventName.BuffStackMinus1.ToString(),null,
                     BuffEventName.Strength.ToString(),null,
                     "",null,
                     "",null,
@@ -257,9 +269,9 @@ namespace DesignerScripts
              {
                 BuffDataName.Enhance.ToString(),new BuffData
                 (
-                    "7",
+                    "1_7",
                     BuffDataName.Enhance.ToString(),
-                    "icon7",
+                    "icon1_7",
                     new [] {"Self"},
                     5,
                     100,
@@ -268,7 +280,7 @@ namespace DesignerScripts
                     BuffRemoveStackUpdateEnum.Reduce,
                     "",null,
                     "",null,
-                    BuffEventName.BuffStackMinus1.ToString(),null,
+                    "",null,
                     "",null,
                     BuffEventName.Enhance.ToString(),null,
                     "",null,
@@ -281,8 +293,115 @@ namespace DesignerScripts
                  )
 
              },
-
              {
+                BuffDataName.Dodge.ToString(),new BuffData
+                (
+                    "1_8",
+                    BuffDataName.Dodge.ToString(),
+                    "icon1_8",
+                    new [] {"Target"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    BuffEventName.Dodge.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+             },
+             {
+                BuffDataName.EnergyStorage.ToString(),new BuffData
+                (
+                    "1_9",
+                    BuffDataName.EnergyStorage.ToString(),
+                    "icon1_9",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    BuffEventName.EnergyStorage.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+             },
+             {
+                BuffDataName.Anger.ToString(),new BuffData
+                (
+                    "1_10",
+                    BuffDataName.Anger.ToString(),
+                    "icon1_10",
+                    new [] {"Self"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    BuffEventName.Anger.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+             },
+            {
+                BuffDataName.LoseEnergy.ToString(),new BuffData
+                (
+                    "1_11",
+                    BuffDataName.LoseEnergy.ToString(),
+                    "icon1_11",
+                    new [] {"Target"},
+                    5,
+                    100,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    BuffEventName.LoseEnergy.ToString(),null,
+                    ChaControlState.origin,
+                    null
+                 )
+            },
+
+
+#region 圣物buff
+
+            {
                 BuffDataName.Add2ValueIfResultIsEven.ToString(),new BuffData
                 (
                     "8",
@@ -926,7 +1045,7 @@ namespace DesignerScripts
 
              },
 
-
+#endregion
 
         };
 
