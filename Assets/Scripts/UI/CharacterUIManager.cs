@@ -34,6 +34,7 @@ namespace UI
         [SerializeField, Tooltip("敌人")] public Transform enemy;
         [SerializeField, Tooltip("敌人血条")] private Slider enemyHealthSlider;
         [SerializeField, Tooltip("敌人血量Text")] private Text enemyHealthText;
+        [SerializeField, Tooltip("敌人护盾UI")] private ShieldUIObject enemyShieldUI;
         [Header("意图相关")]
         [SerializeField, Tooltip("父物体")] private Transform intentionParent;
         [SerializeField, Tooltip("生成模板")] private GameObject intentionTemplate;
@@ -43,10 +44,16 @@ namespace UI
         [SerializeField, Tooltip("玩家")] public Transform player;
         [SerializeField, Tooltip("玩家血条")] private Slider playerHealthSlider;
         [SerializeField, Tooltip("敌人血量Text")] private Text playerHealthText;
+        [SerializeField, Tooltip("玩家护盾UI")] private ShieldUIObject playerShieldUI;
 
         private Vector3 offsetPosition;
 
-
+        /// <summary>
+        /// 创建伤害文本
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="hit"></param>
+        /// <param name="position"></param>
         private void CreateAttackText(Transform parent,int hit,Vector3 position)
         {
             var tmp = Instantiate(attackTextTemplate, parent, true);
@@ -83,7 +90,6 @@ namespace UI
             attackTextPosition += character.position;
             CreateAttackText(attackTextParent, hitNum, attackTextPosition);//创建伤害数字
         }
-        
 
         /// <summary>
         /// 角色攻击动画
@@ -154,6 +160,47 @@ namespace UI
         {
             yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
             player.DOPunchPosition(useOtherOffset, attackTime, 1);
+        }
+
+        /// <summary>
+        /// 创建治疗文本
+        /// </summary>
+        /// <param name="character"></param>
+        /// <param name="num"></param>
+        public void CreateCureText(Character character, int num)
+        {
+            Vector3 attackTextPosition = attackTextOffset;
+            switch (character)
+            {
+                case Character.Enemy:
+                    attackTextPosition += enemy.position;
+                    break;
+                case Character.Player:
+                    attackTextPosition += player.position;
+                    break;
+            }
+            var tmp = Instantiate(attackTextTemplate, attackTextParent, true);
+            tmp.transform.position = attackTextPosition;//更改位置
+            tmp.GetComponent<AttackText>().InitCure(num,attackTime);//初始化
+            tmp.SetActive(true);
+        }
+
+        /// <summary>
+        /// 更新角色护盾UI
+        /// </summary>
+        /// <param name="character"></param>
+        /// <param name="shieldNum"></param>
+        public void UpdateShieldUI(Character character,int shieldNum)
+        {
+            switch (character)
+            {
+                case Character.Enemy:
+                    enemyShieldUI.UpdateShieldNum(shieldNum);
+                    break;
+                case Character.Player:
+                    playerShieldUI.UpdateShieldNum(shieldNum);
+                    break;
+            }
         }
         
         /// <summary>

@@ -535,12 +535,14 @@ MonoBehaviour:
   enemy: {fileID: 93368173}
   enemyHealthSlider: {fileID: 705856192}
   enemyHealthText: {fileID: 1589465677}
+  enemyShieldUI: {fileID: 705856193}
   intentionParent: {fileID: 583505413}
   intentionTemplate: {fileID: 6535650827630053666, guid: 1ebb27978c6df1f49a6dca6e87dad096, type: 3}
   intentionList: []
   player: {fileID: 1161813748}
   playerHealthSlider: {fileID: 987176127}
   playerHealthText: {fileID: 900775698}
+  playerShieldUI: {fileID: 3410802820645819181}
 --- !u!114 &81981823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2752,6 +2754,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &705856193 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7557837425869981495, guid: fcb3a2d5ba3131d418ed63cbcbf08b20, type: 3}
+  m_PrefabInstance: {fileID: 705856190}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d646dbc5f1a4acd4495835e55268b680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &717025137
@@ -7274,6 +7287,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcb3a2d5ba3131d418ed63cbcbf08b20, type: 3}
+--- !u!114 &3410802820645819181 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7557837425869981495, guid: fcb3a2d5ba3131d418ed63cbcbf08b20, type: 3}
+  m_PrefabInstance: {fileID: 3410802820645819180}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d646dbc5f1a4acd4495835e55268b680, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
