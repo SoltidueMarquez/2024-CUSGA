@@ -63,7 +63,7 @@ public class HalidomManager : MonoBehaviour
     private void Start()
     {
         //Test
-        AddHalidom(HalidomData.halidomDictionary[HalidomName.Add2ValueIfResultIsEven.ToString()]);
+        AddHalidom(HalidomData.halidomDictionary[HalidomName.Add1StackIfEnemyHaveBleed.ToString()]);
         //打印圣物所有buff信息
         foreach(var halidom in halidomList)
         {

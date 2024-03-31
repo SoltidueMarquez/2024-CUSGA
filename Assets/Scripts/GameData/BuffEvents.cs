@@ -230,8 +230,7 @@ namespace DesignerScripts
             //这边还没决定好，是直接扣血，还是调用伤害函数，因为可能在damageManager里会有接视觉表现，例如跳数字的效果，但是如果直接在这边扣血，那就需要在这边也调用视觉表现
             buffInfo.target.GetComponent<ChaState>().ModResources(new ChaResource(-bleedDamage, 0, 0, 0));
             Debug.Log("流血造成" + bleedDamage + "伤害");
-            buffInfo.target.GetComponent<ChaState>().RemoveBuff(buffInfo);
-            Debug.Log("回合结束层数-1");
+            
 
         }
 
@@ -240,8 +239,7 @@ namespace DesignerScripts
             int health = buffInfo.curStack * 2;
             buffInfo.target.GetComponent<ChaState>().ModResources(new ChaResource(health, 0, 0, 0));
             Debug.Log("精力回复" + health + "生命");
-            buffInfo.target.GetComponent<ChaState>().RemoveBuff(buffInfo);
-            Debug.Log("回合结束层数-1");
+            
         }
 
         public static void Vulnerable(BuffInfo buffInfo, DamageInfo damageInfo, GameObject attack)

@@ -1,3 +1,4 @@
+using DesignerScripts;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -61,7 +62,12 @@ public class PreparationState : IState
     }
     public void OnEnter()
     {
-
+        //Test
+        foreach(var enemy in manager.parameter.enemyChaStates)
+        {
+            enemy.AddBuff(new BuffInfo(BuffDataTable.buffData[BuffDataName.Bleed.ToString()]),enemy.gameObject);
+            Debug.Log("给敌人加了一个流血buff");
+        }
 
         Debug.Log("Enter PreparationState");
 
