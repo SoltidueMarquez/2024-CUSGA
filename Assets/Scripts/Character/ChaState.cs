@@ -159,6 +159,7 @@ public class ChaState : MonoBehaviour
         //这边对盾条还是需要斟酌一下
         //this.resource.currentShield = Mathf.Clamp(this.resource.currentShield, 0, this.prop.shield);
         this.resource.currentHp = Mathf.Clamp(this.resource.currentHp, 0, this.prop.health);
+        CharacterUIManager.Instance.UpdateShieldUI((Character)this.side, this.resource.currentShield);
         CharacterUIManager.Instance.ChangeHealthSlider((Character)side, this.resource.currentHp, this.prop.health);
         if (this.resource.currentHp <= 0)
         {

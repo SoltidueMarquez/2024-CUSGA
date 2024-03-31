@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -174,15 +175,25 @@ namespace UI
             {
                 case Character.Enemy:
                     attackTextPosition += enemy.position;
+                    DoCure(attackTextPosition, num);
                     break;
                 case Character.Player:
                     attackTextPosition += player.position;
+                    StartCoroutine(DoPlayerCureAnim(attackTextPosition, num));
                     break;
             }
+        }
+        private void DoCure(Vector3 attackTextPosition,int num)
+        {
             var tmp = Instantiate(attackTextTemplate, attackTextParent, true);
             tmp.transform.position = attackTextPosition;//更改位置
-            tmp.GetComponent<AttackText>().InitCure(num,attackTime);//初始化
+            tmp.GetComponent<AttackText>().InitCure(num, attackTime);//初始化
             tmp.SetActive(true);
+        }
+        IEnumerator DoPlayerCureAnim(Vector3 attackTextPosition, int num)
+        {
+            yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
+            DoCure(attackTextPosition, num);
         }
 
         /// <summary>
@@ -198,11 +209,16 @@ namespace UI
                     enemyShieldUI.UpdateShieldNum(shieldNum);
                     break;
                 case Character.Player:
-                    playerShieldUI.UpdateShieldNum(shieldNum);
+                    StartCoroutine(DoPlayerShieldAnim(shieldNum));
                     break;
             }
         }
-        
+        IEnumerator DoPlayerShieldAnim(int shieldNum)
+        {
+            yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
+            playerShieldUI.UpdateShieldNum(shieldNum);
+        }
+
         /// <summary>
         /// 创建意图
         /// </summary>

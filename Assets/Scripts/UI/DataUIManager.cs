@@ -12,7 +12,7 @@ namespace UI
             RunText.text = $"{run}";
         }
         
-        public void UpdateReRollText(int time)
+        public void UpdateRerollText(int time)
         {
             ReRollText.text = $"{time}";
         }

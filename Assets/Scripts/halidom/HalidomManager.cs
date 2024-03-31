@@ -2,6 +2,7 @@ using DesignerScripts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 
 
@@ -63,7 +64,10 @@ public class HalidomManager : MonoBehaviour
     private void Start()
     {
         //Test
-        AddHalidom(HalidomData.halidomDictionary[HalidomName.Add1StackIfEnemyHaveBleed.ToString()]);
+        AddHalidom(HalidomData.halidomDictionary[HalidomName.Add2ValueIfResultIsEven.ToString()]);
+        SacredObjectUIManager.Instance.CreateSacredUIObject(0,HalidomData.halidomDictionary[HalidomName.Add2ValueIfResultIsEven.ToString()].description);
+        AddHalidom(HalidomData.halidomDictionary[HalidomName.Add2ValueIfResultIsOdd.ToString()]);
+        SacredObjectUIManager.Instance.CreateSacredUIObject(1, HalidomData.halidomDictionary[HalidomName.Add2ValueIfResultIsOdd.ToString()].description);
         //打印圣物所有buff信息
         foreach(var halidom in halidomList)
         {

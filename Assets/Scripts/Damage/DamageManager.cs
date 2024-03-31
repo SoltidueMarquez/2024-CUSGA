@@ -88,6 +88,7 @@ public class DamageManager : MonoSingleton<DamageManager>
                 break;
             case DiceType.Support:
                 attackerChaState.ModResources(new ChaResource(damageInfo.finalDamage, 0, 0, 0));
+                CharacterUIManager.Instance.CreateCureText(attackCharacter, damageInfo.finalDamage);
                 CharacterUIManager.Instance.UseOtherDice(attackCharacter);
                 break;
         }

@@ -218,6 +218,7 @@ public class EnemyRoundStartResolutionState : IState
     }
     public void OnEnter()
     {
+        CharacterUIManager.Instance.RemoveAllIntentionUIObject();
         //TODO：圣物所有在敌人判定阶段触发的回调点
         //触发所有敌人身上挂载的buff的OnRoundStart回调点
         foreach (var enemy in manager.parameter.enemyChaStates)

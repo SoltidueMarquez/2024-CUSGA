@@ -154,6 +154,7 @@ public class BattleManager : MonoBehaviour
 
     public void RollDice()
     {
+        DataUIManager.Instance.UpdateRerollText(this.parameter.playerChaState.resource.currentRollTimes);
         List<SingleDiceObj> singleDiceObjs = this.parameter.playerChaState.GetBattleDiceHandler().GetRandomSingleDices();
         this.parameter.playerChaState.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs);
         for (int i = 0; i < singleDiceObjs.Count; i++)
@@ -194,12 +195,12 @@ public class BattleManager : MonoBehaviour
             Vector2Int pos = new Vector2Int(i, singleDiceObjs[i].idInDice);
             RollingResultUIManager.Instance.CreateResult(i, singleDiceObjs[i].model.id, pos);
         }
+        DataUIManager.Instance.UpdateRerollText(this.parameter.playerChaState.resource.currentRollTimes);
     }
     public void RollDiceForEnemy(ChaState chaState)
     {
         var singleDiceObjs = chaState.GetBattleDiceHandler().GetRandomSingleDices();
         chaState.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs);
-        CharacterUIManager.Instance.RemoveAllIntentionUIObject();
         foreach (var singleDice in singleDiceObjs)
         {
             CharacterUIManager.Instance.CreateIntentionUIObject(singleDice.model.id);
