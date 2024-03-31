@@ -358,7 +358,7 @@ namespace DesignerScripts
         {
             if (damageInfo.damage.indexDamageRate % 2 == 0)
             {
-                damageInfo.damage.indexDamageRate += 2;
+                damageInfo.damage.baseDamage += 2;
                 Debug.Log("骰子为偶数，增加2点伤害");
             }
 
@@ -367,7 +367,7 @@ namespace DesignerScripts
         {
             if (damageInfo.damage.indexDamageRate % 2 == 1)
             {
-                damageInfo.damage.indexDamageRate += 2;
+                damageInfo.damage.baseDamage += 2;
                 Debug.Log("骰子为奇数，增加2点伤害");
             }
         }
@@ -376,7 +376,7 @@ namespace DesignerScripts
         {
             if (damageInfo.damage.indexDamageRate <= 3)
             {
-                damageInfo.damage.indexDamageRate += 3;
+                damageInfo.damage.baseDamage += 3;
                 Debug.Log("骰子小于等于3，增加3点伤害");
             }
         }
@@ -385,7 +385,7 @@ namespace DesignerScripts
         {
             if (damageInfo.damage.indexDamageRate >= 4)
             {
-                damageInfo.damage.indexDamageRate += 3;
+                damageInfo.damage.baseDamage += 3;
                 Debug.Log("骰子大于等于4，增加3点伤害");
             }
         }

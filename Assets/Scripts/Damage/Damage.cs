@@ -6,7 +6,13 @@ using UnityEngine;
 
 public struct Damage
 {
+    /// <summary>
+    /// 根据骰子稀有度设置基础伤害
+    /// </summary>
     public int baseDamage;
+    /// <summary>
+    /// 不同位置骰子点数的倍率
+    /// </summary>
     public float indexDamageRate;
     public Damage(int baseDamage,float indexDamageRate)
     {

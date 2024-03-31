@@ -115,7 +115,7 @@ namespace DesignerScripts
             new List<BuffInfo>()
                 {
                 //TODO:还没写，这边需要新UI
-                    new BuffInfo(BuffDataTable.buffData["好事成双"],null,null,1,false,null)
+                    //new BuffInfo(BuffDataTable.buffData["好事成双"],null,null,1,false,null)
                 })
             },
             {
@@ -151,7 +151,7 @@ namespace DesignerScripts
             "如果当前又力量提升效果，我方的力量效能提升",
             new List<BuffInfo>()
             {       //TODO:还没写这个buffData
-                    new BuffInfo(BuffDataTable.buffData["狗牙"],null,null,1,true,null)
+                    //new BuffInfo(BuffDataTable.buffData["狗牙"],null,null,1,true,null)
                 })
             },
             {
@@ -355,7 +355,7 @@ namespace DesignerScripts
             "敌方获得DEBUFF时，层数+1",
             new List<BuffInfo>()
             {
-                    new BuffInfo(BuffDataTable.buffData["Add1StackIfEnemyHaveDebuff"],null,null,1,false,null)
+                    //new BuffInfo(BuffDataTable.buffData["Add1StackIfEnemyHaveDebuff"],null,null,1,false,null)
                 })
             },
             {
@@ -367,7 +367,7 @@ namespace DesignerScripts
             "我方获得正面BUFF时，层数+1",
             new List<BuffInfo>()
             {
-                    new BuffInfo(BuffDataTable.buffData["Add1StackIfPlayerHavePositiveBuff"],null,null,1,false,null)
+                    //new BuffInfo(BuffDataTable.buffData["Add1StackIfPlayerHavePositiveBuff"],null,null,1,false,null)
                 })
             },
         };

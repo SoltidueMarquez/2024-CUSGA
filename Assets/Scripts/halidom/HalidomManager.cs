@@ -1,6 +1,9 @@
+using DesignerScripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class HalidomManager : MonoBehaviour
 {
@@ -59,7 +62,22 @@ public class HalidomManager : MonoBehaviour
 
     private void Start()
     {
+        //Test
+        AddHalidom(HalidomData.halidomDictionary[HalidomName.Add2ValueIfResultIsEven.ToString()]);
+        //打印圣物所有buff信息
+        foreach(var halidom in halidomList)
+        {
+            if (halidom != null)
+            {
+                foreach (var buff in halidom.buffInfos)
+                {
+                    Debug.Log("圣物中的buff名称是"+buff.buffData.buffName);
+                }
+            }
+        }
         
+        
+
     }
     
 
