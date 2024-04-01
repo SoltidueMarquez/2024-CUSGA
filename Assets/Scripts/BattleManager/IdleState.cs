@@ -65,7 +65,7 @@ public class PreparationState : IState
         //Test
         foreach(var enemy in manager.parameter.enemyChaStates)
         {
-            enemy.AddBuff(new BuffInfo(BuffDataTable.buffData[BuffDataName.Bleed.ToString()]),enemy.gameObject);
+            //enemy.AddBuff(new BuffInfo(BuffDataTable.buffData[BuffDataName.Bleed.ToString()]),enemy.gameObject);
             Debug.Log("给敌人加了一个流血buff");
         }
 

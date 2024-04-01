@@ -13,6 +13,7 @@ namespace UI
         public static UIManager Instance; //单例调用
         [Header("通用")] 
         [Tooltip("拖拽图层")] public Transform dragCanvas;
+        [Tooltip("奖励界面管理器")] public RewardUIManager rewardUIManager;
 
         private void Awake()
         {

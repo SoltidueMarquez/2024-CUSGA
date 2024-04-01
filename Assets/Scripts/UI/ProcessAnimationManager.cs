@@ -80,6 +80,12 @@ namespace UI
             RotateIn(PlayerTurnState.PlayerTurnEnd);
             ResultAppear(PlayerTurnState.PlayerTurnEnd);
         }
+
+        public void FightEnd()
+        {
+            RotateIn(PlayerTurnState.PlayerTurnStart);
+            ResultAppear(PlayerTurnState.PlayerTurnStart);
+        }
     }
 
     [Serializable]

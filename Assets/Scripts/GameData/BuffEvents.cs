@@ -278,7 +278,7 @@ namespace DesignerScripts
         {
             if (HalidomManager.Instance.halidomList != null)
             {
-                foreach(var halidom in HalidomManager.Instance.halidomList)
+                /*foreach(var halidom in HalidomManager.Instance.halidomList)
                 {
                     //检测圣物有没有手术刀
                     if(halidom.id == "8")
@@ -292,7 +292,7 @@ namespace DesignerScripts
                         }
                         
                     }
-                }
+                }*/
             }
         }
 

@@ -25,6 +25,10 @@ namespace UI
         [SerializeField, Tooltip("玩家的出现位置(Y)")] private float playerStartYPosition;
         [SerializeField, Tooltip("玩家的离开位置(Y)")] private float playerEndYPosition;
 
+        /// <summary>
+        /// 战斗结束UI
+        /// </summary>
+        /// <param name="onUIAnimFinished"></param>
         public void DoFightEndUIAnim(OnUIAnimFinished onUIAnimFinished)
         {
             panel.SetActive(true);
@@ -40,7 +44,8 @@ namespace UI
                 StartCoroutine(AnimFish(onUIAnimFinished)); //结束时调用
             }
             
-            //TODO：奖励结算UI
+            //TODO：奖励结算UI出现
+            UIManager.Instance.rewardUIManager.ShowRewardUI(appearDurationTime);
         }
         
         /// <summary>
