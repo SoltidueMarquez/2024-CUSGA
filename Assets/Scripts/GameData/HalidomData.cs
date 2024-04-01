@@ -17,6 +17,7 @@ namespace DesignerScripts
         Add1StackIfPlayerHaveStrength,
         Add1StackIfPlayerHavePositiveBuff,
         Add4MoneyWhenBattleEnd,
+        GainHalfMoney,
         Add50PercentAttackEvery3TimesLoseHealth,
         Add90PercentAttackEvery9TimesUseDice,
         Recover20HealthWhenEnterStore,
@@ -30,7 +31,12 @@ namespace DesignerScripts
         Add1EnemyBleedStackWhenDiceIs4,
         Add1PlayerStrengthStackWhenDiceIs5,
         Add1PermanentValueWhenDiceIs6,
-
+        Gain1DodgeWhenBattleStart,//30
+        Gain1EnhanceWhenBattleStart,//31
+        Gain2StrengthWhenBattleStart,//32
+        Gain2ToughWhenBattleStart,//33
+        Gain2VulnerableWhenBattleStart,//34
+        Gain2WeakWhenBattleStart,//35
     }
     public static class HalidomData
     {
@@ -180,7 +186,7 @@ namespace DesignerScripts
             },
 
             {
-            HalidomName.Add50PercentAttackEvery3TimesLoseHealth.ToString(),
+            HalidomName.GainHalfMoney.ToString(),
             new HalidomObject(
             RareType.Rare,
             "14",
@@ -188,7 +194,7 @@ namespace DesignerScripts
             "拾取时，获得数量等同于当前金钱一半的金钱",
             new List<BuffInfo>()
             {
-                    new BuffInfo(BuffDataTable.buffData["Add50PercentAttackEvery3TimesLoseHealth"],null,null,1,false,null)
+                    new BuffInfo(BuffDataTable.buffData["GainHalfMoney"],null,null,1,false,null)
                 })
             },
 

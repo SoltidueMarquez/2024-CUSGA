@@ -40,6 +40,7 @@ namespace DesignerScripts
         Add1StackIfPlayerHaveStrength,
         Add1StackIfPlayerHavePositiveBuff,
         Add4MoneyWhenBattleEnd,
+        GainHalfMoney,
         Add50PercentAttackEvery3TimesLoseHealth,
         Add90PercentAttackEvery9TimesUseDice,
         Recover20HealthWhenEnterStore,
@@ -53,7 +54,12 @@ namespace DesignerScripts
         Add1EnemyBleedStackWhenDiceIs4,
         Add1PlayerStrengthStackWhenDiceIs5,
         Add1PermanentValueWhenDiceIs6,
-
+        Gain1DodgeWhenBattleStart,//30
+        Gain1EnhanceWhenBattleStart,//31
+        Gain2StrengthWhenBattleStart,//32
+        Gain2ToughWhenBattleStart,//33
+        Gain2VulnerableWhenBattleStart,//34
+        Gain2WeakWhenBattleStart,//35
         #endregion
     }
     public class BuffDataTable
@@ -169,7 +175,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
-                    BuffEventName.BuffStackMinus1.ToString(),null,
+                    "",null,
                     "",null,
                     BuffEventName.Vulnerable.ToString(),null,
                     "",null,
@@ -198,7 +204,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
-                    BuffEventName.BuffStackMinus1.ToString(),null,
+                    "",null,
                     "",null,
                     BuffEventName.Tough.ToString(),null,
                     "",null,
@@ -227,7 +233,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
-                    BuffEventName.BuffStackMinus1.ToString(),null,
+                    "",null,
                     BuffEventName.Weak.ToString(),null,
                     "",null,
                     "",null,
@@ -256,7 +262,7 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
-                    BuffEventName.BuffStackMinus1.ToString(),null,
+                    "",null,
                     BuffEventName.Strength.ToString(),null,
                     "",null,
                     "",null,
@@ -647,6 +653,33 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     BuffEventName.Add4MoneyWhenBattleEnd.ToString(),null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+             {
+                BuffDataName.GainHalfMoney.ToString(),new BuffData
+                (
+                    "2_13",
+                    BuffDataName.GainHalfMoney.ToString(),
+                    "icon2_13",
+                    new [] {"Self"},
+                    5,
+                    0,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    BuffEventName.GainHalfMoney.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
                     "",null,
                     "",null,
                     ChaControlState.origin,
