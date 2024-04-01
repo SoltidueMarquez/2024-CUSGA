@@ -51,6 +51,7 @@ namespace DesignerScripts
         Add1StackIfPlayerHaveStrength,
         Add1StackIfPlayerHavePositiveBuff,
         Add4MoneyWhenBattleEnd,
+        GainHalfMoney,
         Add50PercentAttackEvery3TimesLoseHealth,
         Add90PercentAttackEvery9TimesUseDice,
         Recover20HealthWhenEnterStore,
@@ -63,8 +64,13 @@ namespace DesignerScripts
         Recover5HealthWhenDiceIs3,
         Add1EnemyBleedStackWhenDiceIs4,
         Add1PlayerStrengthStackWhenDiceIs5,
-        Add1PermanentValueWhenDiceIs6
-
+        Add1PermanentValueWhenDiceIs6,
+        Gain1DodgeWhenBattleStart,//30
+        Gain1EnhanceWhenBattleStart,//31
+        Gain2StrengthWhenBattleStart,//32
+        Gain2ToughWhenBattleStart,//33
+        Gain2VulnerableWhenBattleStart,//34
+        Gain2WeakWhenBattleStart,//35
         #endregion
     }
     public class BuffEvents
@@ -78,6 +84,9 @@ namespace DesignerScripts
             },
             {
                 BuffEventName.Add1Reroll.ToString(),Add1Reroll
+            },
+            {
+                BuffEventName.GainHalfMoney.ToString(),GainHalfMoney
             }
 
         };
@@ -231,7 +240,6 @@ namespace DesignerScripts
             buffInfo.target.GetComponent<ChaState>().ModResources(new ChaResource(-bleedDamage, 0, 0, 0));
             Debug.Log("流血造成" + bleedDamage + "伤害");
             
-
         }
 
         public static void Spirit(BuffInfo buffInfo)
@@ -293,8 +301,12 @@ namespace DesignerScripts
                 damageInfo.addDamageArea += 0.5f;
                 Debug.Log("强化效果生效，增加50%伤害");
                 //触发后-1层
-                buffInfo.target.GetComponent<ChaState>().RemoveBuff(buffInfo);
+                buffInfo.curStack--;
                 Debug.Log("buff层数-1");
+                if(buffInfo.curStack == 0)
+                {
+                    buffInfo.isPermanent=false;
+                }
             }
 
         }
@@ -304,8 +316,12 @@ namespace DesignerScripts
             damageInfo.damage.baseDamage = 0;
             Debug.Log("闪避生效，伤害为0");
             //触发后-1层
-            buffInfo.target.GetComponent<ChaState>().RemoveBuff(buffInfo);
+            buffInfo.curStack--;
             Debug.Log("buff层数-1");
+            if (buffInfo.curStack == 0)
+            {
+                buffInfo.isPermanent = false;
+            }
         }
 
 
@@ -338,8 +354,12 @@ namespace DesignerScripts
             singleDiceObj.model.buffInfos = null;
             Debug.Log("失能生效，伤害为0");
             //触发后-1层
-            buffInfo.target.GetComponent<ChaState>().RemoveBuff(buffInfo);
+            buffInfo.curStack--;
             Debug.Log("buff层数-1");
+            if (buffInfo.curStack == 0)
+            {
+                buffInfo.isPermanent = false;
+            }
             return singleDiceObj;
 
         }
@@ -463,6 +483,17 @@ namespace DesignerScripts
             {
                 tempChaState.ModResources(new ChaResource(0, 4, 0, 0));
                 Debug.Log("增加4金币");
+            }
+        }
+
+        public static void GainHalfMoney(BuffInfo buffInfo)
+        {
+            ChaState tempChaState = buffInfo.creator.GetComponent<ChaState>();
+            if (tempChaState.resource.currentMoney > 0)
+            {
+                //增加一半金币
+                tempChaState.ModResources(new ChaResource(0, tempChaState.resource.currentMoney / 2, 0, 0));
+                Debug.Log("增加一半金币");
             }
         }
 
