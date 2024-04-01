@@ -31,29 +31,32 @@ namespace DesignerScripts
         #region 圣物buff
         Add2ValueIfResultIsEven,//1
         Add2ValueIfResultIsOdd,//2
-        Add3ValueIfResultBelow3,//4
-        Add3ValueIfResultAbove4,//5
-        EnhanceEnemyVulnerability,
-        EnhancePlayerStrength,
-        Add1StackIfEnemyHaveBleed,
+        Add3ValueIfResultBelow3,//5
+        Add3ValueIfResultAbove4,//6
+        GainAndChoose2DicesGiveRandomCoating,
+        GainAndChoose2DicesGive1PermanentEnhance,
+        Add1StackIfEnemyHaveBleed,//8
         Add1StackIfEnemyHaveDebuff,
-        Add1StackIfPlayerHaveStrength,
+        Add1StackIfPlayerHaveStrength,//9
+        EnhancePlayerStrength,//10
+        EnhanceEnemyVulnerability,//11
         Add1StackIfPlayerHavePositiveBuff,
-        Add4MoneyWhenBattleEnd,
-        GainHalfMoney,
-        Add50PercentAttackEvery3TimesLoseHealth,
+        Add4MoneyWhenBattleEnd,//12
+        GainHalfMoney,//13
+        Add50PercentAttackEvery3TimesLoseHealth,//16
         Add90PercentAttackEvery9TimesUseDice,
         Recover20HealthWhenEnterStore,
-        Get5MaxHealthWhenGain,
-        Recover25HealthWhenHealthBelowHalf,
+        Get5MaxHealthWhenGain,//18
+        RecoverHalfHealthWhenGain,//19
+        Recover25HealthWhenHealthBelowHalf,//20
         Add1Reroll,
         HalfInStore,
-        ReuseDiceWhenDiceIs1,
-        Add2MoneyWhenDiceIs2,
-        Recover5HealthWhenDiceIs3,
-        Add1EnemyBleedStackWhenDiceIs4,
-        Add1PlayerStrengthStackWhenDiceIs5,
-        Add1PermanentValueWhenDiceIs6,
+        ReuseDiceWhenDiceIs1,//23
+        Add2MoneyWhenDiceIs2,//24
+        Recover5HealthWhenDiceIs3,//25
+        Add1EnemyBleedStackWhenDiceIs4,//26
+        Add1PlayerStrengthStackWhenDiceIs5,//27
+        Add1PermanentValueWhenDiceIs6,//28
         Gain1DodgeWhenBattleStart,//30
         Gain1EnhanceWhenBattleStart,//31
         Gain2StrengthWhenBattleStart,//32
@@ -116,7 +119,7 @@ namespace DesignerScripts
                     false,
                     BuffUpdateEnum.Add,
                     BuffRemoveStackUpdateEnum.Reduce,
-                    "",null,
+                    BuffEventName.CheckForBleed.ToString(),null,
                     "",null,
                     "",null,
                     BuffEventName.Bleed.ToString(),null,
@@ -259,7 +262,7 @@ namespace DesignerScripts
                     false,
                     BuffUpdateEnum.Add,
                     BuffRemoveStackUpdateEnum.Reduce,
-                    "",null,
+                    BuffEventName.CheckForStrength.ToString(),null,
                     "",null,
                     "",null,
                     "",null,
@@ -800,6 +803,34 @@ namespace DesignerScripts
              },
 
              {
+                BuffDataName.RecoverHalfHealthWhenGain.ToString(),new BuffData
+                (
+                    "2_19",
+                    BuffDataName.RecoverHalfHealthWhenGain.ToString(),
+                    "icon2_19",
+                    new [] {"Self"},
+                    5,
+                    0,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    BuffEventName.RecoverHalfHealthWhenGain.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
                 BuffDataName.Recover25HealthWhenHealthBelowHalf.ToString(),new BuffData
                 (
                     "2_20",
@@ -1024,6 +1055,178 @@ namespace DesignerScripts
                  )
 
              },
+
+             {
+                BuffDataName.Gain1DodgeWhenBattleStart.ToString(),new BuffData
+                (
+                    "2_30",
+                    BuffDataName.Gain1DodgeWhenBattleStart.ToString(),
+                    "icon2_30",
+                    new [] {"Self"},
+                    5,
+                    0,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    BuffEventName.Gain1DodgeWhenBattleStart.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.Gain1EnhanceWhenBattleStart.ToString(),new BuffData
+                (
+                    "2_31",
+                    BuffDataName.Gain1EnhanceWhenBattleStart.ToString(),
+                    "icon2_31",
+                    new [] {"Self"},
+                    5,
+                    0,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    BuffEventName.Gain1EnhanceWhenBattleStart.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.Gain2StrengthWhenBattleStart.ToString(),new BuffData
+                (
+                    "2_32",
+                    BuffDataName.Gain2StrengthWhenBattleStart.ToString(),
+                    "icon2_32",
+                    new [] {"Self"},
+                    5,
+                    0,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    BuffEventName.Gain2StrengthWhenBattleStart.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.Gain2ToughWhenBattleStart.ToString(),new BuffData
+                (
+                    "2_33",
+                    BuffDataName.Gain2ToughWhenBattleStart.ToString(),
+                    "icon2_33",
+                    new [] {"Self"},
+                    5,
+                    0,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    BuffEventName.Gain2ToughWhenBattleStart.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.Gain2VulnerableWhenBattleStart.ToString(),new BuffData
+                (
+                    "2_34",
+                    BuffDataName.Gain2VulnerableWhenBattleStart.ToString(),
+                    "icon2_34",
+                    new [] {"Target"},
+                    5,
+                    0,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    BuffEventName.Gain2VulnerableWhenBattleStart.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+             {
+                BuffDataName.Gain2WeakWhenBattleStart.ToString(),new BuffData
+                (
+                    "2_35",
+                    BuffDataName.Gain2WeakWhenBattleStart.ToString(),
+                    "icon2_35",
+                    new [] {"Target"},
+                    5,
+                    0,
+                    true,
+                    BuffUpdateEnum.Add,
+                    BuffRemoveStackUpdateEnum.Reduce,
+                    "",null,
+                    "",null,
+                    BuffEventName.Gain2WeakWhenBattleStart.ToString(),null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    "",null,
+                    ChaControlState.origin,
+                    null
+                 )
+
+             },
+
+
+
+
              {
                 BuffDataName.Add1Reroll.ToString(),new BuffData
                 (

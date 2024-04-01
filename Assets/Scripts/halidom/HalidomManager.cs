@@ -64,10 +64,10 @@ public class HalidomManager : MonoBehaviour
     private void Start()
     {
         //Test
-        AddHalidom(HalidomData.halidomDictionary[HalidomName.Add2ValueIfResultIsEven.ToString()]);
-        SacredObjectUIManager.Instance.CreateSacredUIObject(0,HalidomData.halidomDictionary[HalidomName.Add2ValueIfResultIsEven.ToString()].description);
-        AddHalidom(HalidomData.halidomDictionary[HalidomName.Add2ValueIfResultIsOdd.ToString()]);
-        SacredObjectUIManager.Instance.CreateSacredUIObject(1, HalidomData.halidomDictionary[HalidomName.Add2ValueIfResultIsOdd.ToString()].description);
+        AddHalidom(HalidomData.halidomDictionary[HalidomName.偶数注.ToString()]);
+        SacredObjectUIManager.Instance.CreateSacredUIObject(0,HalidomData.halidomDictionary[HalidomName.偶数注.ToString()].description);
+        AddHalidom(HalidomData.halidomDictionary[HalidomName.奇数注.ToString()]);
+        SacredObjectUIManager.Instance.CreateSacredUIObject(1, HalidomData.halidomDictionary[HalidomName.奇数注.ToString()].description);
         //打印圣物所有buff信息
         foreach(var halidom in halidomList)
         {
@@ -104,7 +104,7 @@ public class HalidomManager : MonoBehaviour
                     //获取圣物的创建者 给予buffinfo
                     buffInfo.creator = BattleManager.Instance.parameter.playerChaState.gameObject;
                     //获取圣物buff的对象（暂定 没有给敌人上buff）
-                    buffInfo.target=BattleManager.Instance.parameter.playerChaState.gameObject;
+                    buffInfo.target=BattleManager.Instance.parameter.enemyChaStates[0].gameObject;
                     //触发圣物的OnCreate回调点
                     buffInfo.buffData.onCreate?.Invoke(buffInfo);
                 }

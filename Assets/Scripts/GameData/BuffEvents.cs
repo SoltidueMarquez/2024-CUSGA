@@ -38,33 +38,37 @@ namespace DesignerScripts
         BuffStackMinus1,//Buff层数减1
 
         #region 圣物buff
-        Add2ValueIfResultIsEven,
-        Add2ValueIfResultIsOdd,
-        Add3ValueIfResultBelow3,
-        Add3ValueIfResultAbove4,
+        Add2ValueIfResultIsEven,//1
+        Add2ValueIfResultIsOdd,//2
+        Add3ValueIfResultBelow3,//5
+        Add3ValueIfResultAbove4,//6
         GainAndChoose2DicesGiveRandomCoating,
         GainAndChoose2DicesGive1PermanentEnhance,
-        EnhanceEnemyVulnerability,
-        EnhancePlayerStrength,
-        Add1StackIfEnemyHaveBleed,
+        
+        Add1StackIfEnemyHaveBleed,//8
+        CheckForBleed,//8
         Add1StackIfEnemyHaveDebuff,
-        Add1StackIfPlayerHaveStrength,
+        Add1StackIfPlayerHaveStrength,//9
+        CheckForStrength,//9
+        EnhancePlayerStrength,//10
+        EnhanceEnemyVulnerability,//11
         Add1StackIfPlayerHavePositiveBuff,
-        Add4MoneyWhenBattleEnd,
-        GainHalfMoney,
-        Add50PercentAttackEvery3TimesLoseHealth,
+        Add4MoneyWhenBattleEnd,//12
+        GainHalfMoney,//13
+        Add50PercentAttackEvery3TimesLoseHealth,//16
         Add90PercentAttackEvery9TimesUseDice,
         Recover20HealthWhenEnterStore,
-        Get5MaxHealthWhenGain,
-        Recover25HealthWhenHealthBelowHalf,
+        Get5MaxHealthWhenGain,//18
+        RecoverHalfHealthWhenGain,//19
+        Recover25HealthWhenHealthBelowHalf,//20
         Add1Reroll,
         HalfInStore,
-        ReuseDiceWhenDiceIs1,
-        Add2MoneyWhenDiceIs2,
-        Recover5HealthWhenDiceIs3,
-        Add1EnemyBleedStackWhenDiceIs4,
-        Add1PlayerStrengthStackWhenDiceIs5,
-        Add1PermanentValueWhenDiceIs6,
+        ReuseDiceWhenDiceIs1,//23
+        Add2MoneyWhenDiceIs2,//24
+        Recover5HealthWhenDiceIs3,//25
+        Add1EnemyBleedStackWhenDiceIs4,//26
+        Add1PlayerStrengthStackWhenDiceIs5,//27
+        Add1PermanentValueWhenDiceIs6,//28
         Gain1DodgeWhenBattleStart,//30
         Gain1EnhanceWhenBattleStart,//31
         Gain2StrengthWhenBattleStart,//32
@@ -78,6 +82,13 @@ namespace DesignerScripts
         #region 存回调点函数的字典
         public static Dictionary<string, OnBuffCreate> onCreateFunc = new Dictionary<string, OnBuffCreate>()
         {
+            //普通buff
+            {
+                BuffEventName.CheckForBleed.ToString(),CheckForBleed
+            },
+            {
+                BuffEventName.CheckForStrength.ToString(),CheckForStrength
+            },
             //圣物buff
             {
                 BuffEventName.Get5MaxHealthWhenGain.ToString(),Get5MaxHealthWhenGain
@@ -87,6 +98,9 @@ namespace DesignerScripts
             },
             {
                 BuffEventName.GainHalfMoney.ToString(),GainHalfMoney
+            },
+            {
+                BuffEventName.RecoverHalfHealthWhenGain.ToSafeString(),RecoverHalfHealthWhenGain
             }
 
         };
@@ -103,7 +117,26 @@ namespace DesignerScripts
             //圣物buff
             {
                 BuffEventName.Recover25HealthWhenHealthBelowHalf.ToString(),Recover25HealthWhenHealthBelowHalf
-            }
+            },
+            {
+                BuffEventName.Gain1DodgeWhenBattleStart.ToString(),Gain1DodgeWhenBattleStart
+            },
+            {
+                BuffEventName.Gain1EnhanceWhenBattleStart.ToString(),Gain1EnhanceWhenBattleStart
+            },
+            {
+                BuffEventName.Gain2StrengthWhenBattleStart.ToString(),Gain2StrengthWhenBattleStart
+            },
+            {
+                BuffEventName.Gain2ToughWhenBattleStart.ToString(),Gain2ToughWhenBattleStart
+            },
+            {
+                BuffEventName.Gain2VulnerableWhenBattleStart.ToString(),Gain2VulnerableWhenBattleStart
+            },
+            {
+                BuffEventName.Gain2WeakWhenBattleStart.ToString(),Gain2WeakWhenBattleStart
+            },
+            
         };
         public static Dictionary<string, OnRoundEnd> onRoundEndFunc = new Dictionary<string, OnRoundEnd>()
         {
@@ -241,6 +274,27 @@ namespace DesignerScripts
             Debug.Log("流血造成" + bleedDamage + "伤害");
             
         }
+        public static void CheckForBleed(BuffInfo buffInfo)
+        {
+            if (HalidomManager.Instance.halidomList != null)
+            {
+                foreach(var halidom in HalidomManager.Instance.halidomList)
+                {
+                    //检测圣物有没有手术刀
+                    if(halidom.id == "8")
+                    {
+                        //检测buff施加的对象是否是敌人
+                        if(buffInfo.target == BattleManager.Instance.parameter.enemyChaStates[0].gameObject)
+                        {
+                            //如果对象是敌人，且圣物管理器有手术刀，流血层数+1
+                            buffInfo.curStack++;
+                            Debug.Log("因为手术刀，敌人流血层数+1");
+                        }
+                        
+                    }
+                }
+            }
+        }
 
         public static void Spirit(BuffInfo buffInfo)
         {
@@ -282,6 +336,28 @@ namespace DesignerScripts
                 Debug.Log("虚弱效果生效");
             }
 
+        }
+
+        public static void CheckForStrength(BuffInfo buffInfo)
+        {
+            if (HalidomManager.Instance.halidomList != null)
+            {
+                foreach (var halidom in HalidomManager.Instance.halidomList)
+                {
+                    //检测圣物有没有蛋白粉
+                    if (halidom.id == "9")
+                    {
+                        //检测buff施加的对象是否是玩家
+                        if (buffInfo.target == BattleManager.Instance.parameter.playerChaState.gameObject)
+                        {
+                            //如果对象是敌人，且圣物管理器有手术刀，流血层数+1
+                            buffInfo.curStack++;
+                            Debug.Log("因为蛋白粉，我方力量层数+1");
+                        }
+
+                    }
+                }
+            }
         }
 
         public static void Strength(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
@@ -410,8 +486,9 @@ namespace DesignerScripts
 
         public static void Add1StackIfEnemyHaveBleed(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
+            //4.1 放到Bleed的OnCreate中了
             //找damageinfo中的addbuffs有没有流血
-            if (damageInfo.addBuffs != null)
+            /*if (damageInfo.addBuffs != null)
             {
                 BuffInfo findBuffInfo = damageInfo.addBuffs.Find(x => x.buffData.id == "1_1");
                 if (findBuffInfo != null)
@@ -419,12 +496,13 @@ namespace DesignerScripts
                     findBuffInfo.curStack++;
                     Debug.Log("敌人流血层数+1");
                 }
-            }
+            }*/
         }
 
         public static SingleDiceObj Add1StackIfPlayerHaveStrength(BuffInfo buffInfo, SingleDiceObj singleDiceObj)
         {
-            if (singleDiceObj.model.buffInfos != null)
+            //4.1 放到Strength的OnCreate中了
+            /*if (singleDiceObj.model.buffInfos != null)
             {
                 foreach(var  diceBuffInfo in singleDiceObj.model.buffInfos)
                 {
@@ -435,15 +513,15 @@ namespace DesignerScripts
                         Debug.Log("玩家力量层数+1");
                     }
                 }
-            }
+            }*/
             return singleDiceObj;
         }
 
         public static void EnhancePlayerStrength(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
-            if(target.GetComponent<BuffHandler>() != null)
+            if(buffInfo.creator.GetComponent<BuffHandler>() != null)
             {
-                BuffHandler targetBuffHandler = target.GetComponent<BuffHandler>();
+                BuffHandler targetBuffHandler = buffInfo.creator.GetComponent<BuffHandler>();
                 //查询力量buff
                 BuffInfo findBuffInfo = targetBuffHandler.buffList.Find(x => x.buffData.id == "1_6");
 
@@ -458,9 +536,9 @@ namespace DesignerScripts
         }
         public static void EnhanceEnemyVulnerability(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
-            if (target.GetComponent<BuffHandler>() != null)
+            if (buffInfo.target.GetComponent<BuffHandler>() != null)
             {
-                BuffHandler targetBuffHandler = target.GetComponent<BuffHandler>();
+                BuffHandler targetBuffHandler = buffInfo.target.GetComponent<BuffHandler>();
                 //查询流血buff
                 BuffInfo findBuffInfo = targetBuffHandler.buffList.Find(x => x.buffData.id == "1_3");
 
@@ -553,6 +631,18 @@ namespace DesignerScripts
 
         }
 
+        public static void RecoverHalfHealthWhenGain(BuffInfo buffInfo)
+        {
+            //获取玩家的状态
+            ChaState tempChaState = buffInfo.creator.GetComponent<ChaState>();
+            //访问当前的资源
+            if (tempChaState.resource.currentHp > 0)
+            {
+                tempChaState.ModResources(new ChaResource(tempChaState.baseProp.health/2, 0, 0, 0));
+                Debug.Log("获得时回复一半生命");
+            }
+        }
+
         public static void Add1Reroll(BuffInfo buffInfo)
         {
             //RerollCount在BattleManager中
@@ -622,11 +712,11 @@ namespace DesignerScripts
         {
             if (damageInfo.damage.indexDamageRate == 4)
             {
-                if (target.GetComponent<BuffHandler>() != null)
+                if (buffInfo.target.GetComponent<BuffHandler>() != null)
                 {
-                    BuffHandler targetBuffHandler = target.GetComponent<BuffHandler>();
+                    BuffHandler targetBuffHandler = buffInfo.target.GetComponent<BuffHandler>();
                     //查询流血buff
-                    BuffInfo findBuffInfo = targetBuffHandler.buffList.Find(x => x.buffData.id == "1");
+                    BuffInfo findBuffInfo = targetBuffHandler.buffList.Find(x => x.buffData.id == "1_1");
 
                     //如果找到流血buff
                     if (findBuffInfo != null)
@@ -644,11 +734,11 @@ namespace DesignerScripts
         {
             if (damageInfo.damage.indexDamageRate == 5)
             {
-                if (target.GetComponent<BuffHandler>() != null)
+                if (buffInfo.creator.GetComponent<BuffHandler>() != null)
                 {
-                    BuffHandler targetBuffHandler = target.GetComponent<BuffHandler>();
+                    BuffHandler targetBuffHandler = buffInfo.creator.GetComponent<BuffHandler>();
                     //查询力量buff
-                    BuffInfo findBuffInfo = targetBuffHandler.buffList.Find(x => x.buffData.id == "6");
+                    BuffInfo findBuffInfo = targetBuffHandler.buffList.Find(x => x.buffData.id == "1_6");
 
                     //如果找到力量buff
                     if (findBuffInfo != null)
@@ -666,8 +756,77 @@ namespace DesignerScripts
         {
             if (damageInfo.damage.indexDamageRate == 6)
             {
-                damageInfo.damage.indexDamageRate += 6;
+                damageInfo.damage.baseDamage += 6;
                 Debug.Log("骰子为6，增加6点伤害");
+            }
+        }
+
+        public static void Gain1DodgeWhenBattleStart(BuffInfo buffInfo)
+        {
+            if(BattleManager.Instance.parameter.turns == 1)
+            {
+                BuffInfo newDodgeBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target);
+                //给对面添加伤害为0的buff
+                buffInfo.target.GetComponent<ChaState>().AddBuff(newDodgeBuff, buffInfo.target);
+                Debug.Log("战斗开始获得1层闪避");
+            }
+        }
+
+        public static void Gain1EnhanceWhenBattleStart(BuffInfo buffInfo)
+        {
+            if (BattleManager.Instance.parameter.turns == 1)
+            {
+                BuffInfo newEnhanceBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Enhance.ToString()], buffInfo.creator, buffInfo.target);
+                buffInfo.target.GetComponent<ChaState>().AddBuff(newEnhanceBuff, buffInfo.creator);
+                Debug.Log("战斗开始获得1层强化");
+            }
+        }
+
+        public static void Gain2StrengthWhenBattleStart(BuffInfo buffInfo)
+        {
+            if (BattleManager.Instance.parameter.turns == 1)
+            {
+                BuffInfo newStrengthBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target);
+                BuffInfo newStrengthBuff2 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target);
+                buffInfo.target.GetComponent<ChaState>().AddBuff(newStrengthBuff1, buffInfo.creator);
+                buffInfo.target.GetComponent<ChaState>().AddBuff(newStrengthBuff2, buffInfo.creator);
+                Debug.Log("战斗开始获得2层力量");
+            }
+        }
+
+        public static void Gain2ToughWhenBattleStart(BuffInfo buffInfo)
+        {
+            if (BattleManager.Instance.parameter.turns == 1)
+            {
+                BuffInfo newToughBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target);
+                BuffInfo newToughBuff2 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target);
+                buffInfo.target.GetComponent<ChaState>().AddBuff(newToughBuff1, buffInfo.creator);
+                buffInfo.target.GetComponent<ChaState>().AddBuff(newToughBuff2, buffInfo.creator);
+                Debug.Log("战斗开始获得2层坚韧");
+            }
+        }
+
+        public static void Gain2VulnerableWhenBattleStart(BuffInfo buffInfo)
+        {
+            if (BattleManager.Instance.parameter.turns == 1)
+            {
+                BuffInfo newVulnerableBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Vulnerable.ToString()], buffInfo.creator, buffInfo.target);
+                BuffInfo newVulnerableBuff2 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Vulnerable.ToString()], buffInfo.creator, buffInfo.target);
+                buffInfo.target.GetComponent<ChaState>().AddBuff(newVulnerableBuff1, buffInfo.target);
+                buffInfo.target.GetComponent<ChaState>().AddBuff(newVulnerableBuff2, buffInfo.target);
+                Debug.Log("战斗开始获得2层易伤");
+            }
+        }
+
+        public static void Gain2WeakWhenBattleStart(BuffInfo buffInfo)
+        {
+            if (BattleManager.Instance.parameter.turns == 1)
+            {
+                BuffInfo newWeakBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Weak.ToString()], buffInfo.creator, buffInfo.target);
+                BuffInfo newWeakBuff2 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Weak.ToString()], buffInfo.creator, buffInfo.target);
+                buffInfo.target.GetComponent<ChaState>().AddBuff(newWeakBuff1, buffInfo.target);
+                buffInfo.target.GetComponent<ChaState>().AddBuff(newWeakBuff2, buffInfo.target);
+                Debug.Log("战斗开始获得2层虚弱");
             }
         }
 
