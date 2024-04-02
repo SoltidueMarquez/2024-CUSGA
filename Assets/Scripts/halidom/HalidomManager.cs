@@ -109,6 +109,7 @@ public class HalidomManager : MonoBehaviour
                     buffInfo.buffData.onCreate?.Invoke(buffInfo);
                 }
                 RefreshAllHalidoms();
+                BattleManager.Instance.parameter.playerChaState.AttrAndResourceRecheck();
                 //找到空的格子后就跳出循环
                 break;
             }

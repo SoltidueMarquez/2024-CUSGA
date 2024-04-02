@@ -130,7 +130,7 @@ public class ChaState : MonoBehaviour
     /// <summary>
     /// 重新计算属性,在buff添加或者删除的时候调用
     /// </summary>
-    private void AttrAndResourceRecheck()
+    public void AttrAndResourceRecheck()
     {
         //创建一个新变量，先把原本的属性保存下来，用于后续计算差值
         ChaProperty chaProperty = new ChaProperty(this.prop);
