@@ -44,7 +44,7 @@ namespace DesignerScripts
         Add3ValueIfResultAbove4,//6
         GainAndChoose2DicesGiveRandomCoating,
         GainAndChoose2DicesGive1PermanentEnhance,
-        
+
         Add1StackIfEnemyHaveBleed,//8
         CheckForBleed,//8
         Add1StackIfEnemyHaveDebuff,
@@ -136,7 +136,7 @@ namespace DesignerScripts
             {
                 BuffEventName.Gain2WeakWhenBattleStart.ToString(),Gain2WeakWhenBattleStart
             },
-            
+
         };
         public static Dictionary<string, OnRoundEnd> onRoundEndFunc = new Dictionary<string, OnRoundEnd>()
         {
@@ -272,27 +272,28 @@ namespace DesignerScripts
             //这边还没决定好，是直接扣血，还是调用伤害函数，因为可能在damageManager里会有接视觉表现，例如跳数字的效果，但是如果直接在这边扣血，那就需要在这边也调用视觉表现
             buffInfo.target.GetComponent<ChaState>().ModResources(new ChaResource(-bleedDamage, 0, 0, 0));
             Debug.Log("流血造成" + bleedDamage + "伤害");
-            
+
         }
+
+
         public static void CheckForBleed(BuffInfo buffInfo)
         {
             if (HalidomManager.Instance.halidomList != null)
             {
-                /*foreach(var halidom in HalidomManager.Instance.halidomList)
+                for (int i = 0; i < HalidomManager.Instance.halidomList.Length; i++)
                 {
-                    //检测圣物有没有手术刀
-                    if(halidom.id == "8")
+                    if(HalidomManager.Instance.halidomList[i]!=null)
                     {
-                        //检测buff施加的对象是否是敌人
-                        if(buffInfo.target == BattleManager.Instance.parameter.enemyChaStates[0].gameObject)
+                        if (HalidomManager.Instance.halidomList[i].id == "8")
                         {
-                            //如果对象是敌人，且圣物管理器有手术刀，流血层数+1
-                            buffInfo.curStack++;
-                            Debug.Log("因为手术刀，敌人流血层数+1");
+                            if (buffInfo.target == BattleManager.Instance.parameter.enemyChaStates[0].gameObject)
+                            {
+                                buffInfo.curStack++;
+                                Debug.Log("因为手术刀，敌人流血层数+1");
+                            }
                         }
-                        
                     }
-                }*/
+                }
             }
         }
 
@@ -301,7 +302,7 @@ namespace DesignerScripts
             int health = buffInfo.curStack * 2;
             buffInfo.target.GetComponent<ChaState>().ModResources(new ChaResource(health, 0, 0, 0));
             Debug.Log("精力回复" + health + "生命");
-            
+
         }
 
         public static void Vulnerable(BuffInfo buffInfo, DamageInfo damageInfo, GameObject attack)
@@ -342,20 +343,25 @@ namespace DesignerScripts
         {
             if (HalidomManager.Instance.halidomList != null)
             {
-                foreach (var halidom in HalidomManager.Instance.halidomList)
+                for (int i = 0; i < HalidomManager.Instance.halidomList.Length; i++)
                 {
-                    //检测圣物有没有蛋白粉
-                    if (halidom.id == "9")
+                    if (HalidomManager.Instance.halidomList[i] != null)
                     {
-                        //检测buff施加的对象是否是玩家
-                        if (buffInfo.target == BattleManager.Instance.parameter.playerChaState.gameObject)
+                        //检测圣物有没有蛋白粉
+                        if (HalidomManager.Instance.halidomList[i].id == "9")
                         {
-                            //如果对象是敌人，且圣物管理器有手术刀，流血层数+1
-                            buffInfo.curStack++;
-                            Debug.Log("因为蛋白粉，我方力量层数+1");
-                        }
+                            //检测buff施加的对象是否是玩家
+                            if (buffInfo.target == BattleManager.Instance.parameter.playerChaState.gameObject)
+                            {
+                                //如果对象是敌人，且圣物管理器有手术刀，流血层数+1
+                                buffInfo.curStack++;
+                                Debug.Log("因为蛋白粉，我方力量层数+1");
+                            }
 
+                        }
                     }
+                    
+                    
                 }
             }
         }
@@ -379,9 +385,9 @@ namespace DesignerScripts
                 //触发后-1层
                 buffInfo.curStack--;
                 Debug.Log("buff层数-1");
-                if(buffInfo.curStack == 0)
+                if (buffInfo.curStack == 0)
                 {
-                    buffInfo.isPermanent=false;
+                    buffInfo.isPermanent = false;
                 }
             }
 
@@ -519,14 +525,14 @@ namespace DesignerScripts
 
         public static void EnhancePlayerStrength(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
-            if(buffInfo.creator.GetComponent<BuffHandler>() != null)
+            if (buffInfo.creator.GetComponent<BuffHandler>() != null)
             {
                 BuffHandler targetBuffHandler = buffInfo.creator.GetComponent<BuffHandler>();
                 //查询力量buff
                 BuffInfo findBuffInfo = targetBuffHandler.buffList.Find(x => x.buffData.id == "1_6");
 
                 //如果找到力量buff
-                if(findBuffInfo != null)
+                if (findBuffInfo != null)
                 {
                     //再增伤0.15f即0.25->0.4
                     damageInfo.addDamageArea += 0.15f;
@@ -638,7 +644,7 @@ namespace DesignerScripts
             //访问当前的资源
             if (tempChaState.resource.currentHp > 0)
             {
-                tempChaState.ModResources(new ChaResource(tempChaState.baseProp.health/2, 0, 0, 0));
+                tempChaState.ModResources(new ChaResource(tempChaState.baseProp.health / 2, 0, 0, 0));
                 Debug.Log("获得时回复一半生命");
             }
         }
@@ -672,7 +678,7 @@ namespace DesignerScripts
             //深拷贝一条damageinfo信息加入伤害队列
             if (damageInfo.damage.indexDamageRate == 1)
             {
-                DamageInfo damageInfoCopy = new DamageInfo(damageInfo.attacker,damageInfo.defender,damageInfo.damage,damageInfo.diceType,damageInfo.level,damageInfo.addBuffs);
+                DamageInfo damageInfoCopy = new DamageInfo(damageInfo.attacker, damageInfo.defender, damageInfo.damage, damageInfo.diceType, damageInfo.level, damageInfo.addBuffs);
                 DamageManager.Instance.DoDamage(damageInfoCopy);
                 Debug.Log("重复打出");
             }
@@ -763,7 +769,7 @@ namespace DesignerScripts
 
         public static void Gain1DodgeWhenBattleStart(BuffInfo buffInfo)
         {
-            if(BattleManager.Instance.parameter.turns == 1)
+            if (BattleManager.Instance.parameter.turns == 1)
             {
                 BuffInfo newDodgeBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target);
                 //给对面添加伤害为0的buff

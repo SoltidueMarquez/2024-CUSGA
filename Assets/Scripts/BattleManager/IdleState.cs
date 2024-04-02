@@ -63,11 +63,11 @@ public class PreparationState : IState
     public void OnEnter()
     {
         //Test
-        foreach(var enemy in manager.parameter.enemyChaStates)
-        {
-            //enemy.AddBuff(new BuffInfo(BuffDataTable.buffData[BuffDataName.Bleed.ToString()]),enemy.gameObject);
-            Debug.Log("给敌人加了一个流血buff");
-        }
+        Debug.Log("Test内容-------------------");
+        Debug.Log("玩家的生命值是" + manager.parameter.playerChaState.prop.health);
+        Debug.Log("Test内容-------------------");
+
+
 
         Debug.Log("Enter PreparationState");
 
@@ -129,6 +129,17 @@ public class PlayerRoundStartResolutionState : IState
     public void OnExit()
     {
         Debug.Log("Exit PlayerRoundStartResolutionState");
+
+        //Test
+        if (manager.parameter.turns == 1)
+        {
+            Debug.Log("Test---------------------");
+            HalidomManager.Instance.AddHalidom(DesignerScripts.HalidomData.halidomDictionary[HalidomName.烤土豆.ToString()]);
+            Debug.Log("添加圣物烤土豆");
+            Debug.Log("玩家血量上限为"+manager.parameter.playerChaState.prop.health);
+            Debug.Log("Test---------------------");
+        }
+
 
     }
 
@@ -271,16 +282,16 @@ public class EnemyActionState : IState
 
     public void OnUpdate()
     {
-    ////TODO: 敌人AI逻辑
-    //    foreach (var enemy in manager.parameter.enemyChaStates)
-    //    {
-    //        enemy.GetBattleDiceHandler().CastDiceAll(enemy, manager.parameter.playerChaState.gameObject);
-    //        DamageManager.Instance.DealWithAllDamage();
-    //    }
-    //    manager.TransitionState(GameState.EnemyRoundEndResolution);
-    
+        ////TODO: 敌人AI逻辑
+        //    foreach (var enemy in manager.parameter.enemyChaStates)
+        //    {
+        //        enemy.GetBattleDiceHandler().CastDiceAll(enemy, manager.parameter.playerChaState.gameObject);
+        //        DamageManager.Instance.DealWithAllDamage();
+        //    }
+        //    manager.TransitionState(GameState.EnemyRoundEndResolution);
+
     }
-    
+
 }
 
 public class EnemyRoundEndResolutionState : IState

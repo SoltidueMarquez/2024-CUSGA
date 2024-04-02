@@ -370,6 +370,7 @@ MonoBehaviour:
   descriptionCanvas: {fileID: 7966917798512068786}
   descriptionText: {fileID: 8262169550973622426}
   saleUI: {fileID: 7392091066134577002}
+  saleButton: {fileID: 8167802557555201143}
   saleButtonText: {fileID: 96965888174995931}
   _currentColumn:
     transform: {fileID: 0}

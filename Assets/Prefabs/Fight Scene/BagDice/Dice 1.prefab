@@ -90,12 +90,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8969deb79056ac040a5e0b4b585db71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 
   salePrice: 1
-  desc: "\u4E00\u70B9\uFF0C\u4EC5\u4EC5\u662F\u4E00\u70B9"
   descriptionCanvas: {fileID: 5956872092027956793}
   descriptionText: {fileID: 1999488926751938915}
   saleUI: {fileID: 6788775339226579424}
+  saleButton: {fileID: 6911376138040947346}
   saleButtonText: {fileID: 5385493828929871342}
   _currentColumn:
     transform: {fileID: 0}
