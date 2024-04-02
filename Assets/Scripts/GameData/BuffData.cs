@@ -97,12 +97,12 @@ namespace DesignerScripts
             "",null,//OnRoll回调点 ，回调点参数额外设置
             "",null,//OnKill回调点 ，回调点参数额外设置
             "",null,//OnBeKill回调点 ，回调点参数额外设置
-             "",null,//OnCast回调点 ，回调点参数额外设置
+            "",null,//OnCast回调点 ，回调点参数额外设置
             //buff对玩家的状态修改（无敌，能否出牌，局内骰面更改），
             ChaControlState.origin,
             //buff对玩家的属性(血量，金钱，护盾，重新投掷次数）修改
             null
-            ) 
+            )
             },
 
             #region 基础buff
@@ -126,13 +126,13 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
-                    "",null, 
+                    "",null,
                     "",null,
                     "",null,
                     ChaControlState.origin,
                     null
                  )
-                
+
             },
             //回合结束加血+层数-1
             {
@@ -634,7 +634,7 @@ namespace DesignerScripts
                  )
 
              },
-             
+
 
              {
                 BuffDataName.Add4MoneyWhenBattleEnd.ToString(),new BuffData
