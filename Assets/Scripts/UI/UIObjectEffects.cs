@@ -23,6 +23,7 @@ namespace UI
         [SerializeField,Tooltip("说明UI")]protected GameObject descriptionCanvas;
         [SerializeField,Tooltip("说明Text")]protected Text descriptionText;
         [SerializeField,Tooltip("出售UI")] protected GameObject saleUI;
+        [SerializeField, Tooltip("出售按钮")] protected Button saleButton;
         [SerializeField,Tooltip("出售按钮Text")]protected Text saleButtonText;
 
         protected State _state;
@@ -36,12 +37,23 @@ namespace UI
         {
             descriptionText.text = id;
             saleButtonText.text = $"出售\n￥{salePrice}";
+            saleButton.onClick.AddListener(DestroyUI);
+            //TODO:saleButton绑定移除圣物/背包骰面效果函数：增加一个委托类型的参数(就是对应的移除函数)
             _state = State.None;
             _currentColumn = UIManager.Instance.DetectColumn(gameObject, columns, offset); //检测当前所在的物品栏
             if (_currentColumn != null) //初始化当前所在的物品栏
             {
                 _currentColumn.bagObject = gameObject;
             }
+        }
+
+        /// <summary>
+        /// 摧毁UI函数
+        /// </summary>
+        private void DestroyUI()
+        {
+            _currentColumn.bagObject = null; //所在的物品栏置空
+            Destroy(gameObject);
         }
     }
 }
