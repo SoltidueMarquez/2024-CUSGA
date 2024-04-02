@@ -33,7 +33,7 @@ public class HalidomManager : MonoBehaviour
     /// 初始属性
     /// </summary>
     public ChaProperty baseProp = new ChaProperty(
-        200, 400, 4, 0
+        50, 400, 4, 0
     );
 
 
