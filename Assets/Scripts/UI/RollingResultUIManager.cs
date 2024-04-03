@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -32,6 +33,21 @@ namespace UI
             var tmp = Instantiate(template, columns[index], true);
             tmp.transform.position = columns[index].position;//更改位置
             tmp.GetComponent<RollingResultDiceUI>().Init(index, location, id);//初始化
+            tmp.SetActive(true);
+            _resultList.Add(tmp);
+        }
+        /// <summary>
+        /// 生成奖励界面的投掷结果函数,请按投掷顺序有序生成
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="id"></param>
+        /// <param name="location"></param>
+        public void CreateRewardResult(int index, string id, Vector2Int location)
+        {
+            var tmp = Instantiate(template, columns[index], true);
+            tmp.transform.position = columns[index].position;//更改位置
+            tmp.GetComponent<RollingResultDiceUI>().Init(index, location, id);//初始化
+            tmp.GetComponent<Button>().interactable = false;
             tmp.SetActive(true);
             _resultList.Add(tmp);
         }
