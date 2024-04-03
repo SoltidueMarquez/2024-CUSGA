@@ -35,6 +35,10 @@ public class HalidomManager : MonoBehaviour
     public ChaProperty baseProp = new ChaProperty(
         50, 400, 4, 0
     );
+    /// <summary>
+    /// 存放移除圣物的函数
+    /// </summary>
+    public Action<int> removeHalidomDelegate;
 
 
 
@@ -59,6 +63,8 @@ public class HalidomManager : MonoBehaviour
         //TODO:初始化圣物上限
         //设置数组上限为最大圣物上限
         halidomList = new HalidomObject[halidomMaxCount];
+        //设置移除圣物的函数
+        removeHalidomDelegate = RemoveHalidom;
     }
 
     private void Start()
@@ -97,7 +103,7 @@ public class HalidomManager : MonoBehaviour
                 //将圣物加入圣物列表
                 halidomList[i] = halidom;
                 //获得圣物在格子中的序号
-                halidom.halidomIndex = i + 1;
+                halidom.halidomIndex = i ;
                 //触发圣物OnCreate回调点
                 foreach (var buffInfo in halidom.buffInfos)
                 {
@@ -124,8 +130,8 @@ public class HalidomManager : MonoBehaviour
     {
         for (int i = 0; i < halidomList.Length; i++)
         {
-            //index为实际数组下标+1
-            if (i == index - 1)
+            //index为实际数组下标
+            if (i == index )
             {
                 //触发圣物OnRemove回调点
                 foreach (var buffInfo in halidomList[i].buffInfos)
@@ -138,6 +144,7 @@ public class HalidomManager : MonoBehaviour
                 halidomList[i] = null;
                 //重新计算属性
                 RefreshAllHalidoms();
+                BattleManager.Instance.parameter.playerChaState.AttrAndResourceRecheck();
 
             }
         }
