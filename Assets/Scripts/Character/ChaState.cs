@@ -121,6 +121,9 @@ public class ChaState : MonoBehaviour
         }
         return damageInfo.finalDamage < this.resource.currentHp;
     }
+    /// <summary>
+    /// 角色死亡，根据是敌人还是玩家，调用不同的逻辑，不同的逻辑在BattleManager中实现
+    /// </summary>
     public void Kill()
     {
         //TODO:玩家死亡的逻辑
@@ -148,8 +151,8 @@ public class ChaState : MonoBehaviour
         this.prop = (this.baseProp + buffProp[0]) * (this.buffProp[1]) + halidomProp;
         //计算差值
         chaProperty = this.prop - chaProperty;
-        //根据差值，重新计算资源
-        this.resource += new ChaResource(chaProperty.health, chaProperty.money, chaProperty.maxRollTimes, chaProperty.shield);
+        //根据差值，重新计算资源,包括更新UI
+        this.ModResources(new ChaResource(chaProperty.health, chaProperty.money, chaProperty.maxRollTimes, chaProperty.shield));
     }
     public void ModResources(ChaResource value)
     {
