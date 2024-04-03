@@ -13,6 +13,12 @@ namespace UI
         [SerializeField] private List<BuffUIObjectEfffect> playerBuffList;
         [SerializeField] private List<BuffUIObjectEfffect> enemyBuffList;
 
+        /// <summary>
+        /// 创建buff UI函数
+        /// </summary>
+        /// <param name="character"></param>
+        /// <param name="desc"></param>
+        /// <param name="durationTime"></param>
         public void CreateBuffUIObject(Character character, string desc, int durationTime)
         {
             Transform parent = null;
