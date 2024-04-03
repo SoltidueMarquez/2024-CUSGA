@@ -19,7 +19,8 @@ namespace UI
         /// </summary>
         /// <param name="index">所在栏位序列号</param>
         /// <param name="id"></param>
-        public void CreateSacredUIObject(int index, string id)
+        /// <param name="remove"></param>
+        public void CreateSacredUIObject(int index, string id, Action<int> remove)
         {
             if (sacredObjectColumns[index].bagObject != null)
             {
@@ -28,7 +29,7 @@ namespace UI
             }
             var tmp = Instantiate(template, parent, true);
             tmp.transform.position = sacredObjectColumns[index].transform.position;//更改位置
-            tmp.GetComponent<SacredObjectsUIEffects>().Init(sacredObjectColumns, offsetS, id);//初始化
+            tmp.GetComponent<SacredObjectsUIEffects>().Init(sacredObjectColumns, offsetS, id, remove, index);//初始化
             tmp.SetActive(true);
         }
 

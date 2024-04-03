@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
@@ -33,12 +34,13 @@ namespace UI
         /// <summary>
         /// 初始化函数
         /// </summary>
-        public void Init(List<Column> columns, float offset, string id)
+        public void Init(List<Column> columns, float offset, string id, Action<int> remove, int index)
         {
             descriptionText.text = id;
             saleButtonText.text = $"出售\n￥{salePrice}";
+            //saleButton绑定移除圣物/背包骰面效果函数：增加一个委托类型的参数(就是对应的移除函数)
             saleButton.onClick.AddListener(DestroyUI);
-            //TODO:saleButton绑定移除圣物/背包骰面效果函数：增加一个委托类型的参数(就是对应的移除函数)
+            saleButton.onClick.AddListener(() => remove?.Invoke(index));
             _state = State.None;
             _currentColumn = UIManager.Instance.DetectColumn(gameObject, columns, offset); //检测当前所在的物品栏
             if (_currentColumn != null) //初始化当前所在的物品栏

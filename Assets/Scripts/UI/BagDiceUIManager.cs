@@ -13,13 +13,14 @@ namespace UI
         [Tooltip("栏目判定")] public float offsetB;
         [SerializeField, Tooltip("生成模板")] private GameObject template;
         [SerializeField, Tooltip("父物体")] private Transform parent;
-        
+
         /// <summary>
         /// 生成圣物函数
         /// </summary>
         /// <param name="index">所在栏位序列号</param>
         /// <param name="id"></param>
-        public void CreateBagUIDice(int index, string id)
+        /// <param name="remove"></param>
+        public void CreateBagUIDice(int index, string id, Action<int> remove)
         {
             if (bagColumns[index].bagObject != null)
             {
@@ -28,7 +29,7 @@ namespace UI
             }
             var tmp = Instantiate(template, parent, true);
             tmp.transform.position = bagColumns[index].transform.position;//更改位置
-            tmp.GetComponent<BagDiceUIEffects>().Init(bagColumns, offsetB, id);//初始化
+            tmp.GetComponent<BagDiceUIEffects>().Init(bagColumns, offsetB, id, remove, index);//初始化
             tmp.SetActive(true);
         }
         /// <summary>
