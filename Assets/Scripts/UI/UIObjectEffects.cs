@@ -39,8 +39,11 @@ namespace UI
             descriptionText.text = id;
             saleButtonText.text = $"出售\n￥{salePrice}";
             //saleButton绑定移除圣物/背包骰面效果函数：增加一个委托类型的参数(就是对应的移除函数)
-            saleButton.onClick.AddListener(DestroyUI);
-            saleButton.onClick.AddListener(() => remove?.Invoke(index));
+            saleButton.onClick.AddListener(() =>
+            {
+                DestroyUI();
+                remove?.Invoke(index);
+            });
             _state = State.None;
             _currentColumn = UIManager.Instance.DetectColumn(gameObject, columns, offset); //检测当前所在的物品栏
             if (_currentColumn != null) //初始化当前所在的物品栏
