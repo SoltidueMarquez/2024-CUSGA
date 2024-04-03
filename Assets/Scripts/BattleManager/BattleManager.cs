@@ -160,7 +160,7 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < singleDiceObjs.Count; i++)
         {
             Vector2Int pos = new Vector2Int(i, singleDiceObjs[i].idInDice);
-            RollingResultUIManager.Instance.CreateResult(i, singleDiceObjs[i].model.id, pos);
+            RollingResultUIManager.Instance.CreateResult(i, singleDiceObjs[i].model.id, pos, false);
         }
     }
     public void ReRollDice()
@@ -193,7 +193,7 @@ public class BattleManager : MonoBehaviour
                 continue;
             }
             Vector2Int pos = new Vector2Int(i, singleDiceObjs[i].idInDice);
-            RollingResultUIManager.Instance.CreateResult(i, singleDiceObjs[i].model.id, pos);
+            RollingResultUIManager.Instance.CreateResult(i, singleDiceObjs[i].model.id, pos, false);
         }
         DataUIManager.Instance.UpdateRerollText(this.parameter.playerChaState.resource.currentRollTimes);
     }

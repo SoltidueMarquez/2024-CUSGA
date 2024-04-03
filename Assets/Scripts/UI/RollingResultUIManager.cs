@@ -21,33 +21,20 @@ namespace UI
         [Tooltip("使用动画时长")]public float useTime;
         [Tooltip("使用放大倍数")]public float scale;
         [Tooltip("距离使用者上方位置")] public float moveOffset;
-        
+
         /// <summary>
         /// 生成投掷结果函数,请按投掷顺序有序生成
         /// </summary>
         /// <param name="index">是第几个投掷结果</param>
         /// <param name="id">骰面的id</param>
         /// <param name="location">坐标位置，先页面位置再页内位置</param>
-        public void CreateResult(int index, string id, Vector2Int location)
+        /// <param name="ifFightEnd"></param>
+        public void CreateResult(int index, string id, Vector2Int location,bool ifFightEnd)
         {
             var tmp = Instantiate(template, columns[index], true);
             tmp.transform.position = columns[index].position;//更改位置
             tmp.GetComponent<RollingResultDiceUI>().Init(index, location, id);//初始化
-            tmp.SetActive(true);
-            _resultList.Add(tmp);
-        }
-        /// <summary>
-        /// 生成奖励界面的投掷结果函数,请按投掷顺序有序生成
-        /// </summary>
-        /// <param name="index"></param>
-        /// <param name="id"></param>
-        /// <param name="location"></param>
-        public void CreateRewardResult(int index, string id, Vector2Int location)
-        {
-            var tmp = Instantiate(template, columns[index], true);
-            tmp.transform.position = columns[index].position;//更改位置
-            tmp.GetComponent<RollingResultDiceUI>().Init(index, location, id);//初始化
-            tmp.GetComponent<Button>().interactable = false;
+            if (ifFightEnd) { tmp.GetComponent<Button>().interactable = false;}
             tmp.SetActive(true);
             _resultList.Add(tmp);
         }
