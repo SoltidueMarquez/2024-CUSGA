@@ -22,7 +22,7 @@ namespace UI
             {
                 Disable();
                 DoChosenAnim(animTime, scale);//动画
-                onChoose.Invoke(index);
+                onChoose?.Invoke(index);
             });
         }
         

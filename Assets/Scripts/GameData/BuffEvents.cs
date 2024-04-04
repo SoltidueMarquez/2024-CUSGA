@@ -77,6 +77,7 @@ namespace DesignerScripts
         Gain2WeakWhenBattleStart,//35
         #endregion
     }
+
     public class BuffEvents
     {
         #region 存回调点函数的字典
