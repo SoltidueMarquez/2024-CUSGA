@@ -5,24 +5,25 @@ using UnityEngine;
 /// <summary>
 /// 角色的基础属性，最大生命值，金钱，重投次数，基础护盾,也是buff系统用来修改的依据
 /// </summary>
+[System.Serializable]
 public class ChaProperty
 {
     /// <summary>
     /// 最大生命值，在buff中即buff对生命值的修改
     /// </summary>
-    public int health;
+    [Tooltip("最大生命值")]public int health;
     /// <summary>
     /// 玩家的金钱，在buff中即buff对金钱的修改
     /// </summary>
-    public int money;
+    [Tooltip("玩家的金钱")]public int money;
     /// <summary>
     /// 最大重投次数，在buff中即buff对重投次数的修改
     /// </summary>
-    public int maxRollTimes;
+    [Tooltip("最大重投次数")]public int maxRollTimes;
     /// <summary>
     /// 玩家的护盾，在buff中即buff对护盾的修改
     /// </summary>
-    public int shield;
+    [Tooltip("玩家的护盾")]public int shield;
 
     //TODO:运算符重载
     /// <summary>

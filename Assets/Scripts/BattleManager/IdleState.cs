@@ -131,23 +131,23 @@ public class PlayerRoundStartResolutionState : IState
         Debug.Log("Exit PlayerRoundStartResolutionState");
 
         //Test
-        if (manager.parameter.turns == 1)
-        {
-            Debug.Log("Test---------------------");
-            HalidomManager.Instance.AddHalidom(DesignerScripts.HalidomData.halidomDictionary[HalidomName.烤土豆.ToString()]);
-            Debug.Log("添加圣物烤土豆");
-            Debug.Log("玩家血量上限为"+manager.parameter.playerChaState.prop.health);
-            Debug.Log("Test---------------------");
-        }
+        //if (manager.parameter.turns == 1)
+        //{
+        //    Debug.Log("Test---------------------");
+        //    HalidomManager.Instance.AddHalidom(DesignerScripts.HalidomData.halidomDictionary[HalidomName.烤土豆.ToString()]);
+        //    Debug.Log("添加圣物烤土豆");
+        //    Debug.Log("玩家血量上限为"+manager.parameter.playerChaState.prop.health);
+        //    Debug.Log("Test---------------------");
+        //}
 
-        if(manager.parameter.turns == 2)
-        {
-            Debug.Log("Test---------------------");
-            HalidomManager.Instance.RemoveHalidom(2);
-            Debug.Log("移除圣物烤土豆");
-            Debug.Log("玩家血量上限为" + manager.parameter.playerChaState.prop.health);
-            Debug.Log("Test---------------------");
-        }
+        //if(manager.parameter.turns == 2)
+        //{
+        //    Debug.Log("Test---------------------");
+        //    HalidomManager.Instance.RemoveHalidom(2);
+        //    Debug.Log("移除圣物烤土豆");
+        //    Debug.Log("玩家血量上限为" + manager.parameter.playerChaState.prop.health);
+        //    Debug.Log("Test---------------------");
+        //}
 
 
     }
