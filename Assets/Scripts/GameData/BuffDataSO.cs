@@ -49,7 +49,7 @@ namespace DesignerScripts
         public object[] onRemoveParams = null;
 
         [Tooltip("")]
-        public onRoundEndEnum onRoundStart = onRoundEndEnum.None;
+        public onRoundStartEnum onRoundStart = onRoundStartEnum.None;
         [Tooltip("")]
         public object[] onRoundStartParams = null;
 
