@@ -5,7 +5,7 @@ using DesignerScripts;
 
 public class BuffDataInitial : MonoBehaviour
 {
-    public BuffDataSO[] buffDataSos;
+    private BuffDataSO[] buffDataSos;
     // Start is called before the first frame update
     void Awake()
     {

@@ -95,18 +95,18 @@ namespace DesignerScripts
 
                         })
             }*/
-            {
-             "偶数注",
-            new HalidomObject(
-            RareType.Common,
-             "1",
-             "偶数注",
-             "当骰子点数为偶数时，增加2点伤害",
-            new List<BuffInfo>()
-                {
-                    new BuffInfo(BuffDataTable.buffData["Add2ValueIfResultIsEven"],null,null,1,false,null)
-                })
-            },
+            //{
+            // "偶数注",
+            //new HalidomObject(
+            //RareType.Common,
+            // "1",
+            // "偶数注",
+            // "当骰子点数为偶数时，增加2点伤害",
+            //new List<BuffInfo>()
+            //    {
+            //        new BuffInfo(BuffDataTable.buffData["Add2ValueIfResultIsEven"],null,null,1,false,null)
+            //    })
+            //},
             {
              "奇数注",
             new HalidomObject(

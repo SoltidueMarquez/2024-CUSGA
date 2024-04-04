@@ -7,7 +7,7 @@ using static OneLine.Examples.ComplexExample;
 
 namespace DesignerScripts
 {
-    [CreateAssetMenu(fileName = "BuffData_", menuName = "BuffData")]
+    [CreateAssetMenu(fileName = "BuffData_", menuName = "Data/BuffData")]
     public class BuffDataSO : ScriptableObject
     {
         [Tooltip("buffµÄÎ¨Ò»id")]

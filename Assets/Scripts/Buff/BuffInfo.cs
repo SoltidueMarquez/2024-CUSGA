@@ -35,6 +35,22 @@ public class BuffInfo
 
     public Dictionary<string, object> buffParam = new Dictionary<string, object>();
 
+    //public BuffInfo(BuffData buffData, GameObject creator, GameObject target, int stack = 1) {
+    //    this.buffData = buffData;
+    //    this.creator = creator;
+    //    this.target = target;
+    //    this.curStack = stack;
+    //    this.isPermanent=buffData.isPermanent;
+    //    this.roundCount = buffData.duringCount;
+    //    if (buffParam != null)
+    //    {
+    //        foreach (var item in buffParam)
+    //        {
+    //            this.buffParam.Add(item.Key, item.Value);
+    //        }
+    //    }
+    //}
+
     public BuffInfo(
         BuffData buffData, GameObject creator, GameObject target, int stack = 1, bool isPermanent = false,
         Dictionary<string, object> buffParam = null
@@ -45,6 +61,7 @@ public class BuffInfo
         this.target = target;
         this.curStack = stack;
         this.isPermanent = isPermanent;
+        //this.isPermanent = buffData.isPermanent;
         this.roundCount = buffData.duringCount;
         if (buffParam != null)
         {
@@ -56,7 +73,7 @@ public class BuffInfo
     }
 
     public BuffInfo(
-        BuffData buffData,int stack = 1, bool isPermanent = false,
+        BuffData buffData, int stack = 1, bool isPermanent = false,
         Dictionary<string, object> buffParam = null
         )
     {
@@ -80,7 +97,7 @@ public enum BuffRemoveStackUpdateEnum
     Reduce
 }
 
-public enum  BuffUpdateEnum
+public enum BuffUpdateEnum
 {
     Add,
     Replace,
