@@ -1,3 +1,4 @@
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -5,6 +6,8 @@ using UnityEngine.UI;
 
 namespace UI
 {
+    [RequireComponent(typeof(Button))]
+    [RequireComponent(typeof(Image))]
     public class RollingResultDiceUI : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     {
         [SerializeField,Tooltip("投掷结果序列号")]private int index;
@@ -16,7 +19,8 @@ namespace UI
         private float scale;
         private Vector3 moveOffset;
         private Image image;
-        
+        private Button button;
+
         /// <summary>
         /// 初始化函数
         /// </summary>
@@ -26,15 +30,16 @@ namespace UI
         public void Init(int tmpIndex, Vector2Int position, string id)
         {
             image = this.GetComponent<Image>();
+            button = this.GetComponent<Button>();
             useDuration = RollingResultUIManager.Instance.useTime;
             scale = RollingResultUIManager.Instance.scale;
             index = tmpIndex;
             pageAndIndex = position;
-            this.GetComponent<Button>().onClick.AddListener(() =>
+            button.onClick.AddListener(() =>
             {
                 BattleManager.Instance.parameter.playerChaState.UseDice(index, BattleManager.Instance.currentSelectEnemy);
 
-                OnUseDestory();//摧毁物体
+                OnUseDestroy();//摧毁物体
             });
             
             //ToDo:根据id初始化信息
@@ -42,7 +47,10 @@ namespace UI
             Debug.Log("根据id初始化投掷结果信息");
         }
 
-        public void OnUseDestory()
+        /// <summary>
+        /// 使用时销毁函数
+        /// </summary>
+        public void OnUseDestroy()
         {
             moveOffset = CharacterUIManager.Instance.player.position +
                          new Vector3(0, RollingResultUIManager.Instance.moveOffset, 0);
@@ -55,6 +63,41 @@ namespace UI
                 });
             });
         }
+        
+        /// <summary>
+        /// 销毁动画
+        /// </summary>
+        /// <param name="animTime"></param>
+        public void OnReRollDestroy()
+        {
+            Disable();
+            this.transform.DOScale(new Vector3(0, 0, 0), useDuration / 2);
+            image.DOColor(new Color(255, 0, 0, 0), useDuration / 2);
+            StartCoroutine(DestroyGameObject(useDuration / 2));
+        }
+        IEnumerator DestroyGameObject(float animTime)
+        {
+            yield return new WaitForSeconds(animTime);
+            Destroy(gameObject);
+        }
+        
+        /// <summary>
+        /// 点击无效化函数
+        /// </summary>
+        public void Disable()
+        {
+            button.interactable = false;
+        }
+        
+        /// <summary>
+        /// 出现动画
+        /// </summary>
+        public void DoAppearAnim(float animTime)
+        {
+            image.DOFade(1, animTime);
+        }
+        
+        
         
         private void JumpToPosition(Vector2Int position)
         {

@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using DG.Tweening;
-using JetBrains.Annotations;
 using UnityEngine;
 
 namespace UI
@@ -46,6 +44,7 @@ namespace UI
             
             //TODO：奖励结算UI出现
             UIManager.Instance.rewardUIManager.ShowRewardUI(appearDurationTime);
+            RollingResultUIManager.Instance.RemoveAllResultUI(Strategy.ReRoll);
         }
         
         /// <summary>

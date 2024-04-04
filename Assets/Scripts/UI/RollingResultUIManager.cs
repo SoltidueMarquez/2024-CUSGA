@@ -33,9 +33,11 @@ namespace UI
         {
             var tmp = Instantiate(template, columns[index], true);
             tmp.transform.position = columns[index].position;//更改位置
-            tmp.GetComponent<RollingResultDiceUI>().Init(index, location, id);//初始化
-            if (ifFightEnd) { tmp.GetComponent<Button>().interactable = false;}
+            var tmpResult = tmp.GetComponent<RollingResultDiceUI>();
+            tmpResult.Init(index, location, id);//初始化
+            if (ifFightEnd) { tmpResult.Disable();}
             tmp.SetActive(true);
+            tmpResult.DoAppearAnim(useTime);//出现动画
             _resultList.Add(tmp);
         }
 
@@ -82,7 +84,7 @@ namespace UI
             {
                 if (tmp[0] != null)
                 {
-                    tmp[0].GetComponent<RollingResultDiceUI>().OnUseDestory();
+                    tmp[0].GetComponent<RollingResultDiceUI>().OnUseDestroy();
                 }
                 yield return new WaitForSeconds(time);
                 tmp.Remove(tmp[0]);
@@ -118,11 +120,11 @@ namespace UI
             {
                 if (tmp[0] != null)
                 {
-                    yield return new WaitForSeconds(0);
-                    Destroy(tmp[0].gameObject);
+                    tmp[0].GetComponent<RollingResultDiceUI>().OnReRollDestroy(); //重投函数
                 }
                 tmp.Remove(tmp[0]);
             }
+            yield return new WaitForSeconds(useTime / 2);
         }
 
     }
