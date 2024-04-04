@@ -34,7 +34,7 @@ namespace UI
         /// <summary>
         /// 初始化函数
         /// </summary>
-        public void Init(string id)
+        public virtual void Init(string id)
         {
             descriptionText.text = id;
         }

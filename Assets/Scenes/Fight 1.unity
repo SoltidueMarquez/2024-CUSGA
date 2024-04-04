@@ -4121,7 +4121,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1021686753
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4291,6 +4291,15 @@ MonoBehaviour:
   rewardUI: {fileID: 1021686752}
   endButton: {fileID: 574523178}
   useAllButton: {fileID: 1949946011}
+  diceColumns:
+  - transform: {fileID: 1146085132}
+    bagObject: {fileID: 0}
+  - transform: {fileID: 1267500644}
+    bagObject: {fileID: 0}
+  - transform: {fileID: 1263337500}
+    bagObject: {fileID: 0}
+  diceTemplate: {fileID: 3046983917528316593, guid: 8174a524e9bfec74388c66f039a2e426, type: 3}
+  animTime: 1
 --- !u!4 &1128369420
 Transform:
   m_ObjectHideFlags: 0
