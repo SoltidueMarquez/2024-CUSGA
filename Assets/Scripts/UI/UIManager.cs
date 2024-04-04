@@ -27,6 +27,8 @@ namespace UI
         /// <param name="pSize"></param>
         public void EnterPreview(GameObject uiObject, float pSize)
         {
+            var oldScale = uiObject.transform.localScale;
+            pSize = oldScale.x * pSize;
             uiObject.transform.DOScale(new Vector3(pSize, pSize, pSize), 0.2f);
         }
 
