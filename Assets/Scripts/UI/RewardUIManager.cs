@@ -81,5 +81,21 @@ namespace UI
                 item.DoDestroyAnim(animTime);
             }
         }
+
+        /// <summary>
+        /// 禁用全部骰面函数
+        /// </summary>
+        public void DisableAllDices()
+        {
+            foreach (var col in diceColumns)
+            {
+                if (col.bagObject != null)
+                {
+                    var item = col.bagObject.GetComponent<RewardDiceUIObject>();
+                    item.Disable();
+                }
+            }
+        }
+        
     }
 }
