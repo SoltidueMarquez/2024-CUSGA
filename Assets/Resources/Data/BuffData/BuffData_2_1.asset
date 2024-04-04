@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2_1
   dataName: 11
-  icon: icon2_1
   tags:
   - Self
   maxStack: 5
@@ -22,16 +21,16 @@ MonoBehaviour:
   isPermanent: 1
   buffUpdateEnum: 0
   removeStackUpdateEnum: 1
-  onCreate: 
-  onRemove: 
-  onRoundStart: 
-  onRoundEnd: 
-  onHit: Add2ValueIfResultIsEven
-  onBeHurt: 
-  onRoll: 
-  onKill: 
-  onBeKilled: 
-  onCast: 
+  onCreate: 0
+  onRemove: 0
+  onRoundStart: 0
+  onRoundEnd: 0
+  onHit: 1
+  onBeHurt: 0
+  onRoll: 0
+  onKill: 0
+  onBeKilled: 0
+  onCast: 0
   stateMod:
     ifCanChangePosition: 1
     canUseDice: 1
