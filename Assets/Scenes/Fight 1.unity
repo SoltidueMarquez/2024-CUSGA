@@ -593,8 +593,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1871d8602b9dcd24eaea3f3394435dbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RunText: {fileID: 458454510}
-  ReRollText: {fileID: 333788548}
+  runText: {fileID: 458454510}
+  reRollText: {fileID: 333788548}
+  moneyText: {fileID: 1829682577}
 --- !u!114 &81981824
 MonoBehaviour:
   m_ObjectHideFlags: 0

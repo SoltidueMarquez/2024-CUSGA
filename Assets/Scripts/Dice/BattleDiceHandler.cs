@@ -124,7 +124,7 @@ public class BattleDiceHandler : MonoBehaviour
         return true;
     }
     /// <summary>
-    /// 没有存档的情况下，默认初始化骰子,应该是在一开始去加载？？，暂时先算战斗开始的时候加载,这边需要修改
+    /// 没有存档的情况下，默认初始化骰子,应该是在一开始用其他数据结构去加载，暂时先算战斗开始的时候加载,这边需要修改
     /// </summary>
     public void InitDice(int side)
     {
