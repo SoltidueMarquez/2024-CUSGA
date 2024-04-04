@@ -177,7 +177,19 @@ public class HalidomManager : MonoBehaviour
     }
 
 
+    public void SellHalidom(int index)
+    {
+        //获取圣物的售价
+        int price = halidomList[index].value;
+        //将圣物的售价加到玩家的金币上
+        ChaState tempChaState =BattleManager.Instance.parameter.playerChaState;
+        
+        tempChaState.ModResources(new ChaResource(0, price, 0, 0));
+        Debug.Log("售卖圣物成功，获得金币" + price + "个");
+        //将圣物移除
+        RemoveHalidom(index);
 
+    }
 
 
     //交换圣物顺序
