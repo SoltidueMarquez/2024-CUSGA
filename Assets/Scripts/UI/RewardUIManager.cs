@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
@@ -81,19 +79,6 @@ namespace UI
             if (item != null)
             {
                 item.DoDestroyAnim(animTime);
-            }
-        }
-        
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                CreateDiceUI("666", 1,null);
-                CreateDiceUI("676", 0,null);
-            }
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                RemoveDiceUI(1);
             }
         }
     }
