@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -59,7 +60,9 @@ namespace UI
                     break;
             }
             if (buffList?.Count <= index) { return;}
-            buffList?[index]?.DoDestroy();
+            var tmp = buffList?[index];
+            if (tmp != null) tmp.DoDestroy();
+            buffList.Remove(buffList[index]);
         }
 
         /// <summary>
