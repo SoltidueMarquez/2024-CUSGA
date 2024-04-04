@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public struct ChaControlState
 {
     /// <summary>
     /// 是否可以移动背包骰面和战斗骰面的位置
     /// </summary>
-    public bool ifCanChangePosition;
+    [Tooltip("是否可以移动背包骰面和战斗骰面的位置")]public bool ifCanChangePosition;
     /// <summary>
     /// 是否可以使用骰面
     /// </summary>
-    public bool canUseDice;
+    [Tooltip("是否可以使用骰面")]public bool canUseDice;
     /// <summary>
     /// 是否无敌
     /// </summary>
-    public bool ifImmune;
+    [Tooltip("是否无敌")]public bool ifImmune;
 
     public ChaControlState(bool ifCanChangePosition = true, bool canUseDice = true, bool ifImmune = false)
     {

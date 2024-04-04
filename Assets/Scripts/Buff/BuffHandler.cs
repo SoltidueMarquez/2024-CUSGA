@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using UI;
 using UnityEngine;
 
 public class BuffHandler : MonoBehaviour
@@ -39,11 +38,6 @@ public class BuffHandler : MonoBehaviour
             {
                 //TODO:提示buff层数已满
             }
-            //创建buffUI
-            Character character = (Character)findBuffInfo.target.GetComponent<ChaState>().side;
-            string desc = findBuffInfo.buffData.buffName;
-            var duration = findBuffInfo.curStack;
-            BuffUIManager.Instance.CreateBuffUIObject(character, desc, duration);
         }
         else
         {
@@ -51,11 +45,6 @@ public class BuffHandler : MonoBehaviour
             buffInfo.target = this.gameObject;
             buffInfo.buffData.onCreate?.Invoke(buffInfo);
             buffList.Add(buffInfo);
-            //创建buffUI
-            Character character = (Character)buffInfo.target.GetComponent<ChaState>().side;
-            string desc = buffInfo.buffData.buffName;
-            var duration = buffInfo.curStack;
-            BuffUIManager.Instance.CreateBuffUIObject(character, desc, duration);
         }
     }
 
@@ -69,10 +58,6 @@ public class BuffHandler : MonoBehaviour
         {
             case BuffRemoveStackUpdateEnum.Clear:
                 buffInfo.buffData.onRemove?.Invoke(buffInfo);
-                //获取buffinfo在buffList中的索引，然后移除buffUI
-                var index = buffList.IndexOf(buffInfo);
-                var character = (Character)buffInfo.target.GetComponent<ChaState>().side;
-                BuffUIManager.Instance.RemoveBuffUIObject(character, index);
                 buffList.Remove(buffInfo);
                 break;
             case BuffRemoveStackUpdateEnum.Reduce:
@@ -80,9 +65,6 @@ public class BuffHandler : MonoBehaviour
                 buffInfo.buffData.onRemove?.Invoke(buffInfo);
                 if (buffInfo.curStack == 0)
                 {
-                    var i = buffList.IndexOf(buffInfo);
-                    var charac = (Character)buffInfo.target.GetComponent<ChaState>().side;
-                    BuffUIManager.Instance.RemoveBuffUIObject(charac, i);
                     buffList.Remove(buffInfo);
                 }
                 //TODO:关于buff层数减少的刷新
