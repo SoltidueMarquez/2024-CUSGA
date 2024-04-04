@@ -93,8 +93,9 @@ public class BuffInfo
 
 public enum BuffRemoveStackUpdateEnum
 {
+    Reduce,
     Clear,
-    Reduce
+    
 }
 
 public enum BuffUpdateEnum
