@@ -41,9 +41,10 @@ public class BuffHandler : MonoBehaviour
             }
             //创建buffUI
             Character character = (Character)findBuffInfo.target.GetComponent<ChaState>().side;
-            string desc = findBuffInfo.buffData.buffName;
             var duration = findBuffInfo.curStack;
-            BuffUIManager.Instance.CreateBuffUIObject(character, desc, duration);
+            var index = buffList.IndexOf(findBuffInfo);
+            BuffUIManager.Instance.UpdateBuffDurationTime(character, index, duration);
+            //BuffUIManager.Instance.CreateBuffUIObject(character, desc, duration);
         }
         else
         {

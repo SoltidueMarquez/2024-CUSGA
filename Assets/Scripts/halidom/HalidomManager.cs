@@ -204,7 +204,7 @@ public class HalidomManager : MonoBehaviour
                         buffInfo.roundCount--;
                         //Test
                         Debug.Log(buffInfo.roundCount);
-                        if (buffInfo.roundCount == 0)
+                        if (buffInfo.roundCount <= 0)
                         {
                             removeList.Add(buffInfo);
                         }
