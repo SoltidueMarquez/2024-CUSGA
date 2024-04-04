@@ -415,33 +415,33 @@ namespace DesignerScripts
 
             #region 圣物buff
 
-            {
-                BuffDataName.Add2ValueIfResultIsEven.ToString(),new BuffData
-                (
-                    "2_1",
-                    BuffDataName.Add2ValueIfResultIsEven.ToString(),
-                    "icon2_1",
-                    new [] {"Self"},
-                    5,
-                    0,
-                    true,
-                    BuffUpdateEnum.Add,
-                    BuffRemoveStackUpdateEnum.Reduce,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    BuffEventName.Add2ValueIfResultIsEven.ToString(),null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    "",null,
-                    ChaControlState.origin,
-                    null
-                 )
+            //{
+            //    BuffDataName.Add2ValueIfResultIsEven.ToString(),new BuffData
+            //    (
+            //        "2_1",
+            //        BuffDataName.Add2ValueIfResultIsEven.ToString(),
+            //        "icon2_1",
+            //        new [] {"Self"},
+            //        5,
+            //        0,
+            //        true,
+            //        BuffUpdateEnum.Add,
+            //        BuffRemoveStackUpdateEnum.Reduce,
+            //        "",null,
+            //        "",null,
+            //        "",null,
+            //        "",null,
+            //        BuffEventName.Add2ValueIfResultIsEven.ToString(),null,
+            //        "",null,
+            //        "",null,
+            //        "",null,
+            //        "",null,
+            //        "",null,
+            //        ChaControlState.origin,
+            //        null
+            //     )
 
-             },
+            // },
 
              {
                 BuffDataName.Add2ValueIfResultIsOdd.ToString(),new BuffData

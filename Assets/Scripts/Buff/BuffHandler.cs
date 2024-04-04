@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BuffHandler : MonoBehaviour
 {
-    [Description("Buff列表")]
+    //[Description("Buff列表")]
     public List<BuffInfo> buffList = new List<BuffInfo>();
     //所有判断的时候如果buff需要移除，先加入这个列表，然后再进行移除
     private List<BuffInfo> removeList = new List<BuffInfo>();
