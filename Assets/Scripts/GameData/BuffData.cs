@@ -107,7 +107,7 @@ namespace DesignerScripts
             )
             },
 
-            #region 基础buff
+            /*#region 基础buff
             {//这边是流血的buff,要实现层数衰减为延迟回合数的效果，将permanent设置为false,初始持续回合数设置为0
                 //回合结束收到伤害+层数-1
                 BuffDataName.Bleed.ToString(),new BuffData
@@ -1257,7 +1257,7 @@ namespace DesignerScripts
 
              },
 
-#endregion
+#endregion*/
 
         };
 
