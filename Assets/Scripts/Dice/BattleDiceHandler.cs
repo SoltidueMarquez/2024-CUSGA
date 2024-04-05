@@ -69,10 +69,11 @@ public class BattleDiceHandler : MonoBehaviour
                 //添加技能特殊效果Buff
                 foreach (var buffinfo in singleDiceObj.model.buffInfos)
                 {
+                    BuffInfo temp = new BuffInfo(buffinfo.buffData, buffinfo.creator, buffinfo.target, buffinfo.curStack, buffinfo.isPermanent, buffinfo.buffParam);
                     //通过tag进行buff的查找，对施法者添加buff,如果包含self就添加给自己，如果包含target就添加给目标,具体添加给对方的函数走DamageManager中的DealWithDamage函数
                     if (buffinfo.buffData.tags.Contains("Self"))
                     {
-                        chaState.AddBuff(buffinfo, chaState.gameObject);
+                        chaState.AddBuff(temp, chaState.gameObject);
                     }
                 }
             }
@@ -198,6 +199,8 @@ public class BattleDiceHandler : MonoBehaviour
         {
             return null;
         }
-        return buffInfos.Where(x => x.buffData.tags.Contains(tag)).ToList();
+        List<BuffInfo> result = new List<BuffInfo>(buffInfos.Where(x => x.buffData.tags.Contains(tag)).ToList());
+
+        return result;
     }
 }
