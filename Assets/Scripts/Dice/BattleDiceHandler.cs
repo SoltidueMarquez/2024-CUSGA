@@ -107,23 +107,8 @@ public class BattleDiceHandler : MonoBehaviour
             diceCardsInUse[i] = null;
         }
     }
-    /// <summary>
-    /// 判断战斗骰面是否为空
-    /// </summary>
-    /// <returns></returns>
-    public bool IfSingleBattleDiceEmpty()
-    {
-        bool result;
-        for (int i = 0; i < diceCardsInUse.Length; i++)
-        {
-            if (diceCardsInUse[i] != null)
-            {
-                result = false;
-                return result;
-            }
-        }
-        return true;
-    }
+    
+    #region 初始化战斗骰子，有数据的情况下和测试的情况下
     /// <summary>
     /// 没有存档的情况下，默认初始化骰子,应该是在一开始用其他数据结构去加载，暂时先算战斗开始的时候加载,这边需要修改
     /// </summary>
@@ -150,6 +135,8 @@ public class BattleDiceHandler : MonoBehaviour
     {
 
     }
+    #endregion
+    #region 添加骰面到各个地方，例如背包和战斗骰面
     /// <summary>
     /// 将单个战斗骰面加入当前的战斗骰面数组中
     /// </summary>
@@ -162,8 +149,14 @@ public class BattleDiceHandler : MonoBehaviour
             diceCardsInUse[i] = singleDiceObjs[i];
         }
     }
+    public void AddSingleBattleDiceToBag(SingleDiceObj singleDiceObj)
+    {
+        this.bagDiceCards.Add(singleDiceObj);
+    }
+    #endregion
+    #region 随机数相关
     /// <summary>
-    /// 获取随机的战斗骰子数量的骰面
+    /// 获取随机的战斗骰子数量的骰面,主要用于生成战斗时用的骰面
     /// </summary>
     /// <returns>骰面的list</returns>
     public List<SingleDiceObj> GetRandomSingleDices()
@@ -171,13 +164,15 @@ public class BattleDiceHandler : MonoBehaviour
         List<SingleDiceObj> singleDiceObjs = new List<SingleDiceObj>();
         for (int i = 0; i < battleDices.Count; i++)
         {
+            //TODO:这边其实可以重写一下
             int index = battleDices[i].GetRandomDice(out SingleDiceObj singleDiceObj);
             singleDiceObjs.Add(singleDiceObj);
         }
         return singleDiceObjs;
     }
+    
     /// <summary>
-    /// 根据index获取相应的战斗骰子，然后获取随机的骰面
+    /// 根据index获取相应的战斗骰子，然后获取随机的骰面，用于重新投掷的时候根据现有的index投掷
     /// </summary>
     /// <param name="index"></param>
     /// <returns></returns>
@@ -186,6 +181,25 @@ public class BattleDiceHandler : MonoBehaviour
         SingleDiceObj singleDiceObj;
         battleDices[index].GetRandomDice(out singleDiceObj);
         return singleDiceObj;
+    }
+    #endregion
+    #region 一些辅助函数
+    /// <summary>
+    /// 判断战斗骰面是否为空
+    /// </summary>
+    /// <returns></returns>
+    public bool IfSingleBattleDiceEmpty()
+    {
+        bool result;
+        for (int i = 0; i < diceCardsInUse.Length; i++)
+        {
+            if (diceCardsInUse[i] != null)
+            {
+                result = false;
+                return result;
+            }
+        }
+        return true;
     }
     /// <summary>
     /// 根据tag查找buffInfo
@@ -199,8 +213,15 @@ public class BattleDiceHandler : MonoBehaviour
         {
             return null;
         }
-        List<BuffInfo> result = new List<BuffInfo>(buffInfos.Where(x => x.buffData.tags.Contains(tag)).ToList());
-
+        List<BuffInfo> temp = new List<BuffInfo>(buffInfos.Where(x => x.buffData.tags.Contains(tag)).ToList().ToArray());
+        //深拷贝到新的list
+        List<BuffInfo> result = new List<BuffInfo>();
+        foreach (var item in temp)
+        {
+            BuffInfo a = new BuffInfo(item.buffData, item.creator, item.target, item.curStack, item.isPermanent, item.buffParam);
+            result.Add(a);
+        }
         return result;
     }
+    #endregion
 }

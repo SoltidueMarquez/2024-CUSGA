@@ -15,9 +15,9 @@ public class FSMParameter
     /// 玩家重新投掷的次数
     /// </summary>
     public int playerRerollCount;
-    
-    
-    
+
+
+
 
     public ChaState playerChaState;
     public ChaState[] enemyChaStates;
@@ -41,7 +41,7 @@ public enum GameState
     PlayerLose,
     PlayerLoseResolution,
     PlayerWin,
-    Reward 
+    Reward
 }
 public class BattleManager : MonoBehaviour
 {
@@ -53,14 +53,14 @@ public class BattleManager : MonoBehaviour
     [Header("战斗系统参数")]
     public FSMParameter parameter;
     public GameObject currentSelectEnemy;
-    
+
 
     public static BattleManager Instance
     {
         get; private set;
     }
 
-    
+
 
     private void Awake()
     {
@@ -92,7 +92,7 @@ public class BattleManager : MonoBehaviour
         states.Add(GameState.PlayerLoseResolution, new PlayerLoseResolutionState(this));
         states.Add(GameState.PlayerWin, new PlayerWinState(this));
         states.Add(GameState.Reward, new RewardState(this));
-        
+
         //设置初始状态
         TransitionState(GameState.GameStart);
     }
@@ -113,6 +113,7 @@ public class BattleManager : MonoBehaviour
         currentState.OnEnter();
 
     }
+    #region 参数设置
     public void ResetTurns()
     {
         this.parameter.turns = 0;
@@ -125,9 +126,9 @@ public class BattleManager : MonoBehaviour
 
     public void ReducePlayerRerollCount()
     {
-        this.parameter.playerRerollCount--;
+        this.parameter.playerChaState.ModResources(new ChaResource(0, 0, -1, 0));
     }
-
+    #endregion
     /// <summary>
     /// 给ui调用的方法，结束玩家回合
     /// </summary>
@@ -140,7 +141,7 @@ public class BattleManager : MonoBehaviour
 
     public void EndGame(int side)
     {
-        if(side == 0)
+        if (side == 0)
         {
             Debug.Log("玩家死亡");
             TransitionState(GameState.PlayerLose);
@@ -152,6 +153,7 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    #region 投骰子相关
     public void RollDice()
     {
         DataUIManager.Instance.UpdateRerollText(this.parameter.playerChaState.resource.currentRollTimes);
@@ -166,11 +168,11 @@ public class BattleManager : MonoBehaviour
     public void ReRollDice()
     {
         //如果玩家的重新投掷次数小于等于0，就不执行
-        if(this.parameter.playerChaState.resource.currentRollTimes <= 0)
+        if (this.parameter.playerChaState.resource.currentRollTimes <= 0)
         {
             return;
         }
-        this.parameter.playerChaState.ModResources(new ChaResource(0, 0, -1, 0));
+        ReducePlayerRerollCount();
         //放置重新投掷的骰面的数组
         SingleDiceObj[] singleDiceObjs = new SingleDiceObj[this.parameter.playerChaState.GetBattleDiceHandler().battleDiceCount];
         //根据当前还剩多少战斗骰面，来决定重新投掷多少个
@@ -206,6 +208,40 @@ public class BattleManager : MonoBehaviour
             CharacterUIManager.Instance.CreateIntentionUIObject(singleDice.model.id);
         }
     }
+    #endregion
+    #region 奖励界面相关函数
+    /// <summary>
+    /// 判断骰面是否可以选择,在进入奖励界面时调用，售卖骰面时也要调用
+    /// </summary>
+    public void RefreshIfDiceCanChoose()
+    {
+        int currentBagCount = this.parameter.playerChaState.GetBattleDiceHandler().bagDiceCards.Count;
+        int maxBagCount = this.parameter.playerChaState.GetBattleDiceHandler().maxDiceInBag;
+        if (currentBagCount >= maxBagCount)
+        {
+            UIManager.Instance.rewardUIManager.DisableAllDices();
+            Debug.Log("背包已满");
+            return;
+        }
+        else
+        {
+            UIManager.Instance.rewardUIManager.EnableAllDices();
+        }
+    }
+
+    public void AddSingleDiceToPlayerBag(SingleDiceObj singleDiceObj)
+    {
+        int currentBagCount = this.parameter.playerChaState.GetBattleDiceHandler().bagDiceCards.Count;
+        int maxBagCount = this.parameter.playerChaState.GetBattleDiceHandler().maxDiceInBag;
+        if(currentBagCount>=maxBagCount)
+        {
+
+            Debug.Log("背包已满");
+            return;
+        }
+        this.parameter.playerChaState.GetBattleDiceHandler().AddSingleBattleDiceToBag(singleDiceObj);
+    }
+    #endregion
 }
 //定义了一个回调，用于在UI动画结束时调用
-public  delegate void OnUIAnimFinished();
+public delegate void OnUIAnimFinished();
