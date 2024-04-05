@@ -4291,6 +4291,7 @@ MonoBehaviour:
   rewardUI: {fileID: 1021686752}
   endButton: {fileID: 574523178}
   useAllButton: {fileID: 1949946011}
+  animTime: 1
   diceColumns:
   - transform: {fileID: 1146085132}
     bagObject: {fileID: 0}
@@ -4299,7 +4300,8 @@ MonoBehaviour:
   - transform: {fileID: 1263337500}
     bagObject: {fileID: 0}
   diceTemplate: {fileID: 3046983917528316593, guid: 8174a524e9bfec74388c66f039a2e426, type: 3}
-  animTime: 1
+  sacredObjectColumns: []
+  sacredObjectTemplate: {fileID: 0}
 --- !u!4 &1128369420
 Transform:
   m_ObjectHideFlags: 0
@@ -7911,6 +7913,7 @@ GameObject:
   - component: {fileID: 1997646022}
   - component: {fileID: 1997646023}
   - component: {fileID: 1997646021}
+  - component: {fileID: 1997646024}
   m_Layer: 0
   m_Name: HalidomManager
   m_TagString: Untagged
@@ -7982,6 +7985,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b7cb1205ed1a49459ae1a10ba96f251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1997646024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997646020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0107f09953f17742bf6c979976a8cc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  halidomSOData: []
 --- !u!1 &2054669038
 GameObject:
   m_ObjectHideFlags: 0
