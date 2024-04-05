@@ -8,19 +8,22 @@ namespace UI
 {
     public class RewardUIManager : MonoBehaviour
     {
+        [Header("通用")]
         [SerializeField, Tooltip("奖励UI界面")] private GameObject rewardUI;
         [SerializeField, Tooltip("结束按钮")] private Button endButton;
         [SerializeField, Tooltip("全部使用按钮")] private Button useAllButton;
+        [SerializeField, Tooltip("动画时长")] private float animTime;
+        [Header("奖励骰面")]
         [SerializeField, Tooltip("骰子栏位列表")] public List<Column> diceColumns;
         [SerializeField, Tooltip("骰子模板")] private GameObject diceTemplate;
-        
-        [SerializeField, Tooltip("动画时长")] private float animTime;
+        [Header("奖励圣物")]
+        [SerializeField, Tooltip("圣物栏位列表")] public List<Column> sacredObjectColumns;
+        [SerializeField, Tooltip("圣物模板")] private GameObject sacredObjectTemplate;
 
         public void ShowRewardUI(float waitSeconds)
         {
             endButton.interactable = false;
             useAllButton.interactable = false;
-            //TODO:修改ReRoll函数
             StartCoroutine(RewardUI(waitSeconds));
         }
         IEnumerator RewardUI(float waitSeconds)
@@ -59,6 +62,34 @@ namespace UI
         }
 
         /// <summary>
+        /// 创建圣物函数
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="index"></param>
+        /// <param name="onChoose"></param>
+        public void CreateSacredObject(string id, int index, Action<int> onChoose)
+        {
+            if (index > sacredObjectColumns.Count)
+            {
+                Debug.LogWarning("超出生成的栏位");
+                return;
+            }
+            if (sacredObjectColumns[index].bagObject != null) 
+            {
+                Debug.LogWarning("栏位已经有圣物");
+                return;
+            }
+            var parent = sacredObjectColumns[index].transform;
+            var tmp = Instantiate(sacredObjectTemplate, parent, true);
+            sacredObjectColumns[index].bagObject = tmp;
+            tmp.transform.position = parent.position;//更改位置
+            var tmpSacredObject = tmp.GetComponent<RewardSacredUIObject>();
+            tmpSacredObject.Init(id, animTime, 2, onChoose, index);//初始化
+            tmp.SetActive(true);
+            tmpSacredObject.DoAppearAnim(animTime); //出现动画
+        }
+
+        /// <summary>
         /// 移除骰面函数
         /// </summary>
         /// <param name="index">栏位索引</param>
@@ -81,6 +112,29 @@ namespace UI
                 item.DoDestroyAnim(animTime);
             }
         }
+        /// <summary>
+        /// 移除圣物函数
+        /// </summary>
+        /// <param name="index">栏位索引</param>
+        public void RemoveSacredObject(int index)
+        {
+            if (index > sacredObjectColumns.Count)
+            {
+                Debug.LogWarning("超出生成的栏位");
+                return;
+            }
+            if (sacredObjectColumns[index].bagObject == null) 
+            {
+                Debug.LogWarning("圣物不存在");
+                return;
+            }
+            var item = sacredObjectColumns[index].bagObject.GetComponent<RewardSacredUIObject>();
+            sacredObjectColumns[index].bagObject = null;
+            if (item != null)
+            {
+                item.DoDestroyAnim(animTime);
+            }
+        }
 
         /// <summary>
         /// 禁用全部骰面函数
@@ -97,5 +151,49 @@ namespace UI
             }
         }
         
+        /// <summary>
+        /// 启用全部骰面函数
+        /// </summary>
+        public void EnableAllDices()
+        {
+            foreach (var col in diceColumns)
+            {
+                if (col.bagObject != null)
+                {
+                    var item = col.bagObject.GetComponent<RewardDiceUIObject>();
+                    item.Enable();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 禁用全部圣物函数
+        /// </summary>
+        public void DisableAllSacredObject()
+        {
+            foreach (var col in sacredObjectColumns)
+            {
+                if (col.bagObject != null)
+                {
+                    var item = col.bagObject.GetComponent<RewardSacredUIObject>();
+                    item.Disable();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 启用全部圣物函数
+        /// </summary>
+        public void EnableAllSacredObject()
+        {
+            foreach (var col in sacredObjectColumns)
+            {
+                if (col.bagObject != null)
+                {
+                    var item = col.bagObject.GetComponent<RewardSacredUIObject>();
+                    item.Enable();
+                }
+            }
+        }
     }
 }

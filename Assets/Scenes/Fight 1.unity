@@ -4291,6 +4291,7 @@ MonoBehaviour:
   rewardUI: {fileID: 1021686752}
   endButton: {fileID: 574523178}
   useAllButton: {fileID: 1949946011}
+  animTime: 1
   diceColumns:
   - transform: {fileID: 1146085132}
     bagObject: {fileID: 0}
@@ -4299,7 +4300,10 @@ MonoBehaviour:
   - transform: {fileID: 1263337500}
     bagObject: {fileID: 0}
   diceTemplate: {fileID: 3046983917528316593, guid: 8174a524e9bfec74388c66f039a2e426, type: 3}
-  animTime: 1
+  sacredObjectColumns:
+  - transform: {fileID: 526774495}
+    bagObject: {fileID: 0}
+  sacredObjectTemplate: {fileID: 3046983917528316593, guid: 5ee32cff29f90ca4eacf25786e8b73dd, type: 3}
 --- !u!4 &1128369420
 Transform:
   m_ObjectHideFlags: 0
