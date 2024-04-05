@@ -20,7 +20,7 @@ MonoBehaviour:
   duringCount: 0
   isPermanent: 0
   buffUpdateEnum: 0
-  removeStackUpdateEnum: 1
+  removeStackUpdateEnum: 0
   onCreate: 0
   onRemove: 0
   onRoundStart: 0
