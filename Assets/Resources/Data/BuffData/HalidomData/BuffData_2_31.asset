@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b82dfb058aec19848972490bda5eafbd, type: 3}
   m_Name: BuffData_2_31
   m_EditorClassIdentifier: 
-  id: 
-  dataName: 0
+  id: 2_31
+  dataName: 40
   tags: []
-  maxStack: 0
+  maxStack: 5
   duringCount: 0
-  isPermanent: 0
+  isPermanent: 1
   buffUpdateEnum: 0
   removeStackUpdateEnum: 0
   onCreate: 0
   onRemove: 0
-  onRoundStart: 0
+  onRoundStart: 5
   onRoundEnd: 0
   onHit: 0
   onBeHurt: 0
@@ -35,3 +35,4 @@ MonoBehaviour:
     canUseDice: 1
     ifImmune: 0
   propMod: []
+  paramList: []
