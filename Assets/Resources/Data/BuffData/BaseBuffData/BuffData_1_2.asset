@@ -36,3 +36,4 @@ MonoBehaviour:
     canUseDice: 1
     ifImmune: 0
   propMod: []
+  paramList: []

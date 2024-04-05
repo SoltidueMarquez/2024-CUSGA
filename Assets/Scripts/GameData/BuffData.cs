@@ -5,7 +5,7 @@ namespace DesignerScripts
 {
     public enum BuffDataName
     {
-        test,
+        
 
         Bleed,//流血
 
@@ -323,8 +323,8 @@ namespace DesignerScripts
                     "",null,
                     "",null,
                     "",null,
-                    BuffEventName.Dodge.ToString(),null,
                     "",null,
+                    BuffEventName.Dodge.ToString(),null,
                     "",null,
                     "",null,
                     "",null,

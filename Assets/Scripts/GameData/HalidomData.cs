@@ -79,7 +79,8 @@ namespace DesignerScripts
     {
         public static Dictionary<string, HalidomObject> halidomDictionary = new Dictionary<string, HalidomObject>() 
         {
-            /*{
+           /*#region
+            *//*{
                 //Halidom模板
 
                 "Halidom_1",new HalidomObject(
@@ -95,7 +96,7 @@ namespace DesignerScripts
                             new BuffInfo(BuffDataTable.buffData["CheckMoneyAddHealth"],null,null,1,false,null)
 
                         })
-            }*/
+            }*//*
             //{
             // "偶数注",
             //new HalidomObject(
@@ -536,6 +537,8 @@ namespace DesignerScripts
                     //new BuffInfo(BuffDataTable.buffData["Add1StackIfPlayerHavePositiveBuff"],null,null,1,false,null)
                 })
             },
+                    #endregion*/
+
         };
     }
 }

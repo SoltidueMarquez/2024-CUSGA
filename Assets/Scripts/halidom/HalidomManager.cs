@@ -70,7 +70,7 @@ public class HalidomManager : MonoBehaviour
     private void Start()
     {
         //Test
-        AddHalidom(HalidomData.halidomDictionary[HalidomName.偶数注.ToString()]);
+        /*AddHalidom(HalidomData.halidomDictionary[HalidomName.偶数注.ToString()]);
         SacredObjectUIManager.Instance.CreateSacredUIObject(0, HalidomData.halidomDictionary[HalidomName.偶数注.ToString()].description, removeHalidomDelegate);
         AddHalidom(HalidomData.halidomDictionary[HalidomName.奇数注.ToString()]);
         SacredObjectUIManager.Instance.CreateSacredUIObject(1, HalidomData.halidomDictionary[HalidomName.奇数注.ToString()].description, removeHalidomDelegate);
@@ -84,7 +84,7 @@ public class HalidomManager : MonoBehaviour
                     Debug.Log("圣物中的buff名称是"+buff.buffData.buffName);
                 }
             }
-        }
+        }*/
     }
     
 

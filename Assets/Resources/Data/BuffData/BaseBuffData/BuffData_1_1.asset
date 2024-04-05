@@ -23,8 +23,8 @@ MonoBehaviour:
   removeStackUpdateEnum: 1
   onCreate: 0
   onRemove: 0
-  onRoundStart: 1
-  onRoundEnd: 0
+  onRoundStart: 0
+  onRoundEnd: 1
   onHit: 0
   onBeHurt: 0
   onRoll: 0
