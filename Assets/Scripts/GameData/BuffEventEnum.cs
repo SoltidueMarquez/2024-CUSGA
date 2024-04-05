@@ -56,7 +56,7 @@ public enum onBuffHitEnum
     Weak,
     Strength,
     Enhance,
-    Dodge,
+    
     Anger,
     Add2ValueIfResultIsEven,
     Add2ValueIfResultIsOdd,
@@ -80,6 +80,7 @@ public enum onBeHurtEnum
     None,
     Vulnerable,
     Tough,
+    Dodge,
     Add50PercentAttackEvery3TimesLoseHealth,
     EnhanceEnemyVulnerability,
 

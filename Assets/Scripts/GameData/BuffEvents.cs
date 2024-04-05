@@ -165,9 +165,7 @@ namespace DesignerScripts
             {
                 BuffEventName.Enhance.ToString(),Enhance
             },
-            {
-                BuffEventName.Dodge.ToString(),Dodge
-            },
+            
             {
                 BuffEventName.Anger.ToString(),Anger
             },
@@ -226,6 +224,9 @@ namespace DesignerScripts
             },
             {
                 BuffEventName.Tough.ToString(),Tough
+            },
+            {
+                BuffEventName.Dodge.ToString(),Dodge
             },
             //圣物buff
             {
