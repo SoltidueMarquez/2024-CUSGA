@@ -6,6 +6,7 @@ namespace DesignerScripts
 {
     public enum HalidomName
     {
+        test,
         //普通
         偶数注,
         奇数注,

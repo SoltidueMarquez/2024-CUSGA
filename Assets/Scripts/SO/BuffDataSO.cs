@@ -7,6 +7,25 @@ using static OneLine.Examples.ComplexExample;
 
 namespace DesignerScripts
 {
+    /// <summary>
+    /// 参数类型
+    /// </summary>
+    public enum paramsType
+    {
+        intType,
+        floatType,
+        stringType,
+        boolType,
+        vector3Type,
+        vector2Type
+    }
+    [Serializable]
+    public struct Param
+    {
+        public paramsType type;
+        public string name;
+        public string value;
+    }
     [CreateAssetMenu(fileName = "BuffData_", menuName = "Data/BuffData")]
     public class BuffDataSO : ScriptableObject
     {
@@ -95,5 +114,7 @@ namespace DesignerScripts
 
         [Tooltip("buff对玩家的属性修改")]
         public ChaProperty[] propMod = null;
+        [Tooltip("buffInfo需要的额外参数")]
+        public List<Param> paramList;
     }
 }

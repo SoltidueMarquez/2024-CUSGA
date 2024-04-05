@@ -235,38 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragCanvas: {fileID: 849039271}
-  shakeAngleS: 1
-  previewSizeS: 1.2
-  sacredObjectColumns:
-  - transform: {fileID: 211473838}
-    bagObject: {fileID: 0}
-  - transform: {fileID: 1648843896}
-    bagObject: {fileID: 0}
-  - transform: {fileID: 526003206}
-    bagObject: {fileID: 0}
-  - transform: {fileID: 245148438}
-    bagObject: {fileID: 0}
-  - transform: {fileID: 2114061877}
-    bagObject: {fileID: 0}
-  - transform: {fileID: 469554075}
-    bagObject: {fileID: 0}
-  offsetS: 30
-  shakeAngleB: 1
-  previewSizeB: 1.2
-  bagColumns:
-  - transform: {fileID: 238085991}
-    bagObject: {fileID: 0}
-  - transform: {fileID: 141952388}
-    bagObject: {fileID: 0}
-  - transform: {fileID: 1088986962}
-    bagObject: {fileID: 0}
-  - transform: {fileID: 230282658}
-    bagObject: {fileID: 0}
-  - transform: {fileID: 1736194390}
-    bagObject: {fileID: 0}
-  - transform: {fileID: 1923791450}
-    bagObject: {fileID: 0}
-  offsetB: 30
+  rewardUIManager: {fileID: 0}
 --- !u!4 &81981820
 Transform:
   m_ObjectHideFlags: 0
@@ -294,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7479400be27111048a618fff73f958bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fightDiceLists:
+  fightDicePageLists:
   - {fileID: 1743260800}
   - {fileID: 491353055}
   - {fileID: 708600108}
@@ -308,6 +277,9 @@ MonoBehaviour:
   switchButtonLeft: {fileID: 717025139}
   switchButtonRight: {fileID: 584777150}
   pageText: {fileID: 742696118}
+  pageTemplate: {fileID: 0}
+  diceTemplate: {fileID: 0}
+  parent: {fileID: 0}
 --- !u!114 &81981822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,7 +292,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ff892bba58d59540a8f4de859bcd4ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthSlider: {fileID: 1519014322}
+  punchAmplitude: {x: 0, y: 0, z: 0}
+  durationTime: 0
+  punchTime: 0
+  useOtherOffset: {x: 0, y: 0, z: 0}
+  attackAmplitude: 0
+  attackTime: 0
+  attackTextTemplate: {fileID: 0}
+  attackTextParent: {fileID: 0}
+  attackTextOffset: {x: 0, y: 0, z: 0}
+  enemy: {fileID: 0}
+  enemyHealthSlider: {fileID: 0}
+  enemyHealthText: {fileID: 0}
+  enemyShieldUI: {fileID: 0}
+  intentionParent: {fileID: 0}
+  intentionTemplate: {fileID: 0}
+  intentionList: []
+  player: {fileID: 0}
+  playerHealthSlider: {fileID: 0}
+  playerHealthText: {fileID: 0}
+  playerShieldUI: {fileID: 0}
 --- !u!114 &81981823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,7 +324,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1871d8602b9dcd24eaea3f3394435dbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RunText: {fileID: 458454510}
+  runText: {fileID: 0}
+  reRollText: {fileID: 0}
+  moneyText: {fileID: 0}
 --- !u!1 &93368172
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,6 +1154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 1
   pageAndIndex: {x: 1, y: 2}
+  infoCanvas: {fileID: 0}
+  infoText: {fileID: 0}
 --- !u!1 &298821048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1213,12 +1208,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0967afd8a846abf4eb2df418ebbf4307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 
   salePrice: 3
-  desc: "\u540A\u5760:"
   descriptionCanvas: {fileID: 331230571}
   descriptionText: {fileID: 1313093575}
   saleUI: {fileID: 1801320940}
+  saleButton: {fileID: 0}
   saleButtonText: {fileID: 1136514685}
   _currentColumn:
     transform: {fileID: 0}
@@ -1502,7 +1496,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &341200663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1517,6 +1511,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffHandler: {fileID: 0}
   battleDiceHandler: {fileID: 0}
+  baseProp:
+    health: 50
+    money: 400
+    maxRollTimes: 4
+    shield: 0
+  buffProp:
+  - health: 0
+    money: 0
+    maxRollTimes: 0
+    shield: 0
+  - health: 0
+    money: 0
+    maxRollTimes: 0
+    shield: 0
+  resource:
+    currentHp: 0
+    currentMoney: 0
+    currentRollTimes: 0
+    currentShield: 0
+  controlState:
+    ifCanChangePosition: 1
+    canUseDice: 1
+    ifImmune: 0
   side: 1
 --- !u!114 &341200664
 MonoBehaviour:
@@ -2407,7 +2424,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &589276656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2422,6 +2439,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffHandler: {fileID: 0}
   battleDiceHandler: {fileID: 0}
+  baseProp:
+    health: 50
+    money: 400
+    maxRollTimes: 4
+    shield: 0
+  buffProp:
+  - health: 0
+    money: 0
+    maxRollTimes: 0
+    shield: 0
+  - health: 0
+    money: 0
+    maxRollTimes: 0
+    shield: 0
+  resource:
+    currentHp: 0
+    currentMoney: 0
+    currentRollTimes: 0
+    currentShield: 0
+  controlState:
+    ifCanChangePosition: 1
+    canUseDice: 1
+    ifImmune: 0
   side: 0
 --- !u!114 &589276657
 MonoBehaviour:
@@ -3681,6 +3721,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   pageAndIndex: {x: 0, y: 0}
+  infoCanvas: {fileID: 0}
+  infoText: {fileID: 0}
 --- !u!1 &1046270845
 GameObject:
   m_ObjectHideFlags: 0
@@ -4644,7 +4686,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1309330680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5084,7 +5126,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1590396380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5100,9 +5142,8 @@ MonoBehaviour:
   parameter:
     turns: 0
     playerRerollCount: 0
-    playerChaStates: {fileID: 589276656}
-    enemyChaState:
-    - {fileID: 341200663}
+    playerChaState: {fileID: 0}
+    enemyChaStates: []
   currentSelectEnemy: {fileID: 341200662}
 --- !u!4 &1590396381
 Transform:
@@ -5385,6 +5426,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1648843895}
   m_CullTransparentMesh: 1
+--- !u!1 &1665616861
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1665616862}
+  m_Layer: 0
+  m_Name: holidomInit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1665616862
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665616861}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 792.73083, y: 428.43314, z: 12.71978}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1733185257
 GameObject:
   m_ObjectHideFlags: 0
@@ -5884,7 +5956,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1876085117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6203,7 +6275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1997646021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6216,8 +6288,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e78e6b80fe59e94a82deb11c4675b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  halidomList: []
   halidomMaxCount: 6
+  currentCharacterProperty:
+    health: 0
+    money: 0
+    maxRollTimes: 0
+    shield: 0
+  deltaCharacterProperty:
+    health: 0
+    money: 0
+    maxRollTimes: 0
+    shield: 0
+  buffProp:
+  - health: 0
+    money: 0
+    maxRollTimes: 0
+    shield: 0
+  - health: 0
+    money: 0
+    maxRollTimes: 0
+    shield: 0
+  baseProp:
+    health: 50
+    money: 400
+    maxRollTimes: 4
+    shield: 0
 --- !u!4 &1997646022
 Transform:
   m_ObjectHideFlags: 0
@@ -7073,12 +7168,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0967afd8a846abf4eb2df418ebbf4307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 
   salePrice: 2
-  desc: "\u7687\u51A0:"
   descriptionCanvas: {fileID: 4894912000039995830}
   descriptionText: {fileID: 1845362619994535997}
   saleUI: {fileID: 1512911566079034634}
+  saleButton: {fileID: 0}
   saleButtonText: {fileID: 746633416679839153}
   _currentColumn:
     transform: {fileID: 0}
@@ -7356,3 +7450,4 @@ SceneRoots:
   - {fileID: 1997646022}
   - {fileID: 1876085118}
   - {fileID: 1309330681}
+  - {fileID: 1665616862}

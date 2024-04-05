@@ -5,6 +5,8 @@ namespace DesignerScripts
 {
     public enum BuffDataName
     {
+        test,
+
         Bleed,//流血
 
         Spirit,//精力
