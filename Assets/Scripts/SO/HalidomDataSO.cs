@@ -24,5 +24,8 @@ namespace DesignerScripts
 
         [Tooltip("圣物身上存的buff信息")] 
         public List<BuffDataSO> buffDataSos;
+
+        [Tooltip("圣物的icon")]
+        public Sprite sprite;
     }
 }

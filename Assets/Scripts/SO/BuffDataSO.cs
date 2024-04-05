@@ -116,5 +116,10 @@ namespace DesignerScripts
         public ChaProperty[] propMod = null;
         [Tooltip("buffInfo需要的额外参数")]
         public List<Param> paramList;
+        [Tooltip("buff效果介绍")]
+        [Multiline(5)]
+        public string description;
+        [Tooltip("buffSprite")]
+        public Sprite sprite;
     }
 }

@@ -1,6 +1,7 @@
 using DesignerScripts;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 [CreateAssetMenu(fileName = "SingleDiceData", menuName = "Data/SingleDiceData")]
 public class SingleDiceModelSO : ScriptableObject
@@ -35,4 +36,9 @@ public class SingleDiceModelSO : ScriptableObject
     public int side;
     [Tooltip("骰面的Bufflist")]
     public List<BuffDataSO> buffDataSOs;
+    [Header("给UI的属性")]
+    public Sprite sprite;
+    [Multiline(5)]
+    public string description;
+
 }
