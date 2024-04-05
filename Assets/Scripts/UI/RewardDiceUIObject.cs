@@ -13,7 +13,7 @@ namespace UI
         /// <summary>
         /// 初始化函数
         /// </summary>
-        public void Init(string id, float animTime, float scale, Action<int> onChoose, int index)
+        public virtual void Init(string id, float animTime, float scale, Action<int> onChoose, int index)
         {
             descriptionText.text = id;
             
@@ -33,6 +33,14 @@ namespace UI
         public void Disable()
         {
             this.GetComponent<Button>().interactable = false;
+        }
+        
+        /// <summary>
+        /// 有效化化函数
+        /// </summary>
+        public void Enable()
+        {
+            this.GetComponent<Button>().interactable = true;
         }
 
         /// <summary>
@@ -60,7 +68,7 @@ namespace UI
         /// </summary>
         /// <param name="animTime"></param>
         /// <param name="scale"></param>
-        private void DoChosenAnim(float animTime, float scale)
+        public void DoChosenAnim(float animTime, float scale)
         {
             this.transform.DOScale(new Vector3(scale, scale, scale), animTime);
             this.GetComponent<Image>().DOFade(0, animTime);
