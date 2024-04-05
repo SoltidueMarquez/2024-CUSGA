@@ -15,14 +15,14 @@ public class SingleDiceData
                 }
                 ,null)
         },
-        {
-            "Dice_1_1",new SingleDiceModel(0,DiceType.Attack,"normal1", "1",ChaResource.zero,ChaResource.zero, 1, 1,
-                new[]
-                {
-                    new BuffInfo(DesignerScripts.BuffDataTable.buffData[BuffDataName.Strength.ToString()],1, false,null)
-                }
-                ,null)
-        },
+        //{
+        //    "Dice_1_1",new SingleDiceModel(0,DiceType.Attack,"normal1", "1",ChaResource.zero,ChaResource.zero, 1, 1,
+        //        new[]
+        //        {
+        //            new BuffInfo(DesignerScripts.BuffDataTable.buffData[BuffDataName.Strength.ToString()],1, false,null)
+        //        }
+        //        ,null)
+        //},
         {
             "Dice_2",new SingleDiceModel(0,DiceType.Defense, "normal2", "2", ChaResource.zero, ChaResource.zero, 1, 1,
                 new[]
