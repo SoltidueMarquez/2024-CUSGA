@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a222d7b9aff60b489012777e6166707, type: 3}
+  m_Name: DiceData_1_01
+  m_EditorClassIdentifier: 
+  id: 1_01
+  singleDiceModelName: "\u653B\u51FB1"
+  type: 0
+  condition:
+    currentHp: 0
+    currentMoney: 0
+    currentRollTimes: 0
+    currentShield: 0
+  cost:
+    currentHp: 0
+    currentMoney: 0
+    currentRollTimes: 0
+    currentShield: 0
+  level: 1
+  value: 6
+  side: 0
+  buffDataSOs:
+  - {fileID: 11400000, guid: d9956bf95aabd2640a713acb555695ea, type: 2}
+  sprite: {fileID: 0}
+  description: "\u6700\u666E\u901A\u7684\u6218\u6597\u9AB0\u9762\uFF0C\u9644\u5E26\u4E00\u5C42\u6D41\u8840"

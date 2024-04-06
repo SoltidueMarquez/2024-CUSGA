@@ -8,14 +8,9 @@ public class debugTest : MonoBehaviour
     [SerializeField] private HalidomObject halidomObject;
     private void Start()
     {
-        halidomObject = DesignerScripts.HalidomData.halidomDictionary["Test"];
+        //输出所有骰面model
+
+        RandomManager.Instance.GetSingleDiceModel(DiceType.Attack, 1, 1);
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            int i = (int)halidomObject.buffInfos[0].buffParam["testInt"];
-            Debug.Log(i);
-        }
-    }
+    
 }

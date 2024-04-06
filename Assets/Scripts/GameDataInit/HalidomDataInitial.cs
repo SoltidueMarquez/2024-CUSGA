@@ -7,7 +7,7 @@ public class HalidomDataInitial : MonoBehaviour
 {
     private HalidomDataSO[] halidomDataSos;
     // Start is called before the first frame update
-    private void Start()
+    private void Awake()
     {
         halidomDataSos = Resources.LoadAll<HalidomDataSO>("Data/HalidomData");
         for (int i = 0; i < halidomDataSos.Length; i++)

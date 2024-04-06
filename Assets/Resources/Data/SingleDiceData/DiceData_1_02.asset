@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a222d7b9aff60b489012777e6166707, type: 3}
-  m_Name: SingleDiceData
+  m_Name: DiceData_1_02
   m_EditorClassIdentifier: 
-  id: 1_01
-  singleDiceModelName: "\u653B\u51FB1"
+  id: 1_02
+  singleDiceModelName: "\u653B\u51FB2"
   type: 0
   condition:
     currentHp: 0
@@ -29,6 +29,6 @@ MonoBehaviour:
   value: 6
   side: 0
   buffDataSOs:
-  - {fileID: 11400000, guid: d9956bf95aabd2640a713acb555695ea, type: 2}
+  - {fileID: 11400000, guid: 5cf41856c6cf4ad4ca8b177917980e77, type: 2}
   sprite: {fileID: 0}
-  description: "\u6700\u666E\u901A\u7684\u6218\u6597\u9AB0\u9762\uFF0C\u9644\u5E26\u4E00\u5C42\u6D41\u8840"
+  description: "\u6700\u666E\u901A\u7684\u6218\u6597\u9AB0\u9762\uFF0C\u9644\u5E26\u4E00\u5C42sprite"

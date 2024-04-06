@@ -6,7 +6,7 @@ using UnityEngine;
 public class SingleDiceModelInitial : MonoBehaviour
 {
     private SingleDiceModelSO[] singleDiceModelSOs;
-    void Start()
+    void Awake()
     {
         singleDiceModelSOs = Resources.LoadAll<SingleDiceModelSO>("Data/SingleDiceData");
         for (int i = 0; i < singleDiceModelSOs.Length; i++)

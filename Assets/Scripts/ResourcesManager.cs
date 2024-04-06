@@ -1,6 +1,7 @@
 using DesignerScripts;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 /// <summary>
 /// 统一资源读取
@@ -83,7 +84,7 @@ public static class ResourcesManager
     public static SingleDiceUIData GetSingleDiceUIData(SingleDiceObj singleDiceObj)
     {
         string id = singleDiceObj.model.id;
-        SingleDiceModelSO singleDiceModelSO = Resources.Load<SingleDiceModelSO>("Data/SingleDiceData/SingleDiceData_" + id);
+        SingleDiceModelSO singleDiceModelSO = Resources.Load<SingleDiceModelSO>("Data/SingleDiceData/DiceData_" + id);
         if (singleDiceModelSO == null)
         {
             Debug.LogWarning("ResourcesManager:SingleDiceModelSO is null");
@@ -118,13 +119,18 @@ public static class ResourcesManager
     /// <returns></returns>
     public static IntentionUIData GetIntentionUIData(string id)
     {
-        SingleDiceModelSO singleDiceModelSO = Resources.Load<SingleDiceModelSO>("Data/SingleDiceData/SingleDiceData" + id);
-        if (singleDiceModelSO == null)
+        IntentionSO[] intensionSOs = Resources.LoadAll<IntentionSO>("Data/IntentionData");
+        SingleDiceModelSO singleDiceModelSO = Resources.Load<SingleDiceModelSO>("Data/SingleDiceData/DiceData_" + id);
+        if (intensionSOs == null)
         {
-            Debug.LogWarning("ResourcesManager:SingleDiceModelSO is null");
+            Debug.LogWarning("ResourcesManager:SingleDiceModelSOs is null");
             return null;
         }
+        var intentionSO = intensionSOs.Where(intensionSOs => intensionSOs.diceType == singleDiceModelSO.type).FirstOrDefault();
         IntentionUIData intentionUIData = new IntentionUIData();
+        intentionUIData.sprite = intentionSO.icon;
+        intentionUIData.name = intentionSO.intentionName;
+        intentionUIData.description = intentionSO.description;
         //TODO:根据骰子类型获取意图的UI数据
         return intentionUIData;
 
