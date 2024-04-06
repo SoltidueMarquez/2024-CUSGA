@@ -14,6 +14,12 @@ namespace UI
         [SerializeField,Tooltip("所在战斗骰面位置")]private Vector2Int pageAndIndex;
         [SerializeField, Tooltip("说明UI")] private GameObject infoCanvas;
         [SerializeField, Tooltip("说明Text")] private Text infoText;
+        [SerializeField,Tooltip("名称Text")]protected Text nameText;
+        [SerializeField,Tooltip("类型Text")]protected Text typeText;
+        [SerializeField, Tooltip("稀有度Text")] protected Text levelText;
+        [SerializeField,Tooltip("售价Text")]protected Text valueText;
+        [SerializeField,Tooltip("基础数值Text")]protected Text baseValueText;
+        [SerializeField,Tooltip("点数Text")]protected Text idInDiceText;
 
         private float useDuration;
         private float scale;
@@ -43,12 +49,15 @@ namespace UI
             });
             
             //根据id初始化信息
-            infoText.text = $"名称:{data.name}+" +
-                                   $"类型:{data.type}/n" +
-                                   $"描述:{data.description}/n" +
-                                   $"基础数值:{data.baseValue}/n" +
-                                   $"售价:{data.value}";
+            //信息文本初始化
+            nameText.text = data.name;
+            typeText.text = $"类型:{data.type}";
+            levelText.text = $"稀有度:{data.level}";
+            valueText.text = $"售价￥{data.value}";
+            baseValueText.text = $"基础数值{data.baseValue}";
+            infoText.text = $"描述:{data.description}" ;
             this.GetComponent<Image>().sprite = data.sprite;
+            idInDiceText.text = data.idInDice.ToString();
         }
 
         /// <summary>
@@ -60,6 +69,7 @@ namespace UI
                          new Vector3(0, RollingResultUIManager.Instance.moveOffset, 0);
             transform.DOMove(moveOffset, useDuration / 2).OnComplete(() =>
             {
+                idInDiceText.DOFade(0, useDuration / 2);
                 image.DOFade(0, useDuration / 2);
                 transform.DOScale(scale, useDuration / 2).OnComplete(() =>
                 {
@@ -75,6 +85,7 @@ namespace UI
         public void OnReRollDestroy()
         {
             Disable();
+            idInDiceText.DOFade(0, useDuration / 2);
             this.transform.DOScale(new Vector3(0, 0, 0), useDuration / 2);
             image.DOColor(new Color(255, 0, 0, 0), useDuration / 2);
             StartCoroutine(DestroyGameObject(useDuration / 2));
@@ -99,6 +110,7 @@ namespace UI
         public void DoAppearAnim(float animTime)
         {
             image.DOFade(1, animTime);
+            idInDiceText.DOFade(1, useDuration / 2);
         }
         
         

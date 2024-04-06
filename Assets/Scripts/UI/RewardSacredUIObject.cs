@@ -13,11 +13,12 @@ namespace UI
         /// </summary>
         public void Init(string id, float animTime, float scale, Action<int> onChoose, int index)
         {
+            
             //信息初始化
             var tmpData = ResourcesManager.GetHalidomUIData(id);
-            descriptionText.text = $"名称:{tmpData.name}+" +
-                                   $"描述:{tmpData.description}/n" +
-                                   $"售价:{tmpData.value}";
+            nameText.text = tmpData.name;
+            valueText.text = $"售价￥{tmpData.value}";
+            descriptionText.text = tmpData.description;
             this.GetComponent<Image>().sprite = tmpData.sprite;
             //按钮事件绑定
             this.GetComponent<Button>().onClick.AddListener(()=>

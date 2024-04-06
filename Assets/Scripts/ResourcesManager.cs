@@ -23,7 +23,7 @@ public class HalidomUIData
 }
 public class SingleDiceUIData
 {
-    public int index;
+    public int idInDice;
     public int baseValue;
     public DiceType type;
     public Sprite sprite;
@@ -91,7 +91,7 @@ public static class ResourcesManager
             return null;
         }
         SingleDiceUIData singleDiceUIData = new SingleDiceUIData();
-        singleDiceUIData.index = singleDiceModelSO.side;
+        singleDiceUIData.idInDice = singleDiceObj.idInDice;
         //根据骰子类型和基础等级计算基础值
         switch (singleDiceModelSO.type)
         {
