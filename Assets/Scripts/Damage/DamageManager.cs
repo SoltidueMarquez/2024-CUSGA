@@ -44,6 +44,7 @@ public class DamageManager : MonoSingleton<DamageManager>
             }
         }
 
+        Debug.Log("<color=#FFA07A>DamageManager-基础伤害：</color>" + damageInfo.damage.baseDamage);
         foreach (var buff in attackerChaState.GetBuffHandler().buffList)
         {
             buff.buffData.onHit?.Invoke(buff, damageInfo, damageInfo.defender);
