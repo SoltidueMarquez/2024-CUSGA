@@ -261,7 +261,7 @@ public class BattleManager : MonoBehaviour
         //获取当前骰面在背包骰面中的位置
         int index = this.parameter.playerChaState.GetBattleDiceHandler().GetIndexOfSingleDiceInBag(singleDiceObj);
         var singleDiceUIData = ResourcesManager.GetSingleDiceUIData(singleDiceObj);
-        BagDiceUIManager.Instance.CreateBagUIDice(index, singleDiceUIData, null,null);
+        BagDiceUIManager.Instance.CreateBagUIDice(index, singleDiceUIData, SellSingleDice,singleDiceObj);
     }
     /// <summary>
     /// 创建奖励界面的骰面
@@ -285,11 +285,12 @@ public class BattleManager : MonoBehaviour
     /// 售卖单个骰面
     /// </summary>
     /// <param name="index"></param>
-    public void SellSingleDice(int index)
+    public void SellSingleDice(SingleDiceObj singleDiceObj)
     {
-        this.parameter.playerChaState.GetBattleDiceHandler().RemoveSingleBattleDiceFromBag(index);
+        this.parameter.playerChaState.GetBattleDiceHandler().RemoveSingleBattleDiceFromBag(singleDiceObj);
+        var resource = new ChaResource(0, singleDiceObj.model.value, 0, 0);
+        this.parameter.playerChaState.ModResources(resource);
         //获取当前骰面在背包骰面中的位置
-        BagDiceUIManager.Instance.RemoveBagDice(index);
         RefreshIfDiceCanChoose();
     }
     /// <summary>

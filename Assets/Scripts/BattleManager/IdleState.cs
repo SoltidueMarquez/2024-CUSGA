@@ -403,6 +403,8 @@ public class PlayerWinState : IState
 
         Debug.Log("Enter PlayerWinState");
         ProcessPromptUIManager.Instance.DoFightEndUIAnim(null);
+        BattleManager.Instance.TransitionState(GameState.Reward);
+
     }
 
     public void OnExit()

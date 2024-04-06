@@ -155,9 +155,9 @@ public class BattleDiceHandler : MonoBehaviour
     }
     #endregion
     #region 从各个地方删除骰面
-    public void RemoveSingleBattleDiceFromBag(int index)
+    public void RemoveSingleBattleDiceFromBag(SingleDiceObj singleDiceObj)
     {
-        this.bagDiceCards.RemoveAt(index);
+        this.bagDiceCards.Remove(singleDiceObj);
     }
     #endregion
     #region 随机数相关
