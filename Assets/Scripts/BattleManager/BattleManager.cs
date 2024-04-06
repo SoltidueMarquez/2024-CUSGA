@@ -217,6 +217,15 @@ public class BattleManager : MonoBehaviour
     #endregion
     #region 奖励界面相关函数
     /// <summary>
+    /// 进入奖励界面时调用，给玩家加钱
+    /// </summary>
+    public void AddMoneyWhenEnterRewardState()
+    {
+        int money = RandomManager.Instance.GetMoneyViaChaState(this.parameter.playerChaState);
+        var resource = new ChaResource(0, 0, 0, money);
+        this.parameter.playerChaState.ModResources(resource);
+    }
+    /// <summary>
     /// 判断骰面是否可以选择,在进入奖励界面时调用，售卖骰面时也要调用
     /// </summary>
     public void RefreshIfDiceCanChoose()

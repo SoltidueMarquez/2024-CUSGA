@@ -32,4 +32,12 @@ public class RandomManager : MonoSingleton<RandomManager>
         Debug.Log(singleDiceModellegal.Count);
         return singleDiceModellegal[Random.Range(0, singleDiceModellegal.Count)];
     }
+
+
+    public int GetMoneyViaChaState(ChaState chaState)
+    {
+        //进入奖励界面获取的金钱
+        int money = 5;
+        return money;
+    }   
 }
