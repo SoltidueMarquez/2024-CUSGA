@@ -51,7 +51,8 @@ public class BuffHandler : MonoBehaviour
             buffList.Add(buffInfo);
             //添加buffUI
             var charac = (Character)buffInfo.target.GetComponent<ChaState>().side;
-            BuffUIManager.Instance.CreateBuffUIObject(charac, buffInfo.buffData.buffName, buffInfo.curStack);
+            //BuffUIManager.Instance.CreateBuffUIObject(charac, buffInfo.buffData.buffName, buffInfo.curStack);
+            BuffUIManager.Instance.CreateBuffUIObject(charac, buffInfo.buffData.id, buffInfo.curStack);
         }
     }
 

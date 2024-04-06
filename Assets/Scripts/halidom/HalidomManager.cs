@@ -113,7 +113,7 @@ public class HalidomManager : MonoBehaviour
                 }
                 RefreshAllHalidoms();
                 BattleManager.Instance.parameter.playerChaState.AttrAndResourceRecheck();
-                Debug.Log("添加圣物" + halidom.halidomName + "成功");
+                Debug.Log("<color=#3399FF>添加圣物</color>" + halidom.halidomName + "成功");
                 //找到空的格子后就跳出循环
                 break;
             }
