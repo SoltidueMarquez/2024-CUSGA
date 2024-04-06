@@ -12,7 +12,7 @@ namespace UI
     [RequireComponent(typeof(Image))]
     public class BagDiceUIEffects : UIObjectEffects, IBeginDragHandler,IEndDragHandler,IDragHandler,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
     {
-        public void Init(List<Column> columns, float offset, SingleDiceUIData data, Action<int> remove, int index)
+        public void Init(List<Column> columns, float offset, SingleDiceUIData data, Action<SingleDiceObj> remove, SingleDiceObj singleDice)
         {
             //信息文本初始化
             nameText.text = data.name;
@@ -28,7 +28,7 @@ namespace UI
             saleButton.onClick.AddListener(() =>
             {
                 DestroyUI();
-                remove?.Invoke(index);
+                remove?.Invoke(singleDice);
             });
             _state = State.None;
             _currentColumn = UIManager.Instance.DetectColumn(gameObject, columns, offset); //检测当前所在的物品栏

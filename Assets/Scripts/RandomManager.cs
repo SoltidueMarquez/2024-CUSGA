@@ -48,4 +48,27 @@ public class RandomManager : MonoSingleton<RandomManager>
         int money = 5;
         return money;
     }
+    /// <summary>
+    /// 根据投出骰子和当前游戏的状态获取奖励的骰子
+    /// </summary>
+    /// <param name="playerState"></param>
+    ///<param name="count">获取的骰子数量</param>
+    /// <returns></returns>
+    public List<SingleDiceObj> GetRewardSingleDiceObjsViaPlayerData(List<SingleDiceObj> conditionSingleDiceObj,int count)
+    {
+        List<int> ints = new List<int>();
+
+        //这边具体的生成规则还没有决定，暂时先用随机生成
+        var singleDiceObjs = new List<SingleDiceObj>();
+        for (int i = 0; i < count; i++)
+        {
+            SingleDiceModel singleDiceModel = GetSingleDiceModel(DiceType.Attack, 1, 0);
+            SingleDiceObj singleDiceObj = new SingleDiceObj(singleDiceModel, 0);
+            singleDiceObjs.Add(singleDiceObj);
+        }
+
+        return singleDiceObjs;
+
+    }
+    
 }

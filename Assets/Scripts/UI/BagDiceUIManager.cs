@@ -20,7 +20,7 @@ namespace UI
         /// <param name="index">所在栏位序列号</param>
         /// <param name="data"></param>
         /// <param name="remove"></param>
-        public void CreateBagUIDice(int index, SingleDiceUIData data, Action<int> remove)
+        public void CreateBagUIDice(int index, SingleDiceUIData data, Action<SingleDiceObj> remove,SingleDiceObj singleDiceObj)
         {
             if (bagColumns[index].bagObject != null)
             {
@@ -29,7 +29,7 @@ namespace UI
             }
             var tmp = Instantiate(template, parent, true);
             tmp.transform.position = bagColumns[index].transform.position;//更改位置
-            tmp.GetComponent<BagDiceUIEffects>().Init(bagColumns, offsetB, data, remove, index);//初始化
+            tmp.GetComponent<BagDiceUIEffects>().Init(bagColumns, offsetB, data, remove, singleDiceObj);//初始化
             tmp.SetActive(true);
         }
         /// <summary>
