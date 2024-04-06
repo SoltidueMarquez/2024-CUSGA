@@ -429,6 +429,8 @@ public class RewardState : IState
     {
 
         Debug.Log("Enter RewardState");
+        //创建三个奖励骰面
+        manager.CreateRewardSingleDices(3);
 
     }
 

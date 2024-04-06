@@ -39,7 +39,7 @@ namespace UI
         /// <param name="data"></param>
         /// <param name="index">栏位索引</param>
         /// <param name="onChoose">选择骰面后触发的逻辑函数</param>
-        public void CreateDiceUI(SingleDiceUIData data, int index, Action<int> onChoose)
+        public void CreateDiceUI(SingleDiceUIData data, int index, Action<SingleDiceObj> onChoose,SingleDiceObj singleDiceObj)
         {
             if (index > diceColumns.Count)
             {
@@ -56,7 +56,7 @@ namespace UI
             diceColumns[index].bagObject = tmp;
             tmp.transform.position = parent.position;//更改位置
             var tmpDice = tmp.GetComponent<RewardDiceUIObject>();
-            tmpDice.Init(data, animTime, 2, onChoose, index);//初始化
+            tmpDice.Init(data, animTime, 2, onChoose, singleDiceObj);//初始化
             tmp.SetActive(true);
             tmpDice.DoAppearAnim(animTime); //出现动画
         }

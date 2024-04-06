@@ -13,7 +13,7 @@ namespace UI
         /// <summary>
         /// 初始化函数
         /// </summary>
-        public void Init(SingleDiceUIData data, float animTime, float scale, Action<int> onChoose, int index)
+        public void Init(SingleDiceUIData data, float animTime, float scale, Action<SingleDiceObj> onChoose, SingleDiceObj singleDiceObj)
         {
             //信息文本初始化
             nameText.text = data.name;
@@ -29,7 +29,7 @@ namespace UI
             {
                 Disable();
                 DoChosenAnim(animTime, scale);//动画
-                onChoose?.Invoke(index);
+                onChoose?.Invoke(singleDiceObj);
                 UIManager.Instance.rewardUIManager.DisableAllDices();
             });
         }

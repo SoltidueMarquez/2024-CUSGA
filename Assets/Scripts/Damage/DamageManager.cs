@@ -29,19 +29,8 @@ public class DamageManager : MonoSingleton<DamageManager>
         //这边先执行所有的圣物的onhit
         if (attackerChaState.side == 0)
         {
-            if (HalidomManager.Instance.halidomList.Length > 0)
-            {
-                foreach (var halidom in HalidomManager.Instance.halidomList)
-                {
-                    if (halidom != null)
-                    {
-                        foreach (var buff in halidom.buffInfos)
-                        {
-                            buff.buffData.onHit?.Invoke(buff, damageInfo, damageInfo.defender);
-                        }
-                    }
-                }
-            }
+            HalidomManager.Instance.OnHit(damageInfo);
+            HalidomManager.Instance.OnBeHurt(damageInfo);
         }
 
         Debug.Log("<color=#FFA07A>DamageManager-基础伤害：</color>" + damageInfo.damage.baseDamage);

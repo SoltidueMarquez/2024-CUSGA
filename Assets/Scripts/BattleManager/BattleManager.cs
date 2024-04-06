@@ -261,7 +261,25 @@ public class BattleManager : MonoBehaviour
         //获取当前骰面在背包骰面中的位置
         int index = this.parameter.playerChaState.GetBattleDiceHandler().GetIndexOfSingleDiceInBag(singleDiceObj);
         var singleDiceUIData = ResourcesManager.GetSingleDiceUIData(singleDiceObj);
-        BagDiceUIManager.Instance.CreateBagUIDice(index, singleDiceUIData, null);
+        BagDiceUIManager.Instance.CreateBagUIDice(index, singleDiceUIData, null,null);
+    }
+    /// <summary>
+    /// 创建奖励界面的骰面
+    /// </summary>
+    /// <param name="count"></param>
+    public void CreateRewardSingleDices(int count)
+    {
+        //先roll出骰面
+        List<SingleDiceObj> singleDiceObjs = this.parameter.playerChaState.GetBattleDiceHandler().GetRandomSingleDices();
+        //获得根据roll出骰面的结果，获取奖励的骰面
+        var resultDiceObjs = RandomManager.Instance.GetRewardSingleDiceObjsViaPlayerData(singleDiceObjs, count);
+        for (int i = 0; i < resultDiceObjs.Count; i++)
+        {
+            var singleDiceUIData = ResourcesManager.GetSingleDiceUIData(resultDiceObjs[i]);
+            UIManager.Instance.rewardUIManager.CreateDiceUI(singleDiceUIData, i, AddSingleDiceToPlayerBag, resultDiceObjs[i]);
+        }
+
+
     }
     /// <summary>
     /// 售卖单个骰面
@@ -274,9 +292,19 @@ public class BattleManager : MonoBehaviour
         BagDiceUIManager.Instance.RemoveBagDice(index);
         RefreshIfDiceCanChoose();
     }
+    /// <summary>
+    /// 刷新是否可以选择圣物，进入奖励界面时调用，售卖圣物时也要调用
+    /// </summary>
     public void RefreshIfHalodomCanChoose()
     {
-        
+        if (!HalidomManager.Instance.IsFull())
+        {
+            UIManager.Instance.rewardUIManager.EnableAllDices();
+        }
+        else
+        {
+            UIManager.Instance.rewardUIManager.DisableAllDices();
+        }
     }
     /// <summary>
     /// 将选中的圣物添加到圣物管理器中，这边待定
