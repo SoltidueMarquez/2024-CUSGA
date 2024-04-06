@@ -15,12 +15,14 @@ namespace UI
         /// </summary>
         public void Init(SingleDiceUIData data, float animTime, float scale, Action<int> onChoose, int index)
         {
-            //信息初始化
-            descriptionText.text = $"名称:{data.name}+" +
-                                   $"类型:{data.type}/n" +
-                                   $"描述:{data.description}/n" +
-                                   $"基础数值:{data.baseValue}/n" +
-                                   $"售价:{data.value}";
+            //信息文本初始化
+            nameText.text = data.name;
+            typeText.text = $"类型:{data.type}";
+            levelText.text = $"稀有度:{data.level}";
+            valueText.text = $"售价￥{data.value}";
+            baseValueText.text = $"基础数值{data.baseValue}";
+            descriptionText.text = $"描述:{data.description}";
+            idInDiceText.text = data.idInDice.ToString();
             this.GetComponent<Image>().sprite = data.sprite;
             //按钮事件绑定
             this.GetComponent<Button>().onClick.AddListener(()=>
@@ -57,6 +59,7 @@ namespace UI
             Disable();
             this.transform.DOScale(new Vector3(0, 0, 0), animTime);
             this.GetComponent<Image>().DOFade(0, animTime);
+            this.idInDiceText.DOFade(0, animTime);
             StartCoroutine(DestroyGameObject(animTime));
         }
         
@@ -66,6 +69,7 @@ namespace UI
         public void DoAppearAnim(float animTime)
         {
             this.GetComponent<Image>().DOFade(1, animTime);
+            this.idInDiceText.DOFade(1, animTime);
         }
 
         /// <summary>
@@ -77,6 +81,7 @@ namespace UI
         {
             this.transform.DOScale(new Vector3(scale, scale, scale), animTime);
             this.GetComponent<Image>().DOFade(0, animTime);
+            this.idInDiceText.DOFade(0, animTime);
             StartCoroutine(DestroyGameObject(animTime));
         }
         IEnumerator DestroyGameObject(float animTime)

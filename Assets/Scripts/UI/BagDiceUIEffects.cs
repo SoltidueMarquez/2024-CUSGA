@@ -14,12 +14,16 @@ namespace UI
     {
         public void Init(List<Column> columns, float offset, SingleDiceUIData data, Action<int> remove, int index)
         {
-            descriptionText.text = $"名称:{data.name}+" +
-                                   $"类型:{data.type}/n" +
-                                   $"描述:{data.description}/n" +
-                                   $"基础数值:{data.baseValue}/n";
+            //信息文本初始化
+            nameText.text = data.name;
+            typeText.text = $"类型:{data.type}";
+            levelText.text = $"稀有度:{data.level}";
+            valueText.text = $"售价￥{data.value}";
+            baseValueText.text = $"基础数值{data.baseValue}";
+            descriptionText.text = $"描述:{data.description}";
             this.GetComponent<Image>().sprite = data.sprite;
             saleButtonText.text = $"出售\n￥{data.value}";
+            idInDiceText.text = data.idInDice.ToString();
             //saleButton绑定移除圣物/背包骰面效果函数：增加一个委托类型的参数(就是对应的移除函数)
             saleButton.onClick.AddListener(() =>
             {
@@ -51,10 +55,7 @@ namespace UI
         /// <param name="eventData"></param>
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (_state != State.PointerChosen)//鼠标没有点击就退出预览
-            {
-                UIManager.Instance.ExitPreview(gameObject);
-            }
+            UIManager.Instance.ExitPreview(gameObject);
             descriptionCanvas.SetActive(false);
         }
         
