@@ -53,9 +53,21 @@ public class DamageManager : MonoSingleton<DamageManager>
         {
             buff.buffData.onBeHurt?.Invoke(buff, damageInfo, damageInfo.attacker);
         }
+        //计算最终伤害
+        damageInfo.finalDamage = Damage.FinalDamage(damageInfo.damage, damageInfo.level, damageInfo.diceType, damageInfo.addDamageArea, damageInfo.reduceDamageArea);
+
         //如果能被杀死，就会走OnKill和OnBeKilled
         if (defenderChaState.CanBeKilledByDamageInfo(damageInfo))
         {
+            if(attackerChaState.side == 0)
+            {
+                HalidomManager.Instance.OnKill(damageInfo);
+            }
+            else
+            {
+                HalidomManager.Instance.OnBeKilled(damageInfo);
+            }
+            HalidomManager.Instance.OnBeKilled(damageInfo);
             if (attackerChaState != null)
             {
                 foreach (var buff in attackerChaState.GetBuffHandler().buffList)
@@ -68,7 +80,6 @@ public class DamageManager : MonoSingleton<DamageManager>
                 buff.buffData.onBeKilled?.Invoke(buff, damageInfo, damageInfo.attacker);
             }
         }
-        damageInfo.finalDamage = Damage.FinalDamage(damageInfo.damage, damageInfo.level, damageInfo.diceType, damageInfo.addDamageArea, damageInfo.reduceDamageArea);
         Debug.Log("攻击伤害：" + damageInfo.finalDamage);
 
         //根据类型不同执行不同的逻辑

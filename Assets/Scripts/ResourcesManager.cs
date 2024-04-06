@@ -91,7 +91,7 @@ public static class ResourcesManager
             return null;
         }
         SingleDiceUIData singleDiceUIData = new SingleDiceUIData();
-        singleDiceUIData.idInDice = singleDiceObj.idInDice;
+        singleDiceUIData.idInDice = singleDiceObj.idInDice + 1;
         //根据骰子类型和基础等级计算基础值
         switch (singleDiceModelSO.type)
         {
