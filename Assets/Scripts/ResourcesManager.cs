@@ -47,7 +47,7 @@ public static class ResourcesManager
 {
     public static HalidomUIData GetHalidomUIData(string id)
     {
-        HalidomDataSO halidomDataSO = Resources.Load<HalidomDataSO>("Data/HalidomData/HalidomData" + id);
+        HalidomDataSO halidomDataSO = Resources.Load<HalidomDataSO>("Data/HalidomData/HalidomData_" + id);
         if (halidomDataSO == null)
         {
             Debug.LogWarning("ResourcesManager:HalidomDataSO is null");
@@ -63,7 +63,7 @@ public static class ResourcesManager
 
     public static BuffUIData GetBuffUIData(string id)
     {
-        BuffDataSO buffDataSO = Resources.Load<BuffDataSO>("Data/BuffData/BaseBuffData/BuffData" + id);
+        BuffDataSO buffDataSO = Resources.Load<BuffDataSO>("Data/BuffData/BaseBuffData/BuffData_" + id);
         if (buffDataSO == null)
         {
             Debug.LogWarning("ResourcesManager:BuffDataSO is null");
@@ -83,7 +83,7 @@ public static class ResourcesManager
     public static SingleDiceUIData GetSingleDiceUIData(SingleDiceObj singleDiceObj)
     {
         string id = singleDiceObj.model.id;
-        SingleDiceModelSO singleDiceModelSO = Resources.Load<SingleDiceModelSO>("Data/SingleDiceData/SingleDiceData" + id);
+        SingleDiceModelSO singleDiceModelSO = Resources.Load<SingleDiceModelSO>("Data/SingleDiceData/SingleDiceData_" + id);
         if (singleDiceModelSO == null)
         {
             Debug.LogWarning("ResourcesManager:SingleDiceModelSO is null");

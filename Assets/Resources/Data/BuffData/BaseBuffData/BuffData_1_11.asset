@@ -36,3 +36,6 @@ MonoBehaviour:
     canUseDice: 1
     ifImmune: 0
   propMod: []
+  paramList: []
+  description: 
+  sprite: {fileID: 0}

@@ -19,12 +19,13 @@ public class GameStartState : IState
         Debug.Log("游戏开始");
         //TODO:读入所有数据，暂时是这样，后面会改
         manager.parameter.playerChaState.GetBattleDiceHandler().InitDice(0);
+        //创建骰子页面
         for (int i = 0; i < manager.parameter.playerChaState.GetBattleDiceHandler().battleDiceCount; i++)
         {
             //获取
             var singleDices = manager.parameter.playerChaState.GetBattleDiceHandler().battleDices[i].GetBattleDiceSingleDices();
-            var name = $"页面:{i + 1}";
-            FightDicePageManager.Instance.CreatePageUI(name, singleDices);
+            string name = $"页面:{i + 1}";
+            FightDicePageManager.Instance.CreatePageUI(name, singleDices);//UI创建page
         }
         manager.parameter.playerChaState.Initialize();
         //HalidomManager.Instance.AddHalidom(DesignerScripts.HalidomData.halidomDictionary["Halidom_1"]);
@@ -111,7 +112,7 @@ public class PlayerRoundStartResolutionState : IState
         //TODO播放自动投骰子动画
         Debug.Log("播骰子动画");
         //自动投骰子
-        manager.RollDice();
+        manager.RollDice();//这边也需要调用UI的投骰子动画
         //TODO:封装投骰子函数给UI调用
         //TODO:更新UI
         foreach (var enemy in manager.parameter.enemyChaStates)

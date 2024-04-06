@@ -162,7 +162,8 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < singleDiceObjs.Count; i++)
         {
             Vector2Int pos = new Vector2Int(i, singleDiceObjs[i].idInDice);
-            RollingResultUIManager.Instance.CreateResult(i, singleDiceObjs[i].model.id, pos, false);
+            var singleDiceUIData = ResourcesManager.GetSingleDiceUIData(singleDiceObjs[i]);
+            RollingResultUIManager.Instance.CreateResult(i, singleDiceUIData, pos, false);
         }
     }
     public void ReRollDice()
@@ -195,10 +196,15 @@ public class BattleManager : MonoBehaviour
                 continue;
             }
             Vector2Int pos = new Vector2Int(i, singleDiceObjs[i].idInDice);
-            RollingResultUIManager.Instance.CreateResult(i, singleDiceObjs[i].model.id, pos, false);
+            var singleDiceUIData = ResourcesManager.GetSingleDiceUIData(singleDiceObjs[i]);
+            RollingResultUIManager.Instance.CreateResult(i, singleDiceUIData, pos, false);
         }
         DataUIManager.Instance.UpdateRerollText(this.parameter.playerChaState.resource.currentRollTimes);
     }
+    /// <summary>
+    /// 给敌人投掷骰子的方法，并且创建意图 
+    /// </summary>
+    /// <param name="chaState"></param>
     public void RollDiceForEnemy(ChaState chaState)
     {
         var singleDiceObjs = chaState.GetBattleDiceHandler().GetRandomSingleDices();
@@ -233,7 +239,7 @@ public class BattleManager : MonoBehaviour
     {
         int currentBagCount = this.parameter.playerChaState.GetBattleDiceHandler().bagDiceCards.Count;
         int maxBagCount = this.parameter.playerChaState.GetBattleDiceHandler().maxDiceInBag;
-        if(currentBagCount>=maxBagCount)
+        if (currentBagCount >= maxBagCount)
         {
 
             Debug.Log("背包已满");
