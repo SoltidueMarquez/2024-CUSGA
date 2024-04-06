@@ -75,6 +75,10 @@ namespace DesignerScripts
         Gain2ToughWhenBattleStart,//33
         Gain2VulnerableWhenBattleStart,//34
         Gain2WeakWhenBattleStart,//35
+
+        Add4ValueIfResultIsEven,//2-1
+        Add4ValueIfResultIsOdd,//2-2
+
         #endregion
     }
 
@@ -210,6 +214,12 @@ namespace DesignerScripts
             },
             {
                 BuffEventName.Add1PermanentValueWhenDiceIs6.ToString(),Add1PermanentValueWhenDiceIs6
+            },
+            {
+                BuffEventName.Add4ValueIfResultIsEven.ToString(),Add4ValueIfResultIsEven
+            },
+            {
+                BuffEventName.Add4ValueIfResultIsOdd.ToString(),Add4ValueIfResultIsOdd
             },
 
 
@@ -773,9 +783,9 @@ namespace DesignerScripts
         {
             if (BattleManager.Instance.parameter.turns == 1)
             {
-                BuffInfo newDodgeBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target);
+                BuffInfo newDodgeBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target,2);
                 //给对面添加伤害为0的buff
-                buffInfo.target.GetComponent<ChaState>().AddBuff(newDodgeBuff, buffInfo.target);
+                buffInfo.creator.GetComponent<ChaState>().AddBuff(newDodgeBuff, buffInfo.creator);
                 Debug.Log("战斗开始获得1层闪避");
             }
         }
@@ -838,6 +848,24 @@ namespace DesignerScripts
             }
         }
 
+
+        public static void Add4ValueIfResultIsEven(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            if (damageInfo.damage.indexDamageRate % 2 == 0)
+            {
+                damageInfo.damage.baseDamage += 4;
+                Debug.Log("骰子为偶数，增加4点伤害");
+            }
+        }
+
+        public static void Add4ValueIfResultIsOdd(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            if (damageInfo.damage.indexDamageRate % 2 == 1)
+            {
+                damageInfo.damage.baseDamage += 4;
+                Debug.Log("骰子为奇数，增加4点伤害");
+            }
+        }
 
         #endregion
 

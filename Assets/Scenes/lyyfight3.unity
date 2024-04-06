@@ -7997,7 +7997,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0107f09953f17742bf6c979976a8cc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  halidomSOData: []
+  halidomSOData:
+  - {fileID: 11400000, guid: a6c87913dfba3e2459b4f09bcd3e0268, type: 2}
 --- !u!1 &2054669038
 GameObject:
   m_ObjectHideFlags: 0

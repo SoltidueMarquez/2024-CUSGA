@@ -113,6 +113,7 @@ public class HalidomManager : MonoBehaviour
                 }
                 RefreshAllHalidoms();
                 BattleManager.Instance.parameter.playerChaState.AttrAndResourceRecheck();
+                Debug.Log("添加圣物" + halidom.halidomName + "成功");
                 //找到空的格子后就跳出循环
                 break;
             }
@@ -136,6 +137,7 @@ public class HalidomManager : MonoBehaviour
                     buffInfo.buffData.onRemove?.Invoke(buffInfo);
                 }
                 //将圣物在格子中的序号置为0
+                Debug.Log("移除圣物" + halidomList[i].halidomName + "成功");
                 halidomList[i].halidomIndex = 0;
                 //将圣物从圣物列表中移除
                 halidomList[i] = null;

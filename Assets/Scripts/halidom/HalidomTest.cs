@@ -13,6 +13,8 @@ public class HalidomTest : MonoBehaviour
     private void Update()
     {
         AddHalidomAtFirstFrame();
+        //AddHalidom();
+        DestroyHalidom();
     }
 
     public void AddHalidomAtFirstFrame()
@@ -31,6 +33,34 @@ public class HalidomTest : MonoBehaviour
                 
             }
             isRun = true;
+        }
+    }
+
+    public void AddHalidom()
+    {
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            if(!isRun)
+            {
+                foreach (var halidom in halidomSOData)
+                {
+                    if (HalidomData.halidomDictionary.ContainsKey(halidom.halidomName.ToString()))
+                    {
+                        HalidomManager.Instance.AddHalidom(HalidomData.halidomDictionary[halidom.halidomName.ToString()]);
+                    }
+                }
+            }
+            
+            isRun = true;
+        }
+    }
+
+    public void DestroyHalidom()
+    {
+       if(Input.GetKeyDown(KeyCode.P))
+        {
+            HalidomManager.Instance.RemoveHalidom(0);
+
         }
     }
 }

@@ -71,6 +71,9 @@ public enum onBuffHitEnum
     Add1EnemyBleedStackWhenDiceIs4,
     Add1PlayerStrengthStackWhenDiceIs5,
     Add1PermanentValueWhenDiceIs6,
+    Add4ValueIfResultIsEven,
+    Add4ValueIfResultIsOdd,
+
 
 
 }

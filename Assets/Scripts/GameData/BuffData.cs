@@ -65,6 +65,9 @@ namespace DesignerScripts
         Gain2ToughWhenBattleStart,//33
         Gain2VulnerableWhenBattleStart,//34
         Gain2WeakWhenBattleStart,//35
+
+        Add4ValueIfResultIsEven,
+        Add4ValueIfResultIsOdd,
         #endregion
     }
     public class BuffDataTable
