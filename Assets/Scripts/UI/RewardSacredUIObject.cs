@@ -11,9 +11,14 @@ namespace UI
         /// <summary>
         /// 初始化函数
         /// </summary>
-        public override void Init(string id, float animTime, float scale, Action<int> onChoose, int index)
+        public void Init(string id, float animTime, float scale, Action<int> onChoose, int index)
         {
-            descriptionText.text = id;
+            //信息初始化
+            var tmpData = ResourcesManager.GetHalidomUIData(id);
+            descriptionText.text = $"名称:{tmpData.name}+" +
+                                   $"描述:{tmpData.description}/n" +
+                                   $"售价:{tmpData.value}";
+            this.GetComponent<Image>().sprite = tmpData.sprite;
             //按钮事件绑定
             this.GetComponent<Button>().onClick.AddListener(()=>
             {

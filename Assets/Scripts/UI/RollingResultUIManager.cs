@@ -26,15 +26,15 @@ namespace UI
         /// 生成投掷结果函数,请按投掷顺序有序生成
         /// </summary>
         /// <param name="index">是第几个投掷结果</param>
-        /// <param name="id">骰面的id</param>
+        /// <param name="data">骰面的数据</param>
         /// <param name="location">坐标位置，先页面位置再页内位置</param>
         /// <param name="ifFightEnd"></param>
-        public void CreateResult(int index, string id, Vector2Int location,bool ifFightEnd)
+        public void CreateResult(int index, SingleDiceUIData data, Vector2Int location,bool ifFightEnd)
         {
             var tmp = Instantiate(template, columns[index], true);
             tmp.transform.position = columns[index].position;//更改位置
             var tmpResult = tmp.GetComponent<RollingResultDiceUI>();
-            tmpResult.Init(index, location, id);//初始化
+            tmpResult.Init(index, location, data);//初始化
             if (ifFightEnd) { tmpResult.Disable();}
             tmp.SetActive(true);
             tmpResult.DoAppearAnim(useTime);//出现动画

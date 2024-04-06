@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -7,8 +9,31 @@ namespace UI
     /// <summary>
     /// 背包骰面动效实现类
     /// </summary>
+    [RequireComponent(typeof(Image))]
     public class BagDiceUIEffects : UIObjectEffects, IBeginDragHandler,IEndDragHandler,IDragHandler,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
     {
+        public void Init(List<Column> columns, float offset, SingleDiceUIData data, Action<int> remove, int index)
+        {
+            descriptionText.text = $"名称:{data.name}+" +
+                                   $"类型:{data.type}/n" +
+                                   $"描述:{data.description}/n" +
+                                   $"基础数值:{data.baseValue}/n";
+            this.GetComponent<Image>().sprite = data.sprite;
+            saleButtonText.text = $"出售\n￥{data.value}";
+            //saleButton绑定移除圣物/背包骰面效果函数：增加一个委托类型的参数(就是对应的移除函数)
+            saleButton.onClick.AddListener(() =>
+            {
+                DestroyUI();
+                remove?.Invoke(index);
+            });
+            _state = State.None;
+            _currentColumn = UIManager.Instance.DetectColumn(gameObject, columns, offset); //检测当前所在的物品栏
+            if (_currentColumn != null) //初始化当前所在的物品栏
+            {
+                _currentColumn.bagObject = gameObject;
+            }
+        }
+        
         /// <summary>
         /// 鼠标移动函数
         /// </summary>

@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace UI
 {
+    [RequireComponent(typeof(Image))]
     public class FightDiceUIEffect : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     {
         [Header("UI组件")]
@@ -34,9 +35,14 @@ namespace UI
         /// <summary>
         /// 初始化函数
         /// </summary>
-        public virtual void Init(string id)
+        public virtual void Init(SingleDiceUIData data)
         {
-            descriptionText.text = id;
+            descriptionText.text = $"名称:{data.name}+" +
+                                   $"类型:{data.type}/n" +
+                                   $"描述:{data.description}/n" +
+                                   $"基础数值:{data.baseValue}/n" +
+                                   $"售价:{data.value}";
+            this.GetComponent<Image>().sprite = data.sprite;
         }
     }
 }

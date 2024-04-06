@@ -34,14 +34,16 @@ namespace UI
         /// <summary>
         /// 初始化函数
         /// </summary>
-        /// <param name="id">序列号</param>
-        /// <param name="desc">描述</param>
+        /// <param name="id">索引</param>
         /// <param name="durationTime">持续时间</param>
-        public void Init(string desc, int durationTime)
+        public void Init(string id, int durationTime)
         {
             //TODO：依据内容初始化
             UpdateDuration(durationTime);
-            descriptionText.text = desc;
+            var tmpData = ResourcesManager.GetBuffUIData(id);
+            descriptionText.text = $"名称:{tmpData.name}+" +
+                                   $"描述:{tmpData.description}/n";
+            this.GetComponent<Image>().sprite = tmpData.sprite;
         }
 
         /// <summary>

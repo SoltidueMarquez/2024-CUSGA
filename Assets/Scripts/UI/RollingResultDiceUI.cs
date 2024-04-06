@@ -26,8 +26,8 @@ namespace UI
         /// </summary>
         /// <param name="tmpIndex">结果序列号</param>
         /// <param name="position">坐标位置，先页面位置再页内位置</param>
-        /// <param name="id">骰面对应id</param>
-        public void Init(int tmpIndex, Vector2Int position, string id)
+        /// <param name="data">骰面对应data</param>
+        public void Init(int tmpIndex, Vector2Int position, SingleDiceUIData data)
         {
             image = this.GetComponent<Image>();
             button = this.GetComponent<Button>();
@@ -42,9 +42,13 @@ namespace UI
                 OnUseDestroy();//摧毁物体
             });
             
-            //ToDo:根据id初始化信息
-            infoText.text = id;
-            Debug.Log("根据id初始化投掷结果信息");
+            //根据id初始化信息
+            infoText.text = $"名称:{data.name}+" +
+                                   $"类型:{data.type}/n" +
+                                   $"描述:{data.description}/n" +
+                                   $"基础数值:{data.baseValue}/n" +
+                                   $"售价:{data.value}";
+            this.GetComponent<Image>().sprite = data.sprite;
         }
 
         /// <summary>

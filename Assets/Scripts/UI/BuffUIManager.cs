@@ -18,9 +18,9 @@ namespace UI
         /// 创建buff UI函数
         /// </summary>
         /// <param name="character"></param>
-        /// <param name="desc"></param>
+        /// <param name="id"></param>
         /// <param name="durationTime"></param>
-        public void CreateBuffUIObject(Character character, string desc, int durationTime)
+        public void CreateBuffUIObject(Character character, string id, int durationTime)
         {
             Transform parent = null;
             List<BuffUIObjectEfffect> buffList = null;
@@ -37,7 +37,7 @@ namespace UI
             }
             var tmp = Instantiate(template, parent, true);
             var tmpBuff = tmp.GetComponent<BuffUIObjectEfffect>();
-            tmpBuff.Init(desc, durationTime);//初始化
+            tmpBuff.Init(id, durationTime);//初始化
             tmp.SetActive(true);
             buffList?.Add(tmpBuff);
         }

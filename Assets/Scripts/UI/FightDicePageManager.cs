@@ -41,7 +41,8 @@ namespace UI
             {
                 for (int i = 0; i < diceObjs.Count; i++)//创建骰面
                 {
-                    CreateDiceUI(diceObjs[i].model.id, diceObjs[i].idInDice, tmp.transform);
+                    var tmpData = ResourcesManager.GetSingleDiceUIData(diceObjs[i]);
+                    CreateDiceUI(tmpData, diceObjs[i].idInDice, tmp.transform);
                 }
             }
             fightDicePageLists.Add(tmp);
@@ -51,14 +52,14 @@ namespace UI
         /// <summary>
         /// 创建战斗骰函数
         /// </summary>
-        /// <param name="id">id标识</param>
+        /// <param name="data">数据</param>
         /// <param name="index">栏位索引</param>
         /// <param name="page">页面</param>
-        public void CreateDiceUI(string id, int index, Transform page)
+        public void CreateDiceUI(SingleDiceUIData data, int index, Transform page)
         {
             var tmp = Instantiate(diceTemplate, page, true);
             tmp.transform.position = columns[index].transform.position;//更改位置
-            tmp.GetComponent<FightDiceUIEffect>().Init(id);//初始化
+            tmp.GetComponent<FightDiceUIEffect>().Init(data);//初始化
             tmp.SetActive(true);
         }
         

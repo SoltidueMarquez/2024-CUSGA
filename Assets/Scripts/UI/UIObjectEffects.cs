@@ -34,7 +34,7 @@ namespace UI
         /// <summary>
         /// 初始化函数
         /// </summary>
-        public void Init(List<Column> columns, float offset, string id, Action<int> remove, int index)
+        public virtual void Init(List<Column> columns, float offset, string id, Action<int> remove, int index)
         {
             descriptionText.text = id;
             saleButtonText.text = $"出售\n￥{salePrice}";
@@ -55,7 +55,7 @@ namespace UI
         /// <summary>
         /// 摧毁UI函数
         /// </summary>
-        private void DestroyUI()
+        protected void DestroyUI()
         {
             _currentColumn.bagObject = null; //所在的物品栏置空
             Destroy(gameObject);

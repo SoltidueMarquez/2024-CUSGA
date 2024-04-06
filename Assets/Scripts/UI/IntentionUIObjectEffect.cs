@@ -38,8 +38,9 @@ namespace UI
         /// <param name="durationTime">持续时间</param>
         public void Init(string id)
         {
-            //TODO：依据内容初始化
-            descriptionText.text = id;
+            //依据内容初始化
+            var tmp = ResourcesManager.GetIntentionUIData(id);
+            descriptionText.text = $"{tmp.name}:{tmp.description}";
             this.transform.localScale = new Vector3(-1, 1, 1);
         }
 

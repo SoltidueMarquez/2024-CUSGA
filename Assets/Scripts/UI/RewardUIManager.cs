@@ -36,10 +36,10 @@ namespace UI
         /// <summary>
         /// 创建骰面函数,其本质仍然是一个战斗骰面页的骰子(子类)
         /// </summary>
-        /// <param name="id">id标识</param>
+        /// <param name="data"></param>
         /// <param name="index">栏位索引</param>
         /// <param name="onChoose">选择骰面后触发的逻辑函数</param>
-        public void CreateDiceUI(string id, int index, Action<int> onChoose)
+        public void CreateDiceUI(SingleDiceUIData data, int index, Action<int> onChoose)
         {
             if (index > diceColumns.Count)
             {
@@ -56,7 +56,7 @@ namespace UI
             diceColumns[index].bagObject = tmp;
             tmp.transform.position = parent.position;//更改位置
             var tmpDice = tmp.GetComponent<RewardDiceUIObject>();
-            tmpDice.Init(id, animTime, 2, onChoose, index);//初始化
+            tmpDice.Init(data, animTime, 2, onChoose, index);//初始化
             tmp.SetActive(true);
             tmpDice.DoAppearAnim(animTime); //出现动画
         }
