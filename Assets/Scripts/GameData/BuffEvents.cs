@@ -56,6 +56,8 @@ namespace DesignerScripts
         Add4MoneyWhenBattleEnd,//12
         GainHalfMoney,//13
         Add50PercentAttackEvery3TimesLoseHealth,//16
+        Add50PercentAttack,//16
+
         Add90PercentAttackEvery9TimesUseDice,
         Recover20HealthWhenEnterStore,
         Get5MaxHealthWhenGain,//18
@@ -191,6 +193,9 @@ namespace DesignerScripts
             },
             {
                 BuffEventName.EnhancePlayerStrength.ToString(),EnhancePlayerStrength
+            },
+            {
+                BuffEventName.Add50PercentAttack.ToString(),Add50PercentAttack
             },
 
             {
@@ -554,6 +559,7 @@ namespace DesignerScripts
         }
         public static void EnhanceEnemyVulnerability(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
+            Debug.Log("进入EnhanceEnemyVulnerability");
             if (buffInfo.target.GetComponent<BuffHandler>() != null)
             {
                 BuffHandler targetBuffHandler = buffInfo.target.GetComponent<BuffHandler>();
@@ -599,15 +605,17 @@ namespace DesignerScripts
             //在buffinfo的额外参数字典中存储了玩家受到伤害的次数
             //每次OnBeHurt回调点触发时，将次数+1
             //如果次数是3的倍数，增加0.5f的攻击力
+
+            //现在受到伤害只检查是不是配置的时候有这个键值对，有则++
             if (buffInfo.buffParam.ContainsKey("PlayerLoseHealthCount"))
             {
-                Debug.Log("搜到了键值对。。。。。。。。。。。。。。。。。。。");
+                
                 int attackCount = (int)buffInfo.buffParam["PlayerLoseHealthCount"];
                 attackCount++;
-                if (attackCount % 3 == 0)
+                /*if (attackCount % 3 == 0)
                 {
                     damageInfo.addDamageArea += 0.5f;
-                }
+                }*/
                 buffInfo.buffParam["PlayerLoseHealthCount"] = attackCount;
                 Debug.Log("受到伤害次数" + attackCount);
             }
@@ -618,6 +626,22 @@ namespace DesignerScripts
             }*/
         }
 
+        public static void Add50PercentAttack(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            if (buffInfo.buffParam.ContainsKey("PlayerLoseHealthCount"))
+            {
+
+                int attackCount = (int)buffInfo.buffParam["PlayerLoseHealthCount"];
+                
+                if (attackCount % 3 == 0)
+                {
+                    damageInfo.addDamageArea += 0.5f;
+                    Debug.Log("增加50%攻击力");
+                }
+                
+                
+            }
+        }
 
         public static void Add90PercentAttackEvery9TimesUseDice(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
