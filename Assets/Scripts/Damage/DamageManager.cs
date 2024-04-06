@@ -30,7 +30,12 @@ public class DamageManager : MonoSingleton<DamageManager>
         if (attackerChaState.side == 0)
         {
             HalidomManager.Instance.OnHit(damageInfo);
+            
+        }
+        else
+        {
             HalidomManager.Instance.OnBeHurt(damageInfo);
+            
         }
 
         Debug.Log("<color=#FFA07A>DamageManager-基础伤害：</color>" + damageInfo.damage.baseDamage);

@@ -24,7 +24,7 @@ MonoBehaviour:
   onRemove: 0
   onRoundStart: 0
   onRoundEnd: 0
-  onHit: 0
+  onHit: 20
   onBeHurt: 4
   onRoll: 0
   onKill: 0
@@ -35,3 +35,9 @@ MonoBehaviour:
     canUseDice: 1
     ifImmune: 0
   propMod: []
+  paramList:
+  - type: 0
+    name: PlayerLoseHealthCount
+    value: 0
+  description: 
+  sprite: {fileID: 0}

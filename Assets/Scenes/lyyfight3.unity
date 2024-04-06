@@ -7998,7 +7998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   halidomSOData:
-  - {fileID: 11400000, guid: a6c87913dfba3e2459b4f09bcd3e0268, type: 2}
+  - {fileID: 11400000, guid: 428ff086c36c783419c61d9cb3c8d9fa, type: 2}
 --- !u!1 &2054669038
 GameObject:
   m_ObjectHideFlags: 0

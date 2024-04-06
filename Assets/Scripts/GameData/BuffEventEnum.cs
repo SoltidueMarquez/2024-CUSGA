@@ -64,6 +64,7 @@ public enum onBuffHitEnum
     Add3ValueIfResultAbove4,
     Add1StackIfEnemyHaveBleed,
     EnhancePlayerStrength,
+    
     Add90PercentAttackEvery9TimesUseDice,
     ReuseDiceWhenDiceIs1,
     Add2MoneyWhenDiceIs2,
@@ -74,7 +75,7 @@ public enum onBuffHitEnum
     Add4ValueIfResultIsEven,
     Add4ValueIfResultIsOdd,
 
-
+    Add50PercentAttack,
 
 }
 

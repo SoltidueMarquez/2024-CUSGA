@@ -46,6 +46,7 @@ namespace DesignerScripts
         Add4MoneyWhenBattleEnd,//12
         GainHalfMoney,//13
         Add50PercentAttackEvery3TimesLoseHealth,//16
+        
         Add90PercentAttackEvery9TimesUseDice,
         Recover20HealthWhenEnterStore,
         Get5MaxHealthWhenGain,//18
@@ -68,6 +69,8 @@ namespace DesignerScripts
 
         Add4ValueIfResultIsEven,
         Add4ValueIfResultIsOdd,
+
+        Add50PercentAttack,//16
         #endregion
     }
     public class BuffDataTable
