@@ -7,8 +7,9 @@ namespace UI
 {
     public class BuffUIObjectEfffect : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     {
-        [SerializeField] private GameObject descriptionUI;
-        [SerializeField] private Text descriptionText;
+        [SerializeField, Tooltip("描述UI")] private GameObject descriptionUI;
+        [SerializeField, Tooltip("姓名Text")] private Text nameText;
+        [SerializeField, Tooltip("描述Text")] private Text descriptionText;
         [SerializeField, Tooltip("持续回合数")] private Text durationText;
 
         /// <summary>
@@ -38,11 +39,11 @@ namespace UI
         /// <param name="durationTime">持续时间</param>
         public void Init(string id, int durationTime)
         {
-            //TODO：依据内容初始化
+            //依据内容初始化
             UpdateDuration(durationTime);
             var tmpData = ResourcesManager.GetBuffUIData(id);
-            descriptionText.text = $"名称:{tmpData.name}+" +
-                                   $"描述:{tmpData.description}/n";
+            nameText.text = tmpData.name;
+            descriptionText.text = tmpData.description;
             this.GetComponent<Image>().sprite = tmpData.sprite;
         }
 

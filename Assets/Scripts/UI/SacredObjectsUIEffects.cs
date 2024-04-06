@@ -18,8 +18,9 @@ namespace UI
         public override void Init(List<Column> columns, float offset, string id, Action<int> remove, int index)
         {
             var tmpData = ResourcesManager.GetHalidomUIData(id);
-            descriptionText.text = $"名称:{tmpData.name}+" +
-                                   $"描述:{tmpData.description}/n";
+            nameText.text = tmpData.name;
+            valueText.text = $"售价￥{tmpData.value}";
+            descriptionText.text = tmpData.description;
             this.GetComponent<Image>().sprite = tmpData.sprite;
             saleButtonText.text = $"出售\n￥{tmpData.value}";
             
@@ -54,10 +55,7 @@ namespace UI
         /// <param name="eventData"></param>
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (_state != State.PointerChosen)//鼠标没有点击就退出预览
-            {
-                UIManager.Instance.ExitPreview(gameObject);
-            }
+            UIManager.Instance.ExitPreview(gameObject);
             descriptionCanvas.SetActive(false);
         }
         

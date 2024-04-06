@@ -10,6 +10,12 @@ namespace UI
         [Header("UI组件")]
         [SerializeField,Tooltip("说明UI")]protected GameObject descriptionCanvas;
         [SerializeField,Tooltip("说明Text")]protected Text descriptionText;
+        [SerializeField,Tooltip("名称Text")]protected Text nameText;
+        [SerializeField,Tooltip("类型Text")]protected Text typeText;
+        [SerializeField, Tooltip("稀有度Text")] protected Text levelText;
+        [SerializeField,Tooltip("售价Text")]protected Text valueText;
+        [SerializeField,Tooltip("基础数值Text")]protected Text baseValueText;
+        [SerializeField,Tooltip("点数Text")]protected Text idInDiceText;
 
         /// <summary>
         /// 鼠标移动函数
@@ -37,11 +43,14 @@ namespace UI
         /// </summary>
         public virtual void Init(SingleDiceUIData data)
         {
-            descriptionText.text = $"名称:{data.name}+" +
-                                   $"类型:{data.type}/n" +
-                                   $"描述:{data.description}/n" +
-                                   $"基础数值:{data.baseValue}/n" +
-                                   $"售价:{data.value}";
+            //信息文本初始化
+            nameText.text = data.name;
+            typeText.text = $"类型:{data.type}";
+            levelText.text = $"稀有度:{data.level}";
+            valueText.text = $"售价￥{data.value}";
+            baseValueText.text = $"基础数值{data.baseValue}";
+            descriptionText.text = $"描述:{data.description}";
+            idInDiceText.text = data.idInDice.ToString();
             this.GetComponent<Image>().sprite = data.sprite;
         }
     }
