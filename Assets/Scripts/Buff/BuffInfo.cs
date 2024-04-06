@@ -60,7 +60,7 @@ public class BuffInfo
         this.creator = creator;
         this.target = target;
         this.curStack = stack;
-        this.isPermanent = isPermanent;
+        this.isPermanent = buffData.isPermanent;
         //this.isPermanent = buffData.isPermanent;
         this.roundCount = buffData.duringCount;
         if (buffParam != null)

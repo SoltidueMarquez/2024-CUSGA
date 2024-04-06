@@ -243,7 +243,10 @@ public class BattleManager : MonoBehaviour
             UIManager.Instance.rewardUIManager.EnableAllDices();
         }
     }
-
+    /// <summary>
+    /// 向玩家背包添加骰面的函数
+    /// </summary>
+    /// <param name="singleDiceObj"></param>
     public void AddSingleDiceToPlayerBag(SingleDiceObj singleDiceObj)
     {
         int currentBagCount = this.parameter.playerChaState.GetBattleDiceHandler().bagDiceCards.Count;
@@ -255,6 +258,29 @@ public class BattleManager : MonoBehaviour
             return;
         }
         this.parameter.playerChaState.GetBattleDiceHandler().AddSingleBattleDiceToBag(singleDiceObj);
+        //获取当前骰面在背包骰面中的位置
+        int index = this.parameter.playerChaState.GetBattleDiceHandler().GetIndexOfSingleDiceInBag(singleDiceObj);
+        var singleDiceUIData = ResourcesManager.GetSingleDiceUIData(singleDiceObj);
+        BagDiceUIManager.Instance.CreateBagUIDice(index, singleDiceUIData, null);
+    }
+    /// <summary>
+    /// 售卖单个骰面
+    /// </summary>
+    /// <param name="index"></param>
+    public void SellSingleDice(int index)
+    {
+        this.parameter.playerChaState.GetBattleDiceHandler().RemoveSingleBattleDiceFromBag(index);
+        //获取当前骰面在背包骰面中的位置
+        BagDiceUIManager.Instance.RemoveBagDice(index);
+        RefreshIfDiceCanChoose();
+    }
+    /// <summary>
+    /// 将选中的圣物添加到圣物管理器中，这边待定
+    /// </summary>
+    /// <param name="index"></param>
+    public void AddHalidomToHalidomManager(int index)
+    {
+
     }
     #endregion
 }

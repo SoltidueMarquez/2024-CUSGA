@@ -154,6 +154,12 @@ public class BattleDiceHandler : MonoBehaviour
         this.bagDiceCards.Add(singleDiceObj);
     }
     #endregion
+    #region 从各个地方删除骰面
+    public void RemoveSingleBattleDiceFromBag(int index)
+    {
+        this.bagDiceCards.RemoveAt(index);
+    }
+    #endregion
     #region 随机数相关
     /// <summary>
     /// 获取随机的战斗骰子数量的骰面,主要用于生成战斗时用的骰面
@@ -200,6 +206,15 @@ public class BattleDiceHandler : MonoBehaviour
             }
         }
         return true;
+    }
+    /// <summary>
+    /// 获取骰面在背包中的index
+    /// </summary>
+    /// <param name="singleDiceObj"></param>
+    /// <returns></returns>
+    public int GetIndexOfSingleDiceInBag(SingleDiceObj singleDiceObj)
+    {
+        return bagDiceCards.IndexOf(singleDiceObj);
     }
     /// <summary>
     /// 根据tag查找buffInfo
