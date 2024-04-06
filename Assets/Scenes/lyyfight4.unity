@@ -593,8 +593,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1871d8602b9dcd24eaea3f3394435dbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RunText: {fileID: 458454510}
-  ReRollText: {fileID: 333788548}
+  runText: {fileID: 458454510}
+  reRollText: {fileID: 333788548}
+  moneyText: {fileID: 1829682577}
 --- !u!114 &81981824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,7 +705,7 @@ MonoBehaviour:
   enemyStartYPosition: 740
   enemyEndYPosition: 1380
   playerStartYPosition: 340
-  playerEndYPosition: -300
+  playerEndYPosition: -400
 --- !u!114 &81981828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -909,7 +910,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6682\u505C"
+  m_Text: "\u8BBE\u7F6E"
 --- !u!222 &131211899
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1722,11 +1723,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffHandler: {fileID: 0}
   battleDiceHandler: {fileID: 0}
+  baseProp:
+    health: 50
+    money: 400
+    maxRollTimes: 4
+    shield: 0
+  buffProp:
+  - health: 0
+    money: 0
+    maxRollTimes: 0
+    shield: 0
+  - health: 0
+    money: 0
+    maxRollTimes: 0
+    shield: 0
   resource:
     currentHp: 0
     currentMoney: 0
     currentRollTimes: 0
     currentShield: 0
+  controlState:
+    ifCanChangePosition: 1
+    canUseDice: 1
+    ifImmune: 0
   side: 1
 --- !u!114 &341200664
 MonoBehaviour:
@@ -2748,11 +2767,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffHandler: {fileID: 0}
   battleDiceHandler: {fileID: 0}
+  baseProp:
+    health: 50
+    money: 400
+    maxRollTimes: 4
+    shield: 0
+  buffProp:
+  - health: 0
+    money: 0
+    maxRollTimes: 0
+    shield: 0
+  - health: 0
+    money: 0
+    maxRollTimes: 0
+    shield: 0
   resource:
     currentHp: 0
     currentMoney: 0
     currentRollTimes: 0
     currentShield: 0
+  controlState:
+    ifCanChangePosition: 1
+    canUseDice: 1
+    ifImmune: 0
   side: 0
 --- !u!114 &589276657
 MonoBehaviour:
@@ -4254,6 +4291,19 @@ MonoBehaviour:
   rewardUI: {fileID: 1021686752}
   endButton: {fileID: 574523178}
   useAllButton: {fileID: 1949946011}
+  animTime: 1
+  diceColumns:
+  - transform: {fileID: 1146085132}
+    bagObject: {fileID: 0}
+  - transform: {fileID: 1267500644}
+    bagObject: {fileID: 0}
+  - transform: {fileID: 1263337500}
+    bagObject: {fileID: 0}
+  diceTemplate: {fileID: 3046983917528316593, guid: 8174a524e9bfec74388c66f039a2e426, type: 3}
+  sacredObjectColumns:
+  - transform: {fileID: 526774495}
+    bagObject: {fileID: 0}
+  sacredObjectTemplate: {fileID: 3046983917528316593, guid: 5ee32cff29f90ca4eacf25786e8b73dd, type: 3}
 --- !u!4 &1128369420
 Transform:
   m_ObjectHideFlags: 0
@@ -6028,6 +6078,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1590396381}
   - component: {fileID: 1590396380}
+  - component: {fileID: 1590396382}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -6061,6 +6112,62 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1590396379}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1590396382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590396379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 672024d713439c64d8fc67b5c290df9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1591728989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1591728991}
+  - component: {fileID: 1591728990}
+  m_Layer: 0
+  m_Name: BuffDataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1591728990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591728989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b2305213aaccd342b9ec145cc089981, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1591728991
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591728989}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -7819,7 +7926,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1997646022}
+  - component: {fileID: 1997646023}
   - component: {fileID: 1997646021}
+  - component: {fileID: 1997646024}
   m_Layer: 0
   m_Name: HalidomManager
   m_TagString: Untagged
@@ -7840,6 +7949,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   halidomMaxCount: 6
+  currentCharacterProperty:
+    health: 0
+    money: 0
+    maxRollTimes: 0
+    shield: 0
+  deltaCharacterProperty:
+    health: 0
+    money: 0
+    maxRollTimes: 0
+    shield: 0
+  buffProp:
+  - health: 0
+    money: 0
+    maxRollTimes: 0
+    shield: 0
+  - health: 0
+    money: 0
+    maxRollTimes: 0
+    shield: 0
+  baseProp:
+    health: 50
+    money: 400
+    maxRollTimes: 4
+    shield: 0
 --- !u!4 &1997646022
 Transform:
   m_ObjectHideFlags: 0
@@ -7855,6 +7988,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1997646023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997646020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b7cb1205ed1a49459ae1a10ba96f251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1997646024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997646020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0107f09953f17742bf6c979976a8cc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  halidomSOData:
+  - {fileID: 11400000, guid: 42abf58ffdc3b8140bc7f42c2f093885, type: 2}
 --- !u!1 &2054669038
 GameObject:
   m_ObjectHideFlags: 0
@@ -8330,3 +8489,4 @@ SceneRoots:
   - {fileID: 1997646022}
   - {fileID: 1876085118}
   - {fileID: 1309330681}
+  - {fileID: 1591728991}

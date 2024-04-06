@@ -595,11 +595,13 @@ namespace DesignerScripts
 
         public static void Add50PercentAttackEvery3TimesLoseHealth(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
+            Debug.Log("进入了Add50PercentAttackEvery3TimesLoseHealth会丢爱哦的");
             //在buffinfo的额外参数字典中存储了玩家受到伤害的次数
             //每次OnBeHurt回调点触发时，将次数+1
             //如果次数是3的倍数，增加0.5f的攻击力
             if (buffInfo.buffParam.ContainsKey("PlayerLoseHealthCount"))
             {
+                Debug.Log("搜到了键值对。。。。。。。。。。。。。。。。。。。");
                 int attackCount = (int)buffInfo.buffParam["PlayerLoseHealthCount"];
                 attackCount++;
                 if (attackCount % 3 == 0)
@@ -609,10 +611,11 @@ namespace DesignerScripts
                 buffInfo.buffParam["PlayerLoseHealthCount"] = attackCount;
                 Debug.Log("受到伤害次数" + attackCount);
             }
-            else
+            /*else
             {
                 buffInfo.buffParam.Add("PlayerLoseHealthCount", 0);
-            }
+                Debug.Log("Test:--------------设置初始收到伤害次数为0");
+            }*/
         }
 
 
@@ -730,11 +733,11 @@ namespace DesignerScripts
         {
             if (damageInfo.damage.indexDamageRate == 4)
             {
-                if (buffInfo.target.GetComponent<BuffHandler>() != null)
+                /*if (buffInfo.target.GetComponent<BuffHandler>() != null)
                 {
                     BuffHandler targetBuffHandler = buffInfo.target.GetComponent<BuffHandler>();
                     //查询流血buff
-                    BuffInfo findBuffInfo = targetBuffHandler.buffList.Find(x => x.buffData.id == "1_1");
+                    BuffInfo findBuffInfo = targetBuffHandler.buffList.Find(x => x.buffData.id == "1_01");
 
                     //如果找到流血buff
                     if (findBuffInfo != null)
@@ -744,7 +747,13 @@ namespace DesignerScripts
                         Debug.Log("敌人流血层数+1");
                     }
 
-                }
+                }*/
+
+                BuffInfo newBleedBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Bleed.ToString()], buffInfo.creator, buffInfo.target, 1);
+                buffInfo.target.GetComponent<ChaState>().AddBuff(newBleedBuff1, buffInfo.target);
+                Debug.Log("敌方流血+1");
+                BuffInfo findBuffInfo=buffInfo.target.GetComponent<BuffHandler>().buffList.Find(x => x.buffData.id == "1_01");
+                Debug.Log(findBuffInfo.buffData.buffName);
             }
         }
 
@@ -754,9 +763,9 @@ namespace DesignerScripts
             {
                 if (buffInfo.creator.GetComponent<BuffHandler>() != null)
                 {
-                    BuffHandler targetBuffHandler = buffInfo.creator.GetComponent<BuffHandler>();
+                    /*BuffHandler targetBuffHandler = buffInfo.creator.GetComponent<BuffHandler>();
                     //查询力量buff
-                    BuffInfo findBuffInfo = targetBuffHandler.buffList.Find(x => x.buffData.id == "1_6");
+                    BuffInfo findBuffInfo = targetBuffHandler.buffList.Find(x => x.buffData.id == "1_06");
 
                     //如果找到力量buff
                     if (findBuffInfo != null)
@@ -764,7 +773,14 @@ namespace DesignerScripts
                         //增加层数(引用传递）
                         findBuffInfo.curStack++;
                         Debug.Log("玩家力量层数+1");
-                    }
+                    }*/
+
+                    BuffInfo newStrengthBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target,1);
+                    buffInfo.creator.GetComponent<ChaState>().AddBuff(newStrengthBuff1, buffInfo.creator);
+                    Debug.Log("玩家力量+1");
+                    BuffInfo findBuffInfo = buffInfo.creator.GetComponent<BuffHandler>().buffList.Find(x => x.buffData.id == "1_06");
+                    Debug.Log(findBuffInfo.buffData.buffName);
+
 
                 }
             }
@@ -783,7 +799,7 @@ namespace DesignerScripts
         {
             if (BattleManager.Instance.parameter.turns == 1)
             {
-                BuffInfo newDodgeBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target,2);
+                BuffInfo newDodgeBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target,1,true);
                 //给对面添加伤害为0的buff
                 buffInfo.creator.GetComponent<ChaState>().AddBuff(newDodgeBuff, buffInfo.creator);
                 Debug.Log("战斗开始获得1层闪避");
@@ -795,7 +811,7 @@ namespace DesignerScripts
             if (BattleManager.Instance.parameter.turns == 1)
             {
                 BuffInfo newEnhanceBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Enhance.ToString()], buffInfo.creator, buffInfo.target);
-                buffInfo.target.GetComponent<ChaState>().AddBuff(newEnhanceBuff, buffInfo.creator);
+                buffInfo.creator.GetComponent<ChaState>().AddBuff(newEnhanceBuff, buffInfo.creator);
                 Debug.Log("战斗开始获得1层强化");
             }
         }
@@ -806,8 +822,8 @@ namespace DesignerScripts
             {
                 BuffInfo newStrengthBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target);
                 BuffInfo newStrengthBuff2 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target);
-                buffInfo.target.GetComponent<ChaState>().AddBuff(newStrengthBuff1, buffInfo.creator);
-                buffInfo.target.GetComponent<ChaState>().AddBuff(newStrengthBuff2, buffInfo.creator);
+                buffInfo.creator.GetComponent<ChaState>().AddBuff(newStrengthBuff1, buffInfo.creator);
+                buffInfo.creator.GetComponent<ChaState>().AddBuff(newStrengthBuff2, buffInfo.creator);
                 Debug.Log("战斗开始获得2层力量");
             }
         }
@@ -816,10 +832,13 @@ namespace DesignerScripts
         {
             if (BattleManager.Instance.parameter.turns == 1)
             {
+                //因为buff会在回合结束时-1层，所以这边要加三次
                 BuffInfo newToughBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target);
                 BuffInfo newToughBuff2 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target);
-                buffInfo.target.GetComponent<ChaState>().AddBuff(newToughBuff1, buffInfo.creator);
-                buffInfo.target.GetComponent<ChaState>().AddBuff(newToughBuff2, buffInfo.creator);
+                BuffInfo newToughBuff3 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target);
+                buffInfo.creator.GetComponent<ChaState>().AddBuff(newToughBuff1, buffInfo.creator);
+                buffInfo.creator.GetComponent<ChaState>().AddBuff(newToughBuff2, buffInfo.creator);
+                buffInfo.creator.GetComponent<ChaState>().AddBuff(newToughBuff3, buffInfo.creator);
                 Debug.Log("战斗开始获得2层坚韧");
             }
         }
