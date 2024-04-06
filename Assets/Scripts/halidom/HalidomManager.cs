@@ -328,4 +328,18 @@ public class HalidomManager : MonoBehaviour
             }
         }
     }
+    #region 一些实用效果
+    //判断圣物是否满
+    public bool IsFull()
+    {
+        for (int i = 0; i < halidomList.Length; i++)
+        {
+            if (halidomList[i] == null)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    #endregion
 }

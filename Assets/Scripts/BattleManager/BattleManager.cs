@@ -274,6 +274,10 @@ public class BattleManager : MonoBehaviour
         BagDiceUIManager.Instance.RemoveBagDice(index);
         RefreshIfDiceCanChoose();
     }
+    public void RefreshIfHalodomCanChoose()
+    {
+        
+    }
     /// <summary>
     /// 将选中的圣物添加到圣物管理器中，这边待定
     /// </summary>
