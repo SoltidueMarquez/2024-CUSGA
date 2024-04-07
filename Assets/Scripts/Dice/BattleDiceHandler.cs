@@ -23,7 +23,7 @@ public class BattleDiceHandler : MonoBehaviour
     /// <summary>
     /// 背包中最多能放的骰面数量
     /// </summary>
-    public int maxDiceInBag = 8;
+    public int maxDiceInBag = 1;
     /// <summary>
     /// 玩家和敌人身上能使用的骰面
     /// </summary>

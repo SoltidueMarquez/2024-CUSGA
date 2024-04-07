@@ -25,7 +25,7 @@ MonoBehaviour:
     currentMoney: 0
     currentRollTimes: 0
     currentShield: 0
-  level: 3
+  level: 2
   value: 7
   side: 0
   buffDataSOs: []

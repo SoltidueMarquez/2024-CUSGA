@@ -11,7 +11,7 @@ namespace UI
         /// <summary>
         /// 初始化函数
         /// </summary>
-        public void Init(string id, float animTime, float scale, Action<int> onChoose, int index)
+        public void Init(string id, float animTime, float scale, Action<HalidomObject> onChoose, HalidomObject halidomObject)
         {
             
             //信息初始化
@@ -25,7 +25,7 @@ namespace UI
             {
                 Disable();
                 DoChosenAnim(animTime, scale);//动画
-                onChoose?.Invoke(index);
+                onChoose?.Invoke(halidomObject);
                 UIManager.Instance.rewardUIManager.DisableAllSacredObject();
             });
         }

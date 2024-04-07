@@ -187,9 +187,9 @@ public class BattleManager : MonoBehaviour
         }
         else if (currentState is RewardState)
         {
-            CreateRewardSingleDices(3);
+            CreateRewards(3);
         }
-        
+
     }
     /// <summary>
     /// 在战斗中为玩家重新投掷骰子
@@ -251,11 +251,6 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void RefreshIfDiceCanChoose()
     {
-        //如果玩家已经选择了骰面，就不再刷新是否能选择骰面
-        if(this.parameter.ifSelectedDice == true)
-        {
-            return;
-        }
         int currentBagCount = this.parameter.playerChaState.GetBattleDiceHandler().bagDiceCards.Count;
         int maxBagCount = this.parameter.playerChaState.GetBattleDiceHandler().maxDiceInBag;
         if (currentBagCount >= maxBagCount)
@@ -267,6 +262,11 @@ public class BattleManager : MonoBehaviour
         else
         {
             UIManager.Instance.rewardUIManager.EnableAllDices();
+        }
+        //如果玩家已经选择了骰面，就不再刷新是否能选择骰面
+        if (this.parameter.ifSelectedDice == true)
+        {
+            return;
         }
     }
     /// <summary>
@@ -280,14 +280,14 @@ public class BattleManager : MonoBehaviour
         if (currentBagCount >= maxBagCount)
         {
 
-            Debug.Log("背包已满");
+            //Debug.Log("背包已满");
             return;
         }
         this.parameter.playerChaState.GetBattleDiceHandler().AddSingleBattleDiceToBag(singleDiceObj);
         //获取当前骰面在背包骰面中的位置
         int index = this.parameter.playerChaState.GetBattleDiceHandler().GetIndexOfSingleDiceInBag(singleDiceObj);
         var singleDiceUIData = ResourcesManager.GetSingleDiceUIData(singleDiceObj);
-        BagDiceUIManager.Instance.CreateBagUIDice(index, singleDiceUIData, SellSingleDice,singleDiceObj);
+        BagDiceUIManager.Instance.CreateBagUIDice(index, singleDiceUIData, SellSingleDice, singleDiceObj);
         //已经选中过骰面
         this.parameter.ifSelectedDice = true;
     }
@@ -295,19 +295,23 @@ public class BattleManager : MonoBehaviour
     /// 创建奖励界面的骰面
     /// </summary>
     /// <param name="count"></param>
-    public void CreateRewardSingleDices(int count)
+    public void CreateRewards(int count)
     {
-        //清空之前的骰面
-        for (int i = 0;i < count; i++)
+
+        //清空之前的奖励骰面
+        for (int i = 0; i < count; i++)
         {
-            UIManager.Instance.rewardUIManager.RemoveDiceUI(i); 
+            UIManager.Instance.rewardUIManager.RemoveDiceUI(i);
         }
-        
+        //清空之前的圣物 
+        UIManager.Instance.rewardUIManager.RemoveSacredObject(0);
+        //清空之前的roll出的骰面
         RollingResultUIManager.Instance.RemoveAllResultUI(Strategy.ReRoll);
         //先roll出骰面
         List<SingleDiceObj> singleDiceObjs = this.parameter.playerChaState.GetBattleDiceHandler().GetRandomSingleDices();
-        //创建UI骰子效果
-        for(int i = 0; i < singleDiceObjs.Count; i++)
+        //创建roll骰子效果
+        //创建roll骰子的UI效果
+        for (int i = 0; i < singleDiceObjs.Count; i++)
         {
             Vector2Int pos = new Vector2Int(i, singleDiceObjs[i].positionInDice);
             var singleDiceUIData = ResourcesManager.GetSingleDiceUIData(singleDiceObjs[i]);
@@ -315,14 +319,28 @@ public class BattleManager : MonoBehaviour
         }
 
         //获得根据roll出骰面的结果，获取奖励的骰面
+        if(this.parameter.ifSelectedHalidom == false)
+        {
+            CreateRewardDices(singleDiceObjs, count);
+        }
+        if(this.parameter.ifSelectedDice == false)
+        {
+            CreateRewardHalidom(singleDiceObjs);
+        }
+    }
+    /// <summary>
+    /// 根据玩家的骰面，创建奖励界面的骰面
+    /// </summary>
+    /// <param name="singleDiceObjs"></param>
+    public void CreateRewardDices(List<SingleDiceObj> singleDiceObjs, int count)
+    {
         var resultDiceObjs = RandomManager.Instance.GetRewardSingleDiceObjsViaPlayerData(singleDiceObjs, count);
         for (int i = 0; i < resultDiceObjs.Count; i++)
         {
             var singleDiceUIData = ResourcesManager.GetSingleDiceUIData(resultDiceObjs[i]);
             UIManager.Instance.rewardUIManager.CreateDiceUI(singleDiceUIData, i, AddSingleDiceToPlayerBag, resultDiceObjs[i]);
         }
-
-
+        RefreshIfDiceCanChoose();
     }
     /// <summary>
     /// 售卖单个骰面
@@ -337,6 +355,17 @@ public class BattleManager : MonoBehaviour
         RefreshIfDiceCanChoose();
     }
     /// <summary>
+    /// 根据roll出的骰面，创建奖励界面的圣物
+    /// </summary>
+    /// <param name="singleDiceObjs"></param>
+    public void CreateRewardHalidom(List<SingleDiceObj> singleDiceObjs)
+    {
+        var resultHalidom = RandomManager.Instance.GetRewardHalidomViaPlayerData(singleDiceObjs);
+        UIManager.Instance.rewardUIManager.CreateSacredObject(resultHalidom.id, 0,AddHalidomToHalidomManager,resultHalidom);
+        RefreshIfHalodomCanChoose();
+    }
+    
+    /// <summary>
     /// 刷新是否可以选择圣物，进入奖励界面时调用，售卖圣物时也要调用
     /// </summary>
     public void RefreshIfHalodomCanChoose()
@@ -349,19 +378,29 @@ public class BattleManager : MonoBehaviour
         {
             UIManager.Instance.rewardUIManager.DisableAllDices();
         }
+        if (this.parameter.ifSelectedHalidom == true)
+        {
+            UIManager.Instance.rewardUIManager.DisableAllDices();
+        }
     }
     /// <summary>
     /// 将选中的圣物添加到圣物管理器中，这边待定
     /// </summary>
     /// <param name="index"></param>
-    public void AddHalidomToHalidomManager(int index)
+    public void AddHalidomToHalidomManager(HalidomObject halidomObject)
     {
-
+        if(HalidomManager.Instance.IsFull())
+        {
+            return;
+        }
+        HalidomManager.Instance.AddHalidom(halidomObject);//创建视觉效果的也包含在这个函数中
+        this.parameter.ifSelectedHalidom = true;
     }
+
     #endregion
 
 
-    
+
 }
 //定义了一个回调，用于在UI动画结束时调用
 public delegate void OnUIAnimFinished();

@@ -67,7 +67,7 @@ namespace UI
         /// <param name="id"></param>
         /// <param name="index"></param>
         /// <param name="onChoose"></param>
-        public void CreateSacredObject(string id, int index, Action<int> onChoose)
+        public void CreateSacredObject(string id, int index, Action<HalidomObject> onChoose,HalidomObject halidomObject)
         {
             if (index > sacredObjectColumns.Count)
             {
@@ -84,7 +84,7 @@ namespace UI
             sacredObjectColumns[index].bagObject = tmp;
             tmp.transform.position = parent.position;//更改位置
             var tmpSacredObject = tmp.GetComponent<RewardSacredUIObject>();
-            tmpSacredObject.Init(id, animTime, 2, onChoose, index);//初始化
+            tmpSacredObject.Init(id, animTime, 2, onChoose, halidomObject);//初始化
             tmp.SetActive(true);
             tmpSacredObject.DoAppearAnim(animTime); //出现动画
         }
