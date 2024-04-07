@@ -107,7 +107,7 @@ public class BattleDiceHandler : MonoBehaviour
             diceCardsInUse[i] = null;
         }
     }
-    
+
     #region 初始化战斗骰子，有数据的情况下和测试的情况下
     /// <summary>
     /// 没有存档的情况下，默认初始化骰子,应该是在一开始用其他数据结构去加载，暂时先算战斗开始的时候加载,这边需要修改
@@ -122,7 +122,7 @@ public class BattleDiceHandler : MonoBehaviour
             for (int j = 0; j < 6; j++)
             {
                 SingleDiceModel singleDiceModel = RandomManager.Instance.GetSingleDiceModel(battleDices[i].diceType, 1, side);
-                battleDice.AddDice(singleDiceModel, j, i);
+                battleDice.AddDice(singleDiceModel, j, i, j);
             }
         }
         //初始化战斗时骰子的数组大小
@@ -176,7 +176,7 @@ public class BattleDiceHandler : MonoBehaviour
         }
         return singleDiceObjs;
     }
-    
+
     /// <summary>
     /// 根据index获取相应的战斗骰子，然后获取随机的骰面，用于重新投掷的时候根据现有的index投掷
     /// </summary>

@@ -56,14 +56,36 @@ public class RandomManager : MonoSingleton<RandomManager>
     /// <returns></returns>
     public List<SingleDiceObj> GetRewardSingleDiceObjsViaPlayerData(List<SingleDiceObj> conditionSingleDiceObj,int count)
     {
-        List<int> ints = new List<int>();
-
-        //这边具体的生成规则还没有决定，暂时先用随机生成
+        //计算用于条件的骰子的点数总和
+        int sum = 3;
+        foreach (var singleDiceObj in conditionSingleDiceObj)
+        {
+            sum += singleDiceObj.idInDice ;
+        }
+        Debug.Log("<color=#ff2333>RandomManager</color>" + sum);
+        //根据条件骰子的点数总和获取奖励的骰子
+        //生成骰面的等级
+        int level;
+        if (sum < 15)
+        {
+            level = 1;
+        }
+        else if (sum >= 15 && sum <  24)
+        {
+            level = 2;
+        }
+        else
+        {
+            level = 3;
+        }
         var singleDiceObjs = new List<SingleDiceObj>();
         for (int i = 0; i < count; i++)
         {
-            SingleDiceModel singleDiceModel = GetSingleDiceModel(DiceType.Attack, 1, 0);
-            SingleDiceObj singleDiceObj = new SingleDiceObj(singleDiceModel, 0);
+            DiceType diceType = (DiceType)Random.Range(0, 3);
+            SingleDiceModel singleDiceModel = GetSingleDiceModel(diceType, level, 0);
+            int idInDice = Random.Range(0, 6);
+            SingleDiceObj singleDiceObj = new SingleDiceObj(singleDiceModel, idInDice);
+
             singleDiceObjs.Add(singleDiceObj);
         }
 

@@ -26,11 +26,13 @@ public class BattleDice
     /// <summary>
     /// 初始化单个骰子的时候，需要传入单个骰子的数据
     /// </summary>
+    /// <param name="idInDice">点数，可能会叠加</param>
     /// <param name="singleDiceModel"></param>
-    public void AddDice(SingleDiceModel singleDiceModel, int idInDice,int diceIndexInList)
+    public void AddDice(SingleDiceModel singleDiceModel, int idInDice,int diceIndexInList,int positionInDice)
     {
         //TODO:如果有超出上界怎么办
         SingleDiceObj singleDiceObj = new SingleDiceObj(singleDiceModel, idInDice);
+        singleDiceObj.positionInDice = positionInDice;
         this.diceIndexInList = diceIndexInList;
         diceObjs.Add(singleDiceObj);
     }

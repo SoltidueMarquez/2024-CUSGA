@@ -8,7 +8,7 @@ public class SingleDiceObj
 {
     public SingleDiceModel model;
     /// <summary>
-    /// 在骰子中的id
+    /// 在骰子中的id,准确的说是点数，因为是runtime，所以这边的点数也是可以变化的
     /// </summary>
     public int idInDice;
     /// <summary>
@@ -19,6 +19,10 @@ public class SingleDiceObj
     /// 售价,用于卖出,因为是runtime，所以这边的售价是可以变化的
     /// </summary>
     public int value;
+    /// <summary>
+    /// 骰面在骰子中的位置,真正的 0 - 5
+    /// </summary>
+    public int positionInDice;
     
     public SingleDiceObj(SingleDiceModel model, int idInDice)
     {

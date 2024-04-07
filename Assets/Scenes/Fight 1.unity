@@ -6101,6 +6101,8 @@ MonoBehaviour:
   parameter:
     turns: 0
     playerRerollCount: 0
+    ifSelectedDice: 0
+    ifSelectedHalidom: 0
     playerChaState: {fileID: 589276656}
     enemyChaStates:
     - {fileID: 341200663}

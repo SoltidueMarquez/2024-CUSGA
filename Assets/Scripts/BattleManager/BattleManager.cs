@@ -16,9 +16,13 @@ public class FSMParameter
     /// </summary>
     public int playerRerollCount;
 
-
-
-
+    #region 奖励界面相关参数
+    /// <summary>
+    /// 在奖励界面，玩家是否选择了骰面
+    /// </summary>
+    public bool ifSelectedDice;
+    public bool ifSelectedHalidom;
+    #endregion
     public ChaState playerChaState;
     public ChaState[] enemyChaStates;
 
@@ -161,11 +165,12 @@ public class BattleManager : MonoBehaviour
         this.parameter.playerChaState.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs);
         for (int i = 0; i < singleDiceObjs.Count; i++)
         {
-            Vector2Int pos = new Vector2Int(i, singleDiceObjs[i].idInDice);
+            Vector2Int pos = new Vector2Int(i, singleDiceObjs[i].positionInDice);
             var singleDiceUIData = ResourcesManager.GetSingleDiceUIData(singleDiceObjs[i]);
             RollingResultUIManager.Instance.CreateResult(i, singleDiceUIData, pos, false);
         }
     }
+    //需要绑定到UI的按钮上的函数
     public void ReRollDice()
     {
         //如果玩家的重新投掷次数小于等于0，就不执行
@@ -174,6 +179,23 @@ public class BattleManager : MonoBehaviour
             return;
         }
         ReducePlayerRerollCount();
+        DataUIManager.Instance.UpdateRerollText(this.parameter.playerChaState.resource.currentRollTimes);
+        //判断当前处于什么状态，如果是玩家回合，则重新投掷骰面，如果是奖励阶段，则只是显示重新投掷的骰面
+        if (currentState is PlayerActionState)
+        {
+            ReRollDiceForPlayer();
+        }
+        else if (currentState is RewardState)
+        {
+            CreateRewardSingleDices(3);
+        }
+        
+    }
+    /// <summary>
+    /// 在战斗中为玩家重新投掷骰子
+    /// </summary>
+    public void ReRollDiceForPlayer()
+    {
         //放置重新投掷的骰面的数组
         SingleDiceObj[] singleDiceObjs = new SingleDiceObj[this.parameter.playerChaState.GetBattleDiceHandler().battleDiceCount];
         //根据当前还剩多少战斗骰面，来决定重新投掷多少个
@@ -195,11 +217,10 @@ public class BattleManager : MonoBehaviour
             {
                 continue;
             }
-            Vector2Int pos = new Vector2Int(i, singleDiceObjs[i].idInDice);
+            Vector2Int pos = new Vector2Int(i, singleDiceObjs[i].positionInDice);
             var singleDiceUIData = ResourcesManager.GetSingleDiceUIData(singleDiceObjs[i]);
             RollingResultUIManager.Instance.CreateResult(i, singleDiceUIData, pos, false);
         }
-        DataUIManager.Instance.UpdateRerollText(this.parameter.playerChaState.resource.currentRollTimes);
     }
     /// <summary>
     /// 给敌人投掷骰子的方法，并且创建意图 
@@ -230,6 +251,11 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void RefreshIfDiceCanChoose()
     {
+        //如果玩家已经选择了骰面，就不再刷新是否能选择骰面
+        if(this.parameter.ifSelectedDice == true)
+        {
+            return;
+        }
         int currentBagCount = this.parameter.playerChaState.GetBattleDiceHandler().bagDiceCards.Count;
         int maxBagCount = this.parameter.playerChaState.GetBattleDiceHandler().maxDiceInBag;
         if (currentBagCount >= maxBagCount)
@@ -262,6 +288,8 @@ public class BattleManager : MonoBehaviour
         int index = this.parameter.playerChaState.GetBattleDiceHandler().GetIndexOfSingleDiceInBag(singleDiceObj);
         var singleDiceUIData = ResourcesManager.GetSingleDiceUIData(singleDiceObj);
         BagDiceUIManager.Instance.CreateBagUIDice(index, singleDiceUIData, SellSingleDice,singleDiceObj);
+        //已经选中过骰面
+        this.parameter.ifSelectedDice = true;
     }
     /// <summary>
     /// 创建奖励界面的骰面
@@ -269,8 +297,23 @@ public class BattleManager : MonoBehaviour
     /// <param name="count"></param>
     public void CreateRewardSingleDices(int count)
     {
+        //清空之前的骰面
+        for (int i = 0;i < count; i++)
+        {
+            UIManager.Instance.rewardUIManager.RemoveDiceUI(i); 
+        }
+        
+        RollingResultUIManager.Instance.RemoveAllResultUI(Strategy.ReRoll);
         //先roll出骰面
         List<SingleDiceObj> singleDiceObjs = this.parameter.playerChaState.GetBattleDiceHandler().GetRandomSingleDices();
+        //创建UI骰子效果
+        for(int i = 0; i < singleDiceObjs.Count; i++)
+        {
+            Vector2Int pos = new Vector2Int(i, singleDiceObjs[i].positionInDice);
+            var singleDiceUIData = ResourcesManager.GetSingleDiceUIData(singleDiceObjs[i]);
+            RollingResultUIManager.Instance.CreateResult(i, singleDiceUIData, pos, true);
+        }
+
         //获得根据roll出骰面的结果，获取奖励的骰面
         var resultDiceObjs = RandomManager.Instance.GetRewardSingleDiceObjsViaPlayerData(singleDiceObjs, count);
         for (int i = 0; i < resultDiceObjs.Count; i++)
@@ -316,6 +359,9 @@ public class BattleManager : MonoBehaviour
 
     }
     #endregion
+
+
+    
 }
 //定义了一个回调，用于在UI动画结束时调用
 public delegate void OnUIAnimFinished();
