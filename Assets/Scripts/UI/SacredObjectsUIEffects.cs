@@ -15,7 +15,7 @@ namespace UI
         /// <summary>
         /// 初始化函数
         /// </summary>
-        public override void Init(List<Column> columns, float offset, string id, Action<int> remove, int index)
+        public void Init(List<Column> columns, float offset, string id, Action<HalidomObject> remove, HalidomObject halidomObject)
         {
             var tmpData = ResourcesManager.GetHalidomUIData(id);
             nameText.text = tmpData.name;
@@ -28,7 +28,7 @@ namespace UI
             saleButton.onClick.AddListener(() =>
             {
                 DestroyUI();
-                remove?.Invoke(index);
+                remove?.Invoke(halidomObject);
             });
             _state = State.None;
             _currentColumn = UIManager.Instance.DetectColumn(gameObject, columns, offset); //检测当前所在的物品栏

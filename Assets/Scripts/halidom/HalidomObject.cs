@@ -40,12 +40,13 @@ public class HalidomObject
     
     
 
-    public HalidomObject(RareType rareType,string id, string halidomName, string description,  List<BuffInfo> buffinfo )
+    public HalidomObject(RareType rareType,string id, string halidomName, string description,  int value,List<BuffInfo> buffinfo )
     {
         this.rareType = rareType;
         this.id = id;
         this.halidomName = halidomName;
         this.description = description;
+        this.value = value;
         this.buffInfos = buffinfo;
     }
 
