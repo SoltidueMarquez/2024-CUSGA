@@ -361,7 +361,10 @@ public class BattleManager : MonoBehaviour
     public void CreateRewardHalidom(List<SingleDiceObj> singleDiceObjs)
     {
         var resultHalidom = RandomManager.Instance.GetRewardHalidomViaPlayerData(singleDiceObjs);
-        UIManager.Instance.rewardUIManager.CreateSacredObject(resultHalidom.id, 0,AddHalidomToHalidomManager,resultHalidom);
+        if(resultHalidom != null)
+        {
+            UIManager.Instance.rewardUIManager.CreateSacredObject(resultHalidom.id, 0,AddHalidomToHalidomManager,resultHalidom);
+        }
         RefreshIfHalodomCanChoose();
     }
     

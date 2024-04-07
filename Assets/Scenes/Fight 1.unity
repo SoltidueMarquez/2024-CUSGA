@@ -1727,7 +1727,7 @@ MonoBehaviour:
   baseProp:
     health: 50
     money: 400
-    maxRollTimes: 4
+    maxRollTimes: 100
     shield: 0
   buffProp:
   - health: 0

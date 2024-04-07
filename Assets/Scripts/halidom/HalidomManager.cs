@@ -34,11 +34,7 @@ public class HalidomManager : MonoBehaviour
     /// </summary>
     public ChaProperty baseProp = new ChaProperty(
         50, 400, 4, 0
-    );
-    /// <summary>
-    /// 存放移除圣物的函数
-    /// </summary>
-    public Action<int> removeHalidomDelegate;
+    ); 
 
 
 
@@ -64,7 +60,6 @@ public class HalidomManager : MonoBehaviour
         //设置数组上限为最大圣物上限
         halidomList = new HalidomObject[halidomMaxCount];
         //设置移除圣物的函数
-        removeHalidomDelegate = RemoveHalidom;
     }
 
     private void Start()
@@ -92,17 +87,19 @@ public class HalidomManager : MonoBehaviour
 
     public void AddHalidom(HalidomObject halidom)
     {
+        //这边先复制一份
+        HalidomObject halidomObject = new HalidomObject(halidom.rareType,halidom.id,halidom.halidomName,halidom.description,halidom.value,halidom.buffInfos);
         for (int i = 0; i < halidomList.Length; i++)
         {
             //找到第一个空的格子
             if (halidomList[i] == null)
             {
                 //将圣物加入圣物列表
-                halidomList[i] = halidom;
+                halidomList[i] = halidomObject;
                 //获得圣物在格子中的序号
-                halidom.halidomIndex = i ;
+                halidomObject.halidomIndex = i ;
                 //触发圣物OnCreate回调点
-                foreach (var buffInfo in halidom.buffInfos)
+                foreach (var buffInfo in halidomObject.buffInfos)
                 {
                     //获取圣物的创建者 给予buffinfo
                     buffInfo.creator = BattleManager.Instance.parameter.playerChaState.gameObject;
@@ -113,8 +110,8 @@ public class HalidomManager : MonoBehaviour
                 }
                 RefreshAllHalidoms();
                 BattleManager.Instance.parameter.playerChaState.AttrAndResourceRecheck();
-                SacredObjectUIManager.Instance.CreateSacredUIObject(i, halidom.id,removeHalidomDelegate);
-                Debug.Log("<color=#3399FF>HalidomManager-添加圣物:</color>" + halidom.halidomName + "成功");
+                SacredObjectUIManager.Instance.CreateSacredUIObject(i, halidomObject.id,SellHalidom,halidomObject);
+                Debug.Log("<color=#3399FF>HalidomManager-添加圣物:</color>" + halidomObject.halidomName + "成功");
                 //找到空的格子后就跳出循环
                 break;
             }
@@ -180,8 +177,9 @@ public class HalidomManager : MonoBehaviour
     }
 
 
-    public void SellHalidom(int index)
+    public void SellHalidom(HalidomObject halidomObject)
     {
+        int index = halidomObject.halidomIndex;
         //获取圣物的售价
         int price = halidomList[index].value;
         //将圣物的售价加到玩家的金币上
@@ -203,6 +201,7 @@ public class HalidomManager : MonoBehaviour
         halidomList[index2] = temp;
     }
     //所有回调点触发Invoke
+    #region 圣物回调点
     public void OnRoundStart()
     {
         //存储要删除的buff
@@ -328,6 +327,7 @@ public class HalidomManager : MonoBehaviour
             }
         }
     }
+    #endregion
     #region 一些实用效果
     //判断圣物是否满
     public bool IsFull()

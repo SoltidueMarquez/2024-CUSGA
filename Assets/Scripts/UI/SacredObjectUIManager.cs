@@ -21,7 +21,7 @@ namespace UI
         /// <param name="index">所在栏位序列号</param>
         /// <param name="id"></param>
         /// <param name="remove"></param>
-        public void CreateSacredUIObject(int index, string id, Action<int> remove)
+        public void CreateSacredUIObject(int index, string id, Action<HalidomObject> remove,HalidomObject halidomObject)
         {
             if (sacredObjectColumns[index].bagObject != null)
             {
@@ -30,7 +30,7 @@ namespace UI
             }
             var tmp = Instantiate(template, parent, true);
             tmp.transform.position = sacredObjectColumns[index].transform.position;//更改位置
-            tmp.GetComponent<SacredObjectsUIEffects>().Init(sacredObjectColumns, offsetS, id, remove, index);//初始化
+            tmp.GetComponent<SacredObjectsUIEffects>().Init(sacredObjectColumns, offsetS, id, remove, halidomObject);//初始化
             tmp.SetActive(true);
         }
 

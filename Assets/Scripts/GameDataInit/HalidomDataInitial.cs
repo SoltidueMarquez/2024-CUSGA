@@ -14,7 +14,7 @@ public class HalidomDataInitial : MonoBehaviour
         {
             if (HalidomData.halidomDictionary.ContainsKey(halidomDataSos[i].halidomName.ToString()))
             {
-                Debug.LogWarning("HalidomDataInitial:试图添加重复的HalidomData");
+                Debug.LogWarning("HalidomDataInitial:璇曞浘娣诲姞閲嶅鐨凥alidomData");
                 continue;
             }
             HalidomData.halidomDictionary.Add(halidomDataSos[i].halidomName.ToString(),
@@ -23,6 +23,7 @@ public class HalidomDataInitial : MonoBehaviour
                     halidomDataSos[i].id,
                     halidomDataSos[i].halidomName.ToString(),
                     halidomDataSos[i].description,
+                    halidomDataSos[i].value,
                     GetBuffInfoList(halidomDataSos[i].buffDataSos))
                 );
         }
@@ -38,7 +39,7 @@ public class HalidomDataInitial : MonoBehaviour
     {
         if (buffDataSOs == null)
         {
-            Debug.LogWarning("HalidomDataInitial:传入参数为空");
+            Debug.LogWarning("HalidomDataInitial:浼犲叆鍙傛暟涓虹┖");
             return null;
         }
         List<BuffInfo> buffInfos= new List<BuffInfo>();
