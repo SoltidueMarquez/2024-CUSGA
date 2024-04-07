@@ -13,7 +13,16 @@ namespace UI
         [Tooltip("栏目判定")] public float offsetS;
         [SerializeField, Tooltip("生成模板")] private GameObject template;
         [SerializeField, Tooltip("父物体")] private Transform parent;
+        [SerializeField, Tooltip("闪光特效")] public GameObject flickEffect;
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                DoFlick("2_02");
+            }
+        }
+        
         /// <summary>
         /// 生成圣物函数
         /// </summary>
@@ -24,7 +33,7 @@ namespace UI
         {
             if (sacredObjectColumns[index].bagObject != null)
             {
-                Debug.Log("错误，所在栏位已经有圣物存在");
+                Debug.LogWarning("错误，所在栏位已经有圣物存在");
                 return;
             }
             var tmp = Instantiate(template, parent, true);
@@ -34,7 +43,7 @@ namespace UI
         }
 
         /// <summary>
-        /// 移除圣物函数
+        /// 按照栏位的真实位置移除圣物函数
         /// </summary>
         /// <param name="index">所在栏位序列号</param>
         public void RemoveSacredObject(int index)
@@ -47,6 +56,27 @@ namespace UI
             var tmp = sacredObjectColumns[index].bagObject;
             Destroy(tmp);
             sacredObjectColumns[index].bagObject = null;
+        }
+
+        /// <summary>
+        /// 圣物的闪烁函数
+        /// </summary>
+        /// <param name="id">圣物标识</param>
+        public void DoFlick(string id)
+        {
+            SacredObjectsUIEffects sacredUI;
+            foreach (var sacred in sacredObjectColumns)
+            {
+                if (sacred.bagObject == null)
+                {
+                    continue;
+                }
+                sacredUI = sacred.bagObject.GetComponent<SacredObjectsUIEffects>();
+                if (sacredUI != null && sacredUI.id == id)
+                {
+                    sacredUI.DoFlick();
+                }
+            }
         }
     }
 }

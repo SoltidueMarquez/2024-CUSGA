@@ -654,6 +654,7 @@ MonoBehaviour:
   offsetS: 30
   template: {fileID: 7101880693602581045, guid: 816eb06a3e1f8ef49a3bf53fb84da8d9, type: 3}
   parent: {fileID: 2069172125}
+  flickEffect: {fileID: 3150919372634015354, guid: 0f59a52ef61f525408997f50b567e4c4, type: 3}
 --- !u!114 &81981826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6870,10 +6871,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
