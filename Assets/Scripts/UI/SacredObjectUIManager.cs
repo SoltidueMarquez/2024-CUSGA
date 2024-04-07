@@ -15,14 +15,6 @@ namespace UI
         [SerializeField, Tooltip("父物体")] private Transform parent;
         [SerializeField, Tooltip("闪光特效")] public GameObject flickEffect;
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                DoFlick("2_02");
-            }
-        }
-        
         /// <summary>
         /// 生成圣物函数
         /// </summary>

@@ -67,6 +67,7 @@ namespace UI
         /// <param name="id"></param>
         /// <param name="index"></param>
         /// <param name="onChoose"></param>
+        /// <param name="halidomObject"></param>
         public void CreateSacredObject(string id, int index, Action<HalidomObject> onChoose,HalidomObject halidomObject)
         {
             if (index > sacredObjectColumns.Count)
