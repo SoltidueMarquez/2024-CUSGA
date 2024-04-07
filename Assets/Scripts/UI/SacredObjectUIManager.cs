@@ -70,5 +70,30 @@ namespace UI
                 }
             }
         }
+
+        /// <summary>
+        /// 获取圣物id列表，对应栏位为空时id为""
+        /// </summary>
+        public List<string> GetScaredObjectIDList()
+        {
+            List<string> scaredObjectIDList = new List<string>();
+            foreach (var sacred in sacredObjectColumns)
+            {
+                if (sacred.bagObject == null)//如果没有就加入""
+                {
+                    scaredObjectIDList.Add("");
+                }
+                var sacredUI = sacred.bagObject.GetComponent<SacredObjectsUIEffects>();
+                if (sacredUI != null)
+                {
+                    scaredObjectIDList.Add(sacredUI.id);
+                }
+                else
+                {
+                    scaredObjectIDList.Add("");
+                }
+            }
+            return scaredObjectIDList;
+        }
     }
 }
