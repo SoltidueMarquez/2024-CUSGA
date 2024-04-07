@@ -13,7 +13,7 @@ public class SingleDiceModelInitial : MonoBehaviour
         {
             if (SingleDiceData.diceDictionary.ContainsKey(singleDiceModelSOs[i].singleDiceModelName.ToString()))
             {
-                Debug.LogWarning("SingleDiceModelInitial:试图添加重复的SingleDiceModel");
+                Debug.LogWarning("SingleDiceModelInitial:璇曞浘娣诲姞閲嶅鐨凷ingleDiceModel");
                 continue;
             }
             SingleDiceData.diceDictionary.Add(singleDiceModelSOs[i].singleDiceModelName.ToString(),
@@ -27,6 +27,7 @@ public class SingleDiceModelInitial : MonoBehaviour
                     singleDiceModelSOs[i].value,
                     singleDiceModelSOs[i].level,
                     GetBuffInfoList(singleDiceModelSOs[i].buffDataSOs),
+                    singleDiceModelSOs[i].baseValue,
                     null)
                 );
         }
@@ -40,7 +41,7 @@ public class SingleDiceModelInitial : MonoBehaviour
     {
         if (buffDataSOs == null)
         {
-            Debug.LogWarning("HalidomDataInitial:传入参数为空");
+            Debug.LogWarning("HalidomDataInitial:浼犲叆鍙傛暟涓虹┖");
             return null;
         }
 

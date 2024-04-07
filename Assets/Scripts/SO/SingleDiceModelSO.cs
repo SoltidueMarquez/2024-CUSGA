@@ -6,39 +6,41 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SingleDiceData", menuName = "Data/SingleDiceData")]
 public class SingleDiceModelSO : ScriptableObject
 {
-    [Tooltip("÷»×Óµ¥ÃæµÄÎ¨Ò»id,ÓÃÓÚºÍÀàĞÍ¼ÓÔÚÒ»Æğ")]
-    [Header("÷»×Óµ¥ÃæµÄÎ¨Ò»id")]
+    [Tooltip("éª°å­å•é¢çš„å”¯ä¸€id,ç”¨äºå’Œç±»å‹åŠ åœ¨ä¸€èµ·")]
+    [Header("éª°å­å•é¢çš„å”¯ä¸€id")]
     public string id;
-    [Tooltip("÷»ÃæµÄÃû×Ö")]
-    [Header("÷»ÃæµÄÃû×Ö")]
+    [Tooltip("éª°é¢çš„åå­—")]
+    [Header("éª°é¢çš„åå­—")]
     public string singleDiceModelName;
 
-    [Tooltip("ÊôÓÚÄÄÖÖÀàĞÍµÄ÷»×Ó")]
-    [Header("ÊôÓÚÄÄÖÖÀàĞÍµÄ÷»×Ó")]
+    [Tooltip("å±äºå“ªç§ç±»å‹çš„éª°å­")]
+    [Header("å±äºå“ªç§ç±»å‹çš„éª°å­")]
     public DiceType type;
 
-    [Tooltip("÷»×ÓµÄÊ¹ÓÃÌõ¼ş")]
-    [Header("÷»×ÓµÄÊ¹ÓÃÌõ¼ş")]
+    [Tooltip("éª°å­çš„ä½¿ç”¨æ¡ä»¶")]
+    [Header("éª°å­çš„ä½¿ç”¨æ¡ä»¶")]
     public ChaResource condition;
 
-    [Tooltip("÷»×ÓµÄÏûºÄ")]
-    [Header("÷»×ÓµÄÏûºÄ")]
+    [Tooltip("éª°å­çš„æ¶ˆè€—")]
+    [Header("éª°å­çš„æ¶ˆè€—")]
     public ChaResource cost;
 
-    [Tooltip("÷»ÃæµÄµÈ¼¶")]
-    [Header("÷»ÃæµÄµÈ¼¶")]
+    [Tooltip("éª°é¢çš„ç­‰çº§")]
+    [Header("éª°é¢çš„ç­‰çº§")]
     public int level;
-    [Tooltip("÷»ÃæµÄÊÛ¼Û")]
-    [Header("÷»ÃæµÄÊÛ¼Û")]
+    [Tooltip("éª°é¢çš„å”®ä»·")]
+    [Header("éª°é¢çš„å”®ä»·")]
     public int value;
-    [Tooltip("÷»ÃæÊôÓÚÄÄÒ»·½")]
-    [Header("÷»ÃæÊôÓÚÄÄÒ»·½")]
+    [Tooltip("éª°é¢å±äºå“ªä¸€æ–¹")]
+    [Header("éª°é¢å±äºå“ªä¸€æ–¹")]
     public int side;
-    [Tooltip("÷»ÃæµÄBufflist")]
+    [Tooltip("éª°é¢çš„Bufflist")]
     public List<BuffDataSO> buffDataSOs;
-    [Header("¸øUIµÄÊôĞÔ")]
+    [Header("ç»™UIçš„å±æ€§")]
     public Sprite sprite;
     [Multiline(5)]
     public string description;
+    [Header("éª°é¢çš„æ•°å€¼")]
+    public int baseValue;
 
 }

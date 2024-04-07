@@ -399,7 +399,6 @@ public class BattleManager : MonoBehaviour
         HalidomManager.Instance.AddHalidom(halidomObject);//创建视觉效果的也包含在这个函数中
         this.parameter.ifSelectedHalidom = true;
     }
-
     #endregion
 
 

@@ -64,22 +64,7 @@ public class HalidomManager : MonoBehaviour
 
     private void Start()
     {
-        //Test
-        /*AddHalidom(HalidomData.halidomDictionary[HalidomName.偶数注.ToString()]);
-        SacredObjectUIManager.Instance.CreateSacredUIObject(0, HalidomData.halidomDictionary[HalidomName.偶数注.ToString()].description, removeHalidomDelegate);
-        AddHalidom(HalidomData.halidomDictionary[HalidomName.奇数注.ToString()]);
-        SacredObjectUIManager.Instance.CreateSacredUIObject(1, HalidomData.halidomDictionary[HalidomName.奇数注.ToString()].description, removeHalidomDelegate);
-        //打印圣物所有buff信息
-        foreach(var halidom in halidomList)
-        {
-            if (halidom != null)
-            {
-                foreach (var buff in halidom.buffInfos)
-                {
-                    Debug.Log("圣物中的buff名称是"+buff.buffData.buffName);
-                }
-            }
-        }*/
+        
     }
     
 
@@ -176,7 +161,10 @@ public class HalidomManager : MonoBehaviour
         this.deltaCharacterProperty = this.currentCharacterProperty - this.baseProp;
     }
 
-
+    /// <summary>
+    /// 售卖圣物
+    /// </summary>
+    /// <param name="halidomObject"></param>
     public void SellHalidom(HalidomObject halidomObject)
     {
         int index = halidomObject.halidomIndex;
@@ -193,12 +181,21 @@ public class HalidomManager : MonoBehaviour
     }
 
 
-    //交换圣物顺序
-    public void SwapHalidom(int index1, int index2)
+    /// <summary>
+    /// 重新设置圣物列表
+    /// </summary>
+    public void ResetHalidomList()
     {
-        HalidomObject temp = halidomList[index1];
-        halidomList[index1] = halidomList[index2];
-        halidomList[index2] = temp;
+        List<string> ids=SacredObjectUIManager.Instance.GetScaredObjectIDList();
+        var halidomDic = this.GetCurrentHalidomIdListDic();
+        this.ClearHalidomList();
+        for (int i = 0; i < ids.Count; i++)
+        {
+            if (ids[i] != "")
+            {
+                halidomList[i] = halidomDic[ids[i]];
+            }
+        }
     }
     //所有回调点触发Invoke
     #region 圣物回调点
@@ -340,6 +337,32 @@ public class HalidomManager : MonoBehaviour
             }
         }
         return true;
+    }
+    /// <summary>
+    /// 清楚圣物列表，全部等于空
+    /// </summary>
+    public void ClearHalidomList()
+    {
+        for (int i = 0; i < halidomList.Length; i++)
+        {
+            halidomList[i] = null;
+        }
+    }
+    /// <summary>
+    /// 获取当前圣物列表
+    /// </summary>
+    /// <returns></returns>
+    public Dictionary<String,HalidomObject> GetCurrentHalidomIdListDic()
+    {
+        var halidomDictionary = new Dictionary<string, HalidomObject>();
+        for (int i = 0; i < halidomList.Length; i++)
+        {
+            if (halidomList[i] != null)
+            {
+                halidomDictionary.Add(halidomList[i].id, halidomList[i]);
+            }
+        }
+        return halidomDictionary;
     }
     #endregion
 }

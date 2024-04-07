@@ -12,7 +12,8 @@ namespace UI
     [RequireComponent(typeof(Image))]
     public class BagDiceUIEffects : UIObjectEffects, IBeginDragHandler,IEndDragHandler,IDragHandler,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
     {
-        public void Init(List<Column> columns, float offset, SingleDiceUIData data, Action<SingleDiceObj> remove, SingleDiceObj singleDice)
+        public void Init(List<Column> columns, float offset, SingleDiceUIData data, 
+                         Action<SingleDiceObj> remove, SingleDiceObj singleDice)
         {
             //信息文本初始化
             nameText.text = data.name;
