@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,11 +14,13 @@ namespace UI
     [RequireComponent(typeof(Image))]
     public class SacredObjectsUIEffects : UIObjectEffects, IBeginDragHandler,IEndDragHandler,IDragHandler,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
     {
+        public string id;
         /// <summary>
         /// 初始化函数
         /// </summary>
         public override void Init(List<Column> columns, float offset, string id, Action<int> remove, int index)
         {
+            this.id = id;
             var tmpData = ResourcesManager.GetHalidomUIData(id);
             nameText.text = tmpData.name;
             valueText.text = $"售价￥{tmpData.value}";
@@ -36,6 +40,22 @@ namespace UI
             {
                 _currentColumn.bagObject = gameObject;
             }
+        }
+
+        /// <summary>
+        /// 闪烁函数
+        /// </summary>
+        public void DoFlick()
+        {
+            var tmp = Instantiate(SacredObjectUIManager.Instance.flickEffect, transform, true);
+            tmp.transform.position = transform.position;//更改位置
+            tmp.SetActive(true);
+            StartCoroutine(DestroyGameObject(tmp));
+        }
+        IEnumerator DestroyGameObject(GameObject objectToBeDes)
+        {
+            yield return new WaitForSeconds(0.75f);
+            Destroy(objectToBeDes);
         }
         
         /// <summary>
@@ -122,6 +142,5 @@ namespace UI
             gameObject.transform.SetParent(UIManager.Instance.dragCanvas);//设置为拖拽图层
             UIManager.Instance.OnDrag(gameObject);
         }
-
     }
 }
