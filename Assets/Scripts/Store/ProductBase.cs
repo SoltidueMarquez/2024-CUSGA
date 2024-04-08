@@ -45,6 +45,9 @@ public abstract class ProductBase : MonoBehaviour
     /// </summary>
     public UnityEvent<BuyFailType> OnBuyFail;
 
+    /// <summary>
+    /// 商品购买失败的类型
+    /// </summary>
     public enum BuyFailType
     {
         NoMoney,

@@ -6104,6 +6104,7 @@ MonoBehaviour:
     playerRerollCount: 0
     ifSelectedDice: 0
     ifSelectedHalidom: 0
+    currentRollMoney: 0
     playerChaState: {fileID: 589276656}
     enemyChaStates:
     - {fileID: 341200663}
@@ -7270,7 +7271,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uFFE510000.00"
+  m_Text: "\uFFE500000"
 --- !u!222 &1829682578
 CanvasRenderer:
   m_ObjectHideFlags: 0

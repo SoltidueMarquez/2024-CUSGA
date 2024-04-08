@@ -7,9 +7,15 @@ using UnityEngine.Events;
 public class StoreManager : SingletonBase<StoreManager>
 {
     public bool enableDebug = false;
+    public GameObject StoreUIcanvas;
     protected override void Awake()
     {
         base.Awake();
+        if (StoreUIcanvas != null)
+        {
+            StoreUIcanvas = transform.Find("Canvas").gameObject;
+        }
+        StoreUIcanvas.SetActive(false);
     }
 
     protected override void OnDestroy()
@@ -20,7 +26,8 @@ public class StoreManager : SingletonBase<StoreManager>
     // Start is called before the first frame update
     void Start()
     {
-
+        OnEnterStore.AddListener(OpenStore);
+        OnExitStore.AddListener(CloseStore);
     }
 
     // Update is called once per frame
@@ -56,5 +63,16 @@ public class StoreManager : SingletonBase<StoreManager>
         {
             Debug.Log("Store: " + log);
         }
+    }
+
+    private void OpenStore()
+    {
+        StoreUIcanvas.SetActive(true);
+        OnRefreshStore?.Invoke();
+    }
+
+    private void CloseStore()
+    {
+        StoreUIcanvas.SetActive(false);
     }
 }

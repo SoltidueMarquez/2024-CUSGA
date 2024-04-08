@@ -654,6 +654,7 @@ MonoBehaviour:
   offsetS: 30
   template: {fileID: 7101880693602581045, guid: 816eb06a3e1f8ef49a3bf53fb84da8d9, type: 3}
   parent: {fileID: 2069172125}
+  flickEffect: {fileID: 3150919372634015354, guid: 0f59a52ef61f525408997f50b567e4c4, type: 3}
 --- !u!114 &81981826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -705,7 +706,7 @@ MonoBehaviour:
   enemyStartYPosition: 740
   enemyEndYPosition: 1380
   playerStartYPosition: 340
-  playerEndYPosition: -300
+  playerEndYPosition: -400
 --- !u!114 &81981828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1724,9 +1725,9 @@ MonoBehaviour:
   buffHandler: {fileID: 0}
   battleDiceHandler: {fileID: 0}
   baseProp:
-    health: 50
+    health: 5
     money: 400
-    maxRollTimes: 4
+    maxRollTimes: 100
     shield: 0
   buffProp:
   - health: 0
@@ -2804,7 +2805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleDiceCount: 3
-  maxDiceInBag: 8
+  maxDiceInBag: 1
 --- !u!114 &589276658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4300,8 +4301,10 @@ MonoBehaviour:
   - transform: {fileID: 1263337500}
     bagObject: {fileID: 0}
   diceTemplate: {fileID: 3046983917528316593, guid: 8174a524e9bfec74388c66f039a2e426, type: 3}
-  sacredObjectColumns: []
-  sacredObjectTemplate: {fileID: 0}
+  sacredObjectColumns:
+  - transform: {fileID: 526774495}
+    bagObject: {fileID: 0}
+  sacredObjectTemplate: {fileID: 3046983917528316593, guid: 5ee32cff29f90ca4eacf25786e8b73dd, type: 3}
 --- !u!4 &1128369420
 Transform:
   m_ObjectHideFlags: 0
@@ -6076,6 +6079,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1590396381}
   - component: {fileID: 1590396380}
+  - component: {fileID: 1590396382}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -6098,6 +6102,9 @@ MonoBehaviour:
   parameter:
     turns: 0
     playerRerollCount: 0
+    ifSelectedDice: 0
+    ifSelectedHalidom: 0
+    currentRollMoney: 0
     playerChaState: {fileID: 589276656}
     enemyChaStates:
     - {fileID: 341200663}
@@ -6117,6 +6124,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1590396382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590396379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 672024d713439c64d8fc67b5c290df9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1591728989
 GameObject:
   m_ObjectHideFlags: 0
@@ -6853,10 +6872,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -7997,8 +8016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0107f09953f17742bf6c979976a8cc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  halidomSOData:
-  - {fileID: 11400000, guid: 428ff086c36c783419c61d9cb3c8d9fa, type: 2}
+  halidomSOData: []
 --- !u!1 &2054669038
 GameObject:
   m_ObjectHideFlags: 0
