@@ -654,6 +654,7 @@ MonoBehaviour:
   offsetS: 30
   template: {fileID: 7101880693602581045, guid: 816eb06a3e1f8ef49a3bf53fb84da8d9, type: 3}
   parent: {fileID: 2069172125}
+  flickEffect: {fileID: 0}
 --- !u!114 &81981826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6098,6 +6099,9 @@ MonoBehaviour:
   parameter:
     turns: 0
     playerRerollCount: 0
+    ifSelectedDice: 0
+    ifSelectedHalidom: 0
+    currentRollMoney: 0
     playerChaState: {fileID: 589276656}
     enemyChaStates:
     - {fileID: 341200663}
@@ -7998,6 +8002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   halidomSOData:
+  - {fileID: 11400000, guid: cf4cbd3bf2b73c24b948fb4575581ea4, type: 2}
   - {fileID: 11400000, guid: 428ff086c36c783419c61d9cb3c8d9fa, type: 2}
 --- !u!1 &2054669038
 GameObject:
