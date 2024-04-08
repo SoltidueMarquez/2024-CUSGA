@@ -8,7 +8,7 @@ namespace UI.Store
     /// <summary>
     /// 滑动页面效果
     /// </summary>
-    public class PageView : MonoSingleton<PageView>, IBeginDragHandler, IEndDragHandler
+    public class PageView : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     {
         [SerializeField] private float speed = 3; //滑动速度
         [SerializeField, Tooltip("内容页面")] private RectTransform content;

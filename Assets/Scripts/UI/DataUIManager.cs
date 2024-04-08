@@ -21,7 +21,10 @@ namespace UI
 
         public void UpdateMoneyText(int money)
         {
-            moneyText.DOText($"￥{money}", 0.1f);
+            moneyText.DOText($"￥00000", 1f).OnComplete(() =>
+            {
+                moneyText.DOText($"￥{money}", 1f);
+            });
         }
     }
 }
