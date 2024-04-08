@@ -1725,7 +1725,7 @@ MonoBehaviour:
   buffHandler: {fileID: 0}
   battleDiceHandler: {fileID: 0}
   baseProp:
-    health: 50
+    health: 5
     money: 400
     maxRollTimes: 100
     shield: 0
@@ -2805,7 +2805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleDiceCount: 3
-  maxDiceInBag: 8
+  maxDiceInBag: 1
 --- !u!114 &589276658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8016,6 +8016,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   halidomSOData:
+  - {fileID: 11400000, guid: 42abf58ffdc3b8140bc7f42c2f093885, type: 2}
+  - {fileID: 11400000, guid: 42abf58ffdc3b8140bc7f42c2f093885, type: 2}
+  - {fileID: 11400000, guid: 42abf58ffdc3b8140bc7f42c2f093885, type: 2}
+  - {fileID: 11400000, guid: 42abf58ffdc3b8140bc7f42c2f093885, type: 2}
+  - {fileID: 11400000, guid: 42abf58ffdc3b8140bc7f42c2f093885, type: 2}
   - {fileID: 11400000, guid: 42abf58ffdc3b8140bc7f42c2f093885, type: 2}
 --- !u!1 &2054669038
 GameObject:

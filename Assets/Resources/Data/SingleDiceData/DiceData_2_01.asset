@@ -31,3 +31,4 @@ MonoBehaviour:
   buffDataSOs: []
   sprite: {fileID: 0}
   description: "\u57FA\u7840\u9632\u5FA1\u9AB0\u9762"
+  baseValue: 6
