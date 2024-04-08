@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace UI.Shop
+namespace UI.Store
 {
     /// <summary>
     /// 滑动页面效果
@@ -11,7 +11,7 @@ namespace UI.Shop
     public class PageView : MonoSingleton<PageView>, IBeginDragHandler, IEndDragHandler
     {
         [SerializeField] private float speed = 3; //滑动速度
-        [SerializeField, Tooltip("内容页面")] private GameObject content;
+        [SerializeField, Tooltip("内容页面")] private RectTransform content;
         
         private ScrollRect _rect; //ScrollRect组件
         private float _targetHorizontal;
@@ -23,7 +23,7 @@ namespace UI.Shop
 
         private void Start()
         {
-            Init();
+            Init(StoreUIManager.Instance.strengthenBG);
         }
 
         private static void OnUpdateAnimation(int index, int lastIndex) //拖动结束时的切换事件
@@ -38,12 +38,16 @@ namespace UI.Shop
             //在下面加动画变换函数或者在别的脚本里检测位置变换
         }
 
-        public void Init()
+        public void Init(RectTransform canvas)
         {
-            //设置内容页长度
-            //content.transform.width = _rect.content.transform.childCount * 1920 / 2;
             _rect = this.GetComponent<ScrollRect>();
-            for (var i = 0; i < _rect.content.transform.childCount; i++)//添加content下的物体的位置信息到posList里去
+            var childCount = _rect.content.transform.childCount;
+            //根据子物体数动态设置内容页长度
+            float width = canvas.rect.width;
+            float height = content.rect.height;
+            content.sizeDelta = new Vector2(width * (childCount-1), height);
+            //添加content下的物体的位置信息到posList里去
+            for (var i = 0; i < childCount; i++)
             {
                 _posList.Add((i)*(1f/(_rect.content.transform.childCount-1)));//存图片位置
             }
