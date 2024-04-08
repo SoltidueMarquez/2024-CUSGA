@@ -171,7 +171,7 @@ namespace DesignerScripts
             {
                 BuffEventName.Enhance.ToString(),Enhance
             },
-            
+
             {
                 BuffEventName.Anger.ToString(),Anger
             },
@@ -299,9 +299,9 @@ namespace DesignerScripts
             {
                 for (int i = 0; i < HalidomManager.Instance.halidomList.Length; i++)
                 {
-                    if(HalidomManager.Instance.halidomList[i]!=null)
+                    if (HalidomManager.Instance.halidomList[i] != null)
                     {
-                        if (HalidomManager.Instance.halidomList[i].id == "8")
+                        if (HalidomManager.Instance.halidomList[i].id == "1_08")
                         {
                             if (buffInfo.target == BattleManager.Instance.parameter.enemyChaStates[0].gameObject)
                             {
@@ -365,7 +365,7 @@ namespace DesignerScripts
                     if (HalidomManager.Instance.halidomList[i] != null)
                     {
                         //检测圣物有没有蛋白粉
-                        if (HalidomManager.Instance.halidomList[i].id == "9")
+                        if (HalidomManager.Instance.halidomList[i].id == "1_09")
                         {
                             //检测buff施加的对象是否是玩家
                             if (buffInfo.target == BattleManager.Instance.parameter.playerChaState.gameObject)
@@ -377,8 +377,8 @@ namespace DesignerScripts
 
                         }
                     }
-                    
-                    
+
+
                 }
             }
         }
@@ -609,7 +609,7 @@ namespace DesignerScripts
             //现在受到伤害只检查是不是配置的时候有这个键值对，有则++
             if (buffInfo.buffParam.ContainsKey("PlayerLoseHealthCount"))
             {
-                
+
                 int attackCount = (int)buffInfo.buffParam["PlayerLoseHealthCount"];
                 attackCount++;
                 /*if (attackCount % 3 == 0)
@@ -632,14 +632,14 @@ namespace DesignerScripts
             {
 
                 int attackCount = (int)buffInfo.buffParam["PlayerLoseHealthCount"];
-                
+
                 if (attackCount % 3 == 0)
                 {
                     damageInfo.addDamageArea += 0.5f;
                     Debug.Log("增加50%攻击力");
                 }
-                
-                
+
+
             }
         }
 
@@ -776,7 +776,7 @@ namespace DesignerScripts
                 BuffInfo newBleedBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Bleed.ToString()], buffInfo.creator, buffInfo.target, 1);
                 buffInfo.target.GetComponent<ChaState>().AddBuff(newBleedBuff1, buffInfo.target);
                 Debug.Log("敌方流血+1");
-                BuffInfo findBuffInfo=buffInfo.target.GetComponent<BuffHandler>().buffList.Find(x => x.buffData.id == "1_01");
+                BuffInfo findBuffInfo = buffInfo.target.GetComponent<BuffHandler>().buffList.Find(x => x.buffData.id == "1_01");
                 Debug.Log(findBuffInfo.buffData.buffName);
             }
         }
@@ -799,7 +799,7 @@ namespace DesignerScripts
                         Debug.Log("玩家力量层数+1");
                     }*/
 
-                    BuffInfo newStrengthBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target,1);
+                    BuffInfo newStrengthBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target, 1);
                     buffInfo.creator.GetComponent<ChaState>().AddBuff(newStrengthBuff1, buffInfo.creator);
                     Debug.Log("玩家力量+1");
                     BuffInfo findBuffInfo = buffInfo.creator.GetComponent<BuffHandler>().buffList.Find(x => x.buffData.id == "1_06");
@@ -823,7 +823,7 @@ namespace DesignerScripts
         {
             if (BattleManager.Instance.parameter.turns == 1)
             {
-                BuffInfo newDodgeBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target,1,true);
+                BuffInfo newDodgeBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target, 1, true);
                 //给对面添加伤害为0的buff
                 buffInfo.creator.GetComponent<ChaState>().AddBuff(newDodgeBuff, buffInfo.creator);
                 Debug.Log("战斗开始获得1层闪避");

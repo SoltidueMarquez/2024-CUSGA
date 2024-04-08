@@ -654,6 +654,7 @@ MonoBehaviour:
   offsetS: 30
   template: {fileID: 7101880693602581045, guid: 816eb06a3e1f8ef49a3bf53fb84da8d9, type: 3}
   parent: {fileID: 2069172125}
+  flickEffect: {fileID: 3150919372634015354, guid: 0f59a52ef61f525408997f50b567e4c4, type: 3}
 --- !u!114 &81981826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1724,9 +1725,9 @@ MonoBehaviour:
   buffHandler: {fileID: 0}
   battleDiceHandler: {fileID: 0}
   baseProp:
-    health: 50
+    health: 5
     money: 400
-    maxRollTimes: 4
+    maxRollTimes: 100
     shield: 0
   buffProp:
   - health: 0
@@ -2804,7 +2805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleDiceCount: 3
-  maxDiceInBag: 8
+  maxDiceInBag: 1
 --- !u!114 &589276658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6101,6 +6102,9 @@ MonoBehaviour:
   parameter:
     turns: 0
     playerRerollCount: 0
+    ifSelectedDice: 0
+    ifSelectedHalidom: 0
+    currentRollMoney: 0
     playerChaState: {fileID: 589276656}
     enemyChaStates:
     - {fileID: 341200663}
@@ -6868,10 +6872,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -8012,8 +8016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0107f09953f17742bf6c979976a8cc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  halidomSOData:
-  - {fileID: 11400000, guid: fc5e256a9d2d29743b4aa020fddcc2a8, type: 2}
+  halidomSOData: []
 --- !u!1 &2054669038
 GameObject:
   m_ObjectHideFlags: 0
