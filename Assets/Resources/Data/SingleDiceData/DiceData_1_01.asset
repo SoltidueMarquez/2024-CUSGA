@@ -32,3 +32,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d9956bf95aabd2640a713acb555695ea, type: 2}
   sprite: {fileID: 0}
   description: "\u6700\u666E\u901A\u7684\u6218\u6597\u9AB0\u9762\uFF0C\u9644\u5E26\u4E00\u5C42\u6D41\u8840"
+  baseValue: 6

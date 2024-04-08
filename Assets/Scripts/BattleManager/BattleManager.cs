@@ -21,7 +21,15 @@ public class FSMParameter
     /// 在奖励界面，玩家是否选择了骰面
     /// </summary>
     public bool ifSelectedDice;
+    /// <summary>
+    /// 在奖励界面，玩家是否选择了圣物
+    /// </summary>
     public bool ifSelectedHalidom;
+    /// <summary>
+    /// 暂时将当前玩家roll出的钱存起来，方便扣除，再重新添加
+    /// </summary>
+    [HideInInspector]
+    public int currentRollMoney;
     #endregion
     public ChaState playerChaState;
     public ChaState[] enemyChaStates;
@@ -240,11 +248,18 @@ public class BattleManager : MonoBehaviour
     /// <summary>
     /// 进入奖励界面时调用，给玩家加钱
     /// </summary>
-    public void AddMoneyWhenEnterRewardState()
+    public void AddMoneyWhenEnterRewardState(List<SingleDiceObj> singleDiceObjs)
     {
-        int money = RandomManager.Instance.GetMoneyViaChaState(this.parameter.playerChaState);
-        var resource = new ChaResource(0, 0, 0, money);
-        this.parameter.playerChaState.ModResources(resource);
+        int money = RandomManager.Instance.GetMoneyViaRollResult(singleDiceObjs);
+        Debug.Log("BattleManager:当前玩家改变金钱" + money);
+        //先扣除之前roll出的钱
+        var lastResource = new ChaResource(0, -this.parameter.currentRollMoney, 0, 0);
+        this.parameter.playerChaState.ModResources(lastResource);
+       //再添加现在roll出的钱
+        var currentResource = new ChaResource(0, money, 0, 0);
+        this.parameter.playerChaState.ModResources(currentResource);
+        this.parameter.currentRollMoney = money;
+        Debug.Log("BattleManager:当前玩家的金钱" + this.parameter.playerChaState.resource.currentMoney);
     }
     /// <summary>
     /// 判断骰面是否可以选择,在进入奖励界面时调用，售卖骰面时也要调用
@@ -297,7 +312,7 @@ public class BattleManager : MonoBehaviour
     /// <param name="count"></param>
     public void CreateRewards(int count)
     {
-
+        Debug.Log("BattleManager:ifSelectedHalidom" + this.parameter.ifSelectedHalidom + "ifSelectedDice" + this.parameter.ifSelectedDice);
         //清空之前的奖励骰面
         for (int i = 0; i < count; i++)
         {
@@ -319,14 +334,16 @@ public class BattleManager : MonoBehaviour
         }
 
         //获得根据roll出骰面的结果，获取奖励的骰面
-        if(this.parameter.ifSelectedHalidom == false)
+        if(this.parameter.ifSelectedDice == false)
         {
             CreateRewardDices(singleDiceObjs, count);
         }
-        if(this.parameter.ifSelectedDice == false)
+        if(this.parameter.ifSelectedHalidom == false)
         {
             CreateRewardHalidom(singleDiceObjs);
         }
+        //给钱
+        AddMoneyWhenEnterRewardState(singleDiceObjs);
     }
     /// <summary>
     /// 根据玩家的骰面，创建奖励界面的骰面
@@ -365,6 +382,7 @@ public class BattleManager : MonoBehaviour
         {
             UIManager.Instance.rewardUIManager.CreateSacredObject(resultHalidom.id, 0,AddHalidomToHalidomManager,resultHalidom);
         }
+        UIManager.Instance.rewardUIManager.DisableAllSacredObject();
         RefreshIfHalodomCanChoose();
     }
     
@@ -375,15 +393,15 @@ public class BattleManager : MonoBehaviour
     {
         if (!HalidomManager.Instance.IsFull())
         {
-            UIManager.Instance.rewardUIManager.EnableAllDices();
+            UIManager.Instance.rewardUIManager.EnableAllSacredObject();
         }
         else
         {
-            UIManager.Instance.rewardUIManager.DisableAllDices();
+            UIManager.Instance.rewardUIManager.DisableAllSacredObject();
         }
         if (this.parameter.ifSelectedHalidom == true)
         {
-            UIManager.Instance.rewardUIManager.DisableAllDices();
+            UIManager.Instance.rewardUIManager.DisableAllSacredObject();
         }
     }
     /// <summary>

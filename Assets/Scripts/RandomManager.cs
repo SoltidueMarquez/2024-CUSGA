@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using DesignerScripts;
+using static Cinemachine.DocumentationSortingAttribute;
 /// <summary>
 /// 获取随机数的管理器，获取随机的数据
 /// </summary>
@@ -43,15 +44,32 @@ public class RandomManager : MonoSingleton<RandomManager>
         return halidomObjectLegals[Random.Range(0, halidomObjectLegals.Count)];
     }
     /// <summary>
-    /// 通过进入奖励界面获取的角色状态获取金钱
+    /// 通过进入奖励界面获取的投掷结果获取金钱
     /// </summary>
-    /// <param name="chaState"></param>
+    /// <param name="singleDiceObjs">用于计算点数的投掷结果</param>
     /// <returns></returns>
-    public int GetMoneyViaChaState(ChaState chaState)
+    public int GetMoneyViaRollResult(List<SingleDiceObj> conditionSingleDiceObjs)
     {
-        //进入奖励界面获取的金钱
-        int money = 5;
-        return money;
+        //计算用于条件的骰子的点数总和
+        int sum = 3;
+        
+        foreach (var singleDiceObj in conditionSingleDiceObjs)
+        {
+            sum += singleDiceObj.idInDice;
+        }
+        if (sum < 15)
+        {
+            return Random.Range(8, 13);
+        }
+        else if (sum >= 15 && sum < 24)
+        {
+            return Random.Range(13, 18);
+        }
+        else
+        {
+            return Random.Range(18, 23);
+        }
+
     }
     /// <summary>
     /// 通过当前玩家的状态获取买进的价格
@@ -122,7 +140,7 @@ public class RandomManager : MonoSingleton<RandomManager>
         if (sum < 15)
         {
             //不生成圣物
-            return null;
+            return GetRandomSingleDiceObj(RareType.Common);
         }
         else if (sum >= 15 && sum < 24)
         {

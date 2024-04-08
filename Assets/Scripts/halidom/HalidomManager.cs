@@ -177,7 +177,10 @@ public class HalidomManager : MonoBehaviour
         Debug.Log("售卖圣物成功，获得金币" + price + "个");
         //将圣物移除
         RemoveHalidom(index);
-
+        if (BattleManager.Instance !=  null)
+        {
+            BattleManager.Instance.RefreshIfHalodomCanChoose();
+        }
     }
 
 
