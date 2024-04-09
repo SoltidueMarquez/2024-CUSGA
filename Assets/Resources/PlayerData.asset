@@ -17,7 +17,23 @@ MonoBehaviour:
     money: 0
     maxRollTimes: 0
     shield: 0
-  BattleDiceList: []
+  playerDiceSOItems:
+  - diceType: 0
+    singleDiceModelSOs:
+    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
+    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
+    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
+    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
+    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
+    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
+  BattleDiceList:
+  - diceType: 0
+    singleDiceObjSOData:
+    - id: 
+      idInDice: 0
+      level: 0
+      value: 0
+      positionInDice: 0
   chaResource:
     currentHp: 0
     currentMoney: 0

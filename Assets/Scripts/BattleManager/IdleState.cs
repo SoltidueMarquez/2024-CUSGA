@@ -18,7 +18,10 @@ public class GameStartState : IState
     {
         Debug.Log("游戏开始");
         //TODO:读入所有数据，暂时是这样，后面会改
-        manager.parameter.playerChaState.GetBattleDiceHandler().InitDice(0);
+        var playerDataSO = manager.parameter.playerDataSO;
+        //初始化玩家的骰子
+        var playerDiceSOItems = playerDataSO.playerDiceSOItems;
+        manager.parameter.playerChaState.GetBattleDiceHandler().InitDice(playerDiceSOItems);
         //创建骰子页面
         for (int i = 0; i < manager.parameter.playerChaState.GetBattleDiceHandler().battleDiceCount; i++)
         {
@@ -28,11 +31,12 @@ public class GameStartState : IState
             FightDicePageManager.Instance.CreatePageUI(name, singleDices);//UI创建page
         }
         manager.parameter.playerChaState.Initialize();
-        //HalidomManager.Instance.AddHalidom(DesignerScripts.HalidomData.halidomDictionary["Halidom_1"]);
         //根据敌人的数量初始化敌人
+        var enemyDataSO = manager.parameter.enemyDataSO;
+        var enemyBattleDiceList = enemyDataSO.EnemyBattleDiceList;
         for (int i = 0; i < manager.parameter.enemyChaStates.Length; i++)
         {
-            manager.parameter.enemyChaStates[i].GetBattleDiceHandler().InitDice(1);
+            manager.parameter.enemyChaStates[i].GetBattleDiceHandler().InitDice(enemyBattleDiceList);
             manager.parameter.enemyChaStates[i].Initialize();
         }
         //清空回合计数器
@@ -63,17 +67,8 @@ public class PreparationState : IState
     }
     public void OnEnter()
     {
-        //Test
-        Debug.Log("Test内容-------------------");
-        Debug.Log("玩家的生命值是" + manager.parameter.playerChaState.prop.health);
-        Debug.Log("Test内容-------------------");
-
-
-
         Debug.Log("Enter PreparationState");
-
         ProcessPromptUIManager.Instance.DoFightStartUIAnim(() => { manager.TransitionState(GameState.PlayerRoundStartResolution); });
-
     }
 
     public void OnExit()

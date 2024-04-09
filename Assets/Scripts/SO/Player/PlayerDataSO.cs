@@ -7,7 +7,7 @@ using UnityEngine;
 /// 在一开始初始化的时候，玩家的骰子类型和骰子的模型是固定的，这个类用于存储玩家的骰子类型和骰子的模型
 /// </summary>
 [Serializable]
-public class PlayerDiceSOItem
+public class DiceSOItem
 {
     [Header("骰子类型")]
     public DiceType diceType;
@@ -19,7 +19,7 @@ public class PlayerDiceSOItem
 public class BattleDiceSOData
 {
     public DiceType diceType;
-    public int diceIndexInList;
+    [Header("一个战斗骰子拥有的骰面数据")]
     public List<SingleDiceObjSOData> singleDiceObjSOData;
 }
 [Serializable]
@@ -47,11 +47,11 @@ public class PlayerDataSO : ScriptableObject
     [Header("玩家初始的数值")]
     public ChaProperty baseProp;
     [Header("玩家初始时候的骰子类型列表")]
-    public List<PlayerDiceSOItem> playerDiceSOItems;
-    [Header("玩家当前的骰子")]
+    public List<DiceSOItem> playerDiceSOItems;
+    [Header("玩家当前的骰子(保存的数据)")]
     //玩家身上的战斗骰子列表
-    public List<BattleDice> BattleDiceList;
-    [Header("玩家当前的资源")]
+    public List<BattleDiceSOData> BattleDiceList;
+    [Header("玩家当前的资源(保存的数据)")]
     public ChaResource chaResource;
     
 

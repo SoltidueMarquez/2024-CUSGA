@@ -110,18 +110,33 @@ public class BattleDiceHandler : MonoBehaviour
 
     #region 初始化战斗骰子，有数据的情况下和测试的情况下
     /// <summary>
-    /// 没有存档的情况下，默认初始化骰子,应该是在一开始用其他数据结构去加载，暂时先算战斗开始的时候加载,这边需要修改
+    /// 没有存档的情况下，默认初始化骰子,以及敌人的骰子初始化都是这个函数
     /// </summary>
-    public void InitDice(int side)
+    public void InitDice(List<DiceSOItem> playerDiceSOItems)
     {
-        for (int i = 0; i < battleDiceCount; i++)
+        //for (int i = 0; i < battleDiceCount; i++)
+        //{
+        //    DiceType diceType = (DiceType)i;//这边需要修改
+        //    BattleDice battleDice = new BattleDice(diceType);//这边需要修改
+        //    battleDices.Add(battleDice);
+        //    for (int j = 0; j < 6; j++)
+        //    {
+        //        SingleDiceModel singleDiceModel = RandomManager.Instance.GetSingleDiceModel(battleDices[i].diceType, 1, side);
+        //        battleDice.AddDice(singleDiceModel, j, i, j);
+        //    }
+        //}
+        for(int i = 0; i < battleDiceCount ; i++)
         {
-            DiceType diceType = (DiceType)i;//这边需要修改
-            BattleDice battleDice = new BattleDice(diceType);//这边需要修改
+            var diceSOItem = playerDiceSOItems[i];
+            DiceType diceType = diceSOItem.diceType;
+            BattleDice battleDice = new BattleDice(diceType);
             battleDices.Add(battleDice);
             for (int j = 0; j < 6; j++)
             {
-                SingleDiceModel singleDiceModel = RandomManager.Instance.GetSingleDiceModel(battleDices[i].diceType, 1, side);
+                //获取骰面在骰面字典中的key
+                string dicKey = diceSOItem.singleDiceModelSOs[j].singleDiceModelName;
+                SingleDiceModel singleDiceModel = SingleDiceData.diceDictionary[dicKey];
+                //暂时的idinDice，也就是点数，是初始化的时候决定的
                 battleDice.AddDice(singleDiceModel, j, i, j);
             }
         }

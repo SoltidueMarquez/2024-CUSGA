@@ -1725,7 +1725,7 @@ MonoBehaviour:
   buffHandler: {fileID: 0}
   battleDiceHandler: {fileID: 0}
   baseProp:
-    health: 5
+    health: 50
     money: 400
     maxRollTimes: 100
     shield: 0
@@ -1774,6 +1774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676dab65478c37e46a3f941aac266ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffList: []
 --- !u!4 &341200666
 Transform:
   m_ObjectHideFlags: 0
@@ -2804,7 +2805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6622fbbeaf715744fa0067d94cb0f8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battleDiceCount: 3
+  battleDiceCount: 1
   maxDiceInBag: 1
 --- !u!114 &589276658
 MonoBehaviour:
@@ -2818,6 +2819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676dab65478c37e46a3f941aac266ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffList: []
 --- !u!4 &589276659
 Transform:
   m_ObjectHideFlags: 0
@@ -6108,6 +6110,8 @@ MonoBehaviour:
     playerChaState: {fileID: 589276656}
     enemyChaStates:
     - {fileID: 341200663}
+    playerDataSO: {fileID: 11400000, guid: d04d8e89ef3301043adb35028d889f33, type: 2}
+    enemyDataSO: {fileID: 11400000, guid: ca768467329733c49a3099706f2c2e47, type: 2}
   currentSelectEnemy: {fileID: 341200662}
 --- !u!4 &1590396381
 Transform:
@@ -8016,13 +8020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0107f09953f17742bf6c979976a8cc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  halidomSOData:
-  - {fileID: 11400000, guid: 42abf58ffdc3b8140bc7f42c2f093885, type: 2}
-  - {fileID: 11400000, guid: 42abf58ffdc3b8140bc7f42c2f093885, type: 2}
-  - {fileID: 11400000, guid: 42abf58ffdc3b8140bc7f42c2f093885, type: 2}
-  - {fileID: 11400000, guid: 42abf58ffdc3b8140bc7f42c2f093885, type: 2}
-  - {fileID: 11400000, guid: 42abf58ffdc3b8140bc7f42c2f093885, type: 2}
-  - {fileID: 11400000, guid: 42abf58ffdc3b8140bc7f42c2f093885, type: 2}
+  halidomSOData: []
 --- !u!1 &2054669038
 GameObject:
   m_ObjectHideFlags: 0

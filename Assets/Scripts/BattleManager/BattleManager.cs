@@ -33,7 +33,9 @@ public class FSMParameter
     #endregion
     public ChaState playerChaState;
     public ChaState[] enemyChaStates;
-
+    public PlayerDataSO playerDataSO;
+    //TODO:这边的敌人数据还没有
+    public EnemyDataSO enemyDataSO;
 }
 
 public enum GameState
