@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI.Store
 {
@@ -27,6 +26,7 @@ namespace UI.Store
         /// <param name="data"></param>
         /// <param name="index">栏位索引</param>
         /// <param name="onChoose">选择骰面后触发的逻辑函数</param>
+        /// <param name="singleDiceObj">骰面物体</param>
         public void CreateDiceUI(SingleDiceUIData data, int index, Action<SingleDiceObj> onChoose,SingleDiceObj singleDiceObj)
         {
             if (index > diceColumns.Count)
