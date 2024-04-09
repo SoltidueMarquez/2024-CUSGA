@@ -2,17 +2,17 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI
+namespace UI.Store
 {
-    [RequireComponent(typeof(Button))]
-    [RequireComponent(typeof(Image))]
-    public class RewardSacredUIObject : RewardDiceUIObject
+    public class StoreSacredUIObject : StoreDiceUIObject
     {
         /// <summary>
         /// 初始化函数
         /// </summary>
         public void Init(string id, float animTime, float scale, Action<HalidomObject> onChoose, HalidomObject halidomObject)
         {
+            //大小初始化
+            this.transform.localScale = new Vector3(1, 1, 1);
             //信息初始化
             var tmpData = ResourcesManager.GetHalidomUIData(id);
             nameText.text = tmpData.name;
@@ -25,7 +25,6 @@ namespace UI
                 Disable();
                 DoChosenAnim(animTime, scale);//动画
                 onChoose?.Invoke(halidomObject);
-                UIManager.Instance.rewardUIManager.DisableAllSacredObject();
             });
         }
     }

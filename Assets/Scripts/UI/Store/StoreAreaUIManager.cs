@@ -4,17 +4,20 @@ using UnityEngine;
 
 namespace UI.Store
 {
-    public class StoreDiceManager : MonoSingleton<StoreDiceManager>
+    public class StoreAreaUIManager : MonoSingleton<StoreAreaUIManager>
     {
         [Header("通用")]
         [SerializeField, Tooltip("动画时长")] private float animTime;
         [Tooltip("预览大小")] public float previewSize;
         [Tooltip("晃动角度")] public float shakeAngle;
-        
+
         [Header("出售骰面")]
         [SerializeField, Tooltip("骰子栏位列表")] public List<Column> diceColumns;
         [SerializeField, Tooltip("骰子模板")] private GameObject diceTemplate;
         
+        [Header("出售圣物")]
+        [SerializeField, Tooltip("圣物栏位列表")] public List<Column> sacredObjectColumns;
+        [SerializeField, Tooltip("圣物模板")] private GameObject sacredObjectTemplate;
 
         #region 出售骰面相关
         /// <summary>
@@ -23,6 +26,7 @@ namespace UI.Store
         /// <param name="data"></param>
         /// <param name="index">栏位索引</param>
         /// <param name="onChoose">选择骰面后触发的逻辑函数</param>
+        /// <param name="singleDiceObj">骰面物体</param>
         public void CreateDiceUI(SingleDiceUIData data, int index, Action<SingleDiceObj> onChoose,SingleDiceObj singleDiceObj)
         {
             if (index > diceColumns.Count)
@@ -100,36 +104,90 @@ namespace UI.Store
         }
         #endregion
 
+        #region 出售圣物相关
+        /// <summary>
+        /// 创建圣物函数
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="index"></param>
+        /// <param name="onChoose"></param>
+        /// <param name="halidomObject"></param>
+        public void CreateSacredObject(string id, int index, Action<HalidomObject> onChoose,HalidomObject halidomObject)
+        {
+            if (index > sacredObjectColumns.Count)
+            {
+                Debug.LogWarning("超出生成的栏位");
+                return;
+            }
+            if (sacredObjectColumns[index].bagObject != null) 
+            {
+                Debug.LogWarning("栏位已经有圣物");
+                return;
+            }
+            var parent = sacredObjectColumns[index].transform;
+            var tmp = Instantiate(sacredObjectTemplate, parent, true);
+            sacredObjectColumns[index].bagObject = tmp;
+            tmp.transform.position = parent.position;//更改位置
+            var tmpSacredObject = tmp.GetComponent<StoreSacredUIObject>();
+            tmpSacredObject.Init(id, animTime, 2, onChoose, halidomObject);//初始化
+            tmp.SetActive(true);
+            tmpSacredObject.DoAppearAnim(animTime); //出现动画
+        }
+        
+        /// <summary>
+        /// 移除圣物函数
+        /// </summary>
+        /// <param name="index">栏位索引</param>
+        public void RemoveSacredObject(int index)
+        {
+            if (index > sacredObjectColumns.Count)
+            {
+                Debug.LogWarning("超出生成的栏位");
+                return;
+            }
+            if (sacredObjectColumns[index].bagObject == null) 
+            {
+                Debug.LogWarning("圣物不存在");
+                return;
+            }
+            var item = sacredObjectColumns[index].bagObject.GetComponent<StoreSacredUIObject>();
+            sacredObjectColumns[index].bagObject = null;
+            if (item != null)
+            {
+                item.DoDestroyAnim(animTime);
+            }
+        }
+        
+        /// <summary>
+        /// 禁用全部圣物函数
+        /// </summary>
+        public void DisableAllSacredObject()
+        {
+            foreach (var col in sacredObjectColumns)
+            {
+                if (col.bagObject != null)
+                {
+                    var item = col.bagObject.GetComponent<StoreSacredUIObject>();
+                    item.Disable();
+                }
+            }
+        }
 
-        private void TestAction(SingleDiceObj obj)
+        /// <summary>
+        /// 启用全部圣物函数
+        /// </summary>
+        public void EnableAllSacredObject()
         {
-            StoreManager.Instance.m_Debug(nameof(obj));
-        }
-        private void Test()
-        {
-            /*if (Input.GetKeyDown(KeyCode.A))
+            foreach (var col in sacredObjectColumns)
             {
-                CreateDiceUI(new SingleDiceUIData(), 0, TestAction, null);
-                CreateDiceUI(new SingleDiceUIData(), 1, TestAction, null);
-                CreateDiceUI(new SingleDiceUIData(), 2, TestAction, null);
+                if (col.bagObject != null)
+                {
+                    var item = col.bagObject.GetComponent<StoreSacredUIObject>();
+                    item.Enable();
+                }
             }
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                DisableAllDices();
-            }
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                EnableAllDices();
-            }
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                RemoveDiceUI(1);
-            }*/
         }
-
-        private void Update()
-        {
-            Test();
-        }
+        #endregion
+        
     }
 }
