@@ -73,6 +73,11 @@ public class StoreManager : SingletonBase<StoreManager>
 
     private void CloseStore()
     {
+        StartCoroutine(LateCloseStore());
+    }
+    IEnumerator LateCloseStore()
+    {
+        yield return new WaitForSeconds(2);
         StoreUIcanvas.SetActive(false);
     }
 }
