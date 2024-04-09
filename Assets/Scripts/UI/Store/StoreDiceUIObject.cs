@@ -38,8 +38,8 @@ namespace UI.Store
         /// <param name="eventData"></param>
         public override void OnPointerEnter(PointerEventData eventData)
         {
-            UIManager.Instance.EnterPreview(this.gameObject,StoreDiceManager.Instance.previewSize);
-            UIManager.Instance.DoShake(this.GetComponent<Image>(),StoreDiceManager.Instance.shakeAngle);
+            UIManager.Instance.EnterPreview(this.gameObject,StoreAreaUIManager.Instance.previewSize);
+            UIManager.Instance.DoShake(this.GetComponent<Image>(),StoreAreaUIManager.Instance.shakeAngle);
             descriptionCanvas.SetActive(true);
         }
         

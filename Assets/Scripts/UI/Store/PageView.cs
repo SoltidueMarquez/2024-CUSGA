@@ -20,12 +20,6 @@ namespace UI.Store
         private float _startTime;
         private int _curIndex;
 
-
-        private void Start()
-        {
-            Init(StoreUIManager.Instance.strengthenBG);
-        }
-
         private static void OnUpdateAnimation(int index, int lastIndex) //拖动结束时的切换事件
         {
             //在下面加动画变换函数或者在别的脚本里检测位置变换
