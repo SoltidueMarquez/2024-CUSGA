@@ -21,7 +21,7 @@ namespace UI
         /// 鼠标移动函数
         /// </summary>
         /// <param name="eventData"></param>
-        public void OnPointerEnter(PointerEventData eventData)
+        public virtual void OnPointerEnter(PointerEventData eventData)
         {
             UIManager.Instance.EnterPreview(this.gameObject,BagDiceUIManager.Instance.previewSizeB);
             UIManager.Instance.DoShake(this.GetComponent<Image>(),BagDiceUIManager.Instance.shakeAngleB);
@@ -32,7 +32,7 @@ namespace UI
         /// 鼠标移开函数
         /// </summary>
         /// <param name="eventData"></param>
-        public void OnPointerExit(PointerEventData eventData)
+        public virtual void OnPointerExit(PointerEventData eventData)
         {
             UIManager.Instance.ExitPreview(gameObject);
             descriptionCanvas.SetActive(false);

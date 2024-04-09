@@ -4527,6 +4527,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7766787243154943484}
   - component: {fileID: 4094949460559003386}
+  - component: {fileID: 7073011342002001474}
+  - component: {fileID: 3615829596105585163}
   m_Layer: 0
   m_Name: StoreUIManager
   m_TagString: Untagged
@@ -4562,6 +4564,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strengthenBG: {fileID: 7193036800606470205}
+--- !u!114 &7073011342002001474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8810732100187416935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b5051fc65c8d84fbbd63c153b26b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animTime: 1
+  previewSize: 1.2
+  shakeAngle: 5
+  diceColumns:
+  - transform: {fileID: 7926048234021152366}
+    bagObject: {fileID: 0}
+  - transform: {fileID: 6308476059707383429}
+    bagObject: {fileID: 0}
+  - transform: {fileID: 8333885671417910947}
+    bagObject: {fileID: 0}
+  diceTemplate: {fileID: 3046983917528316593, guid: 6c73ff6e08a309c43a7796cd70df1bc0, type: 3}
+--- !u!114 &3615829596105585163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8810732100187416935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d458159c34954581bfd097d90f791879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragCanvas: {fileID: 0}
+  rewardUIManager: {fileID: 0}
 --- !u!1 &9079002580644475389
 GameObject:
   m_ObjectHideFlags: 0
