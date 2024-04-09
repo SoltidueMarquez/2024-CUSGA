@@ -13,7 +13,7 @@ namespace UI
         /// <summary>
         /// 初始化函数
         /// </summary>
-        public void Init(SingleDiceUIData data, float animTime, float scale, Action<SingleDiceObj> onChoose, SingleDiceObj singleDiceObj)
+        public virtual void Init(SingleDiceUIData data, float animTime, float scale, Action<SingleDiceObj> onChoose, SingleDiceObj singleDiceObj)
         {
             //信息文本初始化
             nameText.text = data.name;

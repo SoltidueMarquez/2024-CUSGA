@@ -37,23 +37,23 @@ public class StoreManager : SingletonBase<StoreManager>
     }
 
     /// <summary>
-    /// ½øÈëÉÌµêÊ±µ÷ÓÃ
+    /// è¿›å…¥å•†åº—æ—¶è°ƒç”¨
     /// </summary>
     public UnityEvent OnEnterStore;
     /// <summary>
-    /// Àë¿ªÉÌµêÊ±µ÷ÓÃ
+    /// ç¦»å¼€å•†åº—æ—¶è°ƒç”¨
     /// </summary>
     public UnityEvent OnExitStore;
     /// <summary>
-    /// µã»÷Ç¿»¯µãÊı°´Å¥Ê±µ÷ÓÃ
+    /// ç‚¹å‡»å¼ºåŒ–ç‚¹æ•°æŒ‰é’®æ—¶è°ƒç”¨
     /// </summary>
     public UnityEvent OnClickUpgrade;
     /// <summary>
-    /// µã»÷ÖØÍ¶°´Å¥Ê±µ÷ÓÃ
+    /// ç‚¹å‡»é‡æŠ•æŒ‰é’®æ—¶è°ƒç”¨
     /// </summary>
     public UnityEvent OnClickReroll;
     /// <summary>
-    /// Ë¢ĞÂÉÌÆ·µêÊ±µ÷ÓÃ
+    /// åˆ·æ–°å•†å“åº—æ—¶è°ƒç”¨
     /// </summary>
     public UnityEvent OnRefreshStore;
 
