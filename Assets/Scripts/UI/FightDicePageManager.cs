@@ -42,7 +42,7 @@ namespace UI
                 for (int i = 0; i < diceObjs.Count; i++)//创建骰面
                 {
                     var tmpData = ResourcesManager.GetSingleDiceUIData(diceObjs[i]);
-                    CreateDiceUI(tmpData, diceObjs[i].idInDice, tmp.transform);
+                    CreateDiceUI(tmpData, diceObjs[i].positionInDice, tmp.transform);
                 }
             }
             fightDicePageLists.Add(tmp);

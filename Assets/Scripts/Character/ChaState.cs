@@ -21,9 +21,7 @@ public class ChaState : MonoBehaviour
     /// 角色的基础属性，每个角色不带任何buff的纯粹数值
     /// 先写死，正式的应该是从配置文件中读取
     /// </summary>
-    public ChaProperty baseProp = new ChaProperty(
-        50, 400, 4, 0
-    );
+    public ChaProperty baseProp;
     /// <summary>
     /// buff的属性加成,buffProp[0]是加法，buffProp[1]是乘法
     /// </summary>
@@ -56,7 +54,7 @@ public class ChaState : MonoBehaviour
     {
         buffHandler.BuffRoundStartTick();
         string temp = this.side == 0 ? "当前玩家的buff数" : "当前敌人的buff数";
-        Debug.Log(temp+ this.buffHandler.buffList.Count);
+        Debug.Log(temp + this.buffHandler.buffList.Count);
     }
 
     public void OnRoundEnd()
@@ -164,12 +162,15 @@ public class ChaState : MonoBehaviour
         this.resource.currentHp = Mathf.Clamp(this.resource.currentHp, 0, this.prop.health);
         CharacterUIManager.Instance.UpdateShieldUI((Character)this.side, this.resource.currentShield);
         CharacterUIManager.Instance.ChangeHealthSlider((Character)side, this.resource.currentHp, this.prop.health);
-        DataUIManager.Instance.UpdateMoneyText(this.resource.currentMoney);
+        if (this.side == 0)
+        {
+            DataUIManager.Instance.UpdateMoneyText(this.resource.currentMoney);
+        }
         if (this.resource.currentHp <= 0)
         {
             this.Kill();
         }
-        
+
 
     }
     /// <summary>
@@ -182,7 +183,16 @@ public class ChaState : MonoBehaviour
         //UI初始化
         CharacterUIManager.Instance.ChangeHealthSlider((Character)side, this.resource.currentHp, this.prop.health);
     }
-
+    #region 一些有用函数
+    /// <summary>
+    /// 设置初始值
+    /// </summary>
+    /// <param name="chaProperty"></param>
+    public void SetBaseprop(ChaProperty chaProperty)
+    {
+        this.baseProp = chaProperty;
+    }
+    #endregion
     #region 获取组件
     public BuffHandler GetBuffHandler()
     {

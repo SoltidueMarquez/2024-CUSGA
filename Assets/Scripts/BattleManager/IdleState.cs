@@ -17,28 +17,10 @@ public class GameStartState : IState
     public void OnEnter()
     {
         Debug.Log("游戏开始");
-        //TODO:读入所有数据，暂时是这样，后面会改
-        var playerDataSO = manager.parameter.playerDataSO;
-        //初始化玩家的骰子
-        var playerDiceSOItems = playerDataSO.playerDiceSOItems;
-        manager.parameter.playerChaState.GetBattleDiceHandler().InitDice(playerDiceSOItems);
-        //创建骰子页面
-        for (int i = 0; i < manager.parameter.playerChaState.GetBattleDiceHandler().battleDiceCount; i++)
-        {
-            //获取
-            var singleDices = manager.parameter.playerChaState.GetBattleDiceHandler().battleDices[i].GetBattleDiceSingleDices();
-            string name = $"页面:{i + 1}";
-            FightDicePageManager.Instance.CreatePageUI(name, singleDices);//UI创建page
-        }
-        manager.parameter.playerChaState.Initialize();
-        //根据敌人的数量初始化敌人
-        var enemyDataSO = manager.parameter.enemyDataSO;
-        var enemyBattleDiceList = enemyDataSO.EnemyBattleDiceList;
-        for (int i = 0; i < manager.parameter.enemyChaStates.Length; i++)
-        {
-            manager.parameter.enemyChaStates[i].GetBattleDiceHandler().InitDice(enemyBattleDiceList);
-            manager.parameter.enemyChaStates[i].Initialize();
-        }
+        //玩家所有的初始化
+        BattleManager.Instance.InitializePlayer();
+        //敌人所有的初始化
+        BattleManager.Instance.IntializeEnemy();
         //清空回合计数器
         manager.ResetTurns();
     }
@@ -78,8 +60,6 @@ public class PreparationState : IState
 
     public void OnUpdate()
     {
-        //跳转到玩家判定阶段
-        //manager.TransitionState(GameState.PlayerRoundStartResolution);
     }
 }
 
@@ -125,27 +105,6 @@ public class PlayerRoundStartResolutionState : IState
     public void OnExit()
     {
         Debug.Log("Exit PlayerRoundStartResolutionState");
-
-        //Test
-        //if (manager.parameter.turns == 1)
-        //{
-        //    Debug.Log("Test---------------------");
-        //    HalidomManager.Instance.AddHalidom(DesignerScripts.HalidomData.halidomDictionary[HalidomName.烤土豆.ToString()]);
-        //    Debug.Log("添加圣物烤土豆");
-        //    Debug.Log("玩家血量上限为"+manager.parameter.playerChaState.prop.health);
-        //    Debug.Log("Test---------------------");
-        //}
-
-        //if(manager.parameter.turns == 2)
-        //{
-        //    Debug.Log("Test---------------------");
-        //    HalidomManager.Instance.RemoveHalidom(2);
-        //    Debug.Log("移除圣物烤土豆");
-        //    Debug.Log("玩家血量上限为" + manager.parameter.playerChaState.prop.health);
-        //    Debug.Log("Test---------------------");
-        //}
-
-
     }
 
     public void OnUpdate()
@@ -287,14 +246,6 @@ public class EnemyActionState : IState
 
     public void OnUpdate()
     {
-        ////TODO: 敌人AI逻辑
-        //    foreach (var enemy in manager.parameter.enemyChaStates)
-        //    {
-        //        enemy.GetBattleDiceHandler().CastDiceAll(enemy, manager.parameter.playerChaState.gameObject);
-        //        DamageManager.Instance.DealWithAllDamage();
-        //    }
-        //    manager.TransitionState(GameState.EnemyRoundEndResolution);
-
     }
 
 }

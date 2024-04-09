@@ -24,6 +24,7 @@ public class HalidomUIData
 public class SingleDiceUIData
 {
     public int idInDice;
+    public int positionInDice;
     public int baseValue;
     public DiceType type;
     public Sprite sprite;
@@ -46,6 +47,11 @@ public class IntentionUIData
 }
 public static class ResourcesManager
 {
+    /// <summary>
+    /// 通过id获取圣物的UI信息
+    /// </summary>
+    /// <param name="id">圣物的唯一id</param>
+    /// <returns></returns>
     public static HalidomUIData GetHalidomUIData(string id)
     {
         HalidomDataSO halidomDataSO = Resources.Load<HalidomDataSO>("Data/HalidomData/HalidomData_" + id);
@@ -61,7 +67,17 @@ public static class ResourcesManager
         halidomUIData.sprite = halidomDataSO.sprite;
         return halidomUIData;
     }
-
+    /// <summary>
+    /// 通过id获取相应的singleDiceModel
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public static SingleDiceModel GetSingleDiceModelViaid(string id)
+    {
+        var singleDiceModelList = SingleDiceData.diceDictionary.Values.ToList();
+        var singleDiceModel = singleDiceModelList.Where(x => x.id == id).FirstOrDefault();
+        return singleDiceModel;
+    }
     public static BuffUIData GetBuffUIData(string id)
     {
         BuffDataSO buffDataSO = Resources.Load<BuffDataSO>("Data/BuffData/BaseBuffData/BuffData_" + id);
@@ -91,7 +107,9 @@ public static class ResourcesManager
             return null;
         }
         SingleDiceUIData singleDiceUIData = new SingleDiceUIData();
-        singleDiceUIData.idInDice = singleDiceObj.positionInDice + 1;
+        //这边的idInDice是点数，positionInDice是在骰子中的位置
+        singleDiceUIData.idInDice = singleDiceObj.idInDice;
+        singleDiceUIData.positionInDice = singleDiceObj.positionInDice;
         //根据骰子类型和基础等级计算基础值
         switch (singleDiceModelSO.type)
         {

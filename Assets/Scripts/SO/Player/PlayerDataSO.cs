@@ -33,8 +33,6 @@ public class SingleDiceObjSOData
     public int level;
     [Header("骰子的售价")]
     public int value;
-    [Header("骰子在骰子中的位置")]
-    public int positionInDice;
 }
 
 
@@ -44,6 +42,8 @@ public class SingleDiceObjSOData
 /// </summary>
 public class PlayerDataSO : ScriptableObject
 {
+    [Header("是否存档读取")]
+    public bool ifUseSaveData;
     [Header("玩家初始的数值")]
     public ChaProperty baseProp;
     [Header("玩家初始时候的骰子类型列表")]

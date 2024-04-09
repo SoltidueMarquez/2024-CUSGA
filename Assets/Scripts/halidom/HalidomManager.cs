@@ -30,11 +30,9 @@ public class HalidomManager : MonoBehaviour
     /// </summary>
     public ChaProperty[] buffProp = new ChaProperty[2] { ChaProperty.zero, ChaProperty.zero };
     /// <summary>
-    /// 初始属性
+    /// 初始属性,由playerDataSO提供
     /// </summary>
-    public ChaProperty baseProp = new ChaProperty(
-        50, 400, 4, 0
-    ); 
+    public ChaProperty baseProp;
 
 
 
@@ -61,13 +59,7 @@ public class HalidomManager : MonoBehaviour
         halidomList = new HalidomObject[halidomMaxCount];
         //设置移除圣物的函数
     }
-
-    private void Start()
-    {
-        
-    }
-    
-
+   
     //配置圣物是不配圣物在格子里的顺序的，加进去的时候才获得序号
 
     public void AddHalidom(HalidomObject halidom)

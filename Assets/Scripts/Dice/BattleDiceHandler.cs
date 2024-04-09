@@ -114,18 +114,7 @@ public class BattleDiceHandler : MonoBehaviour
     /// </summary>
     public void InitDice(List<DiceSOItem> playerDiceSOItems)
     {
-        //for (int i = 0; i < battleDiceCount; i++)
-        //{
-        //    DiceType diceType = (DiceType)i;//这边需要修改
-        //    BattleDice battleDice = new BattleDice(diceType);//这边需要修改
-        //    battleDices.Add(battleDice);
-        //    for (int j = 0; j < 6; j++)
-        //    {
-        //        SingleDiceModel singleDiceModel = RandomManager.Instance.GetSingleDiceModel(battleDices[i].diceType, 1, side);
-        //        battleDice.AddDice(singleDiceModel, j, i, j);
-        //    }
-        //}
-        for(int i = 0; i < battleDiceCount ; i++)
+        for (int i = 0; i < battleDiceCount; i++)
         {
             var diceSOItem = playerDiceSOItems[i];
             DiceType diceType = diceSOItem.diceType;
@@ -137,7 +126,7 @@ public class BattleDiceHandler : MonoBehaviour
                 string dicKey = diceSOItem.singleDiceModelSOs[j].singleDiceModelName;
                 SingleDiceModel singleDiceModel = SingleDiceData.diceDictionary[dicKey];
                 //暂时的idinDice，也就是点数，是初始化的时候决定的
-                battleDice.AddDice(singleDiceModel, j, i, j);
+                battleDice.AddDice(singleDiceModel, j + 1, i, j);
             }
         }
         //初始化战斗时骰子的数组大小
@@ -146,9 +135,24 @@ public class BattleDiceHandler : MonoBehaviour
     /// <summary>
     /// 有存档的情况下，初始化骰子
     /// </summary>
-    public void InitDiceWithData()
+    public void InitDiceWithData(List<BattleDiceSOData> battleDiceSODatas)
     {
-
+        for (int i = 0; i < battleDiceCount; i++)
+        {
+            var battleDiceSOData = battleDiceSODatas[i];
+            DiceType diceType = battleDiceSOData.diceType;
+            BattleDice battleDice = new BattleDice(diceType);
+            battleDices.Add(battleDice);
+            for (int j = 0; j < 6; j++)
+            {
+                var singleDiceObjSOData = battleDiceSOData.singleDiceObjSOData[j];
+                string singleDiceid = singleDiceObjSOData.id;
+                var singleDiceModel = ResourcesManager.GetSingleDiceModelViaid(singleDiceid);
+                battleDice.AddDice(singleDiceModel, singleDiceObjSOData.idInDice, i, j);
+            }
+        }
+        //初始化战斗时骰子的数组大小
+        diceCardsInUse = new SingleDiceObj[battleDiceCount];
     }
     #endregion
     #region 添加骰面到各个地方，例如背包和战斗骰面

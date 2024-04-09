@@ -51,7 +51,7 @@ public class RandomManager : MonoSingleton<RandomManager>
     public int GetMoneyViaRollResult(List<SingleDiceObj> conditionSingleDiceObjs)
     {
         //计算用于条件的骰子的点数总和
-        int sum = 3;
+        int sum = 0;
         
         foreach (var singleDiceObj in conditionSingleDiceObjs)
         {

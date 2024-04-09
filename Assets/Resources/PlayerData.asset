@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3de7d951814604594071121c0d0bf5, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
+  ifUseSaveData: 0
   baseProp:
-    health: 0
-    money: 0
-    maxRollTimes: 0
+    health: 50
+    money: 400
+    maxRollTimes: 4
     shield: 0
   playerDiceSOItems:
   - diceType: 0
@@ -29,11 +30,30 @@ MonoBehaviour:
   BattleDiceList:
   - diceType: 0
     singleDiceObjSOData:
-    - id: 
-      idInDice: 0
-      level: 0
-      value: 0
-      positionInDice: 0
+    - id: 1_01
+      idInDice: 8
+      level: 1
+      value: 6
+    - id: 1_01
+      idInDice: 8
+      level: 1
+      value: 6
+    - id: 1_01
+      idInDice: 8
+      level: 1
+      value: 6
+    - id: 1_01
+      idInDice: 8
+      level: 1
+      value: 6
+    - id: 1_01
+      idInDice: 8
+      level: 1
+      value: 6
+    - id: 1_01
+      idInDice: 8
+      level: 1
+      value: 6
   chaResource:
     currentHp: 0
     currentMoney: 0

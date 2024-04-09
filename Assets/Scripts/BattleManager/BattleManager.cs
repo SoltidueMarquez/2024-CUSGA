@@ -166,7 +166,72 @@ public class BattleManager : MonoBehaviour
             TransitionState(GameState.PlayerWin);
         }
     }
+    #region 初始加载数据阶段相关函数
 
+    /// <summary>
+    /// 在这个里面写所有的有关玩家的初始化，包括玩家数值，玩家骰面和相关UI
+    /// </summary>
+    public void InitializePlayer()
+    {
+        var playerDataSO = this.parameter.playerDataSO;
+        //初始化玩家的基础数值
+        this.parameter.playerChaState.SetBaseprop(playerDataSO.baseProp);
+        //对圣物设置玩家的基础数值
+        HalidomManager.Instance.baseProp = playerDataSO.baseProp;
+        HalidomManager.Instance.RefreshAllHalidoms();
+        this.parameter.playerChaState.Initialize();
+
+        if (!playerDataSO.ifUseSaveData)
+        {
+            //初始化玩家的骰子
+            var playerDiceSOItems = playerDataSO.playerDiceSOItems;
+            //设置玩家骰子的数量
+            int battleDiceCount = playerDiceSOItems.Count;
+            this.parameter.playerChaState.GetBattleDiceHandler().battleDiceCount = battleDiceCount;
+            this.parameter.playerChaState.GetBattleDiceHandler().InitDice(playerDiceSOItems);
+        }
+        else
+        {
+            //获取玩家存档信息中所有的保存的信息
+            var battleDiceSODatas = playerDataSO.BattleDiceList;
+            //设置玩家骰子的数量
+            int battleDiceCount = battleDiceSODatas.Count;
+            this.parameter.playerChaState.GetBattleDiceHandler().battleDiceCount = battleDiceCount;
+            //根据存档进行骰子的数值初始化
+            this.parameter.playerChaState.GetBattleDiceHandler().InitDiceWithData(battleDiceSODatas);
+            this.parameter.playerChaState.resource = playerDataSO.chaResource;
+
+        }
+        //创建骰子页面
+        for (int i = 0; i < this.parameter.playerChaState.GetBattleDiceHandler().battleDiceCount; i++)
+        {
+            //获取
+            var singleDices = this.parameter.playerChaState.GetBattleDiceHandler().battleDices[i].GetBattleDiceSingleDices();
+            string name = $"页面:{i + 1}";
+            FightDicePageManager.Instance.CreatePageUI(name, singleDices);//UI创建page
+        }
+
+        //直接用存档的数值覆盖playerChaState的数值
+        
+
+    }
+    /// <summary>
+    /// 对敌人根据数值初始化
+    /// </summary>
+    public void IntializeEnemy()
+    {
+        //根据敌人的数量初始化敌人
+        var enemyDataSO = this.parameter.enemyDataSO;
+        var enemyBattleDiceList = enemyDataSO.EnemyBattleDiceList;
+        for (int i = 0; i < this.parameter.enemyChaStates.Length; i++)
+        {
+            this.parameter.enemyChaStates[i].GetBattleDiceHandler().InitDice(enemyBattleDiceList);
+            this.parameter.enemyChaStates[i].SetBaseprop(enemyDataSO.baseProp);
+            //可能需要手动给敌人加一些buff
+            this.parameter.enemyChaStates[i].Initialize();
+        }
+    }
+    #endregion
     #region 投骰子相关
     public void RollDice()
     {
@@ -257,7 +322,7 @@ public class BattleManager : MonoBehaviour
         //先扣除之前roll出的钱
         var lastResource = new ChaResource(0, -this.parameter.currentRollMoney, 0, 0);
         this.parameter.playerChaState.ModResources(lastResource);
-       //再添加现在roll出的钱
+        //再添加现在roll出的钱
         var currentResource = new ChaResource(0, money, 0, 0);
         this.parameter.playerChaState.ModResources(currentResource);
         this.parameter.currentRollMoney = money;
@@ -336,11 +401,11 @@ public class BattleManager : MonoBehaviour
         }
 
         //获得根据roll出骰面的结果，获取奖励的骰面
-        if(this.parameter.ifSelectedDice == false)
+        if (this.parameter.ifSelectedDice == false)
         {
             CreateRewardDices(singleDiceObjs, count);
         }
-        if(this.parameter.ifSelectedHalidom == false)
+        if (this.parameter.ifSelectedHalidom == false)
         {
             CreateRewardHalidom(singleDiceObjs);
         }
@@ -380,14 +445,14 @@ public class BattleManager : MonoBehaviour
     public void CreateRewardHalidom(List<SingleDiceObj> singleDiceObjs)
     {
         var resultHalidom = RandomManager.Instance.GetRewardHalidomViaPlayerData(singleDiceObjs);
-        if(resultHalidom != null)
+        if (resultHalidom != null)
         {
-            UIManager.Instance.rewardUIManager.CreateSacredObject(resultHalidom.id, 0,AddHalidomToHalidomManager,resultHalidom);
+            UIManager.Instance.rewardUIManager.CreateSacredObject(resultHalidom.id, 0, AddHalidomToHalidomManager, resultHalidom);
         }
         UIManager.Instance.rewardUIManager.DisableAllSacredObject();
         RefreshIfHalodomCanChoose();
     }
-    
+
     /// <summary>
     /// 刷新是否可以选择圣物，进入奖励界面时调用，售卖圣物时也要调用
     /// </summary>
@@ -412,7 +477,7 @@ public class BattleManager : MonoBehaviour
     /// <param name="index"></param>
     public void AddHalidomToHalidomManager(HalidomObject halidomObject)
     {
-        if(HalidomManager.Instance.IsFull())
+        if (HalidomManager.Instance.IsFull())
         {
             return;
         }

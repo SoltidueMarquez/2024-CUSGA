@@ -6,4 +6,6 @@ public class EnemyDataSO : ScriptableObject
 {
     [Header("敌人初始时候身上的骰子列表")]
     public List<DiceSOItem> EnemyBattleDiceList;
+    [Header("敌人初始的数值")]
+    public ChaProperty baseProp;
 }

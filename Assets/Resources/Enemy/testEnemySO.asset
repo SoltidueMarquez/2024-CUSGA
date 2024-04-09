@@ -21,3 +21,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 32ae396366f228041a5c90c716f097d1, type: 2}
     - {fileID: 11400000, guid: 32ae396366f228041a5c90c716f097d1, type: 2}
     - {fileID: 11400000, guid: 32ae396366f228041a5c90c716f097d1, type: 2}
+  baseProp:
+    health: 100
+    money: 0
+    maxRollTimes: 0
+    shield: 0
