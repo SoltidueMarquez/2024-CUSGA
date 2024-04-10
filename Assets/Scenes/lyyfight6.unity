@@ -1193,7 +1193,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 228291518}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1590396380}
+        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
+        m_MethodName: EndBattle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &228291518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1725,7 +1737,7 @@ MonoBehaviour:
   buffHandler: {fileID: 0}
   battleDiceHandler: {fileID: 0}
   baseProp:
-    health: 5
+    health: 50
     money: 400
     maxRollTimes: 100
     shield: 0
@@ -1774,6 +1786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676dab65478c37e46a3f941aac266ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffList: []
 --- !u!4 &341200666
 Transform:
   m_ObjectHideFlags: 0
@@ -2804,7 +2817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6622fbbeaf715744fa0067d94cb0f8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battleDiceCount: 3
+  battleDiceCount: 1
   maxDiceInBag: 1
 --- !u!114 &589276658
 MonoBehaviour:
@@ -2818,6 +2831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676dab65478c37e46a3f941aac266ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffList: []
 --- !u!4 &589276659
 Transform:
   m_ObjectHideFlags: 0
@@ -6108,6 +6122,8 @@ MonoBehaviour:
     playerChaState: {fileID: 589276656}
     enemyChaStates:
     - {fileID: 341200663}
+    playerDataSO: {fileID: 11400000, guid: a898c0c094df00e458aed14b23a1788c, type: 2}
+    enemyDataSO: {fileID: 11400000, guid: ca768467329733c49a3099706f2c2e47, type: 2}
   currentSelectEnemy: {fileID: 341200662}
 --- !u!4 &1590396381
 Transform:
@@ -7271,7 +7287,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uFFE510000.00"
+  m_Text: "\uFFE500000"
 --- !u!222 &1829682578
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8017,8 +8033,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   halidomSOData:
-  - {fileID: 11400000, guid: cf4cbd3bf2b73c24b948fb4575581ea4, type: 2}
-  - {fileID: 11400000, guid: 428ff086c36c783419c61d9cb3c8d9fa, type: 2}
+  - {fileID: 11400000, guid: e42381ce6b4c9114ea6664c1ab2fd389, type: 2}
 --- !u!1 &2054669038
 GameObject:
   m_ObjectHideFlags: 0

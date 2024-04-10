@@ -59,13 +59,13 @@ public class HalidomManager : MonoBehaviour
         halidomList = new HalidomObject[halidomMaxCount];
         //设置移除圣物的函数
     }
-   
+
     //配置圣物是不配圣物在格子里的顺序的，加进去的时候才获得序号
 
     public void AddHalidom(HalidomObject halidom)
     {
         //这边先复制一份
-        HalidomObject halidomObject = new HalidomObject(halidom.rareType,halidom.id,halidom.halidomName,halidom.description,halidom.value,halidom.buffInfos);
+        HalidomObject halidomObject = new HalidomObject(halidom.rareType, halidom.id, halidom.halidomName, halidom.description, halidom.value, halidom.buffInfos);
         for (int i = 0; i < halidomList.Length; i++)
         {
             //找到第一个空的格子
@@ -74,20 +74,27 @@ public class HalidomManager : MonoBehaviour
                 //将圣物加入圣物列表
                 halidomList[i] = halidomObject;
                 //获得圣物在格子中的序号
-                halidomObject.halidomIndex = i ;
+                halidomObject.halidomIndex = i;
                 //触发圣物OnCreate回调点
                 foreach (var buffInfo in halidomObject.buffInfos)
                 {
                     //获取圣物的创建者 给予buffinfo
                     buffInfo.creator = BattleManager.Instance.parameter.playerChaState.gameObject;
                     //获取圣物buff的对象（暂定 没有给敌人上buff）
-                    buffInfo.target=BattleManager.Instance.parameter.enemyChaStates[0].gameObject;
-                    //触发圣物的OnCreate回调点
-                    buffInfo.buffData.onCreate?.Invoke(buffInfo);
+                    buffInfo.target = BattleManager.Instance.parameter.enemyChaStates[0].gameObject;
+                    //需要整体判断这个委托是否为空
+                    if (buffInfo.buffData.onCreate!= null)
+                    {
+                        //触发圣物的OnCreate回调点
+                        buffInfo.buffData.onCreate?.Invoke(buffInfo);
+                        //触发圣物闪烁
+                        SacredObjectUIManager.Instance.DoFlick(halidom.id);
+                    }
+                    
                 }
                 RefreshAllHalidoms();
                 BattleManager.Instance.parameter.playerChaState.AttrAndResourceRecheck();
-                SacredObjectUIManager.Instance.CreateSacredUIObject(i, halidomObject.id,SellHalidom,halidomObject);
+                SacredObjectUIManager.Instance.CreateSacredUIObject(i, halidomObject.id, SellHalidom, halidomObject);
                 Debug.Log("<color=#3399FF>HalidomManager-添加圣物:</color>" + halidomObject.halidomName + "成功");
                 //找到空的格子后就跳出循环
                 break;
@@ -104,12 +111,13 @@ public class HalidomManager : MonoBehaviour
         for (int i = 0; i < halidomList.Length; i++)
         {
             //index为实际数组下标
-            if (i == index )
+            if (i == index)
             {
                 //触发圣物OnRemove回调点
                 foreach (var buffInfo in halidomList[i].buffInfos)
                 {
                     buffInfo.buffData.onRemove?.Invoke(buffInfo);
+
                 }
                 //将圣物在格子中的序号置为0
                 Debug.Log("移除圣物" + halidomList[i].halidomName + "成功");
@@ -163,13 +171,13 @@ public class HalidomManager : MonoBehaviour
         //获取圣物的售价
         int price = halidomList[index].value;
         //将圣物的售价加到玩家的金币上
-        ChaState tempChaState =BattleManager.Instance.parameter.playerChaState;
-        
+        ChaState tempChaState = BattleManager.Instance.parameter.playerChaState;
+
         tempChaState.ModResources(new ChaResource(0, price, 0, 0));
         Debug.Log("售卖圣物成功，获得金币" + price + "个");
         //将圣物移除
         RemoveHalidom(index);
-        if (BattleManager.Instance !=  null)
+        if (BattleManager.Instance != null)
         {
             BattleManager.Instance.RefreshIfHalodomCanChoose();
         }
@@ -181,7 +189,7 @@ public class HalidomManager : MonoBehaviour
     /// </summary>
     public void ResetHalidomList()
     {
-        List<string> ids=SacredObjectUIManager.Instance.GetScaredObjectIDList();
+        List<string> ids = SacredObjectUIManager.Instance.GetScaredObjectIDList();
         var halidomDic = this.GetCurrentHalidomIdListDic();
         this.ClearHalidomList();
         for (int i = 0; i < ids.Count; i++)
@@ -197,7 +205,7 @@ public class HalidomManager : MonoBehaviour
     public List<HalidomDataForSave> GetHalidomDataForSaves()
     {
         var halidomDataForSaveList = new List<HalidomDataForSave>();
-        for(int i = 0;i < this.halidomList.Length; i++)
+        for (int i = 0; i < this.halidomList.Length; i++)
         {
             if (halidomList[i] != null)
             {
@@ -221,7 +229,14 @@ public class HalidomManager : MonoBehaviour
             {
                 foreach (var buffInfo in halidomList[i].buffInfos)
                 {
-                    buffInfo.buffData.onRoundStart?.Invoke(buffInfo);
+                    //需要整体判断这个委托是否为空
+                    if (buffInfo.buffData.onRoundStart != null)
+                    {
+                        buffInfo.buffData.onRoundStart?.Invoke(buffInfo);
+                        //触发圣物闪烁
+                        SacredObjectUIManager.Instance.DoFlick(halidomList[i].id);
+                    }
+                    
                     if (buffInfo.isPermanent == false)//非永久buff
                     {
                         buffInfo.roundCount--;
@@ -233,7 +248,7 @@ public class HalidomManager : MonoBehaviour
                         }
                     }
                 }
-                foreach(var removeBuff in removeList)
+                foreach (var removeBuff in removeList)
                 {
                     switch (removeBuff.buffData.removeStackUpdateEnum)
                     {
@@ -266,7 +281,14 @@ public class HalidomManager : MonoBehaviour
             {
                 foreach (var buffInfo in halidomList[i].buffInfos)
                 {
-                    buffInfo.buffData.onRoundEnd?.Invoke(buffInfo);
+                    //需要整体判断这个委托是否为空
+                    if (buffInfo.buffData.onRoundEnd != null)
+                    {
+                        buffInfo.buffData.onRoundEnd?.Invoke(buffInfo);
+                        //触发圣物闪烁
+                        SacredObjectUIManager.Instance.DoFlick(halidomList[i].id);
+                    }
+                   
                 }
             }
         }
@@ -279,7 +301,14 @@ public class HalidomManager : MonoBehaviour
             {
                 foreach (var buffInfo in halidomList[i].buffInfos)
                 {
-                    buffInfo.buffData.onHit?.Invoke(buffInfo, damageInfo, damageInfo.defender);
+                    //需要整体判断这个委托是否为空
+                    if (buffInfo.buffData.onHit != null)
+                    {
+                        buffInfo.buffData.onHit?.Invoke(buffInfo, damageInfo, damageInfo.defender);
+                        //触发圣物闪烁
+                        SacredObjectUIManager.Instance.DoFlick(halidomList[i].id);
+                    }
+                   
                 }
             }
         }
@@ -292,7 +321,14 @@ public class HalidomManager : MonoBehaviour
             {
                 foreach (var buffInfo in halidomList[i].buffInfos)
                 {
-                    buffInfo.buffData.onBeHurt?.Invoke(buffInfo, damageInfo, damageInfo.attacker);
+                    //需要整体判断这个委托是否为空
+                    if (buffInfo.buffData.onBeHurt != null)
+                    {
+                        buffInfo.buffData.onBeHurt?.Invoke(buffInfo, damageInfo, damageInfo.attacker);
+                        //触发圣物闪烁
+                        SacredObjectUIManager.Instance.DoFlick(halidomList[i].id);
+                    }
+
                 }
             }
         }
@@ -305,7 +341,14 @@ public class HalidomManager : MonoBehaviour
             {
                 foreach (var buffInfo in halidomList[i].buffInfos)
                 {
-                    buffInfo.buffData.onKill?.Invoke(buffInfo, damageInfo, damageInfo.defender);
+                    //需要整体判断这个委托是否为空
+                    if (buffInfo.buffData.onKill != null)
+                    {
+                        buffInfo.buffData.onKill?.Invoke(buffInfo, damageInfo, damageInfo.defender);
+                        //触发圣物闪烁
+                        SacredObjectUIManager.Instance.DoFlick(halidomList[i].id);
+                    }
+
                 }
             }
         }
@@ -318,7 +361,14 @@ public class HalidomManager : MonoBehaviour
             {
                 foreach (var buffInfo in halidomList[i].buffInfos)
                 {
-                    buffInfo.buffData.onBeKilled?.Invoke(buffInfo, damageInfo, damageInfo.attacker);
+                    //需要整体判断这个委托是否为空
+                    if (buffInfo.buffData.onBeKilled != null)
+                    {
+                        buffInfo.buffData.onBeKilled?.Invoke(buffInfo, damageInfo, damageInfo.attacker);
+                        //触发圣物闪烁
+                        SacredObjectUIManager.Instance.DoFlick(halidomList[i].id);
+                    }
+
                 }
             }
         }
@@ -331,8 +381,15 @@ public class HalidomManager : MonoBehaviour
             {
                 foreach (var buffInfo in halidomList[i].buffInfos)
                 {
-                    buffInfo.buffData.onRoll?.Invoke(buffInfo);
+                    //需要整体判断这个委托是否为空
+                    if (buffInfo.buffData.onRoll != null)
+                    {
+                        buffInfo.buffData.onRoll?.Invoke(buffInfo);
+                        //触发圣物闪烁
+                        SacredObjectUIManager.Instance.DoFlick(halidomList[i].id);
+                    }
                 }
+
             }
         }
     }
@@ -364,7 +421,7 @@ public class HalidomManager : MonoBehaviour
     /// 获取当前圣物列表
     /// </summary>
     /// <returns></returns>
-    public Dictionary<String,HalidomObject> GetCurrentHalidomIdListDic()
+    public Dictionary<String, HalidomObject> GetCurrentHalidomIdListDic()
     {
         var halidomDictionary = new Dictionary<string, HalidomObject>();
         for (int i = 0; i < halidomList.Length; i++)
