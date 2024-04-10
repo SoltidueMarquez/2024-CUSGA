@@ -31,9 +31,7 @@ namespace UI.Store
                     StoreManager.Instance.m_Debug($"错误,超出骰面页{nameof(gameObject)}位数限制");
                     break;
                 }
-
-                //TODO:
-                //CreateDiceUI(i, diceList[i], onChooseList[i]);
+                CreateDiceUI(i, diceList[i], onChooseList[i]);
             }
         }
 

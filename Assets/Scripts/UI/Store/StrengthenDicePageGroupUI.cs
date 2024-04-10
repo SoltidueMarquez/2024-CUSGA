@@ -42,10 +42,7 @@ namespace UI.Store
                     StoreManager.Instance.m_Debug($"错误,超出骰面页组合{nameof(gameObject)}5个限制");
                     break;
                 }
-
-                //TODO:
-                //CreateFightDicePageColumns(i + index * 5, this.transform, dicePageList[i], onChooseGroupList[i]);
-                CreateFightDicePageColumns(i + index * 5, this.transform, dicePageList[i], null);
+                CreateFightDicePageColumns(i + index * 5, this.transform, dicePageList[i], onChooseGroupList[i]);
             }
         }
 

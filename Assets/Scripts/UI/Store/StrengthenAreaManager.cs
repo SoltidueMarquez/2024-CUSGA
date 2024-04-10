@@ -99,7 +99,7 @@ namespace UI.Store
         }
         
         /// <summary>
-        /// 创建骰面函数
+        /// 创建背包骰面函数
         /// </summary>
         /// <param name="index">栏位索引</param>
         /// <param name="onChoose">选择事件</param>
