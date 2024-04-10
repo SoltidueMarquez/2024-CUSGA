@@ -188,6 +188,7 @@ public class BattleManager : MonoBehaviour
             //设置玩家骰子的数量
             int battleDiceCount = playerDiceSOItems.Count;
             this.parameter.playerChaState.GetBattleDiceHandler().battleDiceCount = battleDiceCount;
+            this.parameter.playerChaState.GetBattleDiceHandler().maxDiceInBag = playerDataSO.maxBagDiceCount;
             this.parameter.playerChaState.GetBattleDiceHandler().InitDice(playerDiceSOItems);
         }
         else

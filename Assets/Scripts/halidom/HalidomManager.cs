@@ -193,6 +193,23 @@ public class HalidomManager : MonoBehaviour
         }
     }
     //所有回调点触发Invoke
+    #region 存档相关
+    public List<HalidomDataForSave> GetHalidomDataForSaves()
+    {
+        var halidomDataForSaveList = new List<HalidomDataForSave>();
+        for(int i = 0;i < this.halidomList.Length; i++)
+        {
+            if (halidomList[i] != null)
+            {
+                HalidomDataForSave halidomDataForSave = new HalidomDataForSave();
+                halidomDataForSave.halidomName = halidomList[i].halidomName;
+                halidomDataForSave.halidomIndex = i;
+                halidomDataForSaveList.Add(halidomDataForSave);
+            }
+        }
+        return halidomDataForSaveList;
+    }
+    #endregion
     #region 圣物回调点
     public void OnRoundStart()
     {

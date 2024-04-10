@@ -130,7 +130,7 @@ public class PlayerActionState : IState
     {
         Debug.Log("Enter PlayerActionState");
         //TODO:UI动画
-
+        this.manager.parameter.playerDataSO.SaveData();
 
     }
 

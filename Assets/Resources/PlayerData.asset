@@ -55,7 +55,7 @@ MonoBehaviour:
       level: 1
       value: 6
   chaResource:
-    currentHp: 0
+    currentHp: 50
     currentMoney: 0
-    currentRollTimes: 0
+    currentRollTimes: 4
     currentShield: 0

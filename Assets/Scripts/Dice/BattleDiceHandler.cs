@@ -99,14 +99,7 @@ public class BattleDiceHandler : MonoBehaviour
             CastSingleDice(i, chaState, target);
         }
     }
-    //将战斗骰子每一个设置为空
-    public void ClearBattleSingleDices()
-    {
-        for (int i = 0; i < diceCardsInUse.Length; i++)
-        {
-            diceCardsInUse[i] = null;
-        }
-    }
+   
 
     #region 初始化战斗骰子，有数据的情况下和测试的情况下
     /// <summary>
@@ -145,7 +138,7 @@ public class BattleDiceHandler : MonoBehaviour
             battleDices.Add(battleDice);
             for (int j = 0; j < 6; j++)
             {
-                var singleDiceObjSOData = battleDiceSOData.singleDiceObjSOData[j];
+                var singleDiceObjSOData = battleDiceSOData.singleDiceObjSODatas[j];
                 string singleDiceid = singleDiceObjSOData.id;
                 var singleDiceModel = ResourcesManager.GetSingleDiceModelViaid(singleDiceid);
                 battleDice.AddDice(singleDiceModel, singleDiceObjSOData.idInDice, i, j);
@@ -177,6 +170,14 @@ public class BattleDiceHandler : MonoBehaviour
     public void RemoveSingleBattleDiceFromBag(SingleDiceObj singleDiceObj)
     {
         this.bagDiceCards.Remove(singleDiceObj);
+    }
+    //将战斗骰子每一个设置为空
+    public void ClearBattleSingleDices()
+    {
+        for (int i = 0; i < diceCardsInUse.Length; i++)
+        {
+            diceCardsInUse[i] = null;
+        }
     }
     #endregion
     #region 随机数相关
@@ -256,6 +257,54 @@ public class BattleDiceHandler : MonoBehaviour
             result.Add(a);
         }
         return result;
+    }
+    #endregion
+    #region 存档相关
+    /// <summary>
+    /// 从runtimeData中获取战斗骰子的数据
+    /// </summary>
+    /// <returns></returns>
+    public List<BattleDiceSOData> GetBattleDiceSOData()
+    {
+        //创建一个骰子的数据列表
+        var battleDiceSODatas = new List<BattleDiceSOData>();
+        for (int i = 0; i < battleDices.Count; i++)
+        {
+            BattleDice battleDice = battleDices[i];
+            BattleDiceSOData battleDiceSOData = new BattleDiceSOData();
+            battleDiceSOData.diceType = battleDice.diceType;
+            List<SingleDiceObjSOData> singleDiceObjSODatas = new List<SingleDiceObjSOData>();
+            //获取每一个骰子的骰面数据
+            var singleDiceObjs = battleDice.GetBattleDiceSingleDices();
+            for (int j = 0; j < 6; j++)
+            {
+                SingleDiceObj singleDiceObj = singleDiceObjs[i];
+                var singleDiceObjSOData = new SingleDiceObjSOData();
+                singleDiceObjSOData.id = singleDiceObj.model.id;
+                singleDiceObjSOData.idInDice = singleDiceObj.idInDice;
+                singleDiceObjSOData.level = singleDiceObj.level;
+                singleDiceObjSOData.value = singleDiceObj.model.value;
+                singleDiceObjSODatas.Add(singleDiceObjSOData);
+            }
+            battleDiceSOData.singleDiceObjSODatas = singleDiceObjSODatas;
+        }
+        return battleDiceSODatas;
+    }
+    public List<SingleDiceObjSOData> GetSingleDiceObjSODatas()
+    {
+        var singleDiceObjSODatas = new List<SingleDiceObjSOData>();
+        //遍历背包中的骰面
+        for (int i = 0; i < bagDiceCards.Count; i++)
+        {
+            SingleDiceObj singleDiceObj = bagDiceCards[i];
+            var singleDiceObjSOData = new SingleDiceObjSOData();
+            singleDiceObjSOData.id = singleDiceObj.model.id;
+            singleDiceObjSOData.idInDice = singleDiceObj.idInDice;
+            singleDiceObjSOData.level = singleDiceObj.level;
+            singleDiceObjSOData.value = singleDiceObj.model.value;
+            singleDiceObjSODatas.Add(singleDiceObjSOData);
+        }
+        return singleDiceObjSODatas;
     }
     #endregion
 }
