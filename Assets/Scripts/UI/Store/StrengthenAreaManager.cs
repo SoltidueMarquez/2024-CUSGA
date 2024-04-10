@@ -30,12 +30,53 @@ namespace UI.Store
         }
 
         /// <summary>
+        /// 划分函数
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public static List<List<T>> DivideList<T>(List<T> list)
+        {
+            List<List<T>> ansList = new List<List<T>>();
+
+            int startIndex = 0;
+            while (startIndex < list.Count)
+            {
+                List<T> sublist = new List<T>();
+                int endIndex = Mathf.Min(startIndex + 5, list.Count);
+                for (int i = startIndex; i < endIndex; i++)
+                {
+                    sublist.Add(list[i]);
+                }
+                ansList.Add(sublist);
+                startIndex = endIndex;
+            }
+
+            return ansList;
+        }
+        
+        /// <summary>
+        /// 创建升级的所有战斗骰面UI函数
+        /// </summary>
+        /// <param name="dicePageList"></param>
+        /// <param name="onChooseGroupList"></param>
+        public void CreateFightDicePage(List<List<SingleDiceObj>> dicePageList, List<List<Action<SingleDiceObj>>> onChooseGroupList)
+        {
+            var tmpDiceList = DivideList(dicePageList);
+            var tmpActionList = DivideList(onChooseGroupList);
+
+            for (int i = 0; i < tmpDiceList.Count; i++)
+            {
+                CreateFightDicePage(i, tmpDiceList[i], tmpActionList[i]);
+            }
+        }
+
+        /// <summary>
         /// 创建升级的所有战斗骰面UI函数，必须在全部创建完成后再对升级页面进行初始化(调用StoreUIManager.Instance.RefreshUpgradeUI()方法)
         /// </summary>
         /// <param name="index">序号索引</param>
         /// <param name="dicePageList">骰面列表的列表，传入时请保证其包含的骰面列表的个数不超过5，如果超过请切分一下再调用</param>
         /// <param name="onChooseGroupList">骰面升级函数列表的列表</param>
-        public void CreateFightDicePage(int index, List<List<SingleDiceObj>> dicePageList, List<List<Action<SingleDiceObj>>> onChooseGroupList)
+        private void CreateFightDicePage(int index, List<List<SingleDiceObj>> dicePageList, List<List<Action<SingleDiceObj>>> onChooseGroupList)
         {
             var tmp = Instantiate(dicePageTemplate, strengthenContent, true);
             var tmpGroup = tmp.GetComponent<StrengthenDicePageGroupUI>();
@@ -86,7 +127,7 @@ namespace UI.Store
 
 
         #region 测试
-        private void Test()
+        /*private void Test()
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
@@ -97,10 +138,14 @@ namespace UI.Store
                     _testDicePageList.Add(testObj);
                     _testDicePageList.Add(testObj);
                     _testDicePageList.Add(testObj);
+                    _testDicePageList.Add(testObj);
+                    _testDicePageList.Add(testObj);
+                    _testDicePageList.Add(testObj);
+                    _testDicePageList.Add(testObj);
                     
                 }
                 Debug.Log(_testDicePageList);
-                CreateFightDicePage(1, _testDicePageList, null);
+                CreateFightDicePage( _testDicePageList, null);
             }
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -112,7 +157,7 @@ namespace UI.Store
         private void Update()
         {
             Test();
-        }
+        }*/
         #endregion
     }
 }
