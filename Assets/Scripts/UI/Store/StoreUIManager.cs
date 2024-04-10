@@ -27,8 +27,8 @@ namespace UI.Store
 
         public void EnterUpgradeUI()
         {
-            strengthenCanvas.SetActive(true);
             strengthenPage.Init(strengthenBg);
+            strengthenCanvas.SetActive(true);
         }
 
         public void RefreshUpgradeUI()
@@ -43,24 +43,9 @@ namespace UI.Store
         
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 StoreManager.Instance.OnEnterStore.Invoke();
-            }
-
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                StoreManager.Instance.OnExitStore.Invoke();
-            }
-            
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                EnterUpgradeUI();
-            }
-            
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                ExitUpgradeUI();
             }
         }
     }

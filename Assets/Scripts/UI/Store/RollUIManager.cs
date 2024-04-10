@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace UI.Store
 {
-    public class RollUIManager : MonoBehaviour
+    public class RollUIManager : MonoSingleton<RollUIManager>
     {
         [SerializeField, Tooltip("旋转物体列表")] private List<RotateObject> rotateObjects;
         [SerializeField, Tooltip("出现结果列表")] private List<Transform> results;

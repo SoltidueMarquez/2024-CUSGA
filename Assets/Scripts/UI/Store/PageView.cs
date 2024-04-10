@@ -19,6 +19,7 @@ namespace UI.Store
         private bool _isDrag = true; //是否拖动
         private float _startTime;
         private int _curIndex;
+        private int _childCount;
 
         private static void OnUpdateAnimation(int index, int lastIndex) //拖动结束时的切换事件
         {
@@ -34,15 +35,16 @@ namespace UI.Store
 
         public void Init(RectTransform canvas)
         {
+            _posList.Clear();
             _rect = this.GetComponent<ScrollRect>();
-            var childCount = _rect.content.transform.childCount;
-            if (childCount == 0) { return;}
+            _childCount = _rect.content.transform.childCount;
+            if (_childCount == 0) { return;}
             //根据子物体数动态设置内容页长度
             float width = canvas.rect.width;
             float height = content.rect.height;
-            content.sizeDelta = new Vector2(width * (childCount-1), height);
+            content.sizeDelta = new Vector2(width * (_childCount-1), height);
             //添加content下的物体的位置信息到posList里去
-            for (var i = 0; i < childCount; i++)
+            for (var i = 0; i < _childCount; i++)
             {
                 _posList.Add((i)*(1f/(_rect.content.transform.childCount-1)));//存图片位置
             }
@@ -69,12 +71,15 @@ namespace UI.Store
         public void OnBeginDrag(PointerEventData eventData)//开始拖动
         {
             _isDrag = true;
+            if (_childCount == 0) { return;}
             //根据UI切换控制动画变换事件函数
             EndUpdateAnimation(_curIndex);
         }
 
         public void OnEndDrag(PointerEventData eventData)//结束拖动
         {
+            if (_childCount == 0) { return;}
+            
             var posX = _rect.horizontalNormalizedPosition;
             
             //计算_curIndex应该改变到哪一个页面的index

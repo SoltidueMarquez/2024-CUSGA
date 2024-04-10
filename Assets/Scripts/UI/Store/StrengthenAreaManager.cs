@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.Store
 {
@@ -17,8 +18,17 @@ namespace UI.Store
         
         [SerializeField, Tooltip("背包栏位列表")] private List<Column> bagColumnList;
         
+        [SerializeField, Tooltip("离开按钮")] private Button exitButton;
         public float animTime;
-        
+
+        private void Start()
+        {
+            exitButton.onClick.AddListener(() =>
+            {
+                StoreUIManager.Instance.ExitUpgradeUI();
+            });
+        }
+
         /// <summary>
         /// 创建升级的所有战斗骰面UI函数，必须在全部创建完成后再对升级页面进行初始化(调用StoreUIManager.Instance.RefreshUpgradeUI()方法)
         /// </summary>
