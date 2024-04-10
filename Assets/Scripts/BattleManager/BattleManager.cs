@@ -321,7 +321,7 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void AddMoneyWhenEnterRewardState(List<SingleDiceObj> singleDiceObjs)
     {
-        int money = RandomManager.Instance.GetMoneyViaRollResult(singleDiceObjs);
+        int money = RandomManager.GetMoneyViaRollResult(singleDiceObjs);
         Debug.Log("BattleManager:当前玩家改变金钱" + money);
         //先扣除之前roll出的钱
         var lastResource = new ChaResource(0, -this.parameter.currentRollMoney, 0, 0);
@@ -422,7 +422,7 @@ public class BattleManager : MonoBehaviour
     /// <param name="singleDiceObjs">进入奖励界面时roll出的骰面</param>
     public void CreateRewardDices(List<SingleDiceObj> singleDiceObjs, int count)
     {
-        var resultDiceObjs = RandomManager.Instance.GetRewardSingleDiceObjsViaPlayerData(singleDiceObjs, count);
+        var resultDiceObjs = RandomManager.GetRewardSingleDiceObjsViaPlayerData(singleDiceObjs, count);
         for (int i = 0; i < resultDiceObjs.Count; i++)
         {
             var singleDiceUIData = ResourcesManager.GetSingleDiceUIData(resultDiceObjs[i]);
@@ -448,7 +448,7 @@ public class BattleManager : MonoBehaviour
     /// <param name="singleDiceObjs"></param>
     public void CreateRewardHalidom(List<SingleDiceObj> singleDiceObjs)
     {
-        var resultHalidom = RandomManager.Instance.GetRewardHalidomViaPlayerData(singleDiceObjs);
+        var resultHalidom = RandomManager.GetRewardHalidomViaPlayerData(singleDiceObjs);
         if (resultHalidom != null)
         {
             UIManager.Instance.rewardUIManager.CreateSacredObject(resultHalidom.id, 0, AddHalidomToHalidomManager, resultHalidom);

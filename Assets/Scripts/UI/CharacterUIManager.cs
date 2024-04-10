@@ -16,8 +16,14 @@ namespace UI
     /// <summary>
     /// TODO:动画的顺序播放队列需要实现，因为之后的动画可能会打断之前的动画，但是要求是即选即用，感觉不能用队列，暂时先这样吧
     /// </summary>
-    public class CharacterUIManager : MonoSingleton<CharacterUIManager>
+    public class CharacterUIManager : MonoBehaviour
     {
+        public static CharacterUIManager Instance;
+        public void Awake()
+        {
+            Instance = this;
+        }
+
         [Header("受击")]
         [SerializeField, Tooltip("晃动幅度")] private Vector3 punchAmplitude;
         [SerializeField, Tooltip("晃动时间")] private float durationTime;
