@@ -43,9 +43,18 @@ namespace UI.Store
                     break;
                 }
 
+                //TODO:
                 //CreateFightDicePageColumns(i + index * 5, this.transform, dicePageList[i], onChooseGroupList[i]);
                 CreateFightDicePageColumns(i + index * 5, this.transform, dicePageList[i], null);
             }
+        }
+
+        /// <summary>
+        /// 移除函数
+        /// </summary>
+        public void Remove()
+        {
+            Destroy(gameObject);
         }
     }
 }

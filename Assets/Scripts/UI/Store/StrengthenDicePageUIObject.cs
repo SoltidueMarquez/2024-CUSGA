@@ -32,6 +32,7 @@ namespace UI.Store
                     break;
                 }
 
+                //TODO:
                 //CreateDiceUI(i, diceList[i], onChooseList[i]);
             }
         }
