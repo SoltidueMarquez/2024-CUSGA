@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c3de7d951814604594071121c0d0bf5, type: 3}
-  m_Name: PlayerData
+  m_Name: PlayerDataSO
   m_EditorClassIdentifier: 
   ifUseSaveData: 0
   baseProp:
     health: 50
-    money: 400
+    money: 300
     maxRollTimes: 4
     shield: 0
+  halidomSOData: []
   playerDiceSOItems:
   - diceType: 0
     singleDiceModelSOs:
@@ -27,35 +28,76 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
     - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
     - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
-  BattleDiceList:
+  - diceType: 1
+    singleDiceModelSOs:
+    - {fileID: 11400000, guid: ffd7ffe63ae49f94cbd420e2d3ba88fe, type: 2}
+    - {fileID: 11400000, guid: ffd7ffe63ae49f94cbd420e2d3ba88fe, type: 2}
+    - {fileID: 11400000, guid: ffd7ffe63ae49f94cbd420e2d3ba88fe, type: 2}
+    - {fileID: 11400000, guid: ffd7ffe63ae49f94cbd420e2d3ba88fe, type: 2}
+    - {fileID: 11400000, guid: ffd7ffe63ae49f94cbd420e2d3ba88fe, type: 2}
+    - {fileID: 11400000, guid: ffd7ffe63ae49f94cbd420e2d3ba88fe, type: 2}
+  maxBagDiceCount: 6
+  halidomDataForSaves: []
+  battleDiceList:
   - diceType: 0
-    singleDiceObjSOData:
+    singleDiceObjSODatas:
     - id: 1_01
-      idInDice: 8
+      idInDice: 1
       level: 1
       value: 6
     - id: 1_01
-      idInDice: 8
+      idInDice: 1
       level: 1
       value: 6
     - id: 1_01
-      idInDice: 8
+      idInDice: 1
       level: 1
       value: 6
     - id: 1_01
-      idInDice: 8
+      idInDice: 1
       level: 1
       value: 6
     - id: 1_01
-      idInDice: 8
+      idInDice: 1
       level: 1
       value: 6
     - id: 1_01
-      idInDice: 8
+      idInDice: 1
       level: 1
       value: 6
+  - diceType: 1
+    singleDiceObjSODatas:
+    - id: 2_03
+      idInDice: 2
+      level: 2
+      value: 7
+    - id: 2_03
+      idInDice: 2
+      level: 2
+      value: 7
+    - id: 2_03
+      idInDice: 2
+      level: 2
+      value: 7
+    - id: 2_03
+      idInDice: 2
+      level: 2
+      value: 7
+    - id: 2_03
+      idInDice: 2
+      level: 2
+      value: 7
+    - id: 2_03
+      idInDice: 2
+      level: 2
+      value: 7
+  bagDiceList:
+  - id: 2_01
+    idInDice: 3
+    level: 1
+    value: 7
   chaResource:
     currentHp: 50
-    currentMoney: 0
+    currentMoney: 311
     currentRollTimes: 4
     currentShield: 0

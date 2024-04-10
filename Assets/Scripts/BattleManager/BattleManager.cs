@@ -178,9 +178,11 @@ public class BattleManager : MonoBehaviour
         this.parameter.playerChaState.SetBaseprop(playerDataSO.baseProp);
         //对圣物设置玩家的基础数值
         HalidomManager.Instance.baseProp = playerDataSO.baseProp;
+        //初始化圣物给的数值
         HalidomManager.Instance.RefreshAllHalidoms();
         this.parameter.playerChaState.Initialize();
 
+        //初始化玩家的骰面
         if (!playerDataSO.ifUseSaveData)
         {
             //初始化玩家的骰子
@@ -194,10 +196,11 @@ public class BattleManager : MonoBehaviour
         else
         {
             //获取玩家存档信息中所有的保存的信息
-            var battleDiceSODatas = playerDataSO.BattleDiceList;
+            var battleDiceSODatas = playerDataSO.battleDiceList;
             //设置玩家骰子的数量
             int battleDiceCount = battleDiceSODatas.Count;
             this.parameter.playerChaState.GetBattleDiceHandler().battleDiceCount = battleDiceCount;
+            this.parameter.playerChaState.GetBattleDiceHandler().maxDiceInBag = playerDataSO.maxBagDiceCount;
             //根据存档进行骰子的数值初始化
             this.parameter.playerChaState.GetBattleDiceHandler().InitDiceWithData(battleDiceSODatas);
             this.parameter.playerChaState.resource = playerDataSO.chaResource;
@@ -386,7 +389,7 @@ public class BattleManager : MonoBehaviour
         {
             UIManager.Instance.rewardUIManager.RemoveDiceUI(i);
         }
-        //清空之前的圣物 
+        //清空之前的圣物UI
         UIManager.Instance.rewardUIManager.RemoveSacredObject(0);
         //清空之前的roll出的骰面
         RollingResultUIManager.Instance.RemoveAllResultUI(Strategy.ReRoll);
@@ -401,7 +404,7 @@ public class BattleManager : MonoBehaviour
             RollingResultUIManager.Instance.CreateResult(i, singleDiceUIData, pos, true);
         }
 
-        //获得根据roll出骰面的结果，获取奖励的骰面
+        //获得根据roll出骰面的结果，获取奖励的骰面,如果之前已经选择过了相应的骰面或者圣物，就不再创建
         if (this.parameter.ifSelectedDice == false)
         {
             CreateRewardDices(singleDiceObjs, count);
@@ -416,7 +419,7 @@ public class BattleManager : MonoBehaviour
     /// <summary>
     /// 根据玩家的骰面，创建奖励界面的骰面
     /// </summary>
-    /// <param name="singleDiceObjs"></param>
+    /// <param name="singleDiceObjs">进入奖励界面时roll出的骰面</param>
     public void CreateRewardDices(List<SingleDiceObj> singleDiceObjs, int count)
     {
         var resultDiceObjs = RandomManager.Instance.GetRewardSingleDiceObjsViaPlayerData(singleDiceObjs, count);
@@ -486,8 +489,15 @@ public class BattleManager : MonoBehaviour
         this.parameter.ifSelectedHalidom = true;
     }
     #endregion
-
-
+    #region 跳转结束战斗相关函数
+    /// <summary>
+    /// 结束战斗，更新玩家数据
+    /// </summary>
+    public void EndBattle()
+    {
+        this.parameter.playerDataSO.UpdatePlayerDataSO(parameter.playerChaState);
+    }
+    #endregion
 
 }
 //定义了一个回调，用于在UI动画结束时调用

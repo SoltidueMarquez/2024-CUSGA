@@ -15,7 +15,7 @@ public class RandomManager : MonoSingleton<RandomManager>
     /// <param name="diceType">骰子的种类</param>
     /// <param name="level">骰子的等级</param>
     /// <param name="side">骰面属于那一类</param>
-    /// <returns></returns>
+    /// <returns>单个符合条件的骰面model</returns>
     public SingleDiceModel GetSingleDiceModel(DiceType diceType, int level, int side)
     {
         Dictionary<string, SingleDiceModel> diceDictionary = SingleDiceData.diceDictionary;
@@ -91,7 +91,7 @@ public class RandomManager : MonoSingleton<RandomManager>
     public List<SingleDiceObj> GetRewardSingleDiceObjsViaPlayerData(List<SingleDiceObj> conditionSingleDiceObj,int count)
     {
         //计算用于条件的骰子的点数总和
-        int sum = 3;
+        int sum = 0;
         foreach (var singleDiceObj in conditionSingleDiceObj)
         {
             sum += singleDiceObj.idInDice ;
@@ -129,8 +129,7 @@ public class RandomManager : MonoSingleton<RandomManager>
 
     public HalidomObject GetRewardHalidomViaPlayerData(List<SingleDiceObj> conditionSingleDiceObj)
     {
-        //计算用于条件的骰子的点数总和
-        int sum = 3;
+        int sum = 0;
         foreach (var singleDiceObj in conditionSingleDiceObj)
         {
             sum += singleDiceObj.idInDice;

@@ -287,9 +287,11 @@ public class BattleDiceHandler : MonoBehaviour
                 singleDiceObjSODatas.Add(singleDiceObjSOData);
             }
             battleDiceSOData.singleDiceObjSODatas = singleDiceObjSODatas;
+            battleDiceSODatas.Add(battleDiceSOData);
         }
         return battleDiceSODatas;
     }
+    //获取玩家身上的背包骰面数据
     public List<SingleDiceObjSOData> GetSingleDiceObjSODatas()
     {
         var singleDiceObjSODatas = new List<SingleDiceObjSOData>();

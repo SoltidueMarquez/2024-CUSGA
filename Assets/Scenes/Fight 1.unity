@@ -1193,7 +1193,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 228291518}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1590396380}
+        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
+        m_MethodName: EndBattle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &228291518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6110,7 +6122,7 @@ MonoBehaviour:
     playerChaState: {fileID: 589276656}
     enemyChaStates:
     - {fileID: 341200663}
-    playerDataSO: {fileID: 11400000, guid: d04d8e89ef3301043adb35028d889f33, type: 2}
+    playerDataSO: {fileID: 11400000, guid: a898c0c094df00e458aed14b23a1788c, type: 2}
     enemyDataSO: {fileID: 11400000, guid: ca768467329733c49a3099706f2c2e47, type: 2}
   currentSelectEnemy: {fileID: 341200662}
 --- !u!4 &1590396381

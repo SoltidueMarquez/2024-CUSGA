@@ -38,7 +38,7 @@ public class SingleDiceObjSOData
     public int value;
 }
 [Serializable]
-public class  HalidomDataForSave
+public class HalidomDataForSave
 {
     //圣物在字典中的key
     public string halidomName;
@@ -65,7 +65,7 @@ public class PlayerDataSO : ScriptableObject
     public List<HalidomDataForSave> halidomDataForSaves;
     [Header("玩家当前的骰子(保存的数据)")]
     //玩家身上的战斗骰子列表
-    public List<BattleDiceSOData> BattleDiceList;
+    public List<BattleDiceSOData> battleDiceList;
     [Header("玩家当前身上背包的骰面")]
     public List<SingleDiceObjSOData> bagDiceList;
     [Header("玩家当前的资源(保存的数据)")]
@@ -78,17 +78,25 @@ public class PlayerDataSO : ScriptableObject
         string playerDataJson = SImpleJsonUtil.ReadData("PlayerData.json");
         PlayerData playerData = JsonConvert.DeserializeObject<PlayerData>(playerDataJson);
         this.chaResource = playerData.chaResource;
-        this.BattleDiceList = playerData.BattleDiceList;
+        this.battleDiceList = playerData.battleDiceList;
         this.halidomDataForSaves = playerData.halidomDataForSaves;
     }
     public void SaveData()
     {
-        if(HalidomManager.Instance!=null)
+        if (HalidomManager.Instance != null)
         {
             halidomDataForSaves = HalidomManager.Instance.GetHalidomDataForSaves();
         }
         PlayerData playerData = new PlayerData(this);
         string playerDataJson = JsonConvert.SerializeObject(playerData);
         SImpleJsonUtil.WriteData("PlayerData.json", playerDataJson);
+    }
+
+    public void UpdatePlayerDataSO(ChaState chaState)
+    {
+        chaResource = chaState.resource;
+        this.battleDiceList = chaState.GetBattleDiceHandler().GetBattleDiceSOData();
+        this.bagDiceList = chaState.GetBattleDiceHandler().GetSingleDiceObjSODatas();
+
     }
 }
