@@ -1,41 +1,53 @@
 using DesignerScripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class ProductBase : MonoBehaviour
+/// <summary>
+/// 代表商品格子
+/// </summary>
+/// <typeparam name="T">商品类型</typeparam>
+public abstract class ProductBase<T> : MonoBehaviour where T : class
 {
     public bool isEmpty = true;
-    public object productData; 
+    public T product;
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        OnBuyProduct.AddListener(TryBuy);
+        OnBuySuccess.AddListener(ProductBrought);
     }
 
     /// <summary>
     /// 试图购买，返回是否购买成功
     /// </summary>
     /// <returns></returns>
-    public abstract bool TryBuy();
+    protected abstract void TryBuy();
 
-
-    public virtual void AddProduct<T>(T product) where T : HalidomObject
+    /// <summary>
+    /// 商品初始化
+    /// </summary>
+    /// <param name="product"></param>
+    protected virtual void InitialProduct(T _product)
     {
-
+        isEmpty = false;
+        product = _product;
     }
 
     /// <summary>
-    /// 点击商品时调用
+    /// 这个商品被买走了
     /// </summary>
-    public UnityEvent OnClickProduct;
+    protected virtual void ProductBrought()
+    {
+        isEmpty = true;
+    }
+
+    /// <summary>
+    /// 试图购买商品时调用,返回是否购买成功
+    /// </summary>
+    public UnityEvent OnBuyProduct;
     /// <summary>
     /// 购买成功时调用
     /// </summary>
@@ -45,12 +57,12 @@ public abstract class ProductBase : MonoBehaviour
     /// </summary>
     public UnityEvent<BuyFailType> OnBuyFail;
 
-    /// <summary>
-    /// 商品购买失败的类型
-    /// </summary>
-    public enum BuyFailType
-    {
-        NoMoney,
-        NoBagSpace
-    }
+}
+/// <summary>
+/// 商品购买失败的类型
+/// </summary>
+public enum BuyFailType
+{
+    NoMoney,
+    NoBagSpace
 }

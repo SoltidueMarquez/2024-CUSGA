@@ -80,4 +80,6 @@ public class StoreManager : SingletonBase<StoreManager>
         yield return new WaitForSeconds(2);
         StoreUIcanvas.SetActive(false);
     }
+
+    
 }
