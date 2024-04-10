@@ -7,7 +7,7 @@ namespace DesignerScripts
     {
         
 
-        Bleed,//流血
+        Bleed,//流血 
 
         Spirit,//精力
 

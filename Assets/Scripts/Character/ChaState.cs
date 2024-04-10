@@ -160,11 +160,18 @@ public class ChaState : MonoBehaviour
         //这边对盾条还是需要斟酌一下
         //this.resource.currentShield = Mathf.Clamp(this.resource.currentShield, 0, this.prop.shield);
         this.resource.currentHp = Mathf.Clamp(this.resource.currentHp, 0, this.prop.health);
-        CharacterUIManager.Instance.UpdateShieldUI((Character)this.side, this.resource.currentShield);
-        CharacterUIManager.Instance.ChangeHealthSlider((Character)side, this.resource.currentHp, this.prop.health);
+
+        if (CharacterUIManager.Instance != null)
+        {
+            CharacterUIManager.Instance.UpdateShieldUI((Character)this.side, this.resource.currentShield);
+            CharacterUIManager.Instance.ChangeHealthSlider((Character)side, this.resource.currentHp, this.prop.health);
+        }
         if (this.side == 0)
         {
-            DataUIManager.Instance.UpdateMoneyText(this.resource.currentMoney);
+            if (DataUIManager.Instance != null)
+            {
+                DataUIManager.Instance.UpdateMoneyText(this.resource.currentMoney);
+            }
         }
         if (this.resource.currentHp <= 0)
         {
@@ -181,7 +188,10 @@ public class ChaState : MonoBehaviour
         AttrAndResourceRecheck();
 
         //UI初始化
-        CharacterUIManager.Instance.ChangeHealthSlider((Character)side, this.resource.currentHp, this.prop.health);
+        if (CharacterUIManager.Instance != null)
+        {
+            //CharacterUIManager.Instance.ChangeHealthSlider((Character)side, this.resource.currentHp, this.prop.health);
+        }
     }
     #region 一些有用函数
     /// <summary>

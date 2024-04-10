@@ -8,9 +8,9 @@ public class debugTest : MonoBehaviour
     [SerializeField] private HalidomObject halidomObject;
     private void Start()
     {
-        //输出所有骰面model
+        //杈撳嚭鎵�鏈夐闈odel
 
-        RandomManager.Instance.GetSingleDiceModel(DiceType.Attack, 1, 1);
+        RandomManager.GetSingleDiceModel(DiceType.Attack, 1, 1);
     }
     
 }

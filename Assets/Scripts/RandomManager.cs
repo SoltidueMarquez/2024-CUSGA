@@ -7,7 +7,7 @@ using static Cinemachine.DocumentationSortingAttribute;
 /// <summary>
 /// 获取随机数的管理器，获取随机的数据
 /// </summary>
-public class RandomManager : MonoSingleton<RandomManager>
+public static class RandomManager
 {
     /// <summary>
     /// 获取随机的单个骰子
@@ -16,7 +16,7 @@ public class RandomManager : MonoSingleton<RandomManager>
     /// <param name="level">骰子的等级</param>
     /// <param name="side">骰面属于那一类</param>
     /// <returns>单个符合条件的骰面model</returns>
-    public SingleDiceModel GetSingleDiceModel(DiceType diceType, int level, int side)
+    public static SingleDiceModel GetSingleDiceModel(DiceType diceType, int level, int side)
     {
         Dictionary<string, SingleDiceModel> diceDictionary = SingleDiceData.diceDictionary;
         List<SingleDiceModel> singleDiceModels = new List<SingleDiceModel>();
@@ -32,7 +32,7 @@ public class RandomManager : MonoSingleton<RandomManager>
     /// </summary>
     /// <param name="rareType">圣物的稀有度</param>
     /// <returns></returns>
-    public HalidomObject GetRandomSingleDiceObj(RareType rareType)
+    public static HalidomObject GetRandomSingleDiceObj(RareType rareType)
     {
         Dictionary<string,HalidomObject> keyValuePairs = HalidomData.halidomDictionary;
         List<HalidomObject> halidomObjects = new List<HalidomObject>();
@@ -48,7 +48,7 @@ public class RandomManager : MonoSingleton<RandomManager>
     /// </summary>
     /// <param name="singleDiceObjs">用于计算点数的投掷结果</param>
     /// <returns></returns>
-    public int GetMoneyViaRollResult(List<SingleDiceObj> conditionSingleDiceObjs)
+    public static int GetMoneyViaRollResult(List<SingleDiceObj> conditionSingleDiceObjs)
     {
         //计算用于条件的骰子的点数总和
         int sum = 0;
@@ -76,7 +76,7 @@ public class RandomManager : MonoSingleton<RandomManager>
     /// </summary>
     /// <param name="chaState"></param>
     /// <returns></returns>
-    public int GetSalePriceViaChaState(ChaState chaState)
+    public static int GetSalePriceViaChaState(ChaState chaState)
     {
         //进入奖励界面获取的金钱
         int money = 5;
@@ -88,7 +88,7 @@ public class RandomManager : MonoSingleton<RandomManager>
     /// <param name="playerState"></param>
     ///<param name="count">获取的骰子数量</param>
     /// <returns></returns>
-    public List<SingleDiceObj> GetRewardSingleDiceObjsViaPlayerData(List<SingleDiceObj> conditionSingleDiceObj,int count)
+    public static List<SingleDiceObj> GetRewardSingleDiceObjsViaPlayerData(List<SingleDiceObj> conditionSingleDiceObj,int count)
     {
         //计算用于条件的骰子的点数总和
         int sum = 0;
@@ -127,7 +127,7 @@ public class RandomManager : MonoSingleton<RandomManager>
 
     }
 
-    public HalidomObject GetRewardHalidomViaPlayerData(List<SingleDiceObj> conditionSingleDiceObj)
+    public static HalidomObject GetRewardHalidomViaPlayerData(List<SingleDiceObj> conditionSingleDiceObj)
     {
         int sum = 0;
         foreach (var singleDiceObj in conditionSingleDiceObj)
