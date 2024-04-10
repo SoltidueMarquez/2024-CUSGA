@@ -4027,9 +4027,9 @@ GameObject:
   - component: {fileID: 7766787243154943484}
   - component: {fileID: 4094949460559003386}
   - component: {fileID: 7073011342002001474}
+  - component: {fileID: 8296850532430577718}
   - component: {fileID: 7381485503643075250}
   - component: {fileID: 3615829596105585163}
-  - component: {fileID: 8296850532430577718}
   m_Layer: 0
   m_Name: StoreUIManager
   m_TagString: Untagged
@@ -4080,6 +4080,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animTime: 1
+  exitButton: {fileID: 0}
+  upgradeButton: {fileID: 0}
   previewSize: 1.2
   shakeAngle: 5
   diceColumns:
@@ -4098,6 +4100,26 @@ MonoBehaviour:
   - transform: {fileID: 1138662495887465988}
     bagObject: {fileID: 0}
   sacredObjectTemplate: {fileID: 3046983917528316593, guid: 24dc8b92de8b42940bb32cbd33b4ee01, type: 3}
+--- !u!114 &8296850532430577718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8810732100187416935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd7826152dc3ce248a6075403a50f644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diceTemplate: {fileID: 3046983917528316593, guid: 9248ce98862a30748b5d507eb5a4d5d0, type: 3}
+  dicePageColumnsTemplate: {fileID: 8335194878084775339, guid: 9eaa291cf69b7b04db68c3526029865f, type: 3}
+  dicePageTemplate: {fileID: 7210025059963724254, guid: a21f87fb3c609bb4d99ad0e20ca478df, type: 3}
+  strengthenContent: {fileID: 2538699098023792605}
+  bagColumnList: []
+  exitButton: {fileID: 0}
+  animTime: 1
+  testObj: []
 --- !u!114 &7381485503643075250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4144,24 +4166,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dragCanvas: {fileID: 0}
   rewardUIManager: {fileID: 0}
---- !u!114 &8296850532430577718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8810732100187416935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd7826152dc3ce248a6075403a50f644, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  diceTemplate: {fileID: 3046983917528316593, guid: 9248ce98862a30748b5d507eb5a4d5d0, type: 3}
-  dicePageColumnsTemplate: {fileID: 8335194878084775339, guid: 9eaa291cf69b7b04db68c3526029865f, type: 3}
-  dicePageTemplate: {fileID: 7210025059963724254, guid: a21f87fb3c609bb4d99ad0e20ca478df, type: 3}
-  strengthenContent: {fileID: 2538699098023792605}
-  bagColumnList: []
-  animTime: 1
 --- !u!1 &9079002580644475389
 GameObject:
   m_ObjectHideFlags: 0

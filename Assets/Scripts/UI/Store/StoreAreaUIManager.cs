@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.Store
 {
@@ -8,9 +9,11 @@ namespace UI.Store
     {
         [Header("通用")]
         [SerializeField, Tooltip("动画时长")] private float animTime;
+        [SerializeField, Tooltip("离开按钮")] private Button  exitButton;
+        [SerializeField, Tooltip("升级按钮")] private Button  upgradeButton;
         [Tooltip("预览大小")] public float previewSize;
         [Tooltip("晃动角度")] public float shakeAngle;
-
+        
         [Header("出售骰面")]
         [SerializeField, Tooltip("骰子栏位列表")] public List<Column> diceColumns;
         [SerializeField, Tooltip("骰子模板")] private GameObject diceTemplate;
@@ -18,6 +21,18 @@ namespace UI.Store
         [Header("出售圣物")]
         [SerializeField, Tooltip("圣物栏位列表")] public List<Column> sacredObjectColumns;
         [SerializeField, Tooltip("圣物模板")] private GameObject sacredObjectTemplate;
+
+        private void Start()
+        {
+            exitButton.onClick.AddListener(() =>
+            {
+                StoreManager.Instance.OnExitStore?.Invoke();
+            });
+            upgradeButton.onClick.AddListener(() =>
+            {
+                StoreManager.Instance.OnClickUpgrade?.Invoke();
+            });
+        }
 
         #region 出售骰面相关
         /// <summary>
