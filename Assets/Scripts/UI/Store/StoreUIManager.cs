@@ -7,7 +7,7 @@ namespace UI.Store
     {
         public RectTransform strengthenBg;
         public GameObject strengthenCanvas;
-        [SerializeField]private PageView strengthenPage;
+        public PageView strengthenPage;
         
         /// <summary>
         /// 进入商店UI的动画
@@ -30,6 +30,12 @@ namespace UI.Store
             strengthenCanvas.SetActive(true);
             strengthenPage.Init(strengthenBg);
         }
+
+        public void RefreshUpgradeUI()
+        {
+            strengthenPage.Init(strengthenBg);
+        }
+        
         public void ExitUpgradeUI()
         {
             strengthenCanvas.SetActive(false);

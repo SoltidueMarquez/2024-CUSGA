@@ -36,6 +36,7 @@ namespace UI.Store
         {
             _rect = this.GetComponent<ScrollRect>();
             var childCount = _rect.content.transform.childCount;
+            if (childCount == 0) { return;}
             //根据子物体数动态设置内容页长度
             float width = canvas.rect.width;
             float height = content.rect.height;
