@@ -4175,6 +4175,30 @@ MonoBehaviour:
   - {fileID: 651789252004011989}
   timeInterval: 0.5
   finalPosition: -4
+  columns:
+  - transform: {fileID: 3056126233562463336}
+    bagObject: {fileID: 0}
+  - transform: {fileID: 7864109376455484756}
+    bagObject: {fileID: 0}
+  - transform: {fileID: 8568967910397633858}
+    bagObject: {fileID: 0}
+  - transform: {fileID: 3528912195473449827}
+    bagObject: {fileID: 0}
+  - transform: {fileID: 7866243603687622334}
+    bagObject: {fileID: 0}
+  - transform: {fileID: 8947113565026652925}
+    bagObject: {fileID: 0}
+  - transform: {fileID: 7397547005280936812}
+    bagObject: {fileID: 0}
+  - transform: {fileID: 2855121011849364002}
+    bagObject: {fileID: 0}
+  - transform: {fileID: 751280218681714767}
+    bagObject: {fileID: 0}
+  - transform: {fileID: 651789252004011989}
+    bagObject: {fileID: 0}
+  template: {fileID: 7794941978125280914, guid: f9048db2a6e636a4cb66d241e627ddee, type: 3}
+  resultList: []
+  animTime: 2
 --- !u!114 &3615829596105585163
 MonoBehaviour:
   m_ObjectHideFlags: 0
