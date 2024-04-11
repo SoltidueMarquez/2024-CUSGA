@@ -99,7 +99,7 @@ public class BattleDiceHandler : MonoBehaviour
             CastSingleDice(i, chaState, target);
         }
     }
-   
+
 
     #region 初始化战斗骰子，有数据的情况下和测试的情况下
     /// <summary>
@@ -146,6 +146,36 @@ public class BattleDiceHandler : MonoBehaviour
         }
         //初始化战斗时骰子的数组大小
         diceCardsInUse = new SingleDiceObj[battleDiceCount];
+    }
+    /// <summary>
+    /// 在有存档的情况下，初始化背包骰面
+    /// </summary>
+    /// <param name="singleDiceObjSODatas"></param>
+    public void InitBagDiceWithData(List<SingleDiceObjSOData> singleDiceObjSODatas)
+    {
+        this.bagDiceCards.Clear();
+        for (int i = 0; i < singleDiceObjSODatas.Count; i++)
+        {
+            var singleDiceObjSOData = singleDiceObjSODatas[i];
+            string singleDiceid = singleDiceObjSOData.id;
+            var singleDiceModel = ResourcesManager.GetSingleDiceModelViaid(singleDiceid);
+            SingleDiceObj singleDiceObj = new SingleDiceObj(singleDiceModel, singleDiceObjSOData.idInDice);
+            this.AddSingleBattleDiceToBag(singleDiceObj);
+        }
+    }
+    /// <summary>
+    /// 在没有存档的情况下，初始化背包骰面
+    /// </summary>
+    /// <param name="singleDiceModelSOs"></param>
+    public void InitBagDiceWithoutData(List<SingleDiceModelSO> singleDiceModelSOs)
+    {
+        this.bagDiceCards.Clear();
+        for (int i = 0; i < singleDiceModelSOs.Count; i++)
+        {
+            SingleDiceModel singleDiceModel = SingleDiceData.diceDictionary[singleDiceModelSOs[i].name];
+            SingleDiceObj singleDiceObj = new SingleDiceObj(singleDiceModel, i + 1);
+            this.AddSingleBattleDiceToBag(singleDiceObj);
+        }
     }
     #endregion
     #region 添加骰面到各个地方，例如背包和战斗骰面

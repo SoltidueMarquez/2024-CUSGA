@@ -59,6 +59,8 @@ public class PlayerDataSO : ScriptableObject
     public List<HalidomDataSO> halidomSOData;
     [Header("玩家初始时候的骰子类型列表")]
     public List<DiceSOItem> playerDiceSOItems;
+    [Header("玩家初始的时候的背包骰面（不能超过上限）")]
+    public List<SingleDiceModelSO> bagDiceSOList;
     [Header("玩家初始时候的背包骰面上限")]
     public int maxBagDiceCount;
     [Header("玩家身上的圣物")]

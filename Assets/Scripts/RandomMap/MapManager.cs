@@ -53,7 +53,7 @@ namespace Map
             if (CurrentMap == null) return;
 
             var json = JsonConvert.SerializeObject(CurrentMap, Formatting.Indented,
-                new JsonSerializerSettings {ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
+                new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
             PlayerPrefs.SetString("Map", json);
             PlayerPrefs.Save();
         }
@@ -86,6 +86,7 @@ namespace Map
                 this.playerChaState.GetBattleDiceHandler().battleDiceCount = battleDiceCount;
                 this.playerChaState.GetBattleDiceHandler().maxDiceInBag = playerDataSO.maxBagDiceCount;
                 this.playerChaState.GetBattleDiceHandler().InitDice(playerDiceSOItems);
+                this.playerChaState.GetBattleDiceHandler().InitBagDiceWithoutData(playerDataSO.bagDiceSOList);
             }
             else
             {
@@ -98,8 +99,9 @@ namespace Map
                 //根据存档进行骰子的数值初始化
                 this.playerChaState.GetBattleDiceHandler().InitDiceWithData(battleDiceSODatas);
                 this.playerChaState.resource = playerDataSO.chaResource;
-
+                this.playerChaState.GetBattleDiceHandler().InitBagDiceWithData(playerDataSO.bagDiceList);
             }
+            //初始化玩家的背包骰面
         }
     }
 }
