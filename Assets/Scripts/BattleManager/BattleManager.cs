@@ -192,6 +192,7 @@ public class BattleManager : MonoBehaviour
             this.parameter.playerChaState.GetBattleDiceHandler().battleDiceCount = battleDiceCount;
             this.parameter.playerChaState.GetBattleDiceHandler().maxDiceInBag = playerDataSO.maxBagDiceCount;
             this.parameter.playerChaState.GetBattleDiceHandler().InitDice(playerDiceSOItems);
+            this.parameter.playerChaState.GetBattleDiceHandler().InitBagDiceWithoutData(playerDataSO.bagDiceSOList);
         }
         else
         {
@@ -203,6 +204,7 @@ public class BattleManager : MonoBehaviour
             this.parameter.playerChaState.GetBattleDiceHandler().maxDiceInBag = playerDataSO.maxBagDiceCount;
             //根据存档进行骰子的数值初始化
             this.parameter.playerChaState.GetBattleDiceHandler().InitDiceWithData(battleDiceSODatas);
+            this.parameter.playerChaState.GetBattleDiceHandler().InitBagDiceWithData(playerDataSO.bagDiceList);
             this.parameter.playerChaState.resource = playerDataSO.chaResource;
 
         }
@@ -214,9 +216,15 @@ public class BattleManager : MonoBehaviour
             string name = $"页面:{i + 1}";
             FightDicePageManager.Instance.CreatePageUI(name, singleDices);//UI创建page
         }
-
+        //创建背包骰子页面
+        for(int i = 0; i < this.parameter.playerChaState.GetBattleDiceHandler().bagDiceCards.Count; i++)
+        {
+            var singleDice = this.parameter.playerChaState.GetBattleDiceHandler().bagDiceCards[i];
+            var singleDiceUIData = ResourcesManager.GetSingleDiceUIData(singleDice);
+            BagDiceUIManager.Instance.CreateBagUIDice(i, singleDiceUIData, SellSingleDice, singleDice);
+        }
         //直接用存档的数值覆盖playerChaState的数值
-        
+
 
     }
     /// <summary>
