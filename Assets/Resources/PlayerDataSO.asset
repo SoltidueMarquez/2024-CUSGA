@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3de7d951814604594071121c0d0bf5, type: 3}
   m_Name: PlayerDataSO
   m_EditorClassIdentifier: 
-  ifUseSaveData: 0
+  ifUseSaveData: 1
   baseProp:
     health: 50
     money: 300
@@ -36,6 +36,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: ffd7ffe63ae49f94cbd420e2d3ba88fe, type: 2}
     - {fileID: 11400000, guid: ffd7ffe63ae49f94cbd420e2d3ba88fe, type: 2}
     - {fileID: 11400000, guid: ffd7ffe63ae49f94cbd420e2d3ba88fe, type: 2}
+  bagDiceSOList: []
   maxBagDiceCount: 6
   halidomDataForSaves: []
   battleDiceList:

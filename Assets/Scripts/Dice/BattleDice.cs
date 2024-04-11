@@ -61,5 +61,6 @@ public enum DiceType
 {
     Attack,
     Defense,
-    Support
+    Support,
+    Special
 }
