@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 /// <summary>
@@ -80,6 +81,23 @@ namespace DesignerScripts
 
         Add4ValueIfResultIsEven,//2-1
         Add4ValueIfResultIsOdd,//2-2
+
+        #endregion
+
+        #region 骰子用buff
+        GetHurt,//受击
+        RecoverHealth,//回血
+        GainMoney,//拿钱
+        EnemyBleed,//敌人流血
+        EnemyVulnerable,//敌人易伤
+        EnemyWeak,//敌人虚弱
+        PlayerStrength,//玩家力量
+        PlayerEnhance,//玩家强化
+        PlayerDodge,//玩家闪避
+        PlayerSpirit,//玩家精力
+        ClearEnemyPositiveBuff,//清除敌人正面buff
+        ClearPlayerNegativeBuff,//清除玩家负面buff
+
 
         #endregion
     }
@@ -907,6 +925,151 @@ namespace DesignerScripts
             {
                 damageInfo.damage.baseDamage += 4;
                 Debug.Log("骰子为奇数，增加4点伤害");
+            }
+        }
+
+        #endregion
+
+
+
+
+        #region 骰子用buff效果函数
+        public static void GetHurt(BuffInfo buffInfo)
+        {
+            
+            //获取玩家的状态
+            ChaState tempChaState = BattleManager.Instance.parameter.playerChaState.GetComponent<ChaState>();
+            //访问当前的资源
+            if (tempChaState.resource.currentHp > 0)
+            {
+                int damage = (int)buffInfo.buffParam["GetHurt"];
+                tempChaState.ModResources(new ChaResource(-damage, 0, 0, 0));
+                Debug.Log("受到" + damage + "伤害");
+            }
+        }
+
+        public static void RecoverHealth(BuffInfo buffInfo)
+        {
+            //获取玩家的状态
+            ChaState tempChaState = BattleManager.Instance.parameter.playerChaState.GetComponent<ChaState>();
+            //访问当前的资源
+            if (tempChaState.resource.currentHp > 0)
+            {
+                int recoverHealth = (int)buffInfo.buffParam["RecoverHealth"];
+                tempChaState.ModResources(new ChaResource(recoverHealth, 0, 0, 0));
+                Debug.Log("恢复" + recoverHealth + "血量");
+            }
+        }
+
+        public static void GainMoney(BuffInfo buffInfo)
+        {
+            //获取玩家的状态
+            ChaState tempChaState = BattleManager.Instance.parameter.playerChaState.GetComponent<ChaState>();
+            //访问当前的资源
+            if (tempChaState.resource.currentMoney >= 0)
+            {
+                int money = (int)buffInfo.buffParam["GainMoney"];
+                tempChaState.ModResources(new ChaResource(0, money, 0, 0));
+                Debug.Log("增加" + money + "金币");
+            }
+        }
+
+        public static void EnemyVulnerable(BuffInfo buffInfo)
+        {
+            for(int i = 0; i < (int)buffInfo.buffParam["EnemyVulnerable"]; i++)
+            {
+                BuffInfo newVulnerableBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Vulnerable.ToString()], buffInfo.creator, buffInfo.target);
+                buffInfo.target.GetComponent<ChaState>().AddBuff(newVulnerableBuff1, buffInfo.target);
+            }
+        }
+
+        public static void EnemyWeak(BuffInfo buffInfo)
+        {
+            for (int i = 0; i < (int)buffInfo.buffParam["EnemyWeak"]; i++)
+            {
+                BuffInfo newWeakBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Weak.ToString()], buffInfo.creator, buffInfo.target);
+                buffInfo.target.GetComponent<ChaState>().AddBuff(newWeakBuff1, buffInfo.target);
+            }
+        }
+
+        public static void EnemyBleed(BuffInfo buffInfo)
+        {
+            for (int i = 0; i < (int)buffInfo.buffParam["EnemyBleed"]; i++)
+            {
+                BuffInfo newBleedBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Bleed.ToString()], buffInfo.creator, buffInfo.target);
+                buffInfo.target.GetComponent<ChaState>().AddBuff(newBleedBuff1, buffInfo.target);
+            }
+        }
+
+        public static void PlayerStrength(BuffInfo buffInfo)
+        {
+            for (int i = 0; i < (int)buffInfo.buffParam["PlayerStrength"]; i++)
+            {
+                BuffInfo newStrengthBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target);
+                buffInfo.creator.GetComponent<ChaState>().AddBuff(newStrengthBuff1, buffInfo.creator);
+            }
+        }
+
+        
+
+        public static void PlayerDodge(BuffInfo buffInfo)
+        {
+            for (int i = 0; i < (int)buffInfo.buffParam["PlayerDodge"]; i++)
+            {
+                BuffInfo newDodgeBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target);
+                buffInfo.creator.GetComponent<ChaState>().AddBuff(newDodgeBuff1, buffInfo.creator);
+            }
+        }
+
+        
+
+        public static void PlayerEnhance(BuffInfo buffInfo)
+        {
+            for (int i = 0; i < (int)buffInfo.buffParam["PlayerEnhance"]; i++)
+            {
+                BuffInfo newEnhanceBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Enhance.ToString()], buffInfo.creator, buffInfo.target);
+                buffInfo.creator.GetComponent<ChaState>().AddBuff(newEnhanceBuff1, buffInfo.creator);
+            }
+        }
+
+        public static void PlayerSpirit(BuffInfo buffInfo)
+        {
+            for (int i = 0; i < (int)buffInfo.buffParam["PlayerSpirit"]; i++)
+            {
+                BuffInfo newSpiritBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Spirit.ToString()], buffInfo.creator, buffInfo.target);
+                buffInfo.creator.GetComponent<ChaState>().AddBuff(newSpiritBuff1, buffInfo.creator);
+            }
+        }
+
+        public static void ClearEnemyPositiveBuff(BuffInfo buffInfo)
+        {
+            //获取敌方的buffhandler
+            if(buffInfo.target.GetComponent<BuffHandler>() != null)
+            {
+                //从buffhandler中找到一个的Positive buff
+                BuffInfo findBuffInfo = buffInfo.target.GetComponent<BuffHandler>().buffList.Find(x =>x.buffData.tags.Contains("Positive"));
+                if(findBuffInfo != null)
+                {
+                    findBuffInfo.curStack = 0;
+                    findBuffInfo.isPermanent = false;
+                }
+
+            }
+        }
+
+        public static void ClearPlayerNegativeBuff(BuffInfo buffInfo)
+        {
+            //获取玩家的buffhandler
+            if (buffInfo.creator.GetComponent<BuffHandler>() != null)
+            {
+                //从buffhandler中找到一个的Negative buff
+                BuffInfo findBuffInfo = buffInfo.creator.GetComponent<BuffHandler>().buffList.Find(x => x.buffData.tags.Contains("Negative"));
+                if (findBuffInfo != null)
+                {
+                    findBuffInfo.curStack = 0;
+                    findBuffInfo.isPermanent = false;
+                }
+
             }
         }
 

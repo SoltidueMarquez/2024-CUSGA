@@ -16,6 +16,7 @@ MonoBehaviour:
   dataName: 9
   tags:
   - Self
+  - Positive
   maxStack: 0
   duringCount: 0
   isPermanent: 0
@@ -36,3 +37,6 @@ MonoBehaviour:
     canUseDice: 1
     ifImmune: 0
   propMod: []
+  paramList: []
+  description: 
+  sprite: {fileID: 0}

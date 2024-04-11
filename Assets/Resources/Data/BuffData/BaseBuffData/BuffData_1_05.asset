@@ -16,6 +16,7 @@ MonoBehaviour:
   dataName: 4
   tags:
   - Target
+  - Negative
   maxStack: 5
   duringCount: 0
   isPermanent: 0

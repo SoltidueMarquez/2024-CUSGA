@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1_03
   dataName: 2
-  tags: []
+  tags:
+  - Target
+  - Negative
   maxStack: 5
   duringCount: 0
   isPermanent: 0
@@ -36,3 +38,5 @@ MonoBehaviour:
     ifImmune: 0
   propMod: []
   paramList: []
+  description: 
+  sprite: {fileID: 0}
