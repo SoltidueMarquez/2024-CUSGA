@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
@@ -17,7 +16,7 @@ namespace UI
     {
         [SerializeField, Tooltip("投掷结果栏位")] private List<Transform> columns;
         [SerializeField, Tooltip("生成模板")] private GameObject template;
-        [SerializeField, Tooltip("结果列表")] private List<GameObject> resultList;
+        [SerializeField, Tooltip("结果列表")] private List<GameObject> _resultList;
         
         [Tooltip("使用动画时长")]public float useTime;
         [Tooltip("使用放大倍数")]public float scale;
@@ -39,7 +38,7 @@ namespace UI
             if (ifFightEnd) { tmpResult.Disable();}
             tmp.SetActive(true);
             tmpResult.DoAppearAnim(useTime);//出现动画
-            resultList.Add(tmp);
+            _resultList.Add(tmp);
         }
 
         /// <summary>
@@ -47,15 +46,15 @@ namespace UI
         /// </summary>
         public void RemoveAllResultUI(Strategy strategy)
         {
-            if (resultList.Count == 0) { return;}
+            if (_resultList.Count == 0) { return;}
 
             var tmpList = new List<GameObject>();//备份队列
-            while (resultList.Count != 0)
+            while (_resultList.Count != 0)
             {
-                tmpList.Add(resultList[0]);
-                resultList.Remove(resultList[0]);
+                tmpList.Add(_resultList[0]);
+                _resultList.Remove(_resultList[0]);
             }
-            resultList.Clear();//立刻清空队列避免报错
+            _resultList.Clear();//立刻清空队列避免报错
 
             switch (strategy)
             {

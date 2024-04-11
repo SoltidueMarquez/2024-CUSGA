@@ -3,6 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 namespace UI
 {
     [RequireComponent(typeof(Button))]
@@ -40,9 +41,10 @@ namespace UI
             scale = RollingResultUIManager.Instance.scale;
             index = tmpIndex;
             pageAndIndex = position;
-            button?.onClick.AddListener(() =>
+            button.onClick.AddListener(() =>
             {
                 BattleManager.Instance.parameter.playerChaState.UseDice(index, BattleManager.Instance.currentSelectEnemy);
+
                 OnUseDestroy();//摧毁物体
             });
             
@@ -115,13 +117,11 @@ namespace UI
         
         private void JumpToPosition(Vector2Int position)
         {
-            if (FightDicePageManager.Instance == null) { return;}
             FightDicePageManager.Instance.SwitchToPosition(position);
         }
 
         private void RevertMark()
         {
-            if (FightDicePageManager.Instance == null) { return;}
             FightDicePageManager.Instance.RevertMarkColumn();
         }
 
