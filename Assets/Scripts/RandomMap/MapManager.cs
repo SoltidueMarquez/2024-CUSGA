@@ -6,6 +6,7 @@ namespace Map
 {
     public class MapManager : MonoBehaviour
     {
+        [Header("地图配置")]
         public MapConfig config;
         public MapView view;
         [Header("玩家信息")]

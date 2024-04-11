@@ -128,7 +128,7 @@ public static class ResourcesManager
         singleDiceUIData.description = singleDiceModelSO.description;
         singleDiceUIData.value = singleDiceModelSO.value;
         singleDiceUIData.name = singleDiceModelSO.singleDiceModelName;
-        singleDiceUIData.level = singleDiceModelSO.level;
+        singleDiceUIData.level = (int)singleDiceModelSO.level + 1;
         return singleDiceUIData;
     }
     /// <summary>

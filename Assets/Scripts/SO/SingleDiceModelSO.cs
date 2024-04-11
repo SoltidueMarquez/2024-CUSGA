@@ -26,10 +26,10 @@ public class SingleDiceModelSO : ScriptableObject
     public ChaResource cost;
 
     [Tooltip("骰面的等级")]
-    [Header("骰面的等级")]
-    public int level;
-    [Tooltip("骰面的售价")]
-    [Header("骰面的售价")]
+    [Header("骰面的等级(稀有度)")]
+    public RareType level;
+    [Tooltip("骰面的购入价格")]
+    [Header("骰面的购入基础价格")]
     public int value;
     [Tooltip("骰面属于哪一方")]
     [Header("骰面属于哪一方")]

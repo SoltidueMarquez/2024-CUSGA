@@ -44,7 +44,7 @@ public class SingleDiceModel
     /// </summary>
     public VisualEffect visualEffect;
     /// <summary>
-    /// 骰面的售价
+    /// 骰面的购入价格
     /// </summary>
     public int value;
     /// <summary>

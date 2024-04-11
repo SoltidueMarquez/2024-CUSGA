@@ -25,7 +25,7 @@ public class SingleDiceModelInitial : MonoBehaviour
                     singleDiceModelSOs[i].condition,
                     singleDiceModelSOs[i].cost,
                     singleDiceModelSOs[i].value,
-                    singleDiceModelSOs[i].level,
+                    (int)singleDiceModelSOs[i].level + 1,
                     GetBuffInfoList(singleDiceModelSOs[i].buffDataSOs),
                     singleDiceModelSOs[i].baseValue,
                     null)

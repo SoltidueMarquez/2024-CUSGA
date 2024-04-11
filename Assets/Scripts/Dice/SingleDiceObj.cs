@@ -16,14 +16,14 @@ public class SingleDiceObj
     /// </summary>
     public int level;
     /// <summary>
-    /// 售价,用于卖出,因为是runtime，所以这边的售价是可以变化的
+    /// 购入的价格,用于卖出,因为是runtime，所以这边的购入价是可以变化的，由商店的逻辑控制
     /// </summary>
     public int value;
     /// <summary>
     /// 骰面在骰子中的位置,真正的 0 - 5
     /// </summary>
     public int positionInDice;
-    
+    public int SaleValue => Mathf.FloorToInt(value / 4);
     public SingleDiceObj(SingleDiceModel model, int idInDice)
     {
         this.model = model;
