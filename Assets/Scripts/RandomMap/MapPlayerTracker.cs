@@ -79,6 +79,8 @@ namespace Map
             switch (mapNode.Node.nodeType)
             {
                 case NodeType.MinorEnemy:
+                    GameManager.Instance.enemyDataSO = EnemyManager.GetEnemyDataSOviaCondition(EnemyType.Normal);
+                    GameManager.Instance.LoadScene("Fight 1");
                     break;
                 case NodeType.EliteEnemy:
                     break;

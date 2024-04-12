@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3de7d951814604594071121c0d0bf5, type: 3}
   m_Name: PlayerDataSO
   m_EditorClassIdentifier: 
-  ifUseSaveData: 1
+  ifUseSaveData: 0
   baseProp:
     health: 50
     money: 300
@@ -47,29 +47,29 @@ MonoBehaviour:
       level: 1
       value: 6
     - id: 1_01
-      idInDice: 1
+      idInDice: 2
       level: 1
       value: 6
     - id: 1_01
-      idInDice: 1
+      idInDice: 3
       level: 1
       value: 6
     - id: 1_01
-      idInDice: 1
+      idInDice: 4
       level: 1
       value: 6
     - id: 1_01
-      idInDice: 1
+      idInDice: 5
       level: 1
       value: 6
     - id: 1_01
-      idInDice: 1
+      idInDice: 6
       level: 1
       value: 6
   - diceType: 1
     singleDiceObjSODatas:
     - id: 2_03
-      idInDice: 2
+      idInDice: 1
       level: 2
       value: 7
     - id: 2_03
@@ -77,26 +77,22 @@ MonoBehaviour:
       level: 2
       value: 7
     - id: 2_03
-      idInDice: 2
+      idInDice: 3
       level: 2
       value: 7
     - id: 2_03
-      idInDice: 2
+      idInDice: 4
       level: 2
       value: 7
     - id: 2_03
-      idInDice: 2
+      idInDice: 5
       level: 2
       value: 7
     - id: 2_03
-      idInDice: 2
+      idInDice: 6
       level: 2
       value: 7
-  bagDiceList:
-  - id: 2_01
-    idInDice: 3
-    level: 1
-    value: 7
+  bagDiceList: []
   chaResource:
     currentHp: 50
     currentMoney: 311

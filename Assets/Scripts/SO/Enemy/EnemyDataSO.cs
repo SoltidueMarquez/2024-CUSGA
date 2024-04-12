@@ -14,9 +14,17 @@ public class EnemyBuffDataConfig
     [Header("buff的持续回合")]
     public int buffRound;
 }
+public enum EnemyType
+{
+    //敌人的类型
+    Normal,
+    Elite,
+    Boss
+}
 public class EnemyDataSO : ScriptableObject
 {
     [Header("敌人的类型")]
+    public EnemyType enemyType;
     [Header("敌人初始时候身上的骰子列表")]
     public List<DiceSOItem> EnemyBattleDiceList;
     [Header("敌人初始的数值")]

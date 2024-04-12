@@ -110,6 +110,8 @@ public class BattleManager : MonoBehaviour
 
         //设置初始状态
         TransitionState(GameState.GameStart);
+        //这边是本场景的一些初始化
+        this.parameter.enemyDataSO = GameManager.Instance.enemyDataSO;
     }
 
     private void Update()
