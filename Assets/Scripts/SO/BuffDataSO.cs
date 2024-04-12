@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using static OneLine.Examples.ComplexExample;
+using static UnityEditor.Progress;
 
 namespace DesignerScripts
 {
@@ -121,5 +122,34 @@ namespace DesignerScripts
         public string description;
         [Tooltip("buffSprite")]
         public Sprite sprite;
+
+        public static Dictionary<string,System.Object> GetParamDic(List<Param> paramList)
+        {
+            Dictionary<string, System.Object> dict = new Dictionary<string, System.Object>();
+            foreach (var param in paramList)
+            {
+                switch (param.type)
+                {
+                    case paramsType.intType:
+                        dynamic temp = int.Parse(param.value);
+                        dict.Add(param.name, temp);
+                        break;
+                    case paramsType.floatType:
+                        dynamic temp2 = float.Parse(param.value);
+                        dict.Add(param.name, temp2);
+                        break;
+                    case paramsType.stringType:
+                        dynamic temp3 = param.value;
+                        dict.Add(param.name, temp3);
+                        break;
+                    case paramsType.boolType:
+                        dynamic temp4 = bool.Parse(param.value);
+                        dict.Add(param.name, temp4);
+                        break;
+
+                }
+            }
+            return dict;
+        }
     }
 }

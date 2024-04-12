@@ -45,30 +45,7 @@ public class HalidomDataInitial : MonoBehaviour
         List<BuffInfo> buffInfos= new List<BuffInfo>();
         foreach (var item in buffDataSOs)
         {
-            Dictionary<string,System.Object> dict = new Dictionary<string,System.Object>();
-            foreach (var param in item.paramList)
-            {
-                switch (param.type)
-                {
-                    case paramsType.intType:
-                        dynamic temp = int.Parse(param.value);
-                        dict.Add(param.name,temp);
-                        break;
-                    case paramsType.floatType:
-                        dynamic temp2 = float.Parse(param.value);
-                        dict.Add(param.name, temp2);
-                        break;
-                    case paramsType.stringType:
-                        dynamic temp3 =param.value;
-                        dict.Add(param.name, temp3);
-                        break;
-                    case paramsType.boolType:
-                        dynamic temp4 =bool.Parse(param.value);
-                        dict.Add(param.name, temp4);
-                        break;
-                    
-                }
-            }
+            Dictionary<string,System.Object> dict = BuffDataSO.GetParamDic(item.paramList);
             BuffInfo buffInfo = new BuffInfo(
                 BuffDataTable.buffData[item.dataName.ToString()],
                 null,null,1,
