@@ -97,8 +97,19 @@ public class PlayerDataSO : ScriptableObject
     public void UpdatePlayerDataSO(ChaState chaState)
     {
         chaResource = chaState.resource;
-        this.battleDiceList = chaState.GetBattleDiceHandler().GetBattleDiceSOData();
-        this.bagDiceList = chaState.GetBattleDiceHandler().GetSingleDiceObjSODatas();
+        //获取保存的战斗骰子数据
+        var battleDiceSOList = chaState.GetBattleDiceHandler().GetBattleDiceSOData();
+        this.battleDiceList.Clear();
+        for(int i = 0;i < battleDiceSOList.Count; i++)
+        {
+            this.battleDiceList.Add(battleDiceSOList[i]);
+        }
+        var bagDiceSOlist = chaState.GetBattleDiceHandler().GetSingleDiceObjSODatas();
+        this.bagDiceList.Clear();
+        for (int i = 0; i < bagDiceSOlist.Count; i++)
+        {
+            this.bagDiceList.Add(bagDiceSOlist[i]);
+        }
 
     }
 }

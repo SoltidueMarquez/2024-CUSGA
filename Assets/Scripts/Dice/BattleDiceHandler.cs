@@ -141,6 +141,7 @@ public class BattleDiceHandler : MonoBehaviour
                 var singleDiceObjSOData = battleDiceSOData.singleDiceObjSODatas[j];
                 string singleDiceid = singleDiceObjSOData.id;
                 var singleDiceModel = ResourcesManager.GetSingleDiceModelViaid(singleDiceid);
+                
                 battleDice.AddDice(singleDiceModel, singleDiceObjSOData.idInDice, i, j);
             }
         }
@@ -308,7 +309,7 @@ public class BattleDiceHandler : MonoBehaviour
             var singleDiceObjs = battleDice.GetBattleDiceSingleDices();
             for (int j = 0; j < 6; j++)
             {
-                SingleDiceObj singleDiceObj = singleDiceObjs[i];
+                SingleDiceObj singleDiceObj = singleDiceObjs[j];
                 var singleDiceObjSOData = new SingleDiceObjSOData();
                 singleDiceObjSOData.id = singleDiceObj.model.id;
                 singleDiceObjSOData.idInDice = singleDiceObj.idInDice;
