@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 
 namespace UI.Store
@@ -7,14 +9,21 @@ namespace UI.Store
     {
         public RectTransform strengthenBg;
         public GameObject strengthenCanvas;
-        public PageView strengthenPage;
         
+        [SerializeField, Tooltip("动画时间")] private float animTime;
+        [SerializeField, Tooltip("商店区域")] private GameObject storeArea;
+        [SerializeField, Tooltip("投掷区域")] private GameObject rollArea;
+        
+        [SerializeField, Tooltip("商店出现位置")] private Transform appearTransformPosition;
+        [SerializeField, Tooltip("商店离开位置")] private Transform disappearTransformPosition;
+        public PageView strengthenPage;
+
         /// <summary>
         /// 进入商店UI的动画
         /// </summary>
         public void EnterStoreUI()
         {
-            StoreManager.Instance.m_Debug("进入动画");
+            storeArea.transform.DOMoveX(appearTransformPosition.position.x, animTime);
         }
         
         /// <summary>
@@ -22,13 +31,14 @@ namespace UI.Store
         /// </summary>
         public void ExitStoreUI()
         {
-            StoreManager.Instance.m_Debug("离开动画");
+            storeArea.transform.DOMoveX(disappearTransformPosition.position.x, animTime);
         }
 
         public void EnterUpgradeUI()
         {
             strengthenPage.Init(strengthenBg);
             strengthenCanvas.SetActive(true);
+            strengthenCanvas.transform.DOMoveX(appearTransformPosition.position.x, animTime);
         }
 
         public void RefreshUpgradeUI()
@@ -38,7 +48,14 @@ namespace UI.Store
         
         public void ExitUpgradeUI()
         {
-            strengthenCanvas.SetActive(false);
+            strengthenCanvas.transform.DOMoveX(disappearTransformPosition.position.x, animTime);
+            StartCoroutine(LateInactive(animTime,strengthenCanvas));
+        }
+
+        IEnumerator LateInactive(float time, GameObject objectX)
+        {
+            yield return new WaitForSeconds(time);
+            objectX.SetActive(false);
         }
         
         private void Update()

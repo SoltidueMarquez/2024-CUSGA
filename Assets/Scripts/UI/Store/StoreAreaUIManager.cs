@@ -8,7 +8,7 @@ namespace UI.Store
     public class StoreAreaUIManager : MonoSingleton<StoreAreaUIManager>
     {
         [Header("通用")]
-        [SerializeField, Tooltip("动画时长")] private float animTime;
+        [SerializeField, Tooltip("动画时长")] public float animTime;
         [SerializeField, Tooltip("离开按钮")] private Button  exitButton;
         [SerializeField, Tooltip("升级按钮")] private Button  upgradeButton;
         [Tooltip("预览大小")] public float previewSize;

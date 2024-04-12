@@ -77,6 +77,7 @@ namespace UI.Store
         private void JumpToPosition(Vector2Int position)
         {
             if (!_interactable) { return; }
+            //TODO:
             //FightDicePageManager.Instance.SwitchToPosition(position);
         }
         private void RevertMark()
