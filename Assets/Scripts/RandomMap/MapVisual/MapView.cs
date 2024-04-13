@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 
 namespace Map
@@ -29,8 +30,13 @@ namespace Map
         [Tooltip("If the background sprite is null, background will not be shown")]
         public Sprite background;
         public Color32 backgroundColor = Color.white;
+        [Header("地图背景大小")]
         public float xSize;
         public float yOffset;
+        [Header("地图起始在x轴的偏移")]
+        public float xTransformOffset;
+        [Header("地图起始scale")]
+        public float startScale;
         [Header("Line Settings")]
         public GameObject linePrefab;
         [Tooltip("Line point count should be > 2 to get smooth color gradients")]
@@ -102,6 +108,13 @@ namespace Map
             SetLineColors();
 
             CreateMapBackground(m);
+
+            ResetMapScale();
+        }
+
+        private void ResetMapScale()
+        {
+            firstParent.transform.localScale = new Vector3(startScale, startScale, startScale);
         }
 
         protected virtual void CreateMapBackground(Map m)
@@ -141,7 +154,11 @@ namespace Map
                 MapNodes.Add(mapNode);
             }
         }
-
+        /// <summary>
+        /// 通过逻辑的node创建UI的node
+        /// </summary>
+        /// <param name="node">逻辑上的node节点</param>
+        /// <returns></returns>
         protected virtual MapNode CreateMapNode(Node node)
         {
             var mapNodeObject = Instantiate(nodePrefab, mapParent.transform);
@@ -229,7 +246,7 @@ namespace Map
             Debug.Log("Map span in set orientation: " + span + " camera aspect: " + cam.aspect);
 
             // setting first parent to be right in front of the camera first:
-            firstParent.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y, 0f);
+            firstParent.transform.position = new Vector3(cam.transform.position.x + xTransformOffset, cam.transform.position.y, 0f);
             var offset = orientationOffset;
             switch (orientation)
             {
