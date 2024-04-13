@@ -620,6 +620,10 @@ MonoBehaviour:
   allColumns: []
   parent: {fileID: 2894746367828772258}
   template: {fileID: 558227314385513905, guid: 13a14a6f18edb4e45973e72a0f261654, type: 3}
+  diceList: []
+  switchLeftBtn: {fileID: 853095795217577690}
+  switchRightBtn: {fileID: 3664659515149833623}
+  curPageText: {fileID: 6804491145431198275}
 --- !u!1 &1679708234415811829
 GameObject:
   m_ObjectHideFlags: 0
