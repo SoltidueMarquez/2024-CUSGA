@@ -27,7 +27,7 @@ MonoBehaviour:
     currentShield: 0
   level: 0
   value: 4
-  side: 0
+  side: 2
   buffDataSOs: []
   sprite: {fileID: 0}
   description: "\u653B\u51FB"
