@@ -15,7 +15,7 @@ namespace UI
         [SerializeField, Tooltip("父物体")] private Transform parent;
 
         /// <summary>
-        /// 生成圣物函数
+        /// 生成骰面函数
         /// </summary>
         /// <param name="index">所在栏位序列号</param>
         /// <param name="data"></param>
@@ -33,7 +33,7 @@ namespace UI
             tmp.SetActive(true);
         }
         /// <summary>
-        /// 移除圣物函数
+        /// 移除骰面函数
         /// </summary>
         /// <param name="index">所在栏位序列号</param>
         public void RemoveBagDice(int index)
