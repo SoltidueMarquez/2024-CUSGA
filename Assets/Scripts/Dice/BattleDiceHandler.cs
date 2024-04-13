@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UI;
 using UnityEngine;
 /// <summary>
 /// 玩家和敌人身上挂载的战斗骰子管理器
@@ -176,6 +178,29 @@ public class BattleDiceHandler : MonoBehaviour
             SingleDiceModel singleDiceModel = SingleDiceData.diceDictionary[singleDiceModelSOs[i].name];
             SingleDiceObj singleDiceObj = new SingleDiceObj(singleDiceModel, i + 1);
             this.AddSingleBattleDiceToBag(singleDiceObj);
+        }
+    }
+    #endregion
+    #region 创建骰面UI
+    public void InitBattleDiceUI()
+    {
+        for (int i = 0; i < this.battleDiceCount; i++)
+        {
+            //获取
+            var singleDices = this.battleDices[i].GetBattleDiceSingleDices();
+            string name = $"页面:{i + 1}";
+            FightDicePageManager.Instance.CreatePageUI(name, singleDices);//UI创建page
+        }
+    }
+    public void InitBagDiceUI(Action<SingleDiceObj> sellFunction)
+    {
+        //创建背包骰子页面
+        for (int i = 0; i < this.bagDiceCards.Count; i++)
+        {
+            var singleDice = this.bagDiceCards[i];
+            var singleDiceUIData = ResourcesManager.GetSingleDiceUIData(singleDice);
+            BagDiceUIManager.Instance.CreateBagUIDice(i, singleDiceUIData, sellFunction, singleDice);
+            //初始化玩家的背包骰面
         }
     }
     #endregion

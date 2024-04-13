@@ -1,9 +1,11 @@
 ﻿using System.Linq;
 using UnityEngine;
 using Newtonsoft.Json;
+using UI;
 
 namespace Map
 {
+
     public class MapManager : MonoBehaviour
     {
         [Header("地图配置")]
@@ -63,6 +65,7 @@ namespace Map
         {
             SaveMap();
         }
+        #region Player相关
         /// <summary>
         /// 玩家数据的初始化
         /// </summary>
@@ -102,7 +105,20 @@ namespace Map
                 this.playerChaState.resource = playerDataSO.chaResource;
                 this.playerChaState.GetBattleDiceHandler().InitBagDiceWithData(playerDataSO.bagDiceList);
             }
+            //this.playerChaState.GetBattleDiceHandler().InitBattleDiceUI();
             //初始化玩家的背包骰面
+            //this.playerChaState.GetBattleDiceHandler().InitBagDiceUI(SellSingleDice);
+            
         }
+        #endregion
+        #region 骰子交互相关
+        public void SellSingleDice(SingleDiceObj singleDiceObj)
+        {
+            this.playerChaState.GetBattleDiceHandler().RemoveSingleBattleDiceFromBag(singleDiceObj);
+            var resource = new ChaResource(0, singleDiceObj.model.value, 0, 0);
+            this.playerChaState.ModResources(resource);
+            //进行一些其他判定
+        }
+        #endregion
     }
 }

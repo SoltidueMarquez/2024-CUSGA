@@ -212,20 +212,9 @@ public class BattleManager : MonoBehaviour
 
         }
         //创建骰子页面
-        for (int i = 0; i < this.parameter.playerChaState.GetBattleDiceHandler().battleDiceCount; i++)
-        {
-            //获取
-            var singleDices = this.parameter.playerChaState.GetBattleDiceHandler().battleDices[i].GetBattleDiceSingleDices();
-            string name = $"页面:{i + 1}";
-            FightDicePageManager.Instance.CreatePageUI(name, singleDices);//UI创建page
-        }
+        this.parameter.playerChaState.GetBattleDiceHandler().InitBattleDiceUI();
         //创建背包骰子页面
-        for(int i = 0; i < this.parameter.playerChaState.GetBattleDiceHandler().bagDiceCards.Count; i++)
-        {
-            var singleDice = this.parameter.playerChaState.GetBattleDiceHandler().bagDiceCards[i];
-            var singleDiceUIData = ResourcesManager.GetSingleDiceUIData(singleDice);
-            BagDiceUIManager.Instance.CreateBagUIDice(i, singleDiceUIData, SellSingleDice, singleDice);
-        }
+        this.parameter.playerChaState.GetBattleDiceHandler().InitBagDiceUI(SellSingleDice);
         //直接用存档的数值覆盖playerChaState的数值
 
 
