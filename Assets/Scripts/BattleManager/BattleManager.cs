@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 using UI;
 using System.Linq;
+using DesignerScripts;
 
 [Serializable]
 public class FSMParameter
@@ -109,6 +110,8 @@ public class BattleManager : MonoBehaviour
 
         //设置初始状态
         TransitionState(GameState.GameStart);
+        //这边是本场景的一些初始化
+        this.parameter.enemyDataSO = GameManager.Instance.enemyDataSO;
     }
 
     private void Update()
@@ -239,7 +242,21 @@ public class BattleManager : MonoBehaviour
         {
             this.parameter.enemyChaStates[i].GetBattleDiceHandler().InitDice(enemyBattleDiceList);
             this.parameter.enemyChaStates[i].SetBaseprop(enemyDataSO.baseProp);
-            //可能需要手动给敌人加一些buff
+            //初始化buff
+            foreach (var buffConfig in enemyDataSO.enemyBuffs)
+            {
+                var buffData = DesignerScripts.BuffDataTable.buffData[buffConfig.buffDataSO.name.ToString()];
+                for(int j = 0; j < buffConfig.buffStack; j++)
+                {
+                    var paramDic = BuffDataSO.GetParamDic(buffConfig.buffDataSO.paramList);
+                    BuffInfo buffInfo = new BuffInfo(buffData, this.parameter.enemyChaStates[i].gameObject, 
+                                                    this.parameter.enemyChaStates[i].gameObject,
+                                                    buffConfig.buffStack,
+                                                    buffData.isPermanent,
+                                                    paramDic);
+                    this.parameter.enemyChaStates[i].AddBuff(buffInfo, this.parameter.enemyChaStates[i].gameObject);
+                }
+            }
             this.parameter.enemyChaStates[i].Initialize();
         }
     }

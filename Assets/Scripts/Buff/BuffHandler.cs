@@ -18,7 +18,8 @@ public class BuffHandler : MonoBehaviour
         {
             if (findBuffInfo.curStack < findBuffInfo.buffData.maxStack)
             {
-                findBuffInfo.curStack++;
+                //findBuffInfo.curStack++;
+                findBuffInfo.curStack+=buffInfo.curStack;
                 switch (findBuffInfo.buffData.buffUpdateEnum)
                 {
                     case BuffUpdateEnum.Add:

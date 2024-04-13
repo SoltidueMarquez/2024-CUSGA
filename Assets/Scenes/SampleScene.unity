@@ -656,6 +656,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerResourceUI
       objectReference: {fileID: 0}
+    - target: {fileID: 2170905778631896886, guid: 2f7aa2b4309df7844aa89135b74879a3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3123530719100294073, guid: 2f7aa2b4309df7844aa89135b74879a3, type: 3}
       propertyPath: m_Camera
       value: 
@@ -801,6 +805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d798c69edc7851d4792c2d28017ca26f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyDataSO: {fileID: 0}
 --- !u!4 &1825883772
 Transform:
   m_ObjectHideFlags: 0
