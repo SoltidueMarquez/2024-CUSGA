@@ -18,6 +18,19 @@ public enum onCreateEnum
 
     RecoverHalfHealthWhenGain,
 
+    GetHurt,//受击
+    RecoverHealth,//回血
+    GainMoney,//拿钱
+    EnemyBleed,//敌人流血
+    EnemyVulnerable,//敌人易伤
+    EnemyWeak,//敌人虚弱
+    PlayerStrength,//玩家力量
+    PlayerEnhance,//玩家强化
+    PlayerDodge,//玩家闪避
+    PlayerSpirit,//玩家精力
+    ClearEnemyPositiveBuff,//清除敌人正面buff
+    ClearPlayerNegativeBuff,//清除玩家负面buff
+
 }
 
 public enum onRemoveEnum
