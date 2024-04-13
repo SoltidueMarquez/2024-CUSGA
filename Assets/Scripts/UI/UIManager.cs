@@ -64,17 +64,18 @@ namespace UI
         /// 鼠标点击上下浮动
         /// </summary>
         /// <param name="uiObject"></param>
-        public void ClickFlow(GameObject uiObject)
+        /// <param name="distance"></param>
+        public void ClickFlow(GameObject uiObject,float distance)
         {
             Vector2 pos = uiObject.transform.position;
-            Vector2 up = pos + new Vector2(0f, 5f);
-            Vector2 down = pos - new Vector2(0f, 5f);
+            Vector2 up = pos + new Vector2(0f, distance);
+            Vector2 down = pos - new Vector2(0f, distance);
             Sequence flowSquence = DOTween.Sequence();
             flowSquence.SetId("Flow"); //设置动画序列别名
-            flowSquence.Append(uiObject.transform.DOMove(up, 0.5f));
-            flowSquence.Append(uiObject.transform.DOMove(pos, 0.5f));
-            flowSquence.Append(uiObject.transform.DOMove(down, 0.5f));
-            flowSquence.Append(uiObject.transform.DOMove(pos, 0.5f));
+            flowSquence.Append(uiObject.transform.DOMove(up, 0.5f)).SetEase(Ease.Linear);
+            flowSquence.Append(uiObject.transform.DOMove(pos, 0.5f).SetEase(Ease.Linear));
+            flowSquence.Append(uiObject.transform.DOMove(down, 0.5f).SetEase(Ease.Linear));
+            flowSquence.Append(uiObject.transform.DOMove(pos, 0.5f).SetEase(Ease.Linear));
             flowSquence.SetLoops(-1);
         }
 
@@ -97,27 +98,30 @@ namespace UI
         }
 
         /// <summary>
-        /// 物品栏拖拽换位函数
+        /// 物品栏拖拽换位函数，返回值为被交换的物体
         /// </summary>
         /// <param name="uiObject"></param>
         /// <param name="columns"></param>
         /// <param name="oldColumn"></param>
         /// <param name="offset"></param>
         /// <returns></returns>
-        public void DetectPosition(GameObject uiObject, List<Column> columns, Column oldColumn, float offset)
+        public GameObject DetectPosition(GameObject uiObject, List<Column> columns, Column oldColumn, float offset)
         {
-            Vector3 pos = oldColumn.transform.position;;
+            GameObject switchObject = null;
+            Vector3 pos = oldColumn.transform.position;
             foreach (var column in columns)
             {
-                if (Between(Input.mousePosition.x, column.transform.position.x - offset,
+                if (Between(uiObject.transform.position.x, column.transform.position.x - offset,
                         column.transform.position.x + offset)
-                    && Between(Input.mousePosition.y, column.transform.position.y - offset,
+                    && Between(uiObject.transform.position.y, column.transform.position.y - offset,
                         column.transform.position.y + offset))
                 {
                     if (column.bagObject!=null&&column.bagObject!=uiObject)//如果新的栏有物体则交换位置
                     {
                         column.bagObject.GetComponent<UIObjectEffects>()._currentColumn = oldColumn; //需要更新旧物体的_currentColumn
                         column.bagObject.transform.position = oldColumn.transform.position;//原来的格子里的物体换到旧的格子里去
+                        column.bagObject.GetComponent<UIObjectEffects>().editState = oldColumn.state;//设置原来的格子里的物体的可编辑状态
+                        switchObject = column.bagObject;    //返回值为被交换的物体
                         oldColumn.bagObject = column.bagObject; //旧的格子放着交换来的物体
                     }
                     else
@@ -127,9 +131,12 @@ namespace UI
                     //物体移动到相应位置
                     column.bagObject = uiObject;//新的格子放移过来的物体
                     pos = column.transform.position;
+                    uiObject.GetComponent<UIObjectEffects>().editState = column.state;//设置状态
                 }
             }
             uiObject.transform.position = pos;
+
+            return switchObject;
         }
         private bool Between(float value, float left, float right)
         {

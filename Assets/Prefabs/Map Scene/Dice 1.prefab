@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -96, y: -360}
-  m_SizeDelta: {x: 75, y: 75}
+  m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1814157088109390643
 CanvasRenderer:
@@ -91,8 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15e4f65ac770a442baa4e25406c9d0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  salePrice: 0
-  descriptionCanvas: {fileID: 2301887875308599287}
+  descriptionCanvas: {fileID: 5956872092027956793}
   nameText: {fileID: 8647321718745468673}
   typeText: {fileID: 73070751392028554}
   levelText: {fileID: 2203764860053664384}
@@ -763,7 +762,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 300
   m_TargetDisplay: 0
 --- !u!114 &8170800236451652686
 MonoBehaviour:
@@ -944,7 +943,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 300
   m_TargetDisplay: 0
 --- !u!114 &1877049010768607116
 MonoBehaviour:

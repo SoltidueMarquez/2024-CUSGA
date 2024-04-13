@@ -13,33 +13,16 @@ namespace UI
     }
 
     [RequireComponent(typeof(Image))]
-    public class EditableDiceUIObject : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler 
+    public class EditableDiceUIObject : UIObjectEffects, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler 
     {
-        [Header("说明UI")] [SerializeField, Tooltip("说明UI")]
-        protected GameObject descriptionCanvas;
-
-        [SerializeField, Tooltip("名称Text")] private Text nameText;
-        [SerializeField, Tooltip("类型Text")] private Text typeText;
-        [SerializeField, Tooltip("稀有度Text")] private Text levelText;
-        [SerializeField, Tooltip("售价Text")] private Text valueText;
-        [SerializeField, Tooltip("基础数值Text")] private Text baseValueText;
-        [SerializeField, Tooltip("说明Text")] private Text descriptionText;
-        [SerializeField, Tooltip("点数Text")] private Text idInDiceText;
-
-        [Header("出售UI")] 
-        [SerializeField, Tooltip("出售UI")] private GameObject saleUI;
-
-        [SerializeField, Tooltip("出售按钮")] private Button saleButton;
-        [SerializeField, Tooltip("出售按钮Text")] private Text saleButtonText;
-
-        private EditState _editState;
-        private State _state;
-        private Transform _oldParent; //原本的父物体
-        public Column currentColumn; //当前所在栏位
+        
+        public SingleDiceObj diceObj;
 
         #region 初始化
         public void Init(List<Column> columns, float offset, SingleDiceObj singleDice, Action<SingleDiceObj> remove)
         {
+            diceObj = singleDice;
+            this.transform.localScale = new Vector3(1, 1, 1);
             var data = ResourcesManager.GetSingleDiceUIData(singleDice);
             //信息文本初始化
             nameText.text = data.name;
@@ -58,13 +41,29 @@ namespace UI
                 remove?.Invoke(singleDice);
             });
 
-            _editState = EditState.FightDice;
+            editState = EditState.BagDice;
             _state = State.None;
             
-            currentColumn = UIManager.Instance.DetectColumn(gameObject, columns, offset); //检测当前所在的物品栏
-            if (currentColumn != null) //初始化当前所在的物品栏
+            _currentColumn = UIManager.Instance.DetectColumn(gameObject, columns, offset); //检测当前所在的物品栏
+            if (_currentColumn != null) //初始化当前所在的物品栏
             {
-                currentColumn.bagObject = gameObject;
+                _currentColumn.bagObject = gameObject;
+            }
+        }
+
+        public void Init(List<Column> columns, float offset)
+        {
+            editState = EditState.BagDice;
+            this.transform.localScale = new Vector3(1, 1, 1);
+            nameText.text = nameof(gameObject);
+            saleButtonText.text = $"出售\n￥0";
+            idInDiceText.text = "0";
+            saleButton.onClick.AddListener(DestroyUI);
+            _state = State.None;
+            _currentColumn = UIManager.Instance.DetectColumn(gameObject, columns, offset); //检测当前所在的物品栏
+            if (_currentColumn != null) //初始化当前所在的物品栏
+            {
+                _currentColumn.bagObject = gameObject;
             }
         }
         #endregion
@@ -99,16 +98,17 @@ namespace UI
         /// <param name="eventData"></param>
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (editState != EditState.BagDice) { return;}
             if (_state != State.PointerChosen)
             {
-                UIManager.Instance.ClickFlow(gameObject);//设置浮动动画
+                UIManager.Instance.ClickFlow(gameObject, EditableDiceUIManager.Instance.flowDis);//设置浮动动画
                 _state = State.PointerChosen;//设置为选中状态
                 saleUI.SetActive(true);//显示销售按钮
             }
             else
             {
                 EndClick();//结束选中状态
-                transform.position = currentColumn.transform.position;//回复位置
+                transform.position = _currentColumn.transform.position;//回复位置
             }
         }
         
@@ -128,9 +128,9 @@ namespace UI
         /// <exception cref="NotImplementedException"></exception>
         public void OnBeginDrag(PointerEventData eventData)
         {
+            if (editState != EditState.BagDice) { return;}
             EndClick();
-            currentColumn = UIManager.Instance.DetectColumn(gameObject, BagDiceUIManager.Instance.bagColumns, BagDiceUIManager.Instance.offsetB); //记录原来的物品栏位置
-            _oldParent = gameObject.transform.parent;//记录原来的父物体
+            _currentColumn = UIManager.Instance.DetectColumn(gameObject, EditableDiceUIManager.Instance.allColumns, EditableDiceUIManager.Instance.offset); //记录原来的物品栏位置
         }
 
         /// <summary>
@@ -139,11 +139,18 @@ namespace UI
         /// <param name="eventData"></param>
         public void OnEndDrag(PointerEventData eventData)
         {
+            if (editState != EditState.BagDice) { return;}
             EndClick();
             //更改位置
-            UIManager.Instance.DetectPosition(gameObject, BagDiceUIManager.Instance.bagColumns, currentColumn, BagDiceUIManager.Instance.offsetB);
-            currentColumn = UIManager.Instance.DetectColumn(gameObject, BagDiceUIManager.Instance.bagColumns, BagDiceUIManager.Instance.offsetB); //记录原来的物品栏位置
-            gameObject.transform.SetParent(_oldParent);//设置为原来的图层
+            var switchObj = UIManager.Instance.DetectPosition(gameObject, EditableDiceUIManager.Instance.allColumns, _currentColumn, EditableDiceUIManager.Instance.offset);
+            _currentColumn = UIManager.Instance.DetectColumn(gameObject, EditableDiceUIManager.Instance.allColumns, EditableDiceUIManager.Instance.offset); //更新物品栏位置
+            gameObject.transform.SetParent(EditableDiceUIManager.Instance.parent);//设置为原来的图层
+
+            //TODO:交换了几号骰子的哪个面
+            if (editState == EditState.FightDice)
+            {
+                Debug.Log($"<color=green>{gameObject}交换了几号骰子的{switchObj}</color>");
+            }
         }
 
         /// <summary>
@@ -153,17 +160,19 @@ namespace UI
         /// <exception cref="NotImplementedException"></exception>
         public void OnDrag(PointerEventData eventData)
         {
+            if (editState != EditState.BagDice) { return;}
             gameObject.transform.SetParent(UIManager.Instance.dragCanvas);//设置为拖拽图层
-            UIManager.Instance.OnDrag(gameObject);
+            var tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            this.transform.position = new Vector3(tmpPos.x, tmpPos.y, 0);
         }
         #endregion
 
         /// <summary>
         /// 摧毁UI函数
         /// </summary>
-        public void DestroyUI()
+        public void DestroyUI(int nothing)
         {
-            currentColumn.bagObject = null; //所在的物品栏置空
+            _currentColumn.bagObject = null; //所在的物品栏置空
             Destroy(gameObject);
         }
     }
