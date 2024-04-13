@@ -126,7 +126,44 @@ namespace DesignerScripts
             },
             {
                 BuffEventName.RecoverHalfHealthWhenGain.ToSafeString(),RecoverHalfHealthWhenGain
-            }
+            },
+            //骰子buff
+            {
+                BuffEventName.GetHurt.ToString(),GetHurt
+            },
+            {
+                BuffEventName.RecoverHealth.ToString(),RecoverHealth
+            },
+            {
+                BuffEventName.GainMoney.ToString(),GainMoney
+            },
+            {
+                BuffEventName.EnemyBleed.ToString(),EnemyBleed
+            },
+            {
+                BuffEventName.EnemyVulnerable.ToString(),EnemyVulnerable
+            },
+            {
+                BuffEventName.EnemyWeak.ToString(),EnemyWeak
+            },
+            {
+                BuffEventName.PlayerStrength.ToString(),PlayerStrength
+            },
+            {
+                BuffEventName.PlayerEnhance.ToString(),PlayerEnhance
+            },
+            {
+                BuffEventName.PlayerDodge.ToString(),PlayerDodge
+            },
+            {
+                BuffEventName.PlayerSpirit.ToString(),PlayerSpirit
+            },
+            {
+                BuffEventName.ClearEnemyPositiveBuff.ToString(),ClearEnemyPositiveBuff
+            },
+            {
+                BuffEventName.ClearPlayerNegativeBuff.ToString(),ClearPlayerNegativeBuff
+            },   
 
         };
         public static Dictionary<string, OnBuffRemove> onRemoveFunc = new Dictionary<string, OnBuffRemove>();
