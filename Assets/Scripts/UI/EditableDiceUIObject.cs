@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace UI
 {
@@ -40,32 +41,31 @@ namespace UI
                 DestroyUI();
                 remove?.Invoke(singleDice);
             });
-
-            editState = EditState.BagDice;
             _state = State.None;
             
             _currentColumn = UIManager.Instance.DetectColumn(gameObject, columns, offset); //检测当前所在的物品栏
             if (_currentColumn != null) //初始化当前所在的物品栏
             {
                 _currentColumn.bagObject = gameObject;
+                editState = _currentColumn.state;
             }
         }
 
-        public void Init(List<Column> columns, float offset)
+        /*public void Init(List<Column> columns, float offset)
         {
-            editState = EditState.BagDice;
             this.transform.localScale = new Vector3(1, 1, 1);
             nameText.text = nameof(gameObject);
             saleButtonText.text = $"出售\n￥0";
-            idInDiceText.text = "0";
+            idInDiceText.text = Random.Range(0,100).ToString();
             saleButton.onClick.AddListener(DestroyUI);
             _state = State.None;
             _currentColumn = UIManager.Instance.DetectColumn(gameObject, columns, offset); //检测当前所在的物品栏
             if (_currentColumn != null) //初始化当前所在的物品栏
             {
                 _currentColumn.bagObject = gameObject;
+                editState = _currentColumn.state;
             }
-        }
+        }*/
         #endregion
 
         #region 鼠标预览
