@@ -68,7 +68,7 @@ namespace UI
         {
             if (_state != State.PointerChosen)
             {
-                UIManager.Instance.ClickFlow(gameObject);
+                UIManager.Instance.ClickFlow(gameObject, 5f);
                 _state = State.PointerChosen;//设置选中状态
                 saleUI.SetActive(true);//显示销售按钮
             }

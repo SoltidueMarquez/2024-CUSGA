@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.Serialization;
 
 public enum  State
 {
@@ -38,6 +39,7 @@ namespace UI
         protected State _state;
         protected Transform oldParent;  //原本的父物体
         public Column _currentColumn;   //当前所在栏位
+        public EditState editState;     //当前的可编辑状态
 
         /// <summary>
         /// 初始化函数
@@ -63,7 +65,7 @@ namespace UI
         /// <summary>
         /// 摧毁UI函数
         /// </summary>
-        protected void DestroyUI()
+        protected virtual void DestroyUI()
         {
             _currentColumn.bagObject = null; //所在的物品栏置空
             Destroy(gameObject);

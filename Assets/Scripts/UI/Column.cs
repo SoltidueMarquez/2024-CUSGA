@@ -9,5 +9,6 @@ namespace UI
     {
         public Transform transform;
         public GameObject bagObject;
+        public EditState state;
     }
 }
