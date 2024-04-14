@@ -149,7 +149,8 @@ namespace UI
             //TODO:交换了几号骰子的哪个面
             if (editState == EditState.FightDice)
             {
-                Debug.Log($"<color=green>{gameObject}交换了几号骰子的{switchObj}</color>");
+                Debug.Log(
+                    $"<color=green>{gameObject.GetComponent<EditableDiceUIObject>().diceObj}交换了{EditableDiceUIManager.Instance.GetCurrentPage()}号骰子的{switchObj.GetComponent<EditableDiceUIObject>().diceObj}</color>");
             }
         }
 
