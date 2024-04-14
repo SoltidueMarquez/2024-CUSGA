@@ -1,72 +1,85 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 namespace UI
 {
-    public enum EditState
-    {
-        BagDice,
-        FightDice
-    }
-
     [RequireComponent(typeof(Image))]
-    public class EditableDiceUIObject : UIObjectEffects, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler 
+    public class MapSacredUIObject : UIObjectEffects, IBeginDragHandler,IEndDragHandler,IDragHandler,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
     {
-        
-        public SingleDiceObj diceObj;
+        public string id;
 
         #region 初始化
-        public void Init(List<Column> columns, float offset, SingleDiceObj singleDice, Action<SingleDiceObj> remove)
+        /// <summary>
+        /// 初始化函数
+        /// </summary>
+        public void Init(List<Column> columns, float offset, string idX, Action<HalidomObject> remove, HalidomObject halidomObject)
         {
-            diceObj = singleDice;
             this.transform.localScale = new Vector3(1, 1, 1);
-            var data = ResourcesManager.GetSingleDiceUIData(singleDice);
-            //信息文本初始化
-            nameText.text = data.name;
-            typeText.text = $"类型:{data.type}";
-            levelText.text = $"稀有度:{data.level}";
-            valueText.text = $"售价￥{data.value}";
-            baseValueText.text = $"基础数值{data.baseValue}";
-            descriptionText.text = $"描述:{data.description}";
-            this.GetComponent<Image>().sprite = data.sprite;
-            saleButtonText.text = $"出售\n￥{data.value}";
-            idInDiceText.text = data.idInDice.ToString();
-            //saleButton绑定移除骰面效果函数
+            this.id = idX;
+            var tmpData = ResourcesManager.GetHalidomUIData(id);
+            nameText.text = tmpData.name;
+            valueText.text = $"售价￥{tmpData.value}";
+            descriptionText.text = tmpData.description;
+            this.GetComponent<Image>().sprite = tmpData.sprite;
+            saleButtonText.text = $"出售\n￥{tmpData.value}";
+            
+            //saleButton绑定移除圣物效果函数：增加一个委托类型的参数(就是对应的移除函数)
             saleButton.onClick.AddListener(() =>
             {
                 DestroyUI(0);
-                remove?.Invoke(singleDice);
+                remove?.Invoke(halidomObject);
             });
             _state = State.None;
-            
             _currentColumn = UIManager.Instance.DetectColumn(gameObject, columns, offset); //检测当前所在的物品栏
             if (_currentColumn != null) //初始化当前所在的物品栏
             {
                 _currentColumn.bagObject = gameObject;
-                editState = _currentColumn.state;
             }
         }
-
-        /*public void Init(List<Column> columns, float offset)
+        public void Init(List<Column> columns, float offset, string idX)
         {
             this.transform.localScale = new Vector3(1, 1, 1);
-            nameText.text = nameof(gameObject);
-            saleButtonText.text = $"出售\n￥0";
-            idInDiceText.text = Random.Range(0,100).ToString();
-            saleButton.onClick.AddListener(DestroyUI);
+            this.id = idX;
+            var tmpData = ResourcesManager.GetHalidomUIData(id);
+            nameText.text = tmpData.name;
+            valueText.text = $"售价￥{tmpData.value}";
+            descriptionText.text = tmpData.description;
+            this.GetComponent<Image>().sprite = tmpData.sprite;
+            saleButtonText.text = $"出售\n￥{tmpData.value}";
+            
+            //saleButton绑定移除圣物效果函数：增加一个委托类型的参数(就是对应的移除函数)
+            saleButton.onClick.AddListener(()=>
+            {
+                DestroyUI(0);
+            });
             _state = State.None;
             _currentColumn = UIManager.Instance.DetectColumn(gameObject, columns, offset); //检测当前所在的物品栏
             if (_currentColumn != null) //初始化当前所在的物品栏
             {
                 _currentColumn.bagObject = gameObject;
-                editState = _currentColumn.state;
             }
-        }*/
+        }
         #endregion
+        
+        /// <summary>
+        /// 闪烁函数
+        /// </summary>
+        public void DoFlick()
+        {
+            var tmp = Instantiate(MapSacredUIManager.Instance.flickEffect, transform, true);
+            tmp.transform.position = transform.position;//更改位置
+            tmp.SetActive(true);
+            StartCoroutine(DestroyGameObject(tmp));
+        }
+        IEnumerator DestroyGameObject(GameObject objectToBeDes)
+        {
+            yield return new WaitForSeconds(0.75f);
+            Destroy(objectToBeDes);
+        }
 
         #region 鼠标预览
         /// <summary>
@@ -75,8 +88,8 @@ namespace UI
         /// <param name="eventData"></param>
         public void OnPointerEnter(PointerEventData eventData)
         {
-            UIManager.Instance.EnterPreview(this.gameObject, EditableDiceUIManager.Instance.previewSize);
-            UIManager.Instance.DoShake(this.GetComponent<Image>(), EditableDiceUIManager.Instance.shakeAngle);
+            UIManager.Instance.EnterPreview(this.gameObject,MapSacredUIManager.Instance.previewSize);
+            UIManager.Instance.DoShake(this.GetComponent<Image>(),MapSacredUIManager.Instance.shakeAngle);
             descriptionCanvas.SetActive(true);
         }
         
@@ -98,20 +111,18 @@ namespace UI
         /// <param name="eventData"></param>
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (editState != EditState.BagDice) { return;}
             if (_state != State.PointerChosen)
             {
-                UIManager.Instance.ClickFlow(gameObject, EditableDiceUIManager.Instance.flowDis);//设置浮动动画
-                _state = State.PointerChosen;//设置为选中状态
+                UIManager.Instance.ClickFlow(gameObject, MapSacredUIManager.Instance.flowDis);
+                _state = State.PointerChosen;//设置选中状态
                 saleUI.SetActive(true);//显示销售按钮
             }
             else
             {
-                EndClick();//结束选中状态
-                transform.position = _currentColumn.transform.position;//回复位置
+                EndClick();
+                this.transform.position = _currentColumn.transform.position;//回复位置
             }
         }
-        
         private void EndClick()
         {
             UIManager.Instance.CancelClick(gameObject);
@@ -120,7 +131,7 @@ namespace UI
         }
         #endregion
 
-        #region 拖动
+        #region 鼠标拖动
         /// <summary>
         /// 开始拖动函数
         /// </summary>
@@ -128,9 +139,9 @@ namespace UI
         /// <exception cref="NotImplementedException"></exception>
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if (editState != EditState.BagDice) { return;}
             EndClick();
-            _currentColumn = UIManager.Instance.DetectColumn(gameObject, EditableDiceUIManager.Instance.allColumns, EditableDiceUIManager.Instance.offset); //记录原来的物品栏位置
+            _currentColumn =
+                UIManager.Instance.DetectColumn(gameObject, MapSacredUIManager.Instance.sacredObjectColumns, MapSacredUIManager.Instance.offsetS); //记录原来的物品栏位置
         }
 
         /// <summary>
@@ -139,19 +150,11 @@ namespace UI
         /// <param name="eventData"></param>
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (editState != EditState.BagDice) { return;}
             EndClick();
             //更改位置
-            var switchObj = UIManager.Instance.DetectPosition(gameObject, EditableDiceUIManager.Instance.allColumns, _currentColumn, EditableDiceUIManager.Instance.offset);
-            _currentColumn = UIManager.Instance.DetectColumn(gameObject, EditableDiceUIManager.Instance.allColumns, EditableDiceUIManager.Instance.offset); //更新物品栏位置
-            gameObject.transform.SetParent(EditableDiceUIManager.Instance.parent);//设置为原来的图层
-
-            //TODO:交换了几号骰子的哪个面
-            if (editState == EditState.FightDice)
-            {
-                Debug.Log(
-                    $"<color=green>{gameObject.GetComponent<EditableDiceUIObject>().diceObj}交换了{EditableDiceUIManager.Instance.GetCurrentPage()}号骰子的{switchObj.GetComponent<EditableDiceUIObject>().diceObj}</color>");
-            }
+            UIManager.Instance.DetectPosition(gameObject, MapSacredUIManager.Instance.sacredObjectColumns, _currentColumn, MapSacredUIManager.Instance.offsetS);
+            _currentColumn = UIManager.Instance.DetectColumn(gameObject, MapSacredUIManager.Instance.sacredObjectColumns, MapSacredUIManager.Instance.offsetS); //记录原来的物品栏位置
+            gameObject.transform.SetParent(MapSacredUIManager.Instance.parent);//设置为原来的图层
         }
 
         /// <summary>
@@ -161,13 +164,12 @@ namespace UI
         /// <exception cref="NotImplementedException"></exception>
         public void OnDrag(PointerEventData eventData)
         {
-            if (editState != EditState.BagDice) { return;}
             gameObject.transform.SetParent(UIManager.Instance.dragCanvas);//设置为拖拽图层
             var tmpPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             this.transform.position = new Vector3(tmpPos.x, tmpPos.y, 0);
         }
         #endregion
-
+        
         /// <summary>
         /// 摧毁UI函数
         /// </summary>
