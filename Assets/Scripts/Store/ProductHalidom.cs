@@ -10,7 +10,7 @@ public class ProductHalidom : ProductBase<HalidomObject>
         base.Start();
     }
 
-    protected override void TryBuy()
+    public override void TryBuy()
     {
         //if ()
         //{

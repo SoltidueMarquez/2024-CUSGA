@@ -33,7 +33,7 @@ public static class RandomManager
     /// </summary>
     /// <param name="rareType">圣物的稀有度</param>
     /// <returns></returns>
-    public static HalidomObject GetRandomSingleDiceObj(RareType rareType)
+    public static HalidomObject GetRandomHalidomObj(RareType rareType)
     {
         Dictionary<string,HalidomObject> keyValuePairs = HalidomData.halidomDictionary;
         List<HalidomObject> halidomObjects = new List<HalidomObject>();
@@ -142,15 +142,15 @@ public static class RandomManager
         if (sum < 15)
         {
             //不生成圣物
-            return GetRandomSingleDiceObj(RareType.Common);
+            return GetRandomHalidomObj(RareType.Common);
         }
         else if (sum >= 15 && sum < 24)
         {
-            return GetRandomSingleDiceObj(RareType.Rare);
+            return GetRandomHalidomObj(RareType.Rare);
         }
         else
         {
-            return GetRandomSingleDiceObj(RareType.Legendary);
+            return GetRandomHalidomObj(RareType.Legendary);
         }
     }
 

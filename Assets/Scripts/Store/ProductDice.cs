@@ -10,7 +10,7 @@ public class ProductDice : ProductBase<BattleDice>
         base.Start();
     }
 
-    protected override void TryBuy()
+    public override void TryBuy()
     {
         //if ()
         //{
