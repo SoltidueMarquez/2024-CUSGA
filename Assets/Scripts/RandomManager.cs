@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using DesignerScripts;
 using static Cinemachine.DocumentationSortingAttribute;
+using UI;
 /// <summary>
 /// 获取随机数的管理器，获取随机的数据
 /// </summary>
@@ -152,5 +153,5 @@ public static class RandomManager
             return GetRandomSingleDiceObj(RareType.Legendary);
         }
     }
-    
+
 }
