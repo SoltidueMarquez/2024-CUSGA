@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BuffData_GainMoney2
   m_EditorClassIdentifier: 
   id: GainMoney2
-  dataName: 50
+  dataName: 65
   tags:
   - Self
   maxStack: 5
