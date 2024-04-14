@@ -8,9 +8,9 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public enum GameScene
 {
-    StartScene,
+    MapScene,
     BattleScene,
-    EndScene
+    
 }
 public class GameManager : MonoSingleton<GameManager>
 {

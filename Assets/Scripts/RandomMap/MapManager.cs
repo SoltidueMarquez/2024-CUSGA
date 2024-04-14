@@ -16,6 +16,7 @@ namespace Map
         [Header("玩家信息")]
         public PlayerDataSO playerDataSO;
         public ChaState playerChaState;
+        
         public Map CurrentMap { get; private set; }
 
         private void Start()
@@ -138,7 +139,7 @@ namespace Map
             }
             EditableDiceUIManager.Instance.Init(logicDicelist,bagLogicDice);
 
-
+            
             
         }
         #endregion
