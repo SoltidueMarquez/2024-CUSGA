@@ -77,13 +77,12 @@ namespace UI.Store
         private void JumpToPosition(Vector2Int position)
         {
             if (!_interactable) { return; }
-            //TODO:
-            //FightDicePageManager.Instance.SwitchToPosition(position);
+            EditableDiceUIManager.Instance.SwitchToPosition(position);
         }
         private void RevertMark()
         {
             if (!_interactable) { return; }
-            //FightDicePageManager.Instance.RevertMarkColumn();
+            EditableDiceUIManager.Instance.RevertMarkColumn();
         }
         
         public void OnPointerEnter(PointerEventData eventData)

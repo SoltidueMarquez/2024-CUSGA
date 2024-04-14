@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
@@ -29,10 +29,19 @@ namespace UI
         [SerializeField, Tooltip("左切按钮")] private Button switchLeftBtn;
         [SerializeField, Tooltip("右切按钮")] private Button switchRightBtn;
         [SerializeField, Tooltip("当前页码")] private Text curPageText;
-
+        [Tooltip("当前被标记的栏位号")] private int _curFightColumnIndex;
+        
+        /// <summary>
+        /// 获取当前页码
+        /// </summary>
+        /// <returns></returns>
+        public int GetCurrentPage()
+        {
+            return _currentDiceIndex;
+        }
 
         /// <summary>
-        /// 
+        /// 战斗骰面页和背包UI初始化函数
         /// </summary>
         /// <param name="logicDiceList">玩家的骰子列表</param>
         /// <param name="bagDiceList">玩家的背包骰面列表</param>
@@ -116,7 +125,7 @@ namespace UI
             tmp.DestroyUI(0);
         }
 
-        public void RemoveAllBagDice()
+        private void RemoveAllBagDice()
         {
             for (int i = 0; i < bagColumns.Count; i++)
             {
@@ -189,7 +198,16 @@ namespace UI
             var page = (_currentDiceIndex - 1 < 0) ? _currentDiceIndex : _currentDiceIndex - 1;
             SwitchPage(page);
         }
-        
+        public void SwitchToPosition(Vector2Int position)
+        {
+            SwitchPage(position.x);
+            _curFightColumnIndex = position.y;
+            fightColumns[position.y].transform.GetComponent<Image>().DOColor(Color.red, 0.2f);
+        }
+        public void RevertMarkColumn()
+        {
+            fightColumns[_curFightColumnIndex].transform.GetComponent<Image>().DOColor(Color.white, 0.1f);
+        }
         
         /// <summary>
         /// 移除背包骰面函数
@@ -218,13 +236,17 @@ namespace UI
 
         #endregion
 
-        /*public List<LogicDice> test;
-        #region 测试
+        //public List<LogicDice> test;
+        /*#region 测试
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.A))
             {
-                Init(test, test[0]);
+                
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                
             }
         }
         #endregion*/
