@@ -63,8 +63,11 @@ public class HalidomManager : MonoBehaviour
     }
 
     //配置圣物是不配圣物在格子里的顺序的，加进去的时候才获得序号
-
-    public void AddHalidom(HalidomObject halidom)
+    /// <summary>
+    /// 朝圣物列表中添加圣物
+    /// </summary>
+    /// <param name="halidom"></param>
+    public void AddHalidom(HalidomObject halidom,GameScene gameScene)
     {
         //这边先复制一份
         HalidomObject halidomObject = new HalidomObject(halidom.rareType, halidom.id, halidom.halidomName, halidom.description, halidom.value, halidom.buffInfos);
