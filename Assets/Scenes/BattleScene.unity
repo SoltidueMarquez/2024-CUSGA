@@ -641,16 +641,22 @@ MonoBehaviour:
   sacredObjectColumns:
   - transform: {fileID: 211473838}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 1648843896}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 526003206}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 245148438}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 2114061877}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 469554075}
     bagObject: {fileID: 0}
+    state: 0
   offsetS: 30
   template: {fileID: 7101880693602581045, guid: 816eb06a3e1f8ef49a3bf53fb84da8d9, type: 3}
   parent: {fileID: 1523603448}
@@ -672,16 +678,22 @@ MonoBehaviour:
   bagColumns:
   - transform: {fileID: 238085991}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 141952388}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 1088986962}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 230282658}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 1736194390}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 1923791450}
     bagObject: {fileID: 0}
+    state: 0
   offsetB: 30
   template: {fileID: 558227314385513905, guid: 791065f056cfe854ba54e217db7afc33, type: 3}
   parent: {fileID: 212745033}
@@ -4174,6 +4186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d798c69edc7851d4792c2d28017ca26f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyDataSO: {fileID: 0}
 --- !u!4 &993230910
 Transform:
   m_ObjectHideFlags: 0
@@ -4380,14 +4393,18 @@ MonoBehaviour:
   diceColumns:
   - transform: {fileID: 1146085132}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 1267500644}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 1263337500}
     bagObject: {fileID: 0}
+    state: 0
   diceTemplate: {fileID: 3046983917528316593, guid: 8174a524e9bfec74388c66f039a2e426, type: 3}
   sacredObjectColumns:
   - transform: {fileID: 526774495}
     bagObject: {fileID: 0}
+    state: 0
   sacredObjectTemplate: {fileID: 3046983917528316593, guid: 5ee32cff29f90ca4eacf25786e8b73dd, type: 3}
 --- !u!4 &1128369420
 Transform:
@@ -7913,6 +7930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e78e6b80fe59e94a82deb11c4675b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentScene: 1
   halidomMaxCount: 6
   currentCharacterProperty:
     health: 0

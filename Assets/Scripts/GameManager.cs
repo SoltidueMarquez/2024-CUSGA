@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// 整个游戏的管理类,一些整体的管理都在这边
 /// </summary>
+public enum GameScene
+{
+    MapScene,
+    BattleScene,
+    
+}
 public class GameManager : MonoSingleton<GameManager>
 {
     [HideInInspector]

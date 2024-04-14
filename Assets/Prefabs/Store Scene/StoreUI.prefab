@@ -921,7 +921,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 120, y: 0}
+  m_AnchoredPosition: {x: 1920, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2862359886486492529
@@ -2888,7 +2888,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 120, y: 0}
+  m_AnchoredPosition: {x: 1920, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5870723641359906186
@@ -4643,7 +4643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strengthenBg: {fileID: 7193036800606470205}
   strengthenCanvas: {fileID: 5863594257751814937}
-  animTime: 0
+  animTime: 1
   storeArea: {fileID: 2843255067353324059}
   rollArea: {fileID: 4598054344826653412}
   appearTransformPosition: {fileID: 6526144330711405959}

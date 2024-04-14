@@ -8,7 +8,6 @@ public enum RareType
     Rare,
     Legendary
 }
-[Serializable]
 public class HalidomObject
 {
     /// <summary>

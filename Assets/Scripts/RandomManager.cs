@@ -44,6 +44,7 @@ public static class RandomManager
         }).ToList();
         return halidomObjectLegals[Random.Range(0, halidomObjectLegals.Count)];
     }
+    #region 获得金钱
     /// <summary>
     /// 通过进入奖励界面获取的投掷结果获取金钱
     /// </summary>
@@ -83,6 +84,7 @@ public static class RandomManager
         int money = 5;
         return money;
     }
+    #endregion
     /// <summary>
     /// 根据投出骰子和当前游戏的状态获取奖励的骰子
     /// </summary>

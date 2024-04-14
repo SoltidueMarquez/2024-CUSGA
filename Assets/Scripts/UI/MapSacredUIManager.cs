@@ -25,18 +25,18 @@ namespace UI
             RemoveAllSacredObject();
             for (int i = 0; i < halidomObject.Count; i++)
             {
-                CreateSacredUIObject(i, halidomObject[i].id, removeList[i], halidomObject[i]);
+                CreateSacredUIObject(i, removeList[i], halidomObject[i]);
                 //CreateSacredUIObject(i, "1_02", null, null);
             }
         }
-        
+
         /// <summary>
         /// 生成圣物函数
         /// </summary>
         /// <param name="index">所在栏位序列号</param>
-        /// <param name="id"></param>
         /// <param name="remove"></param>
-        private void CreateSacredUIObject(int index, string id, Action<HalidomObject> remove,HalidomObject halidomObject)
+        /// <param name="halidomObject"></param>
+        public void CreateSacredUIObject(int index, Action<HalidomObject> remove,HalidomObject halidomObject)
         {
             if (index >= sacredObjectColumns.Count)
             {
@@ -48,6 +48,7 @@ namespace UI
                 Debug.LogWarning("错误，所在栏位已经有圣物存在");
                 return;
             }
+            var id = halidomObject.id;
             var tmp = Instantiate(template, parent, true);
             tmp.transform.position = sacredObjectColumns[index].transform.position;//更改位置
             tmp.GetComponent<MapSacredUIObject>().Init(sacredObjectColumns, offsetS, id, remove, halidomObject);//初始化
@@ -59,7 +60,7 @@ namespace UI
         /// 按照栏位的真实位置移除圣物函数
         /// </summary>
         /// <param name="index">所在栏位序列号</param>
-        private void RemoveSacredObject(int index)
+        public void RemoveSacredObject(int index)
         {
             if (sacredObjectColumns[index].bagObject == null)
             {

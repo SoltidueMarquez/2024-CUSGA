@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class HalidomManager : MonoBehaviour
 {
+    [Header("当前场景")]
+    public GameScene currentScene;
     /// <summary>
     /// 存放所有圣物的List
     /// </summary>
@@ -94,7 +96,14 @@ public class HalidomManager : MonoBehaviour
                 }
                 RefreshAllHalidoms();
                 BattleManager.Instance.parameter.playerChaState.AttrAndResourceRecheck();
-                SacredObjectUIManager.Instance.CreateSacredUIObject(i, halidomObject.id, SellHalidom, halidomObject);
+                if(this.currentScene == GameScene.BattleScene)
+                {
+                    SacredObjectUIManager.Instance.CreateSacredUIObject(i, halidomObject.id, SellHalidom, halidomObject);
+                }
+                else if(this.currentScene == GameScene.MapScene)
+                {
+                    MapSacredUIManager.Instance.CreateSacredUIObject(i, SellHalidom, halidomObject);
+                }    
                 Debug.Log("<color=#3399FF>HalidomManager-添加圣物:</color>" + halidomObject.halidomName + "成功");
                 //找到空的格子后就跳出循环
                 break;
@@ -185,7 +194,7 @@ public class HalidomManager : MonoBehaviour
 
 
     /// <summary>
-    /// 重新设置圣物列表
+    /// 重新设置圣物列表,交换圣物用
     /// </summary>
     public void ResetHalidomList()
     {
@@ -432,6 +441,26 @@ public class HalidomManager : MonoBehaviour
             }
         }
         return halidomDictionary;
+    }
+    #endregion
+
+    #region 初始化UI相关
+    public void InitHalidomUI()
+    {
+        for(int i = 0;i < halidomList.Length;i++)
+        {
+            if (halidomList[i] != null)
+            {
+                if(this.currentScene == GameScene.BattleScene)
+                {
+                    SacredObjectUIManager.Instance.CreateSacredUIObject(i, halidomList[i].id, SellHalidom, halidomList[i]);
+                }
+                else if(this.currentScene == GameScene.MapScene)
+                {
+                    MapSacredUIManager.Instance.CreateSacredUIObject(i, SellHalidom, halidomList[i]);
+                }
+            }
+        }
     }
     #endregion
 }

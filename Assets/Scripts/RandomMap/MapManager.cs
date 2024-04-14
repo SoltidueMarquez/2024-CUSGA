@@ -2,6 +2,8 @@
 using UnityEngine;
 using Newtonsoft.Json;
 using UI;
+using System.Collections.Generic;
+using System;
 
 namespace Map
 {
@@ -14,6 +16,7 @@ namespace Map
         [Header("玩家信息")]
         public PlayerDataSO playerDataSO;
         public ChaState playerChaState;
+        
         public Map CurrentMap { get; private set; }
 
         private void Start()
@@ -105,9 +108,38 @@ namespace Map
                 this.playerChaState.resource = playerDataSO.chaResource;
                 this.playerChaState.GetBattleDiceHandler().InitBagDiceWithData(playerDataSO.bagDiceList);
             }
-            //this.playerChaState.GetBattleDiceHandler().InitBattleDiceUI();
-            //初始化玩家的背包骰面
-            //this.playerChaState.GetBattleDiceHandler().InitBagDiceUI(SellSingleDice);
+            List<LogicDice> logicDicelist = new List<LogicDice>();
+            //获取logicDiceList
+            for (int i = 0;i < this.playerChaState.GetBattleDiceHandler().battleDiceCount;i++)
+            {
+                var actionList = new List<Action<SingleDiceObj>>();
+                var singleDiceObjs = this.playerChaState.GetBattleDiceHandler().battleDices[i].GetBattleDiceSingleDices();
+                var logicDice = new LogicDice();
+                logicDice.singleDiceList = singleDiceObjs;
+                logicDice.index = i;
+                for (int j = 0;j < singleDiceObjs.Count;j++)
+                {
+                    var singleDiceObj = singleDiceObjs[j];
+                    Action<SingleDiceObj> action = SellSingleDice;
+                    actionList.Add(action);
+                }
+                logicDice.removeList = actionList;
+                logicDicelist.Add(logicDice);
+            }
+            //获取背包的logicDice
+            var currentBagDiceList = this.playerChaState.GetBattleDiceHandler().bagDiceCards;
+            var bagLogicDice = new LogicDice();
+            bagLogicDice.singleDiceList = currentBagDiceList;
+            bagLogicDice.index = 0;
+            for (int i = 0; i < currentBagDiceList.Count; i++)
+            {
+                var singleDiceObj = currentBagDiceList[i];
+                Action<SingleDiceObj> action = SellSingleDice;
+                bagLogicDice.removeList.Add(action);
+            }
+            EditableDiceUIManager.Instance.Init(logicDicelist,bagLogicDice);
+
+            
             
         }
         #endregion
