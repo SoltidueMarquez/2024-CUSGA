@@ -579,9 +579,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: StoreUI
       objectReference: {fileID: 0}
-    - target: {fileID: 3099756004248140214, guid: ead795afd3ad01246b092637d1ea4c59, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 4094949460559003386, guid: ead795afd3ad01246b092637d1ea4c59, type: 3}
+      propertyPath: animTime
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4247798331437191102, guid: ead795afd3ad01246b092637d1ea4c59, type: 3}
       propertyPath: m_LocalPosition.x
@@ -629,7 +629,15 @@ PrefabInstance:
       objectReference: {fileID: 519420031}
     - target: {fileID: 5822657103560371217, guid: ead795afd3ad01246b092637d1ea4c59, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038019694659832592, guid: ead795afd3ad01246b092637d1ea4c59, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 6079163028888325154, guid: ead795afd3ad01246b092637d1ea4c59, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1920
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -886,6 +894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e78e6b80fe59e94a82deb11c4675b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  halidomList: []
   halidomMaxCount: 6
   currentCharacterProperty:
     health: 0

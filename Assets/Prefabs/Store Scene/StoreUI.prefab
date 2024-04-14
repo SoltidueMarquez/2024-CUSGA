@@ -890,7 +890,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 120, y: 0}
+  m_AnchoredPosition: {x: 1920, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2862359886486492529
@@ -2719,7 +2719,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 120, y: 0}
+  m_AnchoredPosition: {x: 1920, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5870723641359906186
@@ -4141,7 +4141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strengthenBg: {fileID: 7193036800606470205}
   strengthenCanvas: {fileID: 5863594257751814937}
-  animTime: 0
+  animTime: 1
   storeArea: {fileID: 2843255067353324059}
   rollArea: {fileID: 4598054344826653412}
   appearTransformPosition: {fileID: 6526144330711405959}
@@ -4167,18 +4167,24 @@ MonoBehaviour:
   diceColumns:
   - transform: {fileID: 7926048234021152366}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 6308476059707383429}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 8333885671417910947}
     bagObject: {fileID: 0}
+    state: 0
   diceTemplate: {fileID: 3046983917528316593, guid: 6c73ff6e08a309c43a7796cd70df1bc0, type: 3}
   sacredObjectColumns:
   - transform: {fileID: 2282626440460740736}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 6873646620679491863}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 1138662495887465988}
     bagObject: {fileID: 0}
+    state: 0
   sacredObjectTemplate: {fileID: 3046983917528316593, guid: 24dc8b92de8b42940bb32cbd33b4ee01, type: 3}
 --- !u!114 &8296850532430577718
 MonoBehaviour:
@@ -4199,16 +4205,22 @@ MonoBehaviour:
   bagColumnList:
   - transform: {fileID: 6381197325666066313}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 3049800861596957794}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 2099917013982375718}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 2663382967603243367}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 932450128148397361}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 639629304486784866}
     bagObject: {fileID: 0}
+    state: 0
   exitButton: {fileID: 7725980100709512345}
   animTime: 1
 --- !u!114 &7381485503643075250
@@ -4246,24 +4258,34 @@ MonoBehaviour:
   columns:
   - transform: {fileID: 3056126233562463336}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 7864109376455484756}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 8568967910397633858}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 3528912195473449827}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 7866243603687622334}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 8947113565026652925}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 7397547005280936812}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 2855121011849364002}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 751280218681714767}
     bagObject: {fileID: 0}
+    state: 0
   - transform: {fileID: 651789252004011989}
     bagObject: {fileID: 0}
+    state: 0
   template: {fileID: 7794941978125280914, guid: f9048db2a6e636a4cb66d241e627ddee, type: 3}
   resultList: []
   animTime: 2
