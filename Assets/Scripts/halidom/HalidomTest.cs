@@ -28,7 +28,7 @@ public class HalidomTest : MonoBehaviour
                 //找halidom字典里是否有这个键
                 if(HalidomData.halidomDictionary.ContainsKey(halidom.halidomName.ToString()))
                 {
-                    HalidomManager.Instance.AddHalidom(HalidomData.halidomDictionary[halidom.halidomName.ToString()],GameScene.BattleScene);
+                    HalidomManager.Instance.AddHalidom(HalidomData.halidomDictionary[halidom.halidomName.ToString()]);
                 }
                 
             }
@@ -46,7 +46,7 @@ public class HalidomTest : MonoBehaviour
                 {
                     if (HalidomData.halidomDictionary.ContainsKey(halidom.halidomName.ToString()))
                     {
-                        HalidomManager.Instance.AddHalidom(HalidomData.halidomDictionary[halidom.halidomName.ToString()],GameScene.BattleScene);
+                        HalidomManager.Instance.AddHalidom(HalidomData.halidomDictionary[halidom.halidomName.ToString()]);
                     }
                 }
             }

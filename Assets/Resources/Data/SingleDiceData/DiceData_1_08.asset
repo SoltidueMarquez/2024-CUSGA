@@ -22,7 +22,7 @@ MonoBehaviour:
     currentShield: 0
   cost:
     currentHp: 0
-    currentMoney: 0
+    currentMoney: 2
     currentRollTimes: 0
     currentShield: 0
   level: 1

@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using UI;
 using System.Collections.Generic;
 using System;
+using DesignerScripts;
 
 namespace Map
 {
@@ -16,13 +17,17 @@ namespace Map
         [Header("玩家信息")]
         public PlayerDataSO playerDataSO;
         public ChaState playerChaState;
-        
+
         public Map CurrentMap { get; private set; }
 
         private void Start()
         {
-            //玩家信息初始化
+            //地图场景玩家信息初始化
             InitializePlayer();
+            //地图场景圣物初始化
+            InitializeHalidom();
+
+            //地图场景地图初始化
             if (PlayerPrefs.HasKey("Map"))
             {
                 var mapJson = PlayerPrefs.GetString("Map");
@@ -110,14 +115,14 @@ namespace Map
             }
             List<LogicDice> logicDicelist = new List<LogicDice>();
             //获取logicDiceList
-            for (int i = 0;i < this.playerChaState.GetBattleDiceHandler().battleDiceCount;i++)
+            for (int i = 0; i < this.playerChaState.GetBattleDiceHandler().battleDiceCount; i++)
             {
                 var actionList = new List<Action<SingleDiceObj>>();
                 var singleDiceObjs = this.playerChaState.GetBattleDiceHandler().battleDices[i].GetBattleDiceSingleDices();
                 var logicDice = new LogicDice();
                 logicDice.singleDiceList = singleDiceObjs;
                 logicDice.index = i;
-                for (int j = 0;j < singleDiceObjs.Count;j++)
+                for (int j = 0; j < singleDiceObjs.Count; j++)
                 {
                     var singleDiceObj = singleDiceObjs[j];
                     Action<SingleDiceObj> action = SellSingleDice;
@@ -137,10 +142,35 @@ namespace Map
                 Action<SingleDiceObj> action = SellSingleDice;
                 bagLogicDice.removeList.Add(action);
             }
-            EditableDiceUIManager.Instance.Init(logicDicelist,bagLogicDice);
+            EditableDiceUIManager.Instance.Init(logicDicelist, bagLogicDice);
 
-            
-            
+
+
+        }
+        /// <summary>
+        /// 初始化圣物
+        /// </summary>
+        public void InitializeHalidom()
+        {
+            //如果1ifUseSaveData为true，那么就是使用存档数据，对宇圣物来说，就是存在圣物manager中的list,因为圣物manager DontDestroyOnLoad
+            if (playerDataSO.ifUseSaveData || GameManager.Instance.ifLoadedHalidom)
+            {
+                HalidomManager.Instance.InitHalidomUI(GameScene.MapScene);
+            }
+            else
+            {
+                //如果ifUseSaveData为false，那么就是使用初始数据，对于圣物来说，就是存在playerDataSO中的list
+                //遍历halidomSO列表
+                foreach (var halidom in playerDataSO.halidomSOs)
+                {
+                    //找halidom字典里是否有这个键
+                    if (HalidomData.halidomDictionary.ContainsKey(halidom.halidomName.ToString()))
+                    {
+                        HalidomManager.Instance.AddHalidomInMap(HalidomData.halidomDictionary[halidom.halidomName.ToString()]);
+                    }
+                }
+                GameManager.Instance.ifLoadedHalidom = true;
+            }
         }
         #endregion
         #region 骰子交互相关

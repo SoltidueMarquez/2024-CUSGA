@@ -219,6 +219,28 @@ public class BattleManager : MonoBehaviour
 
 
     }
+    public void InitializeHalidom()
+    {
+        //如果1ifUseSaveData为true，那么就是使用存档数据，对宇圣物来说，就是存在圣物manager中的list,因为圣物manager DontDestroyOnLoad
+        if (this.parameter.playerDataSO.ifUseSaveData || GameManager.Instance.ifLoadedHalidom)
+        {
+            HalidomManager.Instance.InitHalidomUI(GameScene.BattleScene);
+        }
+        else
+        {
+            //如果ifUseSaveData为false，那么就是使用初始数据，对于圣物来说，就是存在playerDataSO中的list
+            //遍历halidomSO列表
+            foreach (var halidom in this.parameter.playerDataSO.halidomSOs)
+            {
+                //找halidom字典里是否有这个键
+                if (HalidomData.halidomDictionary.ContainsKey(halidom.halidomName.ToString()))
+                {
+                    HalidomManager.Instance.AddHalidom(HalidomData.halidomDictionary[halidom.halidomName.ToString()]);
+                }
+            }
+            GameManager.Instance.ifLoadedHalidom = true;
+        }
+    }
     /// <summary>
     /// 对敌人根据数值初始化
     /// </summary>
@@ -499,7 +521,7 @@ public class BattleManager : MonoBehaviour
         {
             return;
         }
-        HalidomManager.Instance.AddHalidom(halidomObject,GameScene.BattleScene);//创建视觉效果的也包含在这个函数中
+        HalidomManager.Instance.AddHalidom(halidomObject);//创建视觉效果的也包含在这个函数中
         this.parameter.ifSelectedHalidom = true;
     }
     #endregion
