@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public enum RareType
     Rare,
     Legendary
 }
+[Serializable]
 public class HalidomObject
 {
     /// <summary>
