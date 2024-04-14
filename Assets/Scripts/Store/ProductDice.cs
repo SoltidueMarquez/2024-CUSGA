@@ -28,12 +28,12 @@ public class ProductDice : ProductBase<BattleDice>
 
 
 
-    protected override void InitialProduct(BattleDice product)
+    public override void InitialProduct(BattleDice product)
     {
         base.InitialProduct(product);
     }
 
-    protected override void ProductBrought()
+    public override void ProductBrought()
     {
         base.ProductBrought();
     }

@@ -30,7 +30,7 @@ public abstract class ProductBase<T> : MonoBehaviour where T : class
     /// 商品初始化
     /// </summary>
     /// <param name="product"></param>
-    protected virtual void InitialProduct(T _product)
+    public virtual void InitialProduct(T _product)
     {
         isEmpty = false;
         product = _product;
@@ -39,9 +39,15 @@ public abstract class ProductBase<T> : MonoBehaviour where T : class
     /// <summary>
     /// 这个商品被买走了
     /// </summary>
-    protected virtual void ProductBrought()
+    public virtual void ProductBrought()
     {
         isEmpty = true;
+    }
+
+    public virtual void ClearProduct()
+    {
+        isEmpty = true;
+        product= null;
     }
 
     /// <summary>

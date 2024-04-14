@@ -6,7 +6,7 @@ using UI;
 namespace Map
 {
 
-    public class MapManager : MonoBehaviour
+    public class MapManager : MonoSingleton<MapManager>
     {
         [Header("地图配置")]
         public MapConfig config;
