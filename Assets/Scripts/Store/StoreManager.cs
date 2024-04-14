@@ -36,9 +36,13 @@ public class StoreManager : SingletonBase<StoreManager>
     void Start()
     {
         OnEnterStore.AddListener(OpenStore);
-        OnEnterStore.AddListener(RerollShop);
+        OnEnterStore.AddListener(() =>
+        {
+            OnRefreshStore?.Invoke();
+        });
         OnExitStore.AddListener(CloseStore);
-        OnClickReroll.AddListener(RerollShop);
+        //OnClickReroll.AddListener(RerollShop);
+        OnRefreshStore.AddListener(RerollShop);
     }
 
     // Update is called once per frame
@@ -150,35 +154,38 @@ public class StoreManager : SingletonBase<StoreManager>
     /// <param name="rareType3"></param>
     private void AddProductHalidom(RareType rareType1, RareType rareType2, RareType rareType3)
     {
-
-        while (this != null)
+        int i = 0;
+        while (i<100)
         {
-            HalidomObject halidomObject = RandomManager.GetRandomSingleDiceObj(rareType1);
+            HalidomObject halidomObject = RandomManager.GetRandomHalidomObj(rareType1);
             if (!AlreadyHasHalidom(halidomObject))
             {
                 productHalidoms[0].InitialProduct(halidomObject);
                 break;
             }
+            i++;
         }
-
-        while (this != null)
+        i=0;
+        while (i < 100)
         {
-            HalidomObject halidomObject = RandomManager.GetRandomSingleDiceObj(rareType2);
+            HalidomObject halidomObject = RandomManager.GetRandomHalidomObj(rareType2);
             if (!AlreadyHasHalidom(halidomObject))
             {
                 productHalidoms[1].InitialProduct(halidomObject);
                 break;
             }
+            i++;
         }
-
-        while (this != null)
+        i = 0;
+        while (i<100)
         {
-            HalidomObject halidomObject = RandomManager.GetRandomSingleDiceObj(rareType3);
+            HalidomObject halidomObject = RandomManager.GetRandomHalidomObj(rareType3);
             if (!AlreadyHasHalidom(halidomObject))
             {
                 productHalidoms[2].InitialProduct(halidomObject);
                 break;
             }
+            i++;
         }
     }
 

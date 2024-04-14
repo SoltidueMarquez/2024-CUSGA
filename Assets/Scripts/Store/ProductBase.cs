@@ -24,7 +24,7 @@ public abstract class ProductBase<T> : MonoBehaviour where T : class
     /// 试图购买，返回是否购买成功
     /// </summary>
     /// <returns></returns>
-    protected abstract void TryBuy();
+    public abstract void TryBuy();
 
     /// <summary>
     /// 商品初始化

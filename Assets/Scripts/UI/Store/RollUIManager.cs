@@ -18,6 +18,11 @@ namespace UI.Store
         [SerializeField, Tooltip("结果列表")] private List<GameObject> resultList;
         [Tooltip("使用动画时长")]public float animTime;
 
+        private void Start()
+        {
+            
+        }
+
         #region 轮盘按钮与栏位动画
         /// <summary>
         /// 轮盘与按钮旋转进入

@@ -32,6 +32,8 @@ namespace UI.Store
             {
                 StoreManager.Instance.OnClickUpgrade?.Invoke();
             });
+
+            StoreManager.Instance.OnRefreshStore.AddListener(RefreshHalidomUI);
         }
 
         #region 出售骰面相关
@@ -119,6 +121,27 @@ namespace UI.Store
         }
         #endregion
 
+        public void RefreshHalidomUI()
+        {
+            
+            for (int i = 0; i < sacredObjectColumns.Count; i++)
+            {
+                RemoveSacredObject(i);
+            }
+            for (int i = 0; i < diceColumns.Count; i++)
+            {
+                RemoveDiceUI(i);
+            }
+
+
+            for (int i = 0; i < sacredObjectColumns.Count; i++)
+            {
+                ProductHalidom productHalidom = sacredObjectColumns[i].transform.GetComponent<ProductHalidom>();
+                CreateSacredObject(i, productHalidom.TryBuy, productHalidom.product);
+            }
+
+        }
+
         #region 出售圣物相关
         /// <summary>
         /// 创建圣物函数
@@ -127,7 +150,7 @@ namespace UI.Store
         /// <param name="index"></param>
         /// <param name="onChoose"></param>
         /// <param name="halidomObject"></param>
-        public void CreateSacredObject(string id, int index, Action<HalidomObject> onChoose,HalidomObject halidomObject)
+        public void CreateSacredObject(int index, Action onChoose,HalidomObject halidomObject)
         {
             if (index > sacredObjectColumns.Count)
             {
@@ -144,7 +167,7 @@ namespace UI.Store
             sacredObjectColumns[index].bagObject = tmp;
             tmp.transform.position = parent.position;//更改位置
             var tmpSacredObject = tmp.GetComponent<StoreSacredUIObject>();
-            tmpSacredObject.Init(id, animTime, 2, onChoose, halidomObject);//初始化
+            tmpSacredObject.Init(halidomObject.id, animTime, 2, onChoose, halidomObject);//初始化
             tmp.SetActive(true);
             tmpSacredObject.DoAppearAnim(animTime); //出现动画
         }
