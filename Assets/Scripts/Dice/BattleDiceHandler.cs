@@ -54,7 +54,7 @@ public class BattleDiceHandler : MonoBehaviour
             chaState.ModResources(-1 * singleDiceObj.model.cost);
             //造成伤害
             Damage damage = singleDiceObj.model.damage;
-            damage.indexDamageRate = singleDiceObj.idInDice + 1;//根据骰子的id来计算倍率
+            damage.indexDamageRate = singleDiceObj.idInDice ;//根据骰子的id来计算倍率
             //再次通过tag查找需要加入damageInfo类中的加给敌人的buffInfo
             List<BuffInfo> addToEnemyBuffs = null;
             if (singleDiceObj.model.buffInfos != null)

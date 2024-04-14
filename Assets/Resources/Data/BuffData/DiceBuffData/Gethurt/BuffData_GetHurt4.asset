@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BuffData_GetHurt4
   m_EditorClassIdentifier: 
   id: GetHurt4
-  dataName: 48
+  dataName: 62
   tags:
   - Self
   maxStack: 5

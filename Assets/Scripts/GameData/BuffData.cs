@@ -87,6 +87,14 @@ namespace DesignerScripts
         ClearEnemyPositiveBuff,//清除敌人正面buff
         ClearPlayerNegativeBuff,//清除玩家负面buff
         #endregion
+
+        GetHurt2,
+        GetHurt3,
+        GetHurt4,
+        RecoverHealth2,
+        RecoverHealth3,
+        GainMoney2,
+        GainMoney3,
     }
     public class BuffDataTable
     {

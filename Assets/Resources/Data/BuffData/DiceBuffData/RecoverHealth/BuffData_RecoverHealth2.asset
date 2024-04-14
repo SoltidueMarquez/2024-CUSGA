@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BuffData_RecoverHealth2
   m_EditorClassIdentifier: 
   id: RecoverHealth2
-  dataName: 49
+  dataName: 63
   tags:
   - Self
   maxStack: 5
