@@ -102,7 +102,14 @@ public class BattleDiceHandler : MonoBehaviour
         }
     }
 
-
+    #region 骰面交换
+    public void SwapDiceInBagAndBattle(SingleDiceObj singleDiceObjInBag,SingleDiceObj singleDiceObjInBattle)
+    {
+        SingleDiceObj temp = singleDiceObjInBag;
+        singleDiceObjInBag = singleDiceObjInBattle;
+        singleDiceObjInBattle = temp;
+    }
+    #endregion
     #region 初始化战斗骰子，有数据的情况下和测试的情况下
     /// <summary>
     /// 没有存档的情况下，默认初始化骰子,以及敌人的骰子初始化都是这个函数

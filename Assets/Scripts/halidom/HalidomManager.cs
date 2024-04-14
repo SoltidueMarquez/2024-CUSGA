@@ -185,7 +185,7 @@ public class HalidomManager : MonoBehaviour
 
 
     /// <summary>
-    /// 重新设置圣物列表
+    /// 重新设置圣物列表,交换圣物用
     /// </summary>
     public void ResetHalidomList()
     {
