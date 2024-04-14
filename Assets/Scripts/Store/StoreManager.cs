@@ -36,12 +36,8 @@ public class StoreManager : SingletonBase<StoreManager>
     void Start()
     {
         OnEnterStore.AddListener(OpenStore);
-        OnEnterStore.AddListener(() =>
-        {
-            OnRefreshStore?.Invoke();
-        });
         OnExitStore.AddListener(CloseStore);
-        //OnClickReroll.AddListener(RerollShop);
+        OnClickReroll.AddListener(ClickReroll);
         OnRefreshStore.AddListener(RerollShop);
     }
 
@@ -50,6 +46,8 @@ public class StoreManager : SingletonBase<StoreManager>
     {
 
     }
+
+    #region ------UnityEvent------
 
     /// <summary>
     /// 进入商店时调用
@@ -76,6 +74,8 @@ public class StoreManager : SingletonBase<StoreManager>
     /// </summary>
     public UnityEvent<int, SingleDiceObj> OnDiceRoll;
 
+    #endregion
+
     public void m_Debug(string log)
     {
         if (enableDebug)
@@ -98,6 +98,13 @@ public class StoreManager : SingletonBase<StoreManager>
     {
         yield return new WaitForSeconds(2);
         StoreUIcanvas.SetActive(false);
+    }
+
+    #region ------刷新商店------
+
+    private void ClickReroll()
+    {
+        OnRefreshStore?.Invoke();
     }
 
     /// <summary>
@@ -155,7 +162,7 @@ public class StoreManager : SingletonBase<StoreManager>
     private void AddProductHalidom(RareType rareType1, RareType rareType2, RareType rareType3)
     {
         int i = 0;
-        while (i<100)
+        while (i < 100)
         {
             HalidomObject halidomObject = RandomManager.GetRandomHalidomObj(rareType1);
             if (!AlreadyHasHalidom(halidomObject))
@@ -165,7 +172,7 @@ public class StoreManager : SingletonBase<StoreManager>
             }
             i++;
         }
-        i=0;
+        i = 0;
         while (i < 100)
         {
             HalidomObject halidomObject = RandomManager.GetRandomHalidomObj(rareType2);
@@ -177,7 +184,7 @@ public class StoreManager : SingletonBase<StoreManager>
             i++;
         }
         i = 0;
-        while (i<100)
+        while (i < 100)
         {
             HalidomObject halidomObject = RandomManager.GetRandomHalidomObj(rareType3);
             if (!AlreadyHasHalidom(halidomObject))
@@ -194,7 +201,16 @@ public class StoreManager : SingletonBase<StoreManager>
     /// </summary>
     private void AddProductDice(RareType rareType1, RareType rareType2, RareType rareType3)
     {
-        
+
+        productDices[0].InitialProduct(new SingleDiceObj
+            (RandomManager.GetSingleDiceModel((int)rareType1 + 1, 0), Random.Range(0, 6)));
+
+        productDices[1].InitialProduct(new SingleDiceObj
+            (RandomManager.GetSingleDiceModel((int)rareType2 + 1, 0), Random.Range(0, 6)));
+
+        productDices[2].InitialProduct(new SingleDiceObj
+            (RandomManager.GetSingleDiceModel((int)rareType3 + 1, 0), Random.Range(0, 6)));
+
     }
     /// <summary>
     /// 玩家和商店是否拥有圣物
@@ -227,4 +243,5 @@ public class StoreManager : SingletonBase<StoreManager>
         return false;
     }
 
+    #endregion
 }
