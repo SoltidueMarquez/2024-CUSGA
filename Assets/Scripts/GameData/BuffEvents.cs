@@ -98,7 +98,7 @@ namespace DesignerScripts
         ClearEnemyPositiveBuff,//清除敌人正面buff
         ClearPlayerNegativeBuff,//清除玩家负面buff
 
-
+        RerollDice,
         #endregion
     }
 
@@ -163,7 +163,10 @@ namespace DesignerScripts
             },
             {
                 BuffEventName.ClearPlayerNegativeBuff.ToString(),ClearPlayerNegativeBuff
-            },   
+            },
+            {
+                BuffEventName.RerollDice.ToString(),RerollDice
+            },
 
         };
         public static Dictionary<string, OnBuffRemove> onRemoveFunc = new Dictionary<string, OnBuffRemove>();
@@ -1110,6 +1113,11 @@ namespace DesignerScripts
                 }
 
             }
+        }
+
+        public static void RerollDice(BuffInfo buffInfo)
+        {
+            BattleManager.Instance.ReRollDiceForPlayer();
         }
 
         #endregion

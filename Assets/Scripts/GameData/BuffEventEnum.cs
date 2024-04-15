@@ -30,7 +30,7 @@ public enum onCreateEnum
     PlayerSpirit,//玩家精力
     ClearEnemyPositiveBuff,//清除敌人正面buff
     ClearPlayerNegativeBuff,//清除玩家负面buff
-
+    RerollDice,
 }
 
 public enum onRemoveEnum

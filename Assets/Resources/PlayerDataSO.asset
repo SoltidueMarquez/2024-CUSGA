@@ -31,12 +31,12 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 4c9a77c04f88a374b8a895ea3c6e5d30, type: 2}
   - diceType: 1
     singleDiceModelSOs:
-    - {fileID: 11400000, guid: ffd7ffe63ae49f94cbd420e2d3ba88fe, type: 2}
-    - {fileID: 11400000, guid: ffd7ffe63ae49f94cbd420e2d3ba88fe, type: 2}
-    - {fileID: 11400000, guid: ffd7ffe63ae49f94cbd420e2d3ba88fe, type: 2}
-    - {fileID: 11400000, guid: ffd7ffe63ae49f94cbd420e2d3ba88fe, type: 2}
-    - {fileID: 11400000, guid: ffd7ffe63ae49f94cbd420e2d3ba88fe, type: 2}
-    - {fileID: 11400000, guid: ffd7ffe63ae49f94cbd420e2d3ba88fe, type: 2}
+    - {fileID: 11400000, guid: 05902d7cd2b41c44e8d69c22efb953dc, type: 2}
+    - {fileID: 11400000, guid: 05902d7cd2b41c44e8d69c22efb953dc, type: 2}
+    - {fileID: 11400000, guid: 05902d7cd2b41c44e8d69c22efb953dc, type: 2}
+    - {fileID: 11400000, guid: 05902d7cd2b41c44e8d69c22efb953dc, type: 2}
+    - {fileID: 11400000, guid: 05902d7cd2b41c44e8d69c22efb953dc, type: 2}
+    - {fileID: 11400000, guid: 05902d7cd2b41c44e8d69c22efb953dc, type: 2}
   bagDiceSOList: []
   maxBagDiceCount: 6
   halidomDataForSaves: []
