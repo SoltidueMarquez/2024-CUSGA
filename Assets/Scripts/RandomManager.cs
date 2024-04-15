@@ -134,7 +134,7 @@ public static class RandomManager
         {
             DiceType diceType = (DiceType)Random.Range(0, 3);
             SingleDiceModel singleDiceModel = GetSingleDiceModel(diceType, level, 0);
-            int idInDice = Random.Range(0, 6);
+            int idInDice = Random.Range(1, 6);
             SingleDiceObj singleDiceObj = new SingleDiceObj(singleDiceModel, idInDice);
 
             singleDiceObjs.Add(singleDiceObj);
