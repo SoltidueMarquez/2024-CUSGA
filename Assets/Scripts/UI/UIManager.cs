@@ -43,6 +43,13 @@ namespace UI
             pSize = oldScale.x * pSize;
             uiObject.transform.DOScale(new Vector3(pSize, pSize, pSize), 0.2f);
         }
+        public void EnterPreview(GameObject uiObject, float pSize,float maxSize)
+        {
+            var oldScale = uiObject.transform.localScale;
+            pSize = oldScale.x * pSize;
+            pSize = (pSize > maxSize) ? maxSize : pSize;
+            uiObject.transform.DOScale(new Vector3(pSize, pSize, pSize), 0.2f);
+        }
 
         /// <summary>
         /// 晃动效果

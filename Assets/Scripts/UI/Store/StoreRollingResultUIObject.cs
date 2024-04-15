@@ -88,7 +88,7 @@ namespace UI.Store
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (!_interactable) { return; }
-            UIManager.Instance.EnterPreview(this.gameObject, 1.2f);
+            UIManager.Instance.EnterPreview(this.gameObject, 1.2f, 1.2f);
             UIManager.Instance.DoShake(this.GetComponent<Image>(), 5);
             JumpToPosition(_pageAndIndex);//显示是来自于哪个骰子的那个面
             infoCanvas.SetActive(true);

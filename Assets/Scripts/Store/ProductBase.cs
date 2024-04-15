@@ -7,9 +7,9 @@ using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// ´ú±íÉÌÆ·¸ñ×Ó
+/// ä»£è¡¨å•†å“æ ¼å­
 /// </summary>
-/// <typeparam name="T">ÉÌÆ·ÀàĞÍ</typeparam>
+/// <typeparam name="T">å•†å“ç±»å‹</typeparam>
 public abstract class ProductBase<T> : MonoBehaviour where T : class
 {
     public bool isEmpty = true;
@@ -22,7 +22,7 @@ public abstract class ProductBase<T> : MonoBehaviour where T : class
     }
   
     /// <summary>
-    /// ÊÔÍ¼¹ºÂò£¬·µ»ØÊÇ·ñ¹ºÂò³É¹¦
+    /// è¯•å›¾è´­ä¹°ï¼Œè¿”å›æ˜¯å¦è´­ä¹°æˆåŠŸ
     /// </summary>
     /// <returns></returns>
     public virtual void TryBuy()
@@ -31,7 +31,7 @@ public abstract class ProductBase<T> : MonoBehaviour where T : class
     }
 
     /// <summary>
-    /// ÉÌÆ·³õÊ¼»¯
+    /// å•†å“åˆå§‹åŒ–
     /// </summary>
     /// <param name="product"></param>
     public virtual void InitialProduct(T _product)
@@ -44,7 +44,7 @@ public abstract class ProductBase<T> : MonoBehaviour where T : class
     }
 
     /// <summary>
-    /// Õâ¸öÉÌÆ·±»Âò×ßÁË
+    /// è¿™ä¸ªå•†å“è¢«ä¹°èµ°äº†
     /// </summary>
     public virtual void ProductBrought()
     {
@@ -58,17 +58,17 @@ public abstract class ProductBase<T> : MonoBehaviour where T : class
     }
 
     /// <summary>
-    /// ¹ºÂò³É¹¦Ê±µ÷ÓÃ
+    /// è´­ä¹°æˆåŠŸæ—¶è°ƒç”¨
     /// </summary>
     public UnityEvent OnBuySuccess;
     /// <summary>
-    /// ¹ºÂòÊ§°ÜÊÇµ÷ÓÃ
+    /// è´­ä¹°å¤±è´¥æ˜¯è°ƒç”¨
     /// </summary>
     public UnityEvent<BuyFailType> OnBuyFail;
 
 }
 /// <summary>
-/// ÉÌÆ·¹ºÂòÊ§°ÜµÄÀàĞÍ
+/// å•†å“è´­ä¹°å¤±è´¥çš„ç±»å‹
 /// </summary>
 public enum BuyFailType
 {
