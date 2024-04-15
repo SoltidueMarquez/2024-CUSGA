@@ -73,7 +73,7 @@ namespace Map
         {
             SaveMap();
         }
-        #region Player相关
+        #region 初始化相关
         /// <summary>
         /// 玩家数据的初始化
         /// </summary>

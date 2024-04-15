@@ -52,6 +52,8 @@ public class BattleDiceHandler : MonoBehaviour
         {
             //减少资源
             chaState.ModResources(-1 * singleDiceObj.model.cost);
+            //释放骰子
+            diceCardsInUse[index] = null;
             //造成伤害
             Damage damage = singleDiceObj.model.damage;
             damage.indexDamageRate = singleDiceObj.idInDice ;//根据骰子的id来计算倍率
@@ -80,7 +82,7 @@ public class BattleDiceHandler : MonoBehaviour
                 }
             }
             //释放骰子
-            diceCardsInUse[index] = null;
+            
 
         }
         else

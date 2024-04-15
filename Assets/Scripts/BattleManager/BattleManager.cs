@@ -228,6 +228,7 @@ public class BattleManager : MonoBehaviour
         if (this.parameter.playerDataSO.ifUseSaveData || GameManager.Instance.ifLoadedHalidom)
         {
             HalidomManager.Instance.InitHalidomUI(GameScene.BattleScene);
+
         }
         else
         {

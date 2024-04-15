@@ -359,6 +359,7 @@ public class HalidomManager : MonoBehaviour
     {
         for (int i = 0; i < halidomList.Length; i++)
         {
+
             if (halidomList[i] != null)
             {
                 foreach (var buffInfo in halidomList[i].buffInfos)
