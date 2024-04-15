@@ -622,9 +622,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 1
-  OnBuyProduct:
-    m_PersistentCalls:
-      m_Calls: []
   OnBuySuccess:
     m_PersistentCalls:
       m_Calls: []
@@ -1178,7 +1175,6 @@ MonoBehaviour:
   enableDebug: 1
   StoreUIcanvas: {fileID: 5822657103560371217}
   diceScoreFlag: 0f00000018000000
-  originRefreshTime: 1
   productHalidoms:
   - {fileID: 7335776371973441104}
   - {fileID: 8398664542382313900}
@@ -1532,9 +1528,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 1
-  OnBuyProduct:
-    m_PersistentCalls:
-      m_Calls: []
   OnBuySuccess:
     m_PersistentCalls:
       m_Calls: []
@@ -3173,9 +3166,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 1
-  OnBuyProduct:
-    m_PersistentCalls:
-      m_Calls: []
   OnBuySuccess:
     m_PersistentCalls:
       m_Calls: []
@@ -3841,9 +3831,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 1
-  OnBuyProduct:
-    m_PersistentCalls:
-      m_Calls: []
   OnBuySuccess:
     m_PersistentCalls:
       m_Calls: []
@@ -4277,9 +4264,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 1
-  OnBuyProduct:
-    m_PersistentCalls:
-      m_Calls: []
   OnBuySuccess:
     m_PersistentCalls:
       m_Calls: []
@@ -4375,9 +4359,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 1
-  OnBuyProduct:
-    m_PersistentCalls:
-      m_Calls: []
   OnBuySuccess:
     m_PersistentCalls:
       m_Calls: []
@@ -4629,7 +4610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strengthenBg: {fileID: 7193036800606470205}
   strengthenCanvas: {fileID: 5863594257751814937}
-  animTime: 1
+  animTime: 2
   storeArea: {fileID: 2843255067353324059}
   rollArea: {fileID: 4598054344826653412}
   appearTransformPosition: {fileID: 6526144330711405959}

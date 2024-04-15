@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Map;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -146,9 +147,12 @@ namespace UI
             _currentColumn = UIManager.Instance.DetectColumn(gameObject, EditableDiceUIManager.Instance.allColumns, EditableDiceUIManager.Instance.offset); //更新物品栏位置
             gameObject.transform.SetParent(EditableDiceUIManager.Instance.parent);//设置为原来的图层
 
-            //TODO:交换了几号骰子的哪个面
+            //逻辑交换
             if (editState == EditState.FightDice)
             {
+                var bagDice = gameObject.GetComponent<EditableDiceUIObject>().diceObj;
+                var fightDice = switchObj.GetComponent<EditableDiceUIObject>().diceObj;
+                MapManager.Instance.playerChaState.GetBattleDiceHandler().SwapDiceInBagAndBattle(bagDice, fightDice);
                 Debug.Log(
                     $"<color=green>{gameObject.GetComponent<EditableDiceUIObject>().diceObj}交换了{EditableDiceUIManager.Instance.GetCurrentPage()}号骰子的{switchObj.GetComponent<EditableDiceUIObject>().diceObj}</color>");
             }

@@ -1,6 +1,7 @@
 using Map;
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UI.Store;
 using UnityEngine;
 
@@ -37,6 +38,7 @@ public class ProductDice : ProductBase<SingleDiceObj>
     public override void InitialProduct(SingleDiceObj product)
     {
         base.InitialProduct(product);
+        OnBuySuccess.AddListener(CreateUI);
     }
 
     public override void ProductBrought()
@@ -47,9 +49,8 @@ public class ProductDice : ProductBase<SingleDiceObj>
         player.GetBattleDiceHandler().AddSingleBattleDiceToBag(product);
     }
 
-    private void CreatreUI()
+    private void CreateUI()
     {
-        //ChaState player = MapManager.Instance.playerChaState;
-        //StoreAreaUIManager.Instance.CreateDiceUI(player.GetBattleDiceHandler().bagDiceCards.Count+1)
+        EditableDiceUIManager.Instance.CreateBagUIDice(product, MapManager.Instance.SellSingleDice);
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using Frame.Core;
 using UnityEngine.Events;
 using Map;
+using UI.Store;
 using Unity.VisualScripting;
 
 public class StoreManager : SingletonBase<StoreManager>
@@ -129,11 +130,16 @@ public class StoreManager : SingletonBase<StoreManager>
 
         //获取骰子点数
         int diceScore = 0;
+        int i = 0;
+        RollUIManager.Instance.RemoveAllResultUI();
         foreach (var battleDice in battleDices)
         {
             battleDice.GetRandomDice(out SingleDiceObj singleDiceObj);
+            RollUIManager.Instance.CreateResult(i, ResourcesManager.GetSingleDiceUIData(singleDiceObj),
+                new Vector2Int(i, singleDiceObj.positionInDice));
             OnDiceRoll?.Invoke(battleDice.diceIndexInList, singleDiceObj);
             diceScore += singleDiceObj.idInDice;
+            i++;
         }
 
         m_Debug("diceScore: " + diceScore);
