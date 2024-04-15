@@ -776,11 +776,13 @@ namespace DesignerScripts
         public static void ReuseDiceWhenDiceIs1(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
             //深拷贝一条damageinfo信息加入伤害队列
-            if (damageInfo.damage.indexDamageRate == 1)
+            if (damageInfo.damage.indexDamageRate == 1 && !(bool)buffInfo.buffParam["IsFirstDeal"])
             {
                 DamageInfo damageInfoCopy = new DamageInfo(damageInfo.attacker, damageInfo.defender, damageInfo.damage, damageInfo.diceType, damageInfo.level, damageInfo.addBuffs);
                 DamageManager.Instance.DoDamage(damageInfoCopy);
+                
                 Debug.Log("重复打出");
+                buffInfo.buffParam["IsFirstDeal"] = true;
             }
         }
 

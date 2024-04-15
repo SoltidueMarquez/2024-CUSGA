@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProductDice : ProductBase<BattleDice>
+public class ProductDice : ProductBase<SingleDiceObj>
 {
     // Start is called before the first frame update
     protected override void Start()
@@ -10,7 +10,7 @@ public class ProductDice : ProductBase<BattleDice>
         base.Start();
     }
 
-    protected override void TryBuy()
+    public override void TryBuy()
     {
         //if ()
         //{
@@ -26,14 +26,21 @@ public class ProductDice : ProductBase<BattleDice>
 
     }
 
+    public void TryBuy(SingleDiceObj singleDiceObj)
+    {
+        TryBuy();
+    }
 
 
-    protected override void InitialProduct(BattleDice product)
+
+
+
+    public override void InitialProduct(SingleDiceObj product)
     {
         base.InitialProduct(product);
     }
 
-    protected override void ProductBrought()
+    public override void ProductBrought()
     {
         base.ProductBrought();
     }

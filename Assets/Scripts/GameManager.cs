@@ -4,7 +4,7 @@ using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 /// <summary>
-/// Õû¸öÓÎÏ·µÄ¹ÜÀíÀà,Ò»Ğ©ÕûÌåµÄ¹ÜÀí¶¼ÔÚÕâ±ß
+/// æ•´ä¸ªæ¸¸æˆçš„ç®¡ç†ç±»,ä¸€äº›æ•´ä½“çš„ç®¡ç†éƒ½åœ¨è¿™è¾¹
 /// </summary>
 public enum GameScene
 {
@@ -15,7 +15,9 @@ public enum GameScene
 public class GameManager : MonoSingleton<GameManager>
 {
     [HideInInspector]
-    public EnemyDataSO enemyDataSO;
+    public EnemyDataSO enemyDataSO;//ç”¨äºä¼ é€’æ•Œäººæ•°æ®
+    [HideInInspector]
+    public bool ifLoadedHalidom;//ç”¨äºåˆ¤æ–­æ˜¯å¦åŠ è½½äº†åœ£ç‰©,å…¨å±€åªåŠ è½½ä¸€æ¬¡ï¼Œå› ä¸ºåœ£ç‰©æ˜¯å…¨å±€çš„
     
 
     void Start()
@@ -24,12 +26,12 @@ public class GameManager : MonoSingleton<GameManager>
     }
     
     /// <summary>
-    /// ÏÈ°Ñ¼ÓÔØ³¡¾°Ğ´ÔÚÕâÀï£¬»¹ĞèÒªĞŞ¸Ä
+    /// å…ˆæŠŠåŠ è½½åœºæ™¯å†™åœ¨è¿™é‡Œï¼Œè¿˜éœ€è¦ä¿®æ”¹
     /// </summary>
     /// <param name="sceneName"></param>
     public void LoadScene(string sceneName)
     {
-        //¼ÓÔØ³¡¾°
+        
         SceneManager.LoadScene(sceneName);
     }
     
