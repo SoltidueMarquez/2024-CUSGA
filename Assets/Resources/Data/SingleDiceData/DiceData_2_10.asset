@@ -10,22 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a222d7b9aff60b489012777e6166707, type: 3}
-  m_Name: DiceData_1_18
+  m_Name: DiceData_2_10
   m_EditorClassIdentifier: 
-  id: 1_18
-  singleDiceModelName: "\u53CC\u5203++"
-  type: 0
+  id: 2_10
+  singleDiceModelName: "\u575A\u97E7\u9632\u5FA1+"
+  type: 1
   condition:
     currentHp: 0
     currentMoney: 0
     currentRollTimes: 0
     currentShield: 0
   cost:
-<<<<<<< Updated upstream
     currentHp: 0
-=======
-    currentHp: 4
->>>>>>> Stashed changes
     currentMoney: 0
     currentRollTimes: 0
     currentShield: 0
@@ -33,7 +29,9 @@ MonoBehaviour:
   value: 12
   side: 0
   buffDataSOs:
-  - {fileID: 11400000, guid: 25f403dc20503f34dac3943b39c4e5e2, type: 2}
+  - {fileID: 11400000, guid: f4b887843cb510344b80541666e0095d, type: 2}
+  - {fileID: 11400000, guid: f4b887843cb510344b80541666e0095d, type: 2}
+  - {fileID: 11400000, guid: f4b887843cb510344b80541666e0095d, type: 2}
   sprite: {fileID: 0}
-  description: "\u653B\u51FB(valueM),\u53D7\u51FB(4)"
-  baseValue: 13
+  description: "\u53E0\u7532+\u575A\u6BC5+3"
+  baseValue: 7

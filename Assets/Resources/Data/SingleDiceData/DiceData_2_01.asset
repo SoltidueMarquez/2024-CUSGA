@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DiceData_2_01
   m_EditorClassIdentifier: 
   id: 2_01
-  singleDiceModelName: "\u666E\u901A\u9632\u5FA1"
+  singleDiceModelName: "\u9632\u5FA1"
   type: 1
   condition:
     currentHp: 0
@@ -26,9 +26,9 @@ MonoBehaviour:
     currentRollTimes: 0
     currentShield: 0
   level: 0
-  value: 7
+  value: 4
   side: 0
   buffDataSOs: []
   sprite: {fileID: 0}
-  description: "\u57FA\u7840\u9632\u5FA1\u9AB0\u9762"
-  baseValue: 6
+  description: "\u53E0\u76FE(valueM)"
+  baseValue: 5

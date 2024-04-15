@@ -22,7 +22,11 @@ MonoBehaviour:
     currentShield: 0
   cost:
     currentHp: 0
+<<<<<<< Updated upstream
     currentMoney: 0
+=======
+    currentMoney: -3
+>>>>>>> Stashed changes
     currentRollTimes: 0
     currentShield: 0
   level: 2

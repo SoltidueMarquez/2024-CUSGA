@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UI;
 using Unity.VisualScripting;
 using UnityEngine;
 /// <summary>
@@ -98,6 +99,8 @@ namespace DesignerScripts
         ClearEnemyPositiveBuff,//清除敌人正面buff
         ClearPlayerNegativeBuff,//清除玩家负面buff
 
+        RerollAll,//重扔现有所有骰子
+
 
         #endregion
     }
@@ -163,7 +166,10 @@ namespace DesignerScripts
             },
             {
                 BuffEventName.ClearPlayerNegativeBuff.ToString(),ClearPlayerNegativeBuff
-            },   
+            },
+            {
+                BuffEventName.RerollAll.ToString(),RerollAll
+            },
 
         };
         public static Dictionary<string, OnBuffRemove> onRemoveFunc = new Dictionary<string, OnBuffRemove>();
@@ -1108,6 +1114,13 @@ namespace DesignerScripts
                 }
 
             }
+        }
+
+        public static void RerollAll(BuffInfo buffInfo)
+        {
+            BattleManager.Instance.ReRollDiceForPlayer();
+
+
         }
 
         #endregion

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 5_15
   dataName: 58
-  tags: []
+  tags:
+  - Enemy
   maxStack: 5
   duringCount: 0
   isPermanent: 0
