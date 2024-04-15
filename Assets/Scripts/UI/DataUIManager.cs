@@ -26,7 +26,6 @@ namespace UI
             {
                 moneyText.DOText($"￥{money}", 1f);
             });
-            StoreAreaUIManager.Instance?.JudgeValue();
         }
     }
 }

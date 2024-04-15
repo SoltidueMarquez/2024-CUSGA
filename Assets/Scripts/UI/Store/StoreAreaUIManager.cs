@@ -40,41 +40,6 @@ namespace UI.Store
             StoreManager.Instance.OnRefreshStore.AddListener(RefreshDiceUI);
         }
 
-        public void JudgeValue()
-        {
-            ChaState player = MapManager.Instance.playerChaState;
-            for (int i = 0; i < diceColumns.Count; i++)
-            {
-                var color = new Color();
-                var tmpDice = diceColumns[i].transform.GetComponent<ProductDice>();
-                if (tmpDice == null) { return;}
-                if (tmpDice.product?.value > player.resource.currentMoney) 
-                {
-                    color = Color.red;
-                }
-                else
-                {
-                    color = Color.black;
-                }
-                dicePriceTextList[i].GetComponent<Text>().color = color;
-            }
-            for (int i = 0; i < sacredObjectColumns.Count; i++)
-            {
-                var color = new Color();
-                var tmpSacred = sacredObjectColumns[i].transform.GetComponent<ProductHalidom>();
-                if (tmpSacred == null) { return;}
-                if (tmpSacred.product?.value > player.resource.currentMoney)
-                {
-                    color = Color.red;
-                }
-                else
-                {
-                    color = Color.black;
-                }
-                sacredPriceTextList[i].GetComponent<Text>().color = color;
-            }
-        }
-        
         #region 出售骰面相关
         public void RefreshDiceUI()
         {
@@ -180,7 +145,6 @@ namespace UI.Store
 
 
         #region 出售圣物相关
-
         public void RefreshHalidomUI()
         {
 
