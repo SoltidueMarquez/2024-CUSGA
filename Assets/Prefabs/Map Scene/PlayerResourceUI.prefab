@@ -587,6 +587,7 @@ MonoBehaviour:
   switchLeftBtn: {fileID: 853095795217577690}
   switchRightBtn: {fileID: 3664659515149833623}
   curPageText: {fileID: 6804491145431198275}
+  mask: {fileID: 7219722284002053480}
 --- !u!114 &5365380996981894601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2886,7 +2887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &79052465499822804
 RectTransform:
   m_ObjectHideFlags: 0
