@@ -1,4 +1,5 @@
 using DG.Tweening;
+using UI.Store;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,6 +26,7 @@ namespace UI
             {
                 moneyText.DOText($"￥{money}", 1f);
             });
+            StoreAreaUIManager.Instance?.JudgeValue();
         }
     }
 }

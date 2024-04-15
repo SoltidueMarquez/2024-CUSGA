@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Map;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,10 +18,12 @@ namespace UI.Store
         [Header("出售骰面")]
         [SerializeField, Tooltip("骰子栏位列表")] public List<Column> diceColumns;
         [SerializeField, Tooltip("骰子模板")] private GameObject diceTemplate;
+        [SerializeField, Tooltip("售价文本列表")] private List<Text> dicePriceTextList;
 
         [Header("出售圣物")]
         [SerializeField, Tooltip("圣物栏位列表")] public List<Column> sacredObjectColumns;
         [SerializeField, Tooltip("圣物模板")] private GameObject sacredObjectTemplate;
+        [SerializeField, Tooltip("售价文本列表")] private List<Text> sacredPriceTextList;
 
         private void Start()
         {
@@ -37,6 +40,41 @@ namespace UI.Store
             StoreManager.Instance.OnRefreshStore.AddListener(RefreshDiceUI);
         }
 
+        public void JudgeValue()
+        {
+            ChaState player = MapManager.Instance.playerChaState;
+            for (int i = 0; i < diceColumns.Count; i++)
+            {
+                var color = new Color();
+                var tmpDice = diceColumns[i].transform.GetComponent<ProductDice>();
+                if (tmpDice == null) { return;}
+                if (tmpDice.product?.value > player.resource.currentMoney) 
+                {
+                    color = Color.red;
+                }
+                else
+                {
+                    color = Color.black;
+                }
+                dicePriceTextList[i].GetComponent<Text>().color = color;
+            }
+            for (int i = 0; i < sacredObjectColumns.Count; i++)
+            {
+                var color = new Color();
+                var tmpSacred = sacredObjectColumns[i].transform.GetComponent<ProductHalidom>();
+                if (tmpSacred == null) { return;}
+                if (tmpSacred.product?.value > player.resource.currentMoney)
+                {
+                    color = Color.red;
+                }
+                else
+                {
+                    color = Color.black;
+                }
+                sacredPriceTextList[i].GetComponent<Text>().color = color;
+            }
+        }
+        
         #region 出售骰面相关
         public void RefreshDiceUI()
         {
@@ -78,7 +116,9 @@ namespace UI.Store
             diceColumns[index].bagObject = tmp;
             tmp.transform.position = parent.position;//更改位置
             var tmpDice = tmp.GetComponent<StoreDiceUIObject>();
-            tmpDice.Init(ResourcesManager.GetSingleDiceUIData(singleDiceObj), animTime, 2, onChoose, singleDiceObj);//初始化
+            var data = ResourcesManager.GetSingleDiceUIData(singleDiceObj);
+            tmpDice.Init(data, animTime, 2, onChoose, singleDiceObj);//初始化
+            dicePriceTextList[index].text = data.value.ToString(); 
             tmp.SetActive(true);
             tmpDice.DoAppearAnim(animTime); //出现动画
         }
@@ -182,6 +222,8 @@ namespace UI.Store
             tmp.transform.position = parent.position;//更改位置
             var tmpSacredObject = tmp.GetComponent<StoreSacredUIObject>();
             tmpSacredObject.Init(halidomObject.id, animTime, 2, onChoose, halidomObject);//初始化
+            var data = ResourcesManager.GetHalidomUIData(halidomObject.id);
+            sacredPriceTextList[index].text = data.value.ToString();
             tmp.SetActive(true);
             tmpSacredObject.DoAppearAnim(animTime); //出现动画
         }

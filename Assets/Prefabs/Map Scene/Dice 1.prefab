@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15e4f65ac770a442baa4e25406c9d0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  salePrice: 0
   descriptionCanvas: {fileID: 5956872092027956793}
   nameText: {fileID: 8647321718745468673}
   typeText: {fileID: 73070751392028554}
@@ -102,9 +103,11 @@ MonoBehaviour:
   saleUI: {fileID: 6788775339226579424}
   saleButton: {fileID: 6911376138040947346}
   saleButtonText: {fileID: 5385493828929871342}
-  currentColumn:
+  _currentColumn:
     transform: {fileID: 0}
     bagObject: {fileID: 0}
+    state: 0
+  editState: 0
 --- !u!1 &2094148230457410262
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,7 +383,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -65, y: 0}
+  m_AnchoredPosition: {x: -61, y: 0}
   m_SizeDelta: {x: 54.4287, y: 39.81}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1903685360640687329

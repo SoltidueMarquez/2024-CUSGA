@@ -23,7 +23,8 @@ namespace UI
         /// <param name="eventData"></param>
         public virtual void OnPointerEnter(PointerEventData eventData)
         {
-            UIManager.Instance.EnterPreview(this.gameObject,BagDiceUIManager.Instance.previewSizeB);
+            UIManager.Instance.EnterPreview(this.gameObject, BagDiceUIManager.Instance.previewSizeB,
+                BagDiceUIManager.Instance.previewSizeB);
             UIManager.Instance.DoShake(this.GetComponent<Image>(),BagDiceUIManager.Instance.shakeAngleB);
             descriptionCanvas.SetActive(true);
         }
