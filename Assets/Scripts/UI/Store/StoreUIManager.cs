@@ -36,6 +36,7 @@ namespace UI.Store
 
         public void EnterUpgradeUI()
         {
+            EditableDiceUIManager.Instance.SetActivity(false);//设置侧边物UI不可交互
             strengthenPage.Init(strengthenBg);
             strengthenCanvas.SetActive(true);
             strengthenCanvas.transform.DOMoveX(appearTransformPosition.position.x, animTime);
@@ -48,6 +49,7 @@ namespace UI.Store
         
         public void ExitUpgradeUI()
         {
+            EditableDiceUIManager.Instance.SetActivity(true);//设置侧边物UI可交互
             strengthenCanvas.transform.DOMoveX(disappearTransformPosition.position.x, animTime);
             StartCoroutine(LateInactive(animTime,strengthenCanvas));
         }

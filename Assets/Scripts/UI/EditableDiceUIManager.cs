@@ -29,7 +29,17 @@ namespace UI
         [SerializeField, Tooltip("左切按钮")] private Button switchLeftBtn;
         [SerializeField, Tooltip("右切按钮")] private Button switchRightBtn;
         [SerializeField, Tooltip("当前页码")] private Text curPageText;
+        [SerializeField, Tooltip("遮罩")] private GameObject mask;
 
+        /// <summary>
+        /// 设置是否可以交互
+        /// </summary>
+        /// <param name="flag"></param>
+        public void SetActivity(bool flag)
+        {
+            mask.SetActive(!flag);
+        }
+        
         /// <summary>
         /// 获取当前页码
         /// </summary>
