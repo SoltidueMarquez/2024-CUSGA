@@ -29,8 +29,7 @@ namespace UI
         [SerializeField, Tooltip("左切按钮")] private Button switchLeftBtn;
         [SerializeField, Tooltip("右切按钮")] private Button switchRightBtn;
         [SerializeField, Tooltip("当前页码")] private Text curPageText;
-        [Tooltip("当前被标记的栏位号")] private int _curFightColumnIndex;
-        
+
         /// <summary>
         /// 获取当前页码
         /// </summary>
@@ -77,7 +76,7 @@ namespace UI
         /// <param name="index">所在栏位序列号</param>
         /// <param name="remove"></param>
         /// <param name="singleDiceObj"></param>
-        private void CreateBagUIDice(SingleDiceObj singleDiceObj, Action<SingleDiceObj> remove)
+        public void CreateBagUIDice(SingleDiceObj singleDiceObj, Action<SingleDiceObj> remove)
         {
             var index = UIManager.Instance.FindFirstEmptyColumn(bagColumns);
             if (index == -1) 
@@ -202,12 +201,14 @@ namespace UI
         public void SwitchToPosition(Vector2Int position)
         {
             SwitchPage(position.x);
-            _curFightColumnIndex = position.y;
             fightColumns[position.y].transform.GetComponent<Image>().DOColor(Color.red, 0.2f);
         }
         public void RevertMarkColumn()
         {
-            fightColumns[_curFightColumnIndex].transform.GetComponent<Image>().DOColor(Color.white, 0.1f);
+            foreach (var column in fightColumns)
+            {
+                column.transform.GetComponent<Image>().DOColor(Color.white, 0.1f);
+            }
         }
         
         /// <summary>
