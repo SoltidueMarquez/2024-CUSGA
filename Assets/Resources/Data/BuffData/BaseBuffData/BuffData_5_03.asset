@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b82dfb058aec19848972490bda5eafbd, type: 3}
-  m_Name: BuffData_GetHurt3
+  m_Name: BuffData_5_03
   m_EditorClassIdentifier: 
-  id: GetHurt3
-  dataName: 61
+  id: 5_03
+  dataName: 67
   tags:
   - Self
   maxStack: 5
@@ -21,7 +21,7 @@ MonoBehaviour:
   isPermanent: 0
   buffUpdateEnum: 0
   removeStackUpdateEnum: 0
-  onCreate: 7
+  onCreate: 19
   onRemove: 0
   onRoundStart: 0
   onRoundEnd: 0
@@ -36,9 +36,6 @@ MonoBehaviour:
     canUseDice: 1
     ifImmune: 0
   propMod: []
-  paramList:
-  - type: 0
-    name: GetHurt
-    value: 3
+  paramList: []
   description: 
   sprite: {fileID: 0}

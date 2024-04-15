@@ -95,6 +95,7 @@ namespace DesignerScripts
         RecoverHealth3,
         GainMoney2,
         GainMoney3,
+        RerollDice,
     }
     public class BuffDataTable
     {
