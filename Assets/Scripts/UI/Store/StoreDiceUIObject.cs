@@ -58,6 +58,6 @@ namespace UI.Store
             UIManager.Instance.ExitPreview(gameObject);
             descriptionCanvas.SetActive(false);
         }
-        
+
     }
 }
