@@ -22,10 +22,10 @@ namespace UI
             this.id = idX;
             var tmpData = ResourcesManager.GetHalidomUIData(id);
             nameText.text = tmpData.name;
-            valueText.text = $"售价￥{tmpData.value}";
+            valueText.text = $"售价￥{tmpData.salevalue}";
             descriptionText.text = tmpData.description;
             this.GetComponent<Image>().sprite = tmpData.sprite;
-            saleButtonText.text = $"出售\n￥{tmpData.value}";
+            saleButtonText.text = $"出售\n￥{tmpData.salevalue}";
             
             //saleButton绑定移除圣物效果函数：增加一个委托类型的参数(就是对应的移除函数)
             saleButton.onClick.AddListener(() =>

@@ -39,7 +39,7 @@ namespace UI.Store
             nameText.text = data.name;
             typeText.text = $"类型:{data.type}";
             levelText.text = $"稀有度:{data.level}";
-            valueText.text = $"售价￥{data.value}";
+            valueText.text = $"售价￥{data.salevalue}";
             baseValueText.text = $"基础数值{data.baseValue}";
             infoText.text = $"描述:{data.description}" ;
             this.GetComponent<Image>().sprite = data.sprite;
