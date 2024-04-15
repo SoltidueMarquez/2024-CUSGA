@@ -20,6 +20,18 @@ namespace UI
             Instance = this;
         }
         
+        public int FindFirstEmptyColumn(List<Column> columns)
+        {
+            for (int i = 0; i < columns.Count; i++)
+            {
+                if (columns[i].bagObject == null)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        
         /// <summary>
         /// 鼠标移动预览效果
         /// </summary>

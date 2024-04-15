@@ -20,25 +20,27 @@ namespace UI
         /// </summary>
         /// <param name="halidomObject"></param>
         /// <param name="removeList"></param>
-        public void Init(List<HalidomObject> halidomObject, List<Action<HalidomObject>> removeList)
+        public void Init(List<HalidomObject> halidomObject, Action<HalidomObject> removeList)
         {
             RemoveAllSacredObject();
             for (int i = 0; i < halidomObject.Count; i++)
             {
-                CreateSacredUIObject(i, removeList[i], halidomObject[i]);
+                CreateSacredUIObject(removeList, halidomObject[i]);
                 //CreateSacredUIObject(i, "1_02", null, null);
             }
         }
-
+        
+        
         /// <summary>
         /// 生成圣物函数
         /// </summary>
         /// <param name="index">所在栏位序列号</param>
         /// <param name="remove"></param>
         /// <param name="halidomObject"></param>
-        public void CreateSacredUIObject(int index, Action<HalidomObject> remove,HalidomObject halidomObject)
+        public void CreateSacredUIObject(Action<HalidomObject> remove,HalidomObject halidomObject)
         {
-            if (index >= sacredObjectColumns.Count)
+            var index = UIManager.Instance.FindFirstEmptyColumn(sacredObjectColumns);
+            if (index == -1)
             {
                 Debug.LogWarning("错误,圣物栏位溢出");
                 return;

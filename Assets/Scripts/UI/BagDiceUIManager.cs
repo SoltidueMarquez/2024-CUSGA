@@ -20,8 +20,15 @@ namespace UI
         /// <param name="index">所在栏位序列号</param>
         /// <param name="data"></param>
         /// <param name="remove"></param>
-        public void CreateBagUIDice(int index, SingleDiceUIData data, Action<SingleDiceObj> remove,SingleDiceObj singleDiceObj)
+        public void CreateBagUIDice( Action<SingleDiceObj> remove,SingleDiceObj singleDiceObj)
         {
+            var data = ResourcesManager.GetSingleDiceUIData(singleDiceObj);
+            var index = UIManager.Instance.FindFirstEmptyColumn(bagColumns);
+            if (index == -1)
+            {
+                Debug.LogWarning("错误,背包栏位溢出");
+                return;
+            }
             if (bagColumns[index].bagObject != null)
             {
                 Debug.Log("错误，所在栏位已经有骰面存在");

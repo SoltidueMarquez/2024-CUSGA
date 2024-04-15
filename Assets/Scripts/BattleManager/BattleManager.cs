@@ -413,7 +413,7 @@ public class BattleManager : MonoBehaviour
         //获取当前骰面在背包骰面中的位置
         int index = this.parameter.playerChaState.GetBattleDiceHandler().GetIndexOfSingleDiceInBag(singleDiceObj);
         var singleDiceUIData = ResourcesManager.GetSingleDiceUIData(singleDiceObj);
-        BagDiceUIManager.Instance.CreateBagUIDice(index, singleDiceUIData, SellSingleDice, singleDiceObj);
+        BagDiceUIManager.Instance.CreateBagUIDice(SellSingleDice, singleDiceObj);
         //已经选中过骰面
         this.parameter.ifSelectedDice = true;
     }

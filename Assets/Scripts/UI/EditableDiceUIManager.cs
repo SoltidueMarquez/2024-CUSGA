@@ -69,7 +69,7 @@ namespace UI
             //背包初始化
             InitBagUIDice(bagDiceList.singleDiceList, bagDiceList.removeList);
         }
-
+        
         #region 背包骰面
         /// <summary>
         /// 生成单个背包骰面函数
@@ -77,9 +77,10 @@ namespace UI
         /// <param name="index">所在栏位序列号</param>
         /// <param name="remove"></param>
         /// <param name="singleDiceObj"></param>
-        private void CreateBagUIDice(int index, SingleDiceObj singleDiceObj, Action<SingleDiceObj> remove)
+        private void CreateBagUIDice(SingleDiceObj singleDiceObj, Action<SingleDiceObj> remove)
         {
-            if (index >= bagColumns.Count)
+            var index = UIManager.Instance.FindFirstEmptyColumn(bagColumns);
+            if (index == -1) 
             {
                 Debug.LogWarning("错误,背包栏位溢出");
                 return;
@@ -105,7 +106,7 @@ namespace UI
             RemoveAllBagDice();
             for (int i = 0; i < diceList.Count; i++)
             {
-                CreateBagUIDice(i, diceList[i], removeList[i]);
+                CreateBagUIDice(diceList[i], removeList[i]);
                 //CreateBagUIDice(i, null, null);
             }
         }

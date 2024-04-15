@@ -21,8 +21,14 @@ namespace UI
         /// <param name="index">所在栏位序列号</param>
         /// <param name="id"></param>
         /// <param name="remove"></param>
-        public void CreateSacredUIObject(int index, string id, Action<HalidomObject> remove,HalidomObject halidomObject)
+        public void CreateSacredUIObject(Action<HalidomObject> remove,HalidomObject halidomObject)
         {
+            var index = UIManager.Instance.FindFirstEmptyColumn(sacredObjectColumns);
+            if (index == -1)
+            {
+                Debug.LogWarning("错误,圣物栏位溢出");
+                return;
+            }
             if (sacredObjectColumns[index].bagObject != null)
             {
                 Debug.LogWarning("错误，所在栏位已经有圣物存在");
@@ -30,7 +36,7 @@ namespace UI
             }
             var tmp = Instantiate(template, parent, true);
             tmp.transform.position = sacredObjectColumns[index].transform.position;//更改位置
-            tmp.GetComponent<SacredObjectsUIEffects>().Init(sacredObjectColumns, offsetS, id, remove, halidomObject);//初始化
+            tmp.GetComponent<SacredObjectsUIEffects>().Init(sacredObjectColumns, offsetS, halidomObject.id, remove, halidomObject);//初始化
             tmp.SetActive(true);
         }
 

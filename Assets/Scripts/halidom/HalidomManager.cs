@@ -99,7 +99,7 @@ public class HalidomManager : MonoBehaviour
                 }
                 RefreshAllHalidoms();
                 BattleManager.Instance.parameter.playerChaState.AttrAndResourceRecheck();
-                SacredObjectUIManager.Instance.CreateSacredUIObject(i, halidomObject.id, SellHalidom, halidomObject);
+                SacredObjectUIManager.Instance.CreateSacredUIObject(SellHalidom, halidomObject);
                 Debug.Log("<color=#3399FF>HalidomManager-添加圣物:</color>" + halidomObject.halidomName + "成功");
                 //找到空的格子后就跳出循环
                 break;
@@ -143,7 +143,7 @@ public class HalidomManager : MonoBehaviour
                 MapManager.Instance.playerChaState.AttrAndResourceRecheck();
 
                 //在地图中创建圣物UI
-                MapSacredUIManager.Instance.CreateSacredUIObject(i, SellHalidomInMap, halidomObject);
+                MapSacredUIManager.Instance.CreateSacredUIObject(SellHalidomInMap, halidomObject);
 
                 Debug.Log("<color=#3399FF>HalidomManager-添加圣物:</color>" + halidomObject.halidomName + "成功");
                 //找到空的格子后就跳出循环
@@ -507,11 +507,11 @@ public class HalidomManager : MonoBehaviour
             {
                 if (currentScene == GameScene.BattleScene)
                 {
-                    SacredObjectUIManager.Instance.CreateSacredUIObject(i, halidomList[i].id, SellHalidom, halidomList[i]);
+                    SacredObjectUIManager.Instance.CreateSacredUIObject(SellHalidom, halidomList[i]);
                 }
                 else if (currentScene == GameScene.MapScene)
                 {
-                    MapSacredUIManager.Instance.CreateSacredUIObject(i, SellHalidom, halidomList[i]);
+                    MapSacredUIManager.Instance.CreateSacredUIObject(SellHalidom, halidomList[i]);
                 }
             }
         }

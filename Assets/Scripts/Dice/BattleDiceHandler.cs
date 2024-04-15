@@ -208,7 +208,7 @@ public class BattleDiceHandler : MonoBehaviour
         {
             var singleDice = this.bagDiceCards[i];
             var singleDiceUIData = ResourcesManager.GetSingleDiceUIData(singleDice);
-            BagDiceUIManager.Instance.CreateBagUIDice(i, singleDiceUIData, sellFunction, singleDice);
+            BagDiceUIManager.Instance.CreateBagUIDice(sellFunction, singleDice);
             //初始化玩家的背包骰面
         }
     }
