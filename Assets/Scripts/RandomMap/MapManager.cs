@@ -87,7 +87,6 @@ namespace Map
             //初始化圣物给的数值
             HalidomManager.Instance.RefreshAllHalidoms();
             this.playerChaState.Initialize();
-
             //初始化玩家的骰面
             if (!playerDataSO.ifUseSaveData)
             {
@@ -110,9 +109,13 @@ namespace Map
                 this.playerChaState.GetBattleDiceHandler().maxDiceInBag = playerDataSO.maxBagDiceCount;
                 //根据存档进行骰子的数值初始化
                 this.playerChaState.GetBattleDiceHandler().InitDiceWithData(battleDiceSODatas);
-                this.playerChaState.resource = playerDataSO.chaResource;
+                ChaProperty chaProperty = playerDataSO.baseProp;
+                ChaResource resource = playerDataSO.chaResource - new ChaResource(chaProperty.health, chaProperty.money, chaProperty.maxRollTimes, 0);
+                this.playerChaState.ModResources(resource);
                 this.playerChaState.GetBattleDiceHandler().InitBagDiceWithData(playerDataSO.bagDiceList);
             }
+            
+
             List<LogicDice> logicDicelist = new List<LogicDice>();
             //获取logicDiceList
             for (int i = 0; i < this.playerChaState.GetBattleDiceHandler().battleDiceCount; i++)
@@ -133,9 +136,11 @@ namespace Map
             }
             //获取背包的logicDice
             var currentBagDiceList = this.playerChaState.GetBattleDiceHandler().bagDiceCards;
+            Debug.Log("<color=red>MapManager:" + currentBagDiceList.Count);
             var bagLogicDice = new LogicDice();
             bagLogicDice.singleDiceList = currentBagDiceList;
             bagLogicDice.index = 0;
+            bagLogicDice.removeList = new List<Action<SingleDiceObj>>();
             for (int i = 0; i < currentBagDiceList.Count; i++)
             {
                 var singleDiceObj = currentBagDiceList[i];
@@ -181,6 +186,12 @@ namespace Map
             this.playerChaState.ModResources(resource);
             //进行一些其他判定
         }
+        #endregion
+        #region 跨场景
+        public void OnExitMap()
+        {
+            this.playerDataSO.UpdatePlayerDataSO(this.playerChaState);
+        }    
         #endregion
     }
 }

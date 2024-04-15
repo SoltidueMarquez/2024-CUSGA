@@ -185,6 +185,7 @@ public class BattleManager : MonoBehaviour
         HalidomManager.Instance.RefreshAllHalidoms();
         this.parameter.playerChaState.Initialize();
 
+
         //初始化玩家的骰面
         if (!playerDataSO.ifUseSaveData)
         {
@@ -208,7 +209,9 @@ public class BattleManager : MonoBehaviour
             //根据存档进行骰子的数值初始化
             this.parameter.playerChaState.GetBattleDiceHandler().InitDiceWithData(battleDiceSODatas);
             this.parameter.playerChaState.GetBattleDiceHandler().InitBagDiceWithData(playerDataSO.bagDiceList);
-            this.parameter.playerChaState.resource = playerDataSO.chaResource;
+            ChaProperty chaProperty = playerDataSO.baseProp;
+            ChaResource resource = playerDataSO.chaResource - new ChaResource(chaProperty.health, chaProperty.money, chaProperty.maxRollTimes, 0);
+            this.parameter.playerChaState.ModResources(resource);
 
         }
         //创建骰子页面

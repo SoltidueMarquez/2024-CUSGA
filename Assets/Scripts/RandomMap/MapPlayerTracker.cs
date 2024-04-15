@@ -80,6 +80,8 @@ namespace Map
             {
                 case NodeType.MinorEnemy:
                     GameManager.Instance.enemyDataSO = EnemyManager.GetEnemyDataSOviaCondition(EnemyType.Normal);
+                    MapManager.Instance.playerDataSO.ifUseSaveData = true;
+                    MapManager.Instance.OnExitMap();
                     GameManager.Instance.LoadScene("BattleScene");
                     break;
                 case NodeType.EliteEnemy:
