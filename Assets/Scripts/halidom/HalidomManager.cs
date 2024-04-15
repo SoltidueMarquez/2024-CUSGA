@@ -60,7 +60,7 @@ public class HalidomManager : MonoBehaviour
         halidomList = new HalidomObject[halidomMaxCount];
         //设置移除圣物的函数
     }
-    #region 在战斗场景中的圣物管理
+    #region 场景中的圣物管理
     //配置圣物是不配圣物在格子里的顺序的，加进去的时候才获得序号
     /// <summary>
     /// 朝圣物列表中添加圣物
@@ -219,7 +219,7 @@ public class HalidomManager : MonoBehaviour
     {
         int index = halidomObject.halidomIndex;
         //获取圣物的售价
-        int price = halidomList[index].value;
+        int price = halidomList[index].saleValue;
         //将圣物的售价加到玩家的金币上
         ChaState tempChaState = BattleManager.Instance.parameter.playerChaState;
 

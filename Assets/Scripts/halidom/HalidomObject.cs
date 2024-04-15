@@ -35,11 +35,13 @@ public class HalidomObject
     /// </summary>
     public RareType rareType;
     /// <summary>
-    /// 圣物的售价
+    /// 圣物的购入价格
     /// </summary>
     public int value;
-    
-    
+    /// <summary>
+    /// 圣物的出售价格
+    /// </summary>
+    public int saleValue => Mathf.FloorToInt(value / 4);
 
     public HalidomObject(RareType rareType,string id, string halidomName, string description,  int value,List<BuffInfo> buffinfo )
     {
