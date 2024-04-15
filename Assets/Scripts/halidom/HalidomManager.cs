@@ -135,7 +135,7 @@ public class HalidomManager : MonoBehaviour
                         //触发圣物的OnCreate回调点
                         buffInfo.buffData.onCreate?.Invoke(buffInfo);
                         //触发圣物闪烁
-                        SacredObjectUIManager.Instance.DoFlick(halidom.id);
+                        MapSacredUIManager.Instance.DoFlick(halidom.id);
                     }
 
                 }
