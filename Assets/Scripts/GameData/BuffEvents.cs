@@ -48,12 +48,12 @@ namespace DesignerScripts
 
         Add1StackIfEnemyHaveBleed,//8
         CheckForBleed,//8
-        Add1StackIfEnemyHaveDebuff,
+        Add1StackIfEnemyHaveDebuff,//2-05
         Add1StackIfPlayerHaveStrength,//9
         CheckForStrength,//9
         EnhancePlayerStrength,//10
         EnhanceEnemyVulnerability,//11
-        Add1StackIfPlayerHavePositiveBuff,
+        Add1StackIfPlayerHavePositiveBuff,//2-06
         Add4MoneyWhenBattleEnd,//12
         GainHalfMoney,//13
         Add50PercentAttackEvery3TimesLoseHealth,//16
@@ -64,7 +64,7 @@ namespace DesignerScripts
         Get5MaxHealthWhenGain,//18
         RecoverHalfHealthWhenGain,//19
         Recover25HealthWhenHealthBelowHalf,//20
-        Add1Reroll,
+        Add1Reroll,//2-13
         HalfInStore,
         ReuseDiceWhenDiceIs1,//23
         Add2MoneyWhenDiceIs2,//24
@@ -99,6 +99,10 @@ namespace DesignerScripts
         ClearPlayerNegativeBuff,//清除玩家负面buff
 
         RerollDice,
+        #endregion
+
+        #region 稀有圣物
+        
         #endregion
     }
 
@@ -950,8 +954,9 @@ namespace DesignerScripts
                 Debug.Log("战斗开始获得2层虚弱");
             }
         }
+        #endregion
 
-
+        #region 稀有圣物
         public static void Add4ValueIfResultIsEven(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
             if (damageInfo.damage.indexDamageRate % 2 == 0)
@@ -971,6 +976,7 @@ namespace DesignerScripts
         }
 
         #endregion
+
 
 
 

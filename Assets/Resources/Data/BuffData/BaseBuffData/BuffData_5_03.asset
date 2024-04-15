@@ -18,7 +18,7 @@ MonoBehaviour:
   - Self
   maxStack: 5
   duringCount: 0
-  isPermanent: 1
+  isPermanent: 0
   buffUpdateEnum: 0
   removeStackUpdateEnum: 0
   onCreate: 19
