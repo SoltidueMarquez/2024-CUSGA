@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using DesignerScripts;
 using static Cinemachine.DocumentationSortingAttribute;
-using UI;
 /// <summary>
 /// 获取随机数的管理器，获取随机的数据
 /// </summary>
@@ -28,26 +27,12 @@ public static class RandomManager
         }).ToList();
         return singleDiceModellegal[Random.Range(0, singleDiceModellegal.Count)];
     }
-
-    public static SingleDiceModel GetSingleDiceModel(int level, int side)
-    {
-        Dictionary<string, SingleDiceModel> diceDictionary = SingleDiceData.diceDictionary;
-        List<SingleDiceModel> singleDiceModels = new List<SingleDiceModel>();
-        singleDiceModels.AddRange(diceDictionary.Values);
-        List<SingleDiceModel> singleDiceModellegal = singleDiceModels.Where((SingleDiceModel singleDiceModel) =>
-        {
-            return singleDiceModel.level == level && (singleDiceModel.side == side || singleDiceModel.side == 2);
-        }).ToList();
-        return singleDiceModellegal[Random.Range(0, singleDiceModellegal.Count)];
-    }
-
-
     /// <summary>
     /// 根据稀有度获取随机的单个圣物
     /// </summary>
     /// <param name="rareType">圣物的稀有度</param>
     /// <returns></returns>
-    public static HalidomObject GetRandomHalidomObj(RareType rareType)
+    public static HalidomObject GetRandomSingleDiceObj(RareType rareType)
     {
         Dictionary<string,HalidomObject> keyValuePairs = HalidomData.halidomDictionary;
         List<HalidomObject> halidomObjects = new List<HalidomObject>();
@@ -156,16 +141,16 @@ public static class RandomManager
         if (sum < 15)
         {
             //不生成圣物
-            return GetRandomHalidomObj(RareType.Common);
+            return GetRandomSingleDiceObj(RareType.Common);
         }
         else if (sum >= 15 && sum < 24)
         {
-            return GetRandomHalidomObj(RareType.Rare);
+            return GetRandomSingleDiceObj(RareType.Rare);
         }
         else
         {
-            return GetRandomHalidomObj(RareType.Legendary);
+            return GetRandomSingleDiceObj(RareType.Legendary);
         }
     }
-
+    
 }

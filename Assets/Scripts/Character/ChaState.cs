@@ -190,7 +190,7 @@ public class ChaState : MonoBehaviour
         //UI初始化
         if (CharacterUIManager.Instance != null)
         {
-            CharacterUIManager.Instance.ChangeHealthSlider((Character)side, this.resource.currentHp, this.prop.health);
+            //CharacterUIManager.Instance.ChangeHealthSlider((Character)side, this.resource.currentHp, this.prop.health);
         }
     }
     #region 一些有用函数

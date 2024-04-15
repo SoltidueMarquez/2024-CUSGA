@@ -56,7 +56,7 @@ public class PlayerDataSO : ScriptableObject
     [Header("玩家初始的数值")]
     public ChaProperty baseProp;
     [Header("玩家初始的圣物")]
-    public List<HalidomDataSO> halidomSOs;
+    public List<HalidomDataSO> halidomSOData;
     [Header("玩家初始时候的骰子类型列表")]
     public List<DiceSOItem> playerDiceSOItems;
     [Header("玩家初始的时候的背包骰面（不能超过上限）")]

@@ -1,5 +1,4 @@
 using DesignerScripts;
-using Map;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +8,8 @@ using UnityEngine;
 
 public class HalidomManager : MonoBehaviour
 {
+    [Header("当前场景")]
+    public GameScene currentScene;
     /// <summary>
     /// 存放所有圣物的List
     /// </summary>
@@ -60,13 +61,9 @@ public class HalidomManager : MonoBehaviour
         halidomList = new HalidomObject[halidomMaxCount];
         //设置移除圣物的函数
     }
-    #region 在战斗场景中的圣物管理
+
     //配置圣物是不配圣物在格子里的顺序的，加进去的时候才获得序号
-    /// <summary>
-    /// 朝圣物列表中添加圣物
-    /// 这个是在战斗界面的时候用的
-    /// </summary>
-    /// <param name="halidom"></param>
+
     public void AddHalidom(HalidomObject halidom)
     {
         //这边先复制一份
@@ -88,63 +85,25 @@ public class HalidomManager : MonoBehaviour
                     //获取圣物buff的对象（暂定 没有给敌人上buff）
                     buffInfo.target = BattleManager.Instance.parameter.enemyChaStates[0].gameObject;
                     //需要整体判断这个委托是否为空
-                    if (buffInfo.buffData.onCreate != null)
+                    if (buffInfo.buffData.onCreate!= null)
                     {
                         //触发圣物的OnCreate回调点
                         buffInfo.buffData.onCreate?.Invoke(buffInfo);
                         //触发圣物闪烁
                         SacredObjectUIManager.Instance.DoFlick(halidom.id);
                     }
-
+                    
                 }
                 RefreshAllHalidoms();
                 BattleManager.Instance.parameter.playerChaState.AttrAndResourceRecheck();
-                SacredObjectUIManager.Instance.CreateSacredUIObject(i, halidomObject.id, SellHalidom, halidomObject);
-                Debug.Log("<color=#3399FF>HalidomManager-添加圣物:</color>" + halidomObject.halidomName + "成功");
-                //找到空的格子后就跳出循环
-                break;
-            }
-            else
-            {
-                Debug.Log("圣物格子已满");
-            }
-        }
-    }
-
-    public void AddHalidomInMap(HalidomObject halidom)
-    {
-        //这边先复制一份
-        HalidomObject halidomObject = new HalidomObject(halidom.rareType, halidom.id, halidom.halidomName, halidom.description, halidom.value, halidom.buffInfos);
-        for (int i = 0; i < halidomList.Length; i++)
-        {
-            //找到第一个空的格子
-            if (halidomList[i] == null)
-            {
-                //将圣物加入圣物列表
-                halidomList[i] = halidomObject;
-                //获得圣物在格子中的序号
-                halidomObject.halidomIndex = i;
-                //触发圣物OnCreate回调点
-                foreach (var buffInfo in halidomObject.buffInfos)
+                if(this.currentScene == GameScene.BattleScene)
                 {
-                    //获取圣物的创建者 给予buffinfo
-                    buffInfo.creator = MapManager.Instance.playerChaState.gameObject;
-                    //需要整体判断这个委托是否为空
-                    if (buffInfo.buffData.onCreate != null)
-                    {
-                        //触发圣物的OnCreate回调点
-                        buffInfo.buffData.onCreate?.Invoke(buffInfo);
-                        //触发圣物闪烁
-                        SacredObjectUIManager.Instance.DoFlick(halidom.id);
-                    }
-
+                    SacredObjectUIManager.Instance.CreateSacredUIObject(i, halidomObject.id, SellHalidom, halidomObject);
                 }
-                RefreshAllHalidoms();
-                MapManager.Instance.playerChaState.AttrAndResourceRecheck();
-
-                //在地图中创建圣物UI
-                MapSacredUIManager.Instance.CreateSacredUIObject(i, SellHalidomInMap, halidomObject);
-
+                else if(this.currentScene == GameScene.MapScene)
+                {
+                    MapSacredUIManager.Instance.CreateSacredUIObject(i, SellHalidom, halidomObject);
+                }    
                 Debug.Log("<color=#3399FF>HalidomManager-添加圣物:</color>" + halidomObject.halidomName + "成功");
                 //找到空的格子后就跳出循环
                 break;
@@ -181,7 +140,7 @@ public class HalidomManager : MonoBehaviour
             }
         }
     }
-    #endregion
+
     public void RefreshAllHalidoms()
     {
 
@@ -210,7 +169,7 @@ public class HalidomManager : MonoBehaviour
         this.currentCharacterProperty = (this.baseProp + buffProp[0]) * this.buffProp[1];
         this.deltaCharacterProperty = this.currentCharacterProperty - this.baseProp;
     }
-    #region 售卖圣物
+
     /// <summary>
     /// 售卖圣物
     /// </summary>
@@ -232,20 +191,8 @@ public class HalidomManager : MonoBehaviour
             BattleManager.Instance.RefreshIfHalodomCanChoose();
         }
     }
-    public void SellHalidomInMap(HalidomObject halidomObject)
-    {
-        int index = halidomObject.halidomIndex;
-        //获取圣物的售价
-        int price = halidomList[index].value;
-        //将圣物的售价加到玩家的金币上
-        ChaState tempChaState = MapManager.Instance.playerChaState;
-        tempChaState.ModResources(new ChaResource(0, price, 0, 0));
-        Debug.Log("售卖圣物成功，获得金币" + price + "个");
-        //将圣物移除
-        RemoveHalidom(index);
 
-    }
-    #endregion
+
     /// <summary>
     /// 重新设置圣物列表,交换圣物用
     /// </summary>
@@ -298,7 +245,7 @@ public class HalidomManager : MonoBehaviour
                         //触发圣物闪烁
                         SacredObjectUIManager.Instance.DoFlick(halidomList[i].id);
                     }
-
+                    
                     if (buffInfo.isPermanent == false)//非永久buff
                     {
                         buffInfo.roundCount--;
@@ -350,7 +297,7 @@ public class HalidomManager : MonoBehaviour
                         //触发圣物闪烁
                         SacredObjectUIManager.Instance.DoFlick(halidomList[i].id);
                     }
-
+                   
                 }
             }
         }
@@ -370,7 +317,7 @@ public class HalidomManager : MonoBehaviour
                         //触发圣物闪烁
                         SacredObjectUIManager.Instance.DoFlick(halidomList[i].id);
                     }
-
+                   
                 }
             }
         }
@@ -498,17 +445,17 @@ public class HalidomManager : MonoBehaviour
     #endregion
 
     #region 初始化UI相关
-    public void InitHalidomUI(GameScene currentScene)
+    public void InitHalidomUI()
     {
-        for (int i = 0; i < halidomList.Length; i++)
+        for(int i = 0;i < halidomList.Length;i++)
         {
             if (halidomList[i] != null)
             {
-                if (currentScene == GameScene.BattleScene)
+                if(this.currentScene == GameScene.BattleScene)
                 {
                     SacredObjectUIManager.Instance.CreateSacredUIObject(i, halidomList[i].id, SellHalidom, halidomList[i]);
                 }
-                else if (currentScene == GameScene.MapScene)
+                else if(this.currentScene == GameScene.MapScene)
                 {
                     MapSacredUIManager.Instance.CreateSacredUIObject(i, SellHalidom, halidomList[i]);
                 }

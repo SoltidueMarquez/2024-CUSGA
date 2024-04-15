@@ -10,7 +10,7 @@ public class ProductHalidom : ProductBase<HalidomObject>
         base.Start();
     }
 
-    public override void TryBuy()
+    protected override void TryBuy()
     {
         //if ()
         //{
@@ -26,12 +26,12 @@ public class ProductHalidom : ProductBase<HalidomObject>
 
     }
 
-    public override void InitialProduct(HalidomObject product)
+    protected override void InitialProduct(HalidomObject product)
     {
         base.InitialProduct(product);
     }
 
-    public override void ProductBrought()
+    protected override void ProductBrought()
     {
         base.ProductBrought();
     }

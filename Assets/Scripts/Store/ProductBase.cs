@@ -24,13 +24,13 @@ public abstract class ProductBase<T> : MonoBehaviour where T : class
     /// 试图购买，返回是否购买成功
     /// </summary>
     /// <returns></returns>
-    public abstract void TryBuy();
+    protected abstract void TryBuy();
 
     /// <summary>
     /// 商品初始化
     /// </summary>
     /// <param name="product"></param>
-    public virtual void InitialProduct(T _product)
+    protected virtual void InitialProduct(T _product)
     {
         isEmpty = false;
         product = _product;
@@ -39,15 +39,9 @@ public abstract class ProductBase<T> : MonoBehaviour where T : class
     /// <summary>
     /// 这个商品被买走了
     /// </summary>
-    public virtual void ProductBrought()
+    protected virtual void ProductBrought()
     {
         isEmpty = true;
-    }
-
-    public virtual void ClearProduct()
-    {
-        isEmpty = true;
-        product= null;
     }
 
     /// <summary>

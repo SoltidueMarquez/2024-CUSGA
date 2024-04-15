@@ -4187,7 +4187,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDataSO: {fileID: 0}
-  ifLoadedHalidom: 0
 --- !u!4 &993230910
 Transform:
   m_ObjectHideFlags: 0
@@ -7911,6 +7910,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1997646022}
   - component: {fileID: 1997646021}
+  - component: {fileID: 1997646024}
   m_Layer: 0
   m_Name: HalidomManager
   m_TagString: Untagged
@@ -7930,6 +7930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e78e6b80fe59e94a82deb11c4675b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentScene: 1
   halidomMaxCount: 6
   currentCharacterProperty:
     health: 0
@@ -7970,6 +7971,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1997646024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997646020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0107f09953f17742bf6c979976a8cc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  halidomSOData:
+  - {fileID: 11400000, guid: e42381ce6b4c9114ea6664c1ab2fd389, type: 2}
 --- !u!1 &2054669038
 GameObject:
   m_ObjectHideFlags: 0

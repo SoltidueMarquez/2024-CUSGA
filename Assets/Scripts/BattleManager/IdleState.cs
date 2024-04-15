@@ -17,7 +17,6 @@ public class GameStartState : IState
     public void OnEnter()
     {
         Debug.Log("游戏开始");
-        BattleManager.Instance.InitializeHalidom();
         //玩家所有的初始化
         BattleManager.Instance.InitializePlayer();
         //敌人所有的初始化

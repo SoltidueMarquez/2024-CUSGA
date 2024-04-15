@@ -182,7 +182,7 @@ public class BattleDiceHandler : MonoBehaviour
         this.bagDiceCards.Clear();
         for (int i = 0; i < singleDiceModelSOs.Count; i++)
         {
-            SingleDiceModel singleDiceModel = SingleDiceData.diceDictionary[singleDiceModelSOs[i].singleDiceModelName];
+            SingleDiceModel singleDiceModel = SingleDiceData.diceDictionary[singleDiceModelSOs[i].name];
             SingleDiceObj singleDiceObj = new SingleDiceObj(singleDiceModel, i + 1);
             this.AddSingleBattleDiceToBag(singleDiceObj);
         }
