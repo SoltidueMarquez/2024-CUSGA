@@ -14,7 +14,6 @@ public class HalidomTest : MonoBehaviour
     {
         AddHalidomAtFirstFrame();
         //AddHalidom();
-        DestroyHalidom();
     }
 
     public void AddHalidomAtFirstFrame()
@@ -55,12 +54,5 @@ public class HalidomTest : MonoBehaviour
         }
     }
 
-    public void DestroyHalidom()
-    {
-       if(Input.GetKeyDown(KeyCode.P))
-        {
-            HalidomManager.Instance.RemoveHalidom(0);
-
-        }
-    }
+    
 }

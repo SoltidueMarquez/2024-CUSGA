@@ -228,7 +228,7 @@ public class BattleManager : MonoBehaviour
         if (this.parameter.playerDataSO.ifUseSaveData || GameManager.Instance.ifLoadedHalidom)
         {
             HalidomManager.Instance.InitHalidomUI(GameScene.BattleScene);
-
+            HalidomManager.Instance.InitHalidomInBattleScene();
         }
         else
         {
@@ -477,7 +477,7 @@ public class BattleManager : MonoBehaviour
     public void SellSingleDice(SingleDiceObj singleDiceObj)
     {
         this.parameter.playerChaState.GetBattleDiceHandler().RemoveSingleBattleDiceFromBag(singleDiceObj);
-        var resource = new ChaResource(0, singleDiceObj.SaleValue, 0, 0);
+        var resource = new ChaResource(0, -singleDiceObj.SaleValue, 0, 0);
         this.parameter.playerChaState.ModResources(resource);
         //获取当前骰面在背包骰面中的位置
         RefreshIfDiceCanChoose();

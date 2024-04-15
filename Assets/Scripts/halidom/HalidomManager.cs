@@ -156,7 +156,7 @@ public class HalidomManager : MonoBehaviour
         }
     }
     //删去指定格子的圣物
-    public void RemoveHalidom(int index)
+    public void RemoveHalidom(int index, GameScene gameScene)
     {
         for (int i = 0; i < halidomList.Length; i++)
         {
@@ -176,7 +176,15 @@ public class HalidomManager : MonoBehaviour
                 halidomList[i] = null;
                 //重新计算属性
                 RefreshAllHalidoms();
-                BattleManager.Instance.parameter.playerChaState.AttrAndResourceRecheck();
+                if (gameScene == GameScene.BattleScene)
+                {
+                    BattleManager.Instance.parameter.playerChaState.AttrAndResourceRecheck();
+                }
+                else if (gameScene == GameScene.MapScene)
+                {
+                    MapManager.Instance.playerChaState.AttrAndResourceRecheck();
+                }
+
 
             }
         }
@@ -223,10 +231,10 @@ public class HalidomManager : MonoBehaviour
         //将圣物的售价加到玩家的金币上
         ChaState tempChaState = BattleManager.Instance.parameter.playerChaState;
 
-        tempChaState.ModResources(new ChaResource(0, price, 0, 0));
+        tempChaState.ModResources(new ChaResource(0, -price, 0, 0));
         Debug.Log("售卖圣物成功，获得金币" + price + "个");
         //将圣物移除
-        RemoveHalidom(index);
+        RemoveHalidom(index, GameScene.BattleScene);
         if (BattleManager.Instance != null)
         {
             BattleManager.Instance.RefreshIfHalodomCanChoose();
@@ -236,13 +244,13 @@ public class HalidomManager : MonoBehaviour
     {
         int index = halidomObject.halidomIndex;
         //获取圣物的售价
-        int price = halidomList[index].value;
+        int price = halidomList[index].saleValue;
         //将圣物的售价加到玩家的金币上
         ChaState tempChaState = MapManager.Instance.playerChaState;
-        tempChaState.ModResources(new ChaResource(0, price, 0, 0));
+        tempChaState.ModResources(new ChaResource(0, -price, 0, 0));
         Debug.Log("售卖圣物成功，获得金币" + price + "个");
         //将圣物移除
-        RemoveHalidom(index);
+        RemoveHalidom(index, GameScene.MapScene);
 
     }
     #endregion
@@ -497,7 +505,48 @@ public class HalidomManager : MonoBehaviour
         return halidomDictionary;
     }
     #endregion
+    #region 战斗场景初始化
+    public void InitHalidomInBattleScene()
+    {
+        for (int i = 0; i < halidomList.Length; i++)
+        {
+            //找到第一个空的格子
+            if (halidomList[i] != null)
+            {
 
+                //触发圣物OnCreate回调点
+                foreach (var buffInfo in halidomList[i].buffInfos)
+                {
+                    //如果当前格子有东西
+                    buffInfo.creator = BattleManager.Instance.parameter.playerChaState.gameObject;
+                    //获取圣物buff的对象（暂定 没有给敌人上buff）
+                    buffInfo.target = BattleManager.Instance.parameter.enemyChaStates[0].gameObject;
+                    //需要整体判断这个委托是否为空
+                }
+                RefreshAllHalidoms();
+            }
+        }
+    }
+    #endregion
+    #region 地图场景初始化
+    public void InitHalidomInMapScene()
+    {
+        for (int i = 0; i < halidomList.Length; i++)
+        {
+            //如果当前格子有东西
+            if (halidomList[i] != null)
+            {
+                //触发圣物OnCreate回调点
+                foreach (var buffInfo in halidomList[i].buffInfos)
+                {
+                    //获取圣物的创建者 给予buffinfo
+                    buffInfo.creator = MapManager.Instance.playerChaState.gameObject;
+                }
+                RefreshAllHalidoms();
+            }
+        }
+    }
+    #endregion
     #region 初始化UI相关
     public void InitHalidomUI(GameScene currentScene)
     {

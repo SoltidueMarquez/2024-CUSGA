@@ -74,27 +74,27 @@ MonoBehaviour:
     - id: 2_03
       idInDice: 1
       level: 2
-      value: 7
+      value: 8
     - id: 2_03
       idInDice: 2
       level: 2
-      value: 7
+      value: 8
     - id: 2_03
       idInDice: 3
       level: 2
-      value: 7
+      value: 8
     - id: 2_03
       idInDice: 4
       level: 2
-      value: 7
+      value: 8
     - id: 2_03
       idInDice: 5
       level: 2
-      value: 7
+      value: 8
     - id: 2_03
       idInDice: 6
       level: 2
-      value: 7
+      value: 8
   bagDiceList:
   - id: 1_02
     idInDice: 1
