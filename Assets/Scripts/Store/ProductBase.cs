@@ -1,4 +1,5 @@
 using DesignerScripts;
+using Map;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,15 +17,18 @@ public abstract class ProductBase<T> : MonoBehaviour where T : class
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        OnBuyProduct.AddListener(TryBuy);
-        OnBuySuccess.AddListener(ProductBrought);
-    }
 
+        
+    }
+  
     /// <summary>
     /// 试图购买，返回是否购买成功
     /// </summary>
     /// <returns></returns>
-    public abstract void TryBuy();
+    public virtual void TryBuy()
+    {      
+        
+    }
 
     /// <summary>
     /// 商品初始化
@@ -34,6 +38,9 @@ public abstract class ProductBase<T> : MonoBehaviour where T : class
     {
         isEmpty = false;
         product = _product;
+        OnBuySuccess.RemoveAllListeners();
+        OnBuyFail.RemoveAllListeners();
+        OnBuySuccess.AddListener(ProductBrought);
     }
 
     /// <summary>
@@ -47,13 +54,9 @@ public abstract class ProductBase<T> : MonoBehaviour where T : class
     public virtual void ClearProduct()
     {
         isEmpty = true;
-        product= null;
+        product = null;
     }
 
-    /// <summary>
-    /// 试图购买商品时调用,返回是否购买成功
-    /// </summary>
-    public UnityEvent OnBuyProduct;
     /// <summary>
     /// 购买成功时调用
     /// </summary>

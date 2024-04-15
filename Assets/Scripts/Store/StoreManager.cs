@@ -17,6 +17,8 @@ public class StoreManager : SingletonBase<StoreManager>
 
     public List<ProductHalidom> productHalidoms = new List<ProductHalidom>();
     public List<ProductDice> productDices = new List<ProductDice>();
+
+    private ChaState player;
     protected override void Awake()
     {
         base.Awake();
@@ -25,6 +27,8 @@ public class StoreManager : SingletonBase<StoreManager>
             StoreUIcanvas = transform.Find("Canvas").gameObject;
         }
         StoreUIcanvas.SetActive(false);
+
+
     }
 
     protected override void OnDestroy()
@@ -37,8 +41,9 @@ public class StoreManager : SingletonBase<StoreManager>
     {
         OnEnterStore.AddListener(OpenStore);
         OnExitStore.AddListener(CloseStore);
-        OnClickReroll.AddListener(ClickReroll);
         OnRefreshStore.AddListener(RerollShop);
+
+        player = MapManager.Instance.playerChaState;
     }
 
     // Update is called once per frame
@@ -62,10 +67,6 @@ public class StoreManager : SingletonBase<StoreManager>
     /// </summary>
     public UnityEvent OnClickUpgrade;
     /// <summary>
-    /// 点击重投按钮时调用
-    /// </summary>
-    public UnityEvent OnClickReroll;
-    /// <summary>
     /// 刷新商品店时调用
     /// </summary>
     public UnityEvent OnRefreshStore;
@@ -88,6 +89,7 @@ public class StoreManager : SingletonBase<StoreManager>
     {
         StoreUIcanvas.SetActive(true);
         OnRefreshStore?.Invoke();
+        player.resource.currentRollTimes = player.baseProp.maxRollTimes;
     }
 
     private void CloseStore()
@@ -102,9 +104,20 @@ public class StoreManager : SingletonBase<StoreManager>
 
     #region ------刷新商店------
 
-    private void ClickReroll()
+    /// <summary>
+    /// 按下重投按钮
+    /// </summary>
+    public void ClickReroll()
     {
-        OnRefreshStore?.Invoke();
+        if (player.resource.currentRollTimes > 0)
+        {
+            player.resource.currentRollTimes--;
+            OnRefreshStore?.Invoke();
+        }
+        else
+        {
+            m_Debug("重投次数不足");
+        }
     }
 
     /// <summary>

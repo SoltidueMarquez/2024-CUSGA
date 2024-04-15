@@ -49,8 +49,7 @@ namespace UI.Store
             {
                 ProductDice productDice = diceColumns[i].transform.GetComponent<ProductDice>();
 
-                CreateDiceUI(ResourcesManager.GetSingleDiceUIData(productDice.product),
-                                    i, productDice.TryBuy, productDice.product);
+                CreateDiceUI(i, productDice.TryBuy, productDice.product);
             }
         }
 
@@ -61,8 +60,9 @@ namespace UI.Store
         /// <param name="index">栏位索引</param>
         /// <param name="onChoose">选择骰面后触发的逻辑函数</param>
         /// <param name="singleDiceObj">骰面物体</param>
-        public void CreateDiceUI(SingleDiceUIData data, int index, Action<SingleDiceObj> onChoose, SingleDiceObj singleDiceObj)
-        {
+        public void CreateDiceUI(int index, Action<SingleDiceObj> onChoose, SingleDiceObj singleDiceObj)
+        {            
+
             if (index > diceColumns.Count)
             {
                 Debug.LogWarning("超出生成的栏位");
@@ -78,7 +78,7 @@ namespace UI.Store
             diceColumns[index].bagObject = tmp;
             tmp.transform.position = parent.position;//更改位置
             var tmpDice = tmp.GetComponent<StoreDiceUIObject>();
-            tmpDice.Init(data, animTime, 2, onChoose, singleDiceObj);//初始化
+            tmpDice.Init(ResourcesManager.GetSingleDiceUIData(singleDiceObj), animTime, 2, onChoose, singleDiceObj);//初始化
             tmp.SetActive(true);
             tmpDice.DoAppearAnim(animTime); //出现动画
         }

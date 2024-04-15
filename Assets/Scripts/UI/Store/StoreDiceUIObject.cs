@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -25,11 +26,15 @@ namespace UI.Store
             this.GetComponent<Image>().sprite = data.sprite;
             //按钮事件绑定
             this.GetComponent<Button>().onClick.AddListener(()=>
-            {
-                Disable();
-                DoChosenAnim(animTime, scale);//动画
+            {                
+                //Disable();
+                //DoChosenAnim(animTime, scale);//动画
                 onChoose?.Invoke(singleDiceObj);
             });
+
+            transform.parent.GetComponent<ProductDice>().OnBuySuccess.AddListener(Disable);
+            transform.parent.GetComponent<ProductDice>().OnBuySuccess.AddListener(
+                        () => { DoChosenAnim(animTime, scale); });
         }
         
         /// <summary>

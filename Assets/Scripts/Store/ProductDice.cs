@@ -1,5 +1,7 @@
+using Map;
 using System.Collections;
 using System.Collections.Generic;
+using UI.Store;
 using UnityEngine;
 
 public class ProductDice : ProductBase<SingleDiceObj>
@@ -12,28 +14,25 @@ public class ProductDice : ProductBase<SingleDiceObj>
 
     public override void TryBuy()
     {
-        //if ()
-        //{
-        //    OnBuyFail?.Invoke(BuyFailType.NoMoney);
-        //    
-        //}
-        //else if ()
-        //{
-        //    OnBuyFail?.Invoke(BuyFailType.NoBagSpace);
-        //    
-        //}
+        base.TryBuy();
+        ChaState player = MapManager.Instance.playerChaState;
+        if (player.resource.currentMoney < product.value)
+        {
+            OnBuyFail?.Invoke(BuyFailType.NoMoney);
+            return;
+        }
+        else if (player.GetBattleDiceHandler().bagDiceCards.Count >= player.GetBattleDiceHandler().maxDiceInBag)
+        {
+            OnBuyFail?.Invoke(BuyFailType.NoBagSpace);
+            return;
+        }
+
         OnBuySuccess?.Invoke();
-
     }
-
     public void TryBuy(SingleDiceObj singleDiceObj)
     {
         TryBuy();
     }
-
-
-
-
 
     public override void InitialProduct(SingleDiceObj product)
     {
@@ -43,5 +42,14 @@ public class ProductDice : ProductBase<SingleDiceObj>
     public override void ProductBrought()
     {
         base.ProductBrought();
+        ChaState player = MapManager.Instance.playerChaState;
+        player.resource.currentMoney -= product.value;
+        player.GetBattleDiceHandler().AddSingleBattleDiceToBag(product);
+    }
+
+    private void CreatreUI()
+    {
+        //ChaState player = MapManager.Instance.playerChaState;
+        //StoreAreaUIManager.Instance.CreateDiceUI(player.GetBattleDiceHandler().bagDiceCards.Count+1)
     }
 }

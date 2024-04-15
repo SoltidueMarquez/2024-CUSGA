@@ -622,14 +622,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 1
-  product:
-    id: 
-    halidomName: 
-    description: 
-    buffInfos: []
-    halidomIndex: 0
-    rareType: 0
-    value: 0
   OnBuyProduct:
     m_PersistentCalls:
       m_Calls: []
@@ -839,7 +831,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 828246723828463204}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1232022627899332625}
+        m_TargetAssemblyTypeName: StoreManager, Assembly-CSharp
+        m_MethodName: ClickReroll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3833636923987222188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1174,6 +1178,7 @@ MonoBehaviour:
   enableDebug: 1
   StoreUIcanvas: {fileID: 5822657103560371217}
   diceScoreFlag: 0f00000018000000
+  originRefreshTime: 1
   productHalidoms:
   - {fileID: 7335776371973441104}
   - {fileID: 8398664542382313900}
@@ -1251,9 +1256,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnClickReroll:
-    m_PersistentCalls:
-      m_Calls: []
   OnRefreshStore:
     m_PersistentCalls:
       m_Calls: []
@@ -3171,14 +3173,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 1
-  product:
-    id: 
-    halidomName: 
-    description: 
-    buffInfos: []
-    halidomIndex: 0
-    rareType: 0
-    value: 0
   OnBuyProduct:
     m_PersistentCalls:
       m_Calls: []
@@ -4381,14 +4375,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEmpty: 1
-  product:
-    id: 
-    halidomName: 
-    description: 
-    buffInfos: []
-    halidomIndex: 0
-    rareType: 0
-    value: 0
   OnBuyProduct:
     m_PersistentCalls:
       m_Calls: []

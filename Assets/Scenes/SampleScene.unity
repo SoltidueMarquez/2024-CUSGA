@@ -579,6 +579,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: StoreUI
       objectReference: {fileID: 0}
+    - target: {fileID: 3836327947522939319, guid: ead795afd3ad01246b092637d1ea4c59, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836327947522939319, guid: ead795afd3ad01246b092637d1ea4c59, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836327947522939319, guid: ead795afd3ad01246b092637d1ea4c59, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4094949460559003386, guid: ead795afd3ad01246b092637d1ea4c59, type: 3}
       propertyPath: animTime
       value: 2
@@ -850,6 +862,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDataSO: {fileID: 0}
+  ifLoadedHalidom: 0
 --- !u!4 &1825883772
 Transform:
   m_ObjectHideFlags: 0
@@ -894,7 +907,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e78e6b80fe59e94a82deb11c4675b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  halidomList: []
   halidomMaxCount: 6
   currentCharacterProperty:
     health: 0

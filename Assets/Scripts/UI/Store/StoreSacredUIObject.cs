@@ -22,10 +22,14 @@ namespace UI.Store
             //按钮事件绑定
             this.GetComponent<Button>().onClick.AddListener(()=>
             {
-                Disable();
-                DoChosenAnim(animTime, scale);//动画
+                //Disable();
+                //DoChosenAnim(animTime, scale);//动画
                 onChoose?.Invoke();
             });
+
+            transform.parent.GetComponent<ProductHalidom>().OnBuySuccess.AddListener(Disable);
+            transform.parent.GetComponent<ProductHalidom>().OnBuySuccess.AddListener(
+                        () => { DoChosenAnim(animTime, scale); });
         }
     }
 }
