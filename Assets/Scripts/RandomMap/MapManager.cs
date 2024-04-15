@@ -186,6 +186,7 @@ namespace Map
         #region 骰子交互相关
         public void SellSingleDice(SingleDiceObj singleDiceObj)
         {
+            Debug.Log("<color=green>MapManager</color>:" + singleDiceObj.idInDice);
             this.playerChaState.GetBattleDiceHandler().RemoveSingleBattleDiceFromBag(singleDiceObj);
             var resource = new ChaResource(0, singleDiceObj.model.value, 0, 0);
             this.playerChaState.ModResources(resource);

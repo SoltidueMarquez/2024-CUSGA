@@ -30,17 +30,7 @@ public class BattleDiceHandler : MonoBehaviour
     /// 玩家和敌人身上能使用的骰面
     /// </summary>
     public SingleDiceObj[] diceCardsInUse;
-    /// <summary>
-    /// 数据上的交换两个骰面
-    /// </summary>
-    /// <param name="indexInBag">骰面在背包中的下标</param>
-    /// <param name="indexInBattle">骰面在战斗中的下标</param>
-    //public void ChangeDiceInBattle(int indexInBag, int indexInBattle)
-    //{
-    //    SingleDiceObj temp = bagDiceCards[indexInBattle];
-    //    bagDiceCards[indexInBattle] = bagDiceCards[indexInBag];
-    //    bagDiceCards[indexInBag] = temp;
-    //}
+
     /// <summary>
     /// 释放单个骰子
     /// </summary>
@@ -105,11 +95,13 @@ public class BattleDiceHandler : MonoBehaviour
     }
 
     #region 骰面交换
-    public void SwapDiceInBagAndBattle(SingleDiceObj singleDiceObjInBag,SingleDiceObj singleDiceObjInBattle)
+    public void SwapDiceInBagAndBattle(SingleDiceObj singleDiceObjInBag,SingleDiceObj singleDiceObjInBattle,int indexOfDices)
     {
-        SingleDiceObj temp = singleDiceObjInBag;
-        singleDiceObjInBag = singleDiceObjInBattle;
-        singleDiceObjInBattle = temp;
+        int indexInBag = bagDiceCards.IndexOf(singleDiceObjInBag);
+        var singleDiceObjs = this.battleDices[indexOfDices].GetBattleDiceSingleDices();
+        int indexInDice = singleDiceObjs.IndexOf(singleDiceObjInBattle);
+        bagDiceCards[indexInBag] = singleDiceObjInBattle;
+        singleDiceObjs[indexInDice] = singleDiceObjInBag;
     }
     #endregion
     #region 初始化战斗骰子，有数据的情况下和测试的情况下

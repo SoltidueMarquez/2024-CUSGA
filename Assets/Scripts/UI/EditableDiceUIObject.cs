@@ -152,7 +152,7 @@ namespace UI
             {
                 var bagDice = gameObject.GetComponent<EditableDiceUIObject>().diceObj;
                 var fightDice = switchObj.GetComponent<EditableDiceUIObject>().diceObj;
-                MapManager.Instance.playerChaState.GetBattleDiceHandler().SwapDiceInBagAndBattle(bagDice, fightDice);
+                MapManager.Instance.playerChaState.GetBattleDiceHandler().SwapDiceInBagAndBattle(bagDice, fightDice,EditableDiceUIManager.Instance.GetCurrentPage());
                 Debug.Log(
                     $"<color=green>{gameObject.GetComponent<EditableDiceUIObject>().diceObj}交换了{EditableDiceUIManager.Instance.GetCurrentPage()}号骰子的{switchObj.GetComponent<EditableDiceUIObject>().diceObj}</color>");
             }
