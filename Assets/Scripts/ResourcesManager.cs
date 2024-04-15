@@ -111,22 +111,11 @@ public static class ResourcesManager
         singleDiceUIData.idInDice = singleDiceObj.idInDice;
         singleDiceUIData.positionInDice = singleDiceObj.positionInDice;
         //根据骰子类型和基础等级计算基础值
-        switch (singleDiceModelSO.type)
-        {
-            case DiceType.Attack:
-                singleDiceUIData.baseValue = DesignerScripts.DamageUtil.GetlevelBasedDamage(singleDiceObj.level);
-                break;
-            case DiceType.Defense:
-                singleDiceUIData.baseValue = DesignerScripts.DamageUtil.GetIndexLevelBasedShield(singleDiceObj.level);
-                break;
-            case DiceType.Support:
-                singleDiceUIData.baseValue = DesignerScripts.DamageUtil.GetIndexLevelBasedHeal(singleDiceObj.level);
-                break;
-        }
+        singleDiceUIData.baseValue = singleDiceModelSO.baseValue;
         singleDiceUIData.type = singleDiceModelSO.type;
         singleDiceUIData.sprite = singleDiceModelSO.sprite;
         singleDiceUIData.description = singleDiceModelSO.description;
-        singleDiceUIData.value = singleDiceModelSO.value;
+        singleDiceUIData.value = singleDiceObj.SaleValue;
         singleDiceUIData.name = singleDiceModelSO.singleDiceModelName;
         singleDiceUIData.level = (int)singleDiceModelSO.level + 1;
         return singleDiceUIData;
