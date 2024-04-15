@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a222d7b9aff60b489012777e6166707, type: 3}
-  m_Name: DiceData_3_02
+  m_Name: DiceData_2_08
   m_EditorClassIdentifier: 
-  id: 3_02
-  singleDiceModelName: "\u56DE\u590D+"
-  type: 2
+  id: 2_08
+  singleDiceModelName: "\u8FC2\u56DE++"
+  type: 1
   condition:
     currentHp: 0
     currentMoney: 0
@@ -25,10 +25,10 @@ MonoBehaviour:
     currentMoney: 0
     currentRollTimes: 0
     currentShield: 0
-  level: 1
-  value: 8
+  level: 2
+  value: 12
   side: 0
   buffDataSOs: []
   sprite: {fileID: 0}
-  description: "\u56DE\u8840"
-  baseValue: 3
+  description: "\u53E0\u76FE(valueM),\u91CD\u6295(ALL)"
+  baseValue: 5

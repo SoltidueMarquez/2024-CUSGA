@@ -22,14 +22,13 @@ MonoBehaviour:
     currentShield: 0
   cost:
     currentHp: 0
-    currentMoney: 2
+    currentMoney: -2
     currentRollTimes: 0
     currentShield: 0
   level: 1
   value: 8
   side: 0
-  buffDataSOs:
-  - {fileID: 11400000, guid: 4b4e4319738004e49bf1953b619f4489, type: 2}
+  buffDataSOs: []
   sprite: {fileID: 0}
   description: "\u653B\u51FBvalue,\u62FF\u94B12"
   baseValue: 6
