@@ -64,7 +64,8 @@ namespace UI
         /// <param name="eventData"></param>
         public void OnPointerEnter(PointerEventData eventData)
         {
-            UIManager.Instance.EnterPreview(this.gameObject,SacredObjectUIManager.Instance.previewSizeS);
+            UIManager.Instance.EnterPreview(this.gameObject, SacredObjectUIManager.Instance.previewSizeS,
+                SacredObjectUIManager.Instance.previewSizeS);
             UIManager.Instance.DoShake(this.GetComponent<Image>(),SacredObjectUIManager.Instance.shakeAngleS);
             descriptionCanvas.SetActive(true);
         }
