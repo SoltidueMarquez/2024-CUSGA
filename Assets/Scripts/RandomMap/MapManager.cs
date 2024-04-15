@@ -177,6 +177,11 @@ namespace Map
                 GameManager.Instance.ifLoadedHalidom = true;
             }
         }
+
+        public void InitializeMap()
+        {
+
+        }
         #endregion
         #region 骰子交互相关
         public void SellSingleDice(SingleDiceObj singleDiceObj)

@@ -12,12 +12,14 @@ public class PlayerData
     public List<HalidomDataForSave> halidomDataForSaves;
     //玩家当前在背包中的骰面
     public List<SingleDiceObjSOData> bagDiceList;
-
+    //玩家的Map信息
+    public Map.Map map;
     public PlayerData(PlayerDataSO playerDataSO)
     {
         chaResource = playerDataSO.chaResource;
         battleDiceList = playerDataSO.battleDiceList;
         halidomDataForSaves = playerDataSO.halidomDataForSaves;
         bagDiceList = playerDataSO.bagDiceList;
+        map = playerDataSO.currentMap;
     }
 }

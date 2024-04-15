@@ -72,6 +72,8 @@ public class PlayerDataSO : ScriptableObject
     public List<SingleDiceObjSOData> bagDiceList;
     [Header("玩家当前的资源(保存的数据)")]
     public ChaResource chaResource;
+    [Header("玩家的map信息")]
+    public Map.Map currentMap;
     /// <summary>
     /// 从json文件中读取数据
     /// </summary>
