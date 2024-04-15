@@ -19,6 +19,7 @@ public class HalidomUIData
     public string name;
     public string description;
     public int value;
+    public int salevalue;
     public Sprite sprite;
 }
 public class SingleDiceUIData
@@ -30,6 +31,7 @@ public class SingleDiceUIData
     public Sprite sprite;
     public string description;
     public int value;
+    public int salevalue;
     public string name;
     public int level;
 }
@@ -64,6 +66,7 @@ public static class ResourcesManager
         halidomUIData.name = halidomDataSO.halidomName.ToString();
         halidomUIData.description = halidomDataSO.description;
         halidomUIData.value = halidomDataSO.value;
+        halidomUIData.salevalue = Mathf.FloorToInt(halidomDataSO.value / 4);
         halidomUIData.sprite = halidomDataSO.sprite;
         return halidomUIData;
     }
@@ -115,7 +118,8 @@ public static class ResourcesManager
         singleDiceUIData.type = singleDiceModelSO.type;
         singleDiceUIData.sprite = singleDiceModelSO.sprite;
         singleDiceUIData.description = singleDiceModelSO.description;
-        singleDiceUIData.value = singleDiceObj.SaleValue;
+        singleDiceUIData.value = singleDiceObj.value;
+        singleDiceUIData.salevalue = singleDiceObj.SaleValue;
         singleDiceUIData.name = singleDiceModelSO.singleDiceModelName;
         singleDiceUIData.level = (int)singleDiceModelSO.level + 1;
         return singleDiceUIData;
