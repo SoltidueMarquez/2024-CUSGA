@@ -102,7 +102,14 @@ namespace DesignerScripts
         #endregion
 
         #region 稀有圣物
-        
+        GainMoneyAfterBattle,//战斗后获得金币
+        Choose2DiceUpdateWhenGain,
+        Gain2NormalHalidomWhenGain,
+        Hit3DamageWhenLoseHealth,
+        GainDodgeWhenLoseHealth,
+        GainStrengthWhenLoseHealth,
+        RecoverHalfHealthWhenDie,
+        Add1ValueWhenDiceBelow3,
         #endregion
     }
 
@@ -974,6 +981,37 @@ namespace DesignerScripts
                 Debug.Log("骰子为奇数，增加4点伤害");
             }
         }
+
+        public static void GainMoneyAfterBattle(BuffInfo buffInfo, DamageInfo damageInfo, GameObject attacker)
+        {
+            //获取玩家的状态
+            ChaState tempChaState = buffInfo.creator.GetComponent<ChaState>();
+            //访问当前的资源
+            if (tempChaState.resource.currentMoney >= 0)
+            {
+                if(tempChaState.resource.currentMoney <= 50)
+                {
+                    int money = tempChaState.resource.currentMoney / 5;
+                    tempChaState.ModResources(new ChaResource(0, money, 0, 0));
+                    Debug.Log("增加" + money + "金币");
+                }
+                else
+                {
+                    tempChaState.ModResources(new ChaResource(0, 10, 0, 0));
+                    Debug.Log("增加" + 10 + "金币");
+                }
+            }
+        }
+
+        public static void Gain2NormalHalidomWhenGain(BuffInfo buffInfo)
+        {
+            RandomManager.GetRandomHalidomObj(RareType.Common);
+            RandomManager.GetRandomHalidomObj(RareType.Common);
+        }
+
+
+
+
 
         #endregion
 

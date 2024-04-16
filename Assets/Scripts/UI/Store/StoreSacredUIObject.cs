@@ -30,6 +30,8 @@ namespace UI.Store
             transform.parent.GetComponent<ProductHalidom>().OnBuySuccess.AddListener(Disable);
             transform.parent.GetComponent<ProductHalidom>().OnBuySuccess.AddListener(
                         () => { DoChosenAnim(animTime, scale); });
+            transform.parent.GetComponent<ProductHalidom>().OnBuySuccess.AddListener(BusinessmenTipManager.Instance.ShowTip);//增加提示时间
+            transform.parent.GetComponent<ProductHalidom>().OnBuyFail.AddListener(BusinessmenTipManager.Instance.ShowTip);//增加提示时间
         }
     }
 }

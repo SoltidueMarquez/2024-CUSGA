@@ -464,6 +464,29 @@ public class HalidomManager : MonoBehaviour
             }
         }
     }
+    //在新增buff的时候触发
+    public void OnAddBuff(BuffInfo addBuffInfo)
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            if (halidomList[i] != null)
+            {
+                foreach (var buffInfo in halidomList[i].buffInfos)
+                {
+                    //需要整体判断这个委托是否为空
+
+                    if (buffInfo.buffData.onAddBuff != null)
+                    {
+                        buffInfo.buffData.onAddBuff?.Invoke(buffInfo);
+                        //触发圣物闪烁
+                        SacredObjectUIManager.Instance.DoFlick(halidomList[i].id);
+                    }
+                }
+
+            }
+        }
+    }
+
     #endregion
     #region 一些实用效果
     //判断圣物是否满

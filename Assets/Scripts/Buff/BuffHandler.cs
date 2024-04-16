@@ -13,6 +13,8 @@ public class BuffHandler : MonoBehaviour
 
     public void AddBuff(BuffInfo buffInfo, GameObject creator)
     {
+        //添加buff时候的回调点触发
+        HalidomManager.Instance.OnAddBuff(buffInfo);
         BuffInfo findBuffInfo = buffList.Find(x => x.buffData.id == buffInfo.buffData.id);
         if (findBuffInfo != null)//获得相同的buff的情况
         {

@@ -9,7 +9,7 @@ using static UnityEditor.Progress;
 namespace DesignerScripts
 {
     /// <summary>
-    /// ²ÎÊıÀàĞÍ
+    /// å‚æ•°ç±»å‹
     /// </summary>
     public enum paramsType
     {
@@ -30,35 +30,35 @@ namespace DesignerScripts
     [CreateAssetMenu(fileName = "BuffData_", menuName = "Data/BuffData")]
     public class BuffDataSO : ScriptableObject
     {
-        [Tooltip("buffµÄÎ¨Ò»id")]
+        [Tooltip("buffçš„å”¯ä¸€id")]
         public string id;
 
-        [Tooltip("buffµÄÃû×Ö")]
+        [Tooltip("buffçš„åå­—")]
         public BuffDataName dataName;
 
-        //[Tooltip("´æ´¢buffµÄiconÍ¼±êÍ¼Æ¬µÄÃû×Ö£¨ResourcesÎÄ¼ş¼ĞÏÂ£©")]
+        //[Tooltip("å­˜å‚¨buffçš„iconå›¾æ ‡å›¾ç‰‡çš„åå­—ï¼ˆResourcesæ–‡ä»¶å¤¹ä¸‹ï¼‰")]
         //public string icon;
 
-        [Tooltip("ÓÃÓÚ·½±ã¼ìË÷µÄtag£¬ÀıÈç£º»ğÑæ£¬±ù¶³£¬ÖĞ¶¾µÈ")]
+        [Tooltip("ç”¨äºæ–¹ä¾¿æ£€ç´¢çš„tagï¼Œä¾‹å¦‚ï¼šç«ç„°ï¼Œå†°å†»ï¼Œä¸­æ¯’ç­‰")]
         public string[] tags;
 
-        [Tooltip("buffµÄ×î¸ß²ãÊı")]
+        [Tooltip("buffçš„æœ€é«˜å±‚æ•°")]
         public int maxStack;
 
-        [Tooltip("buffµÄ³ÖĞø»ØºÏÊıÁ¿")]
+        [Tooltip("buffçš„æŒç»­å›åˆæ•°é‡")]
         public int duringCount;
 
-        [Tooltip("ÊÇ·ñÊÇÓÀ¾ÃµÄbuff(Õâ¸öµÄÓÅÏÈ¼¶¸ü¸ß£©")]
+        [Tooltip("æ˜¯å¦æ˜¯æ°¸ä¹…çš„buff(è¿™ä¸ªçš„ä¼˜å…ˆçº§æ›´é«˜ï¼‰")]
         public bool isPermanent;
 
-        [Tooltip("buff¸üĞÂ²ãÊıÊ±µÄ²ßÂÔ£¨Add£ºÔö¼Ó»ØºÏ£¬Replace£ºÌæ»»»ØºÏÊıÎªÖ¸¶¨Êı£¬Keep£ºÊ²Ã´¶¼²»×ö£©")]
+        [Tooltip("buffæ›´æ–°å±‚æ•°æ—¶çš„ç­–ç•¥ï¼ˆAddï¼šå¢åŠ å›åˆï¼ŒReplaceï¼šæ›¿æ¢å›åˆæ•°ä¸ºæŒ‡å®šæ•°ï¼ŒKeepï¼šä»€ä¹ˆéƒ½ä¸åšï¼‰")]
         public BuffUpdateEnum buffUpdateEnum;
 
-        [Tooltip("buffÒÆ³ı²ãÊıÊ±µÄ²ßÂÔ£¨Reduce£º¼õÉÙ²ãÊı£¬Clear£ºÇå³ıËùÓĞ²ãÊı£©")]
+        [Tooltip("buffç§»é™¤å±‚æ•°æ—¶çš„ç­–ç•¥ï¼ˆReduceï¼šå‡å°‘å±‚æ•°ï¼ŒClearï¼šæ¸…é™¤æ‰€æœ‰å±‚æ•°ï¼‰")]
         public BuffRemoveStackUpdateEnum removeStackUpdateEnum;
 
-        #region ------»Øµ÷µã------
-        [Tooltip("OnCreate»Øµ÷µã £¬»Øµ÷µã²ÎÊı¶îÍâÉèÖÃ")]
+        #region ------å›è°ƒç‚¹------
+        [Tooltip("OnCreateå›è°ƒç‚¹ ï¼Œå›è°ƒç‚¹å‚æ•°é¢å¤–è®¾ç½®")]
         public onCreateEnum onCreate = onCreateEnum.None;
         [Tooltip("")]
         public object[] onCreateParams = null;
@@ -107,17 +107,20 @@ namespace DesignerScripts
         public onCastEnum onCast = onCastEnum.None;
         [Tooltip("")]
         public object[] onCastParams = null;
-
+        [Tooltip("")]
+        public onAddBuffEnum onAddBuff = onAddBuffEnum.None;
+        [Tooltip("")]
+        public object[] onAddBuffParams = null;
         #endregion
 
-        [Tooltip("buff¶ÔÍæ¼ÒµÄ×´Ì¬ĞŞ¸Ä(Ä¬ÈÏ£ºT£¬T£¬F)")]
+        [Tooltip("buffå¯¹ç©å®¶çš„çŠ¶æ€ä¿®æ”¹(é»˜è®¤ï¼šTï¼ŒTï¼ŒF)")]
         public ChaControlState stateMod = ChaControlState.origin;
 
-        [Tooltip("buff¶ÔÍæ¼ÒµÄÊôĞÔĞŞ¸Ä")]
+        [Tooltip("buffå¯¹ç©å®¶çš„å±æ€§ä¿®æ”¹")]
         public ChaProperty[] propMod = null;
-        [Tooltip("buffInfoĞèÒªµÄ¶îÍâ²ÎÊı")]
+        [Tooltip("buffInfoéœ€è¦çš„é¢å¤–å‚æ•°")]
         public List<Param> paramList;
-        [Tooltip("buffĞ§¹û½éÉÜ")]
+        [Tooltip("buffæ•ˆæœä»‹ç»")]
         [Multiline(5)]
         public string description;
         [Tooltip("buffSprite")]
