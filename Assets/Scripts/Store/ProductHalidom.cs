@@ -52,8 +52,8 @@ public class ProductHalidom : ProductBase<HalidomObject>
         base.ProductBrought();
         HalidomManager.Instance.AddHalidomInMap(product);
         ChaState player = MapManager.Instance.playerChaState;
-        player.resource.currentMoney -= product.value;
-        
+        player.ModResources(new ChaResource(0, -product.value, 0, 0));
+
     }
 
 

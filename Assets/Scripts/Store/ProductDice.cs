@@ -45,7 +45,7 @@ public class ProductDice : ProductBase<SingleDiceObj>
     {
         base.ProductBrought();
         ChaState player = MapManager.Instance.playerChaState;
-        player.resource.currentMoney -= product.value;
+        player.ModResources(new ChaResource(0, -product.value, 0, 0));
         player.GetBattleDiceHandler().AddSingleBattleDiceToBag(product);
     }
 

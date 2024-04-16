@@ -5,7 +5,7 @@ using Frame.Core;
 using UnityEngine.Events;
 using Map;
 using UI.Store;
-using Unity.VisualScripting;
+using System;
 
 public class StoreManager : SingletonBase<StoreManager>
 {
@@ -16,6 +16,15 @@ public class StoreManager : SingletonBase<StoreManager>
     [Tooltip("节点本身包含在更高的一级")]
     public int[] diceScoreFlag = { 15, 24 };
 
+    [Header("强化点数")]
+    [Tooltip("初始价格")] public int upgradeCostOrigin = 2;
+    [Tooltip("价格增幅")] public int upgradeCostAdd = 2;
+    private int upgradeCost = 2;
+
+    [Header("方便测试")]
+    [Tooltip("小于则不指定")] public int pointRollResult = -1;
+
+    [Header("商品格子")]
     public List<ProductHalidom> productHalidoms = new List<ProductHalidom>();
     public List<ProductDice> productDices = new List<ProductDice>();
 
@@ -43,6 +52,7 @@ public class StoreManager : SingletonBase<StoreManager>
         OnEnterStore.AddListener(OpenStore);
         OnExitStore.AddListener(CloseStore);
         OnRefreshStore.AddListener(RerollShop);
+        OnClickUpgrade.AddListener(ClickUpgrade);
 
         player = MapManager.Instance.playerChaState;
     }
@@ -55,6 +65,7 @@ public class StoreManager : SingletonBase<StoreManager>
 
     #region ------UnityEvent------
 
+    [Header("事件")]
     /// <summary>
     /// 进入商店时调用
     /// </summary>
@@ -112,7 +123,7 @@ public class StoreManager : SingletonBase<StoreManager>
     {
         if (player.resource.currentRollTimes > 0)
         {
-            player.resource.currentRollTimes--;
+            player.ModResources(new ChaResource(0, 0, -1, 0));
             OnRefreshStore?.Invoke();
         }
         else
@@ -142,8 +153,13 @@ public class StoreManager : SingletonBase<StoreManager>
             i++;
         }
 
+#if UNITY_EDITOR
+        if (pointRollResult >= 0)
+        {
+            diceScore = pointRollResult;
+        }
         m_Debug("diceScore: " + diceScore);
-
+#endif
         //清空所有商品
         foreach (var product in productHalidoms)
         {
@@ -222,13 +238,13 @@ public class StoreManager : SingletonBase<StoreManager>
     {
 
         productDices[0].InitialProduct(new SingleDiceObj
-            (RandomManager.GetSingleDiceModel((int)rareType1 + 1, 0), Random.Range(0, 6)));
+            (RandomManager.GetSingleDiceModel((int)rareType1 + 1, 0), UnityEngine.Random.Range(0, 6)));
 
         productDices[1].InitialProduct(new SingleDiceObj
-            (RandomManager.GetSingleDiceModel((int)rareType2 + 1, 0), Random.Range(0, 6)));
+            (RandomManager.GetSingleDiceModel((int)rareType2 + 1, 0), UnityEngine.Random.Range(0, 6)));
 
         productDices[2].InitialProduct(new SingleDiceObj
-            (RandomManager.GetSingleDiceModel((int)rareType3 + 1, 0), Random.Range(0, 6)));
+            (RandomManager.GetSingleDiceModel((int)rareType3 + 1, 0), UnityEngine.Random.Range(0, 6)));
 
     }
     /// <summary>
@@ -262,5 +278,86 @@ public class StoreManager : SingletonBase<StoreManager>
         return false;
     }
 
+    #endregion
+
+    #region------强化商店------
+    private void ClickUpgrade()
+    {
+        upgradeCost = upgradeCostOrigin;
+        StrengthenAreaManager.Instance.RefreshUpgradeText(upgradeCost);
+
+        BattleDiceHandler handler = MapManager.Instance.playerChaState.GetBattleDiceHandler();
+
+        List<BattleDice> battleDices = handler.battleDices;
+        List<List<SingleDiceObj>> createList = new List<List<SingleDiceObj>>();
+        List<List<Action<SingleDiceObj>>> createActionList = new List<List<Action<SingleDiceObj>>>();
+
+        //加入使用中的骰子
+        for (int i = 0; i < battleDices.Count; i++)
+        {
+            List<SingleDiceObj> singleDiceObjs = new List<SingleDiceObj>();
+            List<Action<SingleDiceObj>> actions = new List<Action<SingleDiceObj>>();
+            for (int j = 0; j < battleDices[i].GetBattleDiceSingleDices().Count; j++)
+            {
+                SingleDiceObj obj = battleDices[i].GetBattleDiceSingleDices()[j];
+                singleDiceObjs.Add(obj);
+                Action<SingleDiceObj> action = new Action<SingleDiceObj>(TryUpgrade);
+                actions.Add(action);
+            }
+
+            createList.Add(singleDiceObjs);
+            createActionList.Add(actions);
+        }
+
+        //加入背包中的骰子
+        int unAddCount = handler.bagDiceCards.Count;
+
+        //循环次数：6个一组，算出需要执行的组数
+        for (int i = 0; i < handler.bagDiceCards.Count / 6 + 1; i++)
+        {
+
+            List<SingleDiceObj> singleDiceObjs = new List<SingleDiceObj>();
+            List<Action<SingleDiceObj>> actions = new List<Action<SingleDiceObj>>();
+
+            for (int j = 0; j < 6; j++)
+            {
+                SingleDiceObj obj = handler.bagDiceCards[i * 6 + j];
+                singleDiceObjs.Add(obj);
+                Action<SingleDiceObj> action = new Action<SingleDiceObj>(TryUpgrade);
+                actions.Add(action);
+                unAddCount--;
+                if (unAddCount <= 0)
+                {
+                    break;//最后一组才会弹出
+                }
+                StrengthenAreaManager.Instance.CreateBagDiceUI(i * 6 + j, obj, action);
+            }
+
+            //createList.Add(singleDiceObjs);
+            //createActionList.Add(actions);
+        }
+        StrengthenAreaManager.Instance.CreateFightDicePage(createList, createActionList);
+
+
+        //StoreUIManager.Instance.RefreshUpgradeUI();
+    }
+
+    private void TryUpgrade(SingleDiceObj singleDiceObj)
+    {
+        if (player.resource.currentMoney < upgradeCost)
+        {
+            return;
+        }
+        else if (singleDiceObj.idInDice >= 6)
+        {
+            return;
+        }
+
+        player.ModResources(new ChaResource(0, -upgradeCost, 0, 0));
+        upgradeCost += upgradeCostAdd;
+        singleDiceObj.idInDice++;
+
+        StrengthenAreaManager.Instance.RefreshUpgradeText(upgradeCost);
+    }
     #endregion
 }

@@ -10,16 +10,18 @@ namespace UI.Store
     /// </summary>
     public class StrengthenAreaManager : MonoSingleton<StrengthenAreaManager>
     {
-        [Tooltip("骰面模板")]public GameObject diceTemplate;
-        [Tooltip("骰面页模板")]public GameObject dicePageColumnsTemplate;
+        [Tooltip("骰面模板")] public GameObject diceTemplate;
+        [Tooltip("骰面页模板")] public GameObject dicePageColumnsTemplate;
         [SerializeField, Tooltip("骰面页组合模板")] private GameObject dicePageTemplate;
         [SerializeField, Tooltip("骰面页组合父物体")] private Transform strengthenContent;
         private List<StrengthenDicePageGroupUI> _groupList;
-        
+
         [SerializeField, Tooltip("背包栏位列表")] private List<Column> bagColumnList;
-        
+
         [SerializeField, Tooltip("离开按钮")] private Button exitButton;
         public float animTime;
+
+        public Text priceText;
 
         private void Start()
         {
@@ -53,7 +55,7 @@ namespace UI.Store
 
             return ansList;
         }
-        
+
         /// <summary>
         /// 创建升级的所有战斗骰面UI函数
         /// </summary>
@@ -97,7 +99,7 @@ namespace UI.Store
             }
             _groupList.Clear();
         }
-        
+
         /// <summary>
         /// 创建背包骰面函数
         /// </summary>
@@ -125,6 +127,10 @@ namespace UI.Store
             bagColumnList[index].bagObject = null;
         }
 
+        public void RefreshUpgradeText(int value)
+        {
+            priceText.text = "强化价格：￥" + value.ToString();
+        }
 
         #region 测试
         /*private void Test()

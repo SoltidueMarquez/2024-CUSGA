@@ -563,6 +563,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &678025256 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 172628493304569344, guid: ead795afd3ad01246b092637d1ea4c59, type: 3}
+  m_PrefabInstance: {fileID: 689083690}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &689083690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -655,6 +666,10 @@ PrefabInstance:
       propertyPath: sacredPriceTextList.Array.data[2]
       value: 
       objectReference: {fileID: 675673900}
+    - target: {fileID: 8296850532430577718, guid: ead795afd3ad01246b092637d1ea4c59, type: 3}
+      propertyPath: priceText
+      value: 
+      objectReference: {fileID: 678025256}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
