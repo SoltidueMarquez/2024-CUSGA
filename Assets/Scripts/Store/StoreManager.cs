@@ -86,6 +86,10 @@ public class StoreManager : SingletonBase<StoreManager>
     /// 用于刷新骰子ui: 骰子序号,骰面
     /// </summary>
     public UnityEvent<int, SingleDiceObj> OnDiceRoll;
+    /// <summary>
+    /// 强化失败时调用
+    /// </summary>
+    public UnityEvent<BuyFailType> OnUpgradeFail;
 
     #endregion
 
@@ -346,10 +350,12 @@ public class StoreManager : SingletonBase<StoreManager>
     {
         if (player.resource.currentMoney < upgradeCost)
         {
+            OnUpgradeFail?.Invoke(BuyFailType.NoMoney);
             return;
         }
         else if (singleDiceObj.idInDice >= 6)
         {
+            OnUpgradeFail?.Invoke(BuyFailType.DicePointMax);
             return;
         }
 

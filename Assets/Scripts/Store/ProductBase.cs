@@ -73,5 +73,6 @@ public abstract class ProductBase<T> : MonoBehaviour where T : class
 public enum BuyFailType
 {
     NoMoney,
-    NoBagSpace
+    NoBagSpace,
+    DicePointMax
 }
