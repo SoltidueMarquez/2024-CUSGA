@@ -13,12 +13,19 @@ namespace UI.Store
     {
         [SerializeField] private GameObject failTip;
         [SerializeField] private Text failTipText;
-        [SerializeField,Tooltip("失败提示")] private List<string> failTipContent;
+        [SerializeField,Tooltip("缺钱失败提示")] private List<string> moneyFailTipContent;
+        [SerializeField,Tooltip("没空位失败提示")] private List<string> columnFailTipContent;
+        [SerializeField,Tooltip("强化失败提示")] private List<string> strengthenFailTipContent;
         [SerializeField,Tooltip("成功提示")] private List<string> successTipContent;
         [SerializeField] private float animTime;
 
         private float _counter;
-        
+
+        private void Start()
+        {
+            StoreManager.Instance.OnUpgradeFail.AddListener(ShowTip);//增加强化失败的语音
+        }
+
         public void ShowTip(BuyFailType failType)
         {
             if (_counter > 0) { return;}//计时器没归零就不执行
@@ -26,10 +33,21 @@ namespace UI.Store
             StartCoroutine(Count());//开始计时
             
             failTip.SetActive(true);
-            if ((int)failType >= failTipContent.Count) { return; }
-            var content = failTipContent[(int)failType];
+            var content = new List<string>();
+            switch (failType)
+            {
+                case BuyFailType.NoMoney:
+                    content = moneyFailTipContent;
+                    break;
+                case BuyFailType.NoBagSpace:
+                    content = columnFailTipContent;
+                    break;
+                case BuyFailType.DicePointMax:
+                    content = strengthenFailTipContent;
+                    break;
+            }
             failTipText.text = "";
-            failTipText.DOText(content,animTime);
+            failTipText.DOText(content[Random.Range(0, content.Count)], animTime);
             StartCoroutine(LateHide());
         }
         IEnumerator LateHide()
