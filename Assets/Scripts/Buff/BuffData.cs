@@ -92,7 +92,8 @@ public class BuffData
     public BuffOnCast OnCast;
     public object[] onCastParams;
 
-
+    public OnAddBuff onAddBuff;
+    public object[] onAddBuffParams;
     /// <summary>
     /// 基本的构造函数
     /// </summary>
@@ -136,6 +137,7 @@ public class BuffData
         string onKill, object[] onKillParams,
         string onBeKilled, object[] onBeKilledParams,
         string onCast, object[] onCastParams,
+        string onAddBuff, object[] onAddBuffParams,
         ChaControlState stateMod, ChaProperty[] propMod = null
         )
     {
@@ -197,4 +199,5 @@ public delegate int BuffOnRoll(BuffInfo buffInfo);
 public delegate void BuffOnkill(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target);
 public delegate void BuffOnBeKilled(BuffInfo buffInfo, DamageInfo damageInfo, GameObject attacker);
 public delegate SingleDiceObj BuffOnCast(BuffInfo buffInfo, SingleDiceObj singleDiceObj);
+public delegate void OnAddBuff(BuffInfo buffInfo);
 

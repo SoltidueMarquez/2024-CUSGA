@@ -125,4 +125,8 @@ public enum onCastEnum
     Add1StackIfPlayerHaveStrength,
 
 }
+public enum onAddBuffEnum
+{
+    None,
+}
 

@@ -14,7 +14,7 @@ public class BuffDataInitial : MonoBehaviour
         {
             if (BuffDataTable.buffData.ContainsKey(buffDataSos[i].dataName.ToString()))
             {
-                Debug.LogWarning("BuffDataInitial: ‘ÕºÃÌº”÷ÿ∏¥µƒbuff");
+                Debug.LogWarning("BuffDataInitial:ËØïÂõæÊ∑ªÂä†ÈáçÂ§çÁöÑbuff");
                 continue;
             }
             BuffDataTable.buffData.Add(buffDataSos[i].dataName.ToString(),
@@ -38,6 +38,7 @@ public class BuffDataInitial : MonoBehaviour
                 buffDataSos[i].onKill == 0 ? "" : buffDataSos[i].onKill.ToString(), buffDataSos[i].onKillParams,
                 buffDataSos[i].onBeKilled == 0 ? "" : buffDataSos[i].onBeKilled.ToString(), buffDataSos[i].onBeKilledParams,
                 buffDataSos[i].onCast == 0 ? "" : buffDataSos[i].onCast.ToString(), buffDataSos[i].onCastParams,
+                buffDataSos[i].onAddBuff == 0 ? "" : buffDataSos[i].onAddBuff.ToString(), buffDataSos[i].onAddBuffParams,
                 buffDataSos[i].stateMod,
                 buffDataSos[i].propMod)
                 );
