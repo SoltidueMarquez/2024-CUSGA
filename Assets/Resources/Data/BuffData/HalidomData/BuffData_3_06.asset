@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b82dfb058aec19848972490bda5eafbd, type: 3}
   m_Name: BuffData_3_06
   m_EditorClassIdentifier: 
-  id: 3_05
-  dataName: 18
+  id: 3_06
+  dataName: 22
   tags: []
   maxStack: 5
   duringCount: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
   onKill: 0
   onBeKilled: 0
   onCast: 0
-  onAddBuff: 1
+  onAddBuff: 2
   stateMod:
     ifCanChangePosition: 1
     canUseDice: 1

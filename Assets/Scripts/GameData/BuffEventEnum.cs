@@ -94,9 +94,6 @@ public enum onBuffHitEnum
 
     Add50PercentAttack,
     //稀有圣物buff
-    Hit3DamageWhenLoseHealth,
-    GainDodgeWhenLoseHealth,
-    GainStrengthWhenLoseHealth,
     Add1ValueWhenDiceBelow3,
 }
 
@@ -108,6 +105,10 @@ public enum onBeHurtEnum
     Dodge,
     Add50PercentAttackEvery3TimesLoseHealth,
     EnhanceEnemyVulnerability,
+    //稀有圣物buff
+    Hit3DamageWhenLoseHealth,
+    GainDodgeWhenLoseHealth,
+    GainStrengthWhenLoseHealth,
 
 }
 

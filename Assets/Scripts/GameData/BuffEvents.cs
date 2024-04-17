@@ -1027,6 +1027,7 @@ namespace DesignerScripts
                 if (buffInfo.buffData.tags.Contains("Negative"))
                 {
                     buffInfo.curStack++;
+                    Debug.Log("敌方负面buff加一");
                 }
             }
         }
@@ -1040,6 +1041,7 @@ namespace DesignerScripts
                 if (buffInfo.buffData.tags.Contains("Positive"))
                 {
                     buffInfo.curStack++;
+                    Debug.Log("我方正面buff加一");
                 }
             }
         }
