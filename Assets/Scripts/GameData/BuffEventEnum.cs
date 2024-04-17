@@ -31,6 +31,10 @@ public enum onCreateEnum
     ClearEnemyPositiveBuff,//清除敌人正面buff
     ClearPlayerNegativeBuff,//清除玩家负面buff
     RerollDice,
+    //稀有圣物
+    Gain2NormalHalidomWhenGain,
+
+
 }
 
 public enum onRemoveEnum
@@ -89,7 +93,11 @@ public enum onBuffHitEnum
     Add4ValueIfResultIsOdd,
 
     Add50PercentAttack,
-
+    //稀有圣物buff
+    Hit3DamageWhenLoseHealth,
+    GainDodgeWhenLoseHealth,
+    GainStrengthWhenLoseHealth,
+    Add1ValueWhenDiceBelow3,
 }
 
 public enum onBeHurtEnum
@@ -107,10 +115,12 @@ public enum onKillEnum
 {
     None,
     Add4MoneyWhenBattleEnd,
+    GainMoneyAfterBattle,
 }
 public enum onBeKillEnum
 {
     None,
+    RecoverHalfHealthWhenDie,
 
 }
 public enum onRollEnum
@@ -128,5 +138,7 @@ public enum onCastEnum
 public enum onAddBuffEnum
 {
     None,
+    Add1StackIfEnemyHaveDebuff,
+    Add1StackIfPlayerHavePositiveBuff,
 }
 

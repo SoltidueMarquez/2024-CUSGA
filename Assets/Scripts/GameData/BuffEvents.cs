@@ -129,14 +129,19 @@ namespace DesignerScripts
             {
                 BuffEventName.Get5MaxHealthWhenGain.ToString(),Get5MaxHealthWhenGain
             },
-            {
-                BuffEventName.Add1Reroll.ToString(),Add1Reroll
-            },
+            
             {
                 BuffEventName.GainHalfMoney.ToString(),GainHalfMoney
             },
             {
                 BuffEventName.RecoverHalfHealthWhenGain.ToSafeString(),RecoverHalfHealthWhenGain
+            },
+            //稀有圣物buff
+            {
+                BuffEventName.Gain2NormalHalidomWhenGain.ToString(),Gain2NormalHalidomWhenGain
+            },
+            {
+                BuffEventName.Add1Reroll.ToString(),Add1Reroll
             },
             //骰子buff
             {
@@ -178,6 +183,7 @@ namespace DesignerScripts
             {
                 BuffEventName.RerollDice.ToString(),RerollDice
             },
+            
 
         };
         public static Dictionary<string, OnBuffRemove> onRemoveFunc = new Dictionary<string, OnBuffRemove>();
@@ -289,11 +295,15 @@ namespace DesignerScripts
             {
                 BuffEventName.Add1PermanentValueWhenDiceIs6.ToString(),Add1PermanentValueWhenDiceIs6
             },
+            //稀有圣物buff
             {
                 BuffEventName.Add4ValueIfResultIsEven.ToString(),Add4ValueIfResultIsEven
             },
             {
                 BuffEventName.Add4ValueIfResultIsOdd.ToString(),Add4ValueIfResultIsOdd
+            },
+            {
+                BuffEventName.Add1ValueWhenDiceBelow3.ToString(),Add1ValueWhenDiceBelow3
             },
 
 
@@ -319,6 +329,16 @@ namespace DesignerScripts
             {
                 BuffEventName.EnhanceEnemyVulnerability.ToString(),EnhanceEnemyVulnerability
             },
+            //稀有圣物buff
+            {
+                BuffEventName.Hit3DamageWhenLoseHealth.ToString(),Hit3DamageWhenLoseHealth
+            },
+            {
+                BuffEventName.GainDodgeWhenLoseHealth.ToString(),GainDodgeWhenLoseHealth
+            },
+            {
+                BuffEventName.GainStrengthWhenLoseHealth.ToString(),GainStrengthWhenLoseHealth
+            },
         };
         //Player胜利回调点
         public static Dictionary<string, BuffOnkill> onKillFunc = new Dictionary<string, BuffOnkill>()
@@ -326,10 +346,21 @@ namespace DesignerScripts
             //圣物buff
             {
                 BuffEventName.Add4MoneyWhenBattleEnd.ToString(),Add4MoneyWhenBattleEnd
-            }
+            },
+            //稀有圣物buff
+            {
+                BuffEventName.GainMoneyAfterBattle.ToString(),GainMoneyAfterBattle
+            },
 
         };
-        public static Dictionary<string, BuffOnBeKilled> onBeKillFunc = new Dictionary<string, BuffOnBeKilled>();
+        public static Dictionary<string, BuffOnBeKilled> onBeKillFunc = new Dictionary<string, BuffOnBeKilled>()
+        {
+            
+            //稀有圣物buff
+            {
+                BuffEventName.RecoverHalfHealthWhenDie.ToString(),RecoverHalfHealthWhenDie
+            },
+        };
 
         public static Dictionary<string, BuffOnRoll> onRollFunc = new Dictionary<string, BuffOnRoll>();
 
@@ -342,6 +373,16 @@ namespace DesignerScripts
             //圣物buff
             {
                 BuffEventName.Add1StackIfPlayerHaveStrength.ToString(),Add1StackIfPlayerHaveStrength
+            }
+        };
+        public static Dictionary<string, OnAddBuff> onAddFunc = new Dictionary<string, OnAddBuff>()
+        {
+            //稀有圣物buff
+            {
+                BuffEventName.Add1StackIfEnemyHaveDebuff.ToString(),Add1StackIfEnemyHaveDebuff
+            },
+            {
+                BuffEventName.Add1StackIfPlayerHavePositiveBuff.ToString(),Add1StackIfPlayerHavePositiveBuff
             }
         };
 
@@ -757,12 +798,7 @@ namespace DesignerScripts
             }
         }
 
-        public static void Add1Reroll(BuffInfo buffInfo)
-        {
-            //RerollCount在BattleManager中
-            BattleManager.Instance.parameter.playerRerollCount++;
-            Debug.Log("永久增加1次重投机会");
-        }
+
 
         //暂定不加回调点了，判断回合数是否是1判断游戏开始
         public static void Recover25HealthWhenHealthBelowHalf(BuffInfo buffInfo)
@@ -788,7 +824,7 @@ namespace DesignerScripts
             {
                 DamageInfo damageInfoCopy = new DamageInfo(damageInfo.attacker, damageInfo.defender, damageInfo.damage, damageInfo.diceType, damageInfo.level, damageInfo.addBuffs);
                 DamageManager.Instance.DoDamage(damageInfoCopy);
-                
+
                 Debug.Log("重复打出");
                 buffInfo.buffParam["IsFirstDeal"] = true;
             }
@@ -982,6 +1018,32 @@ namespace DesignerScripts
             }
         }
 
+        public static void Add1StackIfEnemyHaveDebuff(BuffInfo buffInfo)
+        {
+            //buff添加的target是否是敌方
+            if (buffInfo.target == BattleManager.Instance.parameter.enemyChaStates[0].gameObject)
+            {
+                //如果这个buff的标签是debuff
+                if (buffInfo.buffData.tags.Contains("Negative"))
+                {
+                    buffInfo.curStack++;
+                }
+            }
+        }
+
+        public static void Add1StackIfPlayerHavePositiveBuff(BuffInfo buffInfo)
+        {
+            //buff添加的target是否是玩家
+            if (buffInfo.target == BattleManager.Instance.parameter.playerChaState.gameObject)
+            {
+                //如果这个buff的标签是buff
+                if (buffInfo.buffData.tags.Contains("Positive"))
+                {
+                    buffInfo.curStack++;
+                }
+            }
+        }
+
         public static void GainMoneyAfterBattle(BuffInfo buffInfo, DamageInfo damageInfo, GameObject attacker)
         {
             //获取玩家的状态
@@ -989,7 +1051,7 @@ namespace DesignerScripts
             //访问当前的资源
             if (tempChaState.resource.currentMoney >= 0)
             {
-                if(tempChaState.resource.currentMoney <= 50)
+                if (tempChaState.resource.currentMoney <= 50)
                 {
                     int money = tempChaState.resource.currentMoney / 5;
                     tempChaState.ModResources(new ChaResource(0, money, 0, 0));
@@ -1010,6 +1072,76 @@ namespace DesignerScripts
         }
 
 
+        public static void Hit3DamageWhenLoseHealth(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            //获取地方的状态
+            ChaState tempChaState = buffInfo.target.GetComponent<ChaState>();
+
+            //因为buff的回调点不知道最终伤害，所以就暂且直接扣血
+            tempChaState.ModResources(new ChaResource(-3, 0, 0, 0));
+            Debug.Log("受到伤害时对方受到3点伤害");
+
+        }
+
+        public static void GainDodgeWhenLoseHealth(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            int probability = Random.Range(1, 11);
+            if (probability == 1)
+            {
+                BuffInfo newDodgeBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target, 1, true);
+                buffInfo.creator.GetComponent<ChaState>().AddBuff(newDodgeBuff, buffInfo.creator);
+                Debug.Log("战斗开始获得1层闪避");
+            }
+        }
+
+
+        public static void GainStrengthWhenLoseHealth(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            int probability = Random.Range(1, 11);
+            if (probability == 1)
+            {
+                BuffInfo newStrengthBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target, 1, true);
+                buffInfo.creator.GetComponent<ChaState>().AddBuff(newStrengthBuff, buffInfo.creator);
+                Debug.Log("战斗开始获得1层力量");
+            }
+        }
+
+
+        public static void Add1Reroll(BuffInfo buffInfo)
+        {
+            buffInfo.buffData.propMod = new ChaProperty[]
+            {
+                //加算
+                new ChaProperty(0,0,1,0),
+                //乘算 Property乘法重载加过1了
+                new ChaProperty(0,0,0,0)
+            };
+            Debug.Log("增加最大重投次數");
+        }
+
+        public static void RecoverHalfHealthWhenDie(BuffInfo buffInfo, DamageInfo damageInfo, GameObject attacker)
+        {
+            if ((bool)buffInfo.buffParam["isUsed"] == false)
+            {
+                ChaState tempChaState = buffInfo.creator.GetComponent<ChaState>();
+                if (tempChaState.resource.currentHp <= 0)
+                {
+                    tempChaState.ModResources(new ChaResource(tempChaState.baseProp.health / 2, 0, 0, 0));
+                    Debug.Log("死亡时回复一半生命");
+                    buffInfo.buffParam["isUsed"] = true;
+                }
+            }
+           
+        }
+
+        public static void Add1ValueWhenDiceBelow3(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            if (damageInfo.damage.indexDamageRate <=3)
+            {
+                damageInfo.damage.baseDamage += 1;
+                Debug.Log("点数是小数(<=3),则打出时点数+1");
+            }
+        }
 
 
 
@@ -1022,7 +1154,7 @@ namespace DesignerScripts
         #region 骰子用buff效果函数
         public static void GetHurt(BuffInfo buffInfo)
         {
-            
+
             //获取玩家的状态
             ChaState tempChaState = BattleManager.Instance.parameter.playerChaState.GetComponent<ChaState>();
             //访问当前的资源
@@ -1062,7 +1194,7 @@ namespace DesignerScripts
 
         public static void EnemyVulnerable(BuffInfo buffInfo)
         {
-            for(int i = 0; i < (int)buffInfo.buffParam["EnemyVulnerable"]; i++)
+            for (int i = 0; i < (int)buffInfo.buffParam["EnemyVulnerable"]; i++)
             {
                 BuffInfo newVulnerableBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Vulnerable.ToString()], buffInfo.creator, buffInfo.target);
                 buffInfo.target.GetComponent<ChaState>().AddBuff(newVulnerableBuff1, buffInfo.target);
@@ -1096,7 +1228,7 @@ namespace DesignerScripts
             }
         }
 
-        
+
 
         public static void PlayerDodge(BuffInfo buffInfo)
         {
@@ -1107,7 +1239,7 @@ namespace DesignerScripts
             }
         }
 
-        
+
 
         public static void PlayerEnhance(BuffInfo buffInfo)
         {
@@ -1130,11 +1262,11 @@ namespace DesignerScripts
         public static void ClearEnemyPositiveBuff(BuffInfo buffInfo)
         {
             //获取敌方的buffhandler
-            if(buffInfo.target.GetComponent<BuffHandler>() != null)
+            if (buffInfo.target.GetComponent<BuffHandler>() != null)
             {
                 //从buffhandler中找到一个的Positive buff
-                BuffInfo findBuffInfo = buffInfo.target.GetComponent<BuffHandler>().buffList.Find(x =>x.buffData.tags.Contains("Positive"));
-                if(findBuffInfo != null)
+                BuffInfo findBuffInfo = buffInfo.target.GetComponent<BuffHandler>().buffList.Find(x => x.buffData.tags.Contains("Positive"));
+                if (findBuffInfo != null)
                 {
                     findBuffInfo.curStack = 0;
                     findBuffInfo.isPermanent = false;

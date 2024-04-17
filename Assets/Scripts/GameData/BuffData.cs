@@ -96,6 +96,16 @@ namespace DesignerScripts
         GainMoney2,
         GainMoney3,
         RerollDice,
+
+        //稀有圣物
+        GainMoneyAfterBattle,//战斗后获得金币
+        Choose2DiceUpdateWhenGain,
+        Gain2NormalHalidomWhenGain,
+        Hit3DamageWhenLoseHealth,
+        GainDodgeWhenLoseHealth,
+        GainStrengthWhenLoseHealth,
+        RecoverHalfHealthWhenDie,
+        Add1ValueWhenDiceBelow3,
     }
     public class BuffDataTable
     {
