@@ -95,12 +95,14 @@ public class HalidomManager : MonoBehaviour
                         //触发圣物闪烁
                         SacredObjectUIManager.Instance.DoFlick(halidom.id);
                     }
+                    OnAddBuff(buffInfo);
 
                 }
                 RefreshAllHalidoms();
                 BattleManager.Instance.parameter.playerChaState.AttrAndResourceRecheck();
                 SacredObjectUIManager.Instance.CreateSacredUIObject(SellHalidom, halidomObject);
                 Debug.Log("<color=#3399FF>HalidomManager-添加圣物:</color>" + halidomObject.halidomName + "成功");
+                
                 //找到空的格子后就跳出循环
                 break;
             }
