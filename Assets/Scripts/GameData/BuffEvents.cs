@@ -344,6 +344,7 @@ namespace DesignerScripts
                 BuffEventName.Add1StackIfPlayerHaveStrength.ToString(),Add1StackIfPlayerHaveStrength
             }
         };
+        public static Dictionary<string, OnAddBuff> onAddFunc = new Dictionary<string, OnAddBuff>();
 
 
         #endregion
