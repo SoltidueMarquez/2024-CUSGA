@@ -24,6 +24,7 @@ namespace UI.Store
         private void Start()
         {
             StoreManager.Instance.OnUpgradeFail.AddListener(ShowTip);//增加强化失败的语音
+            StoreManager.Instance.OnUpgradeSuccess.AddListener(ShowTip);
         }
 
         public void ShowTip(BuyFailType failType)
