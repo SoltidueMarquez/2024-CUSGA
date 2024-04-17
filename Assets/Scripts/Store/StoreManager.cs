@@ -90,6 +90,10 @@ public class StoreManager : SingletonBase<StoreManager>
     /// 强化失败时调用
     /// </summary>
     public UnityEvent<BuyFailType> OnUpgradeFail;
+    /// <summary>
+    /// 强化成功时调用
+    /// </summary>
+    public UnityEvent OnUpgradeSuccess;
 
     #endregion
 
@@ -363,6 +367,7 @@ public class StoreManager : SingletonBase<StoreManager>
         upgradeCost += upgradeCostAdd;
         singleDiceObj.idInDice++;
 
+        OnUpgradeSuccess?.Invoke();
         StrengthenAreaManager.Instance.RefreshUpgradeText(upgradeCost);
     }
     #endregion
