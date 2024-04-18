@@ -56,10 +56,10 @@ namespace UI.Store
             //按钮事件绑定
             this.GetComponent<Button>().onClick.AddListener(()=>
             {
-                StrengthenAreaManager.Instance.UpdateCurrentDice(pageIndex, diceType);
                 onChoose?.Invoke(singleDiceObj);
                 //根据SingleDiceObj引用更新UI，需要放在执行强化逻辑之后
                 UpdateDiceUI();
+                UpdatePlayerResourceDiceUI();
             });
         }
         
@@ -80,6 +80,24 @@ namespace UI.Store
             descriptionText.text = $"描述:{data.description}";
             idInDiceText.text = data.idInDice.ToString();
             this.GetComponent<Image>().sprite = data.sprite;
+        }
+        /// <summary>
+        /// 更新玩家资源区域的UI
+        /// </summary>
+        private void UpdatePlayerResourceDiceUI()
+        {
+            switch (diceType)
+            {
+                case DiceType.FightDice:
+                    EditableDiceUIManager.Instance.SwitchPage(pageIndex);
+                    EditableDiceUIManager.Instance.UpdateFightDiceUI(_diceObj.positionInDice);
+                    break;
+                case DiceType.BagDice:
+                    EditableDiceUIManager.Instance.UpdateBagDiceUI(_diceObj);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

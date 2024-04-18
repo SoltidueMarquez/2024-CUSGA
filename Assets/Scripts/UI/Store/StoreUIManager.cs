@@ -59,6 +59,7 @@ namespace UI.Store
         {
             yield return new WaitForSeconds(time);
             objectX.SetActive(false);
+            StoreAreaUIManager.Instance.SetButton(); //设置强化按钮可以交互
         }
         
         private void Update()

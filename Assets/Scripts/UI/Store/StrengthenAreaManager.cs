@@ -10,9 +10,6 @@ namespace UI.Store
         FightDice,
         BagDice
     }
-    /// <summary>
-    /// TODO:需要考虑到背包骰面和战斗骰面的交互后，产生需要刷新的问题(或者直接将左边的UI全部屏蔽掉)
-    /// </summary>
     public class StrengthenAreaManager : MonoSingleton<StrengthenAreaManager>
     {
         [Tooltip("骰面模板")] public GameObject diceTemplate;
@@ -25,14 +22,9 @@ namespace UI.Store
         public float animTime;
         public Text priceText;
 
-        [SerializeField, Tooltip("当前是第几个骰子")] private int currentPageIndex;
-        [SerializeField, Tooltip("当前是哪种骰子")] private DiceType currentDiceType;
-
-
         private void Start()
         {
             exitButton.onClick.AddListener(ExitUpgradeUI);
-            StoreManager.Instance.OnUpgradeSuccess.AddListener(UpdatePlayerResourceDiceUI);//添加更新UI事件
         }
 
         /// <summary>
@@ -43,37 +35,6 @@ namespace UI.Store
             StoreUIManager.Instance.ExitUpgradeUI();
             RemoveAllDicePage();
             RemoveAllBagDiceUI();
-            StoreAreaUIManager.Instance.SetButton(); //设置强化按钮可以交互
-        }
-        
-        /// <summary>
-        /// 更新当前的选择信息
-        /// </summary>
-        /// <param name="pageIndex"></param>
-        /// <param name="diceType"></param>
-        public void UpdateCurrentDice(int pageIndex, DiceType diceType)
-        {
-            currentPageIndex = pageIndex;
-            currentDiceType = diceType;
-        }
-        /// <summary>
-        /// 更新玩家资源区域的UI
-        /// </summary>
-        /// <param name="upgrade"></param>
-        private void UpdatePlayerResourceDiceUI(UpgradeInfo upgrade)
-        {
-            switch (currentDiceType)
-            {
-                case DiceType.FightDice:
-                    EditableDiceUIManager.Instance.SwitchPage(currentPageIndex);
-                    EditableDiceUIManager.Instance.UpdateFightDiceUI(upgrade._singleDiceObj.positionInDice);
-                    break;
-                case DiceType.BagDice:
-                    EditableDiceUIManager.Instance.UpdateBagDiceUI(upgrade._singleDiceObj);
-                    break;
-                default:
-                    break;
-            }
         }
 
         #region 战斗骰面
@@ -129,7 +90,7 @@ namespace UI.Store
             var tmp = Instantiate(dicePageTemplate, strengthenContent, true);
             var tmpGroup = tmp.GetComponent<StrengthenDicePageGroupUI>();
             tmpGroup.Init(index, dicePageList, onChooseGroupList);
-            if (_groupList == null) { _groupList = new List<StrengthenDicePageGroupUI>(); }
+            _groupList ??= new List<StrengthenDicePageGroupUI>();
             _groupList.Add(tmpGroup);
             tmp.SetActive(true);
         }
@@ -137,7 +98,7 @@ namespace UI.Store
         /// <summary>
         /// 销毁全部战斗骰面页UI
         /// </summary>
-        public void RemoveAllDicePage()
+        private void RemoveAllDicePage()
         {
             foreach (var group in _groupList)
             {
@@ -172,7 +133,7 @@ namespace UI.Store
         /// 移除对应背包骰面的函数
         /// </summary>
         /// <param name="index">栏位索引</param>
-        public void RemoveBagDiceUI(int index)
+        private void RemoveBagDiceUI(int index)
         {
             if (bagColumnList[index].bagObject == null) { return; }
             Destroy(bagColumnList[index].bagObject);
