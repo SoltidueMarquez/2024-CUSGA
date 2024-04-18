@@ -15,6 +15,7 @@ namespace UI.Store
 
         public int pageIndex;
         public DiceType diceType;
+        private SingleDiceObj _diceObj;
 
         /// <summary>
         /// 鼠标移动函数
@@ -40,6 +41,7 @@ namespace UI.Store
         
         public void Init(SingleDiceUIData data, float animTime, Action<SingleDiceObj> onChoose, SingleDiceObj singleDiceObj)
         {
+            _diceObj = singleDiceObj;
             //大小初始化
             this.transform.localScale = new Vector3(1, 1, 1);
             //信息文本初始化
@@ -56,11 +58,17 @@ namespace UI.Store
             {
                 StrengthenAreaManager.Instance.UpdateCurrentDice(pageIndex, diceType);
                 onChoose?.Invoke(singleDiceObj);
+                //根据SingleDiceObj引用更新UI，需要放在执行强化逻辑之后
+                UpdateDiceUI();
             });
         }
-        public void UpdateDiceUI(SingleDiceObj singleDiceObj)
+        
+        /// <summary>
+        /// 根据SingleDiceObj引用更新UI
+        /// </summary>
+        private void UpdateDiceUI()
         {
-            var data = ResourcesManager.GetSingleDiceUIData(singleDiceObj);
+            var data = ResourcesManager.GetSingleDiceUIData(_diceObj);
             //大小初始化
             this.transform.localScale = new Vector3(1, 1, 1);
             //信息文本初始化

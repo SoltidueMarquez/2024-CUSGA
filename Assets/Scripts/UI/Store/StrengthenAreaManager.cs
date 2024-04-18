@@ -28,11 +28,11 @@ namespace UI.Store
         [SerializeField, Tooltip("当前是第几个骰子")] private int currentPageIndex;
         [SerializeField, Tooltip("当前是哪种骰子")] private DiceType currentDiceType;
 
-        
+
         private void Start()
         {
             exitButton.onClick.AddListener(ExitUpgradeUI);
-            StoreManager.Instance.OnUpgradeSuccess.AddListener(UpdateFightDiceUI);//添加更新UI事件
+            StoreManager.Instance.OnUpgradeSuccess.AddListener(UpdatePlayerResourceDiceUI);//添加更新UI事件
         }
 
         /// <summary>
@@ -56,18 +56,22 @@ namespace UI.Store
             currentPageIndex = pageIndex;
             currentDiceType = diceType;
         }
-        private void UpdateFightDiceUI(UpgradeInfo upgrade)
+        /// <summary>
+        /// 更新玩家资源区域的UI
+        /// </summary>
+        /// <param name="upgrade"></param>
+        private void UpdatePlayerResourceDiceUI(UpgradeInfo upgrade)
         {
             switch (currentDiceType)
             {
                 case DiceType.FightDice:
                     EditableDiceUIManager.Instance.SwitchPage(currentPageIndex);
-                    _groupList[currentPageIndex / 5].UpdateDiceUI(upgrade, currentPageIndex);
-                    EditableDiceUIManager.Instance.UpdateFightDiceUI(upgrade, upgrade._singleDiceObj.positionInDice);
+                    EditableDiceUIManager.Instance.UpdateFightDiceUI(upgrade._singleDiceObj.positionInDice);
                     break;
                 case DiceType.BagDice:
-                    UpdateDiceUI(upgrade, currentPageIndex);
-                    EditableDiceUIManager.Instance.UpdateBagDiceUI(upgrade, currentPageIndex);
+                    EditableDiceUIManager.Instance.UpdateBagDiceUI(upgrade._singleDiceObj);
+                    break;
+                default:
                     break;
             }
         }
@@ -152,7 +156,8 @@ namespace UI.Store
         /// <param name="singleDiceObj">骰面</param>
         public void CreateBagDiceUI(int index, SingleDiceObj singleDiceObj, Action<SingleDiceObj> onChoose)
         {
-            SingleDiceUIData data = ResourcesManager.GetSingleDiceUIData(singleDiceObj);
+            if (singleDiceObj == null) { return; }
+            var data = ResourcesManager.GetSingleDiceUIData(singleDiceObj);
             var tmp = Instantiate(diceTemplate, bagColumnList[index].transform, true);
             tmp.transform.position = bagColumnList[index].transform.position; //更改位置
             bagColumnList[index].bagObject = tmp;
@@ -180,16 +185,7 @@ namespace UI.Store
                 RemoveBagDiceUI(i);
             }
         }
-
-        private void UpdateDiceUI(UpgradeInfo upgrade,int index)
-        {
-            var singleDiceObj = upgrade._singleDiceObj;
-            var tmpDice = bagColumnList[index].bagObject.GetComponent<StrengthenDiceUIObject>();
-            if (tmpDice != null)
-            {
-                tmpDice.UpdateDiceUI(singleDiceObj);
-            }
-        }
+        
         #endregion
 
         public void RefreshUpgradeText(int value)
@@ -198,37 +194,7 @@ namespace UI.Store
         }
 
         #region 测试
-        /*private void Test()
-        {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                if (_testDicePageList == null)
-                {
-                    _testDicePageList = new List<List<SingleDiceObj>>();
-                    _testDicePageList.Add(testObj);
-                    _testDicePageList.Add(testObj);
-                    _testDicePageList.Add(testObj);
-                    _testDicePageList.Add(testObj);
-                    _testDicePageList.Add(testObj);
-                    _testDicePageList.Add(testObj);
-                    _testDicePageList.Add(testObj);
-                    _testDicePageList.Add(testObj);
-                    
-                }
-                Debug.Log(_testDicePageList);
-                CreateFightDicePage( _testDicePageList, null);
-            }
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                RemoveAllDicePage();
-            }
-        }
-        [SerializeField]private List<SingleDiceObj> testObj;
-        public List<List<SingleDiceObj>> _testDicePageList;
-        private void Update()
-        {
-            Test();
-        }*/
+        
         #endregion
     }
 }
