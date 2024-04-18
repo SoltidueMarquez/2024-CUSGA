@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 namespace UI.Store
 {
+    public enum DiceType
+    {
+        FightDice,
+        BagDice
+    }
     /// <summary>
     /// TODO:需要考虑到背包骰面和战斗骰面的交互后，产生需要刷新的问题(或者直接将左边的UI全部屏蔽掉)
     /// </summary>
@@ -15,22 +20,59 @@ namespace UI.Store
         [SerializeField, Tooltip("骰面页组合模板")] private GameObject dicePageTemplate;
         [SerializeField, Tooltip("骰面页组合父物体")] private Transform strengthenContent;
         private List<StrengthenDicePageGroupUI> _groupList;
-
         [SerializeField, Tooltip("背包栏位列表")] private List<Column> bagColumnList;
-
         [SerializeField, Tooltip("离开按钮")] private Button exitButton;
         public float animTime;
-
         public Text priceText;
 
+        [SerializeField, Tooltip("当前是第几个骰子")] private int currentPageIndex;
+        [SerializeField, Tooltip("当前是哪种骰子")] private DiceType currentDiceType;
+
+        
         private void Start()
         {
-            exitButton.onClick.AddListener(() =>
-            {
-                StoreUIManager.Instance.ExitUpgradeUI();
-            });
+            exitButton.onClick.AddListener(ExitUpgradeUI);
+            StoreManager.Instance.OnUpgradeSuccess.AddListener(UpdateFightDiceUI);//添加更新UI事件
         }
 
+        /// <summary>
+        /// 退出UI函数
+        /// </summary>
+        private void ExitUpgradeUI()
+        {
+            StoreUIManager.Instance.ExitUpgradeUI();
+            RemoveAllDicePage();
+            RemoveAllBagDiceUI();
+            StoreAreaUIManager.Instance.SetButton(); //设置强化按钮可以交互
+        }
+        
+        /// <summary>
+        /// 更新当前的选择信息
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="diceType"></param>
+        public void UpdateCurrentDice(int pageIndex, DiceType diceType)
+        {
+            currentPageIndex = pageIndex;
+            currentDiceType = diceType;
+        }
+        private void UpdateFightDiceUI(UpgradeInfo upgrade)
+        {
+            switch (currentDiceType)
+            {
+                case DiceType.FightDice:
+                    EditableDiceUIManager.Instance.SwitchPage(currentPageIndex);
+                    _groupList[currentPageIndex / 5].UpdateDiceUI(upgrade, currentPageIndex);
+                    EditableDiceUIManager.Instance.UpdateFightDiceUI(upgrade, upgrade._singleDiceObj.positionInDice);
+                    break;
+                case DiceType.BagDice:
+                    UpdateDiceUI(upgrade, currentPageIndex);
+                    EditableDiceUIManager.Instance.UpdateBagDiceUI(upgrade, currentPageIndex);
+                    break;
+            }
+        }
+
+        #region 战斗骰面
         /// <summary>
         /// 划分函数
         /// </summary>
@@ -99,7 +141,9 @@ namespace UI.Store
             }
             _groupList.Clear();
         }
+        #endregion
 
+        #region 背包骰面
         /// <summary>
         /// 创建背包骰面函数
         /// </summary>
@@ -112,8 +156,10 @@ namespace UI.Store
             var tmp = Instantiate(diceTemplate, bagColumnList[index].transform, true);
             tmp.transform.position = bagColumnList[index].transform.position; //更改位置
             bagColumnList[index].bagObject = tmp;
-            tmp.GetComponent<StrengthenDiceUIObject>()
-                .Init(data, StrengthenAreaManager.Instance.animTime, onChoose, singleDiceObj); //初始化
+            var tmpDice = tmp.GetComponent<StrengthenDiceUIObject>();
+            tmpDice.Init(data, StrengthenAreaManager.Instance.animTime, onChoose, singleDiceObj); //初始化
+            tmpDice.diceType = DiceType.BagDice;
+            tmpDice.pageIndex = index;
             tmp.SetActive(true);
         }
 
@@ -123,9 +169,28 @@ namespace UI.Store
         /// <param name="index">栏位索引</param>
         public void RemoveBagDiceUI(int index)
         {
+            if (bagColumnList[index].bagObject == null) { return; }
             Destroy(bagColumnList[index].bagObject);
             bagColumnList[index].bagObject = null;
         }
+        private void RemoveAllBagDiceUI()
+        {
+            for (int i = 0; i < bagColumnList.Count; i++)
+            {
+                RemoveBagDiceUI(i);
+            }
+        }
+
+        private void UpdateDiceUI(UpgradeInfo upgrade,int index)
+        {
+            var singleDiceObj = upgrade._singleDiceObj;
+            var tmpDice = bagColumnList[index].bagObject.GetComponent<StrengthenDiceUIObject>();
+            if (tmpDice != null)
+            {
+                tmpDice.UpdateDiceUI(singleDiceObj);
+            }
+        }
+        #endregion
 
         public void RefreshUpgradeText(int value)
         {

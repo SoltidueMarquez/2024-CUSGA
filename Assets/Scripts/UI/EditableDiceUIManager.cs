@@ -119,7 +119,21 @@ namespace UI
                 //CreateBagUIDice(i, null, null);
             }
         }
-        
+        /// <summary>
+        /// 更新UI函数
+        /// </summary>
+        /// <param name="upgrade"></param>
+        /// <param name="index"></param>
+        public void UpdateBagDiceUI(UpgradeInfo upgrade, int index)
+        {
+            if (bagColumns[index].bagObject == null)
+            {
+                Debug.LogWarning("错误，所在背包栏位没有骰面存在");
+                return;
+            }
+            var tmp = bagColumns[index].bagObject.GetComponent<EditableDiceUIObject>();
+            tmp.UpdateDiceUI(upgrade._singleDiceObj);
+        }
         /// <summary>
         /// 移除背包骰面函数
         /// </summary>
@@ -148,7 +162,6 @@ namespace UI
         #endregion
 
         #region 战斗骰面
-
         /// <summary>
         /// 生成单个战斗骰面函数
         /// </summary>
@@ -182,6 +195,22 @@ namespace UI
             }
         }
 
+        /// <summary>
+        /// 更新UI函数
+        /// </summary>
+        /// <param name="upgrade"></param>
+        /// <param name="index"></param>
+        public void UpdateFightDiceUI(UpgradeInfo upgrade, int index)
+        {
+            if (fightColumns[index].bagObject == null)
+            {
+                Debug.LogWarning("错误，所在战斗栏位没有骰面存在");
+                return;
+            }
+            var tmp = fightColumns[index].bagObject.GetComponent<EditableDiceUIObject>();
+            tmp.UpdateDiceUI(upgrade._singleDiceObj);
+        }
+        
         /// <summary>
         /// 切换骰子页
         /// </summary>

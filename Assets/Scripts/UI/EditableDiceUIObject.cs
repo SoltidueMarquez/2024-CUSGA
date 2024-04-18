@@ -20,7 +20,7 @@ namespace UI
         
         public SingleDiceObj diceObj;
 
-        #region 初始化
+        #region 初始化&更新
         public void Init(List<Column> columns, float offset, SingleDiceObj singleDice, Action<SingleDiceObj> remove)
         {
             diceObj = singleDice;
@@ -52,6 +52,23 @@ namespace UI
             }
         }
 
+        public void UpdateDiceUI(SingleDiceObj singleDice)
+        {
+            diceObj = singleDice;
+            this.transform.localScale = new Vector3(1, 1, 1);
+            var data = ResourcesManager.GetSingleDiceUIData(singleDice);
+            //信息文本初始化
+            nameText.text = data.name;
+            typeText.text = $"类型:{data.type}";
+            levelText.text = $"稀有度:{data.level}";
+            valueText.text = $"售价￥{data.salevalue}";
+            baseValueText.text = $"基础数值{data.baseValue}";
+            descriptionText.text = $"描述:{data.description}";
+            this.GetComponent<Image>().sprite = data.sprite;
+            saleButtonText.text = $"出售\n￥{data.salevalue}";
+            idInDiceText.text = data.idInDice.ToString();
+        }
+        
         /*public void Init(List<Column> columns, float offset)
         {
             this.transform.localScale = new Vector3(1, 1, 1);

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Map;
 using UnityEngine;
@@ -30,15 +31,41 @@ namespace UI.Store
             exitButton.onClick.AddListener(() =>
             {
                 StoreManager.Instance.OnExitStore?.Invoke();
+                exitButton.interactable = false;
+                upgradeButton.interactable = false;
             });
             upgradeButton.onClick.AddListener(() =>
             {
                 StoreManager.Instance.OnClickUpgrade?.Invoke();
+                upgradeButton.interactable = false;
             });
 
             StoreManager.Instance.OnRefreshStore.AddListener(RefreshHalidomUI);
             StoreManager.Instance.OnRefreshStore.AddListener(RefreshDiceUI);
         }
+
+        public void SetButton()
+        {
+            var time = StoreUIManager.Instance.animTime;
+            StartCoroutine(LateSetButton(time));
+        }
+        IEnumerator LateSetButton(float time)
+        {
+            yield return new WaitForSeconds(time);
+            UpgradeButtonActive();
+            StoreExitButtonActive();
+        }
+        
+        private void UpgradeButtonActive()
+        {
+            upgradeButton.interactable = true;
+        }
+        private void StoreExitButtonActive()
+        {
+            exitButton.interactable = true;
+        }
+
+
 
         #region 出售骰面相关
         public void RefreshDiceUI()
