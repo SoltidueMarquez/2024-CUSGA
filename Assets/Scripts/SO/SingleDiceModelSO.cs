@@ -34,8 +34,8 @@ public class SingleDiceModelSO : ScriptableObject
     [Tooltip("骰面属于哪一方")]
     [Header("骰面属于哪一方")]
     public int side;
-    [Tooltip("骰面的Bufflist")]
-    public List<BuffDataSO> buffDataSOs;
+    [Tooltip("骰面的Bufflist,需要赋层数和持续时间")]
+    public List<BuffDataConfig> buffDataConfigs;
     [Header("给UI的属性")]
     public Sprite sprite;
     [Multiline(5)]
