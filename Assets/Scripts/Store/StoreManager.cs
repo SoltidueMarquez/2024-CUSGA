@@ -28,6 +28,8 @@ public class StoreManager : SingletonBase<StoreManager>
     public List<ProductHalidom> productHalidoms = new List<ProductHalidom>();
     public List<ProductDice> productDices = new List<ProductDice>();
 
+    private int upgradePoint = 1;
+
     private ChaState player;
     protected override void Awake()
     {
@@ -93,7 +95,7 @@ public class StoreManager : SingletonBase<StoreManager>
     /// <summary>
     /// 强化成功时调用
     /// </summary>
-    public UnityEvent OnUpgradeSuccess;
+    public UnityEvent<UpgradeInfo> OnUpgradeSuccess;
 
     #endregion
 
@@ -363,12 +365,58 @@ public class StoreManager : SingletonBase<StoreManager>
             return;
         }
 
+        //------强化成功------
+        //扣钱
         player.ModResources(new ChaResource(0, -upgradeCost, 0, 0));
         upgradeCost += upgradeCostAdd;
-        singleDiceObj.idInDice++;
 
-        OnUpgradeSuccess?.Invoke();
+        //判断加成是否溢出
+        if (singleDiceObj.idInDice + upgradePoint > 6)
+        {
+            int actualUpgradePoint = 6 - singleDiceObj.idInDice;
+            singleDiceObj.idInDice = 6;
+            OnUpgradeSuccess?.Invoke(new UpgradeInfo(singleDiceObj, actualUpgradePoint));
+        }
+        else
+        {
+            singleDiceObj.idInDice += upgradePoint;
+            OnUpgradeSuccess?.Invoke(new UpgradeInfo(singleDiceObj, upgradePoint));
+        }
+
         StrengthenAreaManager.Instance.RefreshUpgradeText(upgradeCost);
     }
+
+    /// <summary>
+    /// 改变一次强化的点数
+    /// </summary>
+    /// <param name="point">小于6</param>
+    public void ChangeUpgradePoint(int point)
+    {
+        upgradePoint = point;
+    }
+
     #endregion
+}
+
+/// <summary>
+/// 用于传递升级信息
+/// </summary>
+public class UpgradeInfo
+{
+    private SingleDiceObj singleDiceObj;
+    /// <summary>
+    /// 升级完毕的骰面信息
+    /// </summary>
+    public SingleDiceObj _singleDiceObj { get { return singleDiceObj; } }
+    private int actualUpgradePoint = 1;
+    /// <summary>
+    /// 此次升级增加了几点数（0-5）
+    /// </summary>
+    public int _actualUpgradePoint { get { return actualUpgradePoint; } }
+
+    public UpgradeInfo(SingleDiceObj singleDiceObj, int actualUpgradePoint = 1)
+    {
+        this.singleDiceObj = singleDiceObj;
+        this.actualUpgradePoint = actualUpgradePoint;
+    }
 }

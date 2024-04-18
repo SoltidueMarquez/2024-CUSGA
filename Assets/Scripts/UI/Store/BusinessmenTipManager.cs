@@ -83,5 +83,18 @@ namespace UI.Store
             failTipText.DOText(content,animTime);
             StartCoroutine(LateHide());
         }
+
+        public void ShowTip(UpgradeInfo upgradeInfo)
+        {
+            if (_counter > 0) { return; }//计时器没归零就不执行
+            _counter = animTime * 2f;
+            StartCoroutine(Count());//开始计时
+
+            failTip.SetActive(true);
+            var content = successTipContent[Random.Range(0, successTipContent.Count)];
+            failTipText.text = "";
+            failTipText.DOText(content, animTime);
+            StartCoroutine(LateHide());
+        }
     }
 }
