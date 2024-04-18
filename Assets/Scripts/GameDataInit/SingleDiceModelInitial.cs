@@ -26,7 +26,7 @@ public class SingleDiceModelInitial : MonoBehaviour
                     singleDiceModelSOs[i].cost,
                     singleDiceModelSOs[i].value,
                     (int)singleDiceModelSOs[i].level + 1,
-                    GetBuffInfoList(singleDiceModelSOs[i].buffDataSOs),
+                    GetBuffInfoList(singleDiceModelSOs[i].buffDataConfigs),
                     singleDiceModelSOs[i].baseValue,
                     null)
                 );
@@ -37,9 +37,9 @@ public class SingleDiceModelInitial : MonoBehaviour
     /// </summary>
     /// <param name="buffDataSOs"></param>
     /// <returns></returns>
-    private BuffInfo[] GetBuffInfoList(List<BuffDataSO> buffDataSOs)
+    private BuffInfo[] GetBuffInfoList(List<BuffDataConfig> buffDataConfigs)
     {
-        if (buffDataSOs == null)
+        if (buffDataConfigs == null)
         {
             Debug.LogWarning("HalidomDataInitial:传入参数为空");
             return null;
@@ -47,10 +47,10 @@ public class SingleDiceModelInitial : MonoBehaviour
 
         List<BuffInfo> buffInfos = new List<BuffInfo>();
 
-        foreach (var item in buffDataSOs)
+        foreach (var item in buffDataConfigs)
         {
             Dictionary<string, System.Object> dict = new Dictionary<string, System.Object>();
-            foreach (var param in item.paramList)
+            foreach (var param in item.buffDataSO.paramList)
             {
                 switch (param.type)
                 {
@@ -74,9 +74,9 @@ public class SingleDiceModelInitial : MonoBehaviour
                 }
             }
             BuffInfo buffInfo = new BuffInfo(
-                BuffDataTable.buffData[item.dataName.ToString()],
-                null, null, 1,
-                BuffDataTable.buffData[item.dataName.ToString()].isPermanent, dict
+                BuffDataTable.buffData[item.buffDataSO.dataName.ToString()],
+                null, null, item.buffStack,
+                BuffDataTable.buffData[item.buffDataSO.dataName.ToString()].isPermanent, dict
                 );
             buffInfos.Add(buffInfo);
         }

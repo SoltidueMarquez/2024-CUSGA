@@ -181,6 +181,7 @@ public class BuffData
         this.onBeKilled = (onBeKilled == "") ? null : DesignerScripts.BuffEvents.onBeKillFunc[onBeKilled];
         this.onBeKilledParams = onBeKilledParams;
         this.OnCast = (onCast == "") ? null : DesignerScripts.BuffEvents.onCastFunc[onCast];
+        this.onAddBuff = (onAddBuff == "") ? null : DesignerScripts.BuffEvents.onAddFunc[onAddBuff];
     }
 
 

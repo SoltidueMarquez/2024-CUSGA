@@ -1050,11 +1050,11 @@ namespace DesignerScripts
 
         public static void Add1StackIfPlayerHavePositiveBuff(BuffInfo buffInfo)
         {
-            Debug.Log("1231231231231");
             //buff添加的target是否是玩家
+            Debug.Log("buff添加的target是" + buffInfo.creator.name);
             if (buffInfo.target == BattleManager.Instance.parameter.playerChaState.gameObject)
             {
-                Debug.Log("buff添加的target是否是玩家");
+                Debug.Log("buff添加的target是玩家");
                 //如果这个buff的标签是buff
                 if (buffInfo.buffData.tags.Contains("Positive"))
                 {
