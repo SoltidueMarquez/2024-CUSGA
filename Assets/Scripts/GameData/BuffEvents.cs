@@ -111,6 +111,22 @@ namespace DesignerScripts
         RecoverHalfHealthWhenDie,
         Add1ValueWhenDiceBelow3,
         #endregion
+
+        #region 传说圣物
+        Add6ValueIfResultIsEven,
+        Add6ValueIfResultIsOdd,
+        Add1ValueToAddOdd,
+        Add1ValueToAddEven,
+        EnhanceAttackAfterSellDice,
+        Enhance25AttackWhenHalfHealth,
+        EnhanceAttackWhenHit,
+        EnhanceAttackBaseOnMoney,
+        EnhanceAttackAndHurt,
+        Gain2DiceAndHurt,
+        Update2DiceAndHurt,
+        Gain2RareHalidom,
+        EnhanceAttackAfterKillEnemy,
+        #endregion
     }
 
     public class BuffEvents
@@ -1034,14 +1050,16 @@ namespace DesignerScripts
 
         public static void Add1StackIfPlayerHavePositiveBuff(BuffInfo buffInfo)
         {
+            Debug.Log("1231231231231");
             //buff添加的target是否是玩家
             if (buffInfo.target == BattleManager.Instance.parameter.playerChaState.gameObject)
             {
+                Debug.Log("buff添加的target是否是玩家");
                 //如果这个buff的标签是buff
                 if (buffInfo.buffData.tags.Contains("Positive"))
                 {
                     buffInfo.curStack++;
-                    Debug.Log("我方正面buff加一");
+                    Debug.Log("榴莲千层生效，我方正面buff加一");
                 }
             }
         }
@@ -1149,7 +1167,73 @@ namespace DesignerScripts
 
         #endregion
 
+        # region 传说圣物
+        public static void Add6ValueIfResultIsEven(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            if (damageInfo.damage.indexDamageRate % 2 == 0)
+            {
+                damageInfo.damage.baseDamage += 6;
+                Debug.Log("骰子为偶数，增加6点伤害");
+            }
+        }
 
+        public static void Add6ValueIfResultIsOdd(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            if (damageInfo.damage.indexDamageRate % 2 == 1)
+            {
+                damageInfo.damage.baseDamage += 6;
+                Debug.Log("骰子为奇数，增加6点伤害");
+            }
+        }
+
+        public static void Enhance25AttackWhenHalfHealth(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            ChaState tempChaState = buffInfo.creator.GetComponent<ChaState>();
+            if(tempChaState.resource.currentHp <= tempChaState.baseProp.health / 2)
+            {
+                damageInfo.addDamageArea += 0.25f;
+                Debug.Log("生命值低于一半，增加25%攻击力");
+            }
+        }
+
+        public static void EnhanceAttackBaseOnMoney(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            ChaState tempChaState = buffInfo.creator.GetComponent<ChaState>();
+            if(tempChaState.resource.currentMoney >= 0)
+            {
+                if(tempChaState.resource.currentMoney <= 150)
+                {
+                    int addAttack = tempChaState.resource.currentMoney / 5;
+                    damageInfo.addDamageArea += addAttack*0.01f;
+                    Debug.Log("增加"+addAttack*0.01f+"%的攻击力");
+                }
+                else
+                {
+                    damageInfo.addDamageArea += 0.3f;
+                    Debug.Log("金币增加30%攻击力");
+                }
+            }
+        }
+
+        public static void EnhanceAttackAndHurt(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            damageInfo.addDamageArea += 0.6f;
+            int probability = Random.Range(1, 11);
+            if (probability == 1)
+            {
+                ChaState tempChaState = buffInfo.creator.GetComponent<ChaState>();
+                tempChaState.ModResources(new ChaResource(-50, 0, 0, 0));
+            }
+        }
+
+        public static void Gain2RareHalidom(BuffInfo buffInfo)
+        {
+            RandomManager.GetRandomHalidomObj(RareType.Rare);
+            RandomManager.GetRandomHalidomObj(RareType.Rare);
+            Debug.Log("获得两个稀有圣物");
+        }
+
+        #endregion
 
 
 
