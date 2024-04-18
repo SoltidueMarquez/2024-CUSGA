@@ -103,6 +103,17 @@ public class BattleDiceHandler : MonoBehaviour
         bagDiceCards[indexInBag] = singleDiceObjInBattle;
         singleDiceObjs[indexInDice] = singleDiceObjInBag;
     }
+    /// <summary>
+    /// 设置背包中的骰子的位置
+    /// </summary>
+    /// <param name="singleDiceObjs"></param>
+    public void ResetDiceInBag(List<SingleDiceObj> singleDiceObjs)
+    {
+        for(int i = 0; i < singleDiceObjs.Count; i++)
+        {
+            bagDiceCards[i] = singleDiceObjs[i];
+        }
+    }
     #endregion
     #region 初始化战斗骰子，有数据的情况下和测试的情况下
     /// <summary>
