@@ -159,6 +159,22 @@ namespace UI
                 }
             }
         }
+        public List<SingleDiceObj> GetBagList()
+        {
+            List<SingleDiceObj> bagList = new List<SingleDiceObj>();
+            foreach (var column in bagColumns)
+            {
+                if (column.bagObject != null)
+                {
+                    bagList.Add(column.bagObject.GetComponent<EditableDiceUIObject>().diceObj);
+                }
+                else
+                {
+                    bagList.Add(null);
+                }
+            }
+            return bagList;
+        }
         #endregion
 
         #region 战斗骰面

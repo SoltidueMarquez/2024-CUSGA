@@ -164,15 +164,20 @@ namespace UI
             var switchObj = UIManager.Instance.DetectPosition(gameObject, EditableDiceUIManager.Instance.allColumns, _currentColumn, EditableDiceUIManager.Instance.offset);
             _currentColumn = UIManager.Instance.DetectColumn(gameObject, EditableDiceUIManager.Instance.allColumns, EditableDiceUIManager.Instance.offset); //更新物品栏位置
             gameObject.transform.SetParent(EditableDiceUIManager.Instance.parent);//设置为原来的图层
-
+            
+            var bagDice = gameObject.GetComponent<EditableDiceUIObject>().diceObj;
             //逻辑交换
-            if (editState == EditState.FightDice)
+            if (editState == EditState.FightDice)//背包和战斗换
             {
-                var bagDice = gameObject.GetComponent<EditableDiceUIObject>().diceObj;
-                var fightDice = switchObj.GetComponent<EditableDiceUIObject>().diceObj;
-                MapManager.Instance.playerChaState.GetBattleDiceHandler().SwapDiceInBagAndBattle(bagDice, fightDice,EditableDiceUIManager.Instance.GetCurrentPage());
+                var fightDiceMaybe = switchObj.GetComponent<EditableDiceUIObject>()?.diceObj;
+                MapManager.Instance.playerChaState.GetBattleDiceHandler().SwapDiceInBagAndBattle(bagDice, fightDiceMaybe,EditableDiceUIManager.Instance.GetCurrentPage());
+                Debug.Log($"<color=green>{bagDice}交换了{EditableDiceUIManager.Instance.GetCurrentPage()}号骰子的{fightDiceMaybe}</color>");
+            }
+            else//背包和背包换
+            {
+                //TODO:调用背包逻辑的更新函数
                 Debug.Log(
-                    $"<color=green>{gameObject.GetComponent<EditableDiceUIObject>().diceObj}交换了{EditableDiceUIManager.Instance.GetCurrentPage()}号骰子的{switchObj.GetComponent<EditableDiceUIObject>().diceObj}</color>");
+                    $"<color=blue>{EditableDiceUIManager.Instance.GetBagList().Count}</color>");
             }
         }
 
