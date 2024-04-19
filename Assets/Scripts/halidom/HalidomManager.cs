@@ -84,7 +84,7 @@ public class HalidomManager : MonoBehaviour
                 //触发圣物OnCreate回调点
                 foreach (var buffInfo in halidomObject.buffInfos)
                 {
-                    Debug.Log("<color=green>HalidomManager:</color>" + buffInfo.buffData.onAddBuff.ToString() + "添加成功");
+                    //Debug.Log("<color=green>HalidomManager:</color>" + buffInfo.buffData.onAddBuff.ToString() + "添加成功");
                     //获取圣物的创建者 给予buffinfo
                     buffInfo.creator = BattleManager.Instance.parameter.playerChaState.gameObject;
                     //获取圣物buff的对象（暂定 没有给敌人上buff）

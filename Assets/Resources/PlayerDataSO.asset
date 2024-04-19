@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3de7d951814604594071121c0d0bf5, type: 3}
   m_Name: PlayerDataSO
   m_EditorClassIdentifier: 
-  ifUseSaveData: 1
+  ifUseSaveData: 0
   baseProp:
     health: 50
     money: 300
