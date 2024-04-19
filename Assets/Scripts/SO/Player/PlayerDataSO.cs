@@ -72,6 +72,8 @@ public class PlayerDataSO : ScriptableObject
     public List<SingleDiceObjSOData> bagDiceList;
     [Header("玩家当前的资源(保存的数据)")]
     public ChaResource chaResource;
+
+    public bool ifHasMap;
     [Header("玩家的map信息")]
     public Map.Map currentMap;
     /// <summary>
@@ -84,6 +86,11 @@ public class PlayerDataSO : ScriptableObject
         this.chaResource = playerData.chaResource;
         this.battleDiceList = playerData.battleDiceList;
         this.halidomDataForSaves = playerData.halidomDataForSaves;
+        if(playerData.map != null)
+        {
+            this.currentMap = playerData.map;
+            ifHasMap = true;
+        }
     }
     public void SaveData()
     {
@@ -113,5 +120,9 @@ public class PlayerDataSO : ScriptableObject
             this.bagDiceList.Add(bagDiceSOlist[i]);
         }
 
+    }
+    public void UpdataPlayerDataSoMap(Map.Map map)
+    {
+        this.currentMap = map;
     }
 }

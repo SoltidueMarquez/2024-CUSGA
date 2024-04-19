@@ -9,7 +9,7 @@ using DesignerScripts;
 namespace Map
 {
 
-    public class MapManager : MonoSingleton<MapManager>
+    public class MapManager : MonoBehaviour
     {
         [Header("地图配置")]
         public MapConfig config;
@@ -19,6 +19,11 @@ namespace Map
         public ChaState playerChaState;
 
         public Map CurrentMap { get; private set; }
+        public static MapManager Instance;
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         private void Start()
         {
@@ -28,27 +33,28 @@ namespace Map
             InitializeHalidom();
 
             //地图场景地图初始化
-            if (PlayerPrefs.HasKey("Map"))
-            {
-                var mapJson = PlayerPrefs.GetString("Map");
-                var map = JsonConvert.DeserializeObject<Map>(mapJson);
-                // using this instead of .Contains()
-                if (map.path.Any(p => p.Equals(map.GetBossNode().point)))
-                {
-                    // payer has already reached the boss, generate a new map
-                    GenerateNewMap();
-                }
-                else
-                {
-                    CurrentMap = map;
-                    // player has not reached the boss yet, load the current map
-                    view.ShowMap(map);
-                }
-            }
-            else
-            {
-                GenerateNewMap();
-            }
+            //if (PlayerPrefs.HasKey("Map"))
+            //{
+            //    var mapJson = PlayerPrefs.GetString("Map");
+            //    var map = JsonConvert.DeserializeObject<Map>(mapJson);
+            //    // using this instead of .Contains()
+            //    if (map.path.Any(p => p.Equals(map.GetBossNode().point)))
+            //    {
+            //        // payer has already reached the boss, generate a new map
+            //        GenerateNewMap();
+            //    }
+            //    else
+            //    {
+            //        CurrentMap = map;
+            //        // player has not reached the boss yet, load the current map
+            //        view.ShowMap(map);
+            //    }
+            //}
+            //else
+            //{
+            //    GenerateNewMap();
+            //}
+            InitializeMap();
         }
 
         public void GenerateNewMap()
@@ -57,6 +63,8 @@ namespace Map
             CurrentMap = map;
             Debug.Log(map.ToJson());
             view.ShowMap(map);
+            this.playerDataSO.ifHasMap = true;
+            this.playerDataSO.UpdataPlayerDataSoMap(map);
         }
 
         public void SaveMap()
@@ -178,10 +186,29 @@ namespace Map
                 GameManager.Instance.ifLoadedHalidom = true;
             }
         }
-
+        /// <summary>
+        /// 根据不同的情况初始化地图
+        /// </summary>
         public void InitializeMap()
         {
-
+            if(this.playerDataSO.ifUseSaveData)//使用保存的数据
+            {
+                if (this.playerDataSO.ifHasMap)//playerDataSO中有地图数据
+                {
+                    this.CurrentMap = this.playerDataSO.currentMap;
+                    this.view.ShowMap(this.playerDataSO.currentMap);
+                }
+                else
+                {
+                    GenerateNewMap();
+                    
+                }
+            }
+            else//使用初始数据
+            {
+                GenerateNewMap();
+            }
+            
         }
         #endregion
         #region 骰子交互相关
@@ -198,6 +225,7 @@ namespace Map
         public void OnExitMap()
         {
             this.playerDataSO.UpdatePlayerDataSO(this.playerChaState);
+            this.playerDataSO.UpdataPlayerDataSoMap(this.CurrentMap);
         }    
         #endregion
     }
