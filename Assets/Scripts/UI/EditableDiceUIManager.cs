@@ -83,7 +83,6 @@ namespace UI
         /// <summary>
         /// 生成单个背包骰面函数
         /// </summary>
-        /// <param name="index">所在栏位序列号</param>
         /// <param name="remove"></param>
         /// <param name="singleDiceObj"></param>
         public void CreateBagUIDice(SingleDiceObj singleDiceObj, Action<SingleDiceObj> remove)
@@ -102,7 +101,6 @@ namespace UI
             var tmp = Instantiate(template, parent, true);
             tmp.transform.position = bagColumns[index].transform.position;//更改位置
             tmp.GetComponent<EditableDiceUIObject>().Init(bagColumns, offset, singleDiceObj, remove);//初始化
-            //tmp.GetComponent<EditableDiceUIObject>().Init(bagColumns, offset);
             tmp.SetActive(true);
         }
         /// <summary>
@@ -116,23 +114,24 @@ namespace UI
             for (int i = 0; i < diceList.Count; i++)
             {
                 CreateBagUIDice(diceList[i], removeList[i]);
-                //CreateBagUIDice(i, null, null);
             }
         }
+
         /// <summary>
         /// 更新UI函数
         /// </summary>
-        /// <param name="upgrade"></param>
-        /// <param name="index"></param>
-        public void UpdateBagDiceUI(UpgradeInfo upgrade, int index)
+        /// <param name="dice"></param>
+        public void UpdateBagDiceUI(SingleDiceObj dice)
         {
+            var index = FindBagDice(dice);
+            if (index < 0) { return;}
             if (bagColumns[index].bagObject == null)
             {
                 Debug.LogWarning("错误，所在背包栏位没有骰面存在");
                 return;
             }
             var tmp = bagColumns[index].bagObject.GetComponent<EditableDiceUIObject>();
-            tmp.UpdateDiceUI(upgrade._singleDiceObj);
+            tmp.UpdateDiceUI();
         }
         /// <summary>
         /// 移除背包骰面函数
@@ -164,16 +163,22 @@ namespace UI
             List<SingleDiceObj> bagList = new List<SingleDiceObj>();
             foreach (var column in bagColumns)
             {
-                if (column.bagObject != null)
-                {
-                    bagList.Add(column.bagObject.GetComponent<EditableDiceUIObject>().diceObj);
-                }
-                else
-                {
-                    bagList.Add(null);
-                }
+                bagList.Add(column.bagObject != null ? column.bagObject.GetComponent<EditableDiceUIObject>().diceObj : null);
             }
             return bagList;
+        }
+
+        private int FindBagDice(SingleDiceObj singleDice)
+        {
+            var list = GetBagList();
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (singleDice == list[i])
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
         #endregion
 
@@ -199,7 +204,6 @@ namespace UI
             var tmp = Instantiate(template, parent, true);
             tmp.transform.position = fightColumns[index].transform.position;//更改位置
             tmp.GetComponent<EditableDiceUIObject>().Init(fightColumns, offset, singleDiceObj, remove);//初始化
-            //tmp.GetComponent<EditableDiceUIObject>().Init(fightColumns, offset);
             tmp.SetActive(true);
         }
         private void CreateSingleFightDice(LogicDice dice)
@@ -207,16 +211,14 @@ namespace UI
             for (int i = 0; i < dice.singleDiceList.Count; i++)
             {
                 CreateFightUIDice(i, dice.singleDiceList[i], dice.removeList[i]);
-                //CreateFightUIDice(i, null, null);
             }
         }
 
         /// <summary>
         /// 更新UI函数
         /// </summary>
-        /// <param name="upgrade"></param>
         /// <param name="index"></param>
-        public void UpdateFightDiceUI(UpgradeInfo upgrade, int index)
+        public void UpdateFightDiceUI(int index)
         {
             if (fightColumns[index].bagObject == null)
             {
@@ -224,7 +226,7 @@ namespace UI
                 return;
             }
             var tmp = fightColumns[index].bagObject.GetComponent<EditableDiceUIObject>();
-            tmp.UpdateDiceUI(upgrade._singleDiceObj);
+            tmp.UpdateDiceUI();
         }
         
         /// <summary>
@@ -292,21 +294,6 @@ namespace UI
         }
 
         #endregion
-
-        //public List<LogicDice> test;
-        /*#region 测试
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                
-            }
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                
-            }
-        }
-        #endregion*/
     }
     
     [Serializable]

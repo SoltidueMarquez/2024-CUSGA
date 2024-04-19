@@ -56,15 +56,6 @@ namespace UI.Store
         {
             Destroy(gameObject);
         }
-
-        /// <summary>
-        /// 升级的函数
-        /// </summary>
-        /// <param name="upgrade"></param>
-        /// <param name="index"></param>
-        public void UpdateDiceUI(UpgradeInfo upgrade, int index)
-        {
-            dicePageList[index].UpdateDiceUI(upgrade);
-        }
+        
     }
 }

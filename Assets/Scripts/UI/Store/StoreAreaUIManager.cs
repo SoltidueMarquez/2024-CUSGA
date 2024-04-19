@@ -47,15 +47,10 @@ namespace UI.Store
         public void SetButton()
         {
             var time = StoreUIManager.Instance.animTime;
-            StartCoroutine(LateSetButton(time));
-        }
-        IEnumerator LateSetButton(float time)
-        {
-            yield return new WaitForSeconds(time);
             UpgradeButtonActive();
             StoreExitButtonActive();
         }
-        
+
         private void UpgradeButtonActive()
         {
             upgradeButton.interactable = true;

@@ -54,16 +54,5 @@ namespace UI.Store
             tmpDice.diceType = DiceType.FightDice;
             tmp.SetActive(true);
         }
-        
-        public void UpdateDiceUI(UpgradeInfo upgrade)
-        {
-            var singleDiceObj = upgrade._singleDiceObj;
-            var index = singleDiceObj.positionInDice;
-            var tmpDice = columns[index].bagObject.GetComponent<StrengthenDiceUIObject>();
-            if (tmpDice != null)
-            {
-                tmpDice.UpdateDiceUI(singleDiceObj);
-            }
-        }
     }
 }

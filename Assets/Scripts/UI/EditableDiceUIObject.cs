@@ -52,11 +52,10 @@ namespace UI
             }
         }
 
-        public void UpdateDiceUI(SingleDiceObj singleDice)
+        public void UpdateDiceUI()
         {
-            diceObj = singleDice;
             this.transform.localScale = new Vector3(1, 1, 1);
-            var data = ResourcesManager.GetSingleDiceUIData(singleDice);
+            var data = ResourcesManager.GetSingleDiceUIData(diceObj);
             //信息文本初始化
             nameText.text = data.name;
             typeText.text = $"类型:{data.type}";
@@ -69,21 +68,6 @@ namespace UI
             idInDiceText.text = data.idInDice.ToString();
         }
         
-        /*public void Init(List<Column> columns, float offset)
-        {
-            this.transform.localScale = new Vector3(1, 1, 1);
-            nameText.text = nameof(gameObject);
-            saleButtonText.text = $"出售\n￥0";
-            idInDiceText.text = Random.Range(0,100).ToString();
-            saleButton.onClick.AddListener(DestroyUI);
-            _state = State.None;
-            _currentColumn = UIManager.Instance.DetectColumn(gameObject, columns, offset); //检测当前所在的物品栏
-            if (_currentColumn != null) //初始化当前所在的物品栏
-            {
-                _currentColumn.bagObject = gameObject;
-                editState = _currentColumn.state;
-            }
-        }*/
         #endregion
 
         #region 鼠标预览
@@ -171,14 +155,17 @@ namespace UI
             {
                 var fightDiceMaybe = switchObj.GetComponent<EditableDiceUIObject>()?.diceObj;
                 MapManager.Instance.playerChaState.GetBattleDiceHandler().SwapDiceInBagAndBattle(bagDice, fightDiceMaybe,EditableDiceUIManager.Instance.GetCurrentPage());
-                Debug.Log($"<color=green>{bagDice}交换了{EditableDiceUIManager.Instance.GetCurrentPage()}号骰子的{fightDiceMaybe}</color>");
+                StoreManager.Instance.m_Debug($"<color=green>{bagDice}交换了{EditableDiceUIManager.Instance.GetCurrentPage()}号骰子的{fightDiceMaybe}</color>");
             }
-            else//背包和背包换
+            /*else//背包和背包换
             {
-                //TODO:调用背包逻辑的更新函数
-                Debug.Log(
-                    $"<color=blue>{EditableDiceUIManager.Instance.GetBagList().Count}</color>");
-            }
+                var bagList = EditableDiceUIManager.Instance.GetBagList();
+                //MapManager.Instance.playerChaState.GetBattleDiceHandler().ResetDiceInBag(bagList);
+                foreach (var dice in bagList)
+                {
+                    StoreManager.Instance.m_Debug($"<color=blue>{dice}</color>");
+                }
+            }*/
         }
 
         /// <summary>
