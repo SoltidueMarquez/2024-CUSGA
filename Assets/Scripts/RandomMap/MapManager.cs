@@ -189,7 +189,7 @@ namespace Map
         {
             Debug.Log("<color=green>MapManager</color>:" + singleDiceObj.idInDice);
             this.playerChaState.GetBattleDiceHandler().RemoveSingleBattleDiceFromBag(singleDiceObj);
-            var resource = new ChaResource(0, -singleDiceObj.SaleValue, 0, 0);
+            var resource = new ChaResource(0, singleDiceObj.SaleValue, 0, 0);
             this.playerChaState.ModResources(resource);
             //进行一些其他判定
         }
