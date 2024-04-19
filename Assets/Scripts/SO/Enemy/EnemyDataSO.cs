@@ -2,7 +2,6 @@ using DesignerScripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "EnemyDataSO", menuName = "Enemy/EnemyDataSO")]
 [System.Serializable]
 public class BuffDataConfig
 {
@@ -21,6 +20,7 @@ public enum EnemyType
     Elite,
     Boss
 }
+[CreateAssetMenu(fileName = "EnemyDataSO", menuName = "Enemy/EnemyDataSO")]
 public class EnemyDataSO : ScriptableObject
 {
     [Header("敌人的类型")]
