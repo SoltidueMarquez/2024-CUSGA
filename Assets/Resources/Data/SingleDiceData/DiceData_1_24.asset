@@ -28,10 +28,7 @@ MonoBehaviour:
   level: 2
   value: 12
   side: 0
-  buffDataSOs:
-  - {fileID: 11400000, guid: fd338955149b8624d887383699769d75, type: 2}
-  - {fileID: 11400000, guid: fd338955149b8624d887383699769d75, type: 2}
-  - {fileID: 11400000, guid: fd338955149b8624d887383699769d75, type: 2}
+  buffDataConfigs: []
   sprite: {fileID: 0}
   description: "\u653B\u51FB(valueM)\u6211\u529B\u91CF+3"
   baseValue: 8

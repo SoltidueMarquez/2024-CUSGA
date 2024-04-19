@@ -481,7 +481,7 @@ public class HalidomManager : MonoBehaviour
 
                     if (buffInfo.buffData.onAddBuff != null)
                     {
-                        buffInfo.buffData.onAddBuff?.Invoke(buffInfo);
+                        buffInfo.buffData.onAddBuff?.Invoke(addBuffInfo);
                         //触发圣物闪烁
                         SacredObjectUIManager.Instance.DoFlick(halidomList[i].id);
                     }

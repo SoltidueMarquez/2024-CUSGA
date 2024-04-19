@@ -69,7 +69,6 @@ public class BattleDiceHandler : MonoBehaviour
                     if (buffinfo.buffData.tags.Contains("Self"))
                     {
                         temp.target = chaState.gameObject;
-                        Debug.Log("<color=red>BattlediceHandler:</color>" + temp.target.name);
                         chaState.AddBuff(temp, chaState.gameObject);
                     }
                 }
