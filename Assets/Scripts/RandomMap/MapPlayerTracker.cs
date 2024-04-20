@@ -82,7 +82,7 @@ namespace Map
                     GameManager.Instance.enemyDataSO = EnemyManager.GetEnemyDataSOviaCondition(EnemyType.Normal);
                     MapManager.Instance.playerDataSO.ifUseSaveData = true;
                     MapManager.Instance.OnExitMap();
-                    GameManager.Instance.LoadScene("BattleScene");
+                    SceneLoader.LoadSceneAsync(GameScene.BattleScene);
                     break;
                 case NodeType.EliteEnemy:
                     break;
