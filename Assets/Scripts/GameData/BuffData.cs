@@ -121,6 +121,25 @@ namespace DesignerScripts
         Update2DiceAndHurt,
         Gain2RareHalidom,
         EnhanceAttackAfterKillEnemy,
+
+
+
+        //新增敌人buff
+        Thorns,//荆棘
+
+        Reflect,//反射
+
+        Split,//分裂
+
+        Pox,//水痘
+
+        Spike,//尖刺
+
+        Corrosion,//腐蚀
+
+        Sensitive,//敏感
+
+        Brave,//勇敢
     }
     public class BuffDataTable
     {

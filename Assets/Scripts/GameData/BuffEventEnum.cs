@@ -57,6 +57,10 @@ public enum onRoundStartEnum
     Gain2ToughWhenBattleStart,
     Gain2VulnerableWhenBattleStart,
     Gain2WeakWhenBattleStart,
+    //新敌人buff
+    Thorns,
+    Split,
+    
 
 }
 
@@ -118,6 +122,11 @@ public enum onBeHurtEnum
     Hit3DamageWhenLoseHealth,
     GainDodgeWhenLoseHealth,
     GainStrengthWhenLoseHealth,
+    //新敌人buff
+    Reflect,
+    Pox,
+    Spike,
+    Corrosion,
 
 }
 
@@ -136,6 +145,9 @@ public enum onBeKillEnum
 public enum onRollEnum
 {
     None,
+    Sensitive,
+    Brave,
+
 
 }
 public enum onCastEnum

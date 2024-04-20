@@ -13,6 +13,7 @@ namespace DesignerScripts
     /// </summary>
     public enum BuffEventName
     {
+        #region 普通buff
 
         Bleed,//流血
 
@@ -37,6 +38,24 @@ namespace DesignerScripts
         LoseEnergy,//失能
 
         BuffStackMinus1,//Buff层数减1
+
+        Thorns,//荆棘
+
+        Reflect,//反射
+
+        Split,//分裂
+
+        Pox,//水痘
+
+        Spike,//尖刺
+
+        Corrosion,//腐蚀
+
+        Sensitive,//敏感
+
+        Brave,//勇敢
+
+        #endregion
 
         #region 圣物buff
         Add2ValueIfResultIsEven,//1
@@ -216,6 +235,12 @@ namespace DesignerScripts
             {
                 BuffEventName.EnergyStorage.ToString(),EnergyStorage
             },
+            {
+                BuffEventName.Thorns.ToString(),Thorns
+            },
+            {
+                BuffEventName.Split.ToString(),Split
+            },
             //圣物buff
             {
                 BuffEventName.Recover25HealthWhenHealthBelowHalf.ToString(),Recover25HealthWhenHealthBelowHalf
@@ -356,6 +381,18 @@ namespace DesignerScripts
             {
                 BuffEventName.Dodge.ToString(),Dodge
             },
+            {
+                BuffEventName.Reflect.ToString(),Reflect
+            },
+            {
+                BuffEventName.Pox.ToString(),Pox
+            },
+            {
+                BuffEventName.Spike.ToString(),Spike
+            },
+            {
+                BuffEventName.Corrosion.ToString(),Corrosion
+            },
             //圣物buff
             {
                 BuffEventName.Add50PercentAttackEvery3TimesLoseHealth.ToString(),Add50PercentAttackEvery3TimesLoseHealth
@@ -396,7 +433,17 @@ namespace DesignerScripts
             },
         };
 
-        public static Dictionary<string, BuffOnRoll> onRollFunc = new Dictionary<string, BuffOnRoll>();
+        public static Dictionary<string, BuffOnRoll> onRollFunc = new Dictionary<string, BuffOnRoll>()
+        {
+            {
+                BuffEventName.Sensitive.ToString(),Sensitive
+            },
+            {
+                BuffEventName.Brave.ToString(),Brave
+            },
+                
+            
+        };
 
         public static Dictionary<string, BuffOnCast> onCastFunc = new Dictionary<string, BuffOnCast>()
         {
@@ -426,6 +473,9 @@ namespace DesignerScripts
         #region 所有buff效果函数
 
         #region 普通buff效果函数
+
+
+        #region 玩家敌人公用buff
         //流血效果，每回合造成2*层数的伤害（数值脚填）
         public static void Bleed(BuffInfo buffInfo)
         {
@@ -612,6 +662,99 @@ namespace DesignerScripts
         {
             buffInfo.target.GetComponent<ChaState>().RemoveBuff(buffInfo);
         }
+        #endregion
+
+        #region 新增敌方buff 4.20
+
+
+        public static void Thorns(BuffInfo buffInfo)//OnRoundStart调用
+        {
+            //添加的反伤需要一开始为true
+            BuffInfo newReflectBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Reflect.ToString()], buffInfo.creator, buffInfo.target,1,true);
+            buffInfo.target.GetComponent<ChaState>().AddBuff(newReflectBuff, buffInfo.target);
+            Debug.Log("荆棘生效，持有者获得反射");
+        }
+
+
+        //这里应该是一个获取最终伤害后的回调点
+        public static void Reflect(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)//OnHurt调用
+        {
+            damageInfo.attacker.GetComponent<ChaState>().ModResources(new ChaResource(-damageInfo.damage.baseDamage, 0, 0, 0));
+            Debug.Log("反射造成" + damageInfo.finalDamage + "伤害");
+            buffInfo.curStack--;
+            if(buffInfo.curStack == 0)
+            {
+                buffInfo.isPermanent = false;
+            }
+
+        }
+
+        public static void Split(BuffInfo buffInfo)//OnRoundStart调用
+        {
+            //添加的水痘需要一开始为true
+            BuffInfo newPoxBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Pox.ToString()], buffInfo.creator, buffInfo.target, 1, true);
+            buffInfo.target.GetComponent<ChaState>().AddBuff(newPoxBuff, buffInfo.target);
+            Debug.Log("分裂生效,持有者获得水痘");
+        }
+
+        public static void Pox(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)//OnHurt调用
+        {
+            damageInfo.damage.baseDamage *= 2;
+            
+            buffInfo.curStack--;
+            if (buffInfo.curStack == 0)
+            {
+                buffInfo.isPermanent = false;
+            }
+            Debug.Log("因为水痘，收到伤害翻倍");
+        }
+
+        public static void Spike(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)//OnHurt调用
+        {
+            //获取攻击方的状态
+            ChaState tempChaState = damageInfo.attacker.GetComponent<ChaState>();
+            if(tempChaState.resource.currentShield ==0)
+            {
+                int damage = (int)buffInfo.buffParam["Value"];
+                tempChaState.ModResources(new ChaResource(-damage, 0, 0, 0));
+                Debug.Log("尖刺生效，攻击方受到" + damage + "伤害");
+            }
+        }
+
+        public static void Corrosion(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)//OnHurt调用
+        {
+            //获取攻击方的状态
+            ChaState tempChaState = damageInfo.attacker.GetComponent<ChaState>();
+            if (tempChaState.resource.currentShield > 0)
+            {
+                int shieldDamage = (int)buffInfo.buffParam["Value"];
+                tempChaState.ModResources(new ChaResource(0, 0, 0, -shieldDamage));
+                Debug.Log("腐蚀生效，攻击方减去" + shieldDamage + "层护盾");
+            }
+        }
+
+        public static int Sensitive(BuffInfo buffInfo)//onRoll调用
+        {
+            BuffInfo newVulnerableBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Vulnerable.ToString()], buffInfo.creator, buffInfo.target, (int)buffInfo.buffParam["Value"],false);
+            
+            buffInfo.target.GetComponent<ChaState>().AddBuff(newVulnerableBuff1, buffInfo.target);
+            
+            Debug.Log("由于敏感获得易伤");
+            return 0;
+        }
+
+        public static int Brave(BuffInfo buffInfo)
+        {
+            BuffInfo newToughBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target, (int)buffInfo.buffParam["Value"], false);
+
+            buffInfo.target.GetComponent<ChaState>().AddBuff(newToughBuff1, buffInfo.target);
+
+            Debug.Log("由于勇敢获得坚韧");
+            return 0;
+        }
+
+        #endregion
+
         #endregion
 
         #region 圣物buff效果函数
