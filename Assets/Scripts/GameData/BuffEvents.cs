@@ -159,6 +159,10 @@ namespace DesignerScripts
             {
                 BuffEventName.Add1Reroll.ToString(),Add1Reroll
             },
+            //传说圣物buff
+            {
+                BuffEventName.Gain2RareHalidom.ToString(),Gain2RareHalidom
+            },
             //骰子buff
             {
                 BuffEventName.GetHurt.ToString(),GetHurt
@@ -321,8 +325,22 @@ namespace DesignerScripts
             {
                 BuffEventName.Add1ValueWhenDiceBelow3.ToString(),Add1ValueWhenDiceBelow3
             },
-
-
+            //传说圣物buff
+            {
+                BuffEventName.Add6ValueIfResultIsEven.ToString(),Add6ValueIfResultIsEven
+            },
+            {
+                BuffEventName.Add6ValueIfResultIsOdd.ToString(),Add6ValueIfResultIsOdd
+            },
+            {
+                BuffEventName.Enhance25AttackWhenHalfHealth.ToString(),Enhance25AttackWhenHalfHealth
+            },
+            {
+                BuffEventName.EnhanceAttackBaseOnMoney.ToString(),EnhanceAttackBaseOnMoney
+            },
+            {
+                BuffEventName.EnhanceAttackAndHurt.ToString(),EnhanceAttackAndHurt
+            }
 
 
         };
