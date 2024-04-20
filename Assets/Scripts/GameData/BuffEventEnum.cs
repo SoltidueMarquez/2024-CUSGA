@@ -33,6 +33,8 @@ public enum onCreateEnum
     RerollDice,
     //稀有圣物
     Gain2NormalHalidomWhenGain,
+    //传说圣物
+    Gain2RareHalidom,
 
 
 }
@@ -95,6 +97,13 @@ public enum onBuffHitEnum
     Add50PercentAttack,
     //稀有圣物buff
     Add1ValueWhenDiceBelow3,
+    //传说圣物
+    Add6ValueIfResultIsEven,
+    Add6ValueIfResultIsOdd,
+    Enhance25AttackWhenHalfHealth,
+    EnhanceAttackWhenHit,
+    EnhanceAttackBaseOnMoney,
+    EnhanceAttackAndHurt,
 }
 
 public enum onBeHurtEnum

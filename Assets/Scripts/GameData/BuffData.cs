@@ -106,6 +106,21 @@ namespace DesignerScripts
         GainStrengthWhenLoseHealth,
         RecoverHalfHealthWhenDie,
         Add1ValueWhenDiceBelow3,
+
+        //传说圣物
+        Add6ValueIfResultIsEven,
+        Add6ValueIfResultIsOdd,
+        Add1ValueToAddOdd,
+        Add1ValueToAddEven,
+        EnhanceAttackAfterSellDice,
+        Enhance25AttackWhenHalfHealth,
+        EnhanceAttackWhenHit,
+        EnhanceAttackBaseOnMoney,
+        EnhanceAttackAndHurt,
+        Gain2DiceAndHurt,
+        Update2DiceAndHurt,
+        Gain2RareHalidom,
+        EnhanceAttackAfterKillEnemy,
     }
     public class BuffDataTable
     {
