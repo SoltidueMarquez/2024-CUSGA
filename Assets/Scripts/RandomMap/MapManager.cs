@@ -27,6 +27,7 @@ namespace Map
 
         private void Start()
         {
+            
             //地图场景玩家信息初始化
             InitializePlayer();
             //地图场景圣物初始化
@@ -64,7 +65,10 @@ namespace Map
             Debug.Log(map.ToJson());
             view.ShowMap(map);
             this.playerDataSO.ifHasMap = true;
-            this.playerDataSO.UpdataPlayerDataSoMap(map);
+            string mapString = map.ToJson();
+            this.playerDataSO.UpdataPlayerDataSoMap(mapString);
+            this.playerDataSO.UpdatePlayerDataSO(this.playerChaState);
+            this.playerDataSO. SaveData();
         }
 
         public void SaveMap()
@@ -195,12 +199,12 @@ namespace Map
             {
                 if (this.playerDataSO.ifHasMap)//playerDataSO中有地图数据
                 {
-                    this.CurrentMap = this.playerDataSO.currentMap;
-                    this.view.ShowMap(this.playerDataSO.currentMap);
+                    this.CurrentMap = JsonConvert.DeserializeObject<Map>(this.playerDataSO.currentMap);
+                    this.view.ShowMap(CurrentMap);
                 }
                 else
                 {
-                    GenerateNewMap();
+                    GenerateNewMap();//创建新地图并且存入把所有的数据存入PlayerData
                     
                 }
             }
@@ -225,7 +229,8 @@ namespace Map
         public void OnExitMap()
         {
             this.playerDataSO.UpdatePlayerDataSO(this.playerChaState);
-            this.playerDataSO.UpdataPlayerDataSoMap(this.CurrentMap);
+            this.playerDataSO.UpdataPlayerDataSoMap(CurrentMap.ToJson());
+            this.playerDataSO.SaveData();
         }    
         #endregion
     }
