@@ -107,7 +107,7 @@ namespace UI.Store
             tmp.transform.position = parent.position;//更改位置
             var tmpDice = tmp.GetComponent<StoreDiceUIObject>();
             var data = ResourcesManager.GetSingleDiceUIData(singleDiceObj);
-            tmpDice.Init(data, animTime, 2, onChoose, singleDiceObj);//初始化
+            tmpDice.Init(animTime, 2, onChoose, singleDiceObj);//初始化
             dicePriceTextList[index].text = data.value.ToString();
             tmp.SetActive(true);
             tmpDice.DoAppearAnim(animTime); //出现动画
@@ -183,7 +183,6 @@ namespace UI.Store
                 ProductHalidom productHalidom = sacredObjectColumns[i].transform.GetComponent<ProductHalidom>();
                 if (!productHalidom.isEmpty)
                 {
-
                     CreateSacredObject(i, productHalidom.TryBuy, productHalidom.product);
                 }
             }
@@ -214,9 +213,8 @@ namespace UI.Store
             sacredObjectColumns[index].bagObject = tmp;
             tmp.transform.position = parent.position;//更改位置
             var tmpSacredObject = tmp.GetComponent<StoreSacredUIObject>();
-            tmpSacredObject.Init(halidomObject.id, animTime, 2, onChoose, halidomObject);//初始化
-            var data = ResourcesManager.GetHalidomUIData(halidomObject.id);
-            sacredPriceTextList[index].text = data.value.ToString();
+            tmpSacredObject.Init(halidomObject.id, animTime, 2, onChoose);//初始
+            sacredPriceTextList[index].text = halidomObject.value.ToString();
             tmp.SetActive(true);
             tmpSacredObject.DoAppearAnim(animTime); //出现动画
         }

@@ -9,10 +9,12 @@ namespace UI.Store
         /// <summary>
         /// 初始化函数
         /// </summary>
-        public void Init(string id, float animTime, float scale, Action onChoose, HalidomObject halidomObject)
+        public void Init(string id, float animTime, float scale, Action onChoose)
         {
             //大小初始化
             this.transform.localScale = new Vector3(1, 1, 1);
+            _scale = scale;
+            _animTime = animTime;
             //信息初始化
             var tmpData = ResourcesManager.GetHalidomUIData(id);
             nameText.text = tmpData.name;
@@ -22,16 +24,27 @@ namespace UI.Store
             //按钮事件绑定
             this.GetComponent<Button>().onClick.AddListener(()=>
             {
-                //Disable();
-                //DoChosenAnim(animTime, scale);//动画
                 onChoose?.Invoke();
             });
 
             transform.parent.GetComponent<ProductHalidom>().OnBuySuccess.AddListener(Disable);
-            transform.parent.GetComponent<ProductHalidom>().OnBuySuccess.AddListener(
-                        () => { DoChosenAnim(animTime, scale); });
+            transform.parent.GetComponent<ProductHalidom>().OnBuySuccess.AddListener(DoChosenAnim);
             transform.parent.GetComponent<ProductHalidom>().OnBuySuccess.AddListener(BusinessmenTipManager.Instance.ShowTip);//增加提示时间
             transform.parent.GetComponent<ProductHalidom>().OnBuyFail.AddListener(BusinessmenTipManager.Instance.ShowTip);//增加提示时间
+        }
+        
+        private void DoChosenAnim()
+        {
+            DoChosenAnim(_animTime, _scale);
+            RemoveListener();
+        }
+        
+        private void RemoveListener()
+        {
+            transform.parent.GetComponent<ProductHalidom>().OnBuySuccess.RemoveListener(Disable);
+            transform.parent.GetComponent<ProductHalidom>().OnBuySuccess.RemoveListener(DoChosenAnim);
+            transform.parent.GetComponent<ProductHalidom>().OnBuySuccess.RemoveListener(BusinessmenTipManager.Instance.ShowTip);//增加提示
+            transform.parent.GetComponent<ProductHalidom>().OnBuyFail.RemoveListener(BusinessmenTipManager.Instance.ShowTip);//增加提示时间
         }
     }
 }
