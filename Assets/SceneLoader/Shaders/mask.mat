@@ -35,9 +35,9 @@ Material:
     m_Floats:
     - _CenterX: 0.5
     - _CenterY: 0.5
-    - _PositionX: 0.601
-    - _PositionY: 0.614
-    - _Radius: 0.675
+    - _PositionX: 0.5
+    - _PositionY: 0.5
+    - _Radius: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 0.63836473, b: 0.63836473, a: 1}
   m_BuildTextureStacks: []

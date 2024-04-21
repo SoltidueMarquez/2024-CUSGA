@@ -6,56 +6,57 @@ Shader "UI/CircleMaskURP"
         _BaseColor("Base Color",Color)=(1,1,1,1)
         _PositionX("PositionX",Range(0,1))=0.5
         _PositionY("PositionY",Range(0,1))=0.5
-        _Radius("Radius",Range(0,1))=0.5
+        _Radius("Radius",Range(0,2))=0.5
     }
     SubShader
     {
         Tags
         {
-            "RenderPipeline"="UniversalPipeline"//ÕâÊÇÒ»¸öURP Shader£¡
+            "RenderPipeline"="UniversalPipeline"//è¿™æ˜¯ä¸€ä¸ªURP Shaderï¼
             "Queue"="Geometry"
             "RenderType"="Opaque"
         }
         HLSLINCLUDE
-         //CGÖĞºËĞÄ´úÂë¿â #include "UnityCG.cginc"
+         //CGä¸­æ ¸å¿ƒä»£ç åº“ #include "UnityCG.cginc"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
        
-        //³ıÁËÌùÍ¼Íâ£¬Òª±©Â¶ÔÚInspectorÃæ°åÉÏµÄ±äÁ¿¶¼ĞèÒª»º´æµ½CBUFFERÖĞ
+        //é™¤äº†è´´å›¾å¤–ï¼Œè¦æš´éœ²åœ¨Inspectoré¢æ¿ä¸Šçš„å˜é‡éƒ½éœ€è¦ç¼“å­˜åˆ°CBUFFERä¸­
         CBUFFER_START(UnityPerMaterial)
         float4 _BaseMap_ST;
         half4 _BaseColor;
+        float _PositionX;
+        float _PositionY;
+        float _Radius;
         CBUFFER_END
         ENDHLSL
 
         Pass
         {
-            Tags{"LightMode"="UniversalForward"}//Õâ¸öPass×îÖÕ»áÊä³öµ½ÑÕÉ«»º³åÀï
+            Tags{"LightMode"="UniversalForward"}//è¿™ä¸ªPassæœ€ç»ˆä¼šè¾“å‡ºåˆ°é¢œè‰²ç¼“å†²é‡Œ
 
             HLSLPROGRAM //CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
-            struct Attributes//Õâ¾ÍÊÇa2v
+            struct Attributes//è¿™å°±æ˜¯a2v
             {
                 float4 positionOS : POSITION;
                 float2 uv : TEXCOORD;
             };
-            struct Varings//Õâ¾ÍÊÇv2f
+            struct Varings//è¿™å°±æ˜¯v2f
             {
                 float4 positionCS : SV_POSITION;
                 float2 uv : TEXCOORD;
             };
 
-            TEXTURE2D(_BaseMap);//ÔÚCGÖĞ»áĞ´³Ésampler2D _MainTex;
+            TEXTURE2D(_BaseMap);//åœ¨CGä¸­ä¼šå†™æˆsampler2D _MainTex;
             SAMPLER(sampler_BaseMap);
-            float _PositionX;
-            float _PositionY;
-            float _Radius;
+            
             
             Varings vert(Attributes IN)
             {
                 Varings OUT;
-                //ÔÚCGÀïÃæ£¬ÎÒÃÇÕâÑù×ª»»¿Õ¼ä×ø±ê o.vertex = UnityObjectToClipPos(v.vertex);
+                //åœ¨CGé‡Œé¢ï¼Œæˆ‘ä»¬è¿™æ ·è½¬æ¢ç©ºé—´åæ ‡ o.vertex = UnityObjectToClipPos(v.vertex);
                 VertexPositionInputs positionInputs = GetVertexPositionInputs(IN.positionOS.xyz);
                 OUT.positionCS = positionInputs.positionCS;
 
@@ -65,16 +66,16 @@ Shader "UI/CircleMaskURP"
 
             float4 frag(Varings IN):SV_Target
             {
-                //ÔÚCGÀï£¬ÎÒÃÇÕâÑù¶ÔÌùÍ¼²ÉÑù fixed4 col = tex2D(_MainTex, i.uv);
+                //åœ¨CGé‡Œï¼Œæˆ‘ä»¬è¿™æ ·å¯¹è´´å›¾é‡‡æ · fixed4 col = tex2D(_MainTex, i.uv);
                 half4 baseMap = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv); 
-                //¼ÆËãµ±Ç°ÏñËØµãµ½Ô²ĞÄµÄ¾àÀë
+                //è®¡ç®—å½“å‰åƒç´ ç‚¹åˆ°åœ†å¿ƒçš„è·ç¦»
                 float aspectRatio = _ScreenParams.x / _ScreenParams.y;
                 float2 center = float2(_PositionX * aspectRatio,_PositionY);
                 float2 uv = IN.uv;
                 uv.x *= aspectRatio;
                 float radius = _Radius;
                 float dis = distance(uv,center);
-//Èç¹û          µ±Ç°ÏñËØµãµ½Ô²ĞÄµÄ¾àÀëĞ¡ÓÚÓÚ°ë¾¶£¬ÄÇÃ´¾ÍÈÃÕâ¸öÏñËØµã±äÍ¸Ã÷
+//å¦‚æœ          å½“å‰åƒç´ ç‚¹åˆ°åœ†å¿ƒçš„è·ç¦»å°äºäºåŠå¾„ï¼Œé‚£ä¹ˆå°±è®©è¿™ä¸ªåƒç´ ç‚¹å˜é€æ˜
 				if(dis<radius)
 				{
 					discard;
