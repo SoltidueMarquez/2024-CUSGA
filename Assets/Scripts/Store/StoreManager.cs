@@ -256,13 +256,13 @@ public class StoreManager : SingletonBase<StoreManager>
     {
 
         productDices[0].InitialProduct(new SingleDiceObj
-            (RandomManager.GetSingleDiceModel((int)rareType1 + 1, 0), UnityEngine.Random.Range(0, 6)));
+            (RandomManager.GetSingleDiceModel((int)rareType1 + 1, 0), UnityEngine.Random.Range(1, 7)));
 
         productDices[1].InitialProduct(new SingleDiceObj
-            (RandomManager.GetSingleDiceModel((int)rareType2 + 1, 0), UnityEngine.Random.Range(0, 6)));
+            (RandomManager.GetSingleDiceModel((int)rareType2 + 1, 0), UnityEngine.Random.Range(1, 7)));
 
         productDices[2].InitialProduct(new SingleDiceObj
-            (RandomManager.GetSingleDiceModel((int)rareType3 + 1, 0), UnityEngine.Random.Range(0, 6)));
+            (RandomManager.GetSingleDiceModel((int)rareType3 + 1, 0), UnityEngine.Random.Range(1, 7)));
 
     }
     /// <summary>
