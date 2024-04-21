@@ -140,6 +140,10 @@ namespace DesignerScripts
         Sensitive,//敏感
 
         Brave,//勇敢
+
+
+        //新增玩家buff
+        Recover20HealthWhenEnterStoreOnDestroy,//17
     }
     public class BuffDataTable
     {
