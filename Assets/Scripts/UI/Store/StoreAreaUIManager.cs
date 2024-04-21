@@ -73,8 +73,11 @@ namespace UI.Store
             for (int i = 0; i < diceColumns.Count; i++)
             {
                 ProductDice productDice = diceColumns[i].transform.GetComponent<ProductDice>();
+                if (!productDice.isEmpty)
+                {
 
-                CreateDiceUI(i, productDice.TryBuy, productDice.product);
+                    CreateDiceUI(i, productDice.TryBuy, productDice.product);
+                }
             }
         }
 
@@ -86,7 +89,7 @@ namespace UI.Store
         /// <param name="onChoose">选择骰面后触发的逻辑函数</param>
         /// <param name="singleDiceObj">骰面物体</param>
         public void CreateDiceUI(int index, Action<SingleDiceObj> onChoose, SingleDiceObj singleDiceObj)
-        {            
+        {
 
             if (index > diceColumns.Count)
             {
@@ -178,7 +181,11 @@ namespace UI.Store
             for (int i = 0; i < sacredObjectColumns.Count; i++)
             {
                 ProductHalidom productHalidom = sacredObjectColumns[i].transform.GetComponent<ProductHalidom>();
-                CreateSacredObject(i, productHalidom.TryBuy, productHalidom.product);
+                if (!productHalidom.isEmpty)
+                {
+
+                    CreateSacredObject(i, productHalidom.TryBuy, productHalidom.product);
+                }
             }
 
         }
