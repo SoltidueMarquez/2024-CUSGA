@@ -1556,6 +1556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableDebug: 1
   StoreUIcanvas: {fileID: 5822657103560371217}
+  discount: 1
   diceScoreFlag: 0f00000018000000
   upgradeCostOrigin: 2
   upgradeCostAdd: 2
@@ -3704,7 +3705,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!1 &5844311263104298292
 GameObject:
   m_ObjectHideFlags: 0
@@ -5832,8 +5833,6 @@ MonoBehaviour:
   exitButton: {fileID: 7725980100709512345}
   animTime: 1
   priceText: {fileID: 172628493304569344}
-  currentPageIndex: 0
-  currentDiceType: 0
 --- !u!114 &7381485503643075250
 MonoBehaviour:
   m_ObjectHideFlags: 0
