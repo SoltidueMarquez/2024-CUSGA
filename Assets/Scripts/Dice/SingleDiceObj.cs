@@ -23,12 +23,16 @@ public class SingleDiceObj
     /// 骰面在骰子中的位置,真正的 0 - 5
     /// </summary>
     public int positionInDice;
-    public int SaleValue => Mathf.FloorToInt(value / 4);
+    /// <summary>
+    /// 骰面的售价，初始化为价值的1/4
+    /// </summary>
+    public int SaleValue ;
     public SingleDiceObj(SingleDiceModel model, int idInDice)
     {
         this.model = model;
         this.idInDice = idInDice;
         this.value = model.value;
         this.level = model.level;
+        SaleValue = Mathf.FloorToInt(value / 4);
     }
 }

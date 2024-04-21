@@ -105,7 +105,7 @@ namespace UI.Store
             var tmpDice = tmp.GetComponent<StoreDiceUIObject>();
             var data = ResourcesManager.GetSingleDiceUIData(singleDiceObj);
             tmpDice.Init(data, animTime, 2, onChoose, singleDiceObj);//初始化
-            dicePriceTextList[index].text = data.value.ToString(); 
+            dicePriceTextList[index].text = data.value.ToString();
             tmp.SetActive(true);
             tmpDice.DoAppearAnim(animTime); //出现动画
         }

@@ -14,20 +14,21 @@ public abstract class ProductBase<T> : MonoBehaviour where T : class
 {
     public bool isEmpty = true;
     public T product;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
 
-        
+
     }
-  
+
     /// <summary>
     /// 试图购买，返回是否购买成功
     /// </summary>
     /// <returns></returns>
     public virtual void TryBuy()
-    {      
-        
+    {
+
     }
 
     /// <summary>
@@ -55,6 +56,15 @@ public abstract class ProductBase<T> : MonoBehaviour where T : class
     {
         isEmpty = true;
         product = null;
+    }
+
+    /// <summary>
+    /// 设置商品售价
+    /// </summary>
+    /// <param name="newPrice"></param>
+    public virtual void RefreshDiscount()
+    {
+
     }
 
     /// <summary>

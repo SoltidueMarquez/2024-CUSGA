@@ -45,6 +45,8 @@ public class ProductHalidom : ProductBase<HalidomObject>
     public override void InitialProduct(HalidomObject product)
     {
         base.InitialProduct(product);
+        RefreshDiscount();
+
     }
 
     public override void ProductBrought()
@@ -54,6 +56,14 @@ public class ProductHalidom : ProductBase<HalidomObject>
         ChaState player = MapManager.Instance.playerChaState;
         player.ModResources(new ChaResource(0, -product.value, 0, 0));
 
+    }
+
+    public override void RefreshDiscount()
+    {
+        if (product != null)
+        {
+            product.value = (int)(product.value * StoreManager.Instance.discount);
+        }
     }
 
 

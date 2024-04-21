@@ -6,11 +6,14 @@ using UnityEngine.Events;
 using Map;
 using UI.Store;
 using System;
+using Sirenix.OdinInspector;
 
 public class StoreManager : SingletonBase<StoreManager>
 {
     public bool enableDebug = false;
     public GameObject StoreUIcanvas;
+
+    public float discount = 1;
 
     [Header("货铺生成规律节点")]
     [Tooltip("节点本身包含在更高的一级")]
@@ -111,7 +114,12 @@ public class StoreManager : SingletonBase<StoreManager>
     {
         StoreUIcanvas.SetActive(true);
         OnRefreshStore?.Invoke();
+
+        //重置刷新次数
         player.resource.currentRollTimes = player.baseProp.maxRollTimes;
+
+        //重置强化费用
+        upgradeCost = upgradeCostOrigin;
     }
 
     private void CloseStore()
@@ -288,12 +296,39 @@ public class StoreManager : SingletonBase<StoreManager>
         return false;
     }
 
+    /// <summary>
+    /// 改变商店折扣，打折为0-1，涨价为>1（在商店购买后会立即生效，而不是等下次进商店）
+    /// </summary>
+    /// <param name="newDiscount"></param>
+    [Button]
+    public void ChangeDiscount(float newDiscount)
+    {
+        this.discount = newDiscount;
+
+        if (StoreUIcanvas.activeSelf)
+        {
+
+            foreach (var item in productDices)
+            {
+                item.RefreshDiscount();
+            }
+
+            foreach (var item in productHalidoms)
+            {
+                item.RefreshDiscount();
+            }
+            StoreAreaUIManager.Instance.RefreshDiceUI();
+            StoreAreaUIManager.Instance.RefreshHalidomUI();
+        }
+
+    }
+
     #endregion
 
     #region------强化商店------
     private void ClickUpgrade()
     {
-        upgradeCost = upgradeCostOrigin;
+
         StrengthenAreaManager.Instance.RefreshUpgradeText(upgradeCost);
 
         BattleDiceHandler handler = MapManager.Instance.playerChaState.GetBattleDiceHandler();
