@@ -370,12 +370,12 @@ public class StoreManager : SingletonBase<StoreManager>
                 singleDiceObjs.Add(obj);
                 Action<SingleDiceObj> action = new Action<SingleDiceObj>(TryUpgrade);
                 actions.Add(action);
+                StrengthenAreaManager.Instance.CreateBagDiceUI(i * 6 + j, obj, action);
                 unAddCount--;
                 if (unAddCount <= 0)
                 {
                     break;//最后一组才会弹出
                 }
-                StrengthenAreaManager.Instance.CreateBagDiceUI(i * 6 + j, obj, action);
             }
 
             //createList.Add(singleDiceObjs);
