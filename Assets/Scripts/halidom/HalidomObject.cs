@@ -6,7 +6,8 @@ public enum RareType
 {
     Common,
     Rare,
-    Legendary
+    Legendary,
+    Enemy
 }
 public class HalidomObject
 {

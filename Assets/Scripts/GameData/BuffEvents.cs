@@ -77,6 +77,7 @@ namespace DesignerScripts
         Add4MoneyWhenBattleEnd,//12
         GainHalfMoney,//13
         HalfInStore,//14
+        HalfInStoreOnDestroy,//14
         GainOverflowMoney,//15
         Add50PercentAttackEvery3TimesLoseHealth,//16
         Add50PercentAttack,//16
@@ -181,6 +182,9 @@ namespace DesignerScripts
             {
                 BuffEventName.Recover20HealthWhenEnterStore.ToString(),Recover20HealthWhenEnterStore
             },
+            {
+                BuffEventName.HalfInStore.ToString(),HalfInStore
+            },
             //稀有圣物buff
             {
                 BuffEventName.Gain2NormalHalidomWhenGain.ToString(),Gain2NormalHalidomWhenGain
@@ -239,6 +243,9 @@ namespace DesignerScripts
         {
             {
                 BuffEventName.Recover20HealthWhenEnterStoreOnDestroy.ToString(),Recover20HealthWhenEnterStoreOnDestroy
+            },
+            {
+                BuffEventName.HalfInStoreOnDestroy.ToString(),HalfInStoreOnDestroy
             },
         };
         public static Dictionary<string, OnRoundStart> onRoundStartFunc = new Dictionary<string, OnRoundStart>()
@@ -355,6 +362,9 @@ namespace DesignerScripts
             {
                 BuffEventName.Add1PermanentValueWhenDiceIs6.ToString(),Add1PermanentValueWhenDiceIs6
             },
+            {
+                BuffEventName.Add20ValueWhenHit15Times.ToString(),Add20ValueWhenHit15Times
+            },
             //稀有圣物buff
             {
                 BuffEventName.Add4ValueIfResultIsEven.ToString(),Add4ValueIfResultIsEven
@@ -415,6 +425,9 @@ namespace DesignerScripts
             {
                 BuffEventName.EnhanceEnemyVulnerability.ToString(),EnhanceEnemyVulnerability
             },
+            {
+                BuffEventName.Hit5AfterDodge.ToString(),Hit5AfterDodge
+            },
             //稀有圣物buff
             {
                 BuffEventName.Hit3DamageWhenLoseHealth.ToString(),Hit3DamageWhenLoseHealth
@@ -433,6 +446,9 @@ namespace DesignerScripts
             {
                 BuffEventName.Add4MoneyWhenBattleEnd.ToString(),Add4MoneyWhenBattleEnd
             },
+            {
+                BuffEventName.GainOverflowMoney.ToSafeString(),GainOverflowMoney
+            },
             //稀有圣物buff
             {
                 BuffEventName.GainMoneyAfterBattle.ToString(),GainMoneyAfterBattle
@@ -450,12 +466,17 @@ namespace DesignerScripts
 
         public static Dictionary<string, BuffOnRoll> onRollFunc = new Dictionary<string, BuffOnRoll>()
         {
+            //buff
             {
                 BuffEventName.Sensitive.ToString(),Sensitive
             },
             {
                 BuffEventName.Brave.ToString(),Brave
             },
+            //普通圣物
+            {
+                BuffEventName.Add1RerollAfterReroll.ToString(),Add1RerollAfterReroll
+            }
                 
             
         };
@@ -903,11 +924,11 @@ namespace DesignerScripts
 
         public static void HalfInStore(BuffInfo buffInfo)
         {
-
+            StoreManager.Instance.ChangeDiscount(0.5f);
         }
         public static void HalfInStoreOnDestroy(BuffInfo buffInfo)
         {
-
+            StoreManager.Instance.ChangeDiscount(1f);
         }
 
         public static void GainOverflowMoney(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
@@ -1450,6 +1471,11 @@ namespace DesignerScripts
             }
         }
 
+
+        public static void EnhanceAttackAfterSellDice(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+
+        }
         public static void Enhance25AttackWhenHalfHealth(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
             ChaState tempChaState = buffInfo.creator.GetComponent<ChaState>();

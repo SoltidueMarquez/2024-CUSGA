@@ -18,12 +18,11 @@ MonoBehaviour:
     money: 300
     maxRollTimes: 4
     shield: 0
-  halidomSOs:
-  - {fileID: 11400000, guid: 2afd70a06923e044889e252f1077abfd, type: 2}
+  halidomSOs: []
   playerDiceSOItems:
   - diceType: 0
     singleDiceModelSOs:
-    - {fileID: 11400000, guid: 4c9a77c04f88a374b8a895ea3c6e5d30, type: 2}
+    - {fileID: 11400000, guid: 94a1ceb80d0e30044a3da6a7e178d822, type: 2}
     - {fileID: 11400000, guid: 4c9a77c04f88a374b8a895ea3c6e5d30, type: 2}
     - {fileID: 11400000, guid: 4c9a77c04f88a374b8a895ea3c6e5d30, type: 2}
     - {fileID: 11400000, guid: 4c9a77c04f88a374b8a895ea3c6e5d30, type: 2}
@@ -109,3 +108,5 @@ MonoBehaviour:
     currentMoney: 311
     currentRollTimes: 4
     currentShield: 0
+  ifHasMap: 0
+  currentMap: 
