@@ -36,13 +36,13 @@ public enum onCreateEnum
     //传说圣物
     Gain2RareHalidom,
 
-
+    Recover20HealthWhenEnterStore,//17
 }
 
 public enum onRemoveEnum
 {
     None,
-
+    Recover20HealthWhenEnterStoreOnDestroy,//17
 }
 
 public enum onRoundStartEnum
