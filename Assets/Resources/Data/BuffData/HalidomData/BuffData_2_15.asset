@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b82dfb058aec19848972490bda5eafbd, type: 3}
-  m_Name: BuffData_2_23
+  m_Name: BuffData_2_15
   m_EditorClassIdentifier: 
-  id: 2_23
-  dataName: 33
-  tags:
-  - Self
+  id: 2_15
+  dataName: 99
+  tags: []
   maxStack: 5
   duringCount: 0
   isPermanent: 1
@@ -25,10 +24,10 @@ MonoBehaviour:
   onRemove: 0
   onRoundStart: 0
   onRoundEnd: 0
-  onHit: 12
+  onHit: 0
   onBeHurt: 0
   onRoll: 0
-  onKill: 0
+  onKill: 3
   onBeKilled: 0
   onCast: 0
   onAddBuff: 0
@@ -37,9 +36,6 @@ MonoBehaviour:
     canUseDice: 1
     ifImmune: 0
   propMod: []
-  paramList:
-  - type: 3
-    name: IsFirstDeal
-    value: false
+  paramList: []
   description: 
   sprite: {fileID: 0}

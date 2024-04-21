@@ -37,12 +37,14 @@ public enum onCreateEnum
     Gain2RareHalidom,
 
     Recover20HealthWhenEnterStore,//17
+    HalfInStore,
 }
 
 public enum onRemoveEnum
 {
     None,
     Recover20HealthWhenEnterStoreOnDestroy,//17
+    HalfInStoreOnDestroy,
 }
 
 public enum onRoundStartEnum
@@ -108,6 +110,9 @@ public enum onBuffHitEnum
     EnhanceAttackWhenHit,
     EnhanceAttackBaseOnMoney,
     EnhanceAttackAndHurt,
+
+
+    Add20ValueWhenHit15Times
 }
 
 public enum onBeHurtEnum
@@ -128,6 +133,8 @@ public enum onBeHurtEnum
     Spike,
     Corrosion,
 
+    Hit5AfterDodge,
+
 }
 
 public enum onKillEnum
@@ -135,6 +142,7 @@ public enum onKillEnum
     None,
     Add4MoneyWhenBattleEnd,
     GainMoneyAfterBattle,
+    GainOverflowMoney
 }
 public enum onBeKillEnum
 {
@@ -147,7 +155,7 @@ public enum onRollEnum
     None,
     Sensitive,
     Brave,
-
+    Add1RerollAfterReroll,
 
 }
 public enum onCastEnum

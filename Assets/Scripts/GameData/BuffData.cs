@@ -144,6 +144,11 @@ namespace DesignerScripts
 
         //新增玩家buff
         Recover20HealthWhenEnterStoreOnDestroy,//17
+        HalfInStoreOnDestroy,
+        GainOverflowMoney,
+        Add20ValueWhenHit15Times,
+        Add1RerollAfterReroll,
+        Hit5AfterDodge,
     }
     public class BuffDataTable
     {
