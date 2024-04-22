@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UI;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class HalidomManager : MonoBehaviour
@@ -34,6 +35,11 @@ public class HalidomManager : MonoBehaviour
     /// 初始属性,由playerDataSO提供
     /// </summary>
     public ChaProperty baseProp;
+
+    /// <summary>
+    /// 圣物售卖时事件
+    /// </summary>
+    public UnityEvent OnSellHalidom;
 
 
 
@@ -243,6 +249,8 @@ public class HalidomManager : MonoBehaviour
         {
             BattleManager.Instance.RefreshIfHalodomCanChoose();
         }
+        //触发圣物售卖回调点函数
+        OnSellHalidom.Invoke();
     }
     public void SellHalidomInMap(HalidomObject halidomObject)
     {

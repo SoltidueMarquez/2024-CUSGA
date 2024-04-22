@@ -38,6 +38,9 @@ public enum onCreateEnum
 
     Recover20HealthWhenEnterStore,//17
     HalfInStore,
+
+    //4.22
+    EnhanceAttackAfterSellDiceOnCreate,
 }
 
 public enum onRemoveEnum
@@ -62,7 +65,9 @@ public enum onRoundStartEnum
     //新敌人buff
     Thorns,
     Split,
-    
+    //4.22
+    EnhanceAttackWhenHitOnRoundStart,
+
 
 }
 
@@ -112,7 +117,13 @@ public enum onBuffHitEnum
     EnhanceAttackAndHurt,
 
 
-    Add20ValueWhenHit15Times
+    Add20ValueWhenHit15Times,
+
+    //4.22
+    EnhanceAttackAfterSellDice,
+    DoubleHit,
+    TripleHit,
+
 }
 
 public enum onBeHurtEnum

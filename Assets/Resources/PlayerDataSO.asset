@@ -23,8 +23,8 @@ MonoBehaviour:
   - diceType: 0
     singleDiceModelSOs:
     - {fileID: 11400000, guid: 94a1ceb80d0e30044a3da6a7e178d822, type: 2}
-    - {fileID: 11400000, guid: 4c9a77c04f88a374b8a895ea3c6e5d30, type: 2}
-    - {fileID: 11400000, guid: 4c9a77c04f88a374b8a895ea3c6e5d30, type: 2}
+    - {fileID: 11400000, guid: 94a1ceb80d0e30044a3da6a7e178d822, type: 2}
+    - {fileID: 11400000, guid: 32ae396366f228041a5c90c716f097d1, type: 2}
     - {fileID: 11400000, guid: 4c9a77c04f88a374b8a895ea3c6e5d30, type: 2}
     - {fileID: 11400000, guid: 4c9a77c04f88a374b8a895ea3c6e5d30, type: 2}
     - {fileID: 11400000, guid: 4c9a77c04f88a374b8a895ea3c6e5d30, type: 2}
@@ -44,10 +44,10 @@ MonoBehaviour:
   battleDiceList:
   - diceType: 0
     singleDiceObjSODatas:
-    - id: 1_06
+    - id: 1_28
       idInDice: 1
-      level: 2
-      value: 8
+      level: 3
+      value: 12
     - id: 1_06
       idInDice: 2
       level: 2
@@ -56,10 +56,10 @@ MonoBehaviour:
       idInDice: 3
       level: 2
       value: 8
-    - id: 1_02
-      idInDice: 2
-      level: 1
-      value: 4
+    - id: 1_06
+      idInDice: 4
+      level: 2
+      value: 8
     - id: 1_06
       idInDice: 5
       level: 2
@@ -100,13 +100,13 @@ MonoBehaviour:
     level: 1
     value: 4
   - id: 1_02
-    idInDice: 3
+    idInDice: 2
     level: 1
     value: 4
   chaResource:
-    currentHp: 50
-    currentMoney: 311
-    currentRollTimes: 4
+    currentHp: 38
+    currentMoney: 310
+    currentRollTimes: 3
     currentShield: 0
   ifHasMap: 0
   currentMap: 

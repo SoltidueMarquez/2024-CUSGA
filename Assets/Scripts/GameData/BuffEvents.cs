@@ -91,7 +91,7 @@ namespace DesignerScripts
         Add20ValueWhenHit15Times,//21
         Add1RerollAfterReroll,//22
         Add1Reroll,//2-13
-        
+
         ReuseDiceWhenDiceIs1,//23
         Add2MoneyWhenDiceIs2,//24
         Recover5HealthWhenDiceIs3,//25
@@ -126,6 +126,9 @@ namespace DesignerScripts
         ClearPlayerNegativeBuff,//清除玩家负面buff
 
         RerollDice,
+
+        DoubleHit,
+        TripleHit,
         #endregion
 
         #region 稀有圣物
@@ -144,9 +147,15 @@ namespace DesignerScripts
         Add6ValueIfResultIsOdd,
         Add1ValueToAddOdd,
         Add1ValueToAddEven,
+
+        EnhanceAttackAfterSellDiceOnCreate,
         EnhanceAttackAfterSellDice,
+
         Enhance25AttackWhenHalfHealth,
+
+        EnhanceAttackWhenHitOnRoundStart,
         EnhanceAttackWhenHit,
+
         EnhanceAttackBaseOnMoney,
         EnhanceAttackAndHurt,
         Gain2DiceAndHurt,
@@ -172,7 +181,7 @@ namespace DesignerScripts
             {
                 BuffEventName.Get5MaxHealthWhenGain.ToString(),Get5MaxHealthWhenGain
             },
-            
+
             {
                 BuffEventName.GainHalfMoney.ToString(),GainHalfMoney
             },
@@ -195,6 +204,9 @@ namespace DesignerScripts
             //传说圣物buff
             {
                 BuffEventName.Gain2RareHalidom.ToString(),Gain2RareHalidom
+            },
+            {
+                BuffEventName.EnhanceAttackAfterSellDiceOnCreate.ToString(),EnhanceAttackAfterSellDiceOnCreate
             },
             //骰子buff
             {
@@ -236,7 +248,7 @@ namespace DesignerScripts
             {
                 BuffEventName.RerollDice.ToString(),RerollDice
             },
-            
+
 
         };
         public static Dictionary<string, OnBuffRemove> onRemoveFunc = new Dictionary<string, OnBuffRemove>()
@@ -285,7 +297,10 @@ namespace DesignerScripts
             {
                 BuffEventName.Gain2WeakWhenBattleStart.ToString(),Gain2WeakWhenBattleStart
             },
-
+            //传说圣物
+            {
+                BuffEventName.EnhanceAttackWhenHitOnRoundStart.ToString(),EnhanceAttackWhenHitOnRoundStart
+            },
         };
         public static Dictionary<string, OnRoundEnd> onRoundEndFunc = new Dictionary<string, OnRoundEnd>()
         {
@@ -390,7 +405,21 @@ namespace DesignerScripts
             },
             {
                 BuffEventName.EnhanceAttackAndHurt.ToString(),EnhanceAttackAndHurt
-            }
+            },
+            {
+                BuffEventName.EnhanceAttackWhenHit.ToString(),EnhanceAttackWhenHit
+            },
+            {
+                BuffEventName.EnhanceAttackAfterSellDice.ToString(),EnhanceAttackAfterSellDice
+            },
+            //骰子buff
+            {
+                BuffEventName.DoubleHit.ToString(),DoubleHit
+            },
+            {
+                BuffEventName.TripleHit.ToString(),TripleHit
+            },
+            
 
 
         };
@@ -477,8 +506,8 @@ namespace DesignerScripts
             {
                 BuffEventName.Add1RerollAfterReroll.ToString(),Add1RerollAfterReroll
             }
-                
-            
+
+
         };
 
         public static Dictionary<string, BuffOnCast> onCastFunc = new Dictionary<string, BuffOnCast>()
@@ -706,7 +735,7 @@ namespace DesignerScripts
         public static void Thorns(BuffInfo buffInfo)//OnRoundStart调用
         {
             //添加的反伤需要一开始为true
-            BuffInfo newReflectBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Reflect.ToString()], buffInfo.creator, buffInfo.target,1,true);
+            BuffInfo newReflectBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Reflect.ToString()], buffInfo.creator, buffInfo.target, 1, true);
             buffInfo.target.GetComponent<ChaState>().AddBuff(newReflectBuff, buffInfo.target);
             Debug.Log("荆棘生效，持有者获得反射");
         }
@@ -718,11 +747,11 @@ namespace DesignerScripts
             damageInfo.attacker.GetComponent<ChaState>().ModResources(new ChaResource(-damageInfo.damage.baseDamage, 0, 0, 0));
             Debug.Log("反射造成" + damageInfo.finalDamage + "伤害");
             buffInfo.curStack--;
-            if(buffInfo.curStack == 0)
+            if (buffInfo.curStack == 0)
             {
                 buffInfo.isPermanent = false;
             }
-            
+
         }
 
         public static void Split(BuffInfo buffInfo)//OnRoundStart调用
@@ -736,7 +765,7 @@ namespace DesignerScripts
         public static void Pox(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)//OnHurt调用
         {
             damageInfo.damage.baseDamage *= 2;
-            
+
             buffInfo.curStack--;
             if (buffInfo.curStack == 0)
             {
@@ -749,7 +778,7 @@ namespace DesignerScripts
         {
             //获取攻击方的状态
             ChaState tempChaState = damageInfo.attacker.GetComponent<ChaState>();
-            if(tempChaState.resource.currentShield ==0)
+            if (tempChaState.resource.currentShield == 0)
             {
                 int damage = (int)buffInfo.buffParam["Value"];
                 tempChaState.ModResources(new ChaResource(-damage, 0, 0, 0));
@@ -771,10 +800,10 @@ namespace DesignerScripts
 
         public static int Sensitive(BuffInfo buffInfo)//onRoll调用
         {
-            BuffInfo newVulnerableBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Vulnerable.ToString()], buffInfo.creator, buffInfo.target, (int)buffInfo.buffParam["Value"],false);
-            
+            BuffInfo newVulnerableBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Vulnerable.ToString()], buffInfo.creator, buffInfo.target, (int)buffInfo.buffParam["Value"], false);
+
             buffInfo.target.GetComponent<ChaState>().AddBuff(newVulnerableBuff1, buffInfo.target);
-            
+
             Debug.Log("由于敏感获得易伤");
             return 0;
         }
@@ -933,11 +962,11 @@ namespace DesignerScripts
 
         public static void GainOverflowMoney(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
-            if(damageInfo.finalDamage > damageInfo.defender.GetComponent<ChaState>().resource.currentHp)
+            if (damageInfo.finalDamage > damageInfo.defender.GetComponent<ChaState>().resource.currentHp)
             {
-                int overflowMoney= damageInfo.finalDamage - damageInfo.defender.GetComponent<ChaState>().resource.currentHp;
+                int overflowMoney = damageInfo.finalDamage - damageInfo.defender.GetComponent<ChaState>().resource.currentHp;
                 buffInfo.creator.GetComponent<ChaState>().ModResources(new ChaResource(0, overflowMoney, 0, 0));
-                Debug.Log("获得"+overflowMoney+"金币");
+                Debug.Log("获得" + overflowMoney + "金币");
             }
         }
 
@@ -987,11 +1016,11 @@ namespace DesignerScripts
             }
         }
 
-        public static  void Recover20HealthWhenEnterStore(BuffInfo buffInfo)
+        public static void Recover20HealthWhenEnterStore(BuffInfo buffInfo)
         {
             StoreManager.Instance.OnEnterStore.AddListener(Recover20Health);
         }
-         
+
         public static void Recover20HealthWhenEnterStoreOnDestroy(BuffInfo buffInfo)
         {
             StoreManager.Instance.OnEnterStore.RemoveListener(Recover20Health);
@@ -1001,7 +1030,7 @@ namespace DesignerScripts
         {
             MapManager.Instance.playerChaState.GetComponent<ChaState>().ModResources(new ChaResource(20, 0, 0, 0));
         }
-            
+
 
 
 
@@ -1102,7 +1131,7 @@ namespace DesignerScripts
             {
                 Debug.Log("三指失效");
             }
-            
+
             return 0;
         }
 
@@ -1220,7 +1249,7 @@ namespace DesignerScripts
         public static void Hit5AfterDodge(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
             BuffInfo findBuffInfo = buffInfo.creator.GetComponent<BuffHandler>().buffList.Find(x => x.buffData.id == "1_08");
-            if(findBuffInfo!=null)
+            if (findBuffInfo != null)
             {
                 damageInfo.attacker.GetComponent<ChaState>().ModResources(new ChaResource(-5, 0, 0, 0));
                 Debug.Log("恶毒嘲笑生效 敌方-5hp");
@@ -1253,7 +1282,7 @@ namespace DesignerScripts
         {
             if (BattleManager.Instance.parameter.turns == 1)
             {
-                BuffInfo newStrengthBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target,2);
+                BuffInfo newStrengthBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target, 2);
                 //BuffInfo newStrengthBuff2 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target);
                 buffInfo.creator.GetComponent<ChaState>().AddBuff(newStrengthBuff1, buffInfo.creator);
                 //buffInfo.creator.GetComponent<ChaState>().AddBuff(newStrengthBuff2, buffInfo.creator);
@@ -1266,7 +1295,7 @@ namespace DesignerScripts
             if (BattleManager.Instance.parameter.turns == 1)
             {
                 //因为buff会在回合结束时-1层，所以这边要加三次
-                BuffInfo newToughBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target,3);
+                BuffInfo newToughBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target, 3);
                 //BuffInfo newToughBuff2 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target);
                 //BuffInfo newToughBuff3 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target);
                 buffInfo.creator.GetComponent<ChaState>().AddBuff(newToughBuff1, buffInfo.creator);
@@ -1280,7 +1309,7 @@ namespace DesignerScripts
         {
             if (BattleManager.Instance.parameter.turns == 1)
             {
-                BuffInfo newVulnerableBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Vulnerable.ToString()], buffInfo.creator, buffInfo.target,2);
+                BuffInfo newVulnerableBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Vulnerable.ToString()], buffInfo.creator, buffInfo.target, 2);
                 //BuffInfo newVulnerableBuff2 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Vulnerable.ToString()], buffInfo.creator, buffInfo.target);
                 buffInfo.target.GetComponent<ChaState>().AddBuff(newVulnerableBuff1, buffInfo.target);
                 //buffInfo.target.GetComponent<ChaState>().AddBuff(newVulnerableBuff2, buffInfo.target);
@@ -1436,12 +1465,12 @@ namespace DesignerScripts
                     buffInfo.buffParam["isUsed"] = true;
                 }
             }
-           
+
         }
 
         public static void Add1ValueWhenDiceBelow3(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
-            if (damageInfo.damage.indexDamageRate <=3)
+            if (damageInfo.damage.indexDamageRate <= 3)
             {
                 damageInfo.damage.baseDamage += 1;
                 Debug.Log("点数是小数(<=3),则打出时点数+1");
@@ -1472,30 +1501,89 @@ namespace DesignerScripts
         }
 
 
+
+
+
+
+
+        public static void EnhanceAttackAfterSellDiceOnCreate(BuffInfo buffInfo)
+        {
+            HalidomManager.Instance.OnSellHalidom.AddListener(() => AddValueAfterSellDice());
+        }
+
+        public static void AddValueAfterSellDice()
+        {
+            for (int i = 0; i < BattleManager.Instance.parameter.playerChaState.GetComponent<HalidomManager>().halidomList.Length; i++)
+            {
+                //如果有杂货铺这个圣物
+                if (BattleManager.Instance.parameter.playerChaState.GetComponent<HalidomManager>().halidomList[i].id == "3_05")
+                {
+                    HalidomObject tempHalidom = BattleManager.Instance.parameter.playerChaState.GetComponent<HalidomManager>().halidomList[i];
+                    Debug.Log("有杂货铺这个圣物");
+                    foreach (var buffInfo in tempHalidom.buffInfos)
+                    {
+
+                        if (buffInfo.buffData.id == "4_05")
+                        {
+                            Debug.Log("有EnhanceAttackAfterSellDice这个buff");
+                            buffInfo.buffParam["Value"] = 1 + (int)buffInfo.buffParam["Value"];
+                            Debug.Log("售卖数加一");
+                        }
+                    }
+
+                }
+            }
+        }
         public static void EnhanceAttackAfterSellDice(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
-
+            damageInfo.addDamageArea += (int)buffInfo.buffParam["Value"] * 0.01f;
+            Debug.Log("增加伤害" + (int)buffInfo.buffParam["Value"] + "%");
         }
+
+
+
+
+
         public static void Enhance25AttackWhenHalfHealth(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
             ChaState tempChaState = buffInfo.creator.GetComponent<ChaState>();
-            if(tempChaState.resource.currentHp <= tempChaState.baseProp.health / 2)
+            if (tempChaState.resource.currentHp <= tempChaState.baseProp.health / 2)
             {
                 damageInfo.addDamageArea += 0.25f;
                 Debug.Log("生命值低于一半，增加25%攻击力");
             }
         }
 
+
+
+        public static void EnhanceAttackWhenHitOnRoundStart(BuffInfo buffInfo)
+        {
+            buffInfo.buffParam["Value"] = 0;
+            Debug.Log("清空攻击次数" + buffInfo.buffParam["Value"]);
+        }
+
+        public static void EnhanceAttackWhenHit(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            damageInfo.addDamageArea += (int)buffInfo.buffParam["Value"] * 0.01f;
+            Debug.Log("伤害增加了" + (int)buffInfo.buffParam["Value"] + "%");
+            buffInfo.buffParam["Value"] = (int)buffInfo.buffParam["Value"] + 5;
+            Debug.Log((int)buffInfo.buffParam["Value"] + "<=现在");
+
+        }
+
+
+
+
         public static void EnhanceAttackBaseOnMoney(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
             ChaState tempChaState = buffInfo.creator.GetComponent<ChaState>();
-            if(tempChaState.resource.currentMoney >= 0)
+            if (tempChaState.resource.currentMoney >= 0)
             {
-                if(tempChaState.resource.currentMoney <= 150)
+                if (tempChaState.resource.currentMoney <= 150)
                 {
                     int addAttack = tempChaState.resource.currentMoney / 5;
-                    damageInfo.addDamageArea += addAttack*0.01f;
-                    Debug.Log("增加"+addAttack*0.01f+"%的攻击力");
+                    damageInfo.addDamageArea += addAttack * 0.01f;
+                    Debug.Log("增加" + addAttack * 0.01f + "%的攻击力");
                 }
                 else
                 {
@@ -1670,6 +1758,34 @@ namespace DesignerScripts
         public static void RerollDice(BuffInfo buffInfo)
         {
             BattleManager.Instance.ReRollDiceForPlayer();
+        }
+
+        public static void DoubleHit(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            if (!(bool)buffInfo.buffParam["IsFirstDeal"])
+            {
+                DamageInfo damageInfoCopy = new DamageInfo(damageInfo.attacker, damageInfo.defender, damageInfo.damage, damageInfo.diceType, damageInfo.level, damageInfo.addBuffs);
+                DamageManager.Instance.DoDamage(damageInfoCopy);
+
+                Debug.Log("重复打出");
+                buffInfo.buffParam["IsFirstDeal"] = true;
+            }
+        }
+
+        public static void TripleHit(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        {
+            Debug.Log("进入triplehit");
+            if ( !(bool)buffInfo.buffParam["IsFirstDeal"])
+            {
+                
+                DamageInfo damageInfoCopy1 = new DamageInfo(damageInfo.attacker, damageInfo.defender, damageInfo.damage, damageInfo.diceType, damageInfo.level, damageInfo.addBuffs);
+                DamageInfo damageInfoCopy2 = new DamageInfo(damageInfo.attacker, damageInfo.defender, damageInfo.damage, damageInfo.diceType, damageInfo.level, damageInfo.addBuffs);
+                DamageManager.Instance.DoDamage(damageInfoCopy1);
+                DamageManager.Instance.DoDamage(damageInfoCopy2);
+
+                Debug.Log("重复打出");
+                buffInfo.buffParam["IsFirstDeal"] = true;
+            }
         }
 
         #endregion

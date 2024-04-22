@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b82dfb058aec19848972490bda5eafbd, type: 3}
-  m_Name: BuffData_5_01
+  m_Name: BuffData_5_02
   m_EditorClassIdentifier: 
-  id: 5_01
-  dataName: 105
+  id: 5_02
+  dataName: 106
   tags:
   - Self
   maxStack: 5
@@ -25,7 +25,7 @@ MonoBehaviour:
   onRemove: 0
   onRoundStart: 0
   onRoundEnd: 0
-  onHit: 30
+  onHit: 31
   onBeHurt: 0
   onRoll: 0
   onKill: 0

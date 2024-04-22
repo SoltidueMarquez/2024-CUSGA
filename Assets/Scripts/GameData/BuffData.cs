@@ -149,6 +149,13 @@ namespace DesignerScripts
         Add20ValueWhenHit15Times,
         Add1RerollAfterReroll,
         Hit5AfterDodge,
+
+        //传说圣物4.22
+        EnhanceAttackWhenHitOnRoundStart,
+        EnhanceAttackAfterSellDiceOnCreate,
+        DoubleHit,
+        TripleHit,
+
     }
     public class BuffDataTable
     {
