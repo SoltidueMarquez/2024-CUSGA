@@ -11,10 +11,16 @@ namespace UI.Store
     /// </summary>
     public class StoreDiceUIObject : RewardDiceUIObject
     {
-        public override void Init(SingleDiceUIData data, float animTime, float scale, Action<SingleDiceObj> onChoose, SingleDiceObj singleDiceObj)
+        protected float _animTime;
+        protected float _scale;
+        
+        public void Init( float animTime, float scale, Action<SingleDiceObj> onChoose, SingleDiceObj singleDiceObj)
         {
+            var data = ResourcesManager.GetSingleDiceUIData(singleDiceObj);
             //大小初始化
             this.transform.localScale = new Vector3(1, 1, 1);
+            _scale = scale;
+            _animTime = animTime;
             //信息文本初始化
             nameText.text = data.name;
             typeText.text = $"类型:{data.type}";
@@ -30,9 +36,26 @@ namespace UI.Store
                 onChoose?.Invoke(singleDiceObj);
             });
 
-            transform.parent.GetComponent<ProductDice>().OnBuySuccess.AddListener(Disable);
-            transform.parent.GetComponent<ProductDice>().OnBuySuccess.AddListener(
-                        () => { DoChosenAnim(animTime, scale); });
+            var parent = transform.parent.GetComponent<ProductDice>();
+            parent.OnBuySuccess.AddListener(Disable);
+            parent.OnBuySuccess.AddListener(DoChosenAnim);
+            parent.OnBuySuccess.AddListener(BusinessmenTipManager.Instance.ShowTip);//增加提示
+            parent.OnBuyFail.AddListener(BusinessmenTipManager.Instance.ShowTip);//增加提示
+        }
+        
+        private void RemoveListener()
+        {
+            var parent = transform.parent.GetComponent<ProductDice>();
+            parent.OnBuySuccess.RemoveListener(Disable);
+            parent.OnBuySuccess.RemoveListener(DoChosenAnim);
+            parent.OnBuySuccess.RemoveListener(BusinessmenTipManager.Instance.ShowTip);//增加提示
+            parent.OnBuyFail.RemoveListener(BusinessmenTipManager.Instance.ShowTip);//增加提示
+        }
+        
+        private void DoChosenAnim()
+        {
+            DoChosenAnim(_animTime, _scale);
+            RemoveListener();
         }
         
         /// <summary>

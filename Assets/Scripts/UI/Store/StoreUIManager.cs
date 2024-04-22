@@ -10,7 +10,7 @@ namespace UI.Store
         public RectTransform strengthenBg;
         public GameObject strengthenCanvas;
         
-        [SerializeField, Tooltip("动画时间")] private float animTime;
+        [SerializeField, Tooltip("动画时间")] public float animTime;
         [SerializeField, Tooltip("商店区域")] private GameObject storeArea;
         [SerializeField, Tooltip("投掷区域")] private GameObject rollArea;
         
@@ -24,6 +24,7 @@ namespace UI.Store
         public void EnterStoreUI()
         {
             storeArea.transform.DOMoveX(appearTransformPosition.position.x, animTime);
+            StoreAreaUIManager.Instance.SetButton();
         }
         
         /// <summary>
@@ -58,6 +59,7 @@ namespace UI.Store
         {
             yield return new WaitForSeconds(time);
             objectX.SetActive(false);
+            StoreAreaUIManager.Instance.SetButton(); //设置强化按钮可以交互
         }
         
         private void Update()

@@ -31,12 +31,23 @@ public enum onCreateEnum
     ClearEnemyPositiveBuff,//清除敌人正面buff
     ClearPlayerNegativeBuff,//清除玩家负面buff
     RerollDice,
+    //稀有圣物
+    Gain2NormalHalidomWhenGain,
+    //传说圣物
+    Gain2RareHalidom,
+
+    Recover20HealthWhenEnterStore,//17
+    HalfInStore,
+
+    //4.22
+    EnhanceAttackAfterSellDiceOnCreate,
 }
 
 public enum onRemoveEnum
 {
     None,
-
+    Recover20HealthWhenEnterStoreOnDestroy,//17
+    HalfInStoreOnDestroy,
 }
 
 public enum onRoundStartEnum
@@ -51,6 +62,12 @@ public enum onRoundStartEnum
     Gain2ToughWhenBattleStart,
     Gain2VulnerableWhenBattleStart,
     Gain2WeakWhenBattleStart,
+    //新敌人buff
+    Thorns,
+    Split,
+    //4.22
+    EnhanceAttackWhenHitOnRoundStart,
+
 
 }
 
@@ -89,6 +106,23 @@ public enum onBuffHitEnum
     Add4ValueIfResultIsOdd,
 
     Add50PercentAttack,
+    //稀有圣物buff
+    Add1ValueWhenDiceBelow3,
+    //传说圣物
+    Add6ValueIfResultIsEven,
+    Add6ValueIfResultIsOdd,
+    Enhance25AttackWhenHalfHealth,
+    EnhanceAttackWhenHit,
+    EnhanceAttackBaseOnMoney,
+    EnhanceAttackAndHurt,
+
+
+    Add20ValueWhenHit15Times,
+
+    //4.22
+    EnhanceAttackAfterSellDice,
+    DoubleHit,
+    TripleHit,
 
 }
 
@@ -100,6 +134,17 @@ public enum onBeHurtEnum
     Dodge,
     Add50PercentAttackEvery3TimesLoseHealth,
     EnhanceEnemyVulnerability,
+    //稀有圣物buff
+    Hit3DamageWhenLoseHealth,
+    GainDodgeWhenLoseHealth,
+    GainStrengthWhenLoseHealth,
+    //新敌人buff
+    Reflect,
+    Pox,
+    Spike,
+    Corrosion,
+
+    Hit5AfterDodge,
 
 }
 
@@ -107,15 +152,21 @@ public enum onKillEnum
 {
     None,
     Add4MoneyWhenBattleEnd,
+    GainMoneyAfterBattle,
+    GainOverflowMoney
 }
 public enum onBeKillEnum
 {
     None,
+    RecoverHalfHealthWhenDie,
 
 }
 public enum onRollEnum
 {
     None,
+    Sensitive,
+    Brave,
+    Add1RerollAfterReroll,
 
 }
 public enum onCastEnum
@@ -124,5 +175,11 @@ public enum onCastEnum
     LoseEnergy,
     Add1StackIfPlayerHaveStrength,
 
+}
+public enum onAddBuffEnum
+{
+    None,
+    Add1StackIfEnemyHaveDebuff,
+    Add1StackIfPlayerHavePositiveBuff,
 }
 

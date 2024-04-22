@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UI;
 using UnityEngine;
 
@@ -108,7 +109,41 @@ public class DamageManager : MonoSingleton<DamageManager>
 
     }
 
+    public int PredictFinalDamage(DamageInfo damageInfo)
+    {
+        if (!damageInfo.defender) return 0;
+        ChaState attackerChaState = damageInfo.attacker.GetComponent<ChaState>();
+        ChaState defenderChaState = damageInfo.defender.GetComponent<ChaState>();
+        //damageInfo.damage.SetBaseDamage(damageInfo.level, damageInfo.diceType);
+        //这边先执行所有的圣物的onhit
+        if (attackerChaState.side == 0)
+        {
+            HalidomManager.Instance.OnHit(damageInfo);
 
+        }
+        else
+        {
+            HalidomManager.Instance.OnBeHurt(damageInfo);
+
+        }
+
+        Debug.Log("<color=#FFA07A>DamageManager-基础伤害：</color>" + damageInfo.damage.baseDamage);
+        foreach (var buff in attackerChaState.GetBuffHandler().buffList)
+        {
+            buff.buffData.onHit?.Invoke(buff, damageInfo, damageInfo.defender);
+        }
+        foreach (var buff in defenderChaState.GetBuffHandler().buffList)
+        {
+            if(buff.buffData.tags.Contains("ReverseHurt"))
+            {
+                continue;
+            }
+            buff.buffData.onBeHurt?.Invoke(buff, damageInfo, damageInfo.attacker);
+        }
+        //计算最终伤害
+        int predictFinalDamage = Damage.FinalDamage(damageInfo.damage, damageInfo.level, damageInfo.diceType, damageInfo.addDamageArea, damageInfo.reduceDamageArea);
+        return predictFinalDamage;
+    }
 
     public void DoDamage(DamageInfo damageInfo)
     {

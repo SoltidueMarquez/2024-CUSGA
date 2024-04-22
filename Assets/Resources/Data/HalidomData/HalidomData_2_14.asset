@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 326b50af1df3114448b8b3692d7d3434, type: 3}
+  m_Name: HalidomData_2_14
+  m_EditorClassIdentifier: 
+  id: 2_14
+  halidomName: 49
+  description: "\u73A9\u5BB6\u8840\u91CF\u5F52\u96F6\u65F6\uFF0C\u514D\u6B7B\u5E76\u56DE\u590D50%\u8840\u91CF\uFF0C\u89E6\u53D1\u540E\u5931\u6548"
+  rareType: 1
+  value: 1
+  buffDataSos:
+  - {fileID: 11400000, guid: f434a43f60a0ee240b6b867bf4337007, type: 2}
+  sprite: {fileID: 0}

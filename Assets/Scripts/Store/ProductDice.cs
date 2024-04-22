@@ -38,6 +38,7 @@ public class ProductDice : ProductBase<SingleDiceObj>
     public override void InitialProduct(SingleDiceObj product)
     {
         base.InitialProduct(product);
+        RefreshDiscount();
         OnBuySuccess.AddListener(CreateUI);
     }
 
@@ -45,10 +46,17 @@ public class ProductDice : ProductBase<SingleDiceObj>
     {
         base.ProductBrought();
         ChaState player = MapManager.Instance.playerChaState;
-        player.resource.currentMoney -= product.value;
+        player.ModResources(new ChaResource(0, -product.value, 0, 0));
         player.GetBattleDiceHandler().AddSingleBattleDiceToBag(product);
     }
 
+    public override void RefreshDiscount()
+    {
+        if (product != null)
+        {
+            product.value = (int)(product.value * StoreManager.Instance.discount);
+        }
+    }
     private void CreateUI()
     {
         EditableDiceUIManager.Instance.CreateBagUIDice(product, MapManager.Instance.SellSingleDice);

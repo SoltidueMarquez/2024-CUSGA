@@ -77,7 +77,7 @@ namespace UI
         /// </summary>
         /// <param name="animTime"></param>
         /// <param name="scale"></param>
-        public void DoChosenAnim(float animTime, float scale)
+        protected void DoChosenAnim(float animTime, float scale)
         {
             this.transform.DOScale(new Vector3(scale, scale, scale), animTime);
             this.GetComponent<Image>().DOFade(0, animTime);

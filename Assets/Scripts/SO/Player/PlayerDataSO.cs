@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 using DesignerScripts;
+using Map;
 /// <summary>
 /// 在一开始初始化的时候，玩家的骰子类型和骰子的模型是固定的，这个类用于存储玩家的骰子类型和骰子的模型
 /// </summary>
@@ -72,8 +73,9 @@ public class PlayerDataSO : ScriptableObject
     public List<SingleDiceObjSOData> bagDiceList;
     [Header("玩家当前的资源(保存的数据)")]
     public ChaResource chaResource;
-    [Header("玩家的map信息")]
-    public Map.Map currentMap;
+
+    public bool ifHasMap;
+    public string currentMap;
     /// <summary>
     /// 从json文件中读取数据
     /// </summary>
@@ -84,6 +86,11 @@ public class PlayerDataSO : ScriptableObject
         this.chaResource = playerData.chaResource;
         this.battleDiceList = playerData.battleDiceList;
         this.halidomDataForSaves = playerData.halidomDataForSaves;
+        if(playerData.map != null)
+        {
+            ifHasMap = true;
+            this.currentMap = playerData.map;
+        }
     }
     public void SaveData()
     {
@@ -95,7 +102,10 @@ public class PlayerDataSO : ScriptableObject
         string playerDataJson = JsonConvert.SerializeObject(playerData);
         SImpleJsonUtil.WriteData("PlayerData.json", playerDataJson);
     }
-
+    /// <summary>
+    /// 可序列化的数据
+    /// </summary>
+    /// <param name="chaState"></param>
     public void UpdatePlayerDataSO(ChaState chaState)
     {
         chaResource = chaState.resource;
@@ -113,5 +123,9 @@ public class PlayerDataSO : ScriptableObject
             this.bagDiceList.Add(bagDiceSOlist[i]);
         }
 
+    }
+    public void UpdataPlayerDataSoMap(string mapString)
+    {
+        this.currentMap = mapString;
     }
 }

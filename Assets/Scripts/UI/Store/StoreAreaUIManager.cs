@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Map;
 using UnityEngine;
@@ -30,15 +31,36 @@ namespace UI.Store
             exitButton.onClick.AddListener(() =>
             {
                 StoreManager.Instance.OnExitStore?.Invoke();
+                exitButton.interactable = false;
+                upgradeButton.interactable = false;
             });
             upgradeButton.onClick.AddListener(() =>
             {
                 StoreManager.Instance.OnClickUpgrade?.Invoke();
+                upgradeButton.interactable = false;
             });
 
             StoreManager.Instance.OnRefreshStore.AddListener(RefreshHalidomUI);
             StoreManager.Instance.OnRefreshStore.AddListener(RefreshDiceUI);
         }
+
+        public void SetButton()
+        {
+            var time = StoreUIManager.Instance.animTime;
+            UpgradeButtonActive();
+            StoreExitButtonActive();
+        }
+
+        private void UpgradeButtonActive()
+        {
+            upgradeButton.interactable = true;
+        }
+        private void StoreExitButtonActive()
+        {
+            exitButton.interactable = true;
+        }
+
+
 
         #region 出售骰面相关
         public void RefreshDiceUI()
@@ -51,8 +73,11 @@ namespace UI.Store
             for (int i = 0; i < diceColumns.Count; i++)
             {
                 ProductDice productDice = diceColumns[i].transform.GetComponent<ProductDice>();
+                if (!productDice.isEmpty)
+                {
 
-                CreateDiceUI(i, productDice.TryBuy, productDice.product);
+                    CreateDiceUI(i, productDice.TryBuy, productDice.product);
+                }
             }
         }
 
@@ -64,7 +89,7 @@ namespace UI.Store
         /// <param name="onChoose">选择骰面后触发的逻辑函数</param>
         /// <param name="singleDiceObj">骰面物体</param>
         public void CreateDiceUI(int index, Action<SingleDiceObj> onChoose, SingleDiceObj singleDiceObj)
-        {            
+        {
 
             if (index > diceColumns.Count)
             {
@@ -82,8 +107,8 @@ namespace UI.Store
             tmp.transform.position = parent.position;//更改位置
             var tmpDice = tmp.GetComponent<StoreDiceUIObject>();
             var data = ResourcesManager.GetSingleDiceUIData(singleDiceObj);
-            tmpDice.Init(data, animTime, 2, onChoose, singleDiceObj);//初始化
-            dicePriceTextList[index].text = data.value.ToString(); 
+            tmpDice.Init(animTime, 2, onChoose, singleDiceObj);//初始化
+            dicePriceTextList[index].text = data.value.ToString();
             tmp.SetActive(true);
             tmpDice.DoAppearAnim(animTime); //出现动画
         }
@@ -156,7 +181,10 @@ namespace UI.Store
             for (int i = 0; i < sacredObjectColumns.Count; i++)
             {
                 ProductHalidom productHalidom = sacredObjectColumns[i].transform.GetComponent<ProductHalidom>();
-                CreateSacredObject(i, productHalidom.TryBuy, productHalidom.product);
+                if (!productHalidom.isEmpty)
+                {
+                    CreateSacredObject(i, productHalidom.TryBuy, productHalidom.product);
+                }
             }
 
         }
@@ -185,9 +213,8 @@ namespace UI.Store
             sacredObjectColumns[index].bagObject = tmp;
             tmp.transform.position = parent.position;//更改位置
             var tmpSacredObject = tmp.GetComponent<StoreSacredUIObject>();
-            tmpSacredObject.Init(halidomObject.id, animTime, 2, onChoose, halidomObject);//初始化
-            var data = ResourcesManager.GetHalidomUIData(halidomObject.id);
-            sacredPriceTextList[index].text = data.value.ToString();
+            tmpSacredObject.Init(halidomObject.id, animTime, 2, onChoose);//初始
+            sacredPriceTextList[index].text = halidomObject.value.ToString();
             tmp.SetActive(true);
             tmpSacredObject.DoAppearAnim(animTime); //出现动画
         }

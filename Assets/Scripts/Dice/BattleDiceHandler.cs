@@ -64,9 +64,11 @@ public class BattleDiceHandler : MonoBehaviour
                 foreach (var buffinfo in singleDiceObj.model.buffInfos)
                 {
                     BuffInfo temp = new BuffInfo(buffinfo.buffData, buffinfo.creator, buffinfo.target, buffinfo.curStack, buffinfo.isPermanent, buffinfo.buffParam);
+                    //Debug.Log("<color=red>BattlediceHandler:"+chaState.gameObject.name);
                     //通过tag进行buff的查找，对施法者添加buff,如果包含self就添加给自己，如果包含target就添加给目标,具体添加给对方的函数走DamageManager中的DealWithDamage函数
                     if (buffinfo.buffData.tags.Contains("Self"))
                     {
+                        temp.target = chaState.gameObject;
                         chaState.AddBuff(temp, chaState.gameObject);
                     }
                 }
@@ -102,6 +104,17 @@ public class BattleDiceHandler : MonoBehaviour
         int indexInDice = singleDiceObjs.IndexOf(singleDiceObjInBattle);
         bagDiceCards[indexInBag] = singleDiceObjInBattle;
         singleDiceObjs[indexInDice] = singleDiceObjInBag;
+    }
+    /// <summary>
+    /// 设置背包中的骰子的位置
+    /// </summary>
+    /// <param name="singleDiceObjs"></param>
+    public void ResetDiceInBag(List<SingleDiceObj> singleDiceObjs)
+    {
+        for(int i = 0; i < singleDiceObjs.Count; i++)
+        {
+            bagDiceCards[i] = singleDiceObjs[i];
+        }
     }
     #endregion
     #region 初始化战斗骰子，有数据的情况下和测试的情况下

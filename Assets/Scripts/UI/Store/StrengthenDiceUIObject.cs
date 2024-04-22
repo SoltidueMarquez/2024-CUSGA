@@ -12,6 +12,11 @@ namespace UI.Store
     [RequireComponent(typeof(Image))]
     public class StrengthenDiceUIObject : FightDiceUIEffect
     {
+
+        public int pageIndex;
+        public DiceType diceType;
+        private SingleDiceObj _diceObj;
+
         /// <summary>
         /// 鼠标移动函数
         /// </summary>
@@ -36,6 +41,7 @@ namespace UI.Store
         
         public void Init(SingleDiceUIData data, float animTime, Action<SingleDiceObj> onChoose, SingleDiceObj singleDiceObj)
         {
+            _diceObj = singleDiceObj;
             //大小初始化
             this.transform.localScale = new Vector3(1, 1, 1);
             //信息文本初始化
@@ -51,7 +57,47 @@ namespace UI.Store
             this.GetComponent<Button>().onClick.AddListener(()=>
             {
                 onChoose?.Invoke(singleDiceObj);
+                //根据SingleDiceObj引用更新UI，需要放在执行强化逻辑之后
+                UpdateDiceUI();
+                UpdatePlayerResourceDiceUI();
             });
+        }
+        
+        /// <summary>
+        /// 根据SingleDiceObj引用更新UI
+        /// </summary>
+        private void UpdateDiceUI()
+        {
+            var data = ResourcesManager.GetSingleDiceUIData(_diceObj);
+            //大小初始化
+            this.transform.localScale = new Vector3(1, 1, 1);
+            //信息文本初始化
+            nameText.text = data.name;
+            typeText.text = $"类型:{data.type}";
+            levelText.text = $"稀有度:{data.level}";
+            valueText.text = $"售价￥{data.salevalue}";
+            baseValueText.text = $"基础数值{data.baseValue}";
+            descriptionText.text = $"描述:{data.description}";
+            idInDiceText.text = data.idInDice.ToString();
+            this.GetComponent<Image>().sprite = data.sprite;
+        }
+        /// <summary>
+        /// 更新玩家资源区域的UI
+        /// </summary>
+        private void UpdatePlayerResourceDiceUI()
+        {
+            switch (diceType)
+            {
+                case DiceType.FightDice:
+                    EditableDiceUIManager.Instance.SwitchPage(pageIndex);
+                    EditableDiceUIManager.Instance.UpdateFightDiceUI(_diceObj.positionInDice);
+                    break;
+                case DiceType.BagDice:
+                    EditableDiceUIManager.Instance.UpdateBagDiceUI(_diceObj);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UI;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class HalidomManager : MonoBehaviour
@@ -34,6 +35,11 @@ public class HalidomManager : MonoBehaviour
     /// 初始属性,由playerDataSO提供
     /// </summary>
     public ChaProperty baseProp;
+
+    /// <summary>
+    /// 圣物售卖时事件
+    /// </summary>
+    public UnityEvent OnSellHalidom;
 
 
 
@@ -71,6 +77,7 @@ public class HalidomManager : MonoBehaviour
     {
         //这边先复制一份
         HalidomObject halidomObject = new HalidomObject(halidom.rareType, halidom.id, halidom.halidomName, halidom.description, halidom.value, halidom.buffInfos);
+
         for (int i = 0; i < halidomList.Length; i++)
         {
             //找到第一个空的格子
@@ -83,6 +90,7 @@ public class HalidomManager : MonoBehaviour
                 //触发圣物OnCreate回调点
                 foreach (var buffInfo in halidomObject.buffInfos)
                 {
+                    //Debug.Log("<color=green>HalidomManager:</color>" + buffInfo.buffData.onAddBuff.ToString() + "添加成功");
                     //获取圣物的创建者 给予buffinfo
                     buffInfo.creator = BattleManager.Instance.parameter.playerChaState.gameObject;
                     //获取圣物buff的对象（暂定 没有给敌人上buff）
@@ -95,12 +103,14 @@ public class HalidomManager : MonoBehaviour
                         //触发圣物闪烁
                         SacredObjectUIManager.Instance.DoFlick(halidom.id);
                     }
+                    OnAddBuff(buffInfo);
 
                 }
                 RefreshAllHalidoms();
                 BattleManager.Instance.parameter.playerChaState.AttrAndResourceRecheck();
                 SacredObjectUIManager.Instance.CreateSacredUIObject(SellHalidom, halidomObject);
                 Debug.Log("<color=#3399FF>HalidomManager-添加圣物:</color>" + halidomObject.halidomName + "成功");
+                
                 //找到空的格子后就跳出循环
                 break;
             }
@@ -239,6 +249,8 @@ public class HalidomManager : MonoBehaviour
         {
             BattleManager.Instance.RefreshIfHalodomCanChoose();
         }
+        //触发圣物售卖回调点函数
+        OnSellHalidom.Invoke();
     }
     public void SellHalidomInMap(HalidomObject halidomObject)
     {
@@ -464,6 +476,29 @@ public class HalidomManager : MonoBehaviour
             }
         }
     }
+    //在新增buff的时候触发
+    public void OnAddBuff(BuffInfo addBuffInfo)
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            if (halidomList[i] != null)
+            {
+                foreach (var buffInfo in halidomList[i].buffInfos)
+                {
+                    //需要整体判断这个委托是否为空
+
+                    if (buffInfo.buffData.onAddBuff != null)
+                    {
+                        buffInfo.buffData.onAddBuff?.Invoke(addBuffInfo);
+                        //触发圣物闪烁
+                        SacredObjectUIManager.Instance.DoFlick(halidomList[i].id);
+                    }
+                }
+
+            }
+        }
+    }
+
     #endregion
     #region 一些实用效果
     //判断圣物是否满

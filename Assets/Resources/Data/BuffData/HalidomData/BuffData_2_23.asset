@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2_23
   dataName: 33
-  tags: []
+  tags:
+  - Self
   maxStack: 5
   duringCount: 0
   isPermanent: 1
@@ -30,6 +31,7 @@ MonoBehaviour:
   onKill: 0
   onBeKilled: 0
   onCast: 0
+  onAddBuff: 0
   stateMod:
     ifCanChangePosition: 1
     canUseDice: 1

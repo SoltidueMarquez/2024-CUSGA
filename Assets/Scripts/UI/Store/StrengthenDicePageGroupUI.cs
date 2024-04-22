@@ -7,6 +7,8 @@ namespace UI.Store
 {
     public class StrengthenDicePageGroupUI : MonoBehaviour
     {
+        [SerializeField] private List<StrengthenDicePageUIObject> dicePageList;
+        
         /// <summary>
         /// 创建一个骰面页UI
         /// </summary>
@@ -18,6 +20,7 @@ namespace UI.Store
         {
             var tmp = Instantiate(StrengthenAreaManager.Instance.dicePageColumnsTemplate, dicePage, true);
             tmp.GetComponent<StrengthenDicePageUIObject>().Init(index, diceObjs, onChooseList); //初始化
+            dicePageList.Add(tmp.GetComponent<StrengthenDicePageUIObject>());
             tmp.SetActive(true);
         }
 
@@ -53,5 +56,6 @@ namespace UI.Store
         {
             Destroy(gameObject);
         }
+        
     }
 }

@@ -20,7 +20,7 @@ namespace UI
         
         public SingleDiceObj diceObj;
 
-        #region 初始化
+        #region 初始化&更新
         public void Init(List<Column> columns, float offset, SingleDiceObj singleDice, Action<SingleDiceObj> remove)
         {
             diceObj = singleDice;
@@ -52,21 +52,22 @@ namespace UI
             }
         }
 
-        /*public void Init(List<Column> columns, float offset)
+        public void UpdateDiceUI()
         {
             this.transform.localScale = new Vector3(1, 1, 1);
-            nameText.text = nameof(gameObject);
-            saleButtonText.text = $"出售\n￥0";
-            idInDiceText.text = Random.Range(0,100).ToString();
-            saleButton.onClick.AddListener(DestroyUI);
-            _state = State.None;
-            _currentColumn = UIManager.Instance.DetectColumn(gameObject, columns, offset); //检测当前所在的物品栏
-            if (_currentColumn != null) //初始化当前所在的物品栏
-            {
-                _currentColumn.bagObject = gameObject;
-                editState = _currentColumn.state;
-            }
-        }*/
+            var data = ResourcesManager.GetSingleDiceUIData(diceObj);
+            //信息文本初始化
+            nameText.text = data.name;
+            typeText.text = $"类型:{data.type}";
+            levelText.text = $"稀有度:{data.level}";
+            valueText.text = $"售价￥{data.salevalue}";
+            baseValueText.text = $"基础数值{data.baseValue}";
+            descriptionText.text = $"描述:{data.description}";
+            this.GetComponent<Image>().sprite = data.sprite;
+            saleButtonText.text = $"出售\n￥{data.salevalue}";
+            idInDiceText.text = data.idInDice.ToString();
+        }
+        
         #endregion
 
         #region 鼠标预览
@@ -147,16 +148,24 @@ namespace UI
             var switchObj = UIManager.Instance.DetectPosition(gameObject, EditableDiceUIManager.Instance.allColumns, _currentColumn, EditableDiceUIManager.Instance.offset);
             _currentColumn = UIManager.Instance.DetectColumn(gameObject, EditableDiceUIManager.Instance.allColumns, EditableDiceUIManager.Instance.offset); //更新物品栏位置
             gameObject.transform.SetParent(EditableDiceUIManager.Instance.parent);//设置为原来的图层
-
+            
+            var bagDice = gameObject.GetComponent<EditableDiceUIObject>().diceObj;
             //逻辑交换
-            if (editState == EditState.FightDice)
+            if (editState == EditState.FightDice)//背包和战斗换
             {
-                var bagDice = gameObject.GetComponent<EditableDiceUIObject>().diceObj;
-                var fightDice = switchObj.GetComponent<EditableDiceUIObject>().diceObj;
-                MapManager.Instance.playerChaState.GetBattleDiceHandler().SwapDiceInBagAndBattle(bagDice, fightDice,EditableDiceUIManager.Instance.GetCurrentPage());
-                Debug.Log(
-                    $"<color=green>{gameObject.GetComponent<EditableDiceUIObject>().diceObj}交换了{EditableDiceUIManager.Instance.GetCurrentPage()}号骰子的{switchObj.GetComponent<EditableDiceUIObject>().diceObj}</color>");
+                var fightDiceMaybe = switchObj.GetComponent<EditableDiceUIObject>()?.diceObj;
+                MapManager.Instance.playerChaState.GetBattleDiceHandler().SwapDiceInBagAndBattle(bagDice, fightDiceMaybe,EditableDiceUIManager.Instance.GetCurrentPage());
+                StoreManager.Instance.m_Debug($"<color=green>{bagDice}交换了{EditableDiceUIManager.Instance.GetCurrentPage()}号骰子的{fightDiceMaybe}</color>");
             }
+            /*else//背包和背包换
+            {
+                var bagList = EditableDiceUIManager.Instance.GetBagList();
+                //MapManager.Instance.playerChaState.GetBattleDiceHandler().ResetDiceInBag(bagList);
+                foreach (var dice in bagList)
+                {
+                    StoreManager.Instance.m_Debug($"<color=blue>{dice}</color>");
+                }
+            }*/
         }
 
         /// <summary>

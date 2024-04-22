@@ -392,6 +392,7 @@ public class BattleManager : MonoBehaviour
         //如果玩家已经选择了骰面，就不再刷新是否能选择骰面
         if (this.parameter.ifSelectedDice == true)
         {
+            UIManager.Instance.rewardUIManager.DisableAllDices();
             return;
         }
     }
@@ -401,6 +402,7 @@ public class BattleManager : MonoBehaviour
     /// <param name="singleDiceObj"></param>
     public void AddSingleDiceToPlayerBag(SingleDiceObj singleDiceObj)
     {
+        RefreshIfDiceCanChoose();
         int currentBagCount = this.parameter.playerChaState.GetBattleDiceHandler().bagDiceCards.Count;
         int maxBagCount = this.parameter.playerChaState.GetBattleDiceHandler().maxDiceInBag;
         if (currentBagCount >= maxBagCount)
@@ -477,7 +479,7 @@ public class BattleManager : MonoBehaviour
     public void SellSingleDice(SingleDiceObj singleDiceObj)
     {
         this.parameter.playerChaState.GetBattleDiceHandler().RemoveSingleBattleDiceFromBag(singleDiceObj);
-        var resource = new ChaResource(0, -singleDiceObj.SaleValue, 0, 0);
+        var resource = new ChaResource(0, singleDiceObj.SaleValue, 0, 0);
         this.parameter.playerChaState.ModResources(resource);
         //获取当前骰面在背包骰面中的位置
         RefreshIfDiceCanChoose();
