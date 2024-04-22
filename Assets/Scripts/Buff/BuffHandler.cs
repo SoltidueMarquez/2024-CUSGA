@@ -97,9 +97,13 @@ public class BuffHandler : MonoBehaviour
     public void BuffRoundStartTick()
     {
         List<BuffInfo> removeList = new List<BuffInfo>();
-        foreach (BuffInfo buffInfo in buffList)//遍历buff列表,先执行回合开始的事件
+        /*foreach (BuffInfo buffInfo in buffList)//遍历buff列表,先执行回合开始的事件
         {
             buffInfo.buffData.onRoundStart?.Invoke(buffInfo);
+        }*/
+        for(int i = 0;i<buffList.Count;i++)
+        {
+            buffList[i].buffData.onRoundStart?.Invoke(buffList[i]);
         }
         
     }
