@@ -12,6 +12,7 @@ public class PlayerData
     public List<HalidomDataForSave> halidomDataForSaves =new();
     //玩家当前在背包中的骰面
     public List<SingleDiceObjSOData> bagDiceList = new();
+    public bool ifHasSaveData;
     //玩家的Map信息,因为unity的json无法序列化map，所以这里用string代替
     public string map;
     public PlayerData(PlayerDataSO playerDataSO)
@@ -21,6 +22,7 @@ public class PlayerData
         halidomDataForSaves = playerDataSO.halidomDataForSaves;
         bagDiceList = playerDataSO.bagDiceList;
         map = playerDataSO.currentMap;
+        ifHasSaveData = playerDataSO.ifHasData;
     }
     public PlayerData()
     {

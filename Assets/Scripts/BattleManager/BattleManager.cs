@@ -260,7 +260,7 @@ public class BattleManager : MonoBehaviour
             //初始化buff
             foreach (var buffConfig in enemyDataSO.enemyBuffs)
             {
-                var buffData = DesignerScripts.BuffDataTable.buffData[buffConfig.buffDataSO.name.ToString()];
+                var buffData = DesignerScripts.BuffDataTable.buffData[buffConfig.buffDataSO.dataName.ToString()];
                 for(int j = 0; j < buffConfig.buffStack; j++)
                 {
                     var paramDic = BuffDataSO.GetParamDic(buffConfig.buffDataSO.paramList);

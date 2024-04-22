@@ -74,6 +74,9 @@ public class PlayerDataSO : ScriptableObject
     [Header("玩家当前的资源(保存的数据)")]
     public ChaResource chaResource;
 
+    [Header("玩家当前是否有存档（保存到存档的变量）")]
+    public bool ifHasData;
+
     public bool ifHasMap;
     public string currentMap;
     /// <summary>
@@ -82,6 +85,11 @@ public class PlayerDataSO : ScriptableObject
     public void LoadData()
     {
         string playerDataJson = SImpleJsonUtil.ReadData("PlayerData.json");
+        if (playerDataJson == "")
+        {
+            ifHasData = false;
+            return;
+        }
         PlayerData playerData = JsonConvert.DeserializeObject<PlayerData>(playerDataJson);
         this.chaResource = playerData.chaResource;
         this.battleDiceList = playerData.battleDiceList;

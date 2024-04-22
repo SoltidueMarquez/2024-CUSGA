@@ -65,6 +65,7 @@ namespace Map
             Debug.Log(map.ToJson());
             view.ShowMap(map);
             this.playerDataSO.ifHasMap = true;
+            this.playerDataSO.ifHasData = true;
             string mapString = map.ToJson();
             this.playerDataSO.UpdataPlayerDataSoMap(mapString);
             this.playerDataSO.UpdatePlayerDataSO(this.playerChaState);
