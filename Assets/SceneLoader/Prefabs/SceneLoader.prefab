@@ -225,4 +225,4 @@ MonoBehaviour:
   animator: {fileID: 0}
   canvas: {fileID: 2199850959051267599}
   maskImage: {fileID: 1672154615793104844}
-  duration: 0
+  duration: 0.5

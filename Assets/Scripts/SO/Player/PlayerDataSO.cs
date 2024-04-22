@@ -85,6 +85,11 @@ public class PlayerDataSO : ScriptableObject
     public void LoadData()
     {
         string playerDataJson = SImpleJsonUtil.ReadData("PlayerData.json");
+        if (playerDataJson == "")
+        {
+            ifHasData = false;
+            return;
+        }
         PlayerData playerData = JsonConvert.DeserializeObject<PlayerData>(playerDataJson);
         this.chaResource = playerData.chaResource;
         this.battleDiceList = playerData.battleDiceList;
