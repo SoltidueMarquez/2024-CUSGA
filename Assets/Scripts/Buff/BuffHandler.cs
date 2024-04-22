@@ -129,6 +129,14 @@ public class BuffHandler : MonoBehaviour
             RemoveBuff(removeList[i]);
         }
     }
+
+    public void BuffOnReRoll()
+    {
+        foreach (var buff in buffList)
+        {
+            buff.buffData.onRoll?.Invoke(buff);
+        }
+    }
     public void RecheckBuff(ChaProperty[] buffProp,ref ChaControlState chaControlState)
     {
 

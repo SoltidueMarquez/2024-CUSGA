@@ -94,6 +94,9 @@ public class BuffData
 
     public OnAddBuff onAddBuff;
     public object[] onAddBuffParams;
+
+    public OnGetFinalDamage onGetFinalDamage;
+    public object[] onGetFinalDamageParams;
     /// <summary>
     /// 基本的构造函数
     /// </summary>
@@ -138,6 +141,7 @@ public class BuffData
         string onBeKilled, object[] onBeKilledParams,
         string onCast, object[] onCastParams,
         string onAddBuff, object[] onAddBuffParams,
+        string onGetFinalDamage, object[] onGetFinalDamageParams,
         ChaControlState stateMod, ChaProperty[] propMod = null
         )
     {
@@ -181,7 +185,11 @@ public class BuffData
         this.onBeKilled = (onBeKilled == "") ? null : DesignerScripts.BuffEvents.onBeKillFunc[onBeKilled];
         this.onBeKilledParams = onBeKilledParams;
         this.OnCast = (onCast == "") ? null : DesignerScripts.BuffEvents.onCastFunc[onCast];
+        this.onCastParams = onCastParams;
         this.onAddBuff = (onAddBuff == "") ? null : DesignerScripts.BuffEvents.onAddFunc[onAddBuff];
+        this.onAddBuffParams = onAddBuffParams;
+        this.onGetFinalDamage = (onGetFinalDamage == "") ? null : DesignerScripts.BuffEvents.onGetFinalDamageFunc[onGetFinalDamage];
+        this.onGetFinalDamageParams = onGetFinalDamageParams;
     }
 
 
@@ -196,9 +204,10 @@ public delegate void OnRoundStart(BuffInfo buff);
 public delegate void OnRoundEnd(BuffInfo buff);
 public delegate void BuffOnHit(BuffInfo buff, DamageInfo damageInfo, GameObject target);
 public delegate void BuffOnBeHurt(BuffInfo buff, DamageInfo damageInfo, GameObject attacker);
-public delegate int BuffOnRoll(BuffInfo buffInfo);
+public delegate void BuffOnRoll(BuffInfo buffInfo);
 public delegate void BuffOnkill(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target);
 public delegate void BuffOnBeKilled(BuffInfo buffInfo, DamageInfo damageInfo, GameObject attacker);
 public delegate SingleDiceObj BuffOnCast(BuffInfo buffInfo, SingleDiceObj singleDiceObj);
 public delegate void OnAddBuff(BuffInfo buffInfo);
+public delegate void OnGetFinalDamage(BuffInfo buffInfo,DamageInfo damageInfo);
 
