@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using UI;
 using UnityEngine;
 
@@ -21,7 +22,7 @@ public class BuffHandler : MonoBehaviour
             if (findBuffInfo.curStack < findBuffInfo.buffData.maxStack)
             {
                 //findBuffInfo.curStack++;
-                findBuffInfo.curStack+=buffInfo.curStack;
+                findBuffInfo.curStack += buffInfo.curStack;
                 switch (findBuffInfo.buffData.buffUpdateEnum)
                 {
                     case BuffUpdateEnum.Add:
@@ -92,20 +93,31 @@ public class BuffHandler : MonoBehaviour
 
     }
     /// <summary>
-    /// 每个回合开始的时候，对buff的时间进行处理
+    /// 每个回合开始的时候，对buff的时间进行处理,side表示当前是哪一方的回合
     /// </summary>
-    public void BuffRoundStartTick()
+    public void BuffRoundStartTick(int side)
     {
-        List<BuffInfo> removeList = new List<BuffInfo>();
-        /*foreach (BuffInfo buffInfo in buffList)//遍历buff列表,先执行回合开始的事件
+        if (side == 0)
         {
-            buffInfo.buffData.onRoundStart?.Invoke(buffInfo);
-        }*/
-        for(int i = 0;i<buffList.Count;i++)
-        {
-            buffList[i].buffData.onRoundStart?.Invoke(buffList[i]);
+            for (int i = 0; i < buffList.Count; i++)
+            {
+                if (buffList[i].buffData.tags.Contains("PlayerOnRoundStart"))
+                {
+                    buffList[i].buffData.onRoundStart?.Invoke(buffList[i]);
+                }
+            }
         }
-        
+        else if (side == 1)
+        {
+            for (int i = 0; i < buffList.Count; i++)
+            {
+                if (buffList[i].buffData.tags.Contains("EnemyOnRoundStart"))
+                {
+                    buffList[i].buffData.onRoundStart?.Invoke(buffList[i]);
+                }
+            }
+        }
+
     }
     //TODO:每个回合结束的时候，对buff的时间进行处理
     public void BuffRoundEndTick()
@@ -141,7 +153,7 @@ public class BuffHandler : MonoBehaviour
             buff.buffData.onRoll?.Invoke(buff);
         }
     }
-    public void RecheckBuff(ChaProperty[] buffProp,ref ChaControlState chaControlState)
+    public void RecheckBuff(ChaProperty[] buffProp, ref ChaControlState chaControlState)
     {
 
         foreach (var buff in buffList)

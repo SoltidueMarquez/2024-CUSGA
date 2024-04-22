@@ -541,7 +541,18 @@ public class BattleManager : MonoBehaviour
         this.parameter.playerDataSO.UpdatePlayerDataSO(parameter.playerChaState);
     }
     #endregion
-
+    #region 封装的战斗回调点
+    public void OnPlayerRoundStart()
+    {
+        this.parameter.enemyChaStates[0].GetBuffHandler().BuffRoundStartTick(0);
+        this.parameter.enemyChaStates[1].GetBuffHandler().BuffRoundStartTick(0);
+    }
+    public void OnEnemyRoundStart()
+    {
+        this.parameter.playerChaState.GetBuffHandler().BuffRoundStartTick(1);
+        this.parameter.enemyChaStates[0].GetBuffHandler().BuffRoundStartTick(1);
+    }
+    #endregion
 }
 //定义了一个回调，用于在UI动画结束时调用
 public delegate void OnUIAnimFinished();
