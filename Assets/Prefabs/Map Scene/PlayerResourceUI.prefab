@@ -523,9 +523,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1871d8602b9dcd24eaea3f3394435dbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animTime: 0
   runText: {fileID: 0}
   reRollText: {fileID: 2488587168156674256}
   moneyText: {fileID: 2655630305047657240}
+  healthText: {fileID: 1682979073567765552}
 --- !u!114 &8570020791098734351
 MonoBehaviour:
   m_ObjectHideFlags: 0

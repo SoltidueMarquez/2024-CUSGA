@@ -13,21 +13,27 @@ public class GameManager : MonoSingleton<GameManager>
     public EnemyDataSO enemyDataSO;//用于传递敌人数据
     [HideInInspector]
     public bool ifLoadedHalidom;//用于判断是否加载了圣物,全局只加载一次，因为圣物是全局的
-    
-
+    [Header("玩家数据")]
+    public PlayerDataSO playerDataSO;
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
     }
-    
-    /// <summary>
-    /// 先把加载场景写在这里，还需要修改
-    /// </summary>
-    /// <param name="sceneName"></param>
-    public void LoadScene(string sceneName)
+
+    #region 开始场景调用
+    public void NewGame()
     {
-        
-        SceneManager.LoadScene(sceneName);
+        playerDataSO.ifUseSaveData = false;//这样就会在进入地图的时候重新生成地图
     }
-    
+    public void ContinueGame()
+    {
+        playerDataSO.ifUseSaveData = true;
+    }
+    public bool CheckIfHasSaveData()
+    {
+        playerDataSO.LoadData();
+        return playerDataSO.ifHasData;
+    }
+    #endregion
+
 }

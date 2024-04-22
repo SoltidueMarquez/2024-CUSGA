@@ -745,7 +745,7 @@ namespace DesignerScripts
         public static void Reflect(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)//OnHurt调用
         {
             damageInfo.attacker.GetComponent<ChaState>().ModResources(new ChaResource(-damageInfo.damage.baseDamage, 0, 0, 0));
-            Debug.Log("反射造成" + damageInfo.finalDamage + "伤害");
+            Debug.Log("反射造成" + damageInfo.damage.baseDamage + "伤害");
             buffInfo.curStack--;
             if (buffInfo.curStack == 0)
             {

@@ -77,7 +77,6 @@ public class SceneLoader : MonoSingleton<SceneLoader>
                     maskMaterial.SetFloat("_Radius", 0);
                 }
             }
-            Debug.Log("Radius" + maskMaterial.GetFloat("_Radius"));
             timer += 20;
             await UniTask.Delay(TimeSpan.FromMilliseconds(20));
         }

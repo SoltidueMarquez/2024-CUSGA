@@ -10,6 +10,11 @@ public static class SImpleJsonUtil
     /// <returns></returns>
         public static string ReadData(string fileName)
         {
+        //如果文件不存在返回空
+        if (!File.Exists(Application.streamingAssetsPath + "/" + fileName))
+        {
+            return "";
+        }
             string readData;
             string fileUrl = Application.streamingAssetsPath + "/" + fileName;
 
