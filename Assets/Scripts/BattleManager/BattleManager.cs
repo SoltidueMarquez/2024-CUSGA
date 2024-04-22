@@ -326,6 +326,7 @@ public class BattleManager : MonoBehaviour
                 singleDiceObjs[i] = this.parameter.playerChaState.GetBattleDiceHandler().GetRandomSingleDice(i);
             }
         }
+        this.parameter.playerChaState.GetBuffHandler().BuffOnReRoll();
         this.parameter.playerChaState.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs.ToList<SingleDiceObj>());
         //这边需要删除所有当前骰面的视觉
 

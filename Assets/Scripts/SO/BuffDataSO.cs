@@ -111,6 +111,8 @@ namespace DesignerScripts
         public onAddBuffEnum onAddBuff = onAddBuffEnum.None;
         [Tooltip("")]
         public object[] onAddBuffParams = null;
+        public onGetFinalDamageEnum onGetFinalDamage = onGetFinalDamageEnum.None;
+        public object[] onGetFinalDamageParams = null;
         #endregion
 
         [Tooltip("buff对玩家的状态修改(默认：T，T，F)")]

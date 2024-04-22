@@ -531,7 +531,7 @@ namespace DesignerScripts
                 BuffEventName.Add1StackIfPlayerHavePositiveBuff.ToString(),Add1StackIfPlayerHavePositiveBuff
             }
         };
-
+        public static Dictionary<string, OnGetFinalDamage> onGetFinalDamageFunc = new();
 
         #endregion
 
