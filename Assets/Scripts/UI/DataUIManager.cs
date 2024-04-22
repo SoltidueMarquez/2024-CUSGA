@@ -78,7 +78,7 @@ namespace UI
         /// </summary>
         /// <param name="health"></param>
         /// <param name="maxHealth"></param>
-        public void UpdateHealth(int health, int maxHealth)
+        public void UpdateHealthText(int health, int maxHealth)
         {
             healthText.text = $"{health}/{maxHealth}";
         }
