@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 576aa348e8b3a92498ed15e7f5425ad7, type: 3}
-  m_Name: Enermy_01SO
+  m_Name: EnermySO 1
   m_EditorClassIdentifier: 
   enemyType: 0
   EnemyBattleDiceList:
@@ -47,7 +47,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 7e52b895f9803874a9cca6db0d466917, type: 2}
     - {fileID: 11400000, guid: 7e52b895f9803874a9cca6db0d466917, type: 2}
   baseProp:
-    health: 56
+    health: 100
     money: 0
     maxRollTimes: 0
     shield: 0

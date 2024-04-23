@@ -593,9 +593,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1871d8602b9dcd24eaea3f3394435dbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animTime: 0
   runText: {fileID: 458454510}
   reRollText: {fileID: 333788548}
   moneyText: {fileID: 1829682577}
+  healthText: {fileID: 0}
 --- !u!114 &81981824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4417,6 +4419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDataSO: {fileID: 0}
   ifLoadedHalidom: 0
+  playerDataSO: {fileID: 0}
 --- !u!4 &993230910
 Transform:
   m_ObjectHideFlags: 0
@@ -6501,7 +6504,7 @@ MonoBehaviour:
     enemyChaStates:
     - {fileID: 341200663}
     playerDataSO: {fileID: 11400000, guid: a898c0c094df00e458aed14b23a1788c, type: 2}
-    enemyDataSO: {fileID: 11400000, guid: ca768467329733c49a3099706f2c2e47, type: 2}
+    enemyDataSO: {fileID: 11400000, guid: 04a1b4d706b1b5f41b2c44ab7da4cc77, type: 2}
   currentSelectEnemy: {fileID: 341200662}
 --- !u!4 &1590396381
 Transform:
@@ -7209,7 +7212,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!114 &1757981754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8280,6 +8283,9 @@ MonoBehaviour:
     money: 400
     maxRollTimes: 4
     shield: 0
+  OnSellHalidom:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1997646022
 Transform:
   m_ObjectHideFlags: 0
