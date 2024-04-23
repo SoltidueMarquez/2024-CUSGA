@@ -541,6 +541,8 @@ public class BattleManager : MonoBehaviour
     public void EndBattle()
     {
         this.parameter.playerDataSO.UpdatePlayerDataSO(parameter.playerChaState);
+        this.parameter.playerDataSO.SaveData();
+        //SceneLoader.Instance.LoadScene();
     }
     #endregion
     #region 封装的战斗回调点

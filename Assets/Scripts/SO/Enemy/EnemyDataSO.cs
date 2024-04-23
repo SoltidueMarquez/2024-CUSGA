@@ -16,13 +16,16 @@ public class BuffDataConfig
 public enum EnemyType
 {
     //敌人的类型
+    Easy,
     Normal,
-    Elite,
+    Hard,
     Boss
 }
 [CreateAssetMenu(fileName = "EnemyDataSO", menuName = "Enemy/EnemyDataSO")]
 public class EnemyDataSO : ScriptableObject
 {
+    [Header("EnemyID")]
+    public string EnemyID;
     [Header("敌人的类型")]
     public EnemyType enemyType;
     [Header("敌人初始时候身上的骰子列表")]

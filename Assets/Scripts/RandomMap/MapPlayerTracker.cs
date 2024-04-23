@@ -78,7 +78,7 @@ namespace Map
             // if you choose to show GUI in some of these cases, do not forget to set "Locked" in MapPlayerTracker back to false
             switch (mapNode.Node.nodeType)
             {
-                case NodeType.MinorEnemy:
+                case NodeType.EasyEnemy:
                     Vector2 cameraPosition = Camera.main.WorldToScreenPoint(mapNode.transform.position);
                     Vector2 viewPointView = Camera.main.ScreenToViewportPoint(cameraPosition);
                     GameManager.Instance.enemyDataSO = EnemyManager.GetEnemyDataSOviaCondition(EnemyType.Normal);
@@ -86,7 +86,7 @@ namespace Map
                     MapManager.Instance.OnExitMap();
                     SceneLoader.Instance.LoadSceneAsync(GameScene.BattleScene, viewPointView);
                     break;
-                case NodeType.EliteEnemy:
+                case NodeType.NormalEnemy:
                     break;
                 case NodeType.RestSite:
                     break;

@@ -8,8 +8,8 @@ namespace Map
     {
         private static MapConfig config;
 
-        private static readonly List<NodeType> RandomNodes = new List<NodeType>
-        {NodeType.Mystery, NodeType.Store, NodeType.Treasure, NodeType.MinorEnemy, NodeType.RestSite};
+        //private static readonly List<NodeType> RandomNodes = new List<NodeType>
+        //{NodeType.Mystery, NodeType.Store, NodeType.Treasure, NodeType.MinorEnemy, NodeType.RestSite};
 
         private static List<float> layerDistances;//用于存储层之间的距离
         private static List<List<Point>> paths;
@@ -72,7 +72,7 @@ namespace Map
 
             for (var i = 0; i < config.GridWidth; i++)
             {
-                var nodeType = Random.Range(0f, 1f) < layer.randomizeNodes ? GetRandomNode() : layer.nodeType;
+                var nodeType = Random.Range(0f, 1f) < layer.randomizeNodes ? GetRandomNode(layer.extraNodes) : layer.nodeType;
                 var blueprintName = config.nodeBlueprints.Where(b => b.nodeType == nodeType).ToList().Random().name;
                 var node = new Node(nodeType, blueprintName, new Point(i, layerIndex))
                 {
@@ -277,9 +277,9 @@ namespace Map
             return path;
         }
 
-        private static NodeType GetRandomNode()
+        private static NodeType GetRandomNode(NodeType[] nodeTypes)
         {
-            return RandomNodes[Random.Range(0, RandomNodes.Count)];
+            return nodeTypes[Random.Range(0, nodeTypes.Length)];
         }
     }
 }

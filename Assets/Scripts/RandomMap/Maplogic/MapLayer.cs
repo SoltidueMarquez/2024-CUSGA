@@ -16,6 +16,8 @@ namespace Map
         [Range(0f, 1f)] public float randomizePosition;
         [Tooltip("Chance to get a random node that is different from the default node on this layer")]
         [Range(0f, 1f)] public float randomizeNodes;
+        [Tooltip("extra nodes that can be choose as extra random node")]
+        public NodeType[] extraNodes;
 
     }
 }

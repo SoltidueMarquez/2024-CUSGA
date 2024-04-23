@@ -79,6 +79,8 @@ public class PlayerDataSO : ScriptableObject
 
     public bool ifHasMap;
     public string currentMap;
+    [Header("玩家当前遭遇过的敌人id号")]
+    public List<string> enemyIDList = new();
     /// <summary>
     /// 从json文件中读取数据
     /// </summary>

@@ -35,5 +35,11 @@ public class GameManager : MonoSingleton<GameManager>
         return playerDataSO.ifHasData;
     }
     #endregion
+    #region 结算场景调用
+    public int GetPlayerKillEnemyCount()
+    {
+        return playerDataSO.enemyIDList.Count;
+    }
+    #endregion
 
 }

@@ -16,7 +16,7 @@ namespace Map
 
         [Tooltip("Increase this number to generate more paths")]
         public int extraPaths;
-        //[Reorderable]
+        
         public ListOfMapLayers layers;
 
         [System.Serializable]
