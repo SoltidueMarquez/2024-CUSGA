@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c017667049ea5ff4f96e41c6b8ea31f8, type: 3}
   m_Name: "\u6CBB\u7597\u610F\u56FE"
   m_EditorClassIdentifier: 
-  diceType: 0
+  diceType: 2
   description: 
   intentionName: 
   icon: {fileID: 0}
