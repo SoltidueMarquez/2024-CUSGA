@@ -32,6 +32,8 @@ MonoBehaviour:
   onKill: 0
   onBeKilled: 0
   onCast: 0
+  onAddBuff: 0
+  onGetFinalDamage: 0
   stateMod:
     ifCanChangePosition: 1
     canUseDice: 1
@@ -39,4 +41,4 @@ MonoBehaviour:
   propMod: []
   paramList: []
   description: 
-  sprite: {fileID: 0}
+  sprite: {fileID: -696340815, guid: aa22c55a3819f6d4da669cc1b598577e, type: 3}
