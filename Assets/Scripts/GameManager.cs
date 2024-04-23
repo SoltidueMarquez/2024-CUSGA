@@ -40,6 +40,11 @@ public class GameManager : MonoSingleton<GameManager>
     {
         return playerDataSO.enemyIDList.Count;
     }
+
+    public int GetCurrentPlayerLayer()
+    {
+        return playerDataSO.enemyIDList.Count;
+    }
     #endregion
 
 }

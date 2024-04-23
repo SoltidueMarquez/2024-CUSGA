@@ -66,6 +66,8 @@ namespace Map
             view.ShowMap(map);
             this.playerDataSO.ifHasMap = true;
             this.playerDataSO.ifHasData = true;
+            //和地图相关的数据
+            this.playerDataSO.enemyIDList = new List<string>();
             string mapString = map.ToJson();
             this.playerDataSO.UpdataPlayerDataSoMap(mapString);
             this.playerDataSO.UpdatePlayerDataSO(this.playerChaState);
@@ -92,7 +94,7 @@ namespace Map
         /// </summary>
         public void InitializePlayer()
         {
-
+            
             //初始化玩家的基础数值
             this.playerChaState.SetBaseprop(playerDataSO.baseProp);
             //对圣物设置玩家的基础数值
