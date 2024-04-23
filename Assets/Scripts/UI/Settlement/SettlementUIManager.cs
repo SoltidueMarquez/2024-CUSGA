@@ -1,22 +1,22 @@
-using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using Settlement_Scene;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI.Settlement
 {
     public class SettlementUIManager : MonoSingleton<SettlementUIManager>
-    {
+    {   [Header("UI设置")]
         [SerializeField] private List<GameObject> settlementTextList;
         [SerializeField] private Text totalScoreText;
+        [SerializeField] private Text titleText;
         [SerializeField] private GameObject template;
         [SerializeField] private Transform parent;
         [SerializeField] private float animTime;
         [SerializeField] private Button exitButton;
         [SerializeField] private GameObject uiCanvas;
+        [SerializeField] private List<string> titleList;
 
         private void Start()
         {
@@ -44,7 +44,13 @@ namespace UI.Settlement
                 tmpText.DOText(content, animTime);
                 settlementTextList.Add(tmp);
             }
-            totalScoreText.DOText($"共计拿到了{SettlementManager.Instance.CalculateTotalScore()}分", animTime);
+            totalScoreText.DOText($"共计拿到了{SettlementManager.Instance.CalculateTotalScore()}分", animTime).OnComplete(
+                () =>
+                {
+                    titleText.text = "???";
+                    var title = titleList[Random.Range(0, titleList.Count)];
+                    titleText.DOText(title, animTime);
+                });
         }
 
         /// <summary>
