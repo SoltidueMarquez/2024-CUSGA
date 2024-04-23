@@ -47,11 +47,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 7e52b895f9803874a9cca6db0d466917, type: 2}
     - {fileID: 11400000, guid: 7e52b895f9803874a9cca6db0d466917, type: 2}
   baseProp:
-    health: 100
+    health: 56
     money: 0
     maxRollTimes: 0
     shield: 0
-  enemyBuffs:
-  - buffDataSO: {fileID: 11400000, guid: 0a25ca833670d1f46bba03f2a4a7dfc1, type: 2}
-    buffStack: 1
-    buffRound: 0
+  enemyBuffs: []

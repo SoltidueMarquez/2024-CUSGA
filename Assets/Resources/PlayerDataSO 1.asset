@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c3de7d951814604594071121c0d0bf5, type: 3}
-  m_Name: PlayerDataSO
+  m_Name: PlayerDataSO 1
   m_EditorClassIdentifier: 
   ifUseSaveData: 0
   baseProp:
@@ -22,7 +22,7 @@ MonoBehaviour:
   playerDiceSOItems:
   - diceType: 0
     singleDiceModelSOs:
-    - {fileID: 11400000, guid: 94a1ceb80d0e30044a3da6a7e178d822, type: 2}
+    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
     - {fileID: 11400000, guid: 94a1ceb80d0e30044a3da6a7e178d822, type: 2}
     - {fileID: 11400000, guid: 32ae396366f228041a5c90c716f097d1, type: 2}
     - {fileID: 11400000, guid: 4c9a77c04f88a374b8a895ea3c6e5d30, type: 2}
@@ -36,6 +36,22 @@ MonoBehaviour:
     - {fileID: 11400000, guid: ffd7ffe63ae49f94cbd420e2d3ba88fe, type: 2}
     - {fileID: 11400000, guid: ffd7ffe63ae49f94cbd420e2d3ba88fe, type: 2}
     - {fileID: 11400000, guid: ffd7ffe63ae49f94cbd420e2d3ba88fe, type: 2}
+  - diceType: 0
+    singleDiceModelSOs:
+    - {fileID: 11400000, guid: 076d1d8e5139f9645b25465615fa85fe, type: 2}
+    - {fileID: 11400000, guid: 076d1d8e5139f9645b25465615fa85fe, type: 2}
+    - {fileID: 11400000, guid: 076d1d8e5139f9645b25465615fa85fe, type: 2}
+    - {fileID: 11400000, guid: 076d1d8e5139f9645b25465615fa85fe, type: 2}
+    - {fileID: 11400000, guid: 076d1d8e5139f9645b25465615fa85fe, type: 2}
+    - {fileID: 11400000, guid: 076d1d8e5139f9645b25465615fa85fe, type: 2}
+  - diceType: 0
+    singleDiceModelSOs:
+    - {fileID: 11400000, guid: 05902d7cd2b41c44e8d69c22efb953dc, type: 2}
+    - {fileID: 11400000, guid: 05902d7cd2b41c44e8d69c22efb953dc, type: 2}
+    - {fileID: 11400000, guid: 05902d7cd2b41c44e8d69c22efb953dc, type: 2}
+    - {fileID: 11400000, guid: 664ff710c97cd1d4c9f6158ebfbfd985, type: 2}
+    - {fileID: 11400000, guid: 664ff710c97cd1d4c9f6158ebfbfd985, type: 2}
+    - {fileID: 11400000, guid: 664ff710c97cd1d4c9f6158ebfbfd985, type: 2}
   bagDiceSOList:
   - {fileID: 11400000, guid: ea923a92ec4ba684ba53a60344722c7f, type: 2}
   - {fileID: 11400000, guid: ea923a92ec4ba684ba53a60344722c7f, type: 2}
