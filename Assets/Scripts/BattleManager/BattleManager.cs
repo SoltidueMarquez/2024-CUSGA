@@ -255,6 +255,8 @@ public class BattleManager : MonoBehaviour
         var enemyBattleDiceList = enemyDataSO.EnemyBattleDiceList;
         for (int i = 0; i < this.parameter.enemyChaStates.Length; i++)
         {
+            //初始化数量
+            this.parameter.enemyChaStates[i].GetBattleDiceHandler().battleDiceCount = enemyBattleDiceList.Count;
             this.parameter.enemyChaStates[i].GetBattleDiceHandler().InitDice(enemyBattleDiceList);
             this.parameter.enemyChaStates[i].SetBaseprop(enemyDataSO.baseProp);
             //初始化buff
