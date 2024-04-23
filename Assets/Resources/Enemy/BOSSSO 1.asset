@@ -16,42 +16,50 @@ MonoBehaviour:
   EnemyBattleDiceList:
   - diceType: 0
     singleDiceModelSOs:
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
+    - {fileID: 11400000, guid: 5525e21d491814149850cdcec7f627c7, type: 2}
+    - {fileID: 11400000, guid: 5525e21d491814149850cdcec7f627c7, type: 2}
+    - {fileID: 11400000, guid: 5525e21d491814149850cdcec7f627c7, type: 2}
+    - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
+    - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
+    - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
   - diceType: 0
     singleDiceModelSOs:
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
+    - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
+    - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
+    - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
+    - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
+    - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
+    - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
   - diceType: 1
     singleDiceModelSOs:
-    - {fileID: 11400000, guid: 664ff710c97cd1d4c9f6158ebfbfd985, type: 2}
-    - {fileID: 11400000, guid: 664ff710c97cd1d4c9f6158ebfbfd985, type: 2}
-    - {fileID: 11400000, guid: 664ff710c97cd1d4c9f6158ebfbfd985, type: 2}
-    - {fileID: 11400000, guid: 076d1d8e5139f9645b25465615fa85fe, type: 2}
-    - {fileID: 11400000, guid: 076d1d8e5139f9645b25465615fa85fe, type: 2}
-    - {fileID: 11400000, guid: 076d1d8e5139f9645b25465615fa85fe, type: 2}
+    - {fileID: 11400000, guid: c8d4ab81eb6b5a941a8e8cc06a4c171b, type: 2}
+    - {fileID: 11400000, guid: c8d4ab81eb6b5a941a8e8cc06a4c171b, type: 2}
+    - {fileID: 11400000, guid: c8d4ab81eb6b5a941a8e8cc06a4c171b, type: 2}
+    - {fileID: 11400000, guid: 699f43d6afbcf3747859fef69967ee7c, type: 2}
+    - {fileID: 11400000, guid: 699f43d6afbcf3747859fef69967ee7c, type: 2}
+    - {fileID: 11400000, guid: 699f43d6afbcf3747859fef69967ee7c, type: 2}
   - diceType: 1
     singleDiceModelSOs:
-    - {fileID: 11400000, guid: 7e52b895f9803874a9cca6db0d466917, type: 2}
-    - {fileID: 11400000, guid: 7e52b895f9803874a9cca6db0d466917, type: 2}
-    - {fileID: 11400000, guid: 7e52b895f9803874a9cca6db0d466917, type: 2}
-    - {fileID: 11400000, guid: 7e52b895f9803874a9cca6db0d466917, type: 2}
-    - {fileID: 11400000, guid: 7e52b895f9803874a9cca6db0d466917, type: 2}
-    - {fileID: 11400000, guid: 7e52b895f9803874a9cca6db0d466917, type: 2}
+    - {fileID: 11400000, guid: 076d1d8e5139f9645b25465615fa85fe, type: 2}
+    - {fileID: 11400000, guid: 076d1d8e5139f9645b25465615fa85fe, type: 2}
+    - {fileID: 11400000, guid: 076d1d8e5139f9645b25465615fa85fe, type: 2}
+    - {fileID: 11400000, guid: 076d1d8e5139f9645b25465615fa85fe, type: 2}
+    - {fileID: 11400000, guid: 076d1d8e5139f9645b25465615fa85fe, type: 2}
+    - {fileID: 11400000, guid: 076d1d8e5139f9645b25465615fa85fe, type: 2}
+  - diceType: 0
+    singleDiceModelSOs:
+    - {fileID: 11400000, guid: 97e6b3be624ac4644a7c0f6a6c64faed, type: 2}
+    - {fileID: 11400000, guid: 97e6b3be624ac4644a7c0f6a6c64faed, type: 2}
+    - {fileID: 11400000, guid: 97e6b3be624ac4644a7c0f6a6c64faed, type: 2}
+    - {fileID: 11400000, guid: 97e6b3be624ac4644a7c0f6a6c64faed, type: 2}
+    - {fileID: 11400000, guid: 94a1ceb80d0e30044a3da6a7e178d822, type: 2}
+    - {fileID: 11400000, guid: 94a1ceb80d0e30044a3da6a7e178d822, type: 2}
   baseProp:
-    health: 100
+    health: 150
     money: 0
     maxRollTimes: 0
     shield: 0
   enemyBuffs:
-  - buffDataSO: {fileID: 11400000, guid: 0a25ca833670d1f46bba03f2a4a7dfc1, type: 2}
+  - buffDataSO: {fileID: 11400000, guid: e5be8aa8e5d04204db1dcf3eb2bcf26d, type: 2}
     buffStack: 1
     buffRound: 0

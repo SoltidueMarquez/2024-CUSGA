@@ -16,28 +16,28 @@ MonoBehaviour:
   EnemyBattleDiceList:
   - diceType: 0
     singleDiceModelSOs:
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
+    - {fileID: 11400000, guid: 48cf08b0561235c4ba6865135cb9bb5d, type: 2}
+    - {fileID: 11400000, guid: 48cf08b0561235c4ba6865135cb9bb5d, type: 2}
+    - {fileID: 11400000, guid: d97e936d87d58c74ca35b0aae6318dab, type: 2}
+    - {fileID: 11400000, guid: d97e936d87d58c74ca35b0aae6318dab, type: 2}
+    - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
+    - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
   - diceType: 0
     singleDiceModelSOs:
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
+    - {fileID: 11400000, guid: 26e4756286b1d7244bd09508f32ac05e, type: 2}
+    - {fileID: 11400000, guid: 26e4756286b1d7244bd09508f32ac05e, type: 2}
+    - {fileID: 11400000, guid: 26e4756286b1d7244bd09508f32ac05e, type: 2}
+    - {fileID: 11400000, guid: 26e4756286b1d7244bd09508f32ac05e, type: 2}
+    - {fileID: 11400000, guid: 26e4756286b1d7244bd09508f32ac05e, type: 2}
+    - {fileID: 11400000, guid: 26e4756286b1d7244bd09508f32ac05e, type: 2}
   - diceType: 1
     singleDiceModelSOs:
+    - {fileID: 11400000, guid: c8d4ab81eb6b5a941a8e8cc06a4c171b, type: 2}
+    - {fileID: 11400000, guid: c8d4ab81eb6b5a941a8e8cc06a4c171b, type: 2}
+    - {fileID: 11400000, guid: c8d4ab81eb6b5a941a8e8cc06a4c171b, type: 2}
+    - {fileID: 11400000, guid: 4e44b1d02e192ae41bb5638c45a80d7c, type: 2}
     - {fileID: 11400000, guid: 664ff710c97cd1d4c9f6158ebfbfd985, type: 2}
     - {fileID: 11400000, guid: 664ff710c97cd1d4c9f6158ebfbfd985, type: 2}
-    - {fileID: 11400000, guid: 664ff710c97cd1d4c9f6158ebfbfd985, type: 2}
-    - {fileID: 11400000, guid: 076d1d8e5139f9645b25465615fa85fe, type: 2}
-    - {fileID: 11400000, guid: 076d1d8e5139f9645b25465615fa85fe, type: 2}
-    - {fileID: 11400000, guid: 076d1d8e5139f9645b25465615fa85fe, type: 2}
   - diceType: 1
     singleDiceModelSOs:
     - {fileID: 11400000, guid: 7e52b895f9803874a9cca6db0d466917, type: 2}
@@ -47,11 +47,11 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 7e52b895f9803874a9cca6db0d466917, type: 2}
     - {fileID: 11400000, guid: 7e52b895f9803874a9cca6db0d466917, type: 2}
   baseProp:
-    health: 100
+    health: 60
     money: 0
     maxRollTimes: 0
     shield: 0
   enemyBuffs:
-  - buffDataSO: {fileID: 11400000, guid: 0a25ca833670d1f46bba03f2a4a7dfc1, type: 2}
+  - buffDataSO: {fileID: 11400000, guid: 31f60b3290927174383465f6fdefbe97, type: 2}
     buffStack: 1
     buffRound: 0

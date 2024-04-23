@@ -24,8 +24,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
   - diceType: 0
     singleDiceModelSOs:
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
-    - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
+    - {fileID: 11400000, guid: 97e6b3be624ac4644a7c0f6a6c64faed, type: 2}
+    - {fileID: 11400000, guid: 97e6b3be624ac4644a7c0f6a6c64faed, type: 2}
     - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
     - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
     - {fileID: 11400000, guid: 63d64525ce50bc74199a87f0e9a10462, type: 2}
