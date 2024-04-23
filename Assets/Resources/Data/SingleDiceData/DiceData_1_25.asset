@@ -32,6 +32,6 @@ MonoBehaviour:
   - buffDataSO: {fileID: 11400000, guid: cf592444921d6054f828f0766041762a, type: 2}
     buffStack: 2
     buffRound: 0
-  sprite: {fileID: 14273479, guid: a3579de2edecde242a8cab02138cdbf4, type: 3}
+  sprite: {fileID: 2025655048, guid: 2bf387469069a9b4183bba90cc805f31, type: 3}
   description: "\u653B\u51FB(valueM),\u6211\u5F3A\u5316+2"
   baseValue: 6

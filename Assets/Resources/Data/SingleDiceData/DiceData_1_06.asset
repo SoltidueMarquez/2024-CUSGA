@@ -29,6 +29,6 @@ MonoBehaviour:
   value: 8
   side: 2
   buffDataConfigs: []
-  sprite: {fileID: 1026390102, guid: 67314c9e7163e06499e8f8706b7a83a2, type: 3}
+  sprite: {fileID: -1887428124, guid: 2bf387469069a9b4183bba90cc805f31, type: 3}
   description: "\u653B\u51FBvalue,\u53D7\u51FB3"
   baseValue: 11

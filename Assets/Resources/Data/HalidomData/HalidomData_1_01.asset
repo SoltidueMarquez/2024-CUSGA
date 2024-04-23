@@ -19,3 +19,4 @@ MonoBehaviour:
   value: 1
   buffDataSos:
   - {fileID: 11400000, guid: 943e998f81820844d886c8c5d38f8cdd, type: 2}
+  sprite: {fileID: 1979336226, guid: 7834449662960c641a50cd8f4ac308c2, type: 3}
