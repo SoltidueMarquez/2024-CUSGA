@@ -23,6 +23,7 @@ namespace UI.Store
         /// </summary>
         public void EnterStoreUI()
         {
+            SettingsManager.Instance.FreezeMap(true);//停止地图的拖动监听
             storeArea.transform.DOMoveX(appearTransformPosition.position.x, animTime);
             StoreAreaUIManager.Instance.SetButton();
         }
@@ -32,6 +33,7 @@ namespace UI.Store
         /// </summary>
         public void ExitStoreUI()
         {
+            SettingsManager.Instance.FreezeMap(false);//停止地图的拖动监听
             storeArea.transform.DOMoveX(disappearTransformPosition.position.x, animTime);
         }
 

@@ -10,12 +10,12 @@ namespace Settlement_Scene
         /// <summary>
         /// _data.x表示数据，_data.y表示乘算因子
         /// </summary>
-        [SerializeField] private Vector2 data;
-        [SerializeField] private SettlementDataType dataType;
+        [SerializeField] public Vector2 data;
+        [SerializeField] public SettlementDataType dataType;
 
-        public void Init(Func<SettlementDataType, Vector2> getData)
+        public void Init(Func<SettlementDataType, float> getData)
         {
-            data = getData.Invoke(dataType);
+            data.x = getData.Invoke(dataType);
         }
         
         public float GetResultScore()

@@ -4065,7 +4065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1335310690592221606, guid: 36b68395345110a48b8a8080e4414506, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1902226174270934145, guid: 36b68395345110a48b8a8080e4414506, type: 3}
       propertyPath: m_BlockingMask.m_Bits
@@ -4230,6 +4230,10 @@ PrefabInstance:
     - target: {fileID: 6878989545922281377, guid: 36b68395345110a48b8a8080e4414506, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -346.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241176675683390200, guid: 36b68395345110a48b8a8080e4414506, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4423,6 +4427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDataSO: {fileID: 0}
   ifLoadedHalidom: 0
+  playerDataSO: {fileID: 0}
 --- !u!4 &993230910
 Transform:
   m_ObjectHideFlags: 0
