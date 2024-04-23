@@ -27,8 +27,8 @@ MonoBehaviour:
     currentShield: 0
   level: 1
   value: 8
-  side: 0
-  buffDataSOs: []
-  sprite: {fileID: 0}
+  side: 2
+  buffDataConfigs: []
+  sprite: {fileID: 1026390102, guid: 67314c9e7163e06499e8f8706b7a83a2, type: 3}
   description: "\u653B\u51FBvalue,\u53D7\u51FB3"
   baseValue: 11

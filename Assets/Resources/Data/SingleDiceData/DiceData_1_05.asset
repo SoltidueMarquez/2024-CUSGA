@@ -27,11 +27,11 @@ MonoBehaviour:
     currentShield: 0
   level: 1
   value: 8
-  side: 0
+  side: 2
   buffDataConfigs:
   - buffDataSO: {fileID: 11400000, guid: 451c072da0f05ee4e8fe5605c7b3fed4, type: 2}
     buffStack: 1
     buffRound: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: -497515729, guid: 67314c9e7163e06499e8f8706b7a83a2, type: 3}
   description: "\u53CC\u51FBplus"
   baseValue: 4
