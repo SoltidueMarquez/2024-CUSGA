@@ -18,4 +18,4 @@ MonoBehaviour:
   rareType: 2
   value: 1
   buffDataSos: []
-  sprite: {fileID: 0}
+  sprite: {fileID: -1185279098, guid: 7834449662960c641a50cd8f4ac308c2, type: 3}
