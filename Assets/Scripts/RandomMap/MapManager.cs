@@ -124,7 +124,6 @@ namespace Map
                 this.playerChaState.GetBattleDiceHandler().InitDiceWithData(battleDiceSODatas);
                 ChaProperty chaProperty = playerDataSO.baseProp;
                 ChaResource resource = playerDataSO.chaResource - new ChaResource(chaProperty.health, chaProperty.money, chaProperty.maxRollTimes, 0);
-                Debug.Log("<color=red>MapManager</color>" + resource.currentMoney);
                 this.playerChaState.ModResources(resource);
                 this.playerChaState.GetBattleDiceHandler().InitBagDiceWithData(playerDataSO.bagDiceList);
             }

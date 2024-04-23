@@ -44,6 +44,8 @@ public class BuffDataInitial : MonoBehaviour
                 buffDataSos[i].propMod)
                 );
         }
+        Destroy(this);
+
     }
 
 }

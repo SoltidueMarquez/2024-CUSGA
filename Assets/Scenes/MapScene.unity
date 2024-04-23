@@ -844,7 +844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDataSO: {fileID: 0}
   ifLoadedHalidom: 0
-  playerDataSO: {fileID: 0}
+  playerDataSO: {fileID: 11400000, guid: a898c0c094df00e458aed14b23a1788c, type: 2}
 --- !u!4 &1825883772
 Transform:
   m_ObjectHideFlags: 0

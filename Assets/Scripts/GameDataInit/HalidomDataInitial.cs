@@ -27,6 +27,7 @@ public class HalidomDataInitial : MonoBehaviour
                     GetBuffInfoList(halidomDataSos[i].buffDataSos))
                 );
         }
+        Destroy(this);
     }
 
 

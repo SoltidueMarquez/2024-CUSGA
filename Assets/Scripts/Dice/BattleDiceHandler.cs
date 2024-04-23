@@ -47,18 +47,20 @@ public class BattleDiceHandler : MonoBehaviour
             //减少资源
             chaState.ModResources(-1 * singleDiceObj.model.cost);
             //释放骰子
-            diceCardsInUse[index] = null;
             if (singleDiceObj.model.buffInfos.Length > 0)
             {
+                Debug.Log(singleDiceObj.model.buffInfos.Length);
                 for (int i = 0; i < singleDiceObj.model.buffInfos.Length; i++)
                 {
                     var item = singleDiceObj.model.buffInfos[i];
-                    singleDiceObj = item.buffData.OnCast?.Invoke(item, singleDiceObj);
+                    var result = item.buffData.OnCast?.Invoke(item, singleDiceObj);
+                    singleDiceObj = result == null ? singleDiceObj : result;
 
                 }
             }
             //添加进栈
             previousSingleDices.Push(new SingleDiceObj(singleDiceObj));
+            diceCardsInUse[index] = null;
 
             //造成伤害
             Damage damage = singleDiceObj.model.damage;

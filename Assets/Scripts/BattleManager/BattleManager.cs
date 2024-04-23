@@ -87,7 +87,6 @@ public class BattleManager : MonoBehaviour
         }
         // 否则，将自身设为实例，并保持在场景切换时不被销毁
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
 
