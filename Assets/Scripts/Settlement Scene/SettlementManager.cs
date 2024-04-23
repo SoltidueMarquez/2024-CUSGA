@@ -9,7 +9,7 @@ namespace Settlement_Scene
 {
     public enum SettlementDataType
     {
-        层数,
+        房间数,
         敌人,
         Boss,
         金钱,
