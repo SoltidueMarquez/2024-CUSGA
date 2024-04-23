@@ -48,14 +48,14 @@ MonoBehaviour:
       idInDice: 1
       level: 3
       value: 12
-    - id: 1_06
+    - id: 1_28
       idInDice: 2
-      level: 2
-      value: 8
-    - id: 1_06
+      level: 3
+      value: 12
+    - id: 1_03
       idInDice: 3
-      level: 2
-      value: 8
+      level: 1
+      value: 4
     - id: 1_06
       idInDice: 4
       level: 2
@@ -104,9 +104,306 @@ MonoBehaviour:
     level: 1
     value: 4
   chaResource:
-    currentHp: 38
-    currentMoney: 310
-    currentRollTimes: 3
+    currentHp: 50
+    currentMoney: 300
+    currentRollTimes: 4
     currentShield: 0
-  ifHasMap: 0
-  currentMap: 
+  ifHasData: 1
+  ifHasMap: 1
+  currentMap: "{\r\n  \"nodes\": [\r\n    {\r\n      \"point\": {\r\n        \"x\":
+    1,\r\n        \"y\": 0\r\n      },\r\n      \"incoming\": [],\r\n      \"outgoing\":
+    [\r\n        {\r\n          \"x\": 2,\r\n          \"y\": 1\r\n        },\r\n       
+    {\r\n          \"x\": 1,\r\n          \"y\": 1\r\n        }\r\n      ],\r\n     
+    \"nodeType\": \"MinorEnemy\",\r\n      \"blueprintName\": \"Minor Enemy\",\r\n     
+    \"position\": {\r\n        \"x\": -3.0,\r\n        \"y\": 0.0,\r\n        \"normalized\":
+    {\r\n          \"x\": -1.0,\r\n          \"y\": 0.0,\r\n          \"magnitude\":
+    1.0,\r\n          \"sqrMagnitude\": 1.0\r\n        },\r\n        \"magnitude\":
+    3.0,\r\n        \"sqrMagnitude\": 9.0\r\n      }\r\n    },\r\n    {\r\n     
+    \"point\": {\r\n        \"x\": 2,\r\n        \"y\": 0\r\n      },\r\n      \"incoming\":
+    [],\r\n      \"outgoing\": [\r\n        {\r\n          \"x\": 2,\r\n         
+    \"y\": 1\r\n        }\r\n      ],\r\n      \"nodeType\": \"MinorEnemy\",\r\n     
+    \"blueprintName\": \"Minor Enemy\",\r\n      \"position\": {\r\n        \"x\":
+    -1.0,\r\n        \"y\": 0.0,\r\n        \"magnitude\": 1.0,\r\n        \"sqrMagnitude\":
+    1.0\r\n      }\r\n    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 3,\r\n       
+    \"y\": 0\r\n      },\r\n      \"incoming\": [],\r\n      \"outgoing\": [\r\n       
+    {\r\n          \"x\": 2,\r\n          \"y\": 1\r\n        }\r\n      ],\r\n     
+    \"nodeType\": \"MinorEnemy\",\r\n      \"blueprintName\": \"Minor Enemy\",\r\n     
+    \"position\": {\r\n        \"x\": 1.0,\r\n        \"y\": 0.0,\r\n        \"magnitude\":
+    1.0,\r\n        \"sqrMagnitude\": 1.0\r\n      }\r\n    },\r\n    {\r\n     
+    \"point\": {\r\n        \"x\": 4,\r\n        \"y\": 0\r\n      },\r\n      \"incoming\":
+    [],\r\n      \"outgoing\": [\r\n        {\r\n          \"x\": 3,\r\n         
+    \"y\": 1\r\n        }\r\n      ],\r\n      \"nodeType\": \"MinorEnemy\",\r\n     
+    \"blueprintName\": \"Minor Enemy\",\r\n      \"position\": {\r\n        \"x\":
+    3.0,\r\n        \"y\": 0.0,\r\n        \"normalized\": {\r\n          \"x\":
+    1.0,\r\n          \"y\": 0.0,\r\n          \"magnitude\": 1.0,\r\n          \"sqrMagnitude\":
+    1.0\r\n        },\r\n        \"magnitude\": 3.0,\r\n        \"sqrMagnitude\":
+    9.0\r\n      }\r\n    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 1,\r\n       
+    \"y\": 1\r\n      },\r\n      \"incoming\": [\r\n        {\r\n          \"x\":
+    1,\r\n          \"y\": 0\r\n        }\r\n      ],\r\n      \"outgoing\": [\r\n       
+    {\r\n          \"x\": 0,\r\n          \"y\": 2\r\n        }\r\n      ],\r\n     
+    \"nodeType\": \"MinorEnemy\",\r\n      \"blueprintName\": \"Minor Enemy\",\r\n     
+    \"position\": {\r\n        \"x\": -3.36875033,\r\n        \"y\": 2.089065,\r\n       
+    \"normalized\": {\r\n          \"x\": -0.849853,\r\n          \"y\": 0.5270198,\r\n         
+    \"magnitude\": 1.0,\r\n          \"sqrMagnitude\": 0.99999994\r\n        },\r\n       
+    \"magnitude\": 3.96392131,\r\n        \"sqrMagnitude\": 15.7126713\r\n      }\r\n   
+    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 2,\r\n        \"y\": 1\r\n     
+    },\r\n      \"incoming\": [\r\n        {\r\n          \"x\": 3,\r\n         
+    \"y\": 0\r\n        },\r\n        {\r\n          \"x\": 1,\r\n          \"y\":
+    0\r\n        },\r\n        {\r\n          \"x\": 2,\r\n          \"y\": 0\r\n       
+    }\r\n      ],\r\n      \"outgoing\": [\r\n        {\r\n          \"x\": 2,\r\n         
+    \"y\": 2\r\n        }\r\n      ],\r\n      \"nodeType\": \"Treasure\",\r\n     
+    \"blueprintName\": \"Treasure\",\r\n      \"position\": {\r\n        \"x\": -0.9107004,\r\n       
+    \"y\": 3.50277853,\r\n        \"normalized\": {\r\n          \"x\": -0.251628131,\r\n         
+    \"y\": 0.967824,\r\n          \"magnitude\": 1.0,\r\n          \"sqrMagnitude\":
+    1.0\r\n        },\r\n        \"magnitude\": 3.619231,\r\n        \"sqrMagnitude\":
+    13.0988331\r\n      }\r\n    },\r\n    {\r\n      \"point\": {\r\n        \"x\":
+    3,\r\n        \"y\": 1\r\n      },\r\n      \"incoming\": [\r\n        {\r\n         
+    \"x\": 4,\r\n          \"y\": 0\r\n        }\r\n      ],\r\n      \"outgoing\":
+    [\r\n        {\r\n          \"x\": 2,\r\n          \"y\": 2\r\n        },\r\n       
+    {\r\n          \"x\": 3,\r\n          \"y\": 2\r\n        }\r\n      ],\r\n     
+    \"nodeType\": \"Treasure\",\r\n      \"blueprintName\": \"Treasure\",\r\n     
+    \"position\": {\r\n        \"x\": 0.4638015,\r\n        \"y\": 2.521151,\r\n       
+    \"normalized\": {\r\n          \"x\": 0.180928111,\r\n          \"y\": 0.983496368,\r\n         
+    \"magnitude\": 1.0,\r\n          \"sqrMagnitude\": 1.00000012\r\n        },\r\n       
+    \"magnitude\": 2.56345749,\r\n        \"sqrMagnitude\": 6.57131433\r\n      }\r\n   
+    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 0,\r\n        \"y\": 2\r\n     
+    },\r\n      \"incoming\": [\r\n        {\r\n          \"x\": 1,\r\n         
+    \"y\": 1\r\n        }\r\n      ],\r\n      \"outgoing\": [\r\n        {\r\n         
+    \"x\": 1,\r\n          \"y\": 3\r\n        }\r\n      ],\r\n      \"nodeType\":
+    \"MinorEnemy\",\r\n      \"blueprintName\": \"Minor Enemy\",\r\n      \"position\":
+    {\r\n        \"x\": -4.87356949,\r\n        \"y\": 5.134406,\r\n        \"normalized\":
+    {\r\n          \"x\": -0.6884438,\r\n          \"y\": 0.7252897,\r\n         
+    \"magnitude\": 1.0,\r\n          \"sqrMagnitude\": 1.0\r\n        },\r\n       
+    \"magnitude\": 7.07911062,\r\n        \"sqrMagnitude\": 50.1138039\r\n      }\r\n   
+    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 2,\r\n        \"y\": 2\r\n     
+    },\r\n      \"incoming\": [\r\n        {\r\n          \"x\": 3,\r\n         
+    \"y\": 1\r\n        },\r\n        {\r\n          \"x\": 2,\r\n          \"y\":
+    1\r\n        }\r\n      ],\r\n      \"outgoing\": [\r\n        {\r\n         
+    \"x\": 2,\r\n          \"y\": 3\r\n        }\r\n      ],\r\n      \"nodeType\":
+    \"MinorEnemy\",\r\n      \"blueprintName\": \"Minor Enemy\",\r\n      \"position\":
+    {\r\n        \"x\": -1.34198856,\r\n        \"y\": 4.80922,\r\n        \"normalized\":
+    {\r\n          \"x\": -0.2687768,\r\n          \"y\": 0.9632025,\r\n         
+    \"magnitude\": 1.0,\r\n          \"sqrMagnitude\": 1.0\r\n        },\r\n       
+    \"magnitude\": 4.992948,\r\n        \"sqrMagnitude\": 24.92953\r\n      }\r\n   
+    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 3,\r\n        \"y\": 2\r\n     
+    },\r\n      \"incoming\": [\r\n        {\r\n          \"x\": 3,\r\n         
+    \"y\": 1\r\n        }\r\n      ],\r\n      \"outgoing\": [\r\n        {\r\n         
+    \"x\": 2,\r\n          \"y\": 3\r\n        },\r\n        {\r\n          \"x\":
+    3,\r\n          \"y\": 3\r\n        }\r\n      ],\r\n      \"nodeType\": \"MinorEnemy\",\r\n     
+    \"blueprintName\": \"Minor Enemy\",\r\n      \"position\": {\r\n        \"x\":
+    0.936722755,\r\n        \"y\": 5.441952,\r\n        \"normalized\": {\r\n         
+    \"x\": 0.169635221,\r\n          \"y\": 0.985506952,\r\n          \"magnitude\":
+    1.0,\r\n          \"sqrMagnitude\": 1.00000012\r\n        },\r\n        \"magnitude\":
+    5.52198267,\r\n        \"sqrMagnitude\": 30.4922943\r\n      }\r\n    },\r\n   
+    {\r\n      \"point\": {\r\n        \"x\": 1,\r\n        \"y\": 3\r\n      },\r\n     
+    \"incoming\": [\r\n        {\r\n          \"x\": 0,\r\n          \"y\": 2\r\n       
+    }\r\n      ],\r\n      \"outgoing\": [\r\n        {\r\n          \"x\": 2,\r\n         
+    \"y\": 4\r\n        }\r\n      ],\r\n      \"nodeType\": \"RestSite\",\r\n     
+    \"blueprintName\": \"Rest Site\",\r\n      \"position\": {\r\n        \"x\":
+    -2.9372716,\r\n        \"y\": 7.69933033,\r\n        \"normalized\": {\r\n         
+    \"x\": -0.35643968,\r\n          \"y\": 0.934318364,\r\n          \"magnitude\":
+    1.0,\r\n          \"sqrMagnitude\": 1.0\r\n        },\r\n        \"magnitude\":
+    8.240585,\r\n        \"sqrMagnitude\": 67.90725\r\n      }\r\n    },\r\n    {\r\n     
+    \"point\": {\r\n        \"x\": 2,\r\n        \"y\": 3\r\n      },\r\n      \"incoming\":
+    [\r\n        {\r\n          \"x\": 2,\r\n          \"y\": 2\r\n        },\r\n       
+    {\r\n          \"x\": 3,\r\n          \"y\": 2\r\n        }\r\n      ],\r\n     
+    \"outgoing\": [\r\n        {\r\n          \"x\": 3,\r\n          \"y\": 4\r\n       
+    }\r\n      ],\r\n      \"nodeType\": \"MinorEnemy\",\r\n      \"blueprintName\":
+    \"Minor Enemy\",\r\n      \"position\": {\r\n        \"x\": -1.25654864,\r\n       
+    \"y\": 8.321269,\r\n        \"normalized\": {\r\n          \"x\": -0.149311721,\r\n         
+    \"y\": 0.988790154,\r\n          \"magnitude\": 1.0,\r\n          \"sqrMagnitude\":
+    0.99999994\r\n        },\r\n        \"magnitude\": 8.4156065,\r\n        \"sqrMagnitude\":
+    70.82243\r\n      }\r\n    },\r\n    {\r\n      \"point\": {\r\n        \"x\":
+    3,\r\n        \"y\": 3\r\n      },\r\n      \"incoming\": [\r\n        {\r\n         
+    \"x\": 3,\r\n          \"y\": 2\r\n        }\r\n      ],\r\n      \"outgoing\":
+    [\r\n        {\r\n          \"x\": 3,\r\n          \"y\": 4\r\n        }\r\n     
+    ],\r\n      \"nodeType\": \"Treasure\",\r\n      \"blueprintName\": \"Treasure\",\r\n     
+    \"position\": {\r\n        \"x\": 0.83576864,\r\n        \"y\": 7.89298868,\r\n       
+    \"normalized\": {\r\n          \"x\": 0.1052988,\r\n          \"y\": 0.9944406,\r\n         
+    \"magnitude\": 1.0,\r\n          \"sqrMagnitude\": 1.0\r\n        },\r\n       
+    \"magnitude\": 7.93711424,\r\n        \"sqrMagnitude\": 62.99778\r\n      }\r\n   
+    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 2,\r\n        \"y\": 4\r\n     
+    },\r\n      \"incoming\": [\r\n        {\r\n          \"x\": 1,\r\n         
+    \"y\": 3\r\n        }\r\n      ],\r\n      \"outgoing\": [\r\n        {\r\n         
+    \"x\": 1,\r\n          \"y\": 5\r\n        }\r\n      ],\r\n      \"nodeType\":
+    \"RestSite\",\r\n      \"blueprintName\": \"Rest Site\",\r\n      \"position\":
+    {\r\n        \"x\": -1.02933407,\r\n        \"y\": 10.0436983,\r\n        \"normalized\":
+    {\r\n          \"x\": -0.101951547,\r\n          \"y\": 0.994789362,\r\n         
+    \"magnitude\": 1.0,\r\n          \"sqrMagnitude\": 1.0\r\n        },\r\n       
+    \"magnitude\": 10.0963068,\r\n        \"sqrMagnitude\": 101.9354\r\n      }\r\n   
+    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 3,\r\n        \"y\": 4\r\n     
+    },\r\n      \"incoming\": [\r\n        {\r\n          \"x\": 3,\r\n         
+    \"y\": 3\r\n        },\r\n        {\r\n          \"x\": 2,\r\n          \"y\":
+    3\r\n        }\r\n      ],\r\n      \"outgoing\": [\r\n        {\r\n         
+    \"x\": 4,\r\n          \"y\": 5\r\n        },\r\n        {\r\n          \"x\":
+    3,\r\n          \"y\": 5\r\n        }\r\n      ],\r\n      \"nodeType\": \"MinorEnemy\",\r\n     
+    \"blueprintName\": \"Minor Enemy\",\r\n      \"position\": {\r\n        \"x\":
+    0.858297467,\r\n        \"y\": 10.089613,\r\n        \"normalized\": {\r\n         
+    \"x\": 0.0847613,\r\n          \"y\": 0.99640125,\r\n          \"normalized\":
+    {\r\n            \"x\": 0.08476131,\r\n            \"y\": 0.9964013,\r\n           
+    \"magnitude\": 1.0,\r\n            \"sqrMagnitude\": 1.0\r\n          },\r\n         
+    \"magnitude\": 0.99999994,\r\n          \"sqrMagnitude\": 0.99999994\r\n       
+    },\r\n        \"magnitude\": 10.1260538,\r\n        \"sqrMagnitude\": 102.536964\r\n     
+    }\r\n    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 1,\r\n        \"y\":
+    5\r\n      },\r\n      \"incoming\": [\r\n        {\r\n          \"x\": 2,\r\n         
+    \"y\": 4\r\n        }\r\n      ],\r\n      \"outgoing\": [\r\n        {\r\n         
+    \"x\": 2,\r\n          \"y\": 6\r\n        }\r\n      ],\r\n      \"nodeType\":
+    \"Store\",\r\n      \"blueprintName\": \"Store\",\r\n      \"position\": {\r\n       
+    \"x\": -3.36530423,\r\n        \"y\": 12.3520584,\r\n        \"normalized\":
+    {\r\n          \"x\": -0.262867361,\r\n          \"y\": 0.964831948,\r\n         
+    \"normalized\": {\r\n            \"x\": -0.2628674,\r\n            \"y\": 0.964832,\r\n           
+    \"magnitude\": 1.0,\r\n            \"sqrMagnitude\": 1.00000012\r\n         
+    },\r\n          \"magnitude\": 0.99999994,\r\n          \"sqrMagnitude\": 0.99999994\r\n       
+    },\r\n        \"magnitude\": 12.80229,\r\n        \"sqrMagnitude\": 163.898621\r\n     
+    }\r\n    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 3,\r\n        \"y\":
+    5\r\n      },\r\n      \"incoming\": [\r\n        {\r\n          \"x\": 3,\r\n         
+    \"y\": 4\r\n        }\r\n      ],\r\n      \"outgoing\": [\r\n        {\r\n         
+    \"x\": 2,\r\n          \"y\": 6\r\n        },\r\n        {\r\n          \"x\":
+    3,\r\n          \"y\": 6\r\n        }\r\n      ],\r\n      \"nodeType\": \"MinorEnemy\",\r\n     
+    \"blueprintName\": \"Minor Enemy\",\r\n      \"position\": {\r\n        \"x\":
+    0.6586273,\r\n        \"y\": 13.4529572,\r\n        \"normalized\": {\r\n         
+    \"x\": 0.0488992371,\r\n          \"y\": 0.9988037,\r\n          \"normalized\":
+    {\r\n            \"x\": 0.04889924,\r\n            \"y\": 0.998803735,\r\n           
+    \"magnitude\": 1.0,\r\n            \"sqrMagnitude\": 1.0\r\n          },\r\n         
+    \"magnitude\": 0.99999994,\r\n          \"sqrMagnitude\": 0.99999994\r\n       
+    },\r\n        \"magnitude\": 13.46907,\r\n        \"sqrMagnitude\": 181.415848\r\n     
+    }\r\n    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 4,\r\n        \"y\":
+    5\r\n      },\r\n      \"incoming\": [\r\n        {\r\n          \"x\": 3,\r\n         
+    \"y\": 4\r\n        }\r\n      ],\r\n      \"outgoing\": [\r\n        {\r\n         
+    \"x\": 4,\r\n          \"y\": 6\r\n        }\r\n      ],\r\n      \"nodeType\":
+    \"MinorEnemy\",\r\n      \"blueprintName\": \"Minor Enemy\",\r\n      \"position\":
+    {\r\n        \"x\": 2.3732357,\r\n        \"y\": 13.5188122,\r\n        \"normalized\":
+    {\r\n          \"x\": 0.1729065,\r\n          \"y\": 0.984938264,\r\n         
+    \"magnitude\": 1.0,\r\n          \"sqrMagnitude\": 1.0\r\n        },\r\n       
+    \"magnitude\": 13.725543,\r\n        \"sqrMagnitude\": 188.390533\r\n      }\r\n   
+    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 2,\r\n        \"y\": 6\r\n     
+    },\r\n      \"incoming\": [\r\n        {\r\n          \"x\": 3,\r\n         
+    \"y\": 5\r\n        },\r\n        {\r\n          \"x\": 1,\r\n          \"y\":
+    5\r\n        }\r\n      ],\r\n      \"outgoing\": [\r\n        {\r\n         
+    \"x\": 1,\r\n          \"y\": 7\r\n        },\r\n        {\r\n          \"x\":
+    2,\r\n          \"y\": 7\r\n        }\r\n      ],\r\n      \"nodeType\": \"Treasure\",\r\n     
+    \"blueprintName\": \"Treasure\",\r\n      \"position\": {\r\n        \"x\": -1.1536057,\r\n       
+    \"y\": 15.4839926,\r\n        \"normalized\": {\r\n          \"x\": -0.0742972,\r\n         
+    \"y\": 0.997236133,\r\n          \"magnitude\": 1.0,\r\n          \"sqrMagnitude\":
+    1.0\r\n        },\r\n        \"magnitude\": 15.526907,\r\n        \"sqrMagnitude\":
+    241.084839\r\n      }\r\n    },\r\n    {\r\n      \"point\": {\r\n        \"x\":
+    3,\r\n        \"y\": 6\r\n      },\r\n      \"incoming\": [\r\n        {\r\n         
+    \"x\": 3,\r\n          \"y\": 5\r\n        }\r\n      ],\r\n      \"outgoing\":
+    [\r\n        {\r\n          \"x\": 2,\r\n          \"y\": 7\r\n        }\r\n     
+    ],\r\n      \"nodeType\": \"Treasure\",\r\n      \"blueprintName\": \"Treasure\",\r\n     
+    \"position\": {\r\n        \"x\": 1.17424452,\r\n        \"y\": 15.4592733,\r\n       
+    \"normalized\": {\r\n          \"x\": 0.0757391155,\r\n          \"y\": 0.9971277,\r\n         
+    \"magnitude\": 1.0,\r\n          \"sqrMagnitude\": 1.00000012\r\n        },\r\n       
+    \"magnitude\": 15.5038052,\r\n        \"sqrMagnitude\": 240.367981\r\n      }\r\n   
+    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 4,\r\n        \"y\": 6\r\n     
+    },\r\n      \"incoming\": [\r\n        {\r\n          \"x\": 4,\r\n         
+    \"y\": 5\r\n        }\r\n      ],\r\n      \"outgoing\": [\r\n        {\r\n         
+    \"x\": 4,\r\n          \"y\": 7\r\n        }\r\n      ],\r\n      \"nodeType\":
+    \"Treasure\",\r\n      \"blueprintName\": \"Treasure\",\r\n      \"position\":
+    {\r\n        \"x\": 2.92556286,\r\n        \"y\": 15.4988108,\r\n        \"normalized\":
+    {\r\n          \"x\": 0.185484931,\r\n          \"y\": 0.9826471,\r\n         
+    \"magnitude\": 1.0,\r\n          \"sqrMagnitude\": 1.0\r\n        },\r\n       
+    \"magnitude\": 15.77251,\r\n        \"sqrMagnitude\": 248.772049\r\n      }\r\n   
+    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 1,\r\n        \"y\": 7\r\n     
+    },\r\n      \"incoming\": [\r\n        {\r\n          \"x\": 2,\r\n         
+    \"y\": 6\r\n        }\r\n      ],\r\n      \"outgoing\": [\r\n        {\r\n         
+    \"x\": 1,\r\n          \"y\": 8\r\n        }\r\n      ],\r\n      \"nodeType\":
+    \"Treasure\",\r\n      \"blueprintName\": \"Treasure\",\r\n      \"position\":
+    {\r\n        \"x\": -2.37572765,\r\n        \"y\": 17.7509518,\r\n        \"normalized\":
+    {\r\n          \"x\": -0.132653847,\r\n          \"y\": 0.9911624,\r\n         
+    \"magnitude\": 1.0,\r\n          \"sqrMagnitude\": 1.0\r\n        },\r\n       
+    \"magnitude\": 17.9092255,\r\n        \"sqrMagnitude\": 320.740356\r\n      }\r\n   
+    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 2,\r\n        \"y\": 7\r\n     
+    },\r\n      \"incoming\": [\r\n        {\r\n          \"x\": 3,\r\n         
+    \"y\": 6\r\n        },\r\n        {\r\n          \"x\": 2,\r\n          \"y\":
+    6\r\n        }\r\n      ],\r\n      \"outgoing\": [\r\n        {\r\n         
+    \"x\": 1,\r\n          \"y\": 8\r\n        },\r\n        {\r\n          \"x\":
+    3,\r\n          \"y\": 8\r\n        }\r\n      ],\r\n      \"nodeType\": \"MinorEnemy\",\r\n     
+    \"blueprintName\": \"Minor Enemy\",\r\n      \"position\": {\r\n        \"x\":
+    -0.174055636,\r\n        \"y\": 18.6539211,\r\n        \"normalized\": {\r\n         
+    \"x\": -0.009330373,\r\n          \"y\": 0.9999564,\r\n          \"normalized\":
+    {\r\n            \"x\": -0.009330374,\r\n            \"y\": 0.9999565,\r\n           
+    \"magnitude\": 1.0,\r\n            \"sqrMagnitude\": 1.0\r\n          },\r\n         
+    \"magnitude\": 0.99999994,\r\n          \"sqrMagnitude\": 0.99999994\r\n       
+    },\r\n        \"magnitude\": 18.6547337,\r\n        \"sqrMagnitude\": 347.999054\r\n     
+    }\r\n    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 4,\r\n        \"y\":
+    7\r\n      },\r\n      \"incoming\": [\r\n        {\r\n          \"x\": 4,\r\n         
+    \"y\": 6\r\n        }\r\n      ],\r\n      \"outgoing\": [\r\n        {\r\n         
+    \"x\": 3,\r\n          \"y\": 8\r\n        }\r\n      ],\r\n      \"nodeType\":
+    \"MinorEnemy\",\r\n      \"blueprintName\": \"Minor Enemy\",\r\n      \"position\":
+    {\r\n        \"x\": 2.91403079,\r\n        \"y\": 18.7725983,\r\n        \"normalized\":
+    {\r\n          \"x\": 0.153390855,\r\n          \"y\": 0.9881656,\r\n         
+    \"magnitude\": 1.0,\r\n          \"sqrMagnitude\": 1.0\r\n        },\r\n       
+    \"magnitude\": 18.9974213,\r\n        \"sqrMagnitude\": 360.902\r\n      }\r\n   
+    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 1,\r\n        \"y\": 8\r\n     
+    },\r\n      \"incoming\": [\r\n        {\r\n          \"x\": 1,\r\n         
+    \"y\": 7\r\n        },\r\n        {\r\n          \"x\": 2,\r\n          \"y\":
+    7\r\n        }\r\n      ],\r\n      \"outgoing\": [\r\n        {\r\n         
+    \"x\": 1,\r\n          \"y\": 9\r\n        },\r\n        {\r\n          \"x\":
+    0,\r\n          \"y\": 9\r\n        }\r\n      ],\r\n      \"nodeType\": \"Store\",\r\n     
+    \"blueprintName\": \"Store\",\r\n      \"position\": {\r\n        \"x\": -3.29328251,\r\n       
+    \"y\": 20.38142,\r\n        \"normalized\": {\r\n          \"x\": -0.159513637,\r\n         
+    \"y\": 0.9871957,\r\n          \"normalized\": {\r\n            \"x\": -0.159513652,\r\n           
+    \"y\": 0.98719573,\r\n            \"magnitude\": 1.0,\r\n            \"sqrMagnitude\":
+    1.0\r\n          },\r\n          \"magnitude\": 0.99999994,\r\n          \"sqrMagnitude\":
+    0.9999999\r\n        },\r\n        \"magnitude\": 20.6457748,\r\n        \"sqrMagnitude\":
+    426.248\r\n      }\r\n    },\r\n    {\r\n      \"point\": {\r\n        \"x\":
+    3,\r\n        \"y\": 8\r\n      },\r\n      \"incoming\": [\r\n        {\r\n         
+    \"x\": 4,\r\n          \"y\": 7\r\n        },\r\n        {\r\n          \"x\":
+    2,\r\n          \"y\": 7\r\n        }\r\n      ],\r\n      \"outgoing\": [\r\n       
+    {\r\n          \"x\": 2,\r\n          \"y\": 9\r\n        },\r\n        {\r\n         
+    \"x\": 4,\r\n          \"y\": 9\r\n        }\r\n      ],\r\n      \"nodeType\":
+    \"EliteEnemy\",\r\n      \"blueprintName\": \"Elite Enemy\",\r\n      \"position\":
+    {\r\n        \"x\": 0.761964142,\r\n        \"y\": 20.9413242,\r\n        \"normalized\":
+    {\r\n          \"x\": 0.0363616124,\r\n          \"y\": 0.999338746,\r\n         
+    \"magnitude\": 1.0,\r\n          \"sqrMagnitude\": 1.00000012\r\n        },\r\n       
+    \"magnitude\": 20.9551811,\r\n        \"sqrMagnitude\": 439.119659\r\n      }\r\n   
+    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 0,\r\n        \"y\": 9\r\n     
+    },\r\n      \"incoming\": [\r\n        {\r\n          \"x\": 1,\r\n         
+    \"y\": 8\r\n        }\r\n      ],\r\n      \"outgoing\": [\r\n        {\r\n         
+    \"x\": 2,\r\n          \"y\": 10\r\n        }\r\n      ],\r\n      \"nodeType\":
+    \"RestSite\",\r\n      \"blueprintName\": \"Rest Site\",\r\n      \"position\":
+    {\r\n        \"x\": -4.92325258,\r\n        \"y\": 23.3878231,\r\n        \"normalized\":
+    {\r\n          \"x\": -0.205990463,\r\n          \"y\": 0.978554,\r\n         
+    \"magnitude\": 1.0,\r\n          \"sqrMagnitude\": 1.0\r\n        },\r\n       
+    \"magnitude\": 23.90039,\r\n        \"sqrMagnitude\": 571.2287\r\n      }\r\n   
+    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 1,\r\n        \"y\": 9\r\n     
+    },\r\n      \"incoming\": [\r\n        {\r\n          \"x\": 1,\r\n         
+    \"y\": 8\r\n        }\r\n      ],\r\n      \"outgoing\": [\r\n        {\r\n         
+    \"x\": 2,\r\n          \"y\": 10\r\n        }\r\n      ],\r\n      \"nodeType\":
+    \"RestSite\",\r\n      \"blueprintName\": \"Rest Site\",\r\n      \"position\":
+    {\r\n        \"x\": -2.77466154,\r\n        \"y\": 22.8451424,\r\n        \"normalized\":
+    {\r\n          \"x\": -0.120569184,\r\n          \"y\": 0.9927049,\r\n         
+    \"magnitude\": 1.0,\r\n          \"sqrMagnitude\": 1.0\r\n        },\r\n       
+    \"magnitude\": 23.0130234,\r\n        \"sqrMagnitude\": 529.5993\r\n      }\r\n   
+    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 2,\r\n        \"y\": 9\r\n     
+    },\r\n      \"incoming\": [\r\n        {\r\n          \"x\": 3,\r\n         
+    \"y\": 8\r\n        }\r\n      ],\r\n      \"outgoing\": [\r\n        {\r\n         
+    \"x\": 2,\r\n          \"y\": 10\r\n        }\r\n      ],\r\n      \"nodeType\":
+    \"RestSite\",\r\n      \"blueprintName\": \"Rest Site\",\r\n      \"position\":
+    {\r\n        \"x\": -0.5445945,\r\n        \"y\": 22.3985577,\r\n        \"normalized\":
+    {\r\n          \"x\": -0.0243066363,\r\n          \"y\": 0.99970454,\r\n         
+    \"magnitude\": 1.0,\r\n          \"sqrMagnitude\": 1.0\r\n        },\r\n       
+    \"magnitude\": 22.4051781,\r\n        \"sqrMagnitude\": 501.991974\r\n      }\r\n   
+    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 4,\r\n        \"y\": 9\r\n     
+    },\r\n      \"incoming\": [\r\n        {\r\n          \"x\": 3,\r\n         
+    \"y\": 8\r\n        }\r\n      ],\r\n      \"outgoing\": [\r\n        {\r\n         
+    \"x\": 2,\r\n          \"y\": 10\r\n        }\r\n      ],\r\n      \"nodeType\":
+    \"RestSite\",\r\n      \"blueprintName\": \"Rest Site\",\r\n      \"position\":
+    {\r\n        \"x\": 2.96448326,\r\n        \"y\": 22.5266418,\r\n        \"normalized\":
+    {\r\n          \"x\": 0.130474046,\r\n          \"y\": 0.99145174,\r\n         
+    \"magnitude\": 1.0,\r\n          \"sqrMagnitude\": 1.0\r\n        },\r\n       
+    \"magnitude\": 22.7208652,\r\n        \"sqrMagnitude\": 516.237732\r\n      }\r\n   
+    },\r\n    {\r\n      \"point\": {\r\n        \"x\": 2,\r\n        \"y\": 10\r\n     
+    },\r\n      \"incoming\": [\r\n        {\r\n          \"x\": 2,\r\n         
+    \"y\": 9\r\n        },\r\n        {\r\n          \"x\": 1,\r\n          \"y\":
+    9\r\n        },\r\n        {\r\n          \"x\": 0,\r\n          \"y\": 9\r\n       
+    },\r\n        {\r\n          \"x\": 4,\r\n          \"y\": 9\r\n        }\r\n     
+    ],\r\n      \"outgoing\": [],\r\n      \"nodeType\": \"Boss\",\r\n      \"blueprintName\":
+    \"Executioner Boss\",\r\n      \"position\": {\r\n        \"x\": -1.12003839,\r\n       
+    \"y\": 26.8469,\r\n        \"normalized\": {\r\n          \"x\": -0.04168321,\r\n         
+    \"y\": 0.9991309,\r\n          \"magnitude\": 1.0,\r\n          \"sqrMagnitude\":
+    1.0\r\n        },\r\n        \"magnitude\": 26.8702545,\r\n        \"sqrMagnitude\":
+    722.010559\r\n      }\r\n    }\r\n  ],\r\n  \"path\": [\r\n    {\r\n      \"x\":
+    1,\r\n      \"y\": 0\r\n    },\r\n    {\r\n      \"x\": 1,\r\n      \"y\": 1\r\n   
+    }\r\n  ],\r\n  \"bossNodeName\": \"Spider Boss\",\r\n  \"configName\": \"DefaultMapConfig\"\r\n}"

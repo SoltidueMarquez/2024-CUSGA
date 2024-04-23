@@ -50,7 +50,15 @@ public class DamageManager : MonoSingleton<DamageManager>
         }
         //计算最终伤害
         damageInfo.finalDamage = Damage.FinalDamage(damageInfo.damage, damageInfo.level, damageInfo.diceType, damageInfo.addDamageArea, damageInfo.reduceDamageArea);
-
+        //走一遍onGetFinalDamage
+        foreach (var buff in attackerChaState.GetBuffHandler().buffList)
+        {
+            buff.buffData.onGetFinalDamage?.Invoke(buff, damageInfo);
+        }
+        foreach (var buff in defenderChaState.GetBuffHandler().buffList)
+        {
+            buff.buffData.onGetFinalDamage?.Invoke(buff, damageInfo);
+        }
         //如果能被杀死，就会走OnKill和OnBeKilled
         if (defenderChaState.CanBeKilledByDamageInfo(damageInfo))
         {

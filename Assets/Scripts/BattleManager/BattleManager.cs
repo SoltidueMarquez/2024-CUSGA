@@ -255,6 +255,8 @@ public class BattleManager : MonoBehaviour
         var enemyBattleDiceList = enemyDataSO.EnemyBattleDiceList;
         for (int i = 0; i < this.parameter.enemyChaStates.Length; i++)
         {
+            //初始化数量
+            this.parameter.enemyChaStates[i].GetBattleDiceHandler().battleDiceCount = enemyBattleDiceList.Count;
             this.parameter.enemyChaStates[i].GetBattleDiceHandler().InitDice(enemyBattleDiceList);
             this.parameter.enemyChaStates[i].SetBaseprop(enemyDataSO.baseProp);
             //初始化buff
@@ -326,6 +328,7 @@ public class BattleManager : MonoBehaviour
                 singleDiceObjs[i] = this.parameter.playerChaState.GetBattleDiceHandler().GetRandomSingleDice(i);
             }
         }
+        this.parameter.playerChaState.GetBuffHandler().BuffOnReRoll();
         this.parameter.playerChaState.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs.ToList<SingleDiceObj>());
         //这边需要删除所有当前骰面的视觉
 
@@ -540,7 +543,18 @@ public class BattleManager : MonoBehaviour
         this.parameter.playerDataSO.UpdatePlayerDataSO(parameter.playerChaState);
     }
     #endregion
-
+    #region 封装的战斗回调点
+    public void OnPlayerRoundStart()
+    {
+        this.parameter.enemyChaStates[0].GetBuffHandler().BuffRoundStartTick(0);
+        this.parameter.enemyChaStates[1].GetBuffHandler().BuffRoundStartTick(0);
+    }
+    public void OnEnemyRoundStart()
+    {
+        this.parameter.playerChaState.GetBuffHandler().BuffRoundStartTick(1);
+        this.parameter.enemyChaStates[0].GetBuffHandler().BuffRoundStartTick(1);
+    }
+    #endregion
 }
 //定义了一个回调，用于在UI动画结束时调用
 public delegate void OnUIAnimFinished();

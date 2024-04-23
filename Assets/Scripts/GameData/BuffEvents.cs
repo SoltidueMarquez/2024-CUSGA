@@ -531,7 +531,7 @@ namespace DesignerScripts
                 BuffEventName.Add1StackIfPlayerHavePositiveBuff.ToString(),Add1StackIfPlayerHavePositiveBuff
             }
         };
-
+        public static Dictionary<string, OnGetFinalDamage> onGetFinalDamageFunc = new();
 
         #endregion
 
@@ -798,24 +798,22 @@ namespace DesignerScripts
             }
         }
 
-        public static int Sensitive(BuffInfo buffInfo)//onRoll调用
+        public static void Sensitive(BuffInfo buffInfo)//onRoll调用
         {
             BuffInfo newVulnerableBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Vulnerable.ToString()], buffInfo.creator, buffInfo.target, (int)buffInfo.buffParam["Value"], false);
 
             buffInfo.target.GetComponent<ChaState>().AddBuff(newVulnerableBuff1, buffInfo.target);
 
             Debug.Log("由于敏感获得易伤");
-            return 0;
         }
 
-        public static int Brave(BuffInfo buffInfo)
+        public static void Brave(BuffInfo buffInfo)
         {
             BuffInfo newToughBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target, (int)buffInfo.buffParam["Value"], false);
 
             buffInfo.target.GetComponent<ChaState>().AddBuff(newToughBuff1, buffInfo.target);
 
             Debug.Log("由于勇敢获得坚韧");
-            return 0;
         }
 
         #endregion
@@ -1117,7 +1115,7 @@ namespace DesignerScripts
             }
         }
 
-        public static int Add1RerollAfterReroll(BuffInfo buffInfo)
+        public static void Add1RerollAfterReroll(BuffInfo buffInfo)
         {
             int count = (int)buffInfo.buffParam["Value"];
             if (count <= 2)
@@ -1132,7 +1130,6 @@ namespace DesignerScripts
                 Debug.Log("三指失效");
             }
 
-            return 0;
         }
 
         public static void ReuseDiceWhenDiceIs1(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)

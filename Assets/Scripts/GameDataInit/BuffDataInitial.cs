@@ -39,6 +39,7 @@ public class BuffDataInitial : MonoBehaviour
                 buffDataSos[i].onBeKilled == 0 ? "" : buffDataSos[i].onBeKilled.ToString(), buffDataSos[i].onBeKilledParams,
                 buffDataSos[i].onCast == 0 ? "" : buffDataSos[i].onCast.ToString(), buffDataSos[i].onCastParams,
                 buffDataSos[i].onAddBuff == 0 ? "" : buffDataSos[i].onAddBuff.ToString(), buffDataSos[i].onAddBuffParams,
+                buffDataSos[i].onGetFinalDamage == 0 ? "" : buffDataSos[i].onGetFinalDamage.ToString(), buffDataSos[i].onGetFinalDamageParams,
                 buffDataSos[i].stateMod,
                 buffDataSos[i].propMod)
                 );

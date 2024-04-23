@@ -344,6 +344,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Settlement Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1902226174270934145, guid: 36b68395345110a48b8a8080e4414506, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 55
+      objectReference: {fileID: 0}
     - target: {fileID: 5611124060600032634, guid: 36b68395345110a48b8a8080e4414506, type: 3}
       propertyPath: m_Pivot.x
       value: 0

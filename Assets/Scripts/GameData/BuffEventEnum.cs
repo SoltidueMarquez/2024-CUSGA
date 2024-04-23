@@ -183,3 +183,8 @@ public enum onAddBuffEnum
     Add1StackIfPlayerHavePositiveBuff,
 }
 
+public enum onGetFinalDamageEnum
+{
+    None,
+}
+

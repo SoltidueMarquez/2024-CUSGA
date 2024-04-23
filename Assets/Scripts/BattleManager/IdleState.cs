@@ -83,7 +83,7 @@ public class PlayerRoundStartResolutionState : IState
         //触发圣物里所有buff的OnRoundStart回调点
         HalidomManager.Instance.OnRoundStart();
         //触发角色里所有buff的OnRoundStart回调点
-        manager.parameter.playerChaState.OnRoundStart();
+        manager.OnPlayerRoundStart();
 
         //TODO播放自动投骰子动画
         Debug.Log("播骰子动画");
@@ -196,10 +196,7 @@ public class EnemyRoundStartResolutionState : IState
         CharacterUIManager.Instance.RemoveAllIntentionUIObject();
         //TODO：圣物所有在敌人判定阶段触发的回调点
         //触发所有敌人身上挂载的buff的OnRoundStart回调点
-        foreach (var enemy in manager.parameter.enemyChaStates)
-        {
-            enemy.OnRoundStart();
-        }
+        manager.OnEnemyRoundStart();
 
         ProcessPromptUIManager.Instance.ShowTip(Turn.Enemy, () => { manager.TransitionState(GameState.EnemyAction); });
         Debug.Log("Enter EnemyRoundStartResolutionState");
