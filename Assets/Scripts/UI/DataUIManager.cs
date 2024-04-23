@@ -56,7 +56,6 @@ namespace UI
             while (true)
             {
                 yield return new WaitForSeconds(step);
-                Debug.Log("每1秒执行一次");
                 if (_currentMoney < target)
                 {
                     _currentMoney++;
