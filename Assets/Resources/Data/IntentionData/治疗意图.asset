@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: "\u6CBB\u7597\u610F\u56FE"
   m_EditorClassIdentifier: 
   diceType: 2
-  description: 
+  description: "\u6CBB\u7597"
   intentionName: 
   icon: {fileID: 0}

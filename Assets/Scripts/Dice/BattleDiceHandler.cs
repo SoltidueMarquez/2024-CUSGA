@@ -30,6 +30,10 @@ public class BattleDiceHandler : MonoBehaviour
     /// 玩家和敌人身上能使用的骰面
     /// </summary>
     public SingleDiceObj[] diceCardsInUse;
+    /// <summary>
+    /// 用于查找上一个或者下一个
+    /// </summary>
+    private Stack<SingleDiceObj> previousSingleDices = new();
 
     /// <summary>
     /// 释放单个骰子
@@ -44,6 +48,18 @@ public class BattleDiceHandler : MonoBehaviour
             chaState.ModResources(-1 * singleDiceObj.model.cost);
             //释放骰子
             diceCardsInUse[index] = null;
+            if(singleDiceObj.model.buffInfos != null)
+            {
+                for(int i = 0;i <singleDiceObj.model.buffInfos.Length;i++)
+                {
+                    var item = singleDiceObj.model.buffInfos[i];
+                    singleDiceObj = item.buffData.OnCast?.Invoke(item, singleDiceObj); 
+                   
+                }
+            }
+            //添加进栈
+            previousSingleDices.Push(new SingleDiceObj(singleDiceObj));
+            
             //造成伤害
             Damage damage = singleDiceObj.model.damage;
             damage.indexDamageRate = singleDiceObj.idInDice ;//根据骰子的id来计算倍率
@@ -327,6 +343,11 @@ public class BattleDiceHandler : MonoBehaviour
             result.Add(a);
         }
         return result;
+    }
+
+    public void ClearPreviousSingleDiceStack()
+    {
+        this.previousSingleDices.Clear();
     }
     #endregion
     #region 存档相关
