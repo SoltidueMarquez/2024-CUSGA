@@ -81,7 +81,6 @@ namespace Map
                 case NodeType.MinorEnemy:
                     Vector2 cameraPosition = Camera.main.WorldToScreenPoint(mapNode.transform.position);
                     Vector2 viewPointView = Camera.main.ScreenToViewportPoint(cameraPosition);
-                    Debug.Log("cameraPosition: " + cameraPosition);
                     GameManager.Instance.enemyDataSO = EnemyManager.GetEnemyDataSOviaCondition(EnemyType.Normal);
                     MapManager.Instance.playerDataSO.ifUseSaveData = true;
                     MapManager.Instance.OnExitMap();
