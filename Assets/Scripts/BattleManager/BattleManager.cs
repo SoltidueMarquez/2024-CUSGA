@@ -546,8 +546,8 @@ public class BattleManager : MonoBehaviour
     #region 封装的战斗回调点
     public void OnPlayerRoundStart()
     {
+        this.parameter.playerChaState.GetBuffHandler().BuffRoundStartTick(0);
         this.parameter.enemyChaStates[0].GetBuffHandler().BuffRoundStartTick(0);
-        this.parameter.enemyChaStates[1].GetBuffHandler().BuffRoundStartTick(0);
     }
     public void OnEnemyRoundStart()
     {
