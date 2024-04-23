@@ -825,7 +825,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u751C\u7F8E\u7684\u6B7B\u4EA1\uFF0C\u91CD\u5F52\u5B81\u9759"
+  m_Text: "\uFF1F\uFF1F\uFF1F"
 --- !u!1 &6211854220364162248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1031,11 +1031,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settlementTextList: []
   totalScoreText: {fileID: 1733775872579523452}
+  titleText: {fileID: 1984694523131152802}
   template: {fileID: 5988322767293121156, guid: be618ba314ec9b847a5efa8952a4745b, type: 3}
   parent: {fileID: 2067162915472630163}
   animTime: 1
   exitButton: {fileID: 618449005932612886}
   uiCanvas: {fileID: 8241176675683390200}
+  titleList:
+  - "\u751C\u7F8E\u7684\u6B7B\u4EA1"
+  - "\u4E00\u5207\u91CD\u5F52\u5B81\u9759"
+  - "\u4E0D\u6B7B\u4E0D\u4F11"
+  - "\u73AB\u7470\u85CF\u4E8E\u5341\u5B57\u4E4B\u4E0B"
+  - "\u6B32\u671B\u4E8E\u6B64\u957F\u7720"
 --- !u!1 &8241176675683390200
 GameObject:
   m_ObjectHideFlags: 0
