@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Map
@@ -57,7 +58,7 @@ namespace Map
             mapManager.SaveMap();
             view.SetAttainableNodes();
             view.SetLineColors();
-            //mapNode.ShowSwirlAnimation();
+            mapNode.ShowSwirlAnimation();
             
             DOTween.Sequence().AppendInterval(enterNodeDelay).OnComplete(() => EnterNode(mapNode));
         }
@@ -78,24 +79,20 @@ namespace Map
             // if you choose to show GUI in some of these cases, do not forget to set "Locked" in MapPlayerTracker back to false
             switch (mapNode.Node.nodeType)
             {
-                case NodeType.MinorEnemy:
-                    Vector2 cameraPosition = Camera.main.WorldToScreenPoint(mapNode.transform.position);
-                    Vector2 viewPointView = Camera.main.ScreenToViewportPoint(cameraPosition);
-                    Debug.Log("cameraPosition: " + cameraPosition);
-                    GameManager.Instance.enemyDataSO = EnemyManager.GetEnemyDataSOviaCondition(EnemyType.Normal);
-                    MapManager.Instance.playerDataSO.ifUseSaveData = true;
-                    MapManager.Instance.OnExitMap();
-                    SceneLoader.Instance.LoadSceneAsync(GameScene.BattleScene, viewPointView);
+                case NodeType.EasyEnemy:
+                    EnterBattleNode(mapNode.transform, EnemyType.Easy);
                     break;
-                case NodeType.EliteEnemy:
+                case NodeType.NormalEnemy:
+                    EnterBattleNode(mapNode.transform, EnemyType.Normal);
                     break;
-                case NodeType.RestSite:
-                    break;
-                case NodeType.Treasure:
+                case NodeType.HardEnemy:
+                    EnterBattleNode(mapNode.transform, EnemyType.Hard);
                     break;
                 case NodeType.Store:
+                    MapManager.Instance.playerDataSO.playerRoomData.roomNums++;
                     break;
                 case NodeType.Boss:
+                    EnterBattleNode(mapNode.transform, EnemyType.Boss);
                     break;
                 case NodeType.Mystery:
                     break;
@@ -103,7 +100,24 @@ namespace Map
                     throw new ArgumentOutOfRangeException();
             }
         }
+        /// <summary>
+        /// 战斗界面的封装
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <param name="enemyType"></param>
+        public static void EnterBattleNode(Transform transform,EnemyType enemyType)
+        {
+            Vector2 cameraPosition = Camera.main.WorldToScreenPoint(transform.position);
+            Vector2 viewPointView = Camera.main.ScreenToViewportPoint(cameraPosition);
 
+            GameManager.Instance.enemyDataSO = EnemyManager.GetEnemyDataSOviaCondition(enemyType, MapManager.Instance.playerDataSO.playerRoomData.enemyIDs);
+
+
+            MapManager.Instance.playerDataSO.ifUseSaveData = true;
+            MapManager.Instance.OnExitMap();//保存数据
+
+            SceneLoader.Instance.LoadSceneAsync(GameScene.BattleScene, viewPointView);
+        }
         private void PlayWarningThatNodeCannotBeAccessed()
         {
             Debug.Log("Selected node cannot be accessed");

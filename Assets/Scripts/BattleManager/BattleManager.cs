@@ -87,7 +87,6 @@ public class BattleManager : MonoBehaviour
         }
         // 否则，将自身设为实例，并保持在场景切换时不被销毁
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
 
@@ -107,11 +106,13 @@ public class BattleManager : MonoBehaviour
         states.Add(GameState.PlayerLoseResolution, new PlayerLoseResolutionState(this));
         states.Add(GameState.PlayerWin, new PlayerWinState(this));
         states.Add(GameState.Reward, new RewardState(this));
-
+        if(GameManager.Instance.enemyDataSO!= null)
+        {
+            parameter.playerDataSO = GameManager.Instance.playerDataSO;
+        }
         //设置初始状态
         TransitionState(GameState.GameStart);
         //这边是本场景的一些初始化
-        this.parameter.enemyDataSO = GameManager.Instance.enemyDataSO;
     }
 
     private void Update()
@@ -541,6 +542,13 @@ public class BattleManager : MonoBehaviour
     public void EndBattle()
     {
         this.parameter.playerDataSO.UpdatePlayerDataSO(parameter.playerChaState);
+        this.parameter.playerDataSO.SaveData();
+        SceneLoader.Instance.LoadSceneAsync(GameScene.MapScene,new Vector2(0.5f,0.5f));
+    }
+    public void EndGame()
+    {
+        this.parameter.playerDataSO.UpdatePlayerDataSO(parameter.playerChaState);
+        this.parameter.playerDataSO.SaveData();
     }
     #endregion
     #region 封装的战斗回调点

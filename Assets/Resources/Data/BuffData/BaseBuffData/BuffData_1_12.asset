@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1_12
   dataName: 89
-  tags: []
+  tags:
+  - PlayerOnRoundStart
   maxStack: 5
   duringCount: 0
   isPermanent: 1

@@ -345,6 +345,9 @@ public class PlayerWinState : IState
     {
 
         Debug.Log("Enter PlayerWinState");
+        //在这边进行一些数据的更新
+        GameManager.Instance.playerDataSO.playerRoomData.roomNums++;
+        GameManager.Instance.playerDataSO.UpdatePlayerRoomData(this.manager.parameter.enemyDataSO);
         ProcessPromptUIManager.Instance.DoFightEndUIAnim(null);
         BattleManager.Instance.TransitionState(GameState.Reward);
 

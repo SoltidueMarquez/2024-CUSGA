@@ -32,29 +32,7 @@ namespace Map
             InitializePlayer();
             //地图场景圣物初始化
             InitializeHalidom();
-
             //地图场景地图初始化
-            //if (PlayerPrefs.HasKey("Map"))
-            //{
-            //    var mapJson = PlayerPrefs.GetString("Map");
-            //    var map = JsonConvert.DeserializeObject<Map>(mapJson);
-            //    // using this instead of .Contains()
-            //    if (map.path.Any(p => p.Equals(map.GetBossNode().point)))
-            //    {
-            //        // payer has already reached the boss, generate a new map
-            //        GenerateNewMap();
-            //    }
-            //    else
-            //    {
-            //        CurrentMap = map;
-            //        // player has not reached the boss yet, load the current map
-            //        view.ShowMap(map);
-            //    }
-            //}
-            //else
-            //{
-            //    GenerateNewMap();
-            //}
             InitializeMap();
         }
 
@@ -66,6 +44,8 @@ namespace Map
             view.ShowMap(map);
             this.playerDataSO.ifHasMap = true;
             this.playerDataSO.ifHasData = true;
+            //和地图相关的数据
+            this.playerDataSO.playerRoomData =new();
             string mapString = map.ToJson();
             this.playerDataSO.UpdataPlayerDataSoMap(mapString);
             this.playerDataSO.UpdatePlayerDataSO(this.playerChaState);
@@ -92,7 +72,7 @@ namespace Map
         /// </summary>
         public void InitializePlayer()
         {
-
+            
             //初始化玩家的基础数值
             this.playerChaState.SetBaseprop(playerDataSO.baseProp);
             //对圣物设置玩家的基础数值

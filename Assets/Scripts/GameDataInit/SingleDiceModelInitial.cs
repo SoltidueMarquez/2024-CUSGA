@@ -31,6 +31,8 @@ public class SingleDiceModelInitial : MonoBehaviour
                     null)
                 );
         }
+        Destroy(this);
+
     }
     /// <summary>
     /// csy: create a new buffInfo list with buffDataSO list

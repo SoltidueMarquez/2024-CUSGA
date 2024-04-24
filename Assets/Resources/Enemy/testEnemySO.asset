@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 576aa348e8b3a92498ed15e7f5425ad7, type: 3}
   m_Name: testEnemySO
   m_EditorClassIdentifier: 
+  EnemyID: 0_0
   enemyType: 0
   EnemyBattleDiceList:
   - diceType: 0
@@ -31,8 +32,11 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
     - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
   baseProp:
-    health: 10
+    health: 50
     money: 0
     maxRollTimes: 0
     shield: 0
-  enemyBuffs: []
+  enemyBuffs:
+  - buffDataSO: {fileID: 11400000, guid: 50fcd5eec68b5254c889018f6446b3d5, type: 2}
+    buffStack: 1
+    buffRound: 0

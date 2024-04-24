@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using DG.Tweening;
 using UI.Store;
@@ -14,6 +15,7 @@ namespace UI
         [SerializeField, Tooltip("金钱文本")] private Text moneyText;
         [SerializeField, Tooltip("血量文本")] private Text healthText;
         private int _currentMoney;//记录当前金币文本
+        private int _newMoney;
         
         /// <summary>
         /// 更新回合数
@@ -39,25 +41,25 @@ namespace UI
         /// <param name="money"></param>
         public void UpdateMoneyText(int money)
         {
+            StopCoroutine(ChangeMoneyText());
+            _newMoney = money;
             var offset = _currentMoney - money;
             if (offset == 0) { return; }
-
-            StartCoroutine(ChangeMoneyText(money));
+            StartCoroutine(ChangeMoneyText());
         }
-        private IEnumerator ChangeMoneyText(int target)
+        private IEnumerator ChangeMoneyText()
         {
-            var offset = Mathf.Abs(_currentMoney - target);
+            var offset = Mathf.Abs(_currentMoney - _newMoney);
             var step = offset switch
             {
                 < 10 => 0.1f,
                 < 100 => 0.01f,
                 _ => 0.01f
             };
-            while (true)
+            while (_currentMoney != _newMoney)
             {
                 yield return new WaitForSeconds(step);
-                Debug.Log("每1秒执行一次");
-                if (_currentMoney < target)
+                if (_currentMoney < _newMoney)
                 {
                     _currentMoney++;
                 }
@@ -66,11 +68,8 @@ namespace UI
                     _currentMoney--;
                 }
                 moneyText.text = $"￥{_currentMoney}";
-                if (_currentMoney == target)
-                {
-                    break;
-                }
             }
+            Debug.LogWarning($"改成{_newMoney}");
         }
 
         /// <summary>

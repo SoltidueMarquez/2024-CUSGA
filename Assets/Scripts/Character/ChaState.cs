@@ -60,6 +60,7 @@ public class ChaState : MonoBehaviour
     public void OnRoundEnd()
     {
         buffHandler.BuffRoundEndTick();
+        this.battleDiceHandler.ClearBattleSingleDices();
     }
     #endregion
     #region 使用骰面

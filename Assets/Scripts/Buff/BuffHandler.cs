@@ -95,6 +95,7 @@ public class BuffHandler : MonoBehaviour
     /// <summary>
     /// 每个回合开始的时候，对buff的时间进行处理,side表示当前是哪一方的回合
     /// </summary>
+    #region 回调点
     public void BuffRoundStartTick(int side)
     {
         if (side == 0)
@@ -153,6 +154,15 @@ public class BuffHandler : MonoBehaviour
             buff.buffData.onRoll?.Invoke(buff);
         }
     }
+    //待定
+    public void BuffOnCast()
+    {
+        foreach(var buff in buffList)
+        {
+            
+        }
+    }
+    #endregion
     public void RecheckBuff(ChaProperty[] buffProp, ref ChaControlState chaControlState)
     {
 

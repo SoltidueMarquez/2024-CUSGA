@@ -13,7 +13,7 @@ public class StartManager : MonoSingleton<StartManager>
     void Start()
     {
         checkCanvas.SetActive(false);
-        //Èç¹ûÓĞ½øĞĞÖĞµÄ¶Ô¾Ö£¬¼¤»î¼ÌĞøÓÎÏ·°´Å¥
+        //å¦‚æœæœ‰è¿›è¡Œä¸­çš„å¯¹å±€ï¼Œæ¿€æ´»ç»§ç»­æ¸¸æˆæŒ‰é’®
         if (GameManager.Instance.CheckIfHasSaveData())
         {
             continueButton.gameObject.SetActive(true);
@@ -28,7 +28,7 @@ public class StartManager : MonoSingleton<StartManager>
 
     public void OnClickStartButton()
     {
-        //Èç¹ûÓĞ½øĞĞÖĞµÄ¶Ô¾Ö£¬ÏÔÊ¾ÌáÊ¾
+        //å¦‚æœæœ‰è¿›è¡Œä¸­çš„å¯¹å±€ï¼Œæ˜¾ç¤ºæç¤º
         if (GameManager.Instance.CheckIfHasSaveData())
         {
             checkCanvas.SetActive(true);
@@ -42,16 +42,16 @@ public class StartManager : MonoSingleton<StartManager>
     public void OnClickContinueButton()
     {
         GameManager.Instance.ContinueGame();
-        //¼ÓÔØ´æµµ£¬Ìø×ª³¡¾°
-        SceneManager.LoadScene("SampleScene");
+        //åŠ è½½å­˜æ¡£ï¼Œè·³è½¬åœºæ™¯
+        SceneManager.LoadScene("MapScene");
     }
 
     public void StartNewGame()
     {
-        //Çå¿Õ´æµµ
+        //æ¸…ç©ºå­˜æ¡£
         GameManager.Instance.NewGame();
-        //¼ÓÔØµØÍ¼
-        SceneManager.LoadScene("SampleScene");
+        //åŠ è½½åœ°å›¾
+        SceneManager.LoadScene("MapScene");
     }
 
     public void OnClickQuitButton()

@@ -30,6 +30,10 @@ public class BattleDiceHandler : MonoBehaviour
     /// 玩家和敌人身上能使用的骰面
     /// </summary>
     public SingleDiceObj[] diceCardsInUse;
+    /// <summary>
+    /// 用于查找上一个或者下一个
+    /// </summary>
+    private Stack<SingleDiceObj> previousSingleDices = new();
 
     /// <summary>
     /// 释放单个骰子
@@ -43,10 +47,24 @@ public class BattleDiceHandler : MonoBehaviour
             //减少资源
             chaState.ModResources(-1 * singleDiceObj.model.cost);
             //释放骰子
+            if (singleDiceObj.model.buffInfos.Length > 0)
+            {
+                Debug.Log(singleDiceObj.model.buffInfos.Length);
+                for (int i = 0; i < singleDiceObj.model.buffInfos.Length; i++)
+                {
+                    var item = singleDiceObj.model.buffInfos[i];
+                    var result = item.buffData.OnCast?.Invoke(item, singleDiceObj);
+                    singleDiceObj = result == null ? singleDiceObj : result;
+
+                }
+            }
+            //添加进栈
+            previousSingleDices.Push(new SingleDiceObj(singleDiceObj));
             diceCardsInUse[index] = null;
+
             //造成伤害
             Damage damage = singleDiceObj.model.damage;
-            damage.indexDamageRate = singleDiceObj.idInDice ;//根据骰子的id来计算倍率
+            damage.indexDamageRate = singleDiceObj.idInDice;//根据骰子的id来计算倍率
             //再次通过tag查找需要加入damageInfo类中的加给敌人的buffInfo
             List<BuffInfo> addToEnemyBuffs = null;
             if (singleDiceObj.model.buffInfos != null)
@@ -74,7 +92,7 @@ public class BattleDiceHandler : MonoBehaviour
                 }
             }
             //释放骰子
-            
+
 
         }
         else
@@ -97,7 +115,7 @@ public class BattleDiceHandler : MonoBehaviour
     }
 
     #region 骰面交换
-    public void SwapDiceInBagAndBattle(SingleDiceObj singleDiceObjInBag,SingleDiceObj singleDiceObjInBattle,int indexOfDices)
+    public void SwapDiceInBagAndBattle(SingleDiceObj singleDiceObjInBag, SingleDiceObj singleDiceObjInBattle, int indexOfDices)
     {
         int indexInBag = bagDiceCards.IndexOf(singleDiceObjInBag);
         var singleDiceObjs = this.battleDices[indexOfDices].GetBattleDiceSingleDices();
@@ -111,7 +129,7 @@ public class BattleDiceHandler : MonoBehaviour
     /// <param name="singleDiceObjs"></param>
     public void ResetDiceInBag(List<SingleDiceObj> singleDiceObjs)
     {
-        for(int i = 0; i < singleDiceObjs.Count; i++)
+        for (int i = 0; i < singleDiceObjs.Count; i++)
         {
             bagDiceCards[i] = singleDiceObjs[i];
         }
@@ -157,7 +175,7 @@ public class BattleDiceHandler : MonoBehaviour
                 var singleDiceObjSOData = battleDiceSOData.singleDiceObjSODatas[j];
                 string singleDiceid = singleDiceObjSOData.id;
                 var singleDiceModel = ResourcesManager.GetSingleDiceModelViaid(singleDiceid);
-                
+
                 battleDice.AddDice(singleDiceModel, singleDiceObjSOData.idInDice, i, j);
             }
         }
@@ -328,6 +346,11 @@ public class BattleDiceHandler : MonoBehaviour
         }
         return result;
     }
+
+    public void ClearPreviousSingleDiceStack()
+    {
+        this.previousSingleDices.Clear();
+    }
     #endregion
     #region 存档相关
     /// <summary>
@@ -379,4 +402,10 @@ public class BattleDiceHandler : MonoBehaviour
         return singleDiceObjSODatas;
     }
     #endregion
+
+
+    public Stack<SingleDiceObj> GetPreviousSingleDicesStack()
+    {
+        return this.previousSingleDices;
+    }
 }

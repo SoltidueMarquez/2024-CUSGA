@@ -35,4 +35,16 @@ public class SingleDiceObj
         this.level = model.level;
         SaleValue = Mathf.FloorToInt(value / 4);
     }
+    /// <summary>
+    /// 拷贝一份
+    /// </summary>
+    /// <param name="singleDiceObj"></param>
+    public SingleDiceObj(SingleDiceObj singleDiceObj)
+    {
+        this.model = singleDiceObj.model;
+        this.idInDice = singleDiceObj.idInDice;
+        this.value = singleDiceObj.value;
+        this.level = singleDiceObj .level;
+        SaleValue = singleDiceObj .SaleValue;
+    }
 }

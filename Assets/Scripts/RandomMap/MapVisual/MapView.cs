@@ -49,6 +49,8 @@ namespace Map
         public Color32 visitedColor = Color.white;
         [Tooltip("Locked node color")]
         public Color32 lockedColor = Color.gray;
+        [Tooltip("Unattainable node color")]
+        public Color32 unAttainableColor = Color.black;
         [Tooltip("Visited or available path color")]
         public Color32 lineVisitedColor = Color.white;
         [Tooltip("Unavailable path color")]
@@ -128,6 +130,7 @@ namespace Map
             backgroundObject.transform.localPosition = new Vector3(bossNode.transform.localPosition.x, span / 2f, 0f);
             backgroundObject.transform.localRotation = Quaternion.identity;
             var sr = backgroundObject.AddComponent<SpriteRenderer>();
+            sr.sortingOrder = -2;
             sr.color = backgroundColor;
             sr.drawMode = SpriteDrawMode.Sliced;
             sr.sprite = background;
@@ -175,6 +178,7 @@ namespace Map
             foreach (var node in MapNodes)
                 node.SetState(NodeStates.Locked);
 
+
             if (mapManager.CurrentMap.path.Count == 0)
             {
                 // we have not started traveling on this map yet, set entire first layer as attainable:
@@ -183,6 +187,13 @@ namespace Map
             }
             else
             {
+                var currentPoint = mapManager.CurrentMap.path[mapManager.CurrentMap.path.Count - 1];
+                var currentNode = mapManager.CurrentMap.GetNode(currentPoint);
+                //foreach (var node in MapNodes)
+                //{
+                //    if(node.Node.point.y <= currentNode.point.y)
+                //        node.SetState(NodeStates.unAttainable);
+                //}
                 // we have already started moving on this map, first highlight the path as visited:
                 foreach (var point in mapManager.CurrentMap.path)
                 {
@@ -191,8 +202,6 @@ namespace Map
                         mapNode.SetState(NodeStates.Visited);
                 }
 
-                var currentPoint = mapManager.CurrentMap.path[mapManager.CurrentMap.path.Count - 1];
-                var currentNode = mapManager.CurrentMap.GetNode(currentPoint);
 
                 // set all the nodes that we can travel to as attainable:
                 foreach (var point in currentNode.outgoing)
@@ -201,6 +210,9 @@ namespace Map
                     if (mapNode != null)
                         mapNode.SetState(NodeStates.Attainable);
                 }
+
+
+
             }
         }
 
@@ -315,6 +327,7 @@ namespace Map
 
             var lineObject = Instantiate(linePrefab, mapParent.transform);
             var lineRenderer = lineObject.GetComponent<LineRenderer>();
+            var lineRenderer2 =lineObject.transform.GetChild(0).GetComponent<LineRenderer>();
             var fromPoint = from.transform.position +
                             (to.transform.position - from.transform.position).normalized * offsetFromNodes;
 
@@ -324,12 +337,15 @@ namespace Map
             // drawing lines in local space:
             lineObject.transform.position = fromPoint;
             lineRenderer.useWorldSpace = false;
-
+            lineRenderer2.useWorldSpace = false;
             // line renderer with 2 points only does not handle transparency properly:
             lineRenderer.positionCount = linePointsCount;
+            lineRenderer2.positionCount = linePointsCount;
             for (var i = 0; i < linePointsCount; i++)
             {
                 lineRenderer.SetPosition(i,
+                    Vector3.Lerp(Vector3.zero, toPoint - fromPoint, (float)i / (linePointsCount - 1)));
+                lineRenderer2.SetPosition(i,
                     Vector3.Lerp(Vector3.zero, toPoint - fromPoint, (float)i / (linePointsCount - 1)));
             }
 

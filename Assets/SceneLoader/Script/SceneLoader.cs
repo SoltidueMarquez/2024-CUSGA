@@ -80,6 +80,7 @@ public class SceneLoader : MonoSingleton<SceneLoader>
             timer += 20;
             await UniTask.Delay(TimeSpan.FromMilliseconds(20));
         }
+        Hide();
     }
     #endregion
 

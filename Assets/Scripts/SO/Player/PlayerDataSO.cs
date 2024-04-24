@@ -45,6 +45,13 @@ public class HalidomDataForSave
     public string halidomName;
     public int halidomIndex;
 }
+[Serializable]
+public struct PlayerRoomData
+{
+    public int roomNums;
+    public List<string> enemyIDs;
+    public List<string> bossIDs;
+}
 
 [CreateAssetMenu(fileName = "PlayerDataSO", menuName = "Data/PlayerDataSO", order = 1)]
 /// <summary>
@@ -79,6 +86,8 @@ public class PlayerDataSO : ScriptableObject
 
     public bool ifHasMap;
     public string currentMap;
+    [Header("玩家当前和房间相关的信息")]
+    public PlayerRoomData playerRoomData;
     /// <summary>
     /// 从json文件中读取数据
     /// </summary>
@@ -110,6 +119,7 @@ public class PlayerDataSO : ScriptableObject
         string playerDataJson = JsonConvert.SerializeObject(playerData);
         SImpleJsonUtil.WriteData("PlayerData.json", playerDataJson);
     }
+    #region 更新playerDataSO的数据
     /// <summary>
     /// 可序列化的数据
     /// </summary>
@@ -136,4 +146,20 @@ public class PlayerDataSO : ScriptableObject
     {
         this.currentMap = mapString;
     }
+    /// <summary>
+    /// 根据敌人的类型更新玩家的房间数据
+    /// </summary>
+    /// <param name="enemyType"></param>
+    public void UpdatePlayerRoomData(EnemyDataSO enemyDataSO)
+    {
+        if(enemyDataSO.enemyType == EnemyType.Boss)
+        {
+            playerRoomData.bossIDs.Add(enemyDataSO.EnemyID);
+        }
+        else
+        {
+            playerRoomData.enemyIDs.Add(enemyDataSO.EnemyID);
+        }
+    }
+    #endregion
 }

@@ -4,8 +4,9 @@ namespace Map
 {
     public enum NodeType
     {
-        MinorEnemy,
-        EliteEnemy,
+        EasyEnemy,
+        NormalEnemy,
+        HardEnemy,
         RestSite,
         Treasure,
         Store,
