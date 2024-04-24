@@ -32,7 +32,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
     - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
   baseProp:
-    health: 10
+    health: 50
     money: 0
     maxRollTimes: 0
     shield: 0

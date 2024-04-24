@@ -13,9 +13,18 @@ public static class EnemyManager
     public static EnemyDataSO GetEnemyDataSOviaCondition(EnemyType enemyType,List<string> enemyIDs)
     {
         EnemyDataSO[] enemyDataSOs = Resources.LoadAll<EnemyDataSO>("Enemy");
-
         //这边先找出所有的敌人，然后再找出符合条件的敌人
-        var resultList = enemyDataSOs.Where(x => ((!enemyIDs.Contains(x.EnemyID)) && x.enemyType == enemyType)).ToList();
+        List<EnemyDataSO> resultList = new();
+        for (int i = 0; i < enemyDataSOs.Length; i++)
+        {
+            if (enemyDataSOs[i].enemyType == enemyType && !enemyIDs.Contains(enemyDataSOs[i].EnemyID))
+            {
+                resultList.Add(enemyDataSOs[i]);
+            }
+        }
+        //var resultList = enemyDataSOs.Where(x => ((!enemyIDs.Contains(x.EnemyID)) && x.enemyType == enemyType)).ToList();
+        Debug.Log("找到的敌人数量" + resultList.Count);
+
         if(resultList.Count == 0)
         {
             Debug.LogWarning("找不到符合要求的新敌人，将从旧的中随机挑选");

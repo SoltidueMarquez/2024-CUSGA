@@ -112,7 +112,6 @@ namespace Map
 
             GameManager.Instance.enemyDataSO = EnemyManager.GetEnemyDataSOviaCondition(enemyType, MapManager.Instance.playerDataSO.playerRoomData.enemyIDs);
 
-
             MapManager.Instance.playerDataSO.ifUseSaveData = true;
             MapManager.Instance.OnExitMap();//保存数据
 
