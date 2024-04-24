@@ -545,6 +545,11 @@ public class BattleManager : MonoBehaviour
         this.parameter.playerDataSO.SaveData();
         SceneLoader.Instance.LoadSceneAsync(GameScene.MapScene,new Vector2(0.5f,0.5f));
     }
+    public void EndGame()
+    {
+        this.parameter.playerDataSO.UpdatePlayerDataSO(parameter.playerChaState);
+        this.parameter.playerDataSO.SaveData();
+    }
     #endregion
     #region 封装的战斗回调点
     public void OnPlayerRoundStart()

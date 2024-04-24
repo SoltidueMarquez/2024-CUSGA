@@ -15,7 +15,7 @@ public class PlayerData
     public bool ifHasSaveData;
     //玩家的Map信息,因为unity的json无法序列化map，所以这里用string代替
     public string map;
-    public List<string> enemyIDs = new();
+    public PlayerRoomData playerRoomData = new();
     public PlayerData(PlayerDataSO playerDataSO)
     {
         chaResource = playerDataSO.chaResource;
@@ -24,7 +24,7 @@ public class PlayerData
         bagDiceList = playerDataSO.bagDiceList;
         map = playerDataSO.currentMap;
         ifHasSaveData = playerDataSO.ifHasData;
-        enemyIDs = playerDataSO.enemyIDList;
+        playerRoomData = playerDataSO.playerRoomData;
     }
     public PlayerData()
     {

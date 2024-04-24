@@ -38,12 +38,36 @@ public class GameManager : MonoSingleton<GameManager>
     #region 结算场景调用
     public int GetPlayerKillEnemyCount()
     {
-        return playerDataSO.enemyIDList.Count;
+        return playerDataSO.playerRoomData.enemyIDs.Count;
     }
 
     public int GetCurrentPlayerLayer()
     {
-        return playerDataSO.enemyIDList.Count;
+        return playerDataSO.playerRoomData.roomNums;
+    }
+    public int GetPlayerKillBossCount()
+    {
+        return playerDataSO.playerRoomData.bossIDs.Count;
+    }
+    public int GetHalidomCount()
+    {
+        return playerDataSO.halidomDataForSaves.Count;
+    }
+    public int GetBagDiceCount()
+    {
+        return playerDataSO.bagDiceList.Count;
+    }
+    public int GetExtraMoney()
+    {
+        return playerDataSO.chaResource.currentMoney - playerDataSO.baseProp.money;
+    }
+    /// <summary>
+    /// 检查是否通关，暂时只有一个boss，做成这样是为了以后扩展
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckIfPassGame()
+    {
+        return playerDataSO.playerRoomData.bossIDs.Count > 0;
     }
     #endregion
 

@@ -67,7 +67,7 @@ namespace Map
             this.playerDataSO.ifHasMap = true;
             this.playerDataSO.ifHasData = true;
             //和地图相关的数据
-            this.playerDataSO.enemyIDList = new List<string>();
+            this.playerDataSO.playerRoomData =new();
             string mapString = map.ToJson();
             this.playerDataSO.UpdataPlayerDataSoMap(mapString);
             this.playerDataSO.UpdatePlayerDataSO(this.playerChaState);
