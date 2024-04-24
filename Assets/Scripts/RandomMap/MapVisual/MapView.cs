@@ -130,6 +130,7 @@ namespace Map
             backgroundObject.transform.localPosition = new Vector3(bossNode.transform.localPosition.x, span / 2f, 0f);
             backgroundObject.transform.localRotation = Quaternion.identity;
             var sr = backgroundObject.AddComponent<SpriteRenderer>();
+            sr.sortingOrder = -2;
             sr.color = backgroundColor;
             sr.drawMode = SpriteDrawMode.Sliced;
             sr.sprite = background;
@@ -326,6 +327,7 @@ namespace Map
 
             var lineObject = Instantiate(linePrefab, mapParent.transform);
             var lineRenderer = lineObject.GetComponent<LineRenderer>();
+            var lineRenderer2 =lineObject.transform.GetChild(0).GetComponent<LineRenderer>();
             var fromPoint = from.transform.position +
                             (to.transform.position - from.transform.position).normalized * offsetFromNodes;
 
@@ -335,12 +337,15 @@ namespace Map
             // drawing lines in local space:
             lineObject.transform.position = fromPoint;
             lineRenderer.useWorldSpace = false;
-
+            lineRenderer2.useWorldSpace = false;
             // line renderer with 2 points only does not handle transparency properly:
             lineRenderer.positionCount = linePointsCount;
+            lineRenderer2.positionCount = linePointsCount;
             for (var i = 0; i < linePointsCount; i++)
             {
                 lineRenderer.SetPosition(i,
+                    Vector3.Lerp(Vector3.zero, toPoint - fromPoint, (float)i / (linePointsCount - 1)));
+                lineRenderer2.SetPosition(i,
                     Vector3.Lerp(Vector3.zero, toPoint - fromPoint, (float)i / (linePointsCount - 1)));
             }
 
