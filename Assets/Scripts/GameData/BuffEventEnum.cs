@@ -174,6 +174,7 @@ public enum onCastEnum
     None,
     LoseEnergy,
     Add1StackIfPlayerHaveStrength,
+    Imitate,
 
 }
 public enum onAddBuffEnum

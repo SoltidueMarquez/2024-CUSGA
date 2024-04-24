@@ -10,27 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b82dfb058aec19848972490bda5eafbd, type: 3}
-  m_Name: BuffData_1_14
+  m_Name: BuffData_5_04
   m_EditorClassIdentifier: 
-  id: 1_14
-  dataName: 91
-  tags:
-  - PlayerOnRoundStart
+  id: 5_04
+  dataName: 107
+  tags: []
   maxStack: 5
   duringCount: 0
-  isPermanent: 1
+  isPermanent: 0
   buffUpdateEnum: 0
   removeStackUpdateEnum: 0
   onCreate: 0
   onRemove: 0
-  onRoundStart: 11
+  onRoundStart: 0
   onRoundEnd: 0
   onHit: 0
   onBeHurt: 0
   onRoll: 0
   onKill: 0
   onBeKilled: 0
-  onCast: 0
+  onCast: 3
   onAddBuff: 0
   onGetFinalDamage: 0
   stateMod:
@@ -40,4 +39,4 @@ MonoBehaviour:
   propMod: []
   paramList: []
   description: 
-  sprite: {fileID: -1295613742, guid: aa22c55a3819f6d4da669cc1b598577e, type: 3}
+  sprite: {fileID: 0}

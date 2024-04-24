@@ -156,6 +156,9 @@ namespace DesignerScripts
         DoubleHit,
         TripleHit,
 
+        //4.24
+        Imitate,
+
     }
     public class BuffDataTable
     {
