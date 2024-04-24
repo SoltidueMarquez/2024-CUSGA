@@ -58,7 +58,17 @@ namespace Settlement_Scene
         //TODO:调用外部存档的接口获取信息
         private float ReadInfo(SettlementDataType dataType)
         {
-            return Random.Range(0, 10);
+            return dataType switch
+            {
+                SettlementDataType.房间数 => GameManager.Instance.GetCurrentPlayerLayer(),
+                SettlementDataType.敌人 => GameManager.Instance.GetPlayerKillEnemyCount(),
+                SettlementDataType.Boss => GameManager.Instance.GetPlayerKillBossCount(),
+                SettlementDataType.金钱 => GameManager.Instance.GetExtraMoney() > 0 ? GameManager.Instance.GetExtraMoney() : 0,
+                SettlementDataType.圣物 => GameManager.Instance.GetHalidomCount(),
+                SettlementDataType.骰面 => GameManager.Instance.GetBagDiceCount(),
+                SettlementDataType.是否通关 => GameManager.Instance.CheckIfPassGame() ? 1 : 0,
+                _ => 0
+            };
         }
 
         #region 测试
