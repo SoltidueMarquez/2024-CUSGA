@@ -129,6 +129,8 @@ namespace DesignerScripts
 
         DoubleHit,
         TripleHit,
+
+        Imitate,
         #endregion
 
         #region 稀有圣物
@@ -519,7 +521,11 @@ namespace DesignerScripts
             //圣物buff
             {
                 BuffEventName.Add1StackIfPlayerHaveStrength.ToString(),Add1StackIfPlayerHaveStrength
-            }
+            },
+            //骰子
+            {
+                BuffEventName.Imitate.ToString(),Imitate
+            },
         };
         public static Dictionary<string, OnAddBuff> onAddFunc = new Dictionary<string, OnAddBuff>()
         {
@@ -1784,6 +1790,14 @@ namespace DesignerScripts
                 buffInfo.buffParam["IsFirstDeal"] = true;
             }
         }
+
+        public static SingleDiceObj Imitate(BuffInfo buffInfo, SingleDiceObj singleDiceObj)
+        {
+            BattleDiceHandler tempBattleDiceHandler=buffInfo.creator.GetComponent<ChaState>().GetBattleDiceHandler();
+            var stack = tempBattleDiceHandler.GetPreviousSingleDicesStack();
+            return stack.Pop();
+        }
+        
 
         #endregion
 

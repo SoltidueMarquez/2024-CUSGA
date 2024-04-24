@@ -402,4 +402,10 @@ public class BattleDiceHandler : MonoBehaviour
         return singleDiceObjSODatas;
     }
     #endregion
+
+
+    public Stack<SingleDiceObj> GetPreviousSingleDicesStack()
+    {
+        return this.previousSingleDices;
+    }
 }
