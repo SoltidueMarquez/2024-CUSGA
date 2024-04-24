@@ -162,7 +162,10 @@ MonoBehaviour:
     rgba: 4294967295
   lockedColor:
     serializedVersion: 2
-    rgba: 4282795590
+    rgba: 2102875991
+  unAttainableColor:
+    serializedVersion: 2
+    rgba: 1998659874
   lineVisitedColor:
     serializedVersion: 2
     rgba: 4294967295

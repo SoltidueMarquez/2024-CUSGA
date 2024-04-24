@@ -32,29 +32,7 @@ namespace Map
             InitializePlayer();
             //地图场景圣物初始化
             InitializeHalidom();
-
             //地图场景地图初始化
-            //if (PlayerPrefs.HasKey("Map"))
-            //{
-            //    var mapJson = PlayerPrefs.GetString("Map");
-            //    var map = JsonConvert.DeserializeObject<Map>(mapJson);
-            //    // using this instead of .Contains()
-            //    if (map.path.Any(p => p.Equals(map.GetBossNode().point)))
-            //    {
-            //        // payer has already reached the boss, generate a new map
-            //        GenerateNewMap();
-            //    }
-            //    else
-            //    {
-            //        CurrentMap = map;
-            //        // player has not reached the boss yet, load the current map
-            //        view.ShowMap(map);
-            //    }
-            //}
-            //else
-            //{
-            //    GenerateNewMap();
-            //}
             InitializeMap();
         }
 

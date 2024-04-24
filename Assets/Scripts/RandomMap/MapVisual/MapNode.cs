@@ -10,7 +10,8 @@ namespace Map
     {
         Locked,
         Visited,
-        Attainable
+        Attainable,
+        unAttainable
     }
 }
 
@@ -30,10 +31,13 @@ namespace Map
         public NodeBlueprint Blueprint { get; private set; }
 
         private float initialScale;
-        private const float HoverScaleFactor = 1.2f;
+        private const float HoverScaleFactor = 1.3f;
         private float mouseDownTime;
 
         private const float MaxClickDuration = 0.5f;
+
+
+        private Tween attainableNodeScaleLoopTween;
 
         public void SetUp(Node node, NodeBlueprint blueprint)
         {
@@ -54,9 +58,9 @@ namespace Map
             if (circleImage != null)
             {
                 circleImage.color = MapView.Instance.visitedColor;
-                circleImage.gameObject.SetActive(false);    
+                circleImage.gameObject.SetActive(false);
             }
-            
+
             SetState(NodeStates.Locked);
         }
 
@@ -64,13 +68,13 @@ namespace Map
         {
             if (visitedCircle != null) visitedCircle.gameObject.SetActive(false);
             if (circleImage != null) circleImage.gameObject.SetActive(false);
-            
+
             switch (state)
             {
                 case NodeStates.Locked:
                     if (sr != null)
                     {
-                        //sr.DOKill();
+                        sr.DOKill();
                         sr.color = MapView.Instance.lockedColor;
                     }
 
@@ -84,35 +88,51 @@ namespace Map
                 case NodeStates.Visited:
                     if (sr != null)
                     {
-                        //sr.DOKill();
+                        sr.DOKill();
                         sr.color = MapView.Instance.visitedColor;
                     }
-                    
+
                     if (image != null)
                     {
                         image.DOKill();
                         image.color = MapView.Instance.visitedColor;
                     }
                     //设置圈圈显现
-                    //if (visitedCircle != null) visitedCircle.gameObject.SetActive(true);
+                    if (visitedCircle != null) visitedCircle.gameObject.SetActive(true);
                     if (circleImage != null) circleImage.gameObject.SetActive(true);
                     break;
                 case NodeStates.Attainable:
                     // start pulsating from visited to locked color:
+
                     if (sr != null)
                     {
                         sr.color = MapView.Instance.lockedColor;
-                        //sr.DOKill();
+                        sr.DOKill();
                         //sr.DOColor(MapView.Instance.visitedColor, 0.5f).SetLoops(-1, LoopType.Yoyo);
+                         attainableNodeScaleLoopTween = sr.transform.DOScale(initialScale * 1.1f, 0.5f).SetLoops(-1, LoopType.Yoyo);
                     }
-                    
+
                     if (image != null)
                     {
                         image.color = MapView.Instance.lockedColor;
                         image.DOKill();
                         image.DOColor(MapView.Instance.visitedColor, 0.5f).SetLoops(-1, LoopType.Yoyo);
                     }
-                    
+
+                    break;
+                case NodeStates.unAttainable:
+                    if (sr != null)
+                    {
+                        sr.DOKill();
+                        sr.color = MapView.Instance.unAttainableColor;
+                    }
+
+                    if (image != null)
+                    {
+                        image.DOKill();
+                        image.color = MapView.Instance.unAttainableColor;
+                    }
+
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(state), state, null);
@@ -124,12 +144,12 @@ namespace Map
             if (sr != null)
             {
                 //sr.transform.DOKill();
-                //sr.transform.DOScale(initialScale * HoverScaleFactor, 0.3f);
+                attainableNodeScaleLoopTween.Pause();
+                sr.transform.DOScale(initialScale * HoverScaleFactor, 0.3f);
             }
-
             if (image != null)
             {
-                image.transform.DOKill();
+                //image.transform.DOKill();
                 image.transform.DOScale(initialScale * HoverScaleFactor, 0.3f);
             }
         }
@@ -139,9 +159,10 @@ namespace Map
             if (sr != null)
             {
                 //sr.transform.DOKill();
-                //sr.transform.DOScale(initialScale, 0.3f);
+                sr.transform.DOScale(initialScale, 0.3f);
+                attainableNodeScaleLoopTween.Play();
             }
-
+            
             if (image != null)
             {
                 //image.transform.DOKill();

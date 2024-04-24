@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576aa348e8b3a92498ed15e7f5425ad7, type: 3}
+  m_Name: testBoss
+  m_EditorClassIdentifier: 
+  EnemyID: 0_0
+  enemyType: 0
+  EnemyBattleDiceList:
+  - diceType: 0
+    singleDiceModelSOs:
+    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
+    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
+    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
+    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
+    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
+    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
+  - diceType: 0
+    singleDiceModelSOs:
+    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
+    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
+    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
+    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
+    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
+    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
+  baseProp:
+    health: 10
+    money: 0
+    maxRollTimes: 0
+    shield: 0
+  enemyBuffs: []

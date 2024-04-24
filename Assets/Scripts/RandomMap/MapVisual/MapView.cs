@@ -49,6 +49,8 @@ namespace Map
         public Color32 visitedColor = Color.white;
         [Tooltip("Locked node color")]
         public Color32 lockedColor = Color.gray;
+        [Tooltip("Unattainable node color")]
+        public Color32 unAttainableColor = Color.black;
         [Tooltip("Visited or available path color")]
         public Color32 lineVisitedColor = Color.white;
         [Tooltip("Unavailable path color")]
@@ -175,6 +177,7 @@ namespace Map
             foreach (var node in MapNodes)
                 node.SetState(NodeStates.Locked);
 
+
             if (mapManager.CurrentMap.path.Count == 0)
             {
                 // we have not started traveling on this map yet, set entire first layer as attainable:
@@ -183,6 +186,13 @@ namespace Map
             }
             else
             {
+                var currentPoint = mapManager.CurrentMap.path[mapManager.CurrentMap.path.Count - 1];
+                var currentNode = mapManager.CurrentMap.GetNode(currentPoint);
+                //foreach (var node in MapNodes)
+                //{
+                //    if(node.Node.point.y <= currentNode.point.y)
+                //        node.SetState(NodeStates.unAttainable);
+                //}
                 // we have already started moving on this map, first highlight the path as visited:
                 foreach (var point in mapManager.CurrentMap.path)
                 {
@@ -191,8 +201,6 @@ namespace Map
                         mapNode.SetState(NodeStates.Visited);
                 }
 
-                var currentPoint = mapManager.CurrentMap.path[mapManager.CurrentMap.path.Count - 1];
-                var currentNode = mapManager.CurrentMap.GetNode(currentPoint);
 
                 // set all the nodes that we can travel to as attainable:
                 foreach (var point in currentNode.outgoing)
@@ -201,6 +209,9 @@ namespace Map
                     if (mapNode != null)
                         mapNode.SetState(NodeStates.Attainable);
                 }
+
+
+
             }
         }
 
