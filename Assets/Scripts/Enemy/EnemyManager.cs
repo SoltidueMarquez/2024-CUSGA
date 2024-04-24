@@ -15,12 +15,13 @@ public static class EnemyManager
         EnemyDataSO[] enemyDataSOs = Resources.LoadAll<EnemyDataSO>("Enemy");
 
         //这边先找出所有的敌人，然后再找出符合条件的敌人
-        var resultList = enemyDataSOs.Where(x => (!enemyIDs.Contains(x.EnemyID) && x.enemyType == enemyType)).ToList();
+        var resultList = enemyDataSOs.Where(x => ((!enemyIDs.Contains(x.EnemyID)) && x.enemyType == enemyType)).ToList();
         if(resultList.Count == 0)
         {
             Debug.LogWarning("找不到符合要求的新敌人，将从旧的中随机挑选");
             resultList = enemyDataSOs.Where(x => x.enemyType == enemyType).ToList();
         }
+        
         return resultList[Random.Range(0,resultList.Count)];
     }
 }

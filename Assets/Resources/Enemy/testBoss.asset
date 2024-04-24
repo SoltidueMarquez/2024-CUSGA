@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: testBoss
   m_EditorClassIdentifier: 
   EnemyID: 0_0
-  enemyType: 0
+  enemyType: 3
   EnemyBattleDiceList:
   - diceType: 0
     singleDiceModelSOs:

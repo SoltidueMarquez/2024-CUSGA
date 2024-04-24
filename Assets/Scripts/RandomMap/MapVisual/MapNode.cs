@@ -120,20 +120,20 @@ namespace Map
                     }
 
                     break;
-                case NodeStates.unAttainable:
-                    if (sr != null)
-                    {
-                        sr.DOKill();
-                        sr.color = MapView.Instance.unAttainableColor;
-                    }
+                //case NodeStates.unAttainable:
+                //    if (sr != null)
+                //    {
+                //        sr.DOKill();
+                //        sr.color = MapView.Instance.unAttainableColor;
+                //    }
 
-                    if (image != null)
-                    {
-                        image.DOKill();
-                        image.color = MapView.Instance.unAttainableColor;
-                    }
+                //    if (image != null)
+                //    {
+                //        image.DOKill();
+                //        image.color = MapView.Instance.unAttainableColor;
+                //    }
 
-                    break;
+                //    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(state), state, null);
             }
@@ -181,6 +181,7 @@ namespace Map
             {
                 // user clicked on this node:
                 MapPlayerTracker.Instance.SelectNode(this);
+                Debug.Log("Clicked on node: " + Node.point);
             }
         }
 
