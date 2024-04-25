@@ -1573,8 +1573,18 @@ namespace DesignerScripts
         }
         public static void EnhanceAttackAfterSellDice(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
-            damageInfo.addDamageArea += (int)buffInfo.buffParam["Value"] * 0.01f;
-            Debug.Log("增加伤害" + (int)buffInfo.buffParam["Value"] + "%");
+            if ((int)buffInfo.buffParam["Value"] >= 30)
+            {
+                damageInfo.addDamageArea += 0.3f;
+                Debug.Log("增加30%伤害");
+
+            }
+            else
+            {
+                damageInfo.addDamageArea += (int)buffInfo.buffParam["Value"] * 0.01f;
+                Debug.Log("增加伤害" + (int)buffInfo.buffParam["Value"] + "%");
+            }
+            
         }
 
 
@@ -1601,10 +1611,19 @@ namespace DesignerScripts
 
         public static void EnhanceAttackWhenHit(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
-            damageInfo.addDamageArea += (int)buffInfo.buffParam["Value"] * 0.01f;
-            Debug.Log("伤害增加了" + (int)buffInfo.buffParam["Value"] + "%");
-            buffInfo.buffParam["Value"] = (int)buffInfo.buffParam["Value"] + 5;
-            Debug.Log((int)buffInfo.buffParam["Value"] + "<=现在");
+            if((int)buffInfo.buffParam["Value"]>=6)
+            {
+                damageInfo.addDamageArea += 0.3f;
+                Debug.Log("伤害增加了30%");
+            }
+            else
+            {
+                damageInfo.addDamageArea += (int)buffInfo.buffParam["Value"] * 0.01f;
+                Debug.Log("伤害增加了" + (int)buffInfo.buffParam["Value"] + "%");
+                buffInfo.buffParam["Value"] = (int)buffInfo.buffParam["Value"] + 5;
+                Debug.Log((int)buffInfo.buffParam["Value"]);
+
+            }
 
         }
 
