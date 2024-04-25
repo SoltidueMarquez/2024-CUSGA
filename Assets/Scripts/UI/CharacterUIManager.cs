@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace UI
 {
@@ -64,6 +64,8 @@ namespace UI
         private void CreateAttackText(Transform parent,int hit,Vector3 position)
         {
             var tmp = Instantiate(attackTextTemplate, parent, true);
+            var randomOffset = Random.Range(-10, 20);
+            position = new Vector3(position.x + randomOffset, position.y, position.z);
             tmp.transform.position = position;//更改位置
             tmp.GetComponent<AttackText>().Init(hit,attackTime);//初始化
             tmp.SetActive(true);
