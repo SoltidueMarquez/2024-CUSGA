@@ -90,6 +90,7 @@ namespace Map
                     break;
                 case NodeType.Store:
                     MapManager.Instance.playerDataSO.playerRoomData.roomNums++;
+                    StoreManager.Instance.OnEnterStore?.Invoke();
                     break;
                 case NodeType.Boss:
                     EnterBattleNode(mapNode.transform, EnemyType.Boss);
@@ -111,7 +112,7 @@ namespace Map
             Vector2 viewPointView = Camera.main.ScreenToViewportPoint(cameraPosition);
 
             GameManager.Instance.enemyDataSO = EnemyManager.GetEnemyDataSOviaCondition(enemyType, MapManager.Instance.playerDataSO.playerRoomData.enemyIDs);
-
+            Debug.Log("Enter Battle Node: " + GameManager.Instance.enemyDataSO.enemyType.ToString());
             MapManager.Instance.playerDataSO.ifUseSaveData = true;
             MapManager.Instance.OnExitMap();//保存数据
 

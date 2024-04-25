@@ -14,6 +14,8 @@ public static class EnemyManager
     {
         EnemyDataSO[] enemyDataSOs = Resources.LoadAll<EnemyDataSO>("Enemy");
         //这边先找出所有的敌人，然后再找出符合条件的敌人
+        List<EnemyDataSO> enemyDataSOList = new();
+        enemyDataSOList = enemyDataSOs.Where(x => x.enemyType == enemyType).ToList();
         List<EnemyDataSO> resultList = new();
         for (int i = 0; i < enemyDataSOs.Length; i++)
         {
@@ -32,7 +34,6 @@ public static class EnemyManager
                 }
             }
         }
-        //var resultList = enemyDataSOs.Where(x => ((!enemyIDs.Contains(x.EnemyID)) && x.enemyType == enemyType)).ToList();
         Debug.Log("找到的敌人数量" + resultList.Count);
 
         if (resultList.Count == 0)

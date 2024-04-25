@@ -34,6 +34,9 @@ namespace Map
             InitializeHalidom();
             //地图场景地图初始化
             InitializeMap();
+
+            //一些其他东西的初始化
+            StoreManager.Instance.OnExitStore.AddListener(OnExitShop);
         }
 
         public void GenerateNewMap()
@@ -212,7 +215,12 @@ namespace Map
             this.playerDataSO.UpdatePlayerDataSO(this.playerChaState);
             this.playerDataSO.UpdataPlayerDataSoMap(CurrentMap.ToJson());
             this.playerDataSO.SaveData();
-        }    
+        }
+        public void OnExitShop()
+        {
+            MapPlayerTracker.Instance.Locked = false;
+            view.SetAttainableNodes();
+        }
         #endregion
     }
 }

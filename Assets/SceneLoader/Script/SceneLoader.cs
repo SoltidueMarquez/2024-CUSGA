@@ -10,7 +10,7 @@ public enum GameScene
 {
     MapScene,
     BattleScene,
-
+    StartGame
 }
 public enum TransitionMode
 {
