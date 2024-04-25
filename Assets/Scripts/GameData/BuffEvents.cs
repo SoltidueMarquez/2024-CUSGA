@@ -770,9 +770,10 @@ namespace DesignerScripts
                 if (buffInfo.curStack == 0)
                 {
                     buffInfo.isPermanent = false;
-                    int index= buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
-                    var characterSide= (Character)buffInfo.target.GetComponent<ChaState>().side;
+                    int index = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
+                    var characterSide = (Character)buffInfo.target.GetComponent<ChaState>().side;
                     BuffUIManager.Instance.RemoveBuffUIObject(characterSide, index);
+                    //buffInfo.target.GetComponent<ChaState>().GetBuffHandler().RemoveBuff(buffInfo);
                 }
 
             }
@@ -1438,8 +1439,9 @@ namespace DesignerScripts
 
         public static void Gain2NormalHalidomWhenGain(BuffInfo buffInfo)
         {
-            RandomManager.GetRandomHalidomObj(RareType.Common);
-            RandomManager.GetRandomHalidomObj(RareType.Common);
+            HalidomManager.Instance.AddHalidom(RandomManager.GetRandomHalidomObj(RareType.Common));
+            HalidomManager.Instance.AddHalidom(RandomManager.GetRandomHalidomObj(RareType.Common));
+            Debug.Log("增加两个普通圣物");
         }
 
 
@@ -1662,8 +1664,8 @@ namespace DesignerScripts
 
         public static void Gain2RareHalidom(BuffInfo buffInfo)
         {
-            RandomManager.GetRandomHalidomObj(RareType.Rare);
-            RandomManager.GetRandomHalidomObj(RareType.Rare);
+            HalidomManager.Instance.AddHalidom(RandomManager.GetRandomHalidomObj(RareType.Rare));
+            HalidomManager.Instance.AddHalidom(RandomManager.GetRandomHalidomObj(RareType.Rare));
             Debug.Log("获得两个稀有圣物");
         }
 
