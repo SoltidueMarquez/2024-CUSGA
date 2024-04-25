@@ -10,7 +10,7 @@ public enum GameScene
 {
     MapScene,
     BattleScene,
-
+    StartGame
 }
 public enum TransitionMode
 {
@@ -26,7 +26,7 @@ public class SceneLoader : MonoSingleton<SceneLoader>
     private Material maskMaterial;
     [Header("参数")]
     public float duration;
-
+    public GameScene currentGameScene;
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -44,7 +44,7 @@ public class SceneLoader : MonoSingleton<SceneLoader>
         await MaskTranstion(position, duration, TransitionMode.In);
         asyncLoad.allowSceneActivation = true;
         await MaskTranstion(new Vector2(0.5f,0.5f), duration, TransitionMode.Out);
-        //await LoadSceneAsyncUnitask(gameScene);
+        currentGameScene = gameScene;
     }
 
     #region 遮罩转场

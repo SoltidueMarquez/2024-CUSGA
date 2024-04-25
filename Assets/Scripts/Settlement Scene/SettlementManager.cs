@@ -70,15 +70,5 @@ namespace Settlement_Scene
                 _ => 0
             };
         }
-
-        #region 测试
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                onEnterSettlement.Invoke();
-            }
-        }
-        #endregion
     }
 }

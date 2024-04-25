@@ -75,6 +75,7 @@ namespace Map
                     if (sr != null)
                     {
                         sr.DOKill();
+                        sr.transform.DOKill();
                         sr.color = MapView.Instance.lockedColor;
                     }
 
@@ -89,6 +90,7 @@ namespace Map
                     if (sr != null)
                     {
                         sr.DOKill();
+                        sr.transform.DOKill();
                         sr.color = MapView.Instance.visitedColor;
                     }
 
@@ -108,7 +110,7 @@ namespace Map
                     {
                         sr.color = MapView.Instance.lockedColor;
                         sr.DOKill();
-                        //sr.DOColor(MapView.Instance.visitedColor, 0.5f).SetLoops(-1, LoopType.Yoyo);
+                        sr.DOColor(MapView.Instance.visitedColor, 0.5f).SetLoops(-1, LoopType.Yoyo);
                          attainableNodeScaleLoopTween = sr.transform.DOScale(initialScale * 1.1f, 0.5f).SetLoops(-1, LoopType.Yoyo);
                     }
 

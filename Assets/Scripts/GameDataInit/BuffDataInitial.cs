@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using DesignerScripts;
 
-public class BuffDataInitial : MonoBehaviour
+public class BuffDataInitial : MonoSingleton<BuffDataInitial>
 {
     private BuffDataSO[] buffDataSos;
     // Start is called before the first frame update
-    void Awake()
+    public override void Awake()
     {
+        base.Awake();
         buffDataSos = Resources.LoadAll<BuffDataSO>("Data/BuffData");
         for (int i = 0; i < buffDataSos.Length; i++)
         {
@@ -44,7 +45,6 @@ public class BuffDataInitial : MonoBehaviour
                 buffDataSos[i].propMod)
                 );
         }
-        Destroy(this);
 
     }
 

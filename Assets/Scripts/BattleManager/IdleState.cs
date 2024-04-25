@@ -289,7 +289,7 @@ public class PlayerLoseState : IState
     }
     public void OnEnter()
     {
-        ProcessPromptUIManager.Instance.DoFightEndUIAnim(null);
+        manager.OnEnterResultUI();
         Debug.Log("Enter PlayerLoseState");
 
     }
@@ -347,7 +347,7 @@ public class PlayerWinState : IState
         Debug.Log("Enter PlayerWinState");
         //在这边进行一些数据的更新
         GameManager.Instance.playerDataSO.playerRoomData.roomNums++;
-        GameManager.Instance.playerDataSO.UpdatePlayerRoomData(this.manager.parameter.enemyDataSO);
+        this.manager.parameter.playerDataSO.UpdatePlayerRoomData(this.manager.parameter.enemyDataSO);
         ProcessPromptUIManager.Instance.DoFightEndUIAnim(null);
         BattleManager.Instance.TransitionState(GameState.Reward);
 

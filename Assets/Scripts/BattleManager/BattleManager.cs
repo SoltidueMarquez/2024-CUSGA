@@ -4,6 +4,7 @@ using System;
 using UI;
 using System.Linq;
 using DesignerScripts;
+using Settlement_Scene;
 
 [Serializable]
 public class FSMParameter
@@ -106,9 +107,10 @@ public class BattleManager : MonoBehaviour
         states.Add(GameState.PlayerLoseResolution, new PlayerLoseResolutionState(this));
         states.Add(GameState.PlayerWin, new PlayerWinState(this));
         states.Add(GameState.Reward, new RewardState(this));
-        if(GameManager.Instance.enemyDataSO!= null)
+        if (GameManager.Instance.enemyDataSO != null)
         {
-            parameter.playerDataSO = GameManager.Instance.playerDataSO;
+            parameter.enemyDataSO = GameManager.Instance.enemyDataSO;
+            Debug.Log("设置enemyDataSO");
         }
         //设置初始状态
         TransitionState(GameState.GameStart);
@@ -264,10 +266,10 @@ public class BattleManager : MonoBehaviour
             foreach (var buffConfig in enemyDataSO.enemyBuffs)
             {
                 var buffData = DesignerScripts.BuffDataTable.buffData[buffConfig.buffDataSO.dataName.ToString()];
-                for(int j = 0; j < buffConfig.buffStack; j++)
+                for (int j = 0; j < buffConfig.buffStack; j++)
                 {
                     var paramDic = BuffDataSO.GetParamDic(buffConfig.buffDataSO.paramList);
-                    BuffInfo buffInfo = new BuffInfo(buffData, this.parameter.enemyChaStates[i].gameObject, 
+                    BuffInfo buffInfo = new BuffInfo(buffData, this.parameter.enemyChaStates[i].gameObject,
                                                     this.parameter.enemyChaStates[i].gameObject,
                                                     buffConfig.buffStack,
                                                     buffData.isPermanent,
@@ -542,13 +544,27 @@ public class BattleManager : MonoBehaviour
     public void EndBattle()
     {
         this.parameter.playerDataSO.UpdatePlayerDataSO(parameter.playerChaState);
+        this.parameter.playerDataSO.UpdatePlayerRoomData(parameter.enemyDataSO);
         this.parameter.playerDataSO.SaveData();
-        SceneLoader.Instance.LoadSceneAsync(GameScene.MapScene,new Vector2(0.5f,0.5f));
+        if (GameManager.Instance.CheckIfPassGame())
+        {
+            OnEnterResultUI();
+        }
+        else
+        {
+            SceneLoader.Instance.LoadSceneAsync(GameScene.MapScene, new Vector2(0.5f, 0.5f));
+        }
     }
-    public void EndGame()
+    public void OnEnterResultUI()
     {
+        this.parameter.playerDataSO.UpdatePlayerRoomData(parameter.enemyDataSO);
         this.parameter.playerDataSO.UpdatePlayerDataSO(parameter.playerChaState);
-        this.parameter.playerDataSO.SaveData();
+        SettlementManager.Instance.onEnterSettlement?.Invoke();
+    }
+    public void OnExitResultUI()
+    {
+        this.parameter.playerDataSO.DeleteData();
+        SceneLoader.Instance.LoadSceneAsync(GameScene.StartGame, new Vector2(0.5f, 0.5f));
     }
     #endregion
     #region 封装的战斗回调点

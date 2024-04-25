@@ -52,6 +52,7 @@ public class ChaState : MonoBehaviour
     /// </summary>
     public void OnRoundStart()
     {
+
         buffHandler.BuffRoundStartTick(0);
         string temp = this.side == 0 ? "当前玩家的buff数" : "当前敌人的buff数";
         Debug.Log(temp + this.buffHandler.buffList.Count);
@@ -59,6 +60,7 @@ public class ChaState : MonoBehaviour
 
     public void OnRoundEnd()
     {
+        RefreshRerollTimes();
         buffHandler.BuffRoundEndTick();
         this.battleDiceHandler.ClearBattleSingleDices();
     }
@@ -87,11 +89,11 @@ public class ChaState : MonoBehaviour
         //当没有骰子的时候，直接返回
         if (this.battleDiceHandler.IfSingleBattleDiceEmpty()) return;
         battleDiceHandler.CastDiceAll(this, BattleManager.Instance.currentSelectEnemy);
-        DamageManager.Instance.DealWithAllDamage();
-        if (this.side == 0)
-        {
-            RollingResultUIManager.Instance.RemoveAllResultUI(Strategy.UseAll);
-        }
+        //DamageManager.Instance.DealWithAllDamage();
+        //if (this.side == 0)
+        //{
+        //    RollingResultUIManager.Instance.RemoveAllResultUI(Strategy.UseAll);
+        //}
     }
     #endregion
     #region buff的操作
@@ -167,11 +169,13 @@ public class ChaState : MonoBehaviour
             CharacterUIManager.Instance.UpdateShieldUI((Character)this.side, this.resource.currentShield);
             CharacterUIManager.Instance.ChangeHealthSlider((Character)side, this.resource.currentHp, this.prop.health);
         }
+
         if (this.side == 0)
         {
             if (DataUIManager.Instance != null)
             {
                 DataUIManager.Instance.UpdateMoneyText(this.resource.currentMoney);
+
             }
         }
         if (this.resource.currentHp <= 0)
@@ -180,6 +184,11 @@ public class ChaState : MonoBehaviour
         }
 
 
+    }
+    //更新重投次数
+    public void RefreshRerollTimes()
+    {
+        this.ModResources(new ChaResource(0, 0, this.prop.maxRollTimes, 0));
     }
     /// <summary>
     /// 初始化

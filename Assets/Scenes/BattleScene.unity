@@ -4199,6 +4199,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6778605249043331962, guid: 36b68395345110a48b8a8080e4414506, type: 3}
+      propertyPath: onExitSettlement.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778605249043331962, guid: 36b68395345110a48b8a8080e4414506, type: 3}
+      propertyPath: onExitSettlement.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778605249043331962, guid: 36b68395345110a48b8a8080e4414506, type: 3}
+      propertyPath: onExitSettlement.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1590396380}
+    - target: {fileID: 6778605249043331962, guid: 36b68395345110a48b8a8080e4414506, type: 3}
+      propertyPath: onExitSettlement.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778605249043331962, guid: 36b68395345110a48b8a8080e4414506, type: 3}
+      propertyPath: onExitSettlement.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnExitResultUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778605249043331962, guid: 36b68395345110a48b8a8080e4414506, type: 3}
+      propertyPath: onExitSettlement.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BattleManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778605249043331962, guid: 36b68395345110a48b8a8080e4414506, type: 3}
+      propertyPath: onExitSettlement.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6813785417427574818, guid: 36b68395345110a48b8a8080e4414506, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -7266,7 +7294,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!114 &1757981754
 MonoBehaviour:
   m_ObjectHideFlags: 0

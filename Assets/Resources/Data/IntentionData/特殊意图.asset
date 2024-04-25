@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diceType: 3
   description: "\u7279\u6B8A"
-  intentionName: 
+  intentionName: "\u7279\u6B8A"
   icon: {fileID: 0}
