@@ -2,6 +2,7 @@ using Map;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UI;
 using Unity.VisualScripting;
 using UnityEngine;
 /// <summary>
@@ -437,9 +438,9 @@ namespace DesignerScripts
             {
                 BuffEventName.Dodge.ToString(),Dodge
             },
-            {
+            /*{
                 BuffEventName.Reflect.ToString(),Reflect
-            },
+            },*/
             {
                 BuffEventName.Pox.ToString(),Pox
             },
@@ -537,7 +538,16 @@ namespace DesignerScripts
                 BuffEventName.Add1StackIfPlayerHavePositiveBuff.ToString(),Add1StackIfPlayerHavePositiveBuff
             }
         };
-        public static Dictionary<string, OnGetFinalDamage> onGetFinalDamageFunc = new();
+        public static Dictionary<string, OnGetFinalDamage> onGetFinalDamageFunc = new Dictionary<string, OnGetFinalDamage>
+        {
+            {
+                BuffEventName.Reflect.ToString(),Reflect
+            }
+            
+        };
+        
+
+       
 
         #endregion
 
@@ -748,15 +758,25 @@ namespace DesignerScripts
 
 
         //这里应该是一个获取最终伤害后的回调点
-        public static void Reflect(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)//OnHurt调用
+        public static void Reflect(BuffInfo buffInfo, DamageInfo damageInfo)//OnHurt调用
         {
-            damageInfo.attacker.GetComponent<ChaState>().ModResources(new ChaResource(-damageInfo.damage.baseDamage, 0, 0, 0));
-            Debug.Log("反射造成" + damageInfo.damage.baseDamage + "伤害");
-            buffInfo.curStack--;
-            if (buffInfo.curStack == 0)
+            if(damageInfo.diceType == DiceType.Attack && damageInfo.defender == buffInfo.creator)
             {
-                buffInfo.isPermanent = false;
+                //计算出超出护盾伤害
+                int damage = Mathf.Abs(damageInfo.finalDamage - damageInfo.attacker.GetComponent<ChaState>().resource.currentShield);
+                damageInfo.attacker.GetComponent<ChaState>().ModResources(new ChaResource(-damage, 0, 0, 0));
+                Debug.Log("反射造成" + damage + "伤害");
+                buffInfo.curStack--;
+                if (buffInfo.curStack == 0)
+                {
+                    buffInfo.isPermanent = false;
+                    int index= buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
+                    var characterSide= (Character)buffInfo.target.GetComponent<ChaState>().side;
+                    BuffUIManager.Instance.RemoveBuffUIObject(characterSide, index);
+                }
+
             }
+            
 
         }
 
@@ -770,38 +790,52 @@ namespace DesignerScripts
 
         public static void Pox(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)//OnHurt调用
         {
-            damageInfo.damage.baseDamage *= 2;
-
-            buffInfo.curStack--;
-            if (buffInfo.curStack == 0)
+            if(damageInfo.diceType == DiceType.Attack)
             {
-                buffInfo.isPermanent = false;
+                damageInfo.damage.baseDamage *= 2;
+
+                buffInfo.curStack--;
+                if (buffInfo.curStack == 0)
+                {
+                    buffInfo.isPermanent = false;
+                    int index = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
+                    var characterSide = (Character)buffInfo.target.GetComponent<ChaState>().side;
+                }
+                Debug.Log("因为水痘，收到伤害翻倍");
             }
-            Debug.Log("因为水痘，收到伤害翻倍");
+            
         }
 
         public static void Spike(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)//OnHurt调用
         {
-            //获取攻击方的状态
-            ChaState tempChaState = damageInfo.attacker.GetComponent<ChaState>();
-            if (tempChaState.resource.currentShield == 0)
+            if (damageInfo.diceType == DiceType.Attack)
             {
-                int damage = (int)buffInfo.buffParam["Value"];
-                tempChaState.ModResources(new ChaResource(-damage, 0, 0, 0));
-                Debug.Log("尖刺生效，攻击方受到" + damage + "伤害");
+                //获取攻击方的状态
+                ChaState tempChaState = damageInfo.attacker.GetComponent<ChaState>();
+                if (tempChaState.resource.currentShield == 0)
+                {
+                    int damage = (int)buffInfo.buffParam["Value"];
+                    tempChaState.ModResources(new ChaResource(-damage, 0, 0, 0));
+                    Debug.Log("尖刺生效，攻击方受到" + damage + "伤害");
+                }
             }
+              
         }
 
         public static void Corrosion(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)//OnHurt调用
         {
-            //获取攻击方的状态
-            ChaState tempChaState = damageInfo.attacker.GetComponent<ChaState>();
-            if (tempChaState.resource.currentShield > 0)
+            if(damageInfo.diceType == DiceType.Attack)
             {
-                int shieldDamage = (int)buffInfo.buffParam["Value"];
-                tempChaState.ModResources(new ChaResource(0, 0, 0, -shieldDamage));
-                Debug.Log("腐蚀生效，攻击方减去" + shieldDamage + "层护盾");
+                //获取攻击方的状态
+                ChaState tempChaState = damageInfo.attacker.GetComponent<ChaState>();
+                if (tempChaState.resource.currentShield > 0)
+                {
+                    int shieldDamage = (int)buffInfo.buffParam["Value"];
+                    tempChaState.ModResources(new ChaResource(0, 0, 0, -shieldDamage));
+                    Debug.Log("腐蚀生效，攻击方减去" + shieldDamage + "层护盾");
+                }
             }
+            
         }
 
         public static void Sensitive(BuffInfo buffInfo)//onRoll调用

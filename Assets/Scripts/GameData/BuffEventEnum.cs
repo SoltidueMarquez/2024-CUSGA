@@ -187,5 +187,6 @@ public enum onAddBuffEnum
 public enum onGetFinalDamageEnum
 {
     None,
+    Reflect,
 }
 
