@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 576aa348e8b3a92498ed15e7f5425ad7, type: 3}
   m_Name: EnermySO 6
   m_EditorClassIdentifier: 
-  enemyType: 0
+  EnemyID: 
+  enemyType: 2
   EnemyBattleDiceList:
   - diceType: 0
     singleDiceModelSOs:
