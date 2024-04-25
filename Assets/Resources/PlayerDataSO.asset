@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ifUseSaveData: 1
   baseProp:
-    health: 50
-    money: 300
-    maxRollTimes: 4
+    health: 100
+    money: 50
+    maxRollTimes: 1
     shield: 0
   halidomSOs: []
   playerDiceSOItems:

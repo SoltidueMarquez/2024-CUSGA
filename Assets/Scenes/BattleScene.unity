@@ -6586,7 +6586,7 @@ MonoBehaviour:
     playerChaState: {fileID: 589276656}
     enemyChaStates:
     - {fileID: 341200663}
-    playerDataSO: {fileID: 11400000, guid: a898c0c094df00e458aed14b23a1788c, type: 2}
+    playerDataSO: {fileID: 11400000, guid: 8ce36af94eb94754f908a1a0b2be156e, type: 2}
     enemyDataSO: {fileID: 11400000, guid: ca768467329733c49a3099706f2c2e47, type: 2}
   currentSelectEnemy: {fileID: 341200662}
 --- !u!4 &1590396381
