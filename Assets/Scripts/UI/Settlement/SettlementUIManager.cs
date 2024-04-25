@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using Settlement_Scene;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace UI.Settlement
 {
@@ -17,9 +19,11 @@ namespace UI.Settlement
         [SerializeField] private Button exitButton;
         [SerializeField] private GameObject uiCanvas;
         [SerializeField] private List<string> titleList;
+        private bool _ifOpen;
 
         private void Start()
         {
+            _ifOpen = false;
             settlementTextList.Clear();
             SettlementManager.Instance.onEnterSettlement.AddListener(EnterUI);
             SettlementManager.Instance.onExitSettlement.AddListener(ExitUI);
@@ -35,6 +39,8 @@ namespace UI.Settlement
         /// <param name="dataList"></param>
         public void ShowScore(List<SettlementData> dataList)
         {
+            if (_ifOpen) { return;}
+            _ifOpen = true;
             foreach (var data in dataList)
             {
                 var tmp = Instantiate(template, parent, true);
@@ -64,6 +70,7 @@ namespace UI.Settlement
                 Destroy(txt);
             }
             settlementTextList.Clear();
+            _ifOpen = false;
         }
 
         private void EnterUI()

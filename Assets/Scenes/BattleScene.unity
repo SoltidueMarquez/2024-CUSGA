@@ -4659,6 +4659,7 @@ MonoBehaviour:
   endButton: {fileID: 574523178}
   useAllButton: {fileID: 1949946011}
   animTime: 1
+  moneyText: {fileID: 1709756153}
   diceColumns:
   - transform: {fileID: 1146085132}
     bagObject: {fileID: 0}
