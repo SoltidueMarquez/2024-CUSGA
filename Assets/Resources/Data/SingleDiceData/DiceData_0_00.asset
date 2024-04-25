@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0_00
   singleDiceModelName: "\u5F85\u673A"
-  type: 0
+  type: 3
   condition:
     currentHp: 0
     currentMoney: 0

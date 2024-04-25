@@ -107,6 +107,7 @@ public class BattleManager : MonoBehaviour
         states.Add(GameState.PlayerLoseResolution, new PlayerLoseResolutionState(this));
         states.Add(GameState.PlayerWin, new PlayerWinState(this));
         states.Add(GameState.Reward, new RewardState(this));
+        this.parameter.playerDataSO = GameManager.Instance.playerDataSO;
         if (GameManager.Instance.enemyDataSO != null)
         {
             parameter.enemyDataSO = GameManager.Instance.enemyDataSO;
@@ -164,12 +165,18 @@ public class BattleManager : MonoBehaviour
         if (side == 0)
         {
             Debug.Log("玩家死亡");
-            TransitionState(GameState.PlayerLose);
+            if (!(this.currentState == states[GameState.PlayerLose]))
+            {
+                TransitionState(GameState.PlayerLose);
+            }
         }
         else
         {
             Debug.Log("敌人死亡");
-            TransitionState(GameState.PlayerWin);
+            if (!(this.currentState == states[GameState.PlayerWin]))
+            {
+                TransitionState(GameState.PlayerWin);
+            }
         }
     }
     #region 初始加载数据阶段相关函数

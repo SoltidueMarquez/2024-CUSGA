@@ -106,6 +106,9 @@ public class DamageManager : MonoSingleton<DamageManager>
                 CharacterUIManager.Instance.CreateCureText(attackCharacter, damageInfo.finalDamage);
                 CharacterUIManager.Instance.UseOtherDice(attackCharacter);
                 break;
+            case DiceType.Special:
+                //待机，什么都不干
+                break;
         }
         //TODO:视觉上的变化
         //伤害流程走完，添加buff

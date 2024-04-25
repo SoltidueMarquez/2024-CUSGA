@@ -13,14 +13,15 @@ public class EnemyAI : MonoBehaviour
 
     public void SimpleAI()
     {
-        StartCoroutine(SimpleTestEnemyAI());
+        characterState.GetBattleDiceHandler().CastDiceAll(characterState, BattleManager.Instance.parameter.playerChaState.gameObject);
+        BattleManager.Instance.TransitionState(GameState.EnemyRoundEndResolution);
     }
 
     IEnumerator SimpleTestEnemyAI()
     {
         yield return new WaitForSeconds(1);
             characterState.GetBattleDiceHandler().CastDiceAll(characterState, BattleManager.Instance.parameter.playerChaState.gameObject);
-            DamageManager.Instance.DealWithAllDamage();
+            //DamageManager.Instance.DealWithAllDamage();
         yield return new WaitForSeconds(1);
         BattleManager.Instance.TransitionState(GameState.EnemyRoundEndResolution);
     }
