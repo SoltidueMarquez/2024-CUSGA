@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SingleDiceModelInitial : MonoBehaviour
+public class SingleDiceModelInitial : MonoSingleton<SingleDiceModelInitial>
 {
     private SingleDiceModelSO[] singleDiceModelSOs;
-    void Awake()
+    public override void Awake()
     {
+        base.Awake();
         singleDiceModelSOs = Resources.LoadAll<SingleDiceModelSO>("Data/SingleDiceData");
         for (int i = 0; i < singleDiceModelSOs.Length; i++)
         {
@@ -31,7 +32,6 @@ public class SingleDiceModelInitial : MonoBehaviour
                     null)
                 );
         }
-        Destroy(this);
 
     }
     /// <summary>

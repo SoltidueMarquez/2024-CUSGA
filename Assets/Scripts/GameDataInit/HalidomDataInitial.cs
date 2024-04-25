@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using DesignerScripts;
 
-public class HalidomDataInitial : MonoBehaviour
+public class HalidomDataInitial : MonoSingleton<HalidomDataInitial>
 {
     private HalidomDataSO[] halidomDataSos;
     // Start is called before the first frame update
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
         halidomDataSos = Resources.LoadAll<HalidomDataSO>("Data/HalidomData");
         for (int i = 0; i < halidomDataSos.Length; i++)
         {
@@ -27,7 +28,6 @@ public class HalidomDataInitial : MonoBehaviour
                     GetBuffInfoList(halidomDataSos[i].buffDataSos))
                 );
         }
-        Destroy(this);
     }
 
 

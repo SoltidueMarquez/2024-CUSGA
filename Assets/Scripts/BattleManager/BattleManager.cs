@@ -109,7 +109,8 @@ public class BattleManager : MonoBehaviour
         states.Add(GameState.Reward, new RewardState(this));
         if (GameManager.Instance.enemyDataSO != null)
         {
-            parameter.playerDataSO = GameManager.Instance.playerDataSO;
+            parameter.enemyDataSO = GameManager.Instance.enemyDataSO;
+            Debug.Log("设置enemyDataSO");
         }
         //设置初始状态
         TransitionState(GameState.GameStart);
