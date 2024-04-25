@@ -144,7 +144,8 @@ namespace Map
                 bagLogicDice.removeList.Add(action);
             }
             EditableDiceUIManager.Instance.Init(logicDicelist, bagLogicDice);
-
+           
+            
 
 
         }
