@@ -69,8 +69,25 @@ namespace UI
                     StartCoroutine(DestroyAll(tmpList));
                     return;
             }
-            
-            
+        }
+
+        /// <summary>
+        /// 摧毁单个结果
+        /// </summary>
+        /// <param name="index"></param>
+        public void RemoveResultUI(int index)
+        {
+            if (index < 0 || index >= resultList.Count)
+            {
+                Debug.LogWarning("RollingResultUIManager:序列索引越界");
+                return;
+            }
+            if (resultList[index] == null)
+            {
+                Debug.LogWarning("RollingResultUIManager:该投掷结果为空");
+                return;
+            }
+            resultList[index].GetComponent<RollingResultDiceUI>()?.OnUseDestroy();
         }
         
         /// <summary>
@@ -85,7 +102,7 @@ namespace UI
             {
                 if (tmp[0] != null)
                 {
-                    tmp[0].GetComponent<RollingResultDiceUI>().OnUseDestroy();
+                    tmp[0].GetComponent<RollingResultDiceUI>()?.OnUseDestroy();
                 }
                 yield return new WaitForSeconds(time);
                 tmp.Remove(tmp[0]);
@@ -121,7 +138,7 @@ namespace UI
             {
                 if (tmp[0] != null)
                 {
-                    tmp[0].GetComponent<RollingResultDiceUI>().OnReRollDestroy(); //重投函数
+                    tmp[0].GetComponent<RollingResultDiceUI>()?.OnReRollDestroy(); //重投函数
                 }
                 tmp.Remove(tmp[0]);
             }

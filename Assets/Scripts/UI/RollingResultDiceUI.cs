@@ -63,6 +63,7 @@ namespace UI
         /// </summary>
         public void OnUseDestroy()
         {
+            button.interactable = false;
             moveOffset = CharacterUIManager.Instance.player.position +
                          new Vector3(0, RollingResultUIManager.Instance.moveOffset, 0);
             transform.DOMove(moveOffset, useDuration / 2).OnComplete(() =>
