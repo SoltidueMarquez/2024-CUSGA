@@ -75,6 +75,7 @@ public class BattleDiceHandler : MonoBehaviour
             //拼装buffInfo
             var damageInfo = new DamageInfo(chaState.gameObject, target, damage, singleDiceObj.model.type, singleDiceObj.level, addToEnemyBuffs);
             DamageManager.Instance.DoDamage(damageInfo);
+            DamageManager.Instance.DealWithAllDamage();
             //视觉逻辑
             Debug.Log(singleDiceObj.model.name);
             if (singleDiceObj.model.buffInfos != null)
@@ -122,7 +123,7 @@ public class BattleDiceHandler : MonoBehaviour
         {
             CastSingleDice(i, chastate, target);
             //Debug.Log("释放第"+i+"个骰子");
-            DamageManager.Instance.DealWithAllDamage();
+            
             if (chastate.side == 0)
             {
                 RollingResultUIManager.Instance.RemoveResultUI(i);
