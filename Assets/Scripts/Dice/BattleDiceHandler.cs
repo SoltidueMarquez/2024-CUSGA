@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UI;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 /// <summary>
 /// 玩家和敌人身上挂载的战斗骰子管理器
 /// </summary>
@@ -106,14 +107,30 @@ public class BattleDiceHandler : MonoBehaviour
     /// <summary>
     /// 释放所有的骰面
     /// </summary>
-    public void CastDiceAll(ChaState chaState, GameObject target)
+    public  void CastDiceAll(ChaState chaState, GameObject target)
     {
-        for (int i = 0; i < diceCardsInUse.Length; i++)
+        //for (int i = 0; i < diceCardsInUse.Length; i++)
+        //{
+        //    CastSingleDice(i, chaState, target);
+        //}
+        CastDiceALLAsync(chaState, target);
+    }
+    //异步释放所有的骰面
+    public async void CastDiceALLAsync(ChaState chastate,GameObject target)
+    {
+        for(int i = 0;i<diceCardsInUse.Length;i++)
         {
-            CastSingleDice(i, chaState, target);
+            CastSingleDice(i, chastate, target);
+            //Debug.Log("释放第"+i+"个骰子");
+            DamageManager.Instance.DealWithAllDamage();
+            if (chastate.side == 0)
+            {
+                RollingResultUIManager.Instance.RemoveResultUI(i);
+            }
+            await UniTask.Delay(1000);
         }
     }
-
+    
     #region 骰面交换
     public void SwapDiceInBagAndBattle(SingleDiceObj singleDiceObjInBag, SingleDiceObj singleDiceObjInBattle, int indexOfDices)
     {

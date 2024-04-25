@@ -87,11 +87,11 @@ public class ChaState : MonoBehaviour
         //当没有骰子的时候，直接返回
         if (this.battleDiceHandler.IfSingleBattleDiceEmpty()) return;
         battleDiceHandler.CastDiceAll(this, BattleManager.Instance.currentSelectEnemy);
-        DamageManager.Instance.DealWithAllDamage();
-        if (this.side == 0)
-        {
-            RollingResultUIManager.Instance.RemoveAllResultUI(Strategy.UseAll);
-        }
+        //DamageManager.Instance.DealWithAllDamage();
+        //if (this.side == 0)
+        //{
+        //    RollingResultUIManager.Instance.RemoveAllResultUI(Strategy.UseAll);
+        //}
     }
     #endregion
     #region buff的操作

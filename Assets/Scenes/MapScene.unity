@@ -489,6 +489,10 @@ PrefabInstance:
       propertyPath: playerChaState
       value: 
       objectReference: {fileID: 586110493}
+    - target: {fileID: 5337413451386887161, guid: 6dc8f4ee6004b5345a5925b01e34cb27, type: 3}
+      propertyPath: background
+      value: 
+      objectReference: {fileID: 21300000, guid: c48758cf38d7c5d4aac9ca49618efd5c, type: 3}
     - target: {fileID: 6173653652465991376, guid: 6dc8f4ee6004b5345a5925b01e34cb27, type: 3}
       propertyPath: m_Name
       value: MapObjects
