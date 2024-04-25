@@ -2,6 +2,7 @@ using Map;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UI;
 using Unity.VisualScripting;
 using UnityEngine;
 /// <summary>
@@ -437,9 +438,9 @@ namespace DesignerScripts
             {
                 BuffEventName.Dodge.ToString(),Dodge
             },
-            {
+            /*{
                 BuffEventName.Reflect.ToString(),Reflect
-            },
+            },*/
             {
                 BuffEventName.Pox.ToString(),Pox
             },
@@ -537,7 +538,16 @@ namespace DesignerScripts
                 BuffEventName.Add1StackIfPlayerHavePositiveBuff.ToString(),Add1StackIfPlayerHavePositiveBuff
             }
         };
-        public static Dictionary<string, OnGetFinalDamage> onGetFinalDamageFunc = new();
+        public static Dictionary<string, OnGetFinalDamage> onGetFinalDamageFunc = new Dictionary<string, OnGetFinalDamage>
+        {
+            {
+                BuffEventName.Reflect.ToString(),Reflect
+            }
+            
+        };
+        
+
+       
 
         #endregion
 
@@ -748,15 +758,26 @@ namespace DesignerScripts
 
 
         //这里应该是一个获取最终伤害后的回调点
-        public static void Reflect(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)//OnHurt调用
+        public static void Reflect(BuffInfo buffInfo, DamageInfo damageInfo)//OnHurt调用
         {
-            damageInfo.attacker.GetComponent<ChaState>().ModResources(new ChaResource(-damageInfo.damage.baseDamage, 0, 0, 0));
-            Debug.Log("反射造成" + damageInfo.damage.baseDamage + "伤害");
-            buffInfo.curStack--;
-            if (buffInfo.curStack == 0)
+            if(damageInfo.diceType == DiceType.Attack && damageInfo.defender == buffInfo.creator)
             {
-                buffInfo.isPermanent = false;
+                //计算出超出护盾伤害
+                int damage = Mathf.Abs(damageInfo.finalDamage - damageInfo.attacker.GetComponent<ChaState>().resource.currentShield);
+                damageInfo.attacker.GetComponent<ChaState>().ModResources(new ChaResource(-damage, 0, 0, 0));
+                Debug.Log("反射造成" + damage + "伤害");
+                buffInfo.curStack--;
+                if (buffInfo.curStack == 0)
+                {
+                    buffInfo.isPermanent = false;
+                    int index = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
+                    var characterSide = (Character)buffInfo.target.GetComponent<ChaState>().side;
+                    BuffUIManager.Instance.RemoveBuffUIObject(characterSide, index);
+                    //buffInfo.target.GetComponent<ChaState>().GetBuffHandler().RemoveBuff(buffInfo);
+                }
+
             }
+            
 
         }
 
@@ -770,38 +791,52 @@ namespace DesignerScripts
 
         public static void Pox(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)//OnHurt调用
         {
-            damageInfo.damage.baseDamage *= 2;
-
-            buffInfo.curStack--;
-            if (buffInfo.curStack == 0)
+            if(damageInfo.diceType == DiceType.Attack)
             {
-                buffInfo.isPermanent = false;
+                damageInfo.damage.baseDamage *= 2;
+
+                buffInfo.curStack--;
+                if (buffInfo.curStack == 0)
+                {
+                    buffInfo.isPermanent = false;
+                    int index = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
+                    var characterSide = (Character)buffInfo.target.GetComponent<ChaState>().side;
+                }
+                Debug.Log("因为水痘，收到伤害翻倍");
             }
-            Debug.Log("因为水痘，收到伤害翻倍");
+            
         }
 
         public static void Spike(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)//OnHurt调用
         {
-            //获取攻击方的状态
-            ChaState tempChaState = damageInfo.attacker.GetComponent<ChaState>();
-            if (tempChaState.resource.currentShield == 0)
+            if (damageInfo.diceType == DiceType.Attack)
             {
-                int damage = (int)buffInfo.buffParam["Value"];
-                tempChaState.ModResources(new ChaResource(-damage, 0, 0, 0));
-                Debug.Log("尖刺生效，攻击方受到" + damage + "伤害");
+                //获取攻击方的状态
+                ChaState tempChaState = damageInfo.attacker.GetComponent<ChaState>();
+                if (tempChaState.resource.currentShield == 0)
+                {
+                    int damage = (int)buffInfo.buffParam["Value"];
+                    tempChaState.ModResources(new ChaResource(-damage, 0, 0, 0));
+                    Debug.Log("尖刺生效，攻击方受到" + damage + "伤害");
+                }
             }
+              
         }
 
         public static void Corrosion(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)//OnHurt调用
         {
-            //获取攻击方的状态
-            ChaState tempChaState = damageInfo.attacker.GetComponent<ChaState>();
-            if (tempChaState.resource.currentShield > 0)
+            if(damageInfo.diceType == DiceType.Attack)
             {
-                int shieldDamage = (int)buffInfo.buffParam["Value"];
-                tempChaState.ModResources(new ChaResource(0, 0, 0, -shieldDamage));
-                Debug.Log("腐蚀生效，攻击方减去" + shieldDamage + "层护盾");
+                //获取攻击方的状态
+                ChaState tempChaState = damageInfo.attacker.GetComponent<ChaState>();
+                if (tempChaState.resource.currentShield > 0)
+                {
+                    int shieldDamage = (int)buffInfo.buffParam["Value"];
+                    tempChaState.ModResources(new ChaResource(0, 0, 0, -shieldDamage));
+                    Debug.Log("腐蚀生效，攻击方减去" + shieldDamage + "层护盾");
+                }
             }
+            
         }
 
         public static void Sensitive(BuffInfo buffInfo)//onRoll调用
@@ -1404,8 +1439,9 @@ namespace DesignerScripts
 
         public static void Gain2NormalHalidomWhenGain(BuffInfo buffInfo)
         {
-            RandomManager.GetRandomHalidomObj(RareType.Common);
-            RandomManager.GetRandomHalidomObj(RareType.Common);
+            HalidomManager.Instance.AddHalidom(RandomManager.GetRandomHalidomObj(RareType.Common));
+            HalidomManager.Instance.AddHalidom(RandomManager.GetRandomHalidomObj(RareType.Common));
+            Debug.Log("增加两个普通圣物");
         }
 
 
@@ -1539,8 +1575,18 @@ namespace DesignerScripts
         }
         public static void EnhanceAttackAfterSellDice(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
-            damageInfo.addDamageArea += (int)buffInfo.buffParam["Value"] * 0.01f;
-            Debug.Log("增加伤害" + (int)buffInfo.buffParam["Value"] + "%");
+            if ((int)buffInfo.buffParam["Value"] >= 30)
+            {
+                damageInfo.addDamageArea += 0.3f;
+                Debug.Log("增加30%伤害");
+
+            }
+            else
+            {
+                damageInfo.addDamageArea += (int)buffInfo.buffParam["Value"] * 0.01f;
+                Debug.Log("增加伤害" + (int)buffInfo.buffParam["Value"] + "%");
+            }
+            
         }
 
 
@@ -1567,10 +1613,19 @@ namespace DesignerScripts
 
         public static void EnhanceAttackWhenHit(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
-            damageInfo.addDamageArea += (int)buffInfo.buffParam["Value"] * 0.01f;
-            Debug.Log("伤害增加了" + (int)buffInfo.buffParam["Value"] + "%");
-            buffInfo.buffParam["Value"] = (int)buffInfo.buffParam["Value"] + 5;
-            Debug.Log((int)buffInfo.buffParam["Value"] + "<=现在");
+            if((int)buffInfo.buffParam["Value"]>=6)
+            {
+                damageInfo.addDamageArea += 0.3f;
+                Debug.Log("伤害增加了30%");
+            }
+            else
+            {
+                damageInfo.addDamageArea += (int)buffInfo.buffParam["Value"] * 0.01f;
+                Debug.Log("伤害增加了" + (int)buffInfo.buffParam["Value"] + "%");
+                buffInfo.buffParam["Value"] = (int)buffInfo.buffParam["Value"] + 5;
+                Debug.Log((int)buffInfo.buffParam["Value"]);
+
+            }
 
         }
 
@@ -1609,8 +1664,8 @@ namespace DesignerScripts
 
         public static void Gain2RareHalidom(BuffInfo buffInfo)
         {
-            RandomManager.GetRandomHalidomObj(RareType.Rare);
-            RandomManager.GetRandomHalidomObj(RareType.Rare);
+            HalidomManager.Instance.AddHalidom(RandomManager.GetRandomHalidomObj(RareType.Rare));
+            HalidomManager.Instance.AddHalidom(RandomManager.GetRandomHalidomObj(RareType.Rare));
             Debug.Log("获得两个稀有圣物");
         }
 

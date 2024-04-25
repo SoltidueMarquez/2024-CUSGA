@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ namespace UI
         [SerializeField, Tooltip("结束按钮")] private Button endButton;
         [SerializeField, Tooltip("全部使用按钮")] private Button useAllButton;
         [SerializeField, Tooltip("动画时长")] private float animTime;
+        [SerializeField, Tooltip("金钱文本")] private Text moneyText;
         [Header("奖励骰面")]
         [SerializeField, Tooltip("骰子栏位列表")] public List<Column> diceColumns;
         [SerializeField, Tooltip("骰子模板")] private GameObject diceTemplate;
@@ -33,6 +35,12 @@ namespace UI
             ProcessAnimationManager.Instance.FightEnd();
         }
 
+        public void UpdateMoneyText(int money)
+        {
+            moneyText.text = "";
+            moneyText.DOText($"获得金钱{money}", animTime);
+        }
+        
         /// <summary>
         /// 创建骰面函数,其本质仍然是一个战斗骰面页的骰子(子类)
         /// </summary>

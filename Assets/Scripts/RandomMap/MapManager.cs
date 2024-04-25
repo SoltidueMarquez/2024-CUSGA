@@ -225,6 +225,9 @@ namespace Map
         }
         public void OnExitShop()
         {
+            this.playerDataSO.UpdatePlayerDataSO(this.playerChaState);
+            this.playerDataSO.UpdataPlayerDataSoMap(CurrentMap.ToJson()); 
+            this.playerDataSO.SaveData();
             MapPlayerTracker.Instance.Locked = false;
             view.SetAttainableNodes();
         }
