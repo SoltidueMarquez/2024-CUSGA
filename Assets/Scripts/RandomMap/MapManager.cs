@@ -27,7 +27,7 @@ namespace Map
 
         private void Start()
         {
-
+            this.playerDataSO = GameManager.Instance.playerDataSO;
             //地图场景玩家信息初始化
             InitializePlayer();
             //地图场景圣物初始化
