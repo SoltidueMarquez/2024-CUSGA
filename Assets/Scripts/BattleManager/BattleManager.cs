@@ -545,6 +545,7 @@ public class BattleManager : MonoBehaviour
     {
         this.parameter.playerDataSO.UpdatePlayerDataSO(parameter.playerChaState);
         this.parameter.playerDataSO.UpdatePlayerRoomData(parameter.enemyDataSO);
+        this.parameter.playerDataSO.UpdataPlayerDataSoMap(GameManager.Instance.currentMap);
         this.parameter.playerDataSO.SaveData();
         if (GameManager.Instance.CheckIfPassGame())
         {

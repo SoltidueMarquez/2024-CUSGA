@@ -345,7 +345,8 @@ public class PlayerWinState : IState
     {
 
         Debug.Log("Enter PlayerWinState");
-        //在这边进行一些数据的更新
+        //在这边进行一些数据的更新.和刷新
+        this.manager.parameter.playerChaState.RefreshRerollTimes();//刷新玩家的重投次数
         GameManager.Instance.playerDataSO.playerRoomData.roomNums++;
         this.manager.parameter.playerDataSO.UpdatePlayerRoomData(this.manager.parameter.enemyDataSO);
         ProcessPromptUIManager.Instance.DoFightEndUIAnim(null);

@@ -53,9 +53,11 @@ namespace Map
         /// <param name="mapNode"></param>
         private void SendPlayerToNode(MapNode mapNode)
         {
+            //mapManager.SaveMap();没啥用
+            MapManager.Instance.OnExitMap();//提前保存数据
             Locked = lockAfterSelecting;
             mapManager.CurrentMap.path.Add(mapNode.Node.point);
-            mapManager.SaveMap();
+            GameManager.Instance.currentMap = mapManager.CurrentMap.ToJson();
             view.SetAttainableNodes();
             view.SetLineColors();
             mapNode.ShowSwirlAnimation();
@@ -89,6 +91,7 @@ namespace Map
                     EnterBattleNode(mapNode.transform, EnemyType.Hard);
                     break;
                 case NodeType.Store:
+                    MapManager.Instance.OnEnterShop();
                     StoreManager.Instance.OnEnterStore?.Invoke();
                     break;
                 case NodeType.Boss:
@@ -109,11 +112,11 @@ namespace Map
         {
             Vector2 cameraPosition = Camera.main.WorldToScreenPoint(transform.position);
             Vector2 viewPointView = Camera.main.ScreenToViewportPoint(cameraPosition);
-
+            MapManager.Instance.playerChaState.RefreshRerollTimes();
             GameManager.Instance.enemyDataSO = EnemyManager.GetEnemyDataSOviaCondition(enemyType, MapManager.Instance.playerDataSO.playerRoomData.enemyIDs);
             Debug.Log("Enter Battle Node: " + GameManager.Instance.enemyDataSO.enemyType.ToString());
             MapManager.Instance.playerDataSO.ifUseSaveData = true;
-            MapManager.Instance.OnExitMap();//保存数据
+            
 
             SceneLoader.Instance.LoadSceneAsync(GameScene.BattleScene, viewPointView);
         }

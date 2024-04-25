@@ -12,6 +12,8 @@ public class GameManager : MonoSingleton<GameManager>
     public EnemyDataSO enemyDataSO;//用于传递敌人数据
     [HideInInspector]
     public bool ifLoadedHalidom;//用于判断是否加载了圣物,全局只加载一次，因为圣物是全局的
+    [HideInInspector]
+    public string currentMap;
     [Header("玩家数据")]
     public PlayerDataSO playerDataSO;
     void Start()
