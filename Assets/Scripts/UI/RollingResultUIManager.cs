@@ -63,7 +63,7 @@ namespace UI
                     StartCoroutine(WaitForDestroyAll(ProcessAnimationManager.Instance.timeInterval,tmpList));//等待一段时间后销毁
                     return;
                 case Strategy.UseAll:
-                    StartCoroutine(WaitForDestroy(useTime / 2, tmpList));
+                    StartCoroutine(WaitForDestroy(useTime, tmpList));
                     return;
                 case Strategy.ReRoll:
                     StartCoroutine(DestroyAll(tmpList));

@@ -106,6 +106,7 @@ namespace UI
         /// <param name="character"></param>
         public void Attack(Character character)
         {
+            Debug.LogWarning("角色动画");
             switch (character)
             {
                 case Character.Enemy:
@@ -122,6 +123,28 @@ namespace UI
             yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
             offsetPosition = (enemy.position - player.position).normalized * attackAmplitude;
             player.DOPunchPosition(offsetPosition, attackTime, 1);
+        }
+        
+        /// <summary>
+        /// 角色使用其他骰面的动画
+        /// </summary>
+        public void UseOtherDice(Character character)
+        {
+            Debug.LogWarning("角色动画");
+            switch (character)
+            {
+                case Character.Enemy:
+                    enemy.DOPunchPosition(useOtherOffset, attackTime, 1);
+                    break;
+                case Character.Player:
+                    StartCoroutine(DoPlayerOtherAnim());
+                    break;
+            }
+        }
+        IEnumerator DoPlayerOtherAnim()
+        {
+            yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
+            player.DOPunchPosition(useOtherOffset, attackTime, 1);
         }
         
         /// <summary>
@@ -149,28 +172,7 @@ namespace UI
             enemyHealthSlider.value = (float)currentHealth / maxHealth;
             enemyHealthText.text = $"{currentHealth}/{maxHealth}";
         }
-
-        /// <summary>
-        /// 角色使用其他骰面的动画
-        /// </summary>
-        public void UseOtherDice(Character character)
-        {
-            switch (character)
-            {
-                case Character.Enemy:
-                    enemy.DOPunchPosition(useOtherOffset, attackTime, 1);
-                    break;
-                case Character.Player:
-                    StartCoroutine(DoPlayerOtherAnim());
-                    break;
-            }
-        }
-        IEnumerator DoPlayerOtherAnim()
-        {
-            yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
-            player.DOPunchPosition(useOtherOffset, attackTime, 1);
-        }
-
+        
         /// <summary>
         /// 创建治疗文本
         /// </summary>
