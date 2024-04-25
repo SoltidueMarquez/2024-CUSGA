@@ -89,7 +89,6 @@ namespace Map
                     EnterBattleNode(mapNode.transform, EnemyType.Hard);
                     break;
                 case NodeType.Store:
-                    MapManager.Instance.playerDataSO.playerRoomData.roomNums++;
                     StoreManager.Instance.OnEnterStore?.Invoke();
                     break;
                 case NodeType.Boss:

@@ -52,6 +52,7 @@ public class ChaState : MonoBehaviour
     /// </summary>
     public void OnRoundStart()
     {
+
         buffHandler.BuffRoundStartTick(0);
         string temp = this.side == 0 ? "当前玩家的buff数" : "当前敌人的buff数";
         Debug.Log(temp + this.buffHandler.buffList.Count);
@@ -59,6 +60,7 @@ public class ChaState : MonoBehaviour
 
     public void OnRoundEnd()
     {
+        RefreshRerollTimes();
         buffHandler.BuffRoundEndTick();
         this.battleDiceHandler.ClearBattleSingleDices();
     }
@@ -167,14 +169,13 @@ public class ChaState : MonoBehaviour
             CharacterUIManager.Instance.UpdateShieldUI((Character)this.side, this.resource.currentShield);
             CharacterUIManager.Instance.ChangeHealthSlider((Character)side, this.resource.currentHp, this.prop.health);
         }
-        
+
         if (this.side == 0)
         {
             if (DataUIManager.Instance != null)
             {
                 DataUIManager.Instance.UpdateMoneyText(this.resource.currentMoney);
-                DataUIManager.Instance.UpdateRerollText(this.resource.currentRollTimes);
-                DataUIManager.Instance.UpdateHealthText(this.resource.currentHp, this.prop.health);
+
             }
         }
         if (this.resource.currentHp <= 0)
@@ -183,6 +184,11 @@ public class ChaState : MonoBehaviour
         }
 
 
+    }
+    //更新重投次数
+    public void RefreshRerollTimes()
+    {
+        this.ModResources(new ChaResource(0, 0, this.prop.maxRollTimes, 0));
     }
     /// <summary>
     /// 初始化

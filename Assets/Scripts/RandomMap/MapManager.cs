@@ -27,7 +27,7 @@ namespace Map
 
         private void Start()
         {
-            
+
             //地图场景玩家信息初始化
             InitializePlayer();
             //地图场景圣物初始化
@@ -48,11 +48,11 @@ namespace Map
             this.playerDataSO.ifHasMap = true;
             this.playerDataSO.ifHasData = true;
             //和地图相关的数据
-            this.playerDataSO.playerRoomData =new();
+            this.playerDataSO.playerRoomData = new();
             string mapString = map.ToJson();
             this.playerDataSO.UpdataPlayerDataSoMap(mapString);
             this.playerDataSO.UpdatePlayerDataSO(this.playerChaState);
-            this.playerDataSO. SaveData();
+            this.playerDataSO.SaveData();
         }
 
         public void SaveMap()
@@ -75,7 +75,7 @@ namespace Map
         /// </summary>
         public void InitializePlayer()
         {
-            
+
             //初始化玩家的基础数值
             this.playerChaState.SetBaseprop(playerDataSO.baseProp);
             //对圣物设置玩家的基础数值
@@ -110,7 +110,7 @@ namespace Map
                 this.playerChaState.ModResources(resource);
                 this.playerChaState.GetBattleDiceHandler().InitBagDiceWithData(playerDataSO.bagDiceList);
             }
-            
+
 
             List<LogicDice> logicDicelist = new List<LogicDice>();
             //获取logicDiceList
@@ -144,8 +144,8 @@ namespace Map
                 bagLogicDice.removeList.Add(action);
             }
             EditableDiceUIManager.Instance.Init(logicDicelist, bagLogicDice);
-           
-            
+            UpdatePlayerUI();
+
 
 
         }
@@ -180,7 +180,7 @@ namespace Map
         /// </summary>
         public void InitializeMap()
         {
-            if(this.playerDataSO.ifUseSaveData)//使用保存的数据
+            if (this.playerDataSO.ifUseSaveData)//使用保存的数据
             {
                 if (this.playerDataSO.ifHasMap)//playerDataSO中有地图数据
                 {
@@ -190,14 +190,14 @@ namespace Map
                 else
                 {
                     GenerateNewMap();//创建新地图并且存入把所有的数据存入PlayerData
-                    
+
                 }
             }
             else//使用初始数据
             {
                 GenerateNewMap();
             }
-            
+
         }
         #endregion
         #region 骰子交互相关
@@ -217,10 +217,23 @@ namespace Map
             this.playerDataSO.UpdataPlayerDataSoMap(CurrentMap.ToJson());
             this.playerDataSO.SaveData();
         }
+        public void OnEnterShop()
+        {
+            playerDataSO.playerRoomData.roomNums++;
+            playerChaState.RefreshRerollTimes();
+            UpdatePlayerUI();
+        }
         public void OnExitShop()
         {
             MapPlayerTracker.Instance.Locked = false;
             view.SetAttainableNodes();
+        }
+        #endregion
+        #region 更新玩家UI信息
+        public void UpdatePlayerUI()
+        {
+            DataUIManager.Instance.UpdateRerollText(playerChaState.resource.currentRollTimes);
+            DataUIManager.Instance.UpdateHealthText(playerChaState.resource.currentHp, playerChaState.prop.health);
         }
         #endregion
     }
