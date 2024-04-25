@@ -641,6 +641,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDataSO: {fileID: 0}
   ifLoadedHalidom: 0
+  currentMap: 
   playerDataSO: {fileID: 11400000, guid: 8ce36af94eb94754f908a1a0b2be156e, type: 2}
 --- !u!4 &238340001
 Transform:
