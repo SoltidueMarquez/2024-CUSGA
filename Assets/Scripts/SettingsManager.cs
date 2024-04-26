@@ -90,7 +90,7 @@ public class SettingsManager : MonoSingleton<SettingsManager>
             backToStartButton.SetActive(true);
         }
 
-        Time.timeScale = 0f;
+        // Time.timeScale = 0f;
     }
 
     private void CloseSettings()
