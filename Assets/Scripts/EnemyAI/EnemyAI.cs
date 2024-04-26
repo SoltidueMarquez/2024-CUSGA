@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UI;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -13,16 +14,17 @@ public class EnemyAI : MonoBehaviour
 
     public void SimpleAI()
     {
-        characterState.GetBattleDiceHandler().CastDiceAll(characterState, BattleManager.Instance.parameter.playerChaState.gameObject);
-        BattleManager.Instance.TransitionState(GameState.EnemyRoundEndResolution);
+        //characterState.GetBattleDiceHandler().CastDiceAll(characterState, BattleManager.Instance.parameter.playerChaState.gameObject);
+        SimpleAIAsync();
     }
-
-    IEnumerator SimpleTestEnemyAI()
+    public async void SimpleAIAsync()
     {
-        yield return new WaitForSeconds(1);
-            characterState.GetBattleDiceHandler().CastDiceAll(characterState, BattleManager.Instance.parameter.playerChaState.gameObject);
-            //DamageManager.Instance.DealWithAllDamage();
-        yield return new WaitForSeconds(1);
+        for (int i = 0; i < characterState.GetBattleDiceHandler().diceCardsInUse.Length; i++)
+        {
+            characterState.GetBattleDiceHandler().CastSingleDice(i, characterState, BattleManager.Instance.parameter.playerChaState.gameObject);
+            //Debug.Log("释放第"+i+"个骰子");
+            await UniTask.Delay(1000);
+        }
         BattleManager.Instance.TransitionState(GameState.EnemyRoundEndResolution);
     }
 }
