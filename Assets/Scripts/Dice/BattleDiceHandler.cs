@@ -130,7 +130,6 @@ public class BattleDiceHandler : MonoBehaviour
             }
             await UniTask.Delay(1000);
         }
-        
     }
     
     #region 骰面交换

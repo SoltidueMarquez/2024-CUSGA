@@ -4408,6 +4408,8 @@ GameObject:
   m_Component:
   - component: {fileID: 993230910}
   - component: {fileID: 993230909}
+  - component: {fileID: 993230908}
+  - component: {fileID: 993230907}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4415,6 +4417,30 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &993230907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993230906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b7cb1205ed1a49459ae1a10ba96f251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &993230908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993230906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b2305213aaccd342b9ec145cc089981, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &993230909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6532,6 +6558,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1590396381}
   - component: {fileID: 1590396380}
+  - component: {fileID: 1590396382}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -6578,6 +6605,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1590396382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590396379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 672024d713439c64d8fc67b5c290df9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1592930330
 GameObject:
   m_ObjectHideFlags: 0
