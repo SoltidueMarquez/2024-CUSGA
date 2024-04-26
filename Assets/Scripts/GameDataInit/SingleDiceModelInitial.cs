@@ -3,12 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SingleDiceModelInitial : MonoSingleton<SingleDiceModelInitial>
+public class SingleDiceModelInitial : MonoBehaviour
 {
     private SingleDiceModelSO[] singleDiceModelSOs;
-    public override void Awake()
+    public void Start()
     {
-        base.Awake();
         singleDiceModelSOs = Resources.LoadAll<SingleDiceModelSO>("Data/SingleDiceData");
         for (int i = 0; i < singleDiceModelSOs.Length; i++)
         {
@@ -34,6 +33,9 @@ public class SingleDiceModelInitial : MonoSingleton<SingleDiceModelInitial>
         }
 
     }
+
+
+
     /// <summary>
     /// csy: create a new buffInfo list with buffDataSO list
     /// </summary>

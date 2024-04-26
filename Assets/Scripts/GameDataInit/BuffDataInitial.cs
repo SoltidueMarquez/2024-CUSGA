@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using DesignerScripts;
 
-public class BuffDataInitial : MonoSingleton<BuffDataInitial>
+public class BuffDataInitial : MonoBehaviour
 {
     private BuffDataSO[] buffDataSos;
     // Start is called before the first frame update
-    public override void Awake()
+    public void Start()
     {
-        base.Awake();
         buffDataSos = Resources.LoadAll<BuffDataSO>("Data/BuffData");
         for (int i = 0; i < buffDataSos.Length; i++)
         {
