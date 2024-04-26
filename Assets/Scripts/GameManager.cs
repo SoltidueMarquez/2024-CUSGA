@@ -14,20 +14,33 @@ public class GameManager : MonoSingleton<GameManager>
     public bool ifLoadedHalidom;//用于判断是否加载了圣物,全局只加载一次，因为圣物是全局的
     [HideInInspector]
     public string currentMap;
+    [Header("编辑器中的玩家数据")]
+    public PlayerDataSO playerDataSOTemplate;
     [Header("玩家数据")]
     public PlayerDataSO playerDataSO;
+    public override void Awake()
+    {
+        base.Awake();
+        playerDataSO = ScriptableObject.CreateInstance<PlayerDataSO>();
+        playerDataSO.InitPlaydataSOInstance(playerDataSOTemplate);
+    }
+
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
+
     }
 
     #region 开始场景调用
     public void NewGame()
     {
-        playerDataSO.ifUseSaveData = false;//这样就会在进入地图的时候重新生成地图
+        //playerDataSO.ifUseSaveData = false;//这样就会在进入地图的时候重新生成地图
+        playerDataSO = ScriptableObject.CreateInstance<PlayerDataSO>();
+        playerDataSO.InitPlaydataSOInstance(playerDataSOTemplate);
     }
     public void ContinueGame()
     {
+        //playerDataSO.LoadData();
         playerDataSO.ifUseSaveData = true;
     }
     public bool CheckIfHasSaveData()

@@ -10,12 +10,13 @@ public static class SImpleJsonUtil
     /// <returns></returns>
     public static string ReadData(string fileName)
     {
+        string readData;
+#if UNITY_EDITOR
         //如果文件不存在返回空
         if (!File.Exists(Application.streamingAssetsPath + "/" + fileName))
         {
             return "";
         }
-        string readData;
         string fileUrl = Application.streamingAssetsPath + "/" + fileName;
 
         using (StreamReader sr = new StreamReader(fileUrl))
@@ -23,7 +24,20 @@ public static class SImpleJsonUtil
             readData = sr.ReadToEnd();
             sr.Close();
         }
+#endif
+#if !UNITY_EDITOR
+        if (!File.Exists(Application.persistentDataPath + "/" + fileName))
+        {
+            return "";
+        }
+        string fileUrl = Application.persistentDataPath + "/" + fileName;
 
+        using (StreamReader sr = new StreamReader(fileUrl))
+        {
+            readData = sr.ReadToEnd();
+            sr.Close();
+        }
+#endif
         return readData;
     }
     /// <summary>
@@ -33,6 +47,7 @@ public static class SImpleJsonUtil
     /// <param name="writeData"></param>
     public static void WriteData(string fileName, string writeData)
     {
+#if UNITY_EDITOR
         //如果文件不存在则创建文件
         if (!File.Exists(Application.streamingAssetsPath + "/" + fileName))
         {
@@ -46,6 +61,22 @@ public static class SImpleJsonUtil
             sw.Write(writeData);
             sw.Close();
         }
+#endif
+#if !UNITY_EDITOR
+        //如果文件不存在则创建文件
+        if (!File.Exists(Application.persistentDataPath + "/" + fileName))
+        {
+            File.Create(Application.persistentDataPath + "/" + fileName).Dispose();
+        }
+
+        string fileUrl = Application.persistentDataPath + "/" + fileName;
+
+        using (StreamWriter sw = new StreamWriter(fileUrl))
+        {
+            sw.Write(writeData);
+            sw.Close();
+        }
+#endif
     }
     /// <summary>
     /// 删档

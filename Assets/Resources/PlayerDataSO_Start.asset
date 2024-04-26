@@ -214,8 +214,8 @@ MonoBehaviour:
     currentMoney: 65
     currentRollTimes: 0
     currentShield: 2
-  ifHasData: 1
-  ifHasMap: 1
+  ifHasData: 0
+  ifHasMap: 0
   currentMap: "{\r\n  \"nodes\": [\r\n    {\r\n      \"point\": {\r\n        \"x\":
     1,\r\n        \"y\": 0\r\n      },\r\n      \"incoming\": [],\r\n      \"outgoing\":
     [\r\n        {\r\n          \"x\": 2,\r\n          \"y\": 1\r\n        },\r\n       
@@ -513,3 +513,7 @@ MonoBehaviour:
     722.010559\r\n      }\r\n    }\r\n  ],\r\n  \"path\": [\r\n    {\r\n      \"x\":
     1,\r\n      \"y\": 0\r\n    },\r\n    {\r\n      \"x\": 1,\r\n      \"y\": 1\r\n   
     }\r\n  ],\r\n  \"bossNodeName\": \"Spider Boss\",\r\n  \"configName\": \"DefaultMapConfig\"\r\n}"
+  playerRoomData:
+    roomNums: 0
+    enemyIDs: []
+    bossIDs: []

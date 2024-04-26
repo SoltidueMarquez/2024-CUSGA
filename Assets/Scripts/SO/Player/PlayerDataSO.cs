@@ -6,6 +6,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using DesignerScripts;
 using Map;
+using JetBrains.Annotations;
 /// <summary>
 /// 在一开始初始化的时候，玩家的骰子类型和骰子的模型是固定的，这个类用于存储玩家的骰子类型和骰子的模型
 /// </summary>
@@ -109,6 +110,7 @@ public class PlayerDataSO : ScriptableObject
             ifHasMap = true;
             this.currentMap = playerData.map;
         }
+        ifHasData = true;
     }
     public void SaveData()
     {
@@ -167,6 +169,25 @@ public class PlayerDataSO : ScriptableObject
         {
             playerRoomData.enemyIDs.Add(enemyDataSO.EnemyID);
         }
+    }
+    #endregion
+    #region 初始化
+    public void InitPlaydataSOInstance(PlayerDataSO playerDataSO)
+    {
+        this.ifUseSaveData = playerDataSO.ifUseSaveData;
+        this.baseProp = playerDataSO.baseProp;
+        this.halidomSOs = playerDataSO.halidomSOs;
+        this.playerDiceSOItems = playerDataSO.playerDiceSOItems;
+        this.bagDiceSOList = playerDataSO.bagDiceSOList;
+        this.maxBagDiceCount = playerDataSO.maxBagDiceCount;
+
+        this.halidomDataForSaves = new();
+        this.battleDiceList = new();
+        this.bagDiceList = new();
+        this.chaResource = new ChaResource();
+        this .ifHasMap = false;
+        this.currentMap = "";
+        this.playerRoomData = new PlayerRoomData();
     }
     #endregion
 }
