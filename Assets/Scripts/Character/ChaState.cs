@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UI;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 /// <summary>
 /// 玩家和敌人共有的类，是玩家和敌人的的总控，敌人通过AI控制，玩家通过在战斗时对UI进行交互，调用chaState中的函数
