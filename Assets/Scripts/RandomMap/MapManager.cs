@@ -167,9 +167,9 @@ namespace Map
                 foreach (var halidom in playerDataSO.halidomSOs)
                 {
                     //找halidom字典里是否有这个键
-                    if (HalidomData.halidomDictionary.ContainsKey(halidom.halidomName.ToString()))
+                    if (DataInitManager.Instance.halidomDataTable.halidomDictionary.ContainsKey(halidom.halidomName.ToString()))
                     {
-                        HalidomManager.Instance.AddHalidomInMap(HalidomData.halidomDictionary[halidom.halidomName.ToString()]);
+                        HalidomManager.Instance.AddHalidomInMap(DataInitManager.Instance.halidomDataTable.halidomDictionary[halidom.halidomName.ToString()]);
                     }
                 }
                 GameManager.Instance.ifLoadedHalidom = true;

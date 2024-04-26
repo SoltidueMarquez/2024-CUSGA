@@ -247,9 +247,9 @@ public class BattleManager : MonoBehaviour
             foreach (var halidom in this.parameter.playerDataSO.halidomSOs)
             {
                 //找halidom字典里是否有这个键
-                if (HalidomData.halidomDictionary.ContainsKey(halidom.halidomName.ToString()))
+                if (DataInitManager.Instance.halidomDataTable.halidomDictionary.ContainsKey(halidom.halidomName.ToString()))
                 {
-                    HalidomManager.Instance.AddHalidom(HalidomData.halidomDictionary[halidom.halidomName.ToString()]);
+                    HalidomManager.Instance.AddHalidom(DataInitManager.Instance.halidomDataTable.halidomDictionary[halidom.halidomName.ToString()]);
                 }
             }
             GameManager.Instance.ifLoadedHalidom = true;
@@ -272,7 +272,7 @@ public class BattleManager : MonoBehaviour
             //初始化buff
             foreach (var buffConfig in enemyDataSO.enemyBuffs)
             {
-                var buffData = DesignerScripts.BuffDataTable.buffData[buffConfig.buffDataSO.dataName.ToString()];
+                var buffData = DataInitManager.Instance.buffDataTable.buffData[buffConfig.buffDataSO.dataName.ToString()];
                 for (int j = 0; j < buffConfig.buffStack; j++)
                 {
                     var paramDic = BuffDataSO.GetParamDic(buffConfig.buffDataSO.paramList);

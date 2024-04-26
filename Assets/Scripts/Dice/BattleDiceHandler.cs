@@ -169,7 +169,7 @@ public class BattleDiceHandler : MonoBehaviour
             {
                 //获取骰面在骰面字典中的key
                 string dicKey = diceSOItem.singleDiceModelSOs[j].singleDiceModelName;
-                SingleDiceModel singleDiceModel = SingleDiceData.diceDictionary[dicKey];
+                SingleDiceModel singleDiceModel = DataInitManager.Instance.singleDiceDataTable.diceDictionary[dicKey];
                 //暂时的idinDice，也就是点数，是初始化的时候决定的
                 battleDice.AddDice(singleDiceModel, j + 1, i, j);
             }
@@ -225,7 +225,7 @@ public class BattleDiceHandler : MonoBehaviour
         this.bagDiceCards.Clear();
         for (int i = 0; i < singleDiceModelSOs.Count; i++)
         {
-            SingleDiceModel singleDiceModel = SingleDiceData.diceDictionary[singleDiceModelSOs[i].singleDiceModelName];
+            SingleDiceModel singleDiceModel = DataInitManager.Instance.singleDiceDataTable.diceDictionary[singleDiceModelSOs[i].singleDiceModelName];
             SingleDiceObj singleDiceObj = new SingleDiceObj(singleDiceModel, i + 1);
             this.AddSingleBattleDiceToBag(singleDiceObj);
         }

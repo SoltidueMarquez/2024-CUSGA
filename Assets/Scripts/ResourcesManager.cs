@@ -77,7 +77,7 @@ public static class ResourcesManager
     /// <returns></returns>
     public static SingleDiceModel GetSingleDiceModelViaid(string id)
     {
-        var singleDiceModelList = SingleDiceData.diceDictionary.Values.ToList();
+        var singleDiceModelList = DataInitManager.Instance.singleDiceDataTable.diceDictionary.Values.ToList();
         var singleDiceModel = singleDiceModelList.Where(x => x.id == id).FirstOrDefault();
         return singleDiceModel;
     }

@@ -75,9 +75,9 @@ namespace DesignerScripts
         十二试炼,
 
     }
-    public static class HalidomData
+    public class HalidomData
     {
-        public static Dictionary<string, HalidomObject> halidomDictionary = new Dictionary<string, HalidomObject>() 
+        public Dictionary<string, HalidomObject> halidomDictionary = new Dictionary<string, HalidomObject>() 
         {
            /*#region
             *//*{

@@ -709,7 +709,7 @@ namespace DesignerScripts
             {
                 buffInfo.curStack += 3;
                 //获得一层怒气
-                BuffInfo newAngerBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Anger.ToString()], buffInfo.creator, buffInfo.target);
+                BuffInfo newAngerBuff = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Anger.ToString()], buffInfo.creator, buffInfo.target);
                 buffInfo.target.GetComponent<ChaState>().AddBuff(newAngerBuff, buffInfo.target);
                 Debug.Log("蓄能生效，增加3层并获得怒气");
             }
@@ -751,7 +751,7 @@ namespace DesignerScripts
         public static void Thorns(BuffInfo buffInfo)//OnRoundStart调用
         {
             //添加的反伤需要一开始为true
-            BuffInfo newReflectBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Reflect.ToString()], buffInfo.creator, buffInfo.target, 1, true);
+            BuffInfo newReflectBuff = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Reflect.ToString()], buffInfo.creator, buffInfo.target, 1, true);
             buffInfo.target.GetComponent<ChaState>().AddBuff(newReflectBuff, buffInfo.target);
             Debug.Log("荆棘生效，持有者获得反射");
         }
@@ -784,7 +784,7 @@ namespace DesignerScripts
         public static void Split(BuffInfo buffInfo)//OnRoundStart调用
         {
             //添加的水痘需要一开始为true
-            BuffInfo newPoxBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Pox.ToString()], buffInfo.creator, buffInfo.target, 1, true);
+            BuffInfo newPoxBuff = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Pox.ToString()], buffInfo.creator, buffInfo.target, 1, true);
             buffInfo.target.GetComponent<ChaState>().AddBuff(newPoxBuff, buffInfo.target);
             Debug.Log("分裂生效,持有者获得水痘");
         }
@@ -841,7 +841,7 @@ namespace DesignerScripts
 
         public static void Sensitive(BuffInfo buffInfo)//onRoll调用
         {
-            BuffInfo newVulnerableBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Vulnerable.ToString()], buffInfo.creator, buffInfo.target, (int)buffInfo.buffParam["Value"], false);
+            BuffInfo newVulnerableBuff1 = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Vulnerable.ToString()], buffInfo.creator, buffInfo.target, (int)buffInfo.buffParam["Value"], false);
 
             buffInfo.target.GetComponent<ChaState>().AddBuff(newVulnerableBuff1, buffInfo.target);
 
@@ -850,7 +850,7 @@ namespace DesignerScripts
 
         public static void Brave(BuffInfo buffInfo)
         {
-            BuffInfo newToughBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target, (int)buffInfo.buffParam["Value"], false);
+            BuffInfo newToughBuff1 = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target, (int)buffInfo.buffParam["Value"], false);
 
             buffInfo.target.GetComponent<ChaState>().AddBuff(newToughBuff1, buffInfo.target);
 
@@ -1236,7 +1236,7 @@ namespace DesignerScripts
 
                 }*/
 
-                BuffInfo newBleedBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Bleed.ToString()], buffInfo.creator, buffInfo.target, 1);
+                BuffInfo newBleedBuff1 = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Bleed.ToString()], buffInfo.creator, buffInfo.target, 1);
                 buffInfo.target.GetComponent<ChaState>().AddBuff(newBleedBuff1, buffInfo.target);
                 Debug.Log("敌方流血+1");
                 BuffInfo findBuffInfo = buffInfo.target.GetComponent<BuffHandler>().buffList.Find(x => x.buffData.id == "1_01");
@@ -1262,7 +1262,7 @@ namespace DesignerScripts
                         Debug.Log("玩家力量层数+1");
                     }*/
 
-                    BuffInfo newStrengthBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target, 1);
+                    BuffInfo newStrengthBuff1 = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target, 1);
                     buffInfo.creator.GetComponent<ChaState>().AddBuff(newStrengthBuff1, buffInfo.creator);
                     Debug.Log("玩家力量+1");
                     BuffInfo findBuffInfo = buffInfo.creator.GetComponent<BuffHandler>().buffList.Find(x => x.buffData.id == "1_06");
@@ -1299,7 +1299,7 @@ namespace DesignerScripts
         {
             if (BattleManager.Instance.parameter.turns == 1)
             {
-                BuffInfo newDodgeBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target, 1, true);
+                BuffInfo newDodgeBuff = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target, 1, true);
                 //给对面添加伤害为0的buff
                 buffInfo.creator.GetComponent<ChaState>().AddBuff(newDodgeBuff, buffInfo.creator);
                 Debug.Log("战斗开始获得1层闪避");
@@ -1310,7 +1310,7 @@ namespace DesignerScripts
         {
             if (BattleManager.Instance.parameter.turns == 1)
             {
-                BuffInfo newEnhanceBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Enhance.ToString()], buffInfo.creator, buffInfo.target);
+                BuffInfo newEnhanceBuff = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Enhance.ToString()], buffInfo.creator, buffInfo.target);
                 buffInfo.creator.GetComponent<ChaState>().AddBuff(newEnhanceBuff, buffInfo.creator);
                 Debug.Log("战斗开始获得1层强化");
             }
@@ -1320,7 +1320,7 @@ namespace DesignerScripts
         {
             if (BattleManager.Instance.parameter.turns == 1)
             {
-                BuffInfo newStrengthBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target, 2);
+                BuffInfo newStrengthBuff1 = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target, 2);
                 //BuffInfo newStrengthBuff2 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target);
                 buffInfo.creator.GetComponent<ChaState>().AddBuff(newStrengthBuff1, buffInfo.creator);
                 //buffInfo.creator.GetComponent<ChaState>().AddBuff(newStrengthBuff2, buffInfo.creator);
@@ -1333,7 +1333,7 @@ namespace DesignerScripts
             if (BattleManager.Instance.parameter.turns == 1)
             {
                 //因为buff会在回合结束时-1层，所以这边要加三次
-                BuffInfo newToughBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target, 3);
+                BuffInfo newToughBuff1 = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target, 3);
                 //BuffInfo newToughBuff2 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target);
                 //BuffInfo newToughBuff3 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target);
                 buffInfo.creator.GetComponent<ChaState>().AddBuff(newToughBuff1, buffInfo.creator);
@@ -1347,7 +1347,7 @@ namespace DesignerScripts
         {
             if (BattleManager.Instance.parameter.turns == 1)
             {
-                BuffInfo newVulnerableBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Vulnerable.ToString()], buffInfo.creator, buffInfo.target, 2);
+                BuffInfo newVulnerableBuff1 = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Vulnerable.ToString()], buffInfo.creator, buffInfo.target, 2);
                 //BuffInfo newVulnerableBuff2 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Vulnerable.ToString()], buffInfo.creator, buffInfo.target);
                 buffInfo.target.GetComponent<ChaState>().AddBuff(newVulnerableBuff1, buffInfo.target);
                 //buffInfo.target.GetComponent<ChaState>().AddBuff(newVulnerableBuff2, buffInfo.target);
@@ -1359,7 +1359,7 @@ namespace DesignerScripts
         {
             if (BattleManager.Instance.parameter.turns == 1)
             {
-                BuffInfo newWeakBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Weak.ToString()], buffInfo.creator, buffInfo.target, 2);
+                BuffInfo newWeakBuff1 = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Weak.ToString()], buffInfo.creator, buffInfo.target, 2);
                 //BuffInfo newWeakBuff2 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Weak.ToString()], buffInfo.creator, buffInfo.target);
                 buffInfo.target.GetComponent<ChaState>().AddBuff(newWeakBuff1, buffInfo.target);
                 //buffInfo.target.GetComponent<ChaState>().AddBuff(newWeakBuff2, buffInfo.target);
@@ -1461,7 +1461,7 @@ namespace DesignerScripts
             int probability = Random.Range(1, 11);
             if (probability == 1)
             {
-                BuffInfo newDodgeBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target, 1, true);
+                BuffInfo newDodgeBuff = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target, 1, true);
                 buffInfo.creator.GetComponent<ChaState>().AddBuff(newDodgeBuff, buffInfo.creator);
                 Debug.Log("战斗开始获得1层闪避");
             }
@@ -1473,7 +1473,7 @@ namespace DesignerScripts
             int probability = Random.Range(1, 11);
             if (probability == 1)
             {
-                BuffInfo newStrengthBuff = new BuffInfo(BuffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target, 1, true);
+                BuffInfo newStrengthBuff = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target, 1, true);
                 buffInfo.creator.GetComponent<ChaState>().AddBuff(newStrengthBuff, buffInfo.creator);
                 Debug.Log("战斗开始获得1层力量");
             }
@@ -1718,7 +1718,7 @@ namespace DesignerScripts
         {
             for (int i = 0; i < (int)buffInfo.buffParam["EnemyVulnerable"]; i++)
             {
-                BuffInfo newVulnerableBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Vulnerable.ToString()], buffInfo.creator, buffInfo.target);
+                BuffInfo newVulnerableBuff1 = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Vulnerable.ToString()], buffInfo.creator, buffInfo.target);
                 buffInfo.target.GetComponent<ChaState>().AddBuff(newVulnerableBuff1, buffInfo.target);
             }
         }
@@ -1727,7 +1727,7 @@ namespace DesignerScripts
         {
             for (int i = 0; i < (int)buffInfo.buffParam["EnemyWeak"]; i++)
             {
-                BuffInfo newWeakBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Weak.ToString()], buffInfo.creator, buffInfo.target);
+                BuffInfo newWeakBuff1 = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Weak.ToString()], buffInfo.creator, buffInfo.target);
                 buffInfo.target.GetComponent<ChaState>().AddBuff(newWeakBuff1, buffInfo.target);
             }
         }
@@ -1736,7 +1736,7 @@ namespace DesignerScripts
         {
             for (int i = 0; i < (int)buffInfo.buffParam["EnemyBleed"]; i++)
             {
-                BuffInfo newBleedBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Bleed.ToString()], buffInfo.creator, buffInfo.target);
+                BuffInfo newBleedBuff1 = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Bleed.ToString()], buffInfo.creator, buffInfo.target);
                 buffInfo.target.GetComponent<ChaState>().AddBuff(newBleedBuff1, buffInfo.target);
             }
         }
@@ -1745,7 +1745,7 @@ namespace DesignerScripts
         {
             for (int i = 0; i < (int)buffInfo.buffParam["PlayerStrength"]; i++)
             {
-                BuffInfo newStrengthBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target);
+                BuffInfo newStrengthBuff1 = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target);
                 buffInfo.creator.GetComponent<ChaState>().AddBuff(newStrengthBuff1, buffInfo.creator);
             }
         }
@@ -1756,7 +1756,7 @@ namespace DesignerScripts
         {
             for (int i = 0; i < (int)buffInfo.buffParam["PlayerDodge"]; i++)
             {
-                BuffInfo newDodgeBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target);
+                BuffInfo newDodgeBuff1 = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target);
                 buffInfo.creator.GetComponent<ChaState>().AddBuff(newDodgeBuff1, buffInfo.creator);
             }
         }
@@ -1767,7 +1767,7 @@ namespace DesignerScripts
         {
             for (int i = 0; i < (int)buffInfo.buffParam["PlayerEnhance"]; i++)
             {
-                BuffInfo newEnhanceBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Enhance.ToString()], buffInfo.creator, buffInfo.target);
+                BuffInfo newEnhanceBuff1 = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Enhance.ToString()], buffInfo.creator, buffInfo.target);
                 buffInfo.creator.GetComponent<ChaState>().AddBuff(newEnhanceBuff1, buffInfo.creator);
             }
         }
@@ -1776,7 +1776,7 @@ namespace DesignerScripts
         {
             for (int i = 0; i < (int)buffInfo.buffParam["PlayerSpirit"]; i++)
             {
-                BuffInfo newSpiritBuff1 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Spirit.ToString()], buffInfo.creator, buffInfo.target);
+                BuffInfo newSpiritBuff1 = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Spirit.ToString()], buffInfo.creator, buffInfo.target);
                 buffInfo.creator.GetComponent<ChaState>().AddBuff(newSpiritBuff1, buffInfo.creator);
             }
         }

@@ -162,7 +162,7 @@ namespace DesignerScripts
     }
     public class BuffDataTable
     {
-        public static Dictionary<string, BuffData> buffData = new Dictionary<string, BuffData>()
+        public Dictionary<string, BuffData> buffData = new Dictionary<string, BuffData>()
         {
             //{ "test",new BuffData(
             //    //buff的唯一id

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using DesignerScripts;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,15 +10,42 @@ public class SingleDiceModelInitial : MonoSingleton<SingleDiceModelInitial>
     public override void Awake()
     {
         base.Awake();
-        singleDiceModelSOs = Resources.LoadAll<SingleDiceModelSO>("Data/SingleDiceData");
+        //singleDiceModelSOs = Resources.LoadAll<SingleDiceModelSO>("Data/SingleDiceData");
+        //for (int i = 0; i < singleDiceModelSOs.Length; i++)
+        //{
+        //    if (SingleDiceData.diceDictionary.ContainsKey(singleDiceModelSOs[i].singleDiceModelName.ToString()))
+        //    {
+        //        Debug.LogWarning("SingleDiceModelInitial:试图添加重复的SingleDiceModel");
+        //        continue;
+        //    }
+        //    SingleDiceData.diceDictionary.Add(singleDiceModelSOs[i].singleDiceModelName.ToString(),
+        //        new SingleDiceModel(
+        //            singleDiceModelSOs[i].side,
+        //            singleDiceModelSOs[i].type,
+        //            singleDiceModelSOs[i].singleDiceModelName.ToString(),
+        //            singleDiceModelSOs[i].id,
+        //            singleDiceModelSOs[i].condition,
+        //            singleDiceModelSOs[i].cost,
+        //            singleDiceModelSOs[i].value,
+        //            (int)singleDiceModelSOs[i].level + 1,
+        //            GetBuffInfoList(singleDiceModelSOs[i].buffDataConfigs),
+        //            singleDiceModelSOs[i].baseValue,
+        //            null)
+        //        );
+        //}
+        //await LoadSingleDiceModelAsync();
+
+    }
+    public async UniTask LoadSingleDiceModelAsync()
+    {
         for (int i = 0; i < singleDiceModelSOs.Length; i++)
         {
-            if (SingleDiceData.diceDictionary.ContainsKey(singleDiceModelSOs[i].singleDiceModelName.ToString()))
+            if (DataInitManager.Instance.singleDiceDataTable.diceDictionary.ContainsKey(singleDiceModelSOs[i].singleDiceModelName.ToString()))
             {
                 Debug.LogWarning("SingleDiceModelInitial:试图添加重复的SingleDiceModel");
                 continue;
             }
-            SingleDiceData.diceDictionary.Add(singleDiceModelSOs[i].singleDiceModelName.ToString(),
+            DataInitManager.Instance.singleDiceDataTable.diceDictionary.Add(singleDiceModelSOs[i].singleDiceModelName.ToString(),
                 new SingleDiceModel(
                     singleDiceModelSOs[i].side,
                     singleDiceModelSOs[i].type,
@@ -31,8 +59,10 @@ public class SingleDiceModelInitial : MonoSingleton<SingleDiceModelInitial>
                     singleDiceModelSOs[i].baseValue,
                     null)
                 );
-        }
+            Debug.Log(i);
 
+            await UniTask.Delay(1);
+        }
     }
     /// <summary>
     /// csy: create a new buffInfo list with buffDataSO list
@@ -76,9 +106,9 @@ public class SingleDiceModelInitial : MonoSingleton<SingleDiceModelInitial>
                 }
             }
             BuffInfo buffInfo = new BuffInfo(
-                BuffDataTable.buffData[item.buffDataSO.dataName.ToString()],
+                DataInitManager.Instance.buffDataTable.buffData[item.buffDataSO.dataName.ToString()],
                 null, null, item.buffStack,
-                BuffDataTable.buffData[item.buffDataSO.dataName.ToString()].isPermanent, dict
+                DataInitManager.Instance.buffDataTable.buffData[item.buffDataSO.dataName.ToString()].isPermanent, dict
                 );
             buffInfos.Add(buffInfo);
         }

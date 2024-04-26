@@ -19,7 +19,7 @@ public static class RandomManager
     /// <returns>单个符合条件的骰面model</returns>
     public static SingleDiceModel GetSingleDiceModel(DiceType diceType, int level, int side)
     {
-        Dictionary<string, SingleDiceModel> diceDictionary = SingleDiceData.diceDictionary;
+        Dictionary<string, SingleDiceModel> diceDictionary = DataInitManager.Instance.singleDiceDataTable.diceDictionary;
         List<SingleDiceModel> singleDiceModels = new List<SingleDiceModel>();
         singleDiceModels.AddRange(diceDictionary.Values);
         List<SingleDiceModel> singleDiceModellegal = singleDiceModels.Where((SingleDiceModel singleDiceModel) =>
@@ -31,7 +31,7 @@ public static class RandomManager
 
     public static SingleDiceModel GetSingleDiceModel(int level, int side)
     {
-        Dictionary<string, SingleDiceModel> diceDictionary = SingleDiceData.diceDictionary;
+        Dictionary<string, SingleDiceModel> diceDictionary = DataInitManager.Instance.singleDiceDataTable.diceDictionary;
         List<SingleDiceModel> singleDiceModels = new List<SingleDiceModel>();
         singleDiceModels.AddRange(diceDictionary.Values);
         List<SingleDiceModel> singleDiceModellegal = singleDiceModels.Where((SingleDiceModel singleDiceModel) =>
@@ -49,7 +49,7 @@ public static class RandomManager
     /// <returns></returns>
     public static HalidomObject GetRandomHalidomObj(RareType rareType)
     {
-        Dictionary<string,HalidomObject> keyValuePairs = HalidomData.halidomDictionary;
+        Dictionary<string,HalidomObject> keyValuePairs = DataInitManager.Instance.halidomDataTable.halidomDictionary;
         List<HalidomObject> halidomObjects = new List<HalidomObject>();
         halidomObjects.AddRange(keyValuePairs.Values);
         List<HalidomObject> halidomObjectLegals = halidomObjects.Where((HalidomObject halidomObject) =>

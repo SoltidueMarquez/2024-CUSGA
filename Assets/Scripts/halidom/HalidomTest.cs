@@ -25,9 +25,9 @@ public class HalidomTest : MonoBehaviour
             foreach(var halidom in halidomSOData)
             {
                 //找halidom字典里是否有这个键
-                if(HalidomData.halidomDictionary.ContainsKey(halidom.halidomName.ToString()))
+                if(DataInitManager.Instance.halidomDataTable.halidomDictionary.ContainsKey(halidom.halidomName.ToString()))
                 {
-                    HalidomManager.Instance.AddHalidom(HalidomData.halidomDictionary[halidom.halidomName.ToString()]);
+                    HalidomManager.Instance.AddHalidom(DataInitManager.Instance.halidomDataTable.halidomDictionary[halidom.halidomName.ToString()]);
                 }
                 
             }
@@ -43,9 +43,9 @@ public class HalidomTest : MonoBehaviour
             {
                 foreach (var halidom in halidomSOData)
                 {
-                    if (HalidomData.halidomDictionary.ContainsKey(halidom.halidomName.ToString()))
+                    if (DataInitManager.Instance.halidomDataTable.halidomDictionary.ContainsKey(halidom.halidomName.ToString()))
                     {
-                        HalidomManager.Instance.AddHalidom(HalidomData.halidomDictionary[halidom.halidomName.ToString()]);
+                        HalidomManager.Instance.AddHalidom(DataInitManager.Instance.halidomDataTable.halidomDictionary[halidom.halidomName.ToString()]);
                     }
                 }
             }
