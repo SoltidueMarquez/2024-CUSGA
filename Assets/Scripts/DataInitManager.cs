@@ -74,7 +74,7 @@ public class DataInitManager : MonoBehaviour
                     buffDataSos[i].stateMod,
                     buffDataSos[i].propMod)
                     );
-                Debug.Log(i);
+                //Debug.Log(i);
                 await UniTask.Delay(1);
 
             }
@@ -112,7 +112,7 @@ public class DataInitManager : MonoBehaviour
                         singleDiceModelSOs[i].baseValue,
                         null)
                     );
-                Debug.Log(i);
+                //Debug.Log(i);
 
                 await UniTask.Delay(1);
             }
@@ -198,7 +198,7 @@ public class DataInitManager : MonoBehaviour
                         halidomDataSos[i].value,
                         GetBuffInfoList(halidomDataSos[i].buffDataSos))
                     );
-                Debug.Log(i);
+                //Debug.Log(i);
 
                 await UniTask.Delay(1);
 

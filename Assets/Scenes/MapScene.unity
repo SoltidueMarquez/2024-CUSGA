@@ -131,9 +131,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1672154615793104844, guid: 68f9670360383f847a0283bad848df55, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1672154615793104844, guid: 68f9670360383f847a0283bad848df55, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1672154615793104844, guid: 68f9670360383f847a0283bad848df55, type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4193792690235593876, guid: 68f9670360383f847a0283bad848df55, type: 3}
       propertyPath: m_PixelPerfect
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346621814028998058, guid: 68f9670360383f847a0283bad848df55, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346621814028998058, guid: 68f9670360383f847a0283bad848df55, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 6829353694686567489, guid: 68f9670360383f847a0283bad848df55, type: 3}
       propertyPath: m_LocalPosition.x
@@ -288,7 +308,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100
   field of view: 34
   orthographic: 1
   orthographic size: 5
