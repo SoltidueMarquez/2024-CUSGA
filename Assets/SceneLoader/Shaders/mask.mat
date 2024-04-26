@@ -37,7 +37,7 @@ Material:
     - _CenterY: 0.5
     - _PositionX: 0.5
     - _PositionY: 0.5
-    - _Radius: 0
+    - _Radius: 2
     m_Colors:
     - _BaseColor: {r: 0.8490566, g: 0.56470275, b: 0.56470275, a: 1}
   m_BuildTextureStacks: []

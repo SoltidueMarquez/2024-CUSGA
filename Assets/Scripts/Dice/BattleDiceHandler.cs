@@ -128,6 +128,11 @@ public class BattleDiceHandler : MonoBehaviour
             {
                 RollingResultUIManager.Instance.RemoveResultUI(i);
             }
+            if(BattleManager.Instance.GetCurrentState() == BattleManager.Instance.GetStates()[GameState.PlayerWin])
+            {
+                Debug.Log("退出");
+                return;
+            }
             await UniTask.Delay(1000);
         }
     }

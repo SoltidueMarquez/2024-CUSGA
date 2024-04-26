@@ -587,6 +587,16 @@ public class BattleManager : MonoBehaviour
         this.parameter.enemyChaStates[0].GetBuffHandler().BuffRoundStartTick(1);
     }
     #endregion
+    #region 一些有用的函数
+    public IState GetCurrentState()
+    {
+        return currentState;
+    }
+    public Dictionary<GameState, IState> GetStates()
+    {
+        return states;
+    }
+    #endregion
 }
 //定义了一个回调，用于在UI动画结束时调用
 public delegate void OnUIAnimFinished();
