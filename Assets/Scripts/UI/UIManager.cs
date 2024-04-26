@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
@@ -14,12 +15,27 @@ namespace UI
         [Header("通用")] 
         [Tooltip("拖拽图层")] public Transform dragCanvas;
         [Tooltip("奖励界面管理器")] public RewardUIManager rewardUIManager;
+        [SerializeField, Tooltip("设置按钮")] private Button setButton;
 
         private void Awake()
         {
             Instance = this;
         }
-        
+
+        private void Start()
+        {
+            if (setButton != null)
+            {
+                setButton.onClick.AddListener(() =>
+                {
+                    if (SettingsManager.Instance != null)
+                    {
+                        SettingsManager.Instance.OnClickSettingsButton();
+                    }
+                });
+            }
+        }
+
         public int FindFirstEmptyColumn(List<Column> columns)
         {
             for (int i = 0; i < columns.Count; i++)
