@@ -5,19 +5,16 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class IntentionUIObjectEffect : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+    public class IntentionUIObjectEffect : UIObjectEffects,IPointerEnterHandler,IPointerExitHandler
     {
-        [SerializeField] private GameObject descriptionUI;
-        [SerializeField] private Text descriptionText;
-
         /// <summary>
         /// 鼠标预览
         /// </summary>
         /// <param name="eventData"></param>
         public void OnPointerEnter(PointerEventData eventData)
         {
-            transform.DOScale(new Vector3(-1.2f, 1.2f, 1.2f), 0.2f);
-            descriptionUI.SetActive(true);
+            transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.2f);
+            descriptionCanvas.SetActive(true);
         }
 
         /// <summary>
@@ -26,24 +23,28 @@ namespace UI
         /// <param name="eventData"></param>
         public void OnPointerExit(PointerEventData eventData)
         {
-            transform.DOScale(new Vector3(-1f, 1f, 1f), 0.2f);
-            descriptionUI.SetActive(false);
+            transform.DOScale(new Vector3(1f, 1f, 1f), 0.2f);
+            descriptionCanvas.SetActive(false);
         }
 
         /// <summary>
         /// 初始化函数
         /// </summary>
-        /// <param name="id">序列号</param>
-        /// <param name="desc">描述</param>
-        /// <param name="durationTime">持续时间</param>
-        public void Init(string id)
+        /// <param name="dice"></param>
+        public void Init(SingleDiceObj dice)
         {
-            //依据内容初始化
-            var tmp = ResourcesManager.GetIntentionUIData(id);
-            descriptionText.text = $"{tmp.name}:{tmp.description}";
-            this.transform.localScale = new Vector3(-1, 1, 1);
+            this.transform.localScale = new Vector3(1, 1, 1);
+            var data = ResourcesManager.GetSingleDiceUIData(dice);
+            //信息文本初始化
+            nameText.text = data.name;
+            typeText.text = $"类型:{data.type}";
+            levelText.text = $"稀有度:{data.level}";
+            valueText.text = $"售价￥{data.salevalue}";
+            baseValueText.text = $"基础数值{data.baseValue}";
+            descriptionText.text = $"描述:{data.description}";
+            this.GetComponent<Image>().sprite = data.sprite;
+            idInDiceText.text = data.idInDice.ToString();
         }
-
        
         /// <summary>
         /// 销毁函数

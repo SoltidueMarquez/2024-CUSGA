@@ -364,7 +364,7 @@ public class BattleManager : MonoBehaviour
         chaState.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs);
         foreach (var singleDice in singleDiceObjs)
         {
-            CharacterUIManager.Instance.CreateIntentionUIObject(singleDice.model.id);
+            CharacterUIManager.Instance.CreateIntentionUIObject(singleDice);
         }
     }
     #endregion

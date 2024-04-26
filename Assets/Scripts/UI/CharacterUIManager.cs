@@ -233,11 +233,11 @@ namespace UI
         /// 创建意图
         /// </summary>
         /// <param name="id"></param>
-        public void CreateIntentionUIObject(string id)
+        public void CreateIntentionUIObject(SingleDiceObj dice)
         {
             var tmp = Instantiate(intentionTemplate, intentionParent, true);
             var tmpIntention = tmp.GetComponent<IntentionUIObjectEffect>();
-            tmpIntention.Init(id);//初始化
+            tmpIntention.Init(dice);//初始化
             tmp.SetActive(true);
             intentionList.Add(tmpIntention);
         }
