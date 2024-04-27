@@ -5,6 +5,7 @@ using System.Linq;
 using UI;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using System.Threading;
 /// <summary>
 /// 玩家和敌人身上挂载的战斗骰子管理器
 /// </summary>
@@ -35,7 +36,10 @@ public class BattleDiceHandler : MonoBehaviour
     /// 用于查找上一个或者下一个
     /// </summary>
     private Stack<SingleDiceObj> previousSingleDices = new();
-
+    /// <summary>
+    /// 用来取消释放骰子
+    /// </summary>
+    private CancellationTokenSource cancellationToken;
     /// <summary>
     /// 释放单个骰子
     /// </summary>
@@ -110,7 +114,7 @@ public class BattleDiceHandler : MonoBehaviour
     /// <summary>
     /// 释放所有的骰面
     /// </summary>
-    public  void CastDiceAll(ChaState chaState, GameObject target)
+    public void CastDiceAll(ChaState chaState, GameObject target)
     {
         //for (int i = 0; i < diceCardsInUse.Length; i++)
         //{
@@ -119,26 +123,38 @@ public class BattleDiceHandler : MonoBehaviour
         CastDiceALLAsync(chaState, target);
     }
     //异步释放所有的骰面
-    public async void CastDiceALLAsync(ChaState chastate,GameObject target)
+    public async void CastDiceALLAsync(ChaState chastate, GameObject target)
     {
-        for(int i = 0;i<diceCardsInUse.Length;i++)
+        cancellationToken = new CancellationTokenSource();
+        for (int i = 0; i < diceCardsInUse.Length; i++)
         {
-            CastSingleDice(i, chastate, target);
-            //Debug.Log("释放第"+i+"个骰子");
-            
-            if (chastate.side == 0)
+            if (diceCardsInUse[i] != null)
             {
-                RollingResultUIManager.Instance.RemoveResultUI(i);
+                CastSingleDice(i, chastate, target);
+                //Debug.Log("释放第"+i+"个骰子");
+
+                if (chastate.side == 0)
+                {
+                    RollingResultUIManager.Instance.RemoveResultUI(i);
+                }
+                if (BattleManager.Instance.GetCurrentState() == BattleManager.Instance.GetStates()[GameState.PlayerWin] || (BattleManager.Instance.GetCurrentState() == BattleManager.Instance.GetStates()[GameState.Reward]))
+                {
+                    cancellationToken.Cancel();
+                    //RollingResultUIManager.Instance.RemoveAllResultUI(Strategy.ReRoll);
+                    return;
+                }
+                try
+                {
+                    await UniTask.Delay(1000, false, PlayerLoopTiming.Update, cancellationToken.Token);
+                }
+                catch
+                {
+                    Debug.Log("玩家取消释放骰子");
+                }
             }
-            if(BattleManager.Instance.GetCurrentState() == BattleManager.Instance.GetStates()[GameState.PlayerWin])
-            {
-                Debug.Log("退出");
-                return;
-            }
-            await UniTask.Delay(1000);
         }
     }
-    
+
     #region 骰面交换
     public void SwapDiceInBagAndBattle(SingleDiceObj singleDiceObjInBag, SingleDiceObj singleDiceObjInBattle, int indexOfDices)
     {

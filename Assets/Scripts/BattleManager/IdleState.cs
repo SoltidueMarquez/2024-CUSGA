@@ -358,8 +358,8 @@ public class PlayerWinState : IState
         }
         else
         {
-            ProcessPromptUIManager.Instance.DoFightEndUIAnim(null);
-            BattleManager.Instance.TransitionState(GameState.Reward);
+            ProcessPromptUIManager.Instance.DoFightEndUIAnim(TransitToReward);
+            
         }
 
     }
@@ -372,6 +372,11 @@ public class PlayerWinState : IState
     public void OnUpdate()
     {
 
+    }
+
+    public void TransitToReward()
+    {
+        manager.TransitionState(GameState.Reward);
     }
 }
 
