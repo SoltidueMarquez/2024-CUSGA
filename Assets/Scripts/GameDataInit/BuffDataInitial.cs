@@ -11,7 +11,7 @@ public class BuffDataInitial : MonoSingleton<BuffDataInitial>
     public override void Awake()
     {
         base.Awake();
-        //buffDataSos = Resources.LoadAll<BuffDataSO>("Data/BuffData");
+        buffDataSos = Resources.LoadAll<BuffDataSO>("Data/BuffData");
         //for (int i = 0; i < buffDataSos.Length; i++)
         //{
         //    if (BuffDataTable.buffData.ContainsKey(buffDataSos[i].dataName.ToString()))

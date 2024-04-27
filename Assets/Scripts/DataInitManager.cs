@@ -8,10 +8,10 @@ using UnityEngine;
 
 public class DataInitManager : MonoBehaviour
 {
+    public bool ifAsync;
     public BuffDataTable buffDataTable;
     public HalidomData halidomDataTable;
     public SingleDiceData singleDiceDataTable;
-    public TextMeshProUGUI text;
     private BuffDataSO[] buffDataSos;
     private HalidomDataSO[] halidomDataSos;
     private SingleDiceModelSO[] singleDiceModelSOs;
@@ -26,15 +26,29 @@ public class DataInitManager : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(this);
-        LoadGameData();
+        if(ifAsync)
+        {
+            LoadGameDataAsync();
+        }
+        else
+        {
+            LoadGameData();
+        }
     }
-    public async void LoadGameData()
+    public async void LoadGameDataAsync()
     {
         await LoadBuffDataAsync();
         await LoadHalidomDataAysnc();
         await LoadSingleDiceModelAsync();
         Debug.Log("success");
 
+    }
+    public void LoadGameData()
+    {
+        LoadBuffData();
+        LoadSingleDiceModel();
+        LoadHalidomData();
+        Debug.Log("success");
     }
     public async UniTask LoadBuffDataAsync()
     {
@@ -82,7 +96,44 @@ public class DataInitManager : MonoBehaviour
         catch (Exception e)
         {
             Debug.LogError("An exception occurred: " + e.Message);
-            text.text = "An exception occurred: " + e.Message;
+        }
+    }
+    public void LoadBuffData()
+    {
+        buffDataSos = Resources.LoadAll<BuffDataSO>("Data/BuffData");
+        for (int i = 0; i < buffDataSos.Length; i++)
+        {
+            if (DataInitManager.Instance.buffDataTable.buffData.ContainsKey(buffDataSos[i].dataName.ToString()))
+            {
+                Debug.LogWarning("BuffDataInitial:试图添加重复的buff");
+                continue;
+            }
+            DataInitManager.Instance.buffDataTable.buffData.Add(buffDataSos[i].dataName.ToString(),
+                new BuffData(
+                buffDataSos[i].id,
+                buffDataSos[i].dataName.ToString(),
+                "icon" + buffDataSos[i].id,
+                buffDataSos[i].tags,
+                buffDataSos[i].maxStack,
+                buffDataSos[i].duringCount,
+                buffDataSos[i].isPermanent,
+                buffDataSos[i].buffUpdateEnum,
+                buffDataSos[i].removeStackUpdateEnum,
+                buffDataSos[i].onCreate == 0 ? "" : buffDataSos[i].onCreate.ToString(), buffDataSos[i].onCreateParams,
+                buffDataSos[i].onRemove == 0 ? "" : buffDataSos[i].onRemove.ToString(), buffDataSos[i].onRemoveParams,
+                buffDataSos[i].onRoundStart == 0 ? "" : buffDataSos[i].onRoundStart.ToString(), buffDataSos[i].onRoundEndParams,
+                buffDataSos[i].onRoundEnd == 0 ? "" : buffDataSos[i].onRoundEnd.ToString(), buffDataSos[i].onRoundEndParams,
+                buffDataSos[i].onHit == 0 ? "" : buffDataSos[i].onHit.ToString(), buffDataSos[i].onHitParams,
+                buffDataSos[i].onBeHurt == 0 ? "" : buffDataSos[i].onBeHurt.ToString(), buffDataSos[i].onBeHurtParams,
+                buffDataSos[i].onRoll == 0 ? "" : buffDataSos[i].onRoll.ToString(), buffDataSos[i].onRollParams,
+                buffDataSos[i].onKill == 0 ? "" : buffDataSos[i].onKill.ToString(), buffDataSos[i].onKillParams,
+                buffDataSos[i].onBeKilled == 0 ? "" : buffDataSos[i].onBeKilled.ToString(), buffDataSos[i].onBeKilledParams,
+                buffDataSos[i].onCast == 0 ? "" : buffDataSos[i].onCast.ToString(), buffDataSos[i].onCastParams,
+                buffDataSos[i].onAddBuff == 0 ? "" : buffDataSos[i].onAddBuff.ToString(), buffDataSos[i].onAddBuffParams,
+                buffDataSos[i].onGetFinalDamage == 0 ? "" : buffDataSos[i].onGetFinalDamage.ToString(), buffDataSos[i].onGetFinalDamageParams,
+                buffDataSos[i].stateMod,
+                buffDataSos[i].propMod)
+                );
         }
     }
     #region 骰面
@@ -120,17 +171,42 @@ public class DataInitManager : MonoBehaviour
         catch (Exception e)
         {
             Debug.LogError("An exception occurred: " + e.Message);
-            text.text = "An exception occurred: " + e.Message;
         }
 
     }
-
-    /// <summary>
-    /// csy: create a new buffInfo list with buffDataSO list
-    /// </summary>
-    /// <param name="buffDataSOs"></param>
-    /// <returns></returns>
-    private BuffInfo[] GetBuffInfoList(List<BuffDataConfig> buffDataConfigs)
+    public void LoadSingleDiceModel()
+    {
+        singleDiceModelSOs = Resources.LoadAll<SingleDiceModelSO>("Data/SingleDiceData");
+        for (int i = 0; i < singleDiceModelSOs.Length; i++)
+        {
+            if (DataInitManager.Instance.singleDiceDataTable.diceDictionary.ContainsKey(singleDiceModelSOs[i].singleDiceModelName.ToString()))
+            {
+                Debug.LogWarning("SingleDiceModelInitial:试图添加重复的SingleDiceModel");
+                continue;
+            }
+            DataInitManager.Instance.singleDiceDataTable.diceDictionary.Add(singleDiceModelSOs[i].singleDiceModelName.ToString(),
+                new SingleDiceModel(
+                    singleDiceModelSOs[i].side,
+                    singleDiceModelSOs[i].type,
+                    singleDiceModelSOs[i].singleDiceModelName.ToString(),
+                    singleDiceModelSOs[i].id,
+                    singleDiceModelSOs[i].condition,
+                    singleDiceModelSOs[i].cost,
+                    singleDiceModelSOs[i].value,
+                    (int)singleDiceModelSOs[i].level + 1,
+                    GetBuffInfoList(singleDiceModelSOs[i].buffDataConfigs),
+                    singleDiceModelSOs[i].baseValue,
+                    null)
+                );
+            //Debug.Log(i);
+        }
+    }
+        /// <summary>
+        /// csy: create a new buffInfo list with buffDataSO list
+        /// </summary>
+        /// <param name="buffDataSOs"></param>
+        /// <returns></returns>
+        private BuffInfo[] GetBuffInfoList(List<BuffDataConfig> buffDataConfigs)
     {
         if (buffDataConfigs == null)
         {
@@ -207,15 +283,36 @@ public class DataInitManager : MonoBehaviour
         catch (Exception e)
         {
             Debug.LogError("An exception occurred: " + e.Message);
-            text.text = "An exception occurred: " + e.Message;
         }
     }
-    /// <summary>
-    /// csy: create a new buffInfo list with buffDataSO list
-    /// </summary>
-    /// <param name="buffDataSOs"></param>
-    /// <returns></returns>
-    private List<BuffInfo> GetBuffInfoList(List<BuffDataSO> buffDataSOs)
+
+    public void LoadHalidomData()
+    {
+        halidomDataSos = Resources.LoadAll<HalidomDataSO>("Data/HalidomData");
+        for (int i = 0; i < halidomDataSos.Length; i++)
+        {
+            if (DataInitManager.Instance.halidomDataTable.halidomDictionary.ContainsKey(halidomDataSos[i].halidomName.ToString()))
+            {
+                Debug.LogWarning("HalidomDataInitial:试图添加重复的HalidomData");
+                continue;
+            }
+            DataInitManager.Instance.halidomDataTable.halidomDictionary.Add(halidomDataSos[i].halidomName.ToString(),
+                new HalidomObject(
+                    halidomDataSos[i].rareType,
+                    halidomDataSos[i].id,
+                    halidomDataSos[i].halidomName.ToString(),
+                    halidomDataSos[i].description,
+                    halidomDataSos[i].value,
+                    GetBuffInfoList(halidomDataSos[i].buffDataSos))
+                );
+        }
+    }
+        /// <summary>
+        /// csy: create a new buffInfo list with buffDataSO list
+        /// </summary>
+        /// <param name="buffDataSOs"></param>
+        /// <returns></returns>
+        private List<BuffInfo> GetBuffInfoList(List<BuffDataSO> buffDataSOs)
     {
         if (buffDataSOs == null)
         {
