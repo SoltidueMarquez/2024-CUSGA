@@ -51,6 +51,7 @@ public class BattleDiceHandler : MonoBehaviour
         {
             //减少资源
             chaState.ModResources(-1 * singleDiceObj.model.cost);
+            diceCardsInUse[index] = null;
             //释放骰子
             if (singleDiceObj.model.buffInfos.Length > 0)
             {
@@ -67,7 +68,6 @@ public class BattleDiceHandler : MonoBehaviour
             }
             //添加进栈
             previousSingleDices.Push(new SingleDiceObj(singleDiceObj));
-            diceCardsInUse[index] = null;
 
             //造成伤害
             Damage damage = singleDiceObj.model.damage;
@@ -130,7 +130,16 @@ public class BattleDiceHandler : MonoBehaviour
         {
             if (diceCardsInUse[i] != null)
             {
-                CastSingleDice(i, chastate, target);
+                if (diceCardsInUse[i].model.name.Contains("迂回"))
+                {
+                    CastSingleDice(i, chastate, target);
+                    await UniTask.Delay(10);
+                }
+                else
+                {
+                    CastSingleDice(i, chastate, target);
+                }
+
                 //Debug.Log("释放第"+i+"个骰子");
 
                 if (chastate.side == 0)
