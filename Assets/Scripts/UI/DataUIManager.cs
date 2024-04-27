@@ -69,7 +69,6 @@ namespace UI
                 }
                 moneyText.text = $"￥{_currentMoney}";
             }
-            Debug.LogWarning($"改成{_newMoney}");
         }
 
         /// <summary>
