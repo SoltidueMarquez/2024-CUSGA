@@ -127,11 +127,15 @@ public class DamageManager : MonoSingleton<DamageManager>
         }
         //TODO:视觉上的变化
         //伤害流程走完，添加buff
-        for (int i = 0; i < damageInfo.addBuffs.Count; i++)
+        if(damageInfo.addBuffs.Count > 0)
         {
-            ChaState toChaState = defenderChaState;
-            toChaState.GetBuffHandler().AddBuff(damageInfo.addBuffs[i], damageInfo.attacker);
+            for (int i = 0; i < damageInfo.addBuffs.Count; i++)
+            {
+                ChaState toChaState = defenderChaState;
+                toChaState.GetBuffHandler().AddBuff(damageInfo.addBuffs[i], damageInfo.attacker);
+            }
         }
+        
 
     }
 
