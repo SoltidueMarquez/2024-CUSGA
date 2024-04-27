@@ -15,7 +15,7 @@ namespace UI
     }
     public class RollingResultUIManager : MonoSingleton<RollingResultUIManager>
     {
-        [SerializeField, Tooltip("投掷结果栏位")] private List<Transform> columns;
+        [SerializeField, Tooltip("投掷结果栏位")] private List<Column> columnList;
         [SerializeField, Tooltip("生成模板")] private GameObject template;
         [SerializeField, Tooltip("结果列表")] private List<GameObject> resultList;
         
@@ -32,8 +32,9 @@ namespace UI
         /// <param name="ifFightEnd"></param>
         public void CreateResult(int index, SingleDiceUIData data, Vector2Int location,bool ifFightEnd)
         {
-            var tmp = Instantiate(template, columns[index], true);
-            tmp.transform.position = columns[index].position;//更改位置
+            var tmp = Instantiate(template, columnList[index].transform, true);
+            tmp.transform.position = columnList[index].transform.position;//更改位置
+            columnList[index].bagObject = tmp;
             var tmpResult = tmp.GetComponent<RollingResultDiceUI>();
             tmpResult.Init(index, location, data);//初始化
             if (ifFightEnd) { tmpResult.Disable();}
@@ -49,6 +50,11 @@ namespace UI
         {
             if (resultList.Count == 0) { return;}
 
+            foreach (var column in columnList)
+            {
+                column.bagObject = null;
+            }
+            
             var tmpList = new List<GameObject>();//备份队列
             while (resultList.Count != 0)
             {
@@ -77,17 +83,17 @@ namespace UI
         /// <param name="index"></param>
         public void RemoveResultUI(int index)
         {
-            if (index < 0 || index >= resultList.Count)
+            if (index < 0 || index >= columnList.Count)
             {
                 Debug.LogWarning("RollingResultUIManager:序列索引越界");
                 return;
             }
-            if (resultList[index] == null)
+            if (columnList[index].bagObject == null)
             {
                 Debug.LogWarning("RollingResultUIManager:该投掷结果为空");
                 return;
             }
-            resultList[index].GetComponent<RollingResultDiceUI>()?.OnUseDestroy();
+            columnList[index].bagObject.GetComponent<RollingResultDiceUI>()?.OnUseDestroy();
         }
         
         /// <summary>

@@ -611,17 +611,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0a5ae0f0bb4c434884179aa4ffd98cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columns:
-  - {fileID: 1886341155}
-  - {fileID: 1330972326}
-  - {fileID: 312569048}
-  - {fileID: 1634471805}
-  - {fileID: 1914075986}
-  - {fileID: 1808299308}
-  - {fileID: 1676128628}
-  - {fileID: 1534838272}
-  - {fileID: 46489307}
-  - {fileID: 74985877}
+  columnList:
+  - transform: {fileID: 1886341155}
+    bagObject: {fileID: 0}
+    state: 0
+  - transform: {fileID: 1330972326}
+    bagObject: {fileID: 0}
+    state: 0
+  - transform: {fileID: 312569048}
+    bagObject: {fileID: 0}
+    state: 0
+  - transform: {fileID: 1634471805}
+    bagObject: {fileID: 0}
+    state: 0
+  - transform: {fileID: 1914075986}
+    bagObject: {fileID: 0}
+    state: 0
+  - transform: {fileID: 1808299308}
+    bagObject: {fileID: 0}
+    state: 0
+  - transform: {fileID: 1676128628}
+    bagObject: {fileID: 0}
+    state: 0
+  - transform: {fileID: 1534838272}
+    bagObject: {fileID: 0}
+    state: 0
+  - transform: {fileID: 46489307}
+    bagObject: {fileID: 0}
+    state: 0
+  - transform: {fileID: 74985877}
+    bagObject: {fileID: 0}
+    state: 0
   template: {fileID: 1304177038515510442, guid: 3c51c8c40f7233c4f8ed2772adc6df54, type: 3}
   resultList: []
   useTime: 1
