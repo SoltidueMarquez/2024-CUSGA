@@ -12,7 +12,7 @@ namespace UI.Store
         
         public void Init(int index, List<SingleDiceObj> diceList, List<Action<SingleDiceObj>> onChooseList)
         {
-            this.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+            this.transform.localScale = new Vector3(1f, 1f, 1f);
             if (diceList == null || diceList.Count == 0)
             {
                 StoreManager.Instance.m_Debug($"骰面表为空");

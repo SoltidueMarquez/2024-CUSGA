@@ -382,7 +382,7 @@ public class StoreManager : SingletonBase<StoreManager>
             //createActionList.Add(actions);
         }
         StrengthenAreaManager.Instance.CreateFightDicePage(createList, createActionList);
-
+        StoreUIManager.Instance.EnterUpgradeUI();
 
         //StoreUIManager.Instance.RefreshUpgradeUI();
     }
