@@ -158,6 +158,7 @@ namespace DesignerScripts
 
         //4.24
         Imitate,
+        Stun,
 
     }
     public class BuffDataTable

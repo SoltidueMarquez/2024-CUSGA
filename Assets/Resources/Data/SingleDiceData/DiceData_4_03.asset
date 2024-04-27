@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4_03
   singleDiceModelName: "\u6A21\u4EFF+"
-  type: 0
+  type: 3
   condition:
     currentHp: 0
     currentMoney: 0
@@ -32,6 +32,6 @@ MonoBehaviour:
   - buffDataSO: {fileID: 11400000, guid: 3fdb88af79633894f9cd07fed5013127, type: 2}
     buffStack: 2
     buffRound: 0
-  sprite: {fileID: -1253350518, guid: a3579de2edecde242a8cab02138cdbf4, type: 3}
+  sprite: {fileID: 365861258, guid: 2bf387469069a9b4183bba90cc805f31, type: 3}
   description: "\u6253\u51FA\u4E0A\u4E00\u4E2A(\u4E0A\u4E00\u4E2A\u662F\u6A21\u4EFF\u5219\u65E0\u6548)\u9AB0\u97622\u6B21"
   baseValue: 0

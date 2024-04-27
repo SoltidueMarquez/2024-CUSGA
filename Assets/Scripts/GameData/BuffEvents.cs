@@ -37,7 +37,9 @@ namespace DesignerScripts
 
         Anger,//怒气
 
-        LoseEnergy,//失能
+        LoseEnergy,//失能已废弃
+
+        Stun,//失能
 
         BuffStackMinus1,//Buff层数减1
 
@@ -503,9 +505,10 @@ namespace DesignerScripts
         public static Dictionary<string, BuffOnCast> onCastFunc = new Dictionary<string, BuffOnCast>()
         {
             //普通buff
-            {
-                BuffEventName.LoseEnergy.ToString(),LoseEnergy
-            },
+            
+            
+
+            
             //圣物buff
             {
                 BuffEventName.Add1StackIfPlayerHaveStrength.ToString(),Add1StackIfPlayerHaveStrength
@@ -528,6 +531,9 @@ namespace DesignerScripts
             },
             {
                 BuffEventName.TripleHit.ToString(),TripleHit
+            },
+            {
+                BuffEventName.Stun.ToString(),Stun
             }
         };
         public static Dictionary<string, OnAddBuff> onAddFunc = new Dictionary<string, OnAddBuff>()
@@ -544,6 +550,10 @@ namespace DesignerScripts
         {
             {
                 BuffEventName.Reflect.ToString(),Reflect
+            },
+
+            {
+                BuffEventName.LoseEnergy.ToString(),LoseEnergy
             }
 
         };
@@ -723,11 +733,11 @@ namespace DesignerScripts
             Debug.Log("怒气生效，增加" + buffInfo.curStack * 5 * 0.1f + "伤害");
         }
 
-        public static SingleDiceObj LoseEnergy(BuffInfo buffInfo, SingleDiceObj singleDiceObj)
+        public static void LoseEnergy(BuffInfo buffInfo, DamageInfo damageInfo)
         {
-            singleDiceObj.model.damage.baseDamage = 0;
-            singleDiceObj.model.damage.indexDamageRate = 0;
-            singleDiceObj.model.buffInfos = null;
+            damageInfo.finalDamage = 0;
+            damageInfo.addBuffs = new List<BuffInfo>();
+
             Debug.Log("失能生效，伤害为0");
             //触发后-1层
             buffInfo.curStack--;
@@ -735,7 +745,37 @@ namespace DesignerScripts
             if (buffInfo.curStack == 0)
             {
                 buffInfo.isPermanent = false;
+                int index = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
+                var characterSide = (Character)buffInfo.target.GetComponent<ChaState>().side;
+                BuffUIManager.Instance.RemoveBuffUIObject(characterSide, index);
             }
+            
+
+        }
+
+        public static SingleDiceObj Stun(BuffInfo buffInfo, SingleDiceObj singleDiceObj)//Tag：Target onbehurt
+        {
+            
+            
+                if (buffInfo.creator == BattleManager.Instance.parameter.playerChaState.gameObject)
+                {
+                    BuffInfo loseEnergy = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.LoseEnergy.ToString()],
+                         BattleManager.Instance.parameter.playerChaState.gameObject,
+                        BattleManager.Instance.parameter.enemyChaStates[0].gameObject);
+                    BattleManager.Instance.parameter.enemyChaStates[0].GetComponent<ChaState>().AddBuff(loseEnergy, BattleManager.Instance.parameter.enemyChaStates[0].gameObject);
+                }
+                else
+                {
+                    BuffInfo loseEnergynew = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.LoseEnergy.ToString()],
+                         BattleManager.Instance.parameter.enemyChaStates[0].gameObject,
+                        BattleManager.Instance.parameter.playerChaState.gameObject);
+                    BattleManager.Instance.parameter.playerChaState.GetComponent<ChaState>().AddBuff(loseEnergynew, BattleManager.Instance.parameter.playerChaState.gameObject);
+                }
+            
+           
+
+            buffInfo.curStack = 0;
+            buffInfo.isPermanent = false;
             return singleDiceObj;
 
         }
