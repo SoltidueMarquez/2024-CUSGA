@@ -16,7 +16,7 @@ MonoBehaviour:
   halidomName: 13
   description: "\u62FE\u53D6\u65F6\uFF0C\u83B7\u5F97\u6570\u91CF\u7B49\u540C\u4E8E\u5F53\u524D\u91D1\u94B1\u4E00\u534A\u7684\u91D1\u94B1"
   rareType: 0
-  value: 1
+  value: 10
   buffDataSos:
   - {fileID: 11400000, guid: 47f4bfc8c9f37914b8072abfb3973f01, type: 2}
   sprite: {fileID: -1166605284, guid: 7834449662960c641a50cd8f4ac308c2, type: 3}

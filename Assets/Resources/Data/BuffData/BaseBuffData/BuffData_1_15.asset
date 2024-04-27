@@ -38,5 +38,5 @@ MonoBehaviour:
     ifImmune: 0
   propMod: []
   paramList: []
-  description: 
+  description: "\u53D7\u5230\u653B\u51FB\u65F6\uFF0C\u672C\u6B21\u53D7\u5230\u4F24\u5BB3\xD72"
   sprite: {fileID: 198641221, guid: aa22c55a3819f6d4da669cc1b598577e, type: 3}

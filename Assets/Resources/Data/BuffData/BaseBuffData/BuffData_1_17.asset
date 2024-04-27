@@ -41,5 +41,5 @@ MonoBehaviour:
   - type: 0
     name: Value
     value: 2
-  description: 
+  description: "\u53D7\u5230\u653B\u51FB\u65F6\uFF0C\u653B\u51FB\u65B9\u62A4\u76FE-2"
   sprite: {fileID: -1956874920, guid: aa22c55a3819f6d4da669cc1b598577e, type: 3}
