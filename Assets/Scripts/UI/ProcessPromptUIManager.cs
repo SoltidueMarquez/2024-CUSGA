@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using DG.Tweening;
+using Settlement_Scene;
 using UnityEngine;
 
 namespace UI
@@ -47,6 +49,29 @@ namespace UI
             RollingResultUIManager.Instance.RemoveAllResultUI(Strategy.ReRoll);
         }
         
+        /// <summary>
+        /// 游戏结束流程提示
+        /// </summary>
+        /// <param name="onUIAnimFinished"></param>
+        public void DoGameOverUIAnim(OnUIAnimFinished onUIAnimFinished)
+        {
+            panel.SetActive(true);
+            string tip = "你死了";
+            processPrompt.Appear(appearDurationTime, tip); //出现提示
+            StartCoroutine(HideTip());
+            //敌人与玩家离开
+            CharacterUIManager.Instance.enemy.DOMoveY(enemyEndYPosition, appearDurationTime);
+            CharacterUIManager.Instance.player.DOMoveY(playerEndYPosition, appearDurationTime);
+            
+            if (onUIAnimFinished != null)
+            {
+                StartCoroutine(AnimFish(onUIAnimFinished)); //结束时调用
+            }
+            //调出结算界面
+            if (SettlementManager.Instance == null) { return; }
+            SettlementManager.Instance.LateSettlement(appearDurationTime);
+        }
+
         /// <summary>
         /// 战斗开始流程UI动画
         /// </summary>

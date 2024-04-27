@@ -45,7 +45,7 @@ namespace UI.Settlement
             {
                 var tmp = Instantiate(template, parent, true);
                 tmp.SetActive(true);
-                var content = $"{data.dataType}:{data.data.x}..........................{data.GetResultScore()}";
+                var content = $"{data.dataType}:{data.data.x}............{data.GetResultScore()}";
                 var tmpText = tmp.GetComponent<Text>();
                 tmpText.DOText(content, animTime);
                 settlementTextList.Add(tmp);
