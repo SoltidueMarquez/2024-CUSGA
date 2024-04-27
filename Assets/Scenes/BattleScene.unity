@@ -508,7 +508,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dragCanvas: {fileID: 849039271}
   rewardUIManager: {fileID: 1128369419}
-  setButton: {fileID: 0}
+  setButton: {fileID: 846694192}
 --- !u!4 &81981820
 Transform:
   m_ObjectHideFlags: 0
@@ -3777,7 +3777,7 @@ GameObject:
   - component: {fileID: 846694192}
   - component: {fileID: 846694195}
   m_Layer: 5
-  m_Name: 'Pause Button '
+  m_Name: 'Setting Button '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5205,7 +5205,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -178, y: 266}
+  m_AnchoredPosition: {x: -146, y: 240}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1243479462
@@ -5267,7 +5267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -217, y: 266}
+  m_AnchoredPosition: {x: -199, y: 242}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1261379154
