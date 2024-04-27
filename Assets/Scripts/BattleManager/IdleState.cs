@@ -1,4 +1,5 @@
 using DesignerScripts;
+using Settlement_Scene;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -289,7 +290,8 @@ public class PlayerLoseState : IState
     }
     public void OnEnter()
     {
-        manager.OnEnterResultUI();
+        ProcessPromptUIManager.Instance.DoGameOverUIAnim(manager.OnEnterResultUI);
+        
         Debug.Log("Enter PlayerLoseState");
 
     }
@@ -349,8 +351,16 @@ public class PlayerWinState : IState
         this.manager.parameter.playerChaState.RefreshRerollTimes();//刷新玩家的重投次数
         GameManager.Instance.playerDataSO.playerRoomData.roomNums++;
         this.manager.parameter.playerDataSO.UpdatePlayerRoomData(this.manager.parameter.enemyDataSO);
-        ProcessPromptUIManager.Instance.DoFightEndUIAnim(null);
-        BattleManager.Instance.TransitionState(GameState.Reward);
+        if (GameManager.Instance.CheckIfPassGame())
+        {
+            ProcessPromptUIManager.Instance.DoGameOverUIAnim(null);
+            BattleManager.Instance.TransitionState(GameState.Result);
+        }
+        else
+        {
+            ProcessPromptUIManager.Instance.DoFightEndUIAnim(null);
+            BattleManager.Instance.TransitionState(GameState.Reward);
+        }
 
     }
 
@@ -381,6 +391,32 @@ public class RewardState : IState
         //创建三个奖励骰面和圣物
         manager.CreateRewards(3);
 
+    }
+
+    public void OnExit()
+    {
+        Debug.Log("Exit RewardState");
+    }
+
+    public void OnUpdate()
+    {
+
+    }
+}
+
+public class ResultState : IState
+{
+    private BattleManager manager;
+
+    public ResultState(BattleManager manager)
+    {
+
+        this.manager = manager;
+    }
+    public void OnEnter()
+    {
+        manager.OnEnterResultUI();
+        Debug.Log("Enter RewardState");
     }
 
     public void OnExit()

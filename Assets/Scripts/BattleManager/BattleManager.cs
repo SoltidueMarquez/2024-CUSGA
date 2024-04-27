@@ -57,7 +57,8 @@ public enum GameState
     PlayerLose,
     PlayerLoseResolution,
     PlayerWin,
-    Reward
+    Reward,
+    Result
 }
 public class BattleManager : MonoBehaviour
 {
@@ -107,6 +108,7 @@ public class BattleManager : MonoBehaviour
         states.Add(GameState.PlayerLoseResolution, new PlayerLoseResolutionState(this));
         states.Add(GameState.PlayerWin, new PlayerWinState(this));
         states.Add(GameState.Reward, new RewardState(this));
+        states.Add(GameState.Result, new ResultState(this));
         this.parameter.playerDataSO = GameManager.Instance.playerDataSO;
         if (GameManager.Instance.enemyDataSO != null)
         {
@@ -550,23 +552,17 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void EndBattle()
     {
+        this.parameter.playerChaState.RefreshRerollTimes();
         this.parameter.playerDataSO.UpdatePlayerDataSO(parameter.playerChaState);
         this.parameter.playerDataSO.UpdatePlayerRoomData(parameter.enemyDataSO);
         this.parameter.playerDataSO.UpdataPlayerDataSoMap(GameManager.Instance.currentMap);
         this.parameter.playerDataSO.SaveData();
-        if (GameManager.Instance.CheckIfPassGame())
-        {
-            OnEnterResultUI();
-        }
-        else
-        {
-            SceneLoader.Instance.LoadSceneAsync(GameScene.MapScene, new Vector2(0.5f, 0.5f));
-        }
+
+        SceneLoader.Instance.LoadSceneAsync(GameScene.MapScene, new Vector2(0.5f, 0.5f));
+
     }
     public void OnEnterResultUI()
     {
-        this.parameter.playerDataSO.UpdatePlayerRoomData(parameter.enemyDataSO);
-        this.parameter.playerDataSO.UpdatePlayerDataSO(parameter.playerChaState);
         SettlementManager.Instance.onEnterSettlement?.Invoke();
     }
     public void OnExitResultUI()
