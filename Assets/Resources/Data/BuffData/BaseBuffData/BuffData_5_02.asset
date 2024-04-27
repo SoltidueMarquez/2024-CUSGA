@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 5_02
   dataName: 106
-  tags:
-  - Self
+  tags: []
   maxStack: 5
   duringCount: 0
   isPermanent: 0
@@ -25,13 +24,14 @@ MonoBehaviour:
   onRemove: 0
   onRoundStart: 0
   onRoundEnd: 0
-  onHit: 31
+  onHit: 0
   onBeHurt: 0
   onRoll: 0
   onKill: 0
   onBeKilled: 0
-  onCast: 0
+  onCast: 8
   onAddBuff: 0
+  onGetFinalDamage: 0
   stateMod:
     ifCanChangePosition: 1
     canUseDice: 1

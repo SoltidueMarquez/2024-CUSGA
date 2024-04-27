@@ -14,14 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 5_03
   dataName: 67
-  tags:
-  - Self
+  tags: []
   maxStack: 5
   duringCount: 0
   isPermanent: 0
   buffUpdateEnum: 0
   removeStackUpdateEnum: 0
-  onCreate: 19
+  onCreate: 0
   onRemove: 0
   onRoundStart: 0
   onRoundEnd: 0
@@ -30,7 +29,9 @@ MonoBehaviour:
   onRoll: 0
   onKill: 0
   onBeKilled: 0
-  onCast: 0
+  onCast: 6
+  onAddBuff: 0
+  onGetFinalDamage: 0
   stateMod:
     ifCanChangePosition: 1
     canUseDice: 1

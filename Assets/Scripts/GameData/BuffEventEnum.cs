@@ -175,7 +175,11 @@ public enum onCastEnum
     LoseEnergy,
     Add1StackIfPlayerHaveStrength,
     Imitate,
-
+    ClearEnemyPositiveBuff,
+    ClearPlayerNegativeBuff,
+    RerollDice,
+    DoubleHit,
+    TripleHit,
 }
 public enum onAddBuffEnum
 {

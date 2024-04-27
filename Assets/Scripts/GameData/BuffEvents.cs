@@ -242,15 +242,7 @@ namespace DesignerScripts
             {
                 BuffEventName.PlayerSpirit.ToString(),PlayerSpirit
             },
-            {
-                BuffEventName.ClearEnemyPositiveBuff.ToString(),ClearEnemyPositiveBuff
-            },
-            {
-                BuffEventName.ClearPlayerNegativeBuff.ToString(),ClearPlayerNegativeBuff
-            },
-            {
-                BuffEventName.RerollDice.ToString(),RerollDice
-            },
+
 
 
         };
@@ -416,13 +408,8 @@ namespace DesignerScripts
                 BuffEventName.EnhanceAttackAfterSellDice.ToString(),EnhanceAttackAfterSellDice
             },
             //骰子buff
-            {
-                BuffEventName.DoubleHit.ToString(),DoubleHit
-            },
-            {
-                BuffEventName.TripleHit.ToString(),TripleHit
-            },
-            
+
+
 
 
         };
@@ -527,6 +514,21 @@ namespace DesignerScripts
             {
                 BuffEventName.Imitate.ToString(),Imitate
             },
+            {
+                BuffEventName.ClearEnemyPositiveBuff.ToString(),ClearEnemyPositiveBuff
+            },
+            {
+                BuffEventName.ClearPlayerNegativeBuff.ToString(),ClearPlayerNegativeBuff
+            },
+            {
+                BuffEventName.RerollDice.ToString(),RerollDice
+            },
+            {
+                BuffEventName.DoubleHit.ToString(),DoubleHit
+            },
+            {
+                BuffEventName.TripleHit.ToString(),TripleHit
+            }
         };
         public static Dictionary<string, OnAddBuff> onAddFunc = new Dictionary<string, OnAddBuff>()
         {
@@ -543,11 +545,11 @@ namespace DesignerScripts
             {
                 BuffEventName.Reflect.ToString(),Reflect
             }
-            
-        };
-        
 
-       
+        };
+
+
+
 
         #endregion
 
@@ -758,9 +760,9 @@ namespace DesignerScripts
 
 
         //这里应该是一个获取最终伤害后的回调点
-        public static void Reflect(BuffInfo buffInfo, DamageInfo damageInfo)//OnHurt调用
+        public static void Reflect(BuffInfo buffInfo, DamageInfo damageInfo)//onfinaldamage调用
         {
-            if(damageInfo.diceType == DiceType.Attack && damageInfo.defender == buffInfo.creator)
+            if (damageInfo.diceType == DiceType.Attack && damageInfo.defender == buffInfo.creator)
             {
                 //计算出超出护盾伤害
                 int damage = Mathf.Abs(damageInfo.finalDamage - damageInfo.attacker.GetComponent<ChaState>().resource.currentShield);
@@ -769,6 +771,7 @@ namespace DesignerScripts
                 buffInfo.curStack--;
                 if (buffInfo.curStack == 0)
                 {
+                    Debug.Log("反射当前层数为" + buffInfo.curStack);
                     buffInfo.isPermanent = false;
                     int index = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
                     var characterSide = (Character)buffInfo.target.GetComponent<ChaState>().side;
@@ -777,7 +780,7 @@ namespace DesignerScripts
                 }
 
             }
-            
+
 
         }
 
@@ -791,7 +794,7 @@ namespace DesignerScripts
 
         public static void Pox(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)//OnHurt调用
         {
-            if(damageInfo.diceType == DiceType.Attack)
+            if (damageInfo.diceType == DiceType.Attack)
             {
                 damageInfo.damage.baseDamage *= 2;
 
@@ -804,7 +807,7 @@ namespace DesignerScripts
                 }
                 Debug.Log("因为水痘，收到伤害翻倍");
             }
-            
+
         }
 
         public static void Spike(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)//OnHurt调用
@@ -820,12 +823,12 @@ namespace DesignerScripts
                     Debug.Log("尖刺生效，攻击方受到" + damage + "伤害");
                 }
             }
-              
+
         }
 
         public static void Corrosion(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)//OnHurt调用
         {
-            if(damageInfo.diceType == DiceType.Attack)
+            if (damageInfo.diceType == DiceType.Attack)
             {
                 //获取攻击方的状态
                 ChaState tempChaState = damageInfo.attacker.GetComponent<ChaState>();
@@ -836,7 +839,7 @@ namespace DesignerScripts
                     Debug.Log("腐蚀生效，攻击方减去" + shieldDamage + "层护盾");
                 }
             }
-            
+
         }
 
         public static void Sensitive(BuffInfo buffInfo)//onRoll调用
@@ -1586,7 +1589,7 @@ namespace DesignerScripts
                 damageInfo.addDamageArea += (int)buffInfo.buffParam["Value"] * 0.01f;
                 Debug.Log("增加伤害" + (int)buffInfo.buffParam["Value"] + "%");
             }
-            
+
         }
 
 
@@ -1613,7 +1616,7 @@ namespace DesignerScripts
 
         public static void EnhanceAttackWhenHit(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
-            if((int)buffInfo.buffParam["Value"]>=6)
+            if ((int)buffInfo.buffParam["Value"] >= 6)
             {
                 damageInfo.addDamageArea += 0.3f;
                 Debug.Log("伤害增加了30%");
@@ -1674,6 +1677,9 @@ namespace DesignerScripts
 
 
         #region 骰子用buff效果函数
+
+
+        #region 已废弃
         public static void GetHurt(BuffInfo buffInfo)
         {
 
@@ -1780,8 +1786,10 @@ namespace DesignerScripts
                 buffInfo.creator.GetComponent<ChaState>().AddBuff(newSpiritBuff1, buffInfo.creator);
             }
         }
+        #endregion
 
-        public static void ClearEnemyPositiveBuff(BuffInfo buffInfo)
+
+        public static SingleDiceObj ClearEnemyPositiveBuff(BuffInfo buffInfo, SingleDiceObj singleDiceObj)
         {
             //获取敌方的buffhandler
             if (buffInfo.target.GetComponent<BuffHandler>() != null)
@@ -1792,12 +1800,16 @@ namespace DesignerScripts
                 {
                     findBuffInfo.curStack = 0;
                     findBuffInfo.isPermanent = false;
+                    int index = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(findBuffInfo);
+                    var characterSide = (Character)buffInfo.target.GetComponent<ChaState>().side;
+                    BuffUIManager.Instance.RemoveBuffUIObject(characterSide, index);
                 }
 
             }
+            return singleDiceObj;
         }
 
-        public static void ClearPlayerNegativeBuff(BuffInfo buffInfo)
+        public static SingleDiceObj ClearPlayerNegativeBuff(BuffInfo buffInfo, SingleDiceObj singleDiceObj)
         {
             //获取玩家的buffhandler
             if (buffInfo.creator.GetComponent<BuffHandler>() != null)
@@ -1808,51 +1820,108 @@ namespace DesignerScripts
                 {
                     findBuffInfo.curStack = 0;
                     findBuffInfo.isPermanent = false;
-                }
+                    int index = buffInfo.creator.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(findBuffInfo);
+                    var characterSide = (Character)buffInfo.creator.GetComponent<ChaState>().side;
+                    BuffUIManager.Instance.RemoveBuffUIObject(characterSide, index);
 
+                }
             }
+            return singleDiceObj;
         }
 
-        public static void RerollDice(BuffInfo buffInfo)
+        public static SingleDiceObj RerollDice(BuffInfo buffInfo, SingleDiceObj singleDiceObj)
         {
             BattleManager.Instance.ReRollDiceForPlayer();
+            return singleDiceObj;
         }
 
-        public static void DoubleHit(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        public static SingleDiceObj DoubleHit(BuffInfo buffInfo, SingleDiceObj singleDiceObj)
         {
-            if (!(bool)buffInfo.buffParam["IsFirstDeal"])
+            /*if (!(bool)buffInfo.buffParam["IsFirstDeal"])
             {
                 DamageInfo damageInfoCopy = new DamageInfo(damageInfo.attacker, damageInfo.defender, damageInfo.damage, damageInfo.diceType, damageInfo.level, damageInfo.addBuffs);
                 DamageManager.Instance.DoDamage(damageInfoCopy);
 
                 Debug.Log("重复打出");
                 buffInfo.buffParam["IsFirstDeal"] = true;
+            }*/
+
+            if(!(bool)buffInfo.buffParam["IsFirstDeal"])
+            {
+                //拼接一个新的damageinfo
+                Damage damage = singleDiceObj.model.damage;
+                damage.indexDamageRate = singleDiceObj.idInDice;
+                //拼装buffInfo
+
+                if (buffInfo.creator == BattleManager.Instance.parameter.playerChaState.gameObject)
+                {
+                    var damageInfo = new DamageInfo(BattleManager.Instance.parameter.playerChaState.gameObject,
+                                                    BattleManager.Instance.parameter.enemyChaStates[0].gameObject,
+                                                    damage, singleDiceObj.model.type, singleDiceObj.level, null);
+                    DamageManager.Instance.DoDamage(damageInfo);
+                    
+                }
+                else
+                {
+                    var damageInfo = new DamageInfo(BattleManager.Instance.parameter.enemyChaStates[0].gameObject,
+                                                    BattleManager.Instance.parameter.playerChaState.gameObject,
+                                                    damage, singleDiceObj.model.type, singleDiceObj.level, null);
+                    DamageManager.Instance.DoDamage(damageInfo);
+                    
+                }
+                buffInfo.buffParam["IsFirstDeal"] = true;
             }
+            return singleDiceObj;
         }
 
-        public static void TripleHit(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        public static SingleDiceObj TripleHit(BuffInfo buffInfo, SingleDiceObj singleDiceObj)
         {
-            Debug.Log("进入triplehit");
-            if ( !(bool)buffInfo.buffParam["IsFirstDeal"])
+            
+            if (!(bool)buffInfo.buffParam["IsFirstDeal"])
             {
-                
-                DamageInfo damageInfoCopy1 = new DamageInfo(damageInfo.attacker, damageInfo.defender, damageInfo.damage, damageInfo.diceType, damageInfo.level, damageInfo.addBuffs);
-                DamageInfo damageInfoCopy2 = new DamageInfo(damageInfo.attacker, damageInfo.defender, damageInfo.damage, damageInfo.diceType, damageInfo.level, damageInfo.addBuffs);
-                DamageManager.Instance.DoDamage(damageInfoCopy1);
-                DamageManager.Instance.DoDamage(damageInfoCopy2);
+
+                /* DamageInfo damageInfoCopy1 = new DamageInfo(damageInfo.attacker, damageInfo.defender, damageInfo.damage, damageInfo.diceType, damageInfo.level, damageInfo.addBuffs);
+                 DamageInfo damageInfoCopy2 = new DamageInfo(damageInfo.attacker, damageInfo.defender, damageInfo.damage, damageInfo.diceType, damageInfo.level, damageInfo.addBuffs);
+                 DamageManager.Instance.DoDamage(damageInfoCopy1);
+                 DamageManager.Instance.DoDamage(damageInfoCopy2);*/
+                Damage damage = singleDiceObj.model.damage;
+                damage.indexDamageRate = singleDiceObj.idInDice;
+                //拼装buffInfo
+                if (buffInfo.creator == BattleManager.Instance.parameter.playerChaState.gameObject)
+                {
+                    
+                    var damageInfo = new DamageInfo(BattleManager.Instance.parameter.playerChaState.gameObject,
+                                                    BattleManager.Instance.parameter.enemyChaStates[0].gameObject,
+                                                    damage, singleDiceObj.model.type, singleDiceObj.level, null);
+                    DamageManager.Instance.DoDamage(damageInfo);
+                    DamageManager.Instance.DoDamage(damageInfo);
+                }
+                else
+                {
+                    
+                    var damageInfo = new DamageInfo(BattleManager.Instance.parameter.enemyChaStates[0].gameObject,
+                                                    BattleManager.Instance.parameter.playerChaState.gameObject,
+                                                    damage, singleDiceObj.model.type, singleDiceObj.level, null);
+                    DamageManager.Instance.DoDamage(damageInfo);
+                    DamageManager.Instance.DoDamage(damageInfo);
+                }
+
+
 
                 Debug.Log("重复打出");
                 buffInfo.buffParam["IsFirstDeal"] = true;
+
             }
+            return singleDiceObj;
         }
 
         public static SingleDiceObj Imitate(BuffInfo buffInfo, SingleDiceObj singleDiceObj)
         {
-            BattleDiceHandler tempBattleDiceHandler=buffInfo.creator.GetComponent<ChaState>().GetBattleDiceHandler();
+            BattleDiceHandler tempBattleDiceHandler = buffInfo.creator.GetComponent<ChaState>().GetBattleDiceHandler();
             var stack = tempBattleDiceHandler.GetPreviousSingleDicesStack();
             return stack.Pop();
         }
-        
+
 
         #endregion
 

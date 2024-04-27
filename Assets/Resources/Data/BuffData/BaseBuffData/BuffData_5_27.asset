@@ -12,16 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b82dfb058aec19848972490bda5eafbd, type: 3}
   m_Name: BuffData_5_27
   m_EditorClassIdentifier: 
-  id: 5_27
+  id: 5_06
   dataName: 59
-  tags:
-  - Self
+  tags: []
   maxStack: 5
   duringCount: 0
   isPermanent: 0
   buffUpdateEnum: 0
   removeStackUpdateEnum: 0
-  onCreate: 18
+  onCreate: 0
   onRemove: 0
   onRoundStart: 0
   onRoundEnd: 0
@@ -30,7 +29,9 @@ MonoBehaviour:
   onRoll: 0
   onKill: 0
   onBeKilled: 0
-  onCast: 0
+  onCast: 5
+  onAddBuff: 0
+  onGetFinalDamage: 0
   stateMod:
     ifCanChangePosition: 1
     canUseDice: 1
