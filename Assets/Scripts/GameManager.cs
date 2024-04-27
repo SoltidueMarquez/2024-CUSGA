@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 /// 整个游戏的管理类,一些整体的管理都在这边
 /// </summary>
 
-public class GameManager : MonoSingleton<GameManager>
+public class GameManager : MonoBehaviour
 {
     public EnemyDataSO enemyDataSO;//用于传递敌人数据
     [HideInInspector]
@@ -18,16 +18,28 @@ public class GameManager : MonoSingleton<GameManager>
     public PlayerDataSO playerDataSOTemplate;
     [Header("玩家数据")]
     public PlayerDataSO playerDataSO;
-    public override void Awake()
+    public static GameManager Instance { get; private set; }
+    void Awake()
     {
-        base.Awake();
-        playerDataSO = ScriptableObject.CreateInstance<PlayerDataSO>();
-        playerDataSO.InitPlaydataSOInstance(playerDataSOTemplate);
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+            if (Instance != this)
+            {
+                Destroy(gameObject);
+            }
+            Debug.Log("Awake");
+            playerDataSO = ScriptableObject.CreateInstance<PlayerDataSO>();
+            playerDataSO.InitPlaydataSOInstance(playerDataSOTemplate);
     }
-
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
 
     }
 
