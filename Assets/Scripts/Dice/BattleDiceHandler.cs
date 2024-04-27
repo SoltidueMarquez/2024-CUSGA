@@ -53,7 +53,9 @@ public class BattleDiceHandler : MonoBehaviour
                 Debug.Log(singleDiceObj.model.buffInfos.Length);
                 for (int i = 0; i < singleDiceObj.model.buffInfos.Length; i++)
                 {
-                    var item = singleDiceObj.model.buffInfos[i];
+                    var item = new BuffInfo(singleDiceObj.model.buffInfos[i]);
+                    item.creator = chaState.gameObject;
+                    item.target = chaState.gameObject;
                     var result = item.buffData.OnCast?.Invoke(item, singleDiceObj);
                     singleDiceObj = result == null ? singleDiceObj : result;
 

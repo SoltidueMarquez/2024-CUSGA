@@ -89,6 +89,17 @@ public class BuffInfo
             }
         }
     }
+    //深拷贝
+    public BuffInfo(BuffInfo buffInfo)
+    {
+        this.buffData =buffInfo.buffData;
+        this.creator = buffInfo.creator;
+        this.target = buffInfo.target;
+        this.curStack = buffInfo.curStack;
+        this.isPermanent = buffInfo.isPermanent;
+        this.buffParam = buffInfo.buffParam;
+        this.roundCount=buffInfo.roundCount;
+    }
 }
 
 public enum BuffRemoveStackUpdateEnum
