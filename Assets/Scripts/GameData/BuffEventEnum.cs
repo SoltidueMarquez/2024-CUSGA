@@ -180,6 +180,7 @@ public enum onCastEnum
     RerollDice,
     DoubleHit,
     TripleHit,
+    Stun,
 }
 public enum onAddBuffEnum
 {
@@ -192,5 +193,6 @@ public enum onGetFinalDamageEnum
 {
     None,
     Reflect,
+    LoseEnergy,
 }
 
