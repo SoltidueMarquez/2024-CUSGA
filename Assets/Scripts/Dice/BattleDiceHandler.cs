@@ -130,15 +130,8 @@ public class BattleDiceHandler : MonoBehaviour
         {
             if (diceCardsInUse[i] != null)
             {
-                if (diceCardsInUse[i].model.name.Contains("迂回"))
-                {
-                    CastSingleDice(i, chastate, target);
-                    await UniTask.Delay(10);
-                }
-                else
-                {
-                    CastSingleDice(i, chastate, target);
-                }
+
+                CastSingleDice(i, chastate, target);
 
                 //Debug.Log("释放第"+i+"个骰子");
 
