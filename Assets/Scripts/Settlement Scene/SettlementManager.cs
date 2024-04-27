@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UI.Settlement;
 using UnityEngine;
@@ -30,6 +31,17 @@ namespace Settlement_Scene
             onEnterSettlement.AddListener(()=> { SettlementUIManager.Instance.ShowScore(dataList); });
         }
 
+        public void LateSettlement(float time)
+        {
+            StartCoroutine(LateInvoke(time));
+        }
+
+        IEnumerator LateInvoke(float time)
+        {
+            yield return new WaitForSeconds(time);
+            onEnterSettlement.Invoke();
+        }
+        
         /// <summary>
         /// 初始化数据列表的信息
         /// </summary>

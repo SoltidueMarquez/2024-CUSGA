@@ -9,7 +9,7 @@ namespace UI
 
         public void Init(string name)
         {
-            nameText.text = name;
+            //nameText.text = name;
         }
 
     }
