@@ -91,6 +91,7 @@ namespace UI
                 return;
             }
             columnList[index].bagObject.GetComponent<RollingResultDiceUI>()?.OnUseDestroy();
+            columnList[index].bagObject = null;
         }
         
         /// <summary>
