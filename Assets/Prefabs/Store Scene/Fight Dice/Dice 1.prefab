@@ -380,7 +380,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 53}
-  m_SizeDelta: {x: 60, y: 60}
+  m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8214239444993729597
 CanvasRenderer:
@@ -484,6 +484,8 @@ MonoBehaviour:
   valueText: {fileID: 6347750417039236654}
   baseValueText: {fileID: 6212263146994854588}
   idInDiceText: {fileID: 2409538749211781974}
+  pageIndex: 0
+  diceType: 0
 --- !u!1 &5272335709949302499
 GameObject:
   m_ObjectHideFlags: 0

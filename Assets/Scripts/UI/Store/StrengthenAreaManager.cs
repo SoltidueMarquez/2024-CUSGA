@@ -51,7 +51,7 @@ namespace UI.Store
             while (startIndex < list.Count)
             {
                 List<T> sublist = new List<T>();
-                int endIndex = Mathf.Min(startIndex + 5, list.Count);
+                int endIndex = Mathf.Min(startIndex + 3, list.Count);
                 for (int i = startIndex; i < endIndex; i++)
                 {
                     sublist.Add(list[i]);
