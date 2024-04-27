@@ -31,38 +31,53 @@ public class DamageManager : MonoSingleton<DamageManager>
         if (attackerChaState.side == 0)
         {
             HalidomManager.Instance.OnHit(damageInfo);
-            
+
         }
         else
         {
             HalidomManager.Instance.OnBeHurt(damageInfo);
-            
+
         }
 
         Debug.Log("<color=#FFA07A>DamageManager-基础伤害：</color>" + damageInfo.damage.baseDamage);
         foreach (var buff in attackerChaState.GetBuffHandler().buffList)
         {
-            buff.buffData.onHit?.Invoke(buff, damageInfo, damageInfo.defender);
+            if (buff.buffData.onHit != null && buff.curStack > 0)
+            {
+                buff.buffData.onHit?.Invoke(buff, damageInfo, damageInfo.defender);
+            }
         }
         foreach (var buff in defenderChaState.GetBuffHandler().buffList)
         {
-            buff.buffData.onBeHurt?.Invoke(buff, damageInfo, damageInfo.attacker);
+            if (buff.buffData.onBeHurt != null && buff.curStack > 0)
+            {
+                buff.buffData.onBeHurt?.Invoke(buff, damageInfo, damageInfo.attacker);
+            }
+
         }
         //计算最终伤害
         damageInfo.finalDamage = Damage.FinalDamage(damageInfo.damage, damageInfo.level, damageInfo.diceType, damageInfo.addDamageArea, damageInfo.reduceDamageArea);
         //走一遍onGetFinalDamage
         foreach (var buff in attackerChaState.GetBuffHandler().buffList)
         {
-            buff.buffData.onGetFinalDamage?.Invoke(buff, damageInfo);
+            if(buff.buffData.onGetFinalDamage != null && buff.curStack > 0)
+            {
+                buff.buffData.onGetFinalDamage?.Invoke(buff, damageInfo);
+            }
+            
         }
         foreach (var buff in defenderChaState.GetBuffHandler().buffList)
         {
-            buff.buffData.onGetFinalDamage?.Invoke(buff, damageInfo);
+            if(buff.buffData.onGetFinalDamage != null && buff.curStack > 0)
+            {
+                buff.buffData.onGetFinalDamage?.Invoke(buff, damageInfo);
+            }
+            
         }
         //如果能被杀死，就会走OnKill和OnBeKilled
         if (defenderChaState.CanBeKilledByDamageInfo(damageInfo))
         {
-            if(attackerChaState.side == 0)
+            if (attackerChaState.side == 0)
             {
                 HalidomManager.Instance.OnKill(damageInfo);
             }
@@ -145,7 +160,7 @@ public class DamageManager : MonoSingleton<DamageManager>
         }
         foreach (var buff in defenderChaState.GetBuffHandler().buffList)
         {
-            if(buff.buffData.tags.Contains("ReverseHurt"))
+            if (buff.buffData.tags.Contains("ReverseHurt"))
             {
                 continue;
             }
