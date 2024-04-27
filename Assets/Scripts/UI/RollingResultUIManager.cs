@@ -1,9 +1,6 @@
-using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 namespace UI
 {
