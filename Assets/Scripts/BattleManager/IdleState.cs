@@ -356,7 +356,7 @@ public class PlayerWinState : IState
         this.manager.parameter.playerDataSO.UpdatePlayerRoomData(this.manager.parameter.enemyDataSO);
         if (GameManager.Instance.CheckIfPassGame())
         {
-            ProcessPromptUIManager.Instance.DoGameOverUIAnim(TransitToResult);
+            ProcessPromptUIManager.Instance.DoGameWinUIAnim(TransitToResult);
             
         }
         else
