@@ -94,7 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 19bf411c79e522b4b8e54f82b0140314, type: 2}
   view: {fileID: 5337413451386887161}
-  playerDataSO: {fileID: 11400000, guid: a898c0c094df00e458aed14b23a1788c, type: 2}
+  playerDataSO: {fileID: 11400000, guid: 8ce36af94eb94754f908a1a0b2be156e, type: 2}
   playerChaState: {fileID: 0}
 --- !u!1 &5337413451386887166
 GameObject:
@@ -146,7 +146,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 19bf411c79e522b4b8e54f82b0140314, type: 2}
   nodePrefab: {fileID: 6746199761131337685, guid: 621ccae6afb8e8949ba963674577578a, type: 3}
   orientationOffset: -4
-  background: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  background: {fileID: 21300000, guid: c48758cf38d7c5d4aac9ca49618efd5c, type: 3}
   backgroundColor:
     serializedVersion: 2
     rgba: 4294967295

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -12,6 +13,9 @@ namespace UI
         [Tooltip("骰面晃动的角度")] public float shakeAngle;
         [Tooltip("骰面变大的倍数")] public float previewSize;
         [Tooltip("浮动距离")] public float flowDis;
+        [SerializeField, Tooltip("原始颜色")]private Color color;
+        [SerializeField, Tooltip("标记的颜色")]private Color markColor;
+        [SerializeField, Tooltip("标记持续的时间")]private float revertTime;
         
         [Header("栏位设置")]
         [Tooltip("栏目判定")] public float offset;
@@ -30,7 +34,7 @@ namespace UI
         [SerializeField, Tooltip("右切按钮")] private Button switchRightBtn;
         [SerializeField, Tooltip("当前页码")] private Text curPageText;
         [SerializeField, Tooltip("遮罩")] private GameObject mask;
-
+        
         /// <summary>
         /// 设置是否可以交互
         /// </summary>
@@ -257,14 +261,25 @@ namespace UI
         }
         public void SwitchToPosition(Vector2Int position)
         {
+            StopCoroutine(RevertMark());
             SwitchPage(position.x);
-            fightColumns[position.y].transform.GetComponent<Image>().DOColor(Color.red, 0.2f);
+            fightColumns[position.y].transform.GetComponent<Image>().color = markColor;
+            StartCoroutine(RevertMark());
         }
+        IEnumerator RevertMark()
+        {
+            yield return new WaitForSeconds(revertTime);
+            foreach (var column in fightColumns)
+            {
+                column.transform.GetComponent<Image>().color = color;
+            }
+        }
+        
         public void RevertMarkColumn()
         {
             foreach (var column in fightColumns)
             {
-                column.transform.GetComponent<Image>().DOColor(Color.white, 0.1f);
+                column.transform.GetComponent<Image>().color = color;
             }
         }
         
