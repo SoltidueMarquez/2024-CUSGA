@@ -19,7 +19,6 @@ namespace UI.Store
             //信息初始化
             var tmpData = ResourcesManager.GetHalidomUIData(id);
             nameText.text = tmpData.name;
-            valueText.text = $"售价￥{tmpData.salevalue}";
             descriptionText.text = tmpData.description;
             this.GetComponent<Image>().sprite = tmpData.sprite;
             //按钮事件绑定

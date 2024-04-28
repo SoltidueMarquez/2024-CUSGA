@@ -14,7 +14,10 @@ namespace UI
             attackText.text = hit.ToString();
             this.transform.DOShakePosition(attackTime, 10).OnComplete(() =>//数字晃动
             {
-                attackText.DOFade(0, attackTime);//数字消失
+                attackText.DOFade(0, attackTime).OnComplete(() =>
+                {
+                    Destroy(gameObject);
+                });//数字消失
             });
         }
         
@@ -24,7 +27,10 @@ namespace UI
             attackText.color = Color.green;
             this.transform.DOShakePosition(attackTime, 10).OnComplete(() =>//数字晃动
             {
-                attackText.DOFade(0, attackTime);//数字消失
+                attackText.DOFade(0, attackTime).OnComplete(() =>
+                {
+                    Destroy(gameObject);
+                });//数字消失
             });
         }
         
@@ -34,7 +40,10 @@ namespace UI
             attackText.color = Color.black;
             this.transform.DOShakePosition(attackTime, 10).OnComplete(() =>//数字晃动
             {
-                attackText.DOFade(0, attackTime);//数字消失
+                attackText.DOFade(0, attackTime).OnComplete(() =>
+                {
+                    Destroy(gameObject);
+                });//数字消失
             });
         }
 

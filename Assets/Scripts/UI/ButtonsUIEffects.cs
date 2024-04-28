@@ -1,9 +1,7 @@
-using System;
 using Audio_Manager;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace UI
 {
@@ -13,7 +11,7 @@ namespace UI
         private void Start()
         {
             this.transform.localScale = new Vector3(1, 1, 1);
-            this.GetComponent<Button>().onClick.AddListener(() =>
+            this.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() =>
             {
                 if (AudioManager.Instance != null)
                 {
@@ -22,7 +20,7 @@ namespace UI
             });
             if (ifDoScale)
             {
-                this.GetComponent<Button>().onClick.AddListener(() =>
+                this.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() =>
                 {
                     this.transform.DOScale(new Vector3(1.4f, 1.2f, 1.2f), 0.1f).SetEase(Ease.OutElastic);
                 });

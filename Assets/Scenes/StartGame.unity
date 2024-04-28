@@ -2723,8 +2723,52 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 544369428364266500, guid: e367eb73afc2d674081a4078beff2ad4, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 8430666114859346501}
+    - targetCorrespondingSourceObject: {fileID: 2629432360699851454, guid: e367eb73afc2d674081a4078beff2ad4, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 8430666114859346500}
   m_SourcePrefab: {fileID: 100100000, guid: e367eb73afc2d674081a4078beff2ad4, type: 3}
+--- !u!1 &8430666114859346498 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2629432360699851454, guid: e367eb73afc2d674081a4078beff2ad4, type: 3}
+  m_PrefabInstance: {fileID: 8430666114859346497}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8430666114859346499 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 544369428364266500, guid: e367eb73afc2d674081a4078beff2ad4, type: 3}
+  m_PrefabInstance: {fileID: 8430666114859346497}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8430666114859346500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8430666114859346498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb259b6c6657b8429989dffd78ae9ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldTextColor: {r: 1, g: 1, b: 1, a: 1}
+  newTextColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &8430666114859346501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8430666114859346499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb259b6c6657b8429989dffd78ae9ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldTextColor: {r: 1, g: 1, b: 1, a: 1}
+  newTextColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
