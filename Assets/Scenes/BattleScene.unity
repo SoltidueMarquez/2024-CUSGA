@@ -596,7 +596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animTime: 0
   runText: {fileID: 458454510}
-  reRollText: {fileID: 333788548}
+  reRollText: {fileID: 774827041}
   moneyText: {fileID: 1829682577}
   healthText: {fileID: 0}
 --- !u!114 &81981824
@@ -1676,7 +1676,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uFF1F"
+  m_Text: "\uFF1F\uFF1F"
 --- !u!222 &333788549
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3405,8 +3405,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -34.07}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -260.5381, y: 171.22229}
-  m_SizeDelta: {x: 246.5, y: 80}
+  m_AnchoredPosition: {x: -295.23285, y: 194.68555}
+  m_SizeDelta: {x: 330.2675, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &727152299
 MonoBehaviour:
@@ -3664,8 +3664,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -5.2949066, y: 0}
+  m_SizeDelta: {x: -120.1706, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &774827041
 MonoBehaviour:
@@ -3689,18 +3689,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_FontSize: 45
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 40
+    m_MaxSize: 45
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "  \u91CD\u6295"
+  m_Text: 
 --- !u!222 &774827042
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7247,7 +7247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1733185258}
   m_Layer: 5
-  m_Name: ReRoll
+  m_Name: Dice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

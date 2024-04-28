@@ -446,7 +446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animTime: 0
   runText: {fileID: 0}
-  reRollText: {fileID: 2488587168156674256}
+  reRollText: {fileID: 0}
   moneyText: {fileID: 2655630305047657240}
   healthText: {fileID: 1682979073567765552}
 --- !u!114 &8570020791098734351
@@ -464,8 +464,8 @@ MonoBehaviour:
   shakeAngle: 5
   previewSize: 1.2
   flowDis: 0.05
-  color: {r: 1, g: 1, b: 1, a: 0}
-  markColor: {r: 1, g: 0, b: 0, a: 0}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  markColor: {r: 1, g: 0, b: 0, a: 1}
   revertTime: 0.5
   offset: 0.3
   fightColumns:
