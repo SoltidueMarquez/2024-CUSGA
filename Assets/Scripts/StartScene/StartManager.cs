@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Audio_Manager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,6 +13,10 @@ public class StartManager : MonoSingleton<StartManager>
     // Start is called before the first frame update
     void Start()
     {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayMusic("StartScene");
+        }
         checkCanvas.SetActive(false);
         //如果有进行中的对局，激活继续游戏按钮
         if (GameManager.Instance.CheckIfHasSaveData())
