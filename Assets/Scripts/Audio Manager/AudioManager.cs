@@ -23,17 +23,17 @@ namespace Audio_Manager
         //AudioMixer音量设置
         public void SetMasterVolume(float value)
         {
-            var tmp = value * 100 - 80;
+            var tmp = value * 40 - 40;
             audioMixer.SetFloat("vMaster", tmp);
         }
         public void SetMusicVolume(float value)
         {
-            var tmp = value * 100 - 80;
+            var tmp = value * 40 - 40;
             audioMixer.SetFloat("vMusic", tmp);
         }
         public void SetSfxVolume(float value)
         {
-            var tmp = value * 100 - 80;
+            var tmp = value * 40 - 40;
             audioMixer.SetFloat("vSound", tmp);
         }
         //AudioResource音量设置
@@ -67,7 +67,6 @@ namespace Audio_Manager
             var clip = Find(mName, soundList);
             if (clip == null) { return; }
             PlayRandomSound(clip);
-            Debug.LogWarning("AudioManager:播放音效" + mName);
         }
         private void PlayRandomSound(AudioClip audioClip)
         {

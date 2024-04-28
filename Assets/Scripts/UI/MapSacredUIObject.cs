@@ -133,7 +133,7 @@ namespace UI
         {
             if (AudioManager.Instance != null)
             {
-                AudioManager.Instance.PlayRandomSound("clickDown");
+                AudioManager.Instance.PlayRandomSound("clickUp");
             }
             UIManager.Instance.CancelClick(gameObject);
             _state = State.None;//重置状态

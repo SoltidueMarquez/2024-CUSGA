@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Audio_Manager;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -55,6 +56,7 @@ namespace UI
 
         private Vector3 offsetPosition;
 
+        #region 攻击与受击
         /// <summary>
         /// 创建伤害文本
         /// </summary>
@@ -111,6 +113,10 @@ namespace UI
                 case Character.Enemy:
                     offsetPosition = (player.position - enemy.position).normalized * attackAmplitude;
                     enemy.DOPunchPosition(offsetPosition, attackTime, 1);
+                    if (AudioManager.Instance != null && playerShieldUI.curShield <= 0)
+                    {
+                        AudioManager.Instance.PlaySound("attack");
+                    }
                     break;
                 case Character.Player:
                     StartCoroutine(DoPlayerAtkAnim());
@@ -122,7 +128,12 @@ namespace UI
             yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
             offsetPosition = (enemy.position - player.position).normalized * attackAmplitude;
             player.DOPunchPosition(offsetPosition, attackTime, 1);
+            if (AudioManager.Instance != null && enemyShieldUI.curShield <= 0)
+            {
+                AudioManager.Instance.PlaySound("attack");
+            }
         }
+        #endregion
         
         /// <summary>
         /// 角色使用其他骰面的动画
@@ -205,6 +216,41 @@ namespace UI
             DoCure(attackTextPosition, num);
         }
 
+        #region 护盾
+        private void CreateShieldText(Transform parent,int hit,Vector3 position)
+        {
+            if (hit == 0)
+            {
+                return;
+            }
+            var tmp = Instantiate(attackTextTemplate, parent, true);
+            var randomOffset = Random.Range(-10, 20);
+            position = new Vector3(position.x + randomOffset, position.y, position.z);
+            tmp.transform.position = position;//更改位置
+            tmp.GetComponent<AttackText>().InitShield(hit,attackTime);//初始化
+            tmp.SetActive(true);
+        }
+        public void CreateShieldText(Character character,int shieldNum)
+        {
+            Vector3 attackTextPosition = attackTextOffset;
+            switch (character)
+            {
+                case Character.Enemy:
+                    attackTextPosition += enemy.position;
+                    CreateShieldText(attackTextParent, shieldNum, attackTextPosition);//创建护盾文字
+                    break;
+                case Character.Player:
+                    attackTextPosition += player.position;
+                    StartCoroutine(LateShieldAnim(shieldNum, attackTextPosition));
+                    break;
+            }
+        }
+        IEnumerator LateShieldAnim(int shieldNum,Vector3 position)
+        {
+            yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
+            CreateShieldText(attackTextParent, shieldNum, position);//创建护盾文字
+        }
+        
         /// <summary>
         /// 更新角色护盾UI
         /// </summary>
@@ -227,11 +273,13 @@ namespace UI
             yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
             playerShieldUI.UpdateShieldNum(shieldNum);
         }
+        #endregion
 
+        #region 意图
         /// <summary>
         /// 创建意图
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="dice"></param>
         public void CreateIntentionUIObject(SingleDiceObj dice)
         {
             var tmp = Instantiate(intentionTemplate, intentionParent, true);
@@ -254,5 +302,7 @@ namespace UI
             }
             intentionList.Clear();
         }
+        #endregion
+
     }
 }

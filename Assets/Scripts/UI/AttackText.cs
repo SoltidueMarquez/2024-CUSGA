@@ -27,6 +27,16 @@ namespace UI
                 attackText.DOFade(0, attackTime);//数字消失
             });
         }
+        
+        public void InitShield(int num,float attackTime)
+        {
+            attackText.text = num.ToString();
+            attackText.color = Color.black;
+            this.transform.DOShakePosition(attackTime, 10).OnComplete(() =>//数字晃动
+            {
+                attackText.DOFade(0, attackTime);//数字消失
+            });
+        }
 
     }
 }

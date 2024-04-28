@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Audio_Manager;
 using DG.Tweening;
 using UI.Store;
 using UnityEngine;
@@ -44,7 +45,23 @@ namespace UI
             StopCoroutine(ChangeMoneyText());
             _newMoney = money;
             var offset = _currentMoney - money;
-            if (offset == 0) { return; }
+            switch (offset)
+            {
+                case 0:
+                    return;
+                case > 0:
+                    if (AudioManager.Instance != null)
+                    {
+                        AudioManager.Instance.PlaySound("loseMoney");
+                    }
+                    break;
+                case <0:
+                    if (AudioManager.Instance != null)
+                    {
+                        AudioManager.Instance.PlaySound("getMoney");
+                    }
+                    break;
+            }
             StartCoroutine(ChangeMoneyText());
         }
         private IEnumerator ChangeMoneyText()

@@ -71,7 +71,7 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 31c66ca33d10a0945977fd137faf1490, type: 3}
   - name: clickDown
     audioClip: {fileID: 8300000, guid: 72207e9c8a6fb634e9b4a7bd0628cf7f, type: 3}
-  - name: ClickUp
+  - name: clickUp
     audioClip: {fileID: 8300000, guid: b158158710425d941b251d341afbe7e2, type: 3}
   - name: getMoney
     audioClip: {fileID: 8300000, guid: b862ca7597c1eb94d9855b1573350b49, type: 3}
