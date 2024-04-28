@@ -67,9 +67,6 @@ namespace UI
             {
                 StartCoroutine(AnimFish(onUIAnimFinished)); //结束时调用
             }
-            //调出结算界面
-            if (SettlementManager.Instance == null) { return; }
-            SettlementManager.Instance.LateSettlement(appearDurationTime);
         }
 
         /// <summary>
