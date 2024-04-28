@@ -28,7 +28,7 @@ public class EnemyAI : MonoBehaviour
             if (BattleManager.Instance.GetCurrentState() == BattleManager.Instance.GetStates()[GameState.PlayerLose])
             {
                 cancellationToken.Cancel();
-                //return;
+                return;
             }
             try
             {
