@@ -1,4 +1,5 @@
 using System.Collections;
+using Audio_Manager;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -42,6 +43,10 @@ namespace UI
             pageAndIndex = position;
             button?.onClick.AddListener(() =>
             {
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayRandomSound("clickDown");
+                }
                 BattleManager.Instance.parameter.playerChaState.UseDice(index, BattleManager.Instance.currentSelectEnemy);
                 OnUseDestroy();//摧毁物体
             });
@@ -63,6 +68,10 @@ namespace UI
         /// </summary>
         public void OnUseDestroy()
         {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayRandomSound("useDice");
+            }
             button.interactable = false;
             moveOffset = CharacterUIManager.Instance.player.position +
                          new Vector3(0, RollingResultUIManager.Instance.moveOffset, 0);

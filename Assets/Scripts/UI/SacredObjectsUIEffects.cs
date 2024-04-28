@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Audio_Manager;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -91,6 +92,10 @@ namespace UI
                 UIManager.Instance.ClickFlow(gameObject, 5f);
                 _state = State.PointerChosen;//设置选中状态
                 saleUI.SetActive(true);//显示销售按钮
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayRandomSound("clickDown");
+                }
             }
             else
             {
@@ -105,6 +110,10 @@ namespace UI
             UIManager.Instance.CancelClick(gameObject);
             _state = State.None;//重置状态
             saleUI.SetActive(false);//隐藏销售按钮
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayRandomSound("clickUp");
+            }
         }
         
         /// <summary>

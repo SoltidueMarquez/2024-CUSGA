@@ -67,6 +67,7 @@ namespace Audio_Manager
             var clip = Find(mName, soundList);
             if (clip == null) { return; }
             PlayRandomSound(clip);
+            Debug.LogWarning("AudioManager:播放音效" + mName);
         }
         private void PlayRandomSound(AudioClip audioClip)
         {

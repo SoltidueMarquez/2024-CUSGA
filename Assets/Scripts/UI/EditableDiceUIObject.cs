@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Audio_Manager;
 using Map;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -107,6 +108,10 @@ namespace UI
                 UIManager.Instance.ClickFlow(gameObject, EditableDiceUIManager.Instance.flowDis);//设置浮动动画
                 _state = State.PointerChosen;//设置为选中状态
                 saleUI.SetActive(true);//显示销售按钮
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayRandomSound("clickDown");
+                }
             }
             else
             {
@@ -120,6 +125,10 @@ namespace UI
             UIManager.Instance.CancelClick(gameObject);
             _state = State.None;//重置状态
             saleUI.SetActive(false);//隐藏销售按钮
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayRandomSound("clickUp");
+            }
         }
         #endregion
 
