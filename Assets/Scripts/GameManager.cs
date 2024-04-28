@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-
     }
 
     #region 开始场景调用
