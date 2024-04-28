@@ -23,15 +23,18 @@ namespace Audio_Manager
         //AudioMixer音量设置
         public void SetMasterVolume(float value)
         {
-            audioMixer.SetFloat("vMaster", value);
+            var tmp = value * 100 - 80;
+            audioMixer.SetFloat("vMaster", tmp);
         }
         public void SetMusicVolume(float value)
         {
-            audioMixer.SetFloat("vMusic", value);
+            var tmp = value * 100 - 80;
+            audioMixer.SetFloat("vMusic", tmp);
         }
         public void SetSfxVolume(float value)
         {
-            audioMixer.SetFloat("vSound", value);
+            var tmp = value * 100 - 80;
+            audioMixer.SetFloat("vSound", tmp);
         }
         //AudioResource音量设置
         public void SetMusicSourceVolume(float value)

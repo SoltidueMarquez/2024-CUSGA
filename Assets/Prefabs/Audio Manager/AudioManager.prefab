@@ -50,25 +50,29 @@ MonoBehaviour:
   soundPlayer: {fileID: 2294691117520413289}
   musicPlayer: {fileID: 2408978848588311042}
   musicList:
-  - name: 1
+  - name: StartScene
     audioClip: {fileID: 8300000, guid: 7546e585346139249b480f59e52b2855, type: 3}
-  - name: 2
+  - name: Level1
     audioClip: {fileID: 8300000, guid: 3f1d6c84164b01b4f8b0079ab628ae03, type: 3}
-  - name: 3
+  - name: Level3
     audioClip: {fileID: 8300000, guid: f268cd274bf1208418f24d244ac5387d, type: 3}
-  - name: 4
+  - name: Boss
     audioClip: {fileID: 8300000, guid: a83cb46f3b5ee05429598c2ca615a3ae, type: 3}
-  - name: 5
+  - name: Ending1
     audioClip: {fileID: 8300000, guid: 8b2b83613eb65724fb4aaba0e05376ea, type: 3}
-  - name: 6
+  - name: Ending2
     audioClip: {fileID: 8300000, guid: 28765a83cb0a563478c7d5fd559e0289, type: 3}
-  - name: 7
+  - name: Ending3
     audioClip: {fileID: 8300000, guid: 133091dcccdb9be4cbfdb2cc1df5a090, type: 3}
   soundList:
+  - name: rollDice
+    audioClip: {fileID: 8300000, guid: 82931e34edd09684fb149b8d2b45618c, type: 3}
   - name: useDice
     audioClip: {fileID: 8300000, guid: 31c66ca33d10a0945977fd137faf1490, type: 3}
-  - name: click
+  - name: clickDown
     audioClip: {fileID: 8300000, guid: 72207e9c8a6fb634e9b4a7bd0628cf7f, type: 3}
+  - name: ClickUp
+    audioClip: {fileID: 8300000, guid: b158158710425d941b251d341afbe7e2, type: 3}
   - name: getMoney
     audioClip: {fileID: 8300000, guid: b862ca7597c1eb94d9855b1573350b49, type: 3}
   - name: loseMoney
