@@ -56,6 +56,22 @@ namespace UI
             sacredObjectColumns[index].bagObject = null;
         }
 
+        public void UpdateDesc(string id, string desc)
+        {
+            foreach (var sacred in sacredObjectColumns)
+            {
+                if (sacred.bagObject == null)
+                {
+                    continue;
+                }
+                var sacredUI = sacred.bagObject.GetComponent<SacredObjectsUIEffects>();
+                if (sacredUI != null && sacredUI.id == id)
+                {
+                    sacredUI.UpdateDesc(desc);
+                }
+            }
+        }
+        
         /// <summary>
         /// 圣物的闪烁函数
         /// </summary>

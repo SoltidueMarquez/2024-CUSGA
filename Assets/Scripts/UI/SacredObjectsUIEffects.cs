@@ -42,6 +42,11 @@ namespace UI
             }
         }
 
+        public void UpdateDesc(string desc)
+        {
+            descriptionText.text = desc;
+        }
+
         /// <summary>
         /// 闪烁函数
         /// </summary>
