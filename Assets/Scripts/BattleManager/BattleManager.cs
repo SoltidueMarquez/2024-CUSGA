@@ -293,7 +293,7 @@ public class BattleManager : MonoBehaviour
     #region 投骰子相关
     public void RollDice()
     {
-        DataUIManager.Instance.UpdateRerollText(this.parameter.playerChaState.resource.currentRollTimes);
+        DataUIManager.Instance.UpdateRerollText(this.parameter.playerChaState.resource.currentRollTimes,this.parameter.playerChaState.prop.maxRollTimes);
         List<SingleDiceObj> singleDiceObjs = this.parameter.playerChaState.GetBattleDiceHandler().GetRandomSingleDices();
         this.parameter.playerChaState.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs);
         for (int i = 0; i < singleDiceObjs.Count; i++)
@@ -312,7 +312,7 @@ public class BattleManager : MonoBehaviour
             return;
         }
         ReducePlayerRerollCount();
-        DataUIManager.Instance.UpdateRerollText(this.parameter.playerChaState.resource.currentRollTimes);
+        DataUIManager.Instance.UpdateRerollText(this.parameter.playerChaState.resource.currentRollTimes,this.parameter.playerChaState.prop.maxRollTimes);
         //判断当前处于什么状态，如果是玩家回合，则重新投掷骰面，如果是奖励阶段，则只是显示重新投掷的骰面
         if (currentState is PlayerActionState)
         {
