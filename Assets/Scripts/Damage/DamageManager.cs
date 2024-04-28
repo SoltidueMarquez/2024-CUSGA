@@ -107,8 +107,8 @@ public class DamageManager : MonoSingleton<DamageManager>
         switch (damageInfo.diceType)
         {
             case DiceType.Attack:
-                defenderChaState.ModResources(new ChaResource(-damageInfo.finalDamage, 0, 0, 0));
                 CharacterUIManager.Instance.Attack(attackCharacter);
+                defenderChaState.ModResources(new ChaResource(-damageInfo.finalDamage, 0, 0, 0));
                 CharacterUIManager.Instance.BeAttacked(character, damageInfo.finalDamage);
                 break;
             case DiceType.Defense:

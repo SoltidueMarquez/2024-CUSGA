@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using DesignerScripts;
 using static Cinemachine.DocumentationSortingAttribute;
 using UI;
+using System;
 /// <summary>
 /// 获取随机数的管理器，获取随机的数据
 /// </summary>
@@ -30,7 +29,7 @@ public static class RandomManager
         {
             return singleDiceModel.type == diceType && singleDiceModel.level == level && (singleDiceModel.side == side|| singleDiceModel.side == 2) ;
         }).ToList();
-        return singleDiceModellegal[Random.Range(0, singleDiceModellegal.Count)];
+        return singleDiceModellegal[UnityEngine.Random.Range(0, singleDiceModellegal.Count)];
     }
 
     public static SingleDiceModel GetSingleDiceModel(int level, int side)
@@ -48,7 +47,7 @@ public static class RandomManager
         {
             return singleDiceModel.level == level && (singleDiceModel.side == side || singleDiceModel.side == 2);
         }).ToList();
-        return singleDiceModellegal[Random.Range(0, singleDiceModellegal.Count)];
+        return singleDiceModellegal[UnityEngine.Random.Range(0, singleDiceModellegal.Count)];
     }
 
 
@@ -66,7 +65,19 @@ public static class RandomManager
         {
             return halidomObject.rareType == rareType;
         }).ToList();
-        return halidomObjectLegals[Random.Range(0, halidomObjectLegals.Count)];
+        return halidomObjectLegals[UnityEngine.Random.Range(0, halidomObjectLegals.Count)];
+    }
+
+    public static HalidomObject GetRandomHalidomObj(RareType rareType,Dictionary<string,HalidomObject> currentHalidomList)
+    {
+        Dictionary<string, HalidomObject> keyValuePairs = DataInitManager.Instance.halidomDataTable.halidomDictionary;
+        List<HalidomObject> halidomObjects = new List<HalidomObject>();
+        halidomObjects.AddRange(keyValuePairs.Values);
+        List<HalidomObject> halidomObjectLegals = halidomObjects.Where((HalidomObject halidomObject) =>
+        {
+            return halidomObject.rareType == rareType && !(currentHalidomList.ContainsKey(halidomObject.id));
+        }).ToList();
+        return halidomObjectLegals[UnityEngine.Random.Range(0, halidomObjectLegals.Count)];
     }
     #region 获得金钱
     /// <summary>
@@ -85,15 +96,15 @@ public static class RandomManager
         }
         if (sum < 15)
         {
-            return Random.Range(8, 13);
+            return UnityEngine.Random.Range(8, 13);
         }
         else if (sum >= 15 && sum < 24)
         {
-            return Random.Range(13, 18);
+            return UnityEngine.Random.Range(13, 18);
         }
         else
         {
-            return Random.Range(18, 23);
+            return UnityEngine.Random.Range(18, 23);
         }
 
     }
@@ -142,9 +153,9 @@ public static class RandomManager
         var singleDiceObjs = new List<SingleDiceObj>();
         for (int i = 0; i < count; i++)
         {
-            DiceType diceType = (DiceType)Random.Range(0, 3);
+            DiceType diceType = (DiceType)UnityEngine.Random.Range(0, 3);
             SingleDiceModel singleDiceModel = GetSingleDiceModel(diceType, level, 0);
-            int idInDice = Random.Range(1, 6);
+            int idInDice = UnityEngine.Random.Range(1, 6);
             SingleDiceObj singleDiceObj = new SingleDiceObj(singleDiceModel, idInDice);
 
             singleDiceObjs.Add(singleDiceObj);
@@ -154,7 +165,7 @@ public static class RandomManager
 
     }
 
-    public static HalidomObject GetRewardHalidomViaPlayerData(List<SingleDiceObj> conditionSingleDiceObj)
+    public static HalidomObject GetRewardHalidomViaPlayerData(List<SingleDiceObj> conditionSingleDiceObj,Dictionary<String, HalidomObject> currentHalidomList)
     {
         int sum = 0;
         foreach (var singleDiceObj in conditionSingleDiceObj)
@@ -166,15 +177,15 @@ public static class RandomManager
         if (sum < 15)
         {
             //不生成圣物
-            return GetRandomHalidomObj(RareType.Common);
+            return GetRandomHalidomObj(RareType.Common,currentHalidomList);
         }
         else if (sum >= 15 && sum < 24)
         {
-            return GetRandomHalidomObj(RareType.Rare);
+            return GetRandomHalidomObj(RareType.Rare,currentHalidomList);
         }
         else
         {
-            return GetRandomHalidomObj(RareType.Legendary);
+            return GetRandomHalidomObj(RareType.Legendary, currentHalidomList);
         }
     }
 
