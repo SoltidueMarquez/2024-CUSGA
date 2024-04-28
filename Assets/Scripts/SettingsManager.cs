@@ -173,12 +173,12 @@ public class SettingsManager : MonoSingleton<SettingsManager>
 
     private void OnSoundVolumeChanged(float value)
     {
-        AudioManager.Instance.SetMusicVolume(value);
+        AudioManager.Instance.SetSfxVolume(value);
     }
 
     private void OnMusicVolumeChanged(float value)
     {
-        AudioManager.Instance.SetSfxVolume(value);
+        AudioManager.Instance.SetMusicVolume(value);
     }
 
     #endregion
