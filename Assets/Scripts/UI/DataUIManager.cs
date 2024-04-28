@@ -26,14 +26,15 @@ namespace UI
         {
             runText.text = $"{run}";
         }
-        
+
         /// <summary>
         /// 更新重投数
         /// </summary>
         /// <param name="time"></param>
-        public void UpdateRerollText(int time)
+        /// <param name="maxTime"></param>
+        public void UpdateRerollText(int time, int maxTime)
         {
-            reRollText.text = $"{time}";
+            reRollText.text = $"{time}/{maxTime}";
         }
 
         /// <summary>
