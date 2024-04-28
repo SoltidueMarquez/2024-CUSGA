@@ -45,6 +45,7 @@ public class HalidomDataForSave
     //圣物在字典中的key
     public string halidomName;
     public int halidomIndex;
+    public Dictionary<string,System.Object> halidomDataParamsDict;
 }
 [Serializable]
 public class PlayerRoomData

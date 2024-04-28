@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -76,6 +77,9 @@ public class BuffHandler : MonoBehaviour
                 break;
             case BuffRemoveStackUpdateEnum.Reduce:
                 buffInfo.curStack--;
+                var charac1 = (Character)buffInfo.target.GetComponent<ChaState>().side;
+                int index1 = buffList.IndexOf(buffInfo);
+                BuffUIManager.Instance.UpdateBuffDurationTime(charac1, index1, buffInfo.curStack);
                 buffInfo.buffData.onRemove?.Invoke(buffInfo);
                 if (buffInfo.curStack <= 0)
                 {
@@ -133,6 +137,7 @@ public class BuffHandler : MonoBehaviour
             if (buffList[i].isPermanent == false)//非永久buff
             {
                 buffList[i].roundCount--;
+
                 buffList[i].roundCount = Mathf.Max(0, buffList[i].roundCount);//可能出现负数的情况
                 if (buffList[i].roundCount == 0)
                 {
@@ -148,17 +153,22 @@ public class BuffHandler : MonoBehaviour
 
     public void BuffOnReRoll()
     {
-        foreach (var buff in buffList)
+        /*foreach (var buff in buffList)
         {
             buff.buffData.onRoll?.Invoke(buff);
+        }*/
+
+        for (int i = 0; i < buffList.Count; i++)
+        {
+            buffList[i].buffData.onRoll?.Invoke(buffList[i]);
         }
     }
     //待定
     public void BuffOnCast()
     {
-        foreach(var buff in buffList)
+        foreach (var buff in buffList)
         {
-            
+
         }
     }
     #endregion

@@ -1159,6 +1159,8 @@ namespace DesignerScripts
                 tempChaState.ModResources(new ChaResource(tempChaState.baseProp.health / 2, 0, 0, 0));
                 Debug.Log("获得时回复一半生命");
             }
+
+           
         }
 
 

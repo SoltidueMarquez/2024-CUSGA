@@ -236,7 +236,7 @@ public class BattleManager : MonoBehaviour
     }
     public void InitializeHalidom()
     {
-        //如果1ifUseSaveData为true，那么就是使用存档数据，对宇圣物来说，就是存在圣物manager中的list,因为圣物manager DontDestroyOnLoad
+        //如果1ifUseSaveData为true，那么就是使用存档数据，对于圣物来说，就是存在圣物manager中的list,因为圣物manager DontDestroyOnLoad
         if (this.parameter.playerDataSO.ifUseSaveData || GameManager.Instance.ifLoadedHalidom)
         {
             HalidomManager.Instance.InitHalidomUI(GameScene.BattleScene);
@@ -341,6 +341,7 @@ public class BattleManager : MonoBehaviour
             }
         }
         this.parameter.playerChaState.GetBuffHandler().BuffOnReRoll();
+        this.parameter.enemyChaStates[0].GetBuffHandler().BuffOnReRoll();
         this.parameter.playerChaState.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs.ToList<SingleDiceObj>());
         //这边需要删除所有当前骰面的视觉
 

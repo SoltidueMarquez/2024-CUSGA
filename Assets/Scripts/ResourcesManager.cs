@@ -64,7 +64,14 @@ public static class ResourcesManager
         }
         HalidomUIData halidomUIData = new HalidomUIData();
         halidomUIData.name = halidomDataSO.halidomName.ToString();
-        halidomUIData.description = halidomDataSO.description;
+        if(halidomDataSO.halidom2BuffParamMaps.Count>0)
+        {
+            //这边需要对description进行处理
+        }
+        else
+        {
+            halidomUIData.description = halidomDataSO.description;
+        }
         halidomUIData.value = halidomDataSO.value;
         halidomUIData.salevalue = Mathf.FloorToInt(halidomDataSO.value / 4);
         halidomUIData.sprite = halidomDataSO.sprite;

@@ -3,6 +3,7 @@ using Map;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UI;
 using UnityEngine;
 using UnityEngine.Events;
@@ -294,10 +295,26 @@ public class HalidomManager : MonoBehaviour
                 HalidomDataForSave halidomDataForSave = new HalidomDataForSave();
                 halidomDataForSave.halidomName = halidomList[i].halidomName;
                 halidomDataForSave.halidomIndex = i;
+                if (halidomList[i].buffInfos.Count > 0)
+                {
+                    halidomDataForSave.halidomDataParamsDict = halidomList[i].buffInfos[0].buffParam;
+                }
                 halidomDataForSaveList.Add(halidomDataForSave);
             }
         }
         return halidomDataForSaveList;
+    }
+    public string GetCertainHalidomDescription(string id,Halidom2BuffParamMap halidom2BuffParamMap)
+    {
+        HalidomObject halidomObject = halidomList.Where((HalidomObject halidom) =>
+        {
+            return halidom.id == id;
+        }).FirstOrDefault();
+        if(halidomObject != null)
+        {
+            
+        }
+        return "";
     }
     #endregion
     #region 圣物回调点

@@ -1,30 +1,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class Halidom2BuffParamMap
+{
+    [Header("åœ£ç‰©æè¿°ä¸­çš„å…³é”®å­—")]
+    string key;
+    [Header("åœ£ç‰©æè¿°ä¸­çš„å…³é”®å­—å¯¹åº”çš„buffInfoä¸­çš„buffParamkey")]
+    string value;
+}
 namespace DesignerScripts
 {
+
     [CreateAssetMenu(fileName = "HalidomData_", menuName = "Data/HalidomData")]
     public class HalidomDataSO : ScriptableObject
     {
-        [Tooltip("Ê¥ÎïÎ¨Ò»id±êÊ¶")]
+        [Tooltip("åœ£ç‰©å”¯ä¸€idæ ‡è¯†")]
         public string id;
 
-        [Tooltip("Ê¥ÎïÃû³Æ")]
+        [Tooltip("åœ£ç‰©åç§°")]
         public HalidomName halidomName;
-        
-        [Tooltip("Ê¥ÎïÃèÊö")]
+
+        [Tooltip("åœ£ç‰©æè¿°")]
         public string description;
 
-        [Tooltip("Ê¥ÎïµÄÏ¡ÓĞ¶È")]
+        [Tooltip("åœ£ç‰©çš„ç¨€æœ‰åº¦")]
         public RareType rareType;
 
-        [Tooltip("Ê¥ÎïµÄÊÛ¼Û")]
-        public int value=1;
+        [Tooltip("åœ£ç‰©çš„å”®ä»·")]
+        public int value = 1;
 
-        [Tooltip("Ê¥ÎïÉíÉÏ´æµÄbuffĞÅÏ¢")] 
+        [Tooltip("åœ£ç‰©èº«ä¸Šå­˜çš„buffä¿¡æ¯")]
         public List<BuffDataSO> buffDataSos;
 
-        [Tooltip("Ê¥ÎïµÄicon")]
+        [Tooltip("åœ£ç‰©çš„icon")]
         public Sprite sprite;
+
+        public List<Halidom2BuffParamMap> halidom2BuffParamMaps;
     }
 }
