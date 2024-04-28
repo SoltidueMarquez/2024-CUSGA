@@ -139,18 +139,5 @@ namespace UI
             return scaredObjectIDList;
         }
         
-        /*#region 测试
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                
-            }
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                
-            }
-        }
-        #endregion*/
     }
 }
