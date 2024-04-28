@@ -548,13 +548,12 @@ public class BattleManager : MonoBehaviour
     #endregion
     #region 跳转结束战斗相关函数
     /// <summary>
-    /// 结束战斗，更新玩家数据
+    /// 结束战斗，回到地图场景
     /// </summary>
     public void EndBattle()
     {
         this.parameter.playerChaState.RefreshRerollTimes();
         this.parameter.playerDataSO.UpdatePlayerDataSO(parameter.playerChaState);
-        this.parameter.playerDataSO.UpdatePlayerRoomData(parameter.enemyDataSO);
         this.parameter.playerDataSO.UpdataPlayerDataSoMap(GameManager.Instance.currentMap);
         this.parameter.playerDataSO.SaveData();
 

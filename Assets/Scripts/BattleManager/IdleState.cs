@@ -290,7 +290,7 @@ public class PlayerLoseState : IState
     }
     public void OnEnter()
     {
-        ProcessPromptUIManager.Instance.DoGameOverUIAnim(manager.OnEnterResultUI);
+        ProcessPromptUIManager.Instance.DoGameOverUIAnim(TransitToResult);
         
         Debug.Log("Enter PlayerLoseState");
 
@@ -304,6 +304,10 @@ public class PlayerLoseState : IState
     public void OnUpdate()
     {
 
+    }
+    public void TransitToResult()
+    {
+        manager.TransitionState(GameState.Result);
     }
 }
 
@@ -349,12 +353,11 @@ public class PlayerWinState : IState
         Debug.Log("Enter PlayerWinState");
         //在这边进行一些数据的更新.和刷新
         this.manager.parameter.playerChaState.RefreshRerollTimes();//刷新玩家的重投次数
-        GameManager.Instance.playerDataSO.playerRoomData.roomNums++;
         this.manager.parameter.playerDataSO.UpdatePlayerRoomData(this.manager.parameter.enemyDataSO);
         if (GameManager.Instance.CheckIfPassGame())
         {
-            ProcessPromptUIManager.Instance.DoGameOverUIAnim(null);
-            BattleManager.Instance.TransitionState(GameState.Result);
+            ProcessPromptUIManager.Instance.DoGameOverUIAnim(TransitToResult);
+            
         }
         else
         {
@@ -377,6 +380,10 @@ public class PlayerWinState : IState
     public void TransitToReward()
     {
         manager.TransitionState(GameState.Reward);
+    }
+    public void TransitToResult()
+    {
+        manager.TransitionState(GameState.Result);
     }
 }
 
@@ -421,12 +428,12 @@ public class ResultState : IState
     public void OnEnter()
     {
         manager.OnEnterResultUI();
-        Debug.Log("Enter RewardState");
+        Debug.Log("Enter ResultState");
     }
 
     public void OnExit()
     {
-        Debug.Log("Exit RewardState");
+        Debug.Log("Exit ResultState");
     }
 
     public void OnUpdate()
