@@ -129,7 +129,7 @@ public class StoreManager : SingletonBase<StoreManager>
     }
     IEnumerator LateCloseStore()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(StoreUIManager.Instance.animTime * 0.75f);
         StoreUIcanvas.SetActive(false);
     }
 
