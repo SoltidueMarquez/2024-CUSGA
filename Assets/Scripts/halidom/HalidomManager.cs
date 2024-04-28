@@ -245,7 +245,7 @@ public class HalidomManager : MonoBehaviour
         //将圣物的售价加到玩家的金币上
         ChaState tempChaState = BattleManager.Instance.parameter.playerChaState;
 
-        tempChaState.ModResources(new ChaResource(0, -price, 0, 0));
+        tempChaState.ModResources(new ChaResource(0, price, 0, 0));
         Debug.Log("售卖圣物成功，获得金币" + price + "个");
         //将圣物移除
         RemoveHalidom(index, GameScene.BattleScene);
@@ -263,7 +263,7 @@ public class HalidomManager : MonoBehaviour
         int price = halidomList[index].saleValue;
         //将圣物的售价加到玩家的金币上
         ChaState tempChaState = MapManager.Instance.playerChaState;
-        tempChaState.ModResources(new ChaResource(0, -price, 0, 0));
+        tempChaState.ModResources(new ChaResource(0, price, 0, 0));
         Debug.Log("售卖圣物成功，获得金币" + price + "个");
         //将圣物移除
         RemoveHalidom(index, GameScene.MapScene);

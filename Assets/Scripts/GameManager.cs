@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     {
         //playerDataSO.ifUseSaveData = false;//这样就会在进入地图的时候重新生成地图
         playerDataSO = ScriptableObject.CreateInstance<PlayerDataSO>();
+        Debug.Log("NewGame");
         playerDataSO.InitPlaydataSOInstance(playerDataSOTemplate);
     }
     public void ContinueGame()
@@ -56,6 +57,8 @@ public class GameManager : MonoBehaviour
     }
     public bool CheckIfHasSaveData()
     {
+        if (playerDataSO == null) return false;
+        
         playerDataSO.LoadData();
         return playerDataSO.ifHasData;
     }

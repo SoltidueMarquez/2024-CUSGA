@@ -569,6 +569,8 @@ public class BattleManager : MonoBehaviour
     public void OnExitResultUI()
     {
         this.parameter.playerDataSO.DeleteData();
+        HalidomManager.Instance.ClearHalidomList();
+        GameManager.Instance.ifLoadedHalidom = false;
         SceneLoader.Instance.LoadSceneAsync(GameScene.StartGame, new Vector2(0.5f, 0.5f));
     }
     #endregion
