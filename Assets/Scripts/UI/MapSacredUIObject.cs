@@ -40,28 +40,6 @@ namespace UI
                 _currentColumn.bagObject = gameObject;
             }
         }
-        public void Init(List<Column> columns, float offset, string idX)
-        {
-            this.transform.localScale = new Vector3(1, 1, 1);
-            this.id = idX;
-            var tmpData = ResourcesManager.GetHalidomUIData(id);
-            nameText.text = tmpData.name;
-            descriptionText.text = tmpData.description;
-            this.GetComponent<Image>().sprite = tmpData.sprite;
-            saleButtonText.text = $"出售\n￥{tmpData.value}";
-            
-            //saleButton绑定移除圣物效果函数：增加一个委托类型的参数(就是对应的移除函数)
-            saleButton.onClick.AddListener(()=>
-            {
-                DestroyUI(0);
-            });
-            _state = State.None;
-            _currentColumn = UIManager.Instance.DetectColumn(gameObject, columns, offset); //检测当前所在的物品栏
-            if (_currentColumn != null) //初始化当前所在的物品栏
-            {
-                _currentColumn.bagObject = gameObject;
-            }
-        }
         #endregion
 
         public void UpdateDesc(string desc)

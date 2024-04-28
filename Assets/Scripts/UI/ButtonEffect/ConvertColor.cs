@@ -9,16 +9,19 @@ namespace UI.ButtonEffect
     public class ConvertColor : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     {
         public Color oldTextColor;
+        public Sprite oldSprite;
         public Color newTextColor;
+        public Sprite newSprite;
+        
         public void OnPointerEnter(PointerEventData eventData)
         {
-            //this.GetComponent<Image>().color = newColor;
+            this.GetComponent<Image>().sprite = newSprite;
             this.GetComponentInChildren<Text>().color = newTextColor;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            //this.GetComponent<Image>().color = oldColor;
+            this.GetComponent<Image>().sprite = oldSprite;
             this.GetComponentInChildren<Text>().color = oldTextColor;
         }
     }

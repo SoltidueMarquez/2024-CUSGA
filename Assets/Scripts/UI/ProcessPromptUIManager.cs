@@ -66,6 +66,12 @@ namespace UI
         /// <param name="onUIAnimFinished"></param>
         public void DoGameOverUIAnim(OnUIAnimFinished onUIAnimFinished)
         {
+            StartCoroutine(LateGameOverTip(onUIAnimFinished));
+        }
+
+        IEnumerator LateGameOverTip(OnUIAnimFinished onUIAnimFinished)
+        {
+            yield return new WaitForSeconds(appearDurationTime * 0.25f);
             if (AudioManager.Instance != null)
             {
                 AudioManager.Instance.StopMusic();
