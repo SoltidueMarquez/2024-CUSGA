@@ -81,7 +81,7 @@ public static class ResourcesManager
         HalidomDataSO halidomDataSO = Resources.Load<HalidomDataSO>("Data/HalidomData/HalidomData_" + id);
         if (halidomDataSO.halidom2BuffParamMaps.Count > 0)
         {
-            description = HalidomManager.Instance.GetCertainHalidomDescription(id, halidomDataSO.halidom2BuffParamMaps, halidomDataSO.description);
+            description = HalidomManager.Instance.GetCertainHalidomDescription(id, halidomDataSO.halidom2BuffParamMaps);
         }
         else
         {
