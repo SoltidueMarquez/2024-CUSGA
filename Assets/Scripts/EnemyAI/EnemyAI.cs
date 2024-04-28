@@ -40,7 +40,7 @@ public class EnemyAI : MonoBehaviour
             }
             
         }
-        if(!(BattleManager.Instance.GetCurrentState() == BattleManager.Instance.GetStates()[GameState.PlayerLose]))
+        if(BattleManager.Instance.GetCurrentState() == BattleManager.Instance.GetStates()[GameState.EnemyAction])
         {
             BattleManager.Instance.TransitionState(GameState.EnemyRoundEndResolution);
         }

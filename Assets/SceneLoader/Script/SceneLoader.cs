@@ -43,8 +43,9 @@ public class SceneLoader : MonoSingleton<SceneLoader>
         asyncLoad.allowSceneActivation = false;
         await MaskTranstion(position, duration, TransitionMode.In);
         asyncLoad.allowSceneActivation = true;
-        await MaskTranstion(new Vector2(0.5f,0.5f), duration, TransitionMode.Out);
         currentGameScene = gameScene;
+        await MaskTranstion(new Vector2(0.5f,0.5f), duration, TransitionMode.Out);
+        Debug.Log(currentGameScene.ToString());
     }
 
     #region 遮罩转场

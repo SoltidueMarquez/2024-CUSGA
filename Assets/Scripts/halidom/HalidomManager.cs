@@ -123,6 +123,7 @@ public class HalidomManager : MonoBehaviour
                 Debug.Log("圣物格子已满");
             }
         }
+        UpdateHalidomDescription();
     }
 
     public void AddHalidomInMap(HalidomObject halidom)
@@ -168,6 +169,7 @@ public class HalidomManager : MonoBehaviour
                 Debug.Log("圣物格子已满");
             }
         }
+        UpdateHalidomDescription();
     }
     //删去指定格子的圣物
     public void RemoveHalidom(int index, GameScene gameScene)
@@ -608,6 +610,7 @@ public class HalidomManager : MonoBehaviour
                 }
             }
         }
+        UpdateHalidomDescription();
     }
     #endregion
     #region 更新圣物的信息
@@ -640,7 +643,16 @@ public class HalidomManager : MonoBehaviour
                 string des = halidomList[i].description;
                 string result = ResourcesManager.GetHalidomDescription(halidomList[i].id);
                 //更新UI描述
-                //UpdateUI(index,string);
+                if(SceneLoader.Instance.currentGameScene == GameScene.MapScene)
+                {
+                    Debug.Log("在地图执行");
+                    MapSacredUIManager.Instance.UpdateDesc(halidomList[i].id, result);
+                }
+                else if(SceneLoader.Instance.currentGameScene == GameScene.BattleScene)
+                {
+                    Debug.Log("在战斗场景执行");
+                    SacredObjectUIManager.Instance.UpdateDesc(halidomList[i].id, result);
+                }
             }
         }
     }

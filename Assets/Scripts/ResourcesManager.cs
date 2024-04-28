@@ -64,7 +64,7 @@ public static class ResourcesManager
         }
         HalidomUIData halidomUIData = new HalidomUIData();
         halidomUIData.name = halidomDataSO.halidomName.ToString();
-        halidomDataSO.description = GetHalidomDescription(id);
+        halidomUIData.description = halidomDataSO.description;
         halidomUIData.value = halidomDataSO.value;
         halidomUIData.salevalue = Mathf.FloorToInt(halidomDataSO.value / 4);
         halidomUIData.sprite = halidomDataSO.sprite;
