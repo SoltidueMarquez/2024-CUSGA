@@ -64,19 +64,32 @@ public static class ResourcesManager
         }
         HalidomUIData halidomUIData = new HalidomUIData();
         halidomUIData.name = halidomDataSO.halidomName.ToString();
-        if(halidomDataSO.halidom2BuffParamMaps.Count>0)
-        {
-            //这边需要对description进行处理
-        }
-        else
-        {
-            halidomUIData.description = halidomDataSO.description;
-        }
+        halidomDataSO.description = GetHalidomDescription(id);
         halidomUIData.value = halidomDataSO.value;
         halidomUIData.salevalue = Mathf.FloorToInt(halidomDataSO.value / 4);
         halidomUIData.sprite = halidomDataSO.sprite;
         return halidomUIData;
     }
+    /// <summary>
+    /// 获取圣物的描述
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public static string GetHalidomDescription(string id)
+    {
+        string description;
+        HalidomDataSO halidomDataSO = Resources.Load<HalidomDataSO>("Data/HalidomData/HalidomData_" + id);
+        if (halidomDataSO.halidom2BuffParamMaps.Count > 0)
+        {
+            description = HalidomManager.Instance.GetCertainHalidomDescription(id, halidomDataSO.halidom2BuffParamMaps, halidomDataSO.description);
+        }
+        else
+        {
+            description = halidomDataSO.description;
+        }
+        return description;
+    }
+
     /// <summary>
     /// 通过id获取相应的singleDiceModel
     /// </summary>

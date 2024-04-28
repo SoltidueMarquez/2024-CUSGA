@@ -4,9 +4,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
+using System.Text.RegularExpressions;
 using UI;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Windows;
 
 
 public class HalidomManager : MonoBehaviour
@@ -304,18 +307,7 @@ public class HalidomManager : MonoBehaviour
         }
         return halidomDataForSaveList;
     }
-    public string GetCertainHalidomDescription(string id,Halidom2BuffParamMap halidom2BuffParamMap)
-    {
-        HalidomObject halidomObject = halidomList.Where((HalidomObject halidom) =>
-        {
-            return halidom.id == id;
-        }).FirstOrDefault();
-        if(halidomObject != null)
-        {
-            
-        }
-        return "";
-    }
+    
     #endregion
     #region 圣物回调点
     public void OnRoundStart()
@@ -614,6 +606,41 @@ public class HalidomManager : MonoBehaviour
                 {
                     MapSacredUIManager.Instance.CreateSacredUIObject(SellHalidom, halidomList[i]);
                 }
+            }
+        }
+    }
+    #endregion
+    #region 更新圣物的信息
+    public string GetCertainHalidomDescription(string id, List<Halidom2BuffParamMap> halidom2BuffParamMaps)
+    {
+        HalidomObject halidomObject = halidomList.Where((HalidomObject halidom) =>
+        {
+            return halidom.id == id;
+        }).FirstOrDefault();
+        string input = halidomObject.description;
+        string result = "";
+        if (halidomObject != null)
+        {
+            for (int i = 0; i < halidom2BuffParamMaps.Count; i++)
+            {
+                string pattern = halidom2BuffParamMaps[i].key;
+                string replacement = $"<color=red>{(string)halidomObject.buffInfos[0].buffParam[halidom2BuffParamMaps[i].value]}</color>";
+                result = Regex.Replace(input, pattern, replacement);
+            }
+            return result;
+        }
+        return input;
+    }
+    public void UpdateHalidomDescription()
+    {
+        for (int i = 0; i <halidomList.Length; i++)
+        {
+            if (halidomList[i] != null)
+            {
+                string des = halidomList[i].description;
+                string result = ResourcesManager.GetHalidomDescription(halidomList[i].id);
+                //更新UI描述
+                //UpdateUI(index,string);
             }
         }
     }

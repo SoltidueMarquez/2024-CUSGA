@@ -5,9 +5,9 @@ using UnityEngine;
 public class Halidom2BuffParamMap
 {
     [Header("圣物描述中的关键字")]
-    string key;
+    public string key;
     [Header("圣物描述中的关键字对应的buffInfo中的buffParamkey")]
-    string value;
+    public string value;
 }
 namespace DesignerScripts
 {
