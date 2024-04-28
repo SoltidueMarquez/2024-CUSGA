@@ -1,4 +1,5 @@
 using System;
+using Audio_Manager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -56,6 +57,10 @@ namespace UI.Store
             //按钮事件绑定
             this.GetComponent<Button>().onClick.AddListener(()=>
             {
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayRandomSound("clickDown");
+                }
                 onChoose?.Invoke(singleDiceObj);
                 //根据SingleDiceObj引用更新UI，需要放在执行强化逻辑之后
                 UpdateDiceUI();

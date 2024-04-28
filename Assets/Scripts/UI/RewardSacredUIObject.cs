@@ -1,4 +1,5 @@
 using System;
+using Audio_Manager;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,6 +27,10 @@ namespace UI
                 DoChosenAnim(animTime, scale);//动画
                 onChoose?.Invoke(halidomObject);
                 UIManager.Instance.rewardUIManager.DisableAllSacredObject();
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayRandomSound("clickDown");
+                }
             });
         }
     }

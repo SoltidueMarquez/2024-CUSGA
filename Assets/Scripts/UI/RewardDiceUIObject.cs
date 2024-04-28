@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Audio_Manager;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,6 +32,10 @@ namespace UI
                 DoChosenAnim(animTime, scale);//动画
                 onChoose?.Invoke(singleDiceObj);
                 UIManager.Instance.rewardUIManager.DisableAllDices();
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayRandomSound("clickDown");
+                }
             });
         }
         

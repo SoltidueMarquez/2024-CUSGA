@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using Audio_Manager;
 
 namespace UI
 {
@@ -29,6 +30,10 @@ namespace UI
         /// <param name="ifFightEnd"></param>
         public void CreateResult(int index, SingleDiceUIData data, Vector2Int location,bool ifFightEnd)
         {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayRandomSound("rollDice");
+            }
             var tmp = Instantiate(template, columnList[index].transform, true);
             tmp.transform.position = columnList[index].transform.position;//更改位置
             columnList[index].bagObject = tmp;

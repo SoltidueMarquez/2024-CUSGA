@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Audio_Manager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -15,6 +16,7 @@ namespace UI
         public void Init(List<Column> columns, float offset, SingleDiceUIData data, 
                          Action<SingleDiceObj> remove, SingleDiceObj singleDice)
         {
+            
             //信息文本初始化
             nameText.text = data.name;
             typeText.text = $"类型:{data.type}";
@@ -72,6 +74,10 @@ namespace UI
                 UIManager.Instance.ClickFlow(gameObject, 5f);
                 _state = State.PointerChosen;//设置选中状态
                 saleUI.SetActive(true);//显示销售按钮
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayRandomSound("clickDown");
+                }
             }
             else
             {
@@ -86,6 +92,10 @@ namespace UI
             UIManager.Instance.CancelClick(gameObject);
             _state = State.None;//重置状态
             saleUI.SetActive(false);//隐藏销售按钮
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayRandomSound("clickUp"); 
+            }
         }
         
         /// <summary>

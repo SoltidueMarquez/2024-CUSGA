@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Audio_Manager;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,12 +18,7 @@ namespace UI.Store
         [SerializeField, Tooltip("生成模板")] private GameObject template;
         [SerializeField, Tooltip("结果列表")] private List<GameObject> resultList;
         [Tooltip("使用动画时长")]public float animTime;
-
-        private void Start()
-        {
-            
-        }
-
+        
         #region 轮盘按钮与栏位动画
         /// <summary>
         /// 轮盘与按钮旋转进入
@@ -95,6 +91,10 @@ namespace UI.Store
         /// <param name="location">坐标位置，先页面位置再页内位置</param>
         public void CreateResult(int index, SingleDiceUIData data, Vector2Int location)
         {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayRandomSound("rollDice");
+            }
             if (index >= columns.Count)
             {
                 StoreManager.Instance.m_Debug("<color=#ff8400>错误，超出结果栏上限</color>");

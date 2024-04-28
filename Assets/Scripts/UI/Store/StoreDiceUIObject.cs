@@ -1,4 +1,5 @@
 using System;
+using Audio_Manager;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -33,6 +34,10 @@ namespace UI.Store
             //按钮事件绑定
             this.GetComponent<Button>().onClick.AddListener(()=>
             {
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayRandomSound("clickDown");
+                }
                 onChoose?.Invoke(singleDiceObj);
             });
 
