@@ -1,9 +1,6 @@
-using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 namespace UI
 {
@@ -94,6 +91,7 @@ namespace UI
                 return;
             }
             columnList[index].bagObject.GetComponent<RollingResultDiceUI>()?.OnUseDestroy();
+            columnList[index].bagObject = null;
         }
         
         /// <summary>
