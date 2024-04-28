@@ -22,6 +22,10 @@ public static class RandomManager
         Dictionary<string, SingleDiceModel> diceDictionary = DataInitManager.Instance.singleDiceDataTable.diceDictionary;
         List<SingleDiceModel> singleDiceModels = new List<SingleDiceModel>();
         singleDiceModels.AddRange(diceDictionary.Values);
+        singleDiceModels = singleDiceModels.Where((SingleDiceModel singleDiceModel) =>
+        {
+            return singleDiceModel.id != "0_00";
+        }).ToList();
         List<SingleDiceModel> singleDiceModellegal = singleDiceModels.Where((SingleDiceModel singleDiceModel) =>
         {
             return singleDiceModel.type == diceType && singleDiceModel.level == level && (singleDiceModel.side == side|| singleDiceModel.side == 2) ;
@@ -32,8 +36,14 @@ public static class RandomManager
     public static SingleDiceModel GetSingleDiceModel(int level, int side)
     {
         Dictionary<string, SingleDiceModel> diceDictionary = DataInitManager.Instance.singleDiceDataTable.diceDictionary;
+        
         List<SingleDiceModel> singleDiceModels = new List<SingleDiceModel>();
         singleDiceModels.AddRange(diceDictionary.Values);
+        //去除待机,如果说这边需要去除很多，那可以改成dictionary
+        singleDiceModels = singleDiceModels.Where((SingleDiceModel singleDiceModel) =>
+        {
+            return singleDiceModel.id != "0_00";
+        }).ToList();
         List<SingleDiceModel> singleDiceModellegal = singleDiceModels.Where((SingleDiceModel singleDiceModel) =>
         {
             return singleDiceModel.level == level && (singleDiceModel.side == side || singleDiceModel.side == 2);

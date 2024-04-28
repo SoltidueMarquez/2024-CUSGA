@@ -57,6 +57,7 @@ public class StoreManager : SingletonBase<StoreManager>
         OnEnterStore.AddListener(OpenStore);
         OnExitStore.AddListener(CloseStore);
         OnRefreshStore.AddListener(RerollShop);
+        OnRefreshStore.AddListener(MapManager.Instance.UpdatePlayerUI);
         OnClickUpgrade.AddListener(ClickUpgrade);
 
         player = MapManager.Instance.playerChaState;
