@@ -1,7 +1,6 @@
-using System;
 using System.Collections;
+using Audio_Manager;
 using DG.Tweening;
-using Settlement_Scene;
 using UnityEngine;
 
 namespace UI
@@ -25,12 +24,24 @@ namespace UI
         [SerializeField, Tooltip("玩家的出现位置(Y)")] private float playerStartYPosition;
         [SerializeField, Tooltip("玩家的离开位置(Y)")] private float playerEndYPosition;
 
+        private void Start()
+        {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayMusic("Boss");
+            }
+        }
+        
         /// <summary>
         /// 战斗结束UI
         /// </summary>
         /// <param name="onUIAnimFinished"></param>
         public void DoFightEndUIAnim(OnUIAnimFinished onUIAnimFinished)
         {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.StopMusic();
+            }
             panel.SetActive(true);
             string tip = "你赢了";
             processPrompt.Appear(appearDurationTime, tip); //出现提示
@@ -55,8 +66,32 @@ namespace UI
         /// <param name="onUIAnimFinished"></param>
         public void DoGameOverUIAnim(OnUIAnimFinished onUIAnimFinished)
         {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.StopMusic();
+            }
             panel.SetActive(true);
             string tip = "你死了";
+            processPrompt.Appear(appearDurationTime, tip); //出现提示
+            StartCoroutine(HideTip());
+            //敌人与玩家离开
+            CharacterUIManager.Instance.enemy.DOMoveY(enemyEndYPosition, appearDurationTime);
+            CharacterUIManager.Instance.player.DOMoveY(playerEndYPosition, appearDurationTime);
+            
+            if (onUIAnimFinished != null)
+            {
+                StartCoroutine(AnimFish(onUIAnimFinished)); //结束时调用
+            }
+        }
+        
+        public void DoGameWinUIAnim(OnUIAnimFinished onUIAnimFinished)
+        {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.StopMusic();
+            }
+            panel.SetActive(true);
+            string tip = "胜利，然后凯旋";
             processPrompt.Appear(appearDurationTime, tip); //出现提示
             StartCoroutine(HideTip());
             //敌人与玩家离开

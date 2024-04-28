@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI
 {
@@ -21,7 +20,7 @@ namespace UI
         [SerializeField, Tooltip("出现结果列表")] private List<Transform> results;
         [SerializeField, Tooltip("出现时间间隔")] public float timeInterval;
         [SerializeField, Tooltip("出现位置(Y)")] private float finalPosition;
-        
+
         /// <summary>
         /// 轮盘与按钮旋转进入
         /// </summary>
