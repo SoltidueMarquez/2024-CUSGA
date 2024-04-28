@@ -23,7 +23,6 @@ namespace UI
             this.id = idX;
             var tmpData = ResourcesManager.GetHalidomUIData(id);
             nameText.text = tmpData.name;
-            valueText.text = $"售价￥{tmpData.salevalue}";
             descriptionText.text = tmpData.description;
             this.GetComponent<Image>().sprite = tmpData.sprite;
             saleButtonText.text = $"出售\n￥{tmpData.salevalue}";
@@ -47,7 +46,6 @@ namespace UI
             this.id = idX;
             var tmpData = ResourcesManager.GetHalidomUIData(id);
             nameText.text = tmpData.name;
-            valueText.text = $"售价￥{tmpData.value}";
             descriptionText.text = tmpData.description;
             this.GetComponent<Image>().sprite = tmpData.sprite;
             saleButtonText.text = $"出售\n￥{tmpData.value}";

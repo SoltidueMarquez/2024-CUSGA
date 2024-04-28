@@ -15,7 +15,6 @@ namespace UI.Store
         [SerializeField, Tooltip("名称Text")]protected Text nameText;
         [SerializeField, Tooltip("类型Text")]protected Text typeText;
         [SerializeField, Tooltip("稀有度Text")] protected Text levelText;
-        [SerializeField, Tooltip("售价Text")]protected Text valueText;
         [SerializeField, Tooltip("基础数值Text")]protected Text baseValueText;
         [SerializeField, Tooltip("点数Text")]protected Text idInDiceText;
         
@@ -39,7 +38,6 @@ namespace UI.Store
             nameText.text = data.name;
             typeText.text = $"类型:{data.type}";
             levelText.text = $"稀有度:{data.level}";
-            valueText.text = $"售价￥{data.salevalue}";
             baseValueText.text = $"基础数值{data.baseValue}";
             infoText.text = $"描述:{data.description}" ;
             this.GetComponent<Image>().sprite = data.sprite;

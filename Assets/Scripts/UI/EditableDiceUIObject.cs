@@ -31,9 +31,8 @@ namespace UI
             nameText.text = data.name;
             typeText.text = $"类型:{data.type}";
             levelText.text = $"稀有度:{data.level}";
-            valueText.text = $"售价￥{data.salevalue}";
             baseValueText.text = $"基础数值{data.baseValue}";
-            descriptionText.text = $"描述:{data.description}";
+            descriptionText.text = $"{data.description}";
             this.GetComponent<Image>().sprite = data.sprite;
             saleButtonText.text = $"出售\n￥{data.salevalue}";
             idInDiceText.text = data.idInDice.ToString();
@@ -61,9 +60,8 @@ namespace UI
             nameText.text = data.name;
             typeText.text = $"类型:{data.type}";
             levelText.text = $"稀有度:{data.level}";
-            valueText.text = $"售价￥{data.salevalue}";
             baseValueText.text = $"基础数值{data.baseValue}";
-            descriptionText.text = $"描述:{data.description}";
+            descriptionText.text = $"{data.description}";
             this.GetComponent<Image>().sprite = data.sprite;
             saleButtonText.text = $"出售\n￥{data.salevalue}";
             idInDiceText.text = data.idInDice.ToString();
