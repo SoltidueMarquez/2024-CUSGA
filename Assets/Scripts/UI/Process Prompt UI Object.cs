@@ -12,16 +12,19 @@ namespace UI
     {
         [SerializeField,Tooltip("提示框底图")]private Image background;
         [SerializeField,Tooltip("提示文字")]private Text tipText;
+        [SerializeField, Tooltip("panel")] private Image panel;
 
         public void Appear(float time, string value)
         {
             background.DOFade(1, time);
+            panel.DOFade(0.25f, time);
             tipText.DOText(value, time);
         }
         
         public void Fade(float time)
         {
             background.DOFade(0, time);
+            panel.DOFade(0, time);
             tipText.DOText("        ", time);
         }
     }

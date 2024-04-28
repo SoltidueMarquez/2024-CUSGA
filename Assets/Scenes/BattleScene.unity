@@ -2086,6 +2086,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 457780115}
   tipText: {fileID: 32459119}
+  panel: {fileID: 1772109972}
 --- !u!1 &458454508
 GameObject:
   m_ObjectHideFlags: 0
