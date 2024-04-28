@@ -104,6 +104,22 @@ namespace UI
             }
         }
         
+        public void UpdateDesc(string id, string desc)
+        {
+            foreach (var sacred in sacredObjectColumns)
+            {
+                if (sacred.bagObject == null)
+                {
+                    continue;
+                }
+                var sacredUI = sacred.bagObject.GetComponent<MapSacredUIObject>();
+                if (sacredUI != null && sacredUI.id == id)
+                {
+                    sacredUI.UpdateDesc(desc);
+                }
+            }
+        }
+        
         /// <summary>
         /// 获取圣物id列表，对应栏位为空时id为""
         /// </summary>

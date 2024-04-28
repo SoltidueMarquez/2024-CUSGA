@@ -63,6 +63,11 @@ namespace UI
             }
         }
         #endregion
+
+        public void UpdateDesc(string desc)
+        {
+            descriptionText.text = desc;
+        }
         
         /// <summary>
         /// 闪烁函数

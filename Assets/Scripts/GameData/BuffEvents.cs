@@ -1,6 +1,7 @@
 using Map;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using UI;
 using Unity.VisualScripting;
@@ -1049,6 +1050,7 @@ namespace DesignerScripts
                 int overflowMoney = damageInfo.finalDamage - damageInfo.defender.GetComponent<ChaState>().resource.currentHp;
                 buffInfo.creator.GetComponent<ChaState>().ModResources(new ChaResource(0, overflowMoney, 0, 0));
                 Debug.Log("获得" + overflowMoney + "金币");
+                DataUIManager.Instance.UpdateHealthText(buffInfo.creator.GetComponent<ChaState>().resource.currentHp, buffInfo.creator.GetComponent<ChaState>().prop.health);
             }
         }
 
@@ -1151,14 +1153,24 @@ namespace DesignerScripts
 
         public static void RecoverHalfHealthWhenGain(BuffInfo buffInfo)
         {
-            //获取玩家的状态
-            ChaState tempChaState = buffInfo.creator.GetComponent<ChaState>();
-            //访问当前的资源
-            if (tempChaState.resource.currentHp > 0)
+            if(SceneLoader.Instance.currentGameScene == GameScene.BattleScene)
             {
-                tempChaState.ModResources(new ChaResource(tempChaState.baseProp.health / 2, 0, 0, 0));
-                Debug.Log("获得时回复一半生命");
+                //获取玩家的状态
+                ChaState tempChaState = buffInfo.creator.GetComponent<ChaState>();
+                //访问当前的资源
+                if (tempChaState.resource.currentHp > 0)
+                {
+                    tempChaState.ModResources(new ChaResource(tempChaState.baseProp.health / 2, 0, 0, 0));
+                    Debug.Log("获得时回复一半生命");
+                }
             }
+            else if(SceneLoader.Instance.currentGameScene == GameScene.MapScene)
+            {
+                MapManager.Instance.playerChaState.GetComponent<ChaState>().ModResources(new ChaResource(MapManager.Instance.playerChaState.GetComponent<ChaState>().baseProp.health / 2, 0, 0, 0));
+                MapManager.Instance.UpdatePlayerUI();
+                Debug.Log("获得时回复一半生命在地图");
+            }
+            
 
            
         }
@@ -1484,9 +1496,19 @@ namespace DesignerScripts
 
         public static void Gain2NormalHalidomWhenGain(BuffInfo buffInfo)
         {
-            HalidomManager.Instance.AddHalidom(RandomManager.GetRandomHalidomObj(RareType.Common));
-            HalidomManager.Instance.AddHalidom(RandomManager.GetRandomHalidomObj(RareType.Common));
-            Debug.Log("增加两个普通圣物");
+            if(SceneLoader.Instance.currentGameScene == GameScene.BattleScene)
+            {
+                HalidomManager.Instance.AddHalidom(RandomManager.GetRandomHalidomObj(RareType.Common));
+                HalidomManager.Instance.AddHalidom(RandomManager.GetRandomHalidomObj(RareType.Common));
+                Debug.Log("增加两个普通圣物");
+            }
+            else if(SceneLoader.Instance.currentGameScene == GameScene.MapScene)
+            {
+                HalidomManager.Instance.AddHalidomInMap(RandomManager.GetRandomHalidomObj(RareType.Common));
+                HalidomManager.Instance.AddHalidomInMap(RandomManager.GetRandomHalidomObj(RareType.Common));
+                Debug.Log("在地图增加两个普通圣物");
+            }
+            
         }
 
 
@@ -1709,9 +1731,18 @@ namespace DesignerScripts
 
         public static void Gain2RareHalidom(BuffInfo buffInfo)
         {
-            HalidomManager.Instance.AddHalidom(RandomManager.GetRandomHalidomObj(RareType.Rare));
-            HalidomManager.Instance.AddHalidom(RandomManager.GetRandomHalidomObj(RareType.Rare));
-            Debug.Log("获得两个稀有圣物");
+            if (SceneLoader.Instance.currentGameScene == GameScene.BattleScene)
+            {
+                HalidomManager.Instance.AddHalidom(RandomManager.GetRandomHalidomObj(RareType.Rare));
+                HalidomManager.Instance.AddHalidom(RandomManager.GetRandomHalidomObj(RareType.Rare));
+                Debug.Log("增加两个稀有圣物");
+            }
+            else if (SceneLoader.Instance.currentGameScene == GameScene.MapScene)
+            {
+                HalidomManager.Instance.AddHalidomInMap(RandomManager.GetRandomHalidomObj(RareType.Rare));
+                HalidomManager.Instance.AddHalidomInMap(RandomManager.GetRandomHalidomObj(RareType.Rare));
+                Debug.Log("在地图增加两个稀有圣物");
+            }
         }
 
         #endregion
