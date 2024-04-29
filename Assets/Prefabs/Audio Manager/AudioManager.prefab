@@ -64,11 +64,13 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 28765a83cb0a563478c7d5fd559e0289, type: 3}
   - name: Ending3
     audioClip: {fileID: 8300000, guid: 133091dcccdb9be4cbfdb2cc1df5a090, type: 3}
+  - name: win
+    audioClip: {fileID: 8300000, guid: 66d0b44cc708d944da57d59435279173, type: 3}
   soundList:
   - name: rollDice
     audioClip: {fileID: 8300000, guid: 82931e34edd09684fb149b8d2b45618c, type: 3}
   - name: useDice
-    audioClip: {fileID: 8300000, guid: 31c66ca33d10a0945977fd137faf1490, type: 3}
+    audioClip: {fileID: 8300000, guid: 0e2e9e93fffa7d94695ef2700202e485, type: 3}
   - name: clickDown
     audioClip: {fileID: 8300000, guid: 72207e9c8a6fb634e9b4a7bd0628cf7f, type: 3}
   - name: clickUp
@@ -83,6 +85,8 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 2cbf3f1a3940efc499549bbf60850539, type: 3}
   - name: getShield
     audioClip: {fileID: 8300000, guid: c9ddf77265c6afb4d99cd8c7ec072aeb, type: 3}
+  - name: heal
+    audioClip: {fileID: 8300000, guid: 27637caba65929f4d992865c60b3087f, type: 3}
 --- !u!1 &5599647422997901889
 GameObject:
   m_ObjectHideFlags: 0

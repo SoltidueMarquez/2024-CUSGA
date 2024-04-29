@@ -40,7 +40,7 @@ namespace UI
         {
             if (AudioManager.Instance != null)
             {
-                AudioManager.Instance.StopMusic();
+                AudioManager.Instance.PlayMusicOne("win");
             }
             panel.SetActive(true);
             string tip = "你赢了";
@@ -94,7 +94,7 @@ namespace UI
         {
             if (AudioManager.Instance != null)
             {
-                AudioManager.Instance.StopMusic();
+                AudioManager.Instance.PlayMusicOne("win");
             }
             panel.SetActive(true);
             string tip = "胜利，然后凯旋";
