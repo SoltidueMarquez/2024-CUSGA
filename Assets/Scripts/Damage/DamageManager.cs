@@ -114,6 +114,7 @@ public class DamageManager : MonoSingleton<DamageManager>
             case DiceType.Defense:
                 //这边暂时做成只对玩家生效
                 attackerChaState.ModResources(new ChaResource(0, 0, 0, damageInfo.finalDamage));
+                CharacterUIManager.Instance.CreateShieldText(attackCharacter,damageInfo.finalDamage);
                 CharacterUIManager.Instance.UseOtherDice(attackCharacter);
                 break;
             case DiceType.Support:
