@@ -604,7 +604,7 @@ namespace DesignerScripts
 
         public static void Spirit(BuffInfo buffInfo)
         {
-            int health = buffInfo.curStack * 2;
+            int health = buffInfo.curStack ;
             buffInfo.target.GetComponent<ChaState>().ModResources(new ChaResource(health, 0, 0, 0));
             Debug.Log("精力回复" + health + "生命");
 
@@ -693,6 +693,9 @@ namespace DesignerScripts
                 if (buffInfo.curStack == 0)
                 {
                     buffInfo.isPermanent = false;
+                    int index = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
+                    var characterSide = (Character)buffInfo.target.GetComponent<ChaState>().side;
+                    BuffUIManager.Instance.RemoveBuffUIObject(characterSide, index);
                 }
             }
 
@@ -708,6 +711,9 @@ namespace DesignerScripts
             if (buffInfo.curStack == 0)
             {
                 buffInfo.isPermanent = false;
+                int index = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
+                var characterSide = (Character)buffInfo.target.GetComponent<ChaState>().side;
+                BuffUIManager.Instance.RemoveBuffUIObject(characterSide, index);
             }
         }
 
@@ -754,6 +760,7 @@ namespace DesignerScripts
 
         }
 
+        //已废弃
         public static SingleDiceObj Stun(BuffInfo buffInfo, SingleDiceObj singleDiceObj)//Tag：Target onbehurt
         {
 
@@ -845,6 +852,7 @@ namespace DesignerScripts
                     buffInfo.isPermanent = false;
                     int index = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
                     var characterSide = (Character)buffInfo.target.GetComponent<ChaState>().side;
+                    BuffUIManager.Instance.RemoveBuffUIObject(characterSide, index);
                 }
                 Debug.Log("因为水痘，收到伤害翻倍");
             }
@@ -1200,11 +1208,13 @@ namespace DesignerScripts
             {
                 int hitCount = (int)buffInfo.buffParam["PlayerHitCount"];
                 hitCount++;
-                if (hitCount == 15)
+                if (hitCount % 15==0)
                 {
                     damageInfo.damage.baseDamage += 20;
                 }
                 buffInfo.buffParam["PlayerHitCount"] = hitCount;
+                //刷新描述
+                HalidomManager.Instance.UpdateHalidomDescription();
                 Debug.Log("攻击次数" + hitCount);
             }
             else
@@ -1634,6 +1644,8 @@ namespace DesignerScripts
                             Debug.Log("有EnhanceAttackAfterSellDice这个buff");
                             buffInfo.buffParam["Value"] = 1 + (int)buffInfo.buffParam["Value"];
                             Debug.Log("售卖数加一");
+                            //刷新描述
+                            HalidomManager.Instance.UpdateHalidomDescription();
                         }
                     }
 
@@ -1676,6 +1688,8 @@ namespace DesignerScripts
         {
             buffInfo.buffParam["Value"] = 0;
             Debug.Log("清空攻击次数" + buffInfo.buffParam["Value"]);
+            //刷新描述
+            HalidomManager.Instance.UpdateHalidomDescription();
         }
 
         public static void EnhanceAttackWhenHit(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
@@ -1691,6 +1705,8 @@ namespace DesignerScripts
                 Debug.Log("伤害增加了" + (int)buffInfo.buffParam["Value"] + "%");
                 buffInfo.buffParam["Value"] = (int)buffInfo.buffParam["Value"] + 5;
                 Debug.Log((int)buffInfo.buffParam["Value"]);
+                //刷新描述
+                HalidomManager.Instance.UpdateHalidomDescription();
 
             }
 
