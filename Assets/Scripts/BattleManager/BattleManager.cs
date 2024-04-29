@@ -265,6 +265,12 @@ public class BattleManager : MonoBehaviour
     {
         //根据敌人的数量初始化敌人
         var enemyDataSO = this.parameter.enemyDataSO;
+        //初始化敌人的图片
+        if (enemyDataSO.enemySprite != null)
+        {
+            CharacterUIManager.Instance.UpdateEnemySprite(enemyDataSO.enemySprite);
+        }
+
         var enemyBattleDiceList = enemyDataSO.EnemyBattleDiceList;
         for (int i = 0; i < this.parameter.enemyChaStates.Length; i++)
         {
@@ -559,7 +565,7 @@ public class BattleManager : MonoBehaviour
         this.parameter.playerDataSO.UpdatePlayerDataSO(parameter.playerChaState);
         this.parameter.playerDataSO.UpdataPlayerDataSoMap(GameManager.Instance.currentMap);
         this.parameter.playerDataSO.SaveData();
-        SceneLoader.Instance.LoadSceneAsync(GameScene.MapScene, new Vector2(0.5f, 0.5f),SceneTransition.maskInMaskOut);
+        SceneLoader.Instance.LoadSceneAsync(GameScene.MapScene, new Vector2(0.5f, 0.5f), SceneTransition.maskInMaskOut);
     }
     public void OnEnterResultUI()
     {
