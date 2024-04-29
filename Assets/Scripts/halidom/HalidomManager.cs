@@ -208,11 +208,13 @@ public class HalidomManager : MonoBehaviour
     #endregion
     public void RefreshAllHalidoms()
     {
-
+        //清空delta
+        deltaCharacterProperty.Zero();
         //清空之前的加和乘
         for (var i = 0; i < buffProp.Length; i++)
         {
             buffProp[i].Zero();
+            
         }
         //遍历圣物数组
         foreach (var halidom in halidomList)
@@ -224,7 +226,7 @@ public class HalidomManager : MonoBehaviour
                 foreach (var buffinfo in halidom.buffInfos)
                 {
                     //计算相加和相乘
-                    buffProp[0] += buffProp[0] += buffinfo.buffData.propMod[0] * buffinfo.curStack;
+                    buffProp[0] += buffinfo.buffData.propMod[0] * buffinfo.curStack;
                     buffProp[1] += buffinfo.buffData.propMod[1];
 
                 }
