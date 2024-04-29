@@ -134,6 +134,19 @@ namespace UI
             }
         }
         #endregion
+
+        /// <summary>
+        /// 替换敌人素材
+        /// </summary>
+        /// <param name="sprite"></param>
+        public void UpdateEnemySprite(Sprite sprite)
+        {
+            var enemyImage = enemy.gameObject.GetComponent<Image>();
+            if (enemyImage != null)
+            {
+                enemyImage.sprite = sprite;
+            }
+        }
         
         /// <summary>
         /// 角色使用其他骰面的动画
