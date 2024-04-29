@@ -750,30 +750,30 @@ namespace DesignerScripts
                 var characterSide = (Character)buffInfo.target.GetComponent<ChaState>().side;
                 BuffUIManager.Instance.RemoveBuffUIObject(characterSide, index);
             }
-            
+
 
         }
 
         public static SingleDiceObj Stun(BuffInfo buffInfo, SingleDiceObj singleDiceObj)//Tag：Target onbehurt
         {
-            
-            
-                if (buffInfo.creator == BattleManager.Instance.parameter.playerChaState.gameObject)
-                {
-                    BuffInfo loseEnergy = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.LoseEnergy.ToString()],
-                         BattleManager.Instance.parameter.playerChaState.gameObject,
-                        BattleManager.Instance.parameter.enemyChaStates[0].gameObject);
-                    BattleManager.Instance.parameter.enemyChaStates[0].GetComponent<ChaState>().AddBuff(loseEnergy, BattleManager.Instance.parameter.enemyChaStates[0].gameObject);
-                }
-                else
-                {
-                    BuffInfo loseEnergynew = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.LoseEnergy.ToString()],
-                         BattleManager.Instance.parameter.enemyChaStates[0].gameObject,
-                        BattleManager.Instance.parameter.playerChaState.gameObject);
-                    BattleManager.Instance.parameter.playerChaState.GetComponent<ChaState>().AddBuff(loseEnergynew, BattleManager.Instance.parameter.playerChaState.gameObject);
-                }
-            
-           
+
+
+            if (buffInfo.creator == BattleManager.Instance.parameter.playerChaState.gameObject)
+            {
+                BuffInfo loseEnergy = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.LoseEnergy.ToString()],
+                     BattleManager.Instance.parameter.playerChaState.gameObject,
+                    BattleManager.Instance.parameter.enemyChaStates[0].gameObject);
+                BattleManager.Instance.parameter.enemyChaStates[0].GetComponent<ChaState>().AddBuff(loseEnergy, BattleManager.Instance.parameter.enemyChaStates[0].gameObject);
+            }
+            else
+            {
+                BuffInfo loseEnergynew = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.LoseEnergy.ToString()],
+                     BattleManager.Instance.parameter.enemyChaStates[0].gameObject,
+                    BattleManager.Instance.parameter.playerChaState.gameObject);
+                BattleManager.Instance.parameter.playerChaState.GetComponent<ChaState>().AddBuff(loseEnergynew, BattleManager.Instance.parameter.playerChaState.gameObject);
+            }
+
+
 
             buffInfo.curStack = 0;
             buffInfo.isPermanent = false;
@@ -1153,7 +1153,7 @@ namespace DesignerScripts
 
         public static void RecoverHalfHealthWhenGain(BuffInfo buffInfo)
         {
-            if(SceneLoader.Instance.currentGameScene == GameScene.BattleScene)
+            if (SceneLoader.Instance.currentGameScene == GameScene.BattleScene)
             {
                 //获取玩家的状态
                 ChaState tempChaState = buffInfo.creator.GetComponent<ChaState>();
@@ -1164,15 +1164,15 @@ namespace DesignerScripts
                     Debug.Log("获得时回复一半生命");
                 }
             }
-            else if(SceneLoader.Instance.currentGameScene == GameScene.MapScene)
+            else if (SceneLoader.Instance.currentGameScene == GameScene.MapScene)
             {
                 MapManager.Instance.playerChaState.GetComponent<ChaState>().ModResources(new ChaResource(MapManager.Instance.playerChaState.GetComponent<ChaState>().baseProp.health / 2, 0, 0, 0));
                 MapManager.Instance.UpdatePlayerUI();
                 Debug.Log("获得时回复一半生命在地图");
             }
-            
 
-           
+
+
         }
 
 
@@ -1496,19 +1496,19 @@ namespace DesignerScripts
 
         public static void Gain2NormalHalidomWhenGain(BuffInfo buffInfo)
         {
-            if(SceneLoader.Instance.currentGameScene == GameScene.BattleScene)
+            if (SceneLoader.Instance.currentGameScene == GameScene.BattleScene)
             {
                 HalidomManager.Instance.AddHalidom(RandomManager.GetRandomHalidomObj(RareType.Common));
                 HalidomManager.Instance.AddHalidom(RandomManager.GetRandomHalidomObj(RareType.Common));
                 Debug.Log("增加两个普通圣物");
             }
-            else if(SceneLoader.Instance.currentGameScene == GameScene.MapScene)
+            else if (SceneLoader.Instance.currentGameScene == GameScene.MapScene)
             {
                 HalidomManager.Instance.AddHalidomInMap(RandomManager.GetRandomHalidomObj(RareType.Common));
                 HalidomManager.Instance.AddHalidomInMap(RandomManager.GetRandomHalidomObj(RareType.Common));
                 Debug.Log("在地图增加两个普通圣物");
             }
-            
+
         }
 
 
@@ -1864,27 +1864,51 @@ namespace DesignerScripts
 
         public static SingleDiceObj ClearEnemyPositiveBuff(BuffInfo buffInfo, SingleDiceObj singleDiceObj)
         {
-            //获取敌方的buffhandler
-            if (buffInfo.target.GetComponent<BuffHandler>() != null)
+            //暴力ifelse判断到底是谁的回合
+            if (buffInfo.creator == BattleManager.Instance.parameter.playerChaState.gameObject)
             {
-                //从buffhandler中找到一个的Positive buff
-                BuffInfo findBuffInfo = buffInfo.target.GetComponent<BuffHandler>().buffList.Find(x => x.buffData.tags.Contains("Positive"));
-                if (findBuffInfo != null)
+                //获取对方的buffhandler
+                if (BattleManager.Instance.parameter.enemyChaStates[0].GetComponent<BuffHandler>() != null)
                 {
-                    findBuffInfo.curStack = 0;
-                    findBuffInfo.isPermanent = false;
-                    int index = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(findBuffInfo);
-                    var characterSide = (Character)buffInfo.target.GetComponent<ChaState>().side;
-                    BuffUIManager.Instance.RemoveBuffUIObject(characterSide, index);
-                }
+                    //从buffhandler中找到一个的带有Positive tag的 buff
+                    BuffInfo findBuffInfo = BattleManager.Instance.parameter.enemyChaStates[0].GetComponent<BuffHandler>().buffList.Find(x => x.buffData.tags.Contains("Positive"));
+                    if (findBuffInfo != null)
+                    {
+                        //清除buff目前需要手动设置为0 false 并且移除buffUI
+                        findBuffInfo.curStack = 0;
+                        findBuffInfo.isPermanent = false;
+                        int index = BattleManager.Instance.parameter.enemyChaStates[0].GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(findBuffInfo);
+                        var characterSide = (Character)BattleManager.Instance.parameter.enemyChaStates[0].GetComponent<ChaState>().side;
+                        BuffUIManager.Instance.RemoveBuffUIObject(characterSide, index);
+                        Debug.Log("清除一个敌方positivebuff");
+                    }
 
+                }
             }
+            else if (buffInfo.creator == BattleManager.Instance.parameter.enemyChaStates[0].gameObject)
+            {
+                if (BattleManager.Instance.parameter.playerChaState.GetComponent<BuffHandler>() != null)
+                {
+                    BuffInfo findBuffInfo = BattleManager.Instance.parameter.playerChaState.GetComponent<BuffHandler>().buffList.Find(x => x.buffData.tags.Contains("Positive"));
+                    if (findBuffInfo != null)
+                    {
+                        findBuffInfo.curStack = 0;
+                        findBuffInfo.isPermanent = false;
+                        int index = BattleManager.Instance.parameter.playerChaState.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(findBuffInfo);
+                        var characterSide = (Character)BattleManager.Instance.parameter.playerChaState.GetComponent<ChaState>().side;
+                        BuffUIManager.Instance.RemoveBuffUIObject(characterSide, index);
+                        Debug.Log("清除一个敌方positivebuff");
+                    }
+                }
+            }
+
             return singleDiceObj;
         }
 
         public static SingleDiceObj ClearPlayerNegativeBuff(BuffInfo buffInfo, SingleDiceObj singleDiceObj)
         {
-            //获取玩家的buffhandler
+            //因为creator一定是自身，所以不涉及到对方的不需要暴力ifelse
+
             if (buffInfo.creator.GetComponent<BuffHandler>() != null)
             {
                 //从buffhandler中找到一个的Negative buff
@@ -1896,9 +1920,14 @@ namespace DesignerScripts
                     int index = buffInfo.creator.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(findBuffInfo);
                     var characterSide = (Character)buffInfo.creator.GetComponent<ChaState>().side;
                     BuffUIManager.Instance.RemoveBuffUIObject(characterSide, index);
+                    Debug.Log("清除一个我方负面buff");
 
                 }
             }
+
+
+            //获取玩家的buffhandler
+
             return singleDiceObj;
         }
 
@@ -1919,7 +1948,7 @@ namespace DesignerScripts
                 buffInfo.buffParam["IsFirstDeal"] = true;
             }*/
 
-            if(!(bool)buffInfo.buffParam["IsFirstDeal"])
+            if (!(bool)buffInfo.buffParam["IsFirstDeal"])
             {
                 //拼接一个新的damageinfo
                 Damage damage = singleDiceObj.model.damage;
@@ -1932,7 +1961,7 @@ namespace DesignerScripts
                                                     BattleManager.Instance.parameter.enemyChaStates[0].gameObject,
                                                     damage, singleDiceObj.model.type, singleDiceObj.level, null);
                     DamageManager.Instance.DoDamage(damageInfo);
-                    
+
                 }
                 else
                 {
@@ -1940,7 +1969,7 @@ namespace DesignerScripts
                                                     BattleManager.Instance.parameter.playerChaState.gameObject,
                                                     damage, singleDiceObj.model.type, singleDiceObj.level, null);
                     DamageManager.Instance.DoDamage(damageInfo);
-                    
+
                 }
                 buffInfo.buffParam["IsFirstDeal"] = true;
             }
@@ -1949,7 +1978,7 @@ namespace DesignerScripts
 
         public static SingleDiceObj TripleHit(BuffInfo buffInfo, SingleDiceObj singleDiceObj)
         {
-            
+
             if (!(bool)buffInfo.buffParam["IsFirstDeal"])
             {
 
@@ -1962,7 +1991,7 @@ namespace DesignerScripts
                 //拼装buffInfo
                 if (buffInfo.creator == BattleManager.Instance.parameter.playerChaState.gameObject)
                 {
-                    
+
                     var damageInfo = new DamageInfo(BattleManager.Instance.parameter.playerChaState.gameObject,
                                                     BattleManager.Instance.parameter.enemyChaStates[0].gameObject,
                                                     damage, singleDiceObj.model.type, singleDiceObj.level, null);
@@ -1971,7 +2000,7 @@ namespace DesignerScripts
                 }
                 else
                 {
-                    
+
                     var damageInfo = new DamageInfo(BattleManager.Instance.parameter.enemyChaStates[0].gameObject,
                                                     BattleManager.Instance.parameter.playerChaState.gameObject,
                                                     damage, singleDiceObj.model.type, singleDiceObj.level, null);
