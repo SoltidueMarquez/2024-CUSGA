@@ -41,8 +41,7 @@ namespace UI
             {
                 for (int i = 0; i < diceObjs.Count; i++)//创建骰面
                 {
-                    var tmpData = ResourcesManager.GetSingleDiceUIData(diceObjs[i]);
-                    CreateDiceUI(tmpData, diceObjs[i].positionInDice, tmp.transform);
+                    CreateDiceUI(diceObjs[i], diceObjs[i].positionInDice, tmp.transform);
                 }
             }
             fightDicePageLists.Add(tmp);
@@ -55,7 +54,7 @@ namespace UI
         /// <param name="data">数据</param>
         /// <param name="index">栏位索引</param>
         /// <param name="page">页面</param>
-        public void CreateDiceUI(SingleDiceUIData data, int index, Transform page)
+        public void CreateDiceUI(SingleDiceObj data, int index, Transform page)
         {
             var tmp = Instantiate(diceTemplate, page, true);
             tmp.transform.position = columns[index].transform.position;//更改位置
