@@ -218,6 +218,10 @@ namespace UI
         }
         private void DoCure(Vector3 attackTextPosition,int num)
         {
+            if (AudioManager.Instance != null && playerShieldUI.curShield <= 0)
+            {
+                AudioManager.Instance.PlaySound("heal");
+            }
             var tmp = Instantiate(attackTextTemplate, attackTextParent, true);
             tmp.transform.position = attackTextPosition;//更改位置
             tmp.GetComponent<AttackText>().InitCure(num, attackTime);//初始化

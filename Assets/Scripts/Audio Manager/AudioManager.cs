@@ -88,11 +88,24 @@ namespace Audio_Manager
             if (clip == null) { return; }
             PlayMusic(clip);
         }
+        public void PlayMusicOne(string mName)
+        {
+            var clip = Find(mName, musicList);
+            if (clip == null) { return; }
+            PlayMusicOne(clip);
+        }
         private void PlayMusic(AudioClip audioClip)
         {
             StopMusic();
             musicPlayer.clip = audioClip;
             musicPlayer.loop = true;
+            musicPlayer.Play();
+        }
+        private void PlayMusicOne(AudioClip audioClip)
+        {
+            StopMusic();
+            musicPlayer.clip = audioClip;
+            musicPlayer.loop = false;
             musicPlayer.Play();
         }
 
