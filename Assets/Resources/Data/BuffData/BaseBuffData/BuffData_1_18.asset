@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1_18
   dataName: 95
-  tags: []
+  tags:
+  - Positive
   maxStack: 5
   duringCount: 0
   isPermanent: 1
