@@ -42,13 +42,14 @@ namespace UI
         /// <summary>
         /// 初始化函数
         /// </summary>
-        public virtual void Init(SingleDiceUIData data)
+        public virtual void Init(SingleDiceObj dice)
         {
+            var data = ResourcesManager.GetSingleDiceUIData(dice);
             //信息文本初始化
             nameText.text = data.name;
             typeText.text = $"类型:{data.type}";
             levelText.text = $"稀有度:{data.level}";
-            baseValueText.text = $"基础数值{data.baseValue}";
+            baseValueText.text = $"骰面预测数值{(int)(data.baseValue * (1 + (float)data.idInDice / 10))}";
             descriptionText.text = $"{data.description}";
             idInDiceText.text = data.idInDice.ToString();
             this.GetComponent<Image>().sprite = data.sprite;

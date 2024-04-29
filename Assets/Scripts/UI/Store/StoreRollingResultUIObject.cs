@@ -38,7 +38,7 @@ namespace UI.Store
             nameText.text = data.name;
             typeText.text = $"类型:{data.type}";
             levelText.text = $"稀有度:{data.level}";
-            baseValueText.text = $"基础数值{data.baseValue}";
+            baseValueText.text = $"骰面预测数值{(int)(data.baseValue * (1 + (float)data.idInDice / 10))}";
             infoText.text = $"描述:{data.description}" ;
             this.GetComponent<Image>().sprite = data.sprite;
             idInDiceText.text = data.idInDice.ToString();
