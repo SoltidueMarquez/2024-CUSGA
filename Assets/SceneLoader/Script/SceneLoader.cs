@@ -57,15 +57,16 @@ public class SceneLoader : MonoSingleton<SceneLoader>
             case SceneTransition.crossInCrossOut:
                 await FadeInFadeOutTranstion(TransitionMode.In);
                 asyncLoad.allowSceneActivation = true;
+                currentGameScene = gameScene;
                 await FadeInFadeOutTranstion(TransitionMode.Out);
                 break;
             case SceneTransition.maskInMaskOut:
                 await MaskTranstion(position, duration, TransitionMode.In);
                 asyncLoad.allowSceneActivation = true;
+                currentGameScene = gameScene;
                 await MaskTranstion(new Vector2(0.5f, 0.5f), duration, TransitionMode.Out);
                 break;
         }
-        currentGameScene = gameScene;
         Debug.Log(currentGameScene.ToString());
     }
 
