@@ -117,7 +117,7 @@ namespace Map
             Debug.Log("Enter Battle Node: " + GameManager.Instance.enemyDataSO.enemyType.ToString());
             MapManager.Instance.playerDataSO.ifUseSaveData = true;
 
-            SceneLoader.Instance.LoadSceneAsync(GameScene.BattleScene, viewPointView);
+            SceneLoader.Instance.LoadSceneAsync(GameScene.BattleScene, viewPointView, SceneTransition.maskInMaskOut);
         }
         private void PlayWarningThatNodeCannotBeAccessed()
         {

@@ -48,7 +48,7 @@ public class StartManager : MonoSingleton<StartManager>
     {
         GameManager.Instance.ContinueGame();
         //加载存档，跳转场景
-        SceneManager.LoadScene("MapScene");
+        SceneLoader.Instance.LoadSceneAsync(GameScene.MapScene, Vector2.zero, SceneTransition.crossInCrossOut);
     }
 
     public void StartNewGame()
@@ -56,7 +56,7 @@ public class StartManager : MonoSingleton<StartManager>
         //清空存档
         GameManager.Instance.NewGame();
         //加载地图
-        SceneManager.LoadScene("MapScene");
+        SceneLoader.Instance.LoadSceneAsync(GameScene.MapScene, Vector2.zero, SceneTransition.crossInCrossOut);
     }
 
     public void OnClickQuitButton()

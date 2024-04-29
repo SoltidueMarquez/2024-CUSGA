@@ -33,5 +33,7 @@ public class EnemyDataSO : ScriptableObject
     public ChaProperty baseProp;
     [Header("敌人初始的buff")]
     public List<BuffDataConfig> enemyBuffs;
+    [Header("敌人的sprite")]
+    public Sprite enemySprite;
 }
     //AI暂时不管

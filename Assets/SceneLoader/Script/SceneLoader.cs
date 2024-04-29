@@ -19,9 +19,15 @@ public enum TransitionMode
     In,
     Out
 }
+public enum SceneTransition
+{
+    crossInCrossOut,
+    maskInMaskOut,
+}
 
 public class SceneLoader : MonoSingleton<SceneLoader>
 {
+    [Header("组件")]
     public Animator animator;
     public GameObject canvas;
     public Image maskImage;
@@ -29,24 +35,37 @@ public class SceneLoader : MonoSingleton<SceneLoader>
     [Header("参数")]
     public float duration;
     public GameScene currentGameScene;
+    private CanvasGroup canvasGroup;
+
+    private int appearHash = Animator.StringToHash("Appear");
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
         maskMaterial = maskImage.material;
+        canvasGroup = canvas.GetComponent<CanvasGroup>();
         Hide();
 
     }
 
 
-    public async void LoadSceneAsync(GameScene gameScene, Vector2 position)
+    public async void LoadSceneAsync(GameScene gameScene, Vector2 position,SceneTransition sceneTransition)
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(gameScene.ToString(), LoadSceneMode.Single);
-
         asyncLoad.allowSceneActivation = false;
-        await MaskTranstion(position, duration, TransitionMode.In);
-        asyncLoad.allowSceneActivation = true;
+        switch (sceneTransition)
+        {
+            case SceneTransition.crossInCrossOut:
+                await FadeInFadeOutTranstion(TransitionMode.In);
+                asyncLoad.allowSceneActivation = true;
+                await FadeInFadeOutTranstion(TransitionMode.Out);
+                break;
+            case SceneTransition.maskInMaskOut:
+                await MaskTranstion(position, duration, TransitionMode.In);
+                asyncLoad.allowSceneActivation = true;
+                await MaskTranstion(new Vector2(0.5f, 0.5f), duration, TransitionMode.Out);
+                break;
+        }
         currentGameScene = gameScene;
-        await MaskTranstion(new Vector2(0.5f,0.5f), duration, TransitionMode.Out);
         Debug.Log(currentGameScene.ToString());
     }
 
@@ -86,15 +105,43 @@ public class SceneLoader : MonoSingleton<SceneLoader>
         Hide();
     }
     #endregion
+    #region 淡入淡出
+    public async UniTask FadeInFadeOutTranstion(TransitionMode transitionMode)
+    {
+        Show();
+        if (transitionMode == TransitionMode.In)
+        {
+            animator.SetBool(appearHash, true);
+            await UniTask.WaitUntil(() => IsCurrentAnimationFinished("Fadein"));
+        }
+        else
+        {
+            animator.SetBool(appearHash,false);
+            await UniTask.WaitUntil(() => IsCurrentAnimationFinished("Fadeout"));
+        }
+        Hide();
+    }
+    private bool IsCurrentAnimationFinished(string animationName)
+    {
+        // 获取当前动画状态
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-    #region 转场基础函数
+        // 检查当前动画片段是否播放完毕
+        return stateInfo.IsName(animationName) && stateInfo.normalizedTime >= 1.0f;
+    }
+    #endregion
+    #region 显示隐藏
     public void Show()
     {
-        canvas.SetActive(true);
+        canvasGroup.alpha = 1;
+        canvasGroup.blocksRaycasts = true;
+        canvasGroup.interactable = false;
     }
     public void Hide()
     {
-        canvas.SetActive(false);
+        canvasGroup.alpha = 0;
+        canvasGroup.blocksRaycasts = false;
+        canvasGroup.interactable = false;
     }
     #endregion
 }

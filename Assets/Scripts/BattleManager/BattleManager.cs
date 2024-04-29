@@ -559,7 +559,7 @@ public class BattleManager : MonoBehaviour
         this.parameter.playerDataSO.UpdatePlayerDataSO(parameter.playerChaState);
         this.parameter.playerDataSO.UpdataPlayerDataSoMap(GameManager.Instance.currentMap);
         this.parameter.playerDataSO.SaveData();
-        SceneLoader.Instance.LoadSceneAsync(GameScene.MapScene, new Vector2(0.5f, 0.5f));
+        SceneLoader.Instance.LoadSceneAsync(GameScene.MapScene, new Vector2(0.5f, 0.5f),SceneTransition.maskInMaskOut);
     }
     public void OnEnterResultUI()
     {
@@ -570,7 +570,7 @@ public class BattleManager : MonoBehaviour
         this.parameter.playerDataSO.DeleteData();
         HalidomManager.Instance.ClearHalidomList();
         GameManager.Instance.ifLoadedHalidom = false;
-        SceneLoader.Instance.LoadSceneAsync(GameScene.StartGame, new Vector2(0.5f, 0.5f));
+        SceneLoader.Instance.LoadSceneAsync(GameScene.StartGame, new Vector2(0.5f, 0.5f), SceneTransition.maskInMaskOut);
     }
     #endregion
     #region 封装的战斗回调点
