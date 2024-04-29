@@ -109,6 +109,7 @@ public class BattleManager : MonoBehaviour
         states.Add(GameState.PlayerWin, new PlayerWinState(this));
         states.Add(GameState.Reward, new RewardState(this));
         states.Add(GameState.Result, new ResultState(this));
+
         this.parameter.playerDataSO = GameManager.Instance.playerDataSO;
         if (GameManager.Instance.enemyDataSO != null)
         {
@@ -293,7 +294,7 @@ public class BattleManager : MonoBehaviour
     #region 投骰子相关
     public void RollDice()
     {
-        DataUIManager.Instance.UpdateRerollText(this.parameter.playerChaState.resource.currentRollTimes,this.parameter.playerChaState.prop.maxRollTimes);
+        DataUIManager.Instance.UpdateRerollText(this.parameter.playerChaState.resource.currentRollTimes, this.parameter.playerChaState.prop.maxRollTimes);
         List<SingleDiceObj> singleDiceObjs = this.parameter.playerChaState.GetBattleDiceHandler().GetRandomSingleDices();
         this.parameter.playerChaState.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs);
         for (int i = 0; i < singleDiceObjs.Count; i++)
@@ -312,7 +313,7 @@ public class BattleManager : MonoBehaviour
             return;
         }
         ReducePlayerRerollCount();
-        DataUIManager.Instance.UpdateRerollText(this.parameter.playerChaState.resource.currentRollTimes,this.parameter.playerChaState.prop.maxRollTimes);
+        DataUIManager.Instance.UpdateRerollText(this.parameter.playerChaState.resource.currentRollTimes, this.parameter.playerChaState.prop.maxRollTimes);
         //判断当前处于什么状态，如果是玩家回合，则重新投掷骰面，如果是奖励阶段，则只是显示重新投掷的骰面
         if (currentState is PlayerActionState)
         {
@@ -507,7 +508,7 @@ public class BattleManager : MonoBehaviour
     /// <param name="singleDiceObjs"></param>
     public void CreateRewardHalidom(List<SingleDiceObj> singleDiceObjs)
     {
-        var resultHalidom = RandomManager.GetRewardHalidomViaPlayerData(singleDiceObjs,HalidomManager.Instance.GetCurrentHalidomIdListDic());
+        var resultHalidom = RandomManager.GetRewardHalidomViaPlayerData(singleDiceObjs, HalidomManager.Instance.GetCurrentHalidomIdListDic());
         if (resultHalidom != null)
         {
             UIManager.Instance.rewardUIManager.CreateSacredObject(resultHalidom.id, 0, AddHalidomToHalidomManager, resultHalidom);
@@ -558,9 +559,7 @@ public class BattleManager : MonoBehaviour
         this.parameter.playerDataSO.UpdatePlayerDataSO(parameter.playerChaState);
         this.parameter.playerDataSO.UpdataPlayerDataSoMap(GameManager.Instance.currentMap);
         this.parameter.playerDataSO.SaveData();
-
         SceneLoader.Instance.LoadSceneAsync(GameScene.MapScene, new Vector2(0.5f, 0.5f));
-
     }
     public void OnEnterResultUI()
     {

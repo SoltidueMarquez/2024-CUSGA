@@ -238,7 +238,7 @@ namespace Map
         #region 更新玩家UI信息
         public void UpdatePlayerUI()
         {
-            DataUIManager.Instance.UpdateRerollText(playerChaState.resource.currentRollTimes,playerChaState.prop.maxRollTimes);
+            DataUIManager.Instance.UpdateRerollText(playerChaState.resource.currentRollTimes, playerChaState.prop.maxRollTimes);
             DataUIManager.Instance.UpdateHealthText(playerChaState.resource.currentHp, playerChaState.prop.health);
         }
         #endregion

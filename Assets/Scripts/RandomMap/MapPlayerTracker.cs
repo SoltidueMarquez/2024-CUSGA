@@ -61,7 +61,7 @@ namespace Map
             view.SetAttainableNodes();
             view.SetLineColors();
             mapNode.ShowSwirlAnimation();
-            
+
             DOTween.Sequence().AppendInterval(enterNodeDelay).OnComplete(() => EnterNode(mapNode));
         }
         /// <summary>
@@ -108,7 +108,7 @@ namespace Map
         /// </summary>
         /// <param name="transform"></param>
         /// <param name="enemyType"></param>
-        public static void EnterBattleNode(Transform transform,EnemyType enemyType)
+        public static void EnterBattleNode(Transform transform, EnemyType enemyType)
         {
             Vector2 cameraPosition = Camera.main.WorldToScreenPoint(transform.position);
             Vector2 viewPointView = Camera.main.ScreenToViewportPoint(cameraPosition);
@@ -116,7 +116,6 @@ namespace Map
             GameManager.Instance.enemyDataSO = EnemyManager.GetEnemyDataSOviaCondition(enemyType, MapManager.Instance.playerDataSO.playerRoomData.enemyIDs);
             Debug.Log("Enter Battle Node: " + GameManager.Instance.enemyDataSO.enemyType.ToString());
             MapManager.Instance.playerDataSO.ifUseSaveData = true;
-            
 
             SceneLoader.Instance.LoadSceneAsync(GameScene.BattleScene, viewPointView);
         }

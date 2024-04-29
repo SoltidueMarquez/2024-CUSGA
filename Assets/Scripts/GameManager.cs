@@ -16,8 +16,12 @@ public class GameManager : MonoBehaviour
     public string currentMap;
     [Header("编辑器中的玩家数据")]
     public PlayerDataSO playerDataSOTemplate;
+    [Header("新手教程用玩家数据,暂时抛弃")]
+    public PlayerDataSO playerDataSOTutorial;
     [Header("玩家数据")]
     public PlayerDataSO playerDataSO;
+    [Header("是否是新手教程")]
+    public bool ifTutorial;
     public static GameManager Instance { get; private set; }
     void Awake()
     {
@@ -61,6 +65,16 @@ public class GameManager : MonoBehaviour
         
         playerDataSO.LoadData();
         return playerDataSO.ifHasData;
+    }
+    /// <summary>
+    /// 开启新手教程模式
+    /// </summary>
+    public void Turtorial()
+    {
+        this.ifTutorial = true;
+        playerDataSO = ScriptableObject.CreateInstance<PlayerDataSO>();
+        Debug.Log("NewGame");
+        playerDataSO.InitPlaydataSOInstance(playerDataSOTutorial);
     }
     #endregion
     #region 结算场景调用

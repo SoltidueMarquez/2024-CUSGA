@@ -10,7 +10,9 @@ public enum GameScene
 {
     MapScene,
     BattleScene,
-    StartGame
+    StartGame,
+    TurtorialMap,
+    TurtorialBattle,
 }
 public enum TransitionMode
 {
