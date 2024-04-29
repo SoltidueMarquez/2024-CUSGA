@@ -35,11 +35,9 @@ namespace UI.Store
 
         public void Init(RectTransform canvas)
         {
-            Debug.LogWarning("初始化");
             _posList.Clear();
             _rect = this.GetComponent<ScrollRect>();
             _childCount = _rect.content.transform.childCount;
-            Debug.LogWarning(_childCount);
             if (_childCount == 0) { return;}
             //根据子物体数动态设置内容页长度
             float width = canvas.rect.width;

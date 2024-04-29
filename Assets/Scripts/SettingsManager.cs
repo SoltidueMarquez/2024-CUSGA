@@ -107,7 +107,7 @@ public class SettingsManager : MonoSingleton<SettingsManager>
 
     ScrollNonUI scrollNonUI;
     /// <summary>
-    /// µ÷ÕûµØÍ¼×´Ì¬£¬trueÎª¶³½á£¬falseÎª½â¶³
+    /// è°ƒæ•´åœ°å›¾çŠ¶æ€ï¼Œtrueä¸ºå†»ç»“ï¼Œfalseä¸ºè§£å†»
     /// </summary>
     /// <param name="ifFreeze"></param>
     public void FreezeMap(bool freezeState)
@@ -157,10 +157,10 @@ public class SettingsManager : MonoSingleton<SettingsManager>
     [Button]
     public void ShowSpeed()
     {
-        Debug.Log("ÓÎÏ·ËÙ¶È£º " + Time.timeScale);
+        Debug.Log("æ¸¸æˆé€Ÿåº¦ï¼š " + Time.timeScale);
     }
 
-    #region------ÒôÁ¿¿ØÖÆ------
+    #region------éŸ³é‡æ§åˆ¶------
 
     public Scrollbar mainVolume;
     public Scrollbar musicVolume;
