@@ -612,7 +612,7 @@ public class HalidomManager : MonoBehaviour
                 }
             }
         }
-        UpdateHalidomDescription();
+        //UpdateHalidomDescription();
     }
     #endregion
     #region 更新圣物的信息

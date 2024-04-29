@@ -305,6 +305,7 @@ public class BattleDiceHandler : MonoBehaviour
     //将战斗骰子每一个设置为空
     public void ClearBattleSingleDices()
     {
+        Debug.Log(diceCardsInUse.Length);
         for (int i = 0; i < diceCardsInUse.Length; i++)
         {
             diceCardsInUse[i] = null;
