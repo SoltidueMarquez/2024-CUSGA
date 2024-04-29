@@ -271,20 +271,20 @@ namespace UI
         /// <param name="shieldNum"></param>
         public void UpdateShieldUI(Character character,int shieldNum)
         {
+            StartCoroutine(DoCharacterShieldAnim(character, shieldNum));
+        }
+        IEnumerator DoCharacterShieldAnim(Character character,int shieldNum)
+        {
+            yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
             switch (character)
             {
                 case Character.Enemy:
                     enemyShieldUI.UpdateShieldNum(shieldNum);
                     break;
                 case Character.Player:
-                    StartCoroutine(DoPlayerShieldAnim(shieldNum));
+                    playerShieldUI.UpdateShieldNum(shieldNum);
                     break;
             }
-        }
-        IEnumerator DoPlayerShieldAnim(int shieldNum)
-        {
-            yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
-            playerShieldUI.UpdateShieldNum(shieldNum);
         }
         #endregion
 
