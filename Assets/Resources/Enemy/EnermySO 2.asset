@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 576aa348e8b3a92498ed15e7f5425ad7, type: 3}
   m_Name: EnermySO 2
   m_EditorClassIdentifier: 
+  EnemyID: 
   enemyType: 0
   EnemyBattleDiceList:
   - diceType: 0
@@ -55,3 +56,4 @@ MonoBehaviour:
   - buffDataSO: {fileID: 11400000, guid: 7a4822fa0260c7a4880e1ad5ed6a8a76, type: 2}
     buffStack: 1
     buffRound: 0
+  enemySprite: {fileID: 21300000, guid: 3f92af3bd286f3d4cb09bd4ec72ba41e, type: 3}

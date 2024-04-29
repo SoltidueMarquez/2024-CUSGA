@@ -56,3 +56,4 @@ MonoBehaviour:
   - buffDataSO: {fileID: 11400000, guid: fdf6ae296227ce1448dbadb39f41ac3f, type: 2}
     buffStack: 1
     buffRound: 0
+  enemySprite: {fileID: 21300000, guid: 62d5b45afcfb6c54d94f25b17aa95cd5, type: 3}
