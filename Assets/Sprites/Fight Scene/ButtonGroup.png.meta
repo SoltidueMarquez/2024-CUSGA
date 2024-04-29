@@ -193,6 +193,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: HealthBar
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 307
+        width: 512
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed6b61002b6010241a0264ae6055ba58
+      internalID: 1694058119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -206,6 +227,7 @@ TextureImporter:
     nameFileIdTable:
       ButtonGroup_0: 115761398
       Button_Clicked: 1709911009
+      HealthBar: 1694058119
       Money: 413710022
       Round: 1384396991
   mipmapLimitGroupName: 
