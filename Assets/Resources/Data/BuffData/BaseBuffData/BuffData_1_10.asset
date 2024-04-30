@@ -17,6 +17,7 @@ MonoBehaviour:
   tags:
   - Self
   - Positive
+  - OnMyTurnEnd
   maxStack: 0
   duringCount: 0
   isPermanent: 0

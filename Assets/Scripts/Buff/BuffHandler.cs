@@ -124,31 +124,87 @@ public class BuffHandler : MonoBehaviour
 
     }
     //TODO:每个回合结束的时候，对buff的时间进行处理
-    public void BuffRoundEndTick()
+    public void BuffRoundEndTick(int side)
     {
         List<BuffInfo> removeList = new List<BuffInfo>();
-        foreach (var buff in buffList)
-        {
-            buff.buffData.onRoundEnd?.Invoke(buff);
-        }
 
-        for (int i = 0; i < buffList.Count; i++)
+        if(side ==0)
         {
-            if (buffList[i].isPermanent == false)//非永久buff
+            
+            foreach (var buff in buffList)
             {
-                buffList[i].roundCount--;
-
-                buffList[i].roundCount = Mathf.Max(0, buffList[i].roundCount);//可能出现负数的情况
-                if (buffList[i].roundCount == 0)
+                if (buff.buffData.tags.Contains("OnMyTurnEnd"))
                 {
-                    removeList.Add(buffList[i]);
+                    buff.buffData.onRoundEnd?.Invoke(buff);
                 }
+                
+            }
+
+            for (int i = 0; i < buffList.Count; i++)
+            {
+                if (buffList[i].buffData.tags.Contains("OnMyTurnEnd"))
+                {
+                    if (buffList[i].isPermanent == false)//非永久buff
+                    {
+                        buffList[i].roundCount--;
+
+                        buffList[i].roundCount = Mathf.Max(0, buffList[i].roundCount);//可能出现负数的情况
+                        if (buffList[i].roundCount == 0)
+                        {
+                            removeList.Add(buffList[i]);
+                        }
+                    }
+                }
+                
+            }
+            for (int i = 0; i < removeList.Count; i++)
+            {
+                if (buffList[i].buffData.tags.Contains("OnMyTurnEnd"))
+                {
+                    RemoveBuff(removeList[i]);
+                }
+                    
             }
         }
-        for (int i = 0; i < removeList.Count; i++)
+
+        else if(side == 1)
         {
-            RemoveBuff(removeList[i]);
+            foreach (var buff in buffList)
+            {
+                if (buff.buffData.tags.Contains("OnOtherTurnEnd"))
+                {
+                    buff.buffData.onRoundEnd?.Invoke(buff);
+                }
+
+            }
+
+            for (int i = 0; i < buffList.Count; i++)
+            {
+                if (buffList[i].buffData.tags.Contains("OnOtherTurnEnd"))
+                {
+                    if (buffList[i].isPermanent == false)//非永久buff
+                    {
+                        buffList[i].roundCount--;
+
+                        buffList[i].roundCount = Mathf.Max(0, buffList[i].roundCount);//可能出现负数的情况
+                        if (buffList[i].roundCount == 0)
+                        {
+                            removeList.Add(buffList[i]);
+                        }
+                    }
+                }
+
+            }
+            for (int i = 0; i < removeList.Count; i++)
+            {
+                if (buffList[i].buffData.tags.Contains("OnOtherTurnEnd"))
+                {
+                    RemoveBuff(removeList[i]);
+                }
+
+            }
         }
+
     }
 
     public void BuffOnReRoll()

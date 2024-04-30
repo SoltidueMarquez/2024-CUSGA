@@ -512,6 +512,28 @@ public class HalidomManager : MonoBehaviour
         }
     }
 
+    public void OnGetFinalDamage(DamageInfo damageInfo)
+    {
+        for (int i = 0; i < halidomList.Length; i++)
+        {
+            if (halidomList[i] != null)
+            {
+                foreach (var buffInfo in halidomList[i].buffInfos)
+                {
+                    //需要整体判断这个委托是否为空
+                    if (buffInfo.buffData.onGetFinalDamage != null)
+                    {
+                        buffInfo.buffData.onGetFinalDamage?.Invoke(buffInfo,damageInfo);
+                        
+                    }
+                }
+
+            }
+        }
+    }
+
+
+
     #endregion
     #region 一些实用效果
     //判断圣物是否满

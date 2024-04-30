@@ -608,6 +608,22 @@ public class BattleManager : MonoBehaviour
         this.parameter.playerChaState.GetBuffHandler().BuffRoundStartTick(1);
         this.parameter.enemyChaStates[0].GetBuffHandler().BuffRoundStartTick(1);
     }
+
+    public void OnPlayerRoundEnd()
+    {
+        this.parameter.playerChaState.RefreshRerollTimes();
+        this.parameter.playerChaState.GetBuffHandler().BuffRoundEndTick(0);
+        this.parameter.enemyChaStates[0].GetBuffHandler().BuffRoundEndTick(0);
+        this.parameter.playerChaState.GetBattleDiceHandler().ClearBattleSingleDices();
+    }
+
+    public void OnEnemyRoundEnd()
+    {
+        this.parameter.enemyChaStates[0].RefreshRerollTimes();
+        this.parameter.playerChaState.GetBuffHandler().BuffRoundEndTick(1);
+        this.parameter.enemyChaStates[0].GetBuffHandler().BuffRoundEndTick(1);
+        this.parameter.enemyChaStates[0].GetBattleDiceHandler().ClearBattleSingleDices();
+    }
     #endregion
     #region 一些有用的函数
     public IState GetCurrentState()

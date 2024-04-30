@@ -58,7 +58,7 @@ public class ChaState : MonoBehaviour
     public void OnRoundEnd()
     {
         RefreshRerollTimes();
-        buffHandler.BuffRoundEndTick();
+        //buffHandler.BuffRoundEndTick();
         this.battleDiceHandler.ClearBattleSingleDices();
     }
     #endregion
