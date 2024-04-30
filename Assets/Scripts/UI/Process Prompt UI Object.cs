@@ -16,16 +16,22 @@ namespace UI
 
         public void Appear(float time, string value)
         {
-            background.DOFade(1, time);
+            //background.DOFade(1, time);
+            background.transform.DOScaleY(1, time/3).SetEase(Ease.InOutElastic).OnComplete(() =>
+            {
+                tipText.DOText(value, time / 3 * 2);
+            });
             panel.DOFade(0.25f, time);
-            tipText.DOText(value, time);
         }
         
         public void Fade(float time)
         {
-            background.DOFade(0, time);
+            //background.DOFade(0, time);
             panel.DOFade(0, time);
-            tipText.DOText("        ", time);
+            tipText.DOText("        ", time / 3 * 2).OnComplete(() =>
+            {
+                background.transform.DOScaleY(0, time / 3).SetEase(Ease.InOutElastic);
+            });
         }
     }
 }
