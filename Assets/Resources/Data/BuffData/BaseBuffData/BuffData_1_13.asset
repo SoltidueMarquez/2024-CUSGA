@@ -40,5 +40,5 @@ MonoBehaviour:
     ifImmune: 0
   propMod: []
   paramList: []
-  description: "\u53D7\u5230\u653B\u51FB\u65F6\uFF0C\u653B\u51FB\u65B9\u6263\u9664\u76F8\u540C\u8840\u91CF"
+  description: "BUFF\u6301\u6709\u8005\u53D7\u5230\u653B\u51FB\u65F6\uFF0C\u5BF9\u65B9\u6263\u9664\u76F8\u540C\u8840\u91CF\u3002"
   sprite: {fileID: 82010044, guid: aa22c55a3819f6d4da669cc1b598577e, type: 3}

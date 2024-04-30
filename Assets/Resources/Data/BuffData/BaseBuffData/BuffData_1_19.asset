@@ -43,5 +43,5 @@ MonoBehaviour:
   - type: 0
     name: Value
     value: 2
-  description: "\u73A9\u5BB6\u91CD\u6295\u540E\uFF0C\u81EA\u8EAB\u83B7\u5F971\u5C42\u575A\u97E7"
+  description: "(\u4E0D\u53EF\u79FB\u9664)\u73A9\u5BB6\u91CD\u6295\u540E\uFF0CBUFF\u6301\u6709\u8005\u83B7\u5F971\u5C42\u575A\u97E7\u3002\r\n\u3010\u575A\u97E7\uFF1ABUFF\u6301\u6709\u8005\u53D7\u5230\u4F24\u5BB3\u51CF\u5C1125%\u3002\u3011"
   sprite: {fileID: 399490686, guid: aa22c55a3819f6d4da669cc1b598577e, type: 3}

@@ -30,5 +30,5 @@ MonoBehaviour:
   side: 1
   buffDataConfigs: []
   sprite: {fileID: -1589484376, guid: 2bf387469069a9b4183bba90cc805f31, type: 3}
-  description: 
+  description: "\u83B7\u5F97\u9884\u6D4B\u6570\u503C\u7684\u62A4\u76FE\u3002"
   baseValue: 3

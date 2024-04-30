@@ -33,5 +33,5 @@ MonoBehaviour:
     buffStack: 2
     buffRound: 0
   sprite: {fileID: 365861258, guid: 2bf387469069a9b4183bba90cc805f31, type: 3}
-  description: "\u6253\u51FA\u4E0A\u4E00\u4E2A(\u4E0A\u4E00\u4E2A\u662F\u6A21\u4EFF\u5219\u65E0\u6548)\u9AB0\u97622\u6B21"
+  description: "\u6253\u51FA\u6211\u65B9\u4E0A\u4E00\u4E2A\u4F7F\u7528\u7684\u9AB0\u97622\u6B21\u3002"
   baseValue: 0
