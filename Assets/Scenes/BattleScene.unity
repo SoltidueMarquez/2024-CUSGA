@@ -2627,7 +2627,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -181.5, y: 0}
+  m_AnchoredPosition: {x: -181.5, y: 20}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &583505414
@@ -3113,7 +3113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 909458873479797066, guid: fcb3a2d5ba3131d418ed63cbcbf08b20, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 161
+      value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 909458873479797066, guid: fcb3a2d5ba3131d418ed63cbcbf08b20, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4279,6 +4279,7 @@ MonoBehaviour:
   currentMap: 
   playerDataSOTemplate: {fileID: 0}
   playerDataSO: {fileID: 0}
+  ifTutorial: 0
 --- !u!4 &993230910
 Transform:
   m_ObjectHideFlags: 0
@@ -5187,7 +5188,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -146, y: 291}
+  m_AnchoredPosition: {x: -100, y: 170}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1243479462
@@ -5249,7 +5250,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -199, y: 289}
+  m_AnchoredPosition: {x: -120, y: 180}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1261379154
@@ -5479,6 +5480,10 @@ PrefabInstance:
     - target: {fileID: 9098750081690365535, guid: 68f9670360383f847a0283bad848df55, type: 3}
       propertyPath: m_Name
       value: SceneLoader
+      objectReference: {fileID: 0}
+    - target: {fileID: 9098750081690365535, guid: 68f9670360383f847a0283bad848df55, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8663,7 +8668,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 909458873479797066, guid: fcb3a2d5ba3131d418ed63cbcbf08b20, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 161
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 909458873479797066, guid: fcb3a2d5ba3131d418ed63cbcbf08b20, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
