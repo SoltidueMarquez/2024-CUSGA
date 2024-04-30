@@ -61,7 +61,7 @@ public class StoreManager : SingletonBase<StoreManager>
         OnClickUpgrade.AddListener(ClickUpgrade);
 
         player = MapManager.Instance.playerChaState;
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     // Update is called once per frame
