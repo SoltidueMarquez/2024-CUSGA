@@ -4342,6 +4342,18 @@ PrefabInstance:
       propertyPath: onExitSettlement.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1590396380}
+    - target: {fileID: 7437589159999188519, guid: 36b68395345110a48b8a8080e4414506, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437589159999188519, guid: 36b68395345110a48b8a8080e4414506, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437589159999188519, guid: 36b68395345110a48b8a8080e4414506, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8241176675683390200, guid: 36b68395345110a48b8a8080e4414506, type: 3}
       propertyPath: m_IsActive
       value: 0
