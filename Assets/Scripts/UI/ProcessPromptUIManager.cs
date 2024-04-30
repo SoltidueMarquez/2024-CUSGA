@@ -25,7 +25,13 @@ namespace UI
         [SerializeField, Tooltip("玩家的离开位置(Y)")] private Transform playerEndYPosition;
         
         [SerializeField, Tooltip("Boss出现位置")] private Transform bossStartPosition;
+        private bool _ifBoss;
 
+        public void SetIfBoss(bool flag)
+        {
+            _ifBoss = true;
+        }
+        
         private void Start()
         {
             if (AudioManager.Instance != null)
@@ -42,7 +48,8 @@ namespace UI
 
         private void CharacterEnter()
         {
-            CharacterUIManager.Instance.enemy.DOMove(enemyStartYPosition.position, appearDurationTime);
+            CharacterUIManager.Instance.enemy.DOMove(
+                (_ifBoss) ? bossStartPosition.position : enemyStartYPosition.position, appearDurationTime);
             CharacterUIManager.Instance.player.DOMove(playerStartYPosition.position, appearDurationTime);
         }
 

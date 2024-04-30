@@ -221,6 +221,7 @@ namespace UI
         {
             if (ifBoss)
             {
+                ProcessPromptUIManager.Instance.SetIfBoss(true);
                 enemy = boss;
                 //更改血条位置
                 enemyHealthSlider = bossHealthSlider;

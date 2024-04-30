@@ -54,10 +54,5 @@ namespace UI.Tutorial
         {
             onExitTutorial.Invoke();
         }
-
-        public void TestEnter()
-        {
-            EnterUI(test);
-        }
     }
 }

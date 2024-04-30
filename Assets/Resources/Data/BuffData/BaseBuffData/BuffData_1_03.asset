@@ -17,6 +17,7 @@ MonoBehaviour:
   tags:
   - Target
   - Negative
+  - OnMyTurnEnd
   maxStack: 5
   duringCount: 0
   isPermanent: 0

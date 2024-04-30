@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,6 +75,8 @@ public class DamageManager : MonoSingleton<DamageManager>
             }
             
         }
+        //这边先执行所有的圣物的onGetFinalDamage
+        HalidomManager.Instance.OnGetFinalDamage(damageInfo);
         //如果能被杀死，就会走OnKill和OnBeKilled
         if (defenderChaState.CanBeKilledByDamageInfo(damageInfo))
         {
@@ -179,5 +182,14 @@ public class DamageManager : MonoSingleton<DamageManager>
     public void DoDamage(DamageInfo damageInfo)
     {
         damageInfos.Enqueue(damageInfo);
+    }
+
+    public void RefreashHalidomParameter()
+    {
+        HalidomManager.Instance.halidomList.Where(x => x.id == "1_23").FirstOrDefault().buffInfos[0].buffParam["IsFirstDeal"] = false;
+        
+        
+            
+        
     }
 }

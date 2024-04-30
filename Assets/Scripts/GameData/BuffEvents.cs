@@ -97,6 +97,7 @@ namespace DesignerScripts
         Add1Reroll,//2-13
 
         ReuseDiceWhenDiceIs1,//23
+        RefreashReuseDiceWhenDiceIs1,
         Add2MoneyWhenDiceIs2,//24
         Recover5HealthWhenDiceIs3,//25
         Add1EnemyBleedStackWhenDiceIs4,//26
@@ -555,6 +556,9 @@ namespace DesignerScripts
 
             {
                 BuffEventName.LoseEnergy.ToString(),LoseEnergy
+            },
+            {
+                BuffEventName.RefreashReuseDiceWhenDiceIs1.ToString(),RefreashReuseDiceWhenDiceIs1
             }
 
         };
@@ -1242,6 +1246,7 @@ namespace DesignerScripts
 
         public static void ReuseDiceWhenDiceIs1(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
+            
             //深拷贝一条damageinfo信息加入伤害队列
             if (damageInfo.damage.indexDamageRate == 1 && !(bool)buffInfo.buffParam["IsFirstDeal"])
             {
@@ -1251,6 +1256,16 @@ namespace DesignerScripts
                 Debug.Log("重复打出");
                 buffInfo.buffParam["IsFirstDeal"] = true;
             }
+
+
+        }
+
+        public static void RefreashReuseDiceWhenDiceIs1(BuffInfo buffInfo, DamageInfo damageInfo)
+        {
+            buffInfo.buffParam["IsFirstDeal"] = false;
+            Debug.Log("--------------------------------------------------------");
+            Debug.Log(buffInfo.buffParam["IsFirstDeal"]);
+            Debug.Log("--------------------------------------------------------");
         }
 
         public static void Add2MoneyWhenDiceIs2(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)

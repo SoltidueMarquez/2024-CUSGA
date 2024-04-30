@@ -6,6 +6,7 @@ using System.Linq;
 using DesignerScripts;
 using Settlement_Scene;
 using System.Runtime.Serialization.Json;
+using UI.Tutorial;
 
 [Serializable]
 public class FSMParameter
@@ -120,6 +121,15 @@ public class BattleManager : MonoBehaviour
         //设置初始状态
         TransitionState(GameState.GameStart);
         //这边是本场景的一些初始化
+        //关于教程
+        if (GameManager.Instance.ifTutorial)
+        {
+            if (!GameManager.Instance.battleTurtorial)
+            {
+                TutorialManager.Instance.EnterUI(TutorPage.Battle);
+                GameManager.Instance.battleTurtorial = true;
+            }
+        }
     }
 
     private void Update()
@@ -597,6 +607,22 @@ public class BattleManager : MonoBehaviour
     {
         this.parameter.playerChaState.GetBuffHandler().BuffRoundStartTick(1);
         this.parameter.enemyChaStates[0].GetBuffHandler().BuffRoundStartTick(1);
+    }
+
+    public void OnPlayerRoundEnd()
+    {
+        this.parameter.playerChaState.RefreshRerollTimes();
+        this.parameter.playerChaState.GetBuffHandler().BuffRoundEndTick(0);
+        this.parameter.enemyChaStates[0].GetBuffHandler().BuffRoundEndTick(0);
+        this.parameter.playerChaState.GetBattleDiceHandler().ClearBattleSingleDices();
+    }
+
+    public void OnEnemyRoundEnd()
+    {
+        this.parameter.enemyChaStates[0].RefreshRerollTimes();
+        this.parameter.playerChaState.GetBuffHandler().BuffRoundEndTick(1);
+        this.parameter.enemyChaStates[0].GetBuffHandler().BuffRoundEndTick(1);
+        this.parameter.enemyChaStates[0].GetBattleDiceHandler().ClearBattleSingleDices();
     }
     #endregion
     #region 一些有用的函数

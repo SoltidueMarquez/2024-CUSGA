@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using UI;
+using UI.Tutorial;
 using UnityEngine;
 
 public class GameStartState : IState
@@ -164,7 +165,7 @@ public class PlayerRoundEndResolutionState : IState
         HalidomManager.Instance.OnRoundEnd();
         Debug.Log("触发所有的圣物了");
         //触发角色里所有buff的OnRoundEnd回调点
-        manager.parameter.playerChaState.OnRoundEnd();
+        manager.OnPlayerRoundEnd();
 
 
         Debug.Log("Enter PlayerRoundEndResolutionState");
@@ -264,7 +265,7 @@ public class EnemyRoundEndResolutionState : IState
         //触发所有敌人身上挂载的buff的OnRoundEnd回调点
         foreach (var enemy in manager.parameter.enemyChaStates)
         {
-            enemy.OnRoundEnd();
+            manager.OnEnemyRoundEnd();
         }
     }
 
@@ -398,7 +399,14 @@ public class RewardState : IState
     }
     public void OnEnter()
     {
-
+        if (GameManager.Instance.ifTutorial)
+        {
+            if (!GameManager.Instance.rewardTurtorial)
+            {
+                TutorialManager.Instance.EnterUI(TutorPage.Reward);
+                GameManager.Instance.rewardTurtorial = true;
+            }
+        }
         Debug.Log("Enter RewardState");
         //创建三个奖励骰面和圣物
         manager.CreateRewards(3);
