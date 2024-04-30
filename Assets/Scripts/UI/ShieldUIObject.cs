@@ -8,7 +8,7 @@ namespace UI
 {
     public class ShieldUIObject : MonoBehaviour
     {
-        [SerializeField, Tooltip("护盾文本")] private Text shieldText;
+        [SerializeField, Tooltip("护盾文本")] public Text shieldText;
         public float curShield;
         
         public void UpdateShieldNum(int shieldNum)

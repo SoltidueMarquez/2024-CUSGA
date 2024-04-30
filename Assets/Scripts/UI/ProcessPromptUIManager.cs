@@ -23,13 +23,11 @@ namespace UI
         [SerializeField, Tooltip("敌人的离开位置(Y)")] private Transform enemyEndYPosition;
         [SerializeField, Tooltip("玩家的出现位置(Y)")] private Transform playerStartYPosition;
         [SerializeField, Tooltip("玩家的离开位置(Y)")] private Transform playerEndYPosition;
-
-        [SerializeField, Tooltip("")] private bool ifBoss;
+        
         [SerializeField, Tooltip("Boss出现位置")] private Transform bossStartPosition;
 
         private void Start()
         {
-            ifBoss = false;
             if (AudioManager.Instance != null)
             {
                 AudioManager.Instance.PlayMusic("Boss");
@@ -44,7 +42,7 @@ namespace UI
 
         private void CharacterEnter()
         {
-            CharacterUIManager.Instance.enemy.DOMove(ifBoss ? bossStartPosition.position : enemyStartYPosition.position, appearDurationTime);
+            CharacterUIManager.Instance.enemy.DOMove(enemyStartYPosition.position, appearDurationTime);
             CharacterUIManager.Instance.player.DOMove(playerStartYPosition.position, appearDurationTime);
         }
 

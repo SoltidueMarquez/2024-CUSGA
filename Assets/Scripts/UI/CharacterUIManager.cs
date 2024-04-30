@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Audio_Manager;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -55,8 +56,14 @@ namespace UI
         [SerializeField, Tooltip("玩家护盾UI")] private ShieldUIObject playerShieldUI;
 
         private Vector3 offsetPosition;
-
-        [Header("Boss相关")] [SerializeField, Tooltip("")] private Transform bossslider;
+        
+        [Header("Boss相关")] 
+        [SerializeField, Tooltip("Boss")] public Transform boss;
+        [SerializeField, Tooltip("血条")] private Slider bossHealthSlider;
+        [SerializeField, Tooltip("boss血量Text")] private Text bossHealthText;
+        [SerializeField, Tooltip("boss护盾UI")] private ShieldUIObject bossShieldUI;
+        [SerializeField, Tooltip("Buff")] private Transform bossBuff;
+        [SerializeField, Tooltip("意图")] private Transform bossIntention;
         
         
 
@@ -208,23 +215,29 @@ namespace UI
         /// 替换敌人素材
         /// </summary>
         /// <param name="sprite"></param>
+        /// <param name="ifBoss">是否是Boss</param>
         public void UpdateEnemySprite(Sprite sprite, bool ifBoss)
         {
+            if (ifBoss)
+            {
+                enemy = boss;
+                //更改血条位置
+                enemyHealthSlider = bossHealthSlider;
+                //更改血条文本颜色
+                enemyHealthText = bossHealthText;
+                //更改buff
+                BuffUIManager.Instance.enemyParent = bossBuff;
+                //更改护盾UI
+                enemyShieldUI = bossShieldUI;
+                //更改意图
+                intentionParent = bossIntention;
+            }
             var enemyImage = enemy.gameObject.GetComponent<Image>();
             if (enemyImage != null)
             {
                 enemyImage.sprite = sprite;
             }
 
-            if (ifBoss)
-            {
-                enemyImage.SetNativeSize();
-                //更改血条位置
-                enemyHealthSlider.transform.position = bossslider.position;
-                enemyHealthSlider.transform.localScale = bossslider.localScale;
-                //更改buff位置
-                //更改意图位置
-            }
         }
         
         /// <summary>
