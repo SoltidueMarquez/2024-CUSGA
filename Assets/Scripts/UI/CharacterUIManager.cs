@@ -56,6 +56,10 @@ namespace UI
 
         private Vector3 offsetPosition;
 
+        [Header("Boss相关")] [SerializeField, Tooltip("")] private Transform bossslider;
+        
+        
+
         #region 攻击与受击
         /// <summary>
         /// 创建伤害文本
@@ -135,41 +139,7 @@ namespace UI
         }
         #endregion
 
-        /// <summary>
-        /// 替换敌人素材
-        /// </summary>
-        /// <param name="sprite"></param>
-        public void UpdateEnemySprite(Sprite sprite)
-        {
-            var enemyImage = enemy.gameObject.GetComponent<Image>();
-            if (enemyImage != null)
-            {
-                enemyImage.sprite = sprite;
-            }
-        }
-        
-        /// <summary>
-        /// 角色使用其他骰面的动画
-        /// </summary>
-        public void UseOtherDice(Character character)
-        {
-            Debug.LogWarning("角色动画");
-            switch (character)
-            {
-                case Character.Enemy:
-                    enemy.DOPunchPosition(useOtherOffset, attackTime, 1);
-                    break;
-                case Character.Player:
-                    StartCoroutine(DoPlayerOtherAnim());
-                    break;
-            }
-        }
-        IEnumerator DoPlayerOtherAnim()
-        {
-            yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
-            player.DOPunchPosition(useOtherOffset, attackTime, 1);
-        }
-        
+        #region 治疗与血条控制
         /// <summary>
         /// 血条控制函数，0表示玩家，1表示敌人
         /// </summary>
@@ -232,6 +202,53 @@ namespace UI
             yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
             DoCure(attackTextPosition, num);
         }
+        #endregion
+
+        /// <summary>
+        /// 替换敌人素材
+        /// </summary>
+        /// <param name="sprite"></param>
+        public void UpdateEnemySprite(Sprite sprite, bool ifBoss)
+        {
+            var enemyImage = enemy.gameObject.GetComponent<Image>();
+            if (enemyImage != null)
+            {
+                enemyImage.sprite = sprite;
+            }
+
+            if (ifBoss)
+            {
+                enemyImage.SetNativeSize();
+                //更改血条位置
+                enemyHealthSlider.transform.position = bossslider.position;
+                enemyHealthSlider.transform.localScale = bossslider.localScale;
+                //更改buff位置
+                //更改意图位置
+            }
+        }
+        
+        /// <summary>
+        /// 角色使用其他骰面的动画
+        /// </summary>
+        public void UseOtherDice(Character character)
+        {
+            Debug.LogWarning("角色动画");
+            switch (character)
+            {
+                case Character.Enemy:
+                    enemy.DOPunchPosition(useOtherOffset, attackTime, 1);
+                    break;
+                case Character.Player:
+                    StartCoroutine(DoPlayerOtherAnim());
+                    break;
+            }
+        }
+        IEnumerator DoPlayerOtherAnim()
+        {
+            yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
+            player.DOPunchPosition(useOtherOffset, attackTime, 1);
+        }
+        
 
         #region 护盾
         private void CreateShieldText(Transform parent,int hit,Vector3 position)

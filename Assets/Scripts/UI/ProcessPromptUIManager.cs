@@ -19,19 +19,35 @@ namespace UI
         [SerializeField,Tooltip("出现时间")]private float appearDurationTime;
         [SerializeField,Tooltip("消失时间")]private float fadeDurationTime;
         [SerializeField, Tooltip("UI")] private GameObject panel;
-        [SerializeField, Tooltip("敌人的出现位置(Y)")] private float enemyStartYPosition;
-        [SerializeField, Tooltip("敌人的离开位置(Y)")] private float enemyEndYPosition;
-        [SerializeField, Tooltip("玩家的出现位置(Y)")] private float playerStartYPosition;
-        [SerializeField, Tooltip("玩家的离开位置(Y)")] private float playerEndYPosition;
+        [SerializeField, Tooltip("敌人的出现位置(Y)")] private Transform enemyStartYPosition;
+        [SerializeField, Tooltip("敌人的离开位置(Y)")] private Transform enemyEndYPosition;
+        [SerializeField, Tooltip("玩家的出现位置(Y)")] private Transform playerStartYPosition;
+        [SerializeField, Tooltip("玩家的离开位置(Y)")] private Transform playerEndYPosition;
+
+        [SerializeField, Tooltip("")] private bool ifBoss;
+        [SerializeField, Tooltip("Boss出现位置")] private Transform bossStartPosition;
 
         private void Start()
         {
+            ifBoss = false;
             if (AudioManager.Instance != null)
             {
                 AudioManager.Instance.PlayMusic("Boss");
             }
         }
-        
+
+        private void CharacterLeave()
+        {
+            CharacterUIManager.Instance.enemy.DOMove(enemyEndYPosition.position, appearDurationTime);
+            CharacterUIManager.Instance.player.DOMove(playerEndYPosition.position, appearDurationTime);
+        }
+
+        private void CharacterEnter()
+        {
+            CharacterUIManager.Instance.enemy.DOMove(ifBoss ? bossStartPosition.position : enemyStartYPosition.position, appearDurationTime);
+            CharacterUIManager.Instance.player.DOMove(playerStartYPosition.position, appearDurationTime);
+        }
+
         /// <summary>
         /// 战斗结束UI
         /// </summary>
@@ -46,9 +62,7 @@ namespace UI
             string tip = "你赢了";
             processPrompt.Appear(appearDurationTime, tip); //出现提示
             StartCoroutine(HideTip());
-            //敌人与玩家离开
-            CharacterUIManager.Instance.enemy.DOMoveY(enemyEndYPosition, appearDurationTime);
-            CharacterUIManager.Instance.player.DOMoveY(playerEndYPosition, appearDurationTime);
+            CharacterLeave();//敌人与玩家离开
             
             if (onUIAnimFinished != null)
             {
@@ -81,8 +95,7 @@ namespace UI
             processPrompt.Appear(appearDurationTime, tip); //出现提示
             StartCoroutine(HideTip());
             //敌人与玩家离开
-            CharacterUIManager.Instance.enemy.DOMoveY(enemyEndYPosition, appearDurationTime);
-            CharacterUIManager.Instance.player.DOMoveY(playerEndYPosition, appearDurationTime);
+            CharacterLeave();
             
             if (onUIAnimFinished != null)
             {
@@ -101,8 +114,7 @@ namespace UI
             processPrompt.Appear(appearDurationTime, tip); //出现提示
             StartCoroutine(HideTip());
             //敌人与玩家离开
-            CharacterUIManager.Instance.enemy.DOMoveY(enemyEndYPosition, appearDurationTime);
-            CharacterUIManager.Instance.player.DOMoveY(playerEndYPosition, appearDurationTime);
+            CharacterLeave();
             
             if (onUIAnimFinished != null)
             {
@@ -122,8 +134,7 @@ namespace UI
             StartCoroutine(HideStartTip());
             
             //敌人与玩家出现
-            CharacterUIManager.Instance.enemy.DOMoveY(enemyStartYPosition, appearDurationTime);
-            CharacterUIManager.Instance.player.DOMoveY(playerStartYPosition, appearDurationTime);
+            CharacterEnter();
             
             if (onUIAnimFinished != null)
             {
