@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using UI;
+using UI.Tutorial;
 using UnityEngine;
 
 public class GameStartState : IState
@@ -398,7 +399,14 @@ public class RewardState : IState
     }
     public void OnEnter()
     {
-
+        if (GameManager.Instance.ifTutorial)
+        {
+            if (!GameManager.Instance.rewardTurtorial)
+            {
+                TutorialManager.Instance.EnterUI(TutorPage.Reward);
+                GameManager.Instance.rewardTurtorial = true;
+            }
+        }
         Debug.Log("Enter RewardState");
         //创建三个奖励骰面和圣物
         manager.CreateRewards(3);

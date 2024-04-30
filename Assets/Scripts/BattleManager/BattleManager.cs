@@ -6,6 +6,7 @@ using System.Linq;
 using DesignerScripts;
 using Settlement_Scene;
 using System.Runtime.Serialization.Json;
+using UI.Tutorial;
 
 [Serializable]
 public class FSMParameter
@@ -120,6 +121,15 @@ public class BattleManager : MonoBehaviour
         //设置初始状态
         TransitionState(GameState.GameStart);
         //这边是本场景的一些初始化
+        //关于教程
+        if (GameManager.Instance.ifTutorial)
+        {
+            if (!GameManager.Instance.battleTurtorial)
+            {
+                TutorialManager.Instance.EnterUI(TutorPage.Battle);
+                GameManager.Instance.battleTurtorial = true;
+            }
+        }
     }
 
     private void Update()

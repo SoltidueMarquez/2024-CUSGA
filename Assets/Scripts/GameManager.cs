@@ -20,25 +20,30 @@ public class GameManager : MonoBehaviour
     public PlayerDataSO playerDataSO;
     [Header("是否是新手教程")]
     public bool ifTutorial;
+    public bool mapTurtorial;
+    public bool battleTurtorial;
+    public bool storeTurtorial;
+    public bool rewardTurtorial;
     public static GameManager Instance { get; private set; }
     void Awake()
     {
-            if (Instance == null)
-            {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-            if (Instance != this)
-            {
-                Destroy(gameObject);
-            }
-            Debug.Log("Awake");
-            playerDataSO = ScriptableObject.CreateInstance<PlayerDataSO>();
-            playerDataSO.InitPlaydataSOInstance(playerDataSOTemplate);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        Debug.Log("Awake");
+        playerDataSO = ScriptableObject.CreateInstance<PlayerDataSO>();
+        playerDataSO.InitPlaydataSOInstance(playerDataSOTemplate);
+        //ifFirstEnterGame();
     }
     void Start()
     {
@@ -60,21 +65,21 @@ public class GameManager : MonoBehaviour
     public bool CheckIfHasSaveData()
     {
         if (playerDataSO == null) return false;
-        
+
         playerDataSO.LoadData();
         return playerDataSO.ifHasData;
     }
     //判断是否是第一次进入游戏
-    public bool ifFirstEnterGame()
+    public void ifFirstEnterGame()
     {
         if (PlayerPrefs.HasKey("FirstEnterGame"))
         {
-            return false;
+            this.ifTutorial = false;
+            PlayerPrefs.SetInt("FirstEnterGame", 1);
         }
         else
         {
-            PlayerPrefs.SetInt("FirstEnterGame", 1);
-            return true;
+            this.ifTutorial = true;
         }
     }
     #endregion
