@@ -164,7 +164,7 @@ public class PlayerRoundEndResolutionState : IState
         HalidomManager.Instance.OnRoundEnd();
         Debug.Log("触发所有的圣物了");
         //触发角色里所有buff的OnRoundEnd回调点
-        manager.parameter.playerChaState.OnRoundEnd();
+        manager.OnPlayerRoundEnd();
 
 
         Debug.Log("Enter PlayerRoundEndResolutionState");
@@ -264,7 +264,7 @@ public class EnemyRoundEndResolutionState : IState
         //触发所有敌人身上挂载的buff的OnRoundEnd回调点
         foreach (var enemy in manager.parameter.enemyChaStates)
         {
-            enemy.OnRoundEnd();
+            manager.OnEnemyRoundEnd();
         }
     }
 

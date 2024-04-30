@@ -159,6 +159,8 @@ namespace DesignerScripts
         //4.24
         Imitate,
         Stun,
+        //5.1
+        RefreashReuseDiceWhenDiceIs1,
 
     }
     public class BuffDataTable
