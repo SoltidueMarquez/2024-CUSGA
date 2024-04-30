@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1_22
   halidomName: 22
-  description: "\u91CD\u6295\u65F6\u4E0D\u6D88\u8017\u91CD\u6295\u6B21\u6570\uFF0C\u89E6\u53D13\u6B21\u540E\u5931\u6548"
+  description: "\u91CD\u6295\u65F6\u4E0D\u6D88\u8017\u91CD\u6295\u6B21\u6570\uFF0C\u89E6\u53D13\u6B21\u540E\u5931\u6548(\u73B0\u5728\u89E6\u53D1Value\u6B21\uFF09"
   rareType: 0
   value: 10
   buffDataSos:
   - {fileID: 11400000, guid: 7c44a8b79a72995478b0cab6cd7c9caf, type: 2}
   sprite: {fileID: -778114690, guid: 7834449662960c641a50cd8f4ac308c2, type: 3}
+  halidom2BuffParamMaps:
+  - key: Value
+    value: Value

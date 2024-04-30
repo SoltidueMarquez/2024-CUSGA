@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3_02
   halidomName: 52
-  description: "\u70B9\u6570\u662F\u5947\u6570\uFF0C\u5219\u6253\u51FA\u65F6value+6"
+  description: "\u70B9\u6570\u662F\u5947\u6570\uFF0C\u5219\u6253\u51FA\u65F6\u4F24\u5BB3+6"
   rareType: 2
   value: 20
   buffDataSos:
   - {fileID: 11400000, guid: 1dfcc65507b8054409ddcd50396e5887, type: 2}
   sprite: {fileID: -1185279098, guid: 7834449662960c641a50cd8f4ac308c2, type: 3}
+  halidom2BuffParamMaps: []
