@@ -35,5 +35,7 @@ public class EnemyDataSO : ScriptableObject
     public List<BuffDataConfig> enemyBuffs;
     [Header("敌人的sprite")]
     public Sprite enemySprite;
+    [Header("敌人的背景sprite")]
+    public Sprite enemyBackgroundSprite;
 }
     //AI暂时不管

@@ -5,6 +5,7 @@ using UI;
 using System.Linq;
 using DesignerScripts;
 using Settlement_Scene;
+using System.Runtime.Serialization.Json;
 
 [Serializable]
 public class FSMParameter
@@ -268,7 +269,14 @@ public class BattleManager : MonoBehaviour
         //初始化敌人的图片
         if (enemyDataSO.enemySprite != null)
         {
-            CharacterUIManager.Instance.UpdateEnemySprite(enemyDataSO.enemySprite, false, null);
+            if (enemyDataSO.enemyType == EnemyType.Boss)
+            {
+                CharacterUIManager.Instance.UpdateEnemySprite(enemyDataSO.enemySprite, true, enemyDataSO.enemyBackgroundSprite);
+            }
+            else
+            {
+                CharacterUIManager.Instance.UpdateEnemySprite(enemyDataSO.enemySprite, false, null);
+            }
         }
 
         var enemyBattleDiceList = enemyDataSO.EnemyBattleDiceList;

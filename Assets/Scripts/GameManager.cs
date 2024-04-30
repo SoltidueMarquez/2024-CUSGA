@@ -64,6 +64,19 @@ public class GameManager : MonoBehaviour
         playerDataSO.LoadData();
         return playerDataSO.ifHasData;
     }
+    //判断是否是第一次进入游戏
+    public bool ifFirstEnterGame()
+    {
+        if (PlayerPrefs.HasKey("FirstEnterGame"))
+        {
+            return false;
+        }
+        else
+        {
+            PlayerPrefs.SetInt("FirstEnterGame", 1);
+            return true;
+        }
+    }
     #endregion
     #region 结算场景调用
     public int GetPlayerKillEnemyCount()
