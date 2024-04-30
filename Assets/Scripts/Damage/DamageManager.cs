@@ -186,10 +186,24 @@ public class DamageManager : MonoSingleton<DamageManager>
 
     public void RefreashHalidomParameter()
     {
-        HalidomManager.Instance.halidomList.Where(x => x.id == "1_23").FirstOrDefault().buffInfos[0].buffParam["IsFirstDeal"] = false;
-        
-        
-            
-        
+
+        /*if (HalidomManager.Instance.halidomList.Where(x => x.id == "1_23").FirstOrDefault() != null)
+        {
+            Debug.Log("不为空");
+            HalidomManager.Instance.halidomList.Where(x => x.id == "1_23").FirstOrDefault().buffInfos[0].buffParam["IsFirstDeal"] = false;
+        }*/
+        for(int i = 0; i < HalidomManager.Instance.halidomList.Length; i++)
+        {
+            if (HalidomManager.Instance.halidomList[i] != null)
+            {
+                if (HalidomManager.Instance.halidomList[i].id == "1_23")
+                {
+                    HalidomManager.Instance.halidomList[i].buffInfos[0].buffParam["IsFirstDeal"] = false;
+                }
+            }
+        }
+
+
+
     }
 }
