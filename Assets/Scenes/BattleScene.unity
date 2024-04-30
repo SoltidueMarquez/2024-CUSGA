@@ -628,6 +628,7 @@ MonoBehaviour:
   bossShieldUI: {fileID: 1393705112}
   bossBuff: {fileID: 1081475323}
   bossIntention: {fileID: 948862385}
+  bgImage: {fileID: 823332878}
 --- !u!114 &81981823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3936,10 +3937,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1757981756}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2048, y: 2048}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &823332878
 MonoBehaviour:

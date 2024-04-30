@@ -64,6 +64,7 @@ namespace UI
         [SerializeField, Tooltip("boss护盾UI")] private ShieldUIObject bossShieldUI;
         [SerializeField, Tooltip("Buff")] private Transform bossBuff;
         [SerializeField, Tooltip("意图")] private Transform bossIntention;
+        [SerializeField, Tooltip("")] private Image bgImage;
         
         
 
@@ -216,7 +217,7 @@ namespace UI
         /// </summary>
         /// <param name="sprite"></param>
         /// <param name="ifBoss">是否是Boss</param>
-        public void UpdateEnemySprite(Sprite sprite, bool ifBoss)
+        public void UpdateEnemySprite(Sprite sprite, bool ifBoss, Sprite bg)
         {
             if (ifBoss)
             {
@@ -231,6 +232,7 @@ namespace UI
                 enemyShieldUI = bossShieldUI;
                 //更改意图
                 intentionParent = bossIntention;
+                bgImage.sprite = bg;
             }
             var enemyImage = enemy.gameObject.GetComponent<Image>();
             if (enemyImage != null)

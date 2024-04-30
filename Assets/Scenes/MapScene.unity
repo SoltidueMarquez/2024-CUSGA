@@ -795,6 +795,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -1.043
       objectReference: {fileID: 0}
+    - target: {fileID: 1879464444967802583, guid: ead795afd3ad01246b092637d1ea4c59, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2099917013982375718, guid: ead795afd3ad01246b092637d1ea4c59, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1243,7 +1247,6 @@ MonoBehaviour:
   ifLoadedHalidom: 0
   currentMap: 
   playerDataSOTemplate: {fileID: 0}
-  playerDataSOTutorial: {fileID: 0}
   playerDataSO: {fileID: 11400000, guid: 8ce36af94eb94754f908a1a0b2be156e, type: 2}
   ifTutorial: 0
 --- !u!4 &1825883772

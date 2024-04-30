@@ -268,7 +268,7 @@ public class BattleManager : MonoBehaviour
         //初始化敌人的图片
         if (enemyDataSO.enemySprite != null)
         {
-            CharacterUIManager.Instance.UpdateEnemySprite(enemyDataSO.enemySprite, false);
+            CharacterUIManager.Instance.UpdateEnemySprite(enemyDataSO.enemySprite, false, null);
         }
 
         var enemyBattleDiceList = enemyDataSO.EnemyBattleDiceList;
