@@ -453,9 +453,7 @@ namespace DesignerScripts
             {
                 BuffEventName.Hit3DamageWhenLoseHealth.ToString(),Hit3DamageWhenLoseHealth
             },
-            {
-                BuffEventName.GainDodgeWhenLoseHealth.ToString(),GainDodgeWhenLoseHealth
-            },
+            
             {
                 BuffEventName.GainStrengthWhenLoseHealth.ToString(),GainStrengthWhenLoseHealth
             },
@@ -562,7 +560,10 @@ namespace DesignerScripts
             },
             {
                 BuffEventName.RefreashReuseDiceWhenDiceIs1.ToString(),RefreashReuseDiceWhenDiceIs1
-            }
+            },
+            {
+                BuffEventName.GainDodgeWhenLoseHealth.ToString(),GainDodgeWhenLoseHealth
+            },
 
         };
 
@@ -711,18 +712,22 @@ namespace DesignerScripts
 
         public static void Dodge(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
-            damageInfo.damage.baseDamage = 0;
-            Debug.Log("闪避生效，伤害为0");
-            //触发后-1层
-            buffInfo.curStack--;
-            Debug.Log("buff层数-1");
-            if (buffInfo.curStack == 0)
+            if(damageInfo.diceType == DiceType.Attack)
             {
-                buffInfo.isPermanent = false;
-                int index = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
-                var characterSide = (Character)buffInfo.target.GetComponent<ChaState>().side;
-                BuffUIManager.Instance.RemoveBuffUIObject(characterSide, index);
+                damageInfo.damage.baseDamage = 0;
+                Debug.Log("闪避生效，伤害为0");
+                //触发后-1层
+                buffInfo.curStack--;
+                Debug.Log("buff层数-1");
+                if (buffInfo.curStack == 0)
+                {
+                    buffInfo.isPermanent = false;
+                    int index = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
+                    var characterSide = (Character)buffInfo.target.GetComponent<ChaState>().side;
+                    BuffUIManager.Instance.RemoveBuffUIObject(characterSide, index);
+                }
             }
+            
         }
 
 
@@ -1581,15 +1586,19 @@ namespace DesignerScripts
 
         }
 
-        public static void GainDodgeWhenLoseHealth(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        public static void GainDodgeWhenLoseHealth(BuffInfo buffInfo, DamageInfo damageInfo)
         {
-            int probability = Random.Range(1, 11);
-            if (probability == 1)
+            if(damageInfo.finalDamage>BattleManager.Instance.parameter.playerChaState.resource.currentShield &&damageInfo.diceType==DiceType.Attack&&damageInfo.defender== BattleManager.Instance.parameter.playerChaState.gameObject)
             {
-                BuffInfo newDodgeBuff = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target, 1, true);
-                buffInfo.creator.GetComponent<ChaState>().AddBuff(newDodgeBuff, buffInfo.creator);
-                Debug.Log("战斗开始获得1层闪避");
+                int probability = Random.Range(1, 3);
+                //if (probability == 1)
+                //{
+                    BuffInfo newDodgeBuff = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target, 1, true);
+                    buffInfo.creator.GetComponent<ChaState>().AddBuff(newDodgeBuff, buffInfo.creator);
+                    Debug.Log("战斗开始获得1层闪避");
+                //}
             }
+            
         }
 
 

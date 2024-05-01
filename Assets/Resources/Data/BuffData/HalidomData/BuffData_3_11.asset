@@ -25,12 +25,13 @@ MonoBehaviour:
   onRoundStart: 0
   onRoundEnd: 0
   onHit: 0
-  onBeHurt: 7
+  onBeHurt: 0
   onRoll: 0
   onKill: 0
   onBeKilled: 0
   onCast: 0
   onAddBuff: 0
+  onGetFinalDamage: 4
   stateMod:
     ifCanChangePosition: 1
     canUseDice: 1

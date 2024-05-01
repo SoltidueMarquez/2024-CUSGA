@@ -196,6 +196,7 @@ public enum onGetFinalDamageEnum
     None,
     Reflect,
     LoseEnergy,
-    RefreashReuseDiceWhenDiceIs1
+    RefreashReuseDiceWhenDiceIs1,
+    GainDodgeWhenLoseHealth
 }
 
