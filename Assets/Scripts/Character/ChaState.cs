@@ -117,7 +117,7 @@ public class ChaState : MonoBehaviour
         {
             return false;
         }
-        return damageInfo.finalDamage < this.resource.currentHp;
+        return damageInfo.finalDamage > this.resource.currentHp;
     }
     /// <summary>
     /// 角色死亡，根据是敌人还是玩家，调用不同的逻辑，不同的逻辑在BattleManager中实现
