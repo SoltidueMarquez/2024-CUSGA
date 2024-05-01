@@ -26,7 +26,7 @@ public class SettingsManager : MonoSingleton<SettingsManager>
     {
         gameSpeedToggle.isOn = (PlayerPrefs.GetInt("GameSpeedToggle") == 1) ? true : false;
         tutorToggle.isOn = (GameManager.Instance.ifTutorial);
-        
+        OnclickTutorToggle(tutorToggle.isOn);
         OnClickSpeedToggle(gameSpeedToggle.isOn);
         Time.timeScale = gameSpeed;
 
@@ -161,16 +161,17 @@ public class SettingsManager : MonoSingleton<SettingsManager>
         //Debug.Log("OnClickSpeedToggle   " + gameSpeed);
     }
 
-    public void OnclickTutorToggle()
+    public void OnclickTutorToggle(bool toggle)
     {
         if (tutorToggle.isOn)
         {
-            
+            GameManager.Instance.NeedTutorial();
         }
         else
         {
-            
+            GameManager.Instance.NoNeedTutorial();
         }
+        PlayerPrefs.Save();
     }
 
     [Button]
