@@ -24,7 +24,7 @@ namespace UI
             this.GetComponent<Image>().sprite = data.sprite;
             saleButtonText.text = $"出售\n￥{data.salevalue}";
             idInDiceText.text = data.idInDice.ToString();
-            baseValueText.text = $"骰面预测数值{(int)(data.baseValue * (1 + (float)data.idInDice / 10))}";
+            baseValueText.text = $"骰面预测数值:{(int)(data.baseValue * (1 + (float)data.idInDice / 10))}";
             //saleButton绑定移除圣物/背包骰面效果函数：增加一个委托类型的参数(就是对应的移除函数)
             saleButton.onClick.AddListener(() =>
             {
