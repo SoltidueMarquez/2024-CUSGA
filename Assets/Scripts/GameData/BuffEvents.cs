@@ -1609,9 +1609,9 @@ namespace DesignerScripts
                 int probability = Random.Range(1, 11);
                 if (probability == 1)
                 {
-                BuffInfo newDodgeBuff = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target, 1, true);
-                buffInfo.creator.GetComponent<ChaState>().AddBuff(newDodgeBuff, buffInfo.creator);
-                Debug.Log("战斗开始获得1层闪避");
+                    BuffInfo newDodgeBuff = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target, 1, true);
+                    buffInfo.creator.GetComponent<ChaState>().AddBuff(newDodgeBuff, buffInfo.creator);
+                    Debug.Log("战斗开始获得1层闪避");
                 }
             }
 
@@ -1647,12 +1647,12 @@ namespace DesignerScripts
             if ((bool)buffInfo.buffParam["isUsed"] == false)
             {
                 ChaState tempChaState = buffInfo.creator.GetComponent<ChaState>();
-                if (tempChaState.resource.currentHp <= 0)
-                {
-                    tempChaState.ModResources(new ChaResource(tempChaState.baseProp.health / 2, 0, 0, 0));
-                    Debug.Log("死亡时回复一半生命");
-                    buffInfo.buffParam["isUsed"] = true;
-                }
+                damageInfo.finalDamage = 0;
+                tempChaState.resource.currentHp = 0;
+                tempChaState.ModResources(new ChaResource(tempChaState.baseProp.health / 2, 0, 0, 0));
+                Debug.Log("死亡时回复一半生命");
+                buffInfo.buffParam["isUsed"] = true;
+
             }
 
         }
