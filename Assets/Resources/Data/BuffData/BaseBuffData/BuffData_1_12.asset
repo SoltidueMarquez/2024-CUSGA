@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1_12
   dataName: 89
+  buffName: "\u8346\u68D8"
   tags:
   - PlayerOnRoundStart
   - OnMyTurnEnd

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1_03
   dataName: 2
+  buffName: "\u6613\u4F24"
   tags:
   - Target
   - Negative
