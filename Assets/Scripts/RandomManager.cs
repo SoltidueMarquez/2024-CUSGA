@@ -177,7 +177,8 @@ public static class RandomManager
         if (sum < 15)
         {
             //不生成圣物
-            return GetRandomHalidomObj(RareType.Common,currentHalidomList);
+            //return GetRandomHalidomObj(RareType.Common,currentHalidomList);
+            return null;
         }
         else if (sum >= 15 && sum < 24)
         {
