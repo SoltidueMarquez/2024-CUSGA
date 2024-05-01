@@ -22,6 +22,7 @@ namespace DesignerScripts
         public HalidomName halidomName;
 
         [Tooltip("圣物描述")]
+        [Multiline(4)]
         public string description;
 
         [Tooltip("圣物的稀有度")]

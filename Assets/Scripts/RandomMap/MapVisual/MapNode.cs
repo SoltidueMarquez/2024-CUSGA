@@ -193,7 +193,7 @@ namespace Map
                 return;
 
             const float fillDuration = 0.3f;
-            visitedCircleImage.fillAmount = 0;
+            visitedCircleImage.fillAmount = 0f;
 
             DOTween.To(() => visitedCircleImage.fillAmount, x => visitedCircleImage.fillAmount = x, 1f, fillDuration);
         }
