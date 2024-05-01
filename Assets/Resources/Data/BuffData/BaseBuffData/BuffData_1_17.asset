@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1_17
   dataName: 94
+  buffName: "\u8150\u8680"
   tags:
   - Positive
   - OnMyTurnEnd

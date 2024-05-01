@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1_08
   dataName: 7
+  buffName: "\u95EA\u907F"
   tags:
   - Self
   - Positive
