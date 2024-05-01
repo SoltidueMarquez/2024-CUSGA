@@ -27,13 +27,13 @@ public class SingleDiceUIData
     public int idInDice;
     public int positionInDice;
     public int baseValue;
-    public DiceType type;
+    public string type;
     public Sprite sprite;
     public string description;
     public int value;
     public int salevalue;
     public string name;
-    public int level;
+    public string level;
 }
 public class BuffUIData
 {
@@ -135,13 +135,42 @@ public static class ResourcesManager
         singleDiceUIData.positionInDice = singleDiceObj.positionInDice;
         //根据骰子类型和基础等级计算基础值
         singleDiceUIData.baseValue = singleDiceModelSO.baseValue;
-        singleDiceUIData.type = singleDiceModelSO.type;
+        switch (singleDiceModelSO.type)
+        {
+            case DiceType.Attack:
+                singleDiceUIData.type = "攻击";
+                break;
+            case DiceType.Defense:
+                singleDiceUIData.type = "防御";
+                break;
+            case DiceType.Support:
+                singleDiceUIData.type = "支援";
+                break;
+            case DiceType.Special:
+                singleDiceUIData.type = "特殊";
+                break;
+            default:
+                break;
+        }
         singleDiceUIData.sprite = singleDiceModelSO.sprite;
         singleDiceUIData.description = singleDiceModelSO.description;
         singleDiceUIData.value = singleDiceObj.value;
         singleDiceUIData.salevalue = singleDiceObj.SaleValue;
         singleDiceUIData.name = singleDiceModelSO.singleDiceModelName;
-        singleDiceUIData.level = (int)singleDiceModelSO.level + 1;
+        switch (singleDiceModelSO.level)
+        {
+            case RareType.Common:
+                singleDiceUIData.level = "普通";
+                break;
+            case RareType.Rare:
+                singleDiceUIData.level = "稀有";
+                break;
+            case RareType.Legendary:
+                singleDiceUIData.level = "传说";
+                break;
+            default:
+                break;
+        }
         return singleDiceUIData;
     }
     /// <summary>
