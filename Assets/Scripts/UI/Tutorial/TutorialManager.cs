@@ -10,7 +10,8 @@ namespace UI.Tutorial
         Battle,
         Reward,
         Map,
-        Store
+        Store,
+        Strength
     }
     public class TutorialManager : PersistentSingleton<TutorialManager>
     {
