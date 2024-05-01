@@ -166,13 +166,12 @@ public class ChaState : MonoBehaviour
             CharacterUIManager.Instance.UpdateShieldUI((Character)this.side, this.resource.currentShield);
             CharacterUIManager.Instance.ChangeHealthSlider((Character)side, this.resource.currentHp, this.prop.health);
         }
-
+        
         if (this.side == 0)
         {
             if (DataUIManager.Instance != null)
             {
-                DataUIManager.Instance.UpdateMoneyText(this.resource.currentMoney);
-
+                DataUIManager.Instance.UpdateMoneyText(this.resource.currentMoney, true);
             }
         }
         if (this.resource.currentHp <= 0)

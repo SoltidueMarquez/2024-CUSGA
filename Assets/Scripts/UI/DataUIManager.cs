@@ -41,27 +41,30 @@ namespace UI
         /// 更新金钱
         /// </summary>
         /// <param name="money"></param>
-        public void UpdateMoneyText(int money)
+        public void UpdateMoneyText(int money,bool ifPlaySound)
         {
             StopCoroutine(ChangeMoneyText());
             _newMoney = money;
             var offset = _currentMoney - money;
-            switch (offset)
+            if (ifPlaySound)
             {
-                case 0:
-                    return;
-                case > 0:
-                    if (AudioManager.Instance != null)
-                    {
-                        AudioManager.Instance.PlaySound("loseMoney");
-                    }
-                    break;
-                case <0:
-                    if (AudioManager.Instance != null)
-                    {
-                        AudioManager.Instance.PlaySound("getMoney");
-                    }
-                    break;
+                switch (offset)
+                {
+                    case 0:
+                        return;
+                    case > 0:
+                        if (AudioManager.Instance != null)
+                        {
+                            AudioManager.Instance.PlaySound("loseMoney");
+                        }
+                        break;
+                    case <0:
+                        if (AudioManager.Instance != null)
+                        {
+                            AudioManager.Instance.PlaySound("getMoney");
+                        }
+                        break;
+                }
             }
             StartCoroutine(ChangeMoneyText());
         }
