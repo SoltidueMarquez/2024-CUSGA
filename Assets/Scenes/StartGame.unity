@@ -576,6 +576,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneLoader
       objectReference: {fileID: 0}
+    - target: {fileID: 9098750081690365535, guid: 68f9670360383f847a0283bad848df55, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2080,6 +2084,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4452577841302544189, guid: 789c2568d8a9cb84d9964112b465d659, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5040555434823503854, guid: 789c2568d8a9cb84d9964112b465d659, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
