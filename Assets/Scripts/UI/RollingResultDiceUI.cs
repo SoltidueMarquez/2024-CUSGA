@@ -55,7 +55,7 @@ namespace UI
             nameText.text = data.name;
             typeText.text = $"类型:{data.type}";
             levelText.text = $"稀有度:{data.level}";
-            baseValueText.text = $"骰面预测数值{(int)(data.baseValue * (1 + (float)data.idInDice / 10))}";
+            baseValueText.text = $"骰面预测数值:{(int)(data.baseValue * (1 + (float)data.idInDice / 10))}";
             infoText.text = $"{data.description}" ;
             this.GetComponent<Image>().sprite = data.sprite;
             idInDiceText.text = data.idInDice.ToString();
