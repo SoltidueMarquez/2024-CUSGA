@@ -691,14 +691,15 @@ namespace DesignerScripts
             {
                 damageInfo.addDamageArea += 0.5f;
                 Debug.Log("强化效果生效，增加50%伤害");
+                int index = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
+                var characterSide = (Character)buffInfo.target.GetComponent<ChaState>().side;
                 //触发后-1层
                 buffInfo.curStack--;
+                BuffUIManager.Instance.UpdateBuffDurationTime(characterSide, index, buffInfo.curStack);
                 Debug.Log("buff层数-1");
                 if (buffInfo.curStack == 0)
                 {
                     buffInfo.isPermanent = false;
-                    int index = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
-                    var characterSide = (Character)buffInfo.target.GetComponent<ChaState>().side;
                     BuffUIManager.Instance.RemoveBuffUIObject(characterSide, index);
                 }
             }
@@ -1506,6 +1507,7 @@ namespace DesignerScripts
         public static void Add1StackIfEnemyHaveDebuff(BuffInfo buffInfo)
         {
             //buff添加的target是否是敌方
+
             if (buffInfo.target == BattleManager.Instance.parameter.enemyChaStates[0].gameObject)
             {
                 //如果这个buff的标签是debuff
