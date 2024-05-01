@@ -1607,12 +1607,15 @@ namespace DesignerScripts
 
         public static void GainStrengthWhenLoseHealth(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
-            int probability = Random.Range(1, 11);
-            if (probability == 1)
+            if (damageInfo.diceType == DiceType.Attack)
             {
-                BuffInfo newStrengthBuff = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target, 1, true);
-                buffInfo.creator.GetComponent<ChaState>().AddBuff(newStrengthBuff, buffInfo.creator);
-                Debug.Log("战斗开始获得1层力量");
+                int probability = Random.Range(1, 11);
+                if (probability == 1)
+                {
+                    BuffInfo newStrengthBuff = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Strength.ToString()], buffInfo.creator, buffInfo.target, 1, true);
+                    buffInfo.creator.GetComponent<ChaState>().AddBuff(newStrengthBuff, buffInfo.creator);
+                    Debug.Log("战斗开始获得1层力量");
+                }
             }
         }
 
