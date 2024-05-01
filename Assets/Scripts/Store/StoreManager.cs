@@ -141,6 +141,8 @@ public class StoreManager : PersistentSingleton<StoreManager>
         if (player.resource.currentRollTimes > 0)
         {
             player.ModResources(new ChaResource(0, 0, -1, 0));
+            HalidomManager.Instance.OnReroll();
+            MapManager.Instance.UpdatePlayerUI();
             OnRefreshStore?.Invoke();
         }
         else

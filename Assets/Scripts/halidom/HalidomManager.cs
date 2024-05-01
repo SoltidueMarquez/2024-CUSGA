@@ -169,6 +169,7 @@ public class HalidomManager : MonoBehaviour
                 Debug.Log("圣物格子已满");
             }
         }
+        MapManager.Instance.UpdatePlayerUI();
         UpdateHalidomDescription();
     }
     //删去指定格子的圣物
@@ -199,6 +200,7 @@ public class HalidomManager : MonoBehaviour
                 else if (gameScene == GameScene.MapScene)
                 {
                     MapManager.Instance.playerChaState.AttrAndResourceRecheck();
+                    MapManager.Instance.UpdatePlayerUI();
                 }
 
 
@@ -330,6 +332,7 @@ public class HalidomManager : MonoBehaviour
                         buffInfo.buffData.onRoundStart?.Invoke(buffInfo);
                         //触发圣物闪烁
                         SacredObjectUIManager.Instance.DoFlick(halidomList[i].id);
+                        
                     }
 
                     if (buffInfo.isPermanent == false)//非永久buff
@@ -482,7 +485,14 @@ public class HalidomManager : MonoBehaviour
                     {
                         buffInfo.buffData.onRoll?.Invoke(buffInfo);
                         //触发圣物闪烁
-                        SacredObjectUIManager.Instance.DoFlick(halidomList[i].id);
+                        if(SceneLoader.Instance.currentGameScene == GameScene.BattleScene)
+                        {
+                            SacredObjectUIManager.Instance.DoFlick(halidomList[i].id);
+                        }
+                        else if(SceneLoader.Instance.currentGameScene == GameScene.MapScene)
+                        {
+                            MapSacredUIManager.Instance.DoFlick(halidomList[i].id);
+                        }
                     }
                 }
 
@@ -531,7 +541,33 @@ public class HalidomManager : MonoBehaviour
             }
         }
     }
+    public void OnReroll()
+    {
+        for (int i = 0; i < halidomList.Length; i++)
+        {
+            if (halidomList[i] != null)
+            {
+                foreach (var buffInfo in halidomList[i].buffInfos)
+                {
+                    //需要整体判断这个委托是否为空
+                    if (buffInfo.buffData.onRoll != null)
+                    {
+                        buffInfo.buffData.onRoll?.Invoke(buffInfo);
+                        //触发圣物闪烁
+                        if (SceneLoader.Instance.currentGameScene == GameScene.BattleScene)
+                        {
+                            SacredObjectUIManager.Instance.DoFlick(halidomList[i].id);
+                        }
+                        else if (SceneLoader.Instance.currentGameScene == GameScene.MapScene)
+                        {
+                            MapSacredUIManager.Instance.DoFlick(halidomList[i].id);
+                        }
+                    }
+                }
 
+            }
+        }
+    }
 
 
     #endregion
@@ -557,6 +593,7 @@ public class HalidomManager : MonoBehaviour
         {
             halidomList[i] = null;
         }
+        this.RefreshAllHalidoms();
     }
     /// <summary>
     /// 获取当前圣物列表

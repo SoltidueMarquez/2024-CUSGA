@@ -337,6 +337,9 @@ public class BattleManager : MonoBehaviour
             return;
         }
         ReducePlayerRerollCount();
+        HalidomManager.Instance.OnReroll();
+        this.parameter.playerChaState.GetBuffHandler().BuffOnReRoll();
+        this.parameter.enemyChaStates[0].GetBuffHandler().BuffOnReRoll();
         DataUIManager.Instance.UpdateRerollText(this.parameter.playerChaState.resource.currentRollTimes, this.parameter.playerChaState.prop.maxRollTimes);
         //判断当前处于什么状态，如果是玩家回合，则重新投掷骰面，如果是奖励阶段，则只是显示重新投掷的骰面
         if (currentState is PlayerActionState)
@@ -364,9 +367,7 @@ public class BattleManager : MonoBehaviour
                 //获取剩余的骰面的战斗骰子在战斗骰子列表中的位置,并重新投掷
                 singleDiceObjs[i] = this.parameter.playerChaState.GetBattleDiceHandler().GetRandomSingleDice(i);
             }
-        }
-        this.parameter.playerChaState.GetBuffHandler().BuffOnReRoll();
-        this.parameter.enemyChaStates[0].GetBuffHandler().BuffOnReRoll();
+        }       
         this.parameter.playerChaState.GetBattleDiceHandler().AddBattleSingleDice(singleDiceObjs.ToList<SingleDiceObj>());
         //这边需要删除所有当前骰面的视觉
 

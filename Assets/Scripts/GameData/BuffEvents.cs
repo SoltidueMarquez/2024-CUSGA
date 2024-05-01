@@ -608,7 +608,7 @@ namespace DesignerScripts
 
         public static void Spirit(BuffInfo buffInfo)
         {
-            int health = buffInfo.curStack ;
+            int health = buffInfo.curStack;
             buffInfo.target.GetComponent<ChaState>().ModResources(new ChaResource(health, 0, 0, 0));
             Debug.Log("精力回复" + health + "生命");
 
@@ -726,9 +726,9 @@ namespace DesignerScripts
         //这里根据buffhandler的逻辑应该是判断是否为1，是1就变为4层
         public static void EnergyStorage(BuffInfo buffInfo)
         {
-            if(buffInfo.curStack == 1)
+            if (buffInfo.curStack == 1)
             {
-                
+
                 buffInfo.curStack += 2;
                 var charac2 = (Character)buffInfo.target.GetComponent<ChaState>().side;
                 int index2 = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
@@ -746,7 +746,7 @@ namespace DesignerScripts
                 int index1 = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
                 BuffUIManager.Instance.UpdateBuffDurationTime(charac1, index1, buffInfo.curStack);
             }
-            
+
 
             //回合开始时-1层
             /*buffInfo.target.GetComponent<ChaState>().RemoveBuff(buffInfo);
@@ -773,7 +773,7 @@ namespace DesignerScripts
                 int index1 = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
                 BuffUIManager.Instance.UpdateBuffDurationTime(charac1, index1, buffInfo.curStack);
             }
-            
+
         }
 
         public static void LoseEnergy(BuffInfo buffInfo, DamageInfo damageInfo)
@@ -1104,7 +1104,7 @@ namespace DesignerScripts
             //在buffinfo的额外参数字典中存储了玩家受到伤害的次数
             //每次OnBeHurt回调点触发时，将次数+1
             //如果次数是3的倍数，增加0.5f的攻击力
-            if(damageInfo.diceType != DiceType.Attack) return;
+            if (damageInfo.diceType != DiceType.Attack) return;
             //现在受到伤害只检查是不是配置的时候有这个键值对，有则++
             if (buffInfo.buffParam.ContainsKey("PlayerLoseHealthCount"))
             {
@@ -1132,7 +1132,7 @@ namespace DesignerScripts
                 {
                     damageInfo.addDamageArea += 0.5f;
                     Debug.Log("增加50%攻击力");
-                    attackCount-=3;
+                    attackCount -= 3;
                     buffInfo.buffParam["PlayerLoseHealthCount"] = attackCount;
                 }
 
@@ -1201,13 +1201,13 @@ namespace DesignerScripts
                 //访问当前的资源
                 if (tempChaState.resource.currentHp > 0)
                 {
-                    tempChaState.ModResources(new ChaResource(tempChaState.baseProp.health / 2, 0, 0, 0));
+                    tempChaState.ModResources(new ChaResource(tempChaState.prop.health / 2, 0, 0, 0));
                     Debug.Log("获得时回复一半生命");
                 }
             }
             else if (SceneLoader.Instance.currentGameScene == GameScene.MapScene)
             {
-                MapManager.Instance.playerChaState.GetComponent<ChaState>().ModResources(new ChaResource(MapManager.Instance.playerChaState.GetComponent<ChaState>().baseProp.health / 2, 0, 0, 0));
+                MapManager.Instance.playerChaState.GetComponent<ChaState>().ModResources(new ChaResource(MapManager.Instance.playerChaState.GetComponent<ChaState>().prop.health / 2, 0, 0, 0));
                 MapManager.Instance.UpdatePlayerUI();
                 Debug.Log("获得时回复一半生命在地图");
             }
@@ -1226,7 +1226,7 @@ namespace DesignerScripts
                 //获取玩家的状态
                 ChaState tempChaState = buffInfo.creator.GetComponent<ChaState>();
                 //访问当前的资源
-                if (tempChaState.resource.currentHp > 0)
+                if (tempChaState.resource.currentHp < tempChaState.prop.health)
                 {
                     tempChaState.ModResources(new ChaResource(25, 0, 0, 0));
                     Debug.Log("回合1回复25点生命");
@@ -1239,16 +1239,20 @@ namespace DesignerScripts
         {
             if (buffInfo.buffParam.ContainsKey("PlayerHitCount"))
             {
-                int hitCount = (int)buffInfo.buffParam["PlayerHitCount"];
-                hitCount++;
-                if (hitCount % 15==0)
+                if (damageInfo.diceType == DiceType.Attack)
                 {
-                    damageInfo.damage.baseDamage += 20;
+                    int hitCount = (int)buffInfo.buffParam["PlayerHitCount"];
+                    hitCount++;
+                    if (hitCount >= 15)
+                    {
+                        damageInfo.damage.baseDamage += 20;
+                        hitCount = 0;
+                    }
+                    buffInfo.buffParam["PlayerHitCount"] = hitCount;
                 }
-                buffInfo.buffParam["PlayerHitCount"] = hitCount;
                 //刷新描述
                 HalidomManager.Instance.UpdateHalidomDescription();
-                Debug.Log("攻击次数" + hitCount);
+
             }
             else
             {
@@ -1261,10 +1265,11 @@ namespace DesignerScripts
             int count = (int)buffInfo.buffParam["Value"];
             if (count <= 2)
             {
-                buffInfo.creator.GetComponent<ChaState>().resource.currentRollTimes++;
+                buffInfo.creator.GetComponent<ChaState>().ModResources(new ChaResource(0,0,1,0));
                 Debug.Log("不消耗重投次数");
                 count++;
                 buffInfo.buffParam["Value"] = count;
+                HalidomManager.Instance.UpdateHalidomDescription();
             }
             else
             {
@@ -1275,7 +1280,7 @@ namespace DesignerScripts
 
         public static void ReuseDiceWhenDiceIs1(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
-            
+
             //深拷贝一条damageinfo信息加入伤害队列
             if (damageInfo.damage.indexDamageRate == 1 && !(bool)buffInfo.buffParam["IsFirstDeal"])
             {
