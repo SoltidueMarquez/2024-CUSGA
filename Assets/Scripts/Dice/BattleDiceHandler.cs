@@ -83,7 +83,7 @@ public class BattleDiceHandler : MonoBehaviour
             DamageManager.Instance.DoDamage(damageInfo);
             DamageManager.Instance.DealWithAllDamage();
             //刷新buffinfo参数
-            DamageManager.Instance.RefreashHalidomParameter();
+            //DamageManager.Instance.RefreashHalidomParameter();
             //视觉逻辑
             Debug.Log(singleDiceObj.model.name);
             if (singleDiceObj.model.buffInfos != null)

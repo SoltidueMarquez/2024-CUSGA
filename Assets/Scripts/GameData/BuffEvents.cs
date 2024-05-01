@@ -1256,7 +1256,10 @@ namespace DesignerScripts
                 Debug.Log("重复打出");
                 buffInfo.buffParam["IsFirstDeal"] = true;
             }
-
+            else
+            {
+                buffInfo.buffParam["IsFirstDeal"] = false;
+            }
 
         }
 
