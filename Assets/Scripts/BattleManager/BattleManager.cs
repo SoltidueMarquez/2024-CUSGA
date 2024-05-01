@@ -40,6 +40,8 @@ public class FSMParameter
     public PlayerDataSO playerDataSO;
     //TODO:这边的敌人数据还没有
     public EnemyDataSO enemyDataSO;
+    //用于记录是否是否在使用骰子中，使用骰子中的时候，不会进行其他操作
+    public bool ifUsingDice;
 }
 
 public enum GameState
@@ -169,6 +171,7 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void EndPlayerRound()
     {
+        if (BattleManager.Instance.parameter.ifUsingDice) return;
         this.parameter.playerChaState.GetBattleDiceHandler().ClearBattleSingleDices();
         RollingResultUIManager.Instance.RemoveAllResultUI(Strategy.End);
         TransitionState(GameState.PlayerRoundEndResolution);
@@ -331,6 +334,7 @@ public class BattleManager : MonoBehaviour
     //需要绑定到UI的按钮上的函数
     public void ReRollDice()
     {
+        if(this.parameter.ifUsingDice) return;
         //如果玩家的重新投掷次数小于等于0，就不执行
         if (this.parameter.playerChaState.resource.currentRollTimes <= 0)
         {

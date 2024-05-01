@@ -130,6 +130,7 @@ public class BattleDiceHandler : MonoBehaviour
         cancellationToken = new CancellationTokenSource();
         for (int i = 0; i < diceCardsInUse.Length; i++)
         {
+            BattleManager.Instance.parameter.ifUsingDice = true;
             if (diceCardsInUse[i] != null)
             {
 
@@ -156,6 +157,15 @@ public class BattleDiceHandler : MonoBehaviour
                     Debug.Log("玩家取消释放骰子");
                 }
             }
+        }
+        if (BattleManager.Instance.GetCurrentState() == BattleManager.Instance.GetStates()[GameState.PlayerAction])
+        {
+            BattleManager.Instance.parameter.playerChaState.GetBattleDiceHandler().ClearBattleSingleDices();
+            RollingResultUIManager.Instance.RemoveAllResultUI(Strategy.End);
+            ProcessAnimationManager.Instance.PlayerTurnEnd();
+            BattleManager.Instance.TransitionState(GameState.PlayerRoundEndResolution);
+            BattleManager.Instance.parameter.ifUsingDice = false;
+
         }
     }
 
