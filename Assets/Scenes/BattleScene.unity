@@ -2661,7 +2661,6 @@ GameObject:
   - component: {fileID: 574523180}
   - component: {fileID: 574523179}
   - component: {fileID: 574523178}
-  - component: {fileID: 574523181}
   m_Layer: 5
   m_Name: End Button
   m_TagString: Untagged
@@ -2701,13 +2700,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -2794,19 +2793,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 574523176}
   m_CullTransparentMesh: 1
---- !u!114 &574523181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 574523176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f6df4cb0283b7a40911a5de94c754ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ifDoScale: 0
 --- !u!1 &583505412
 GameObject:
   m_ObjectHideFlags: 0
@@ -3531,7 +3517,7 @@ GameObject:
   - component: {fileID: 727152301}
   - component: {fileID: 727152300}
   - component: {fileID: 727152299}
-  - component: {fileID: 727152302}
+  - component: {fileID: 727152303}
   m_Layer: 5
   m_Name: Roll Button
   m_TagString: Untagged
@@ -3572,13 +3558,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -3653,19 +3639,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 727152297}
   m_CullTransparentMesh: 1
---- !u!114 &727152302
-MonoBehaviour:
+--- !u!95 &727152303
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 727152297}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f6df4cb0283b7a40911a5de94c754ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ifDoScale: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f64d281710576964791a1cec97d3acb5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &742696116
 GameObject:
   m_ObjectHideFlags: 0
@@ -8609,7 +8603,6 @@ GameObject:
   - component: {fileID: 1949946013}
   - component: {fileID: 1949946012}
   - component: {fileID: 1949946011}
-  - component: {fileID: 1949946014}
   m_Layer: 5
   m_Name: Use All Button
   m_TagString: Untagged
@@ -8649,13 +8642,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -8730,19 +8723,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1949946009}
   m_CullTransparentMesh: 1
---- !u!114 &1949946014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1949946009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f6df4cb0283b7a40911a5de94c754ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ifDoScale: 0
 --- !u!1 &1997646020
 GameObject:
   m_ObjectHideFlags: 0

@@ -2859,6 +2859,22 @@ PrefabInstance:
       propertyPath: newColor.r
       value: 0.7490196
       objectReference: {fileID: 0}
+    - target: {fileID: 3978786459534856347, guid: e367eb73afc2d674081a4078beff2ad4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3978786459534856347, guid: e367eb73afc2d674081a4078beff2ad4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3978786459534856347, guid: e367eb73afc2d674081a4078beff2ad4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3978786459534856347, guid: e367eb73afc2d674081a4078beff2ad4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: SettingsManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4363354778174668444, guid: e367eb73afc2d674081a4078beff2ad4, type: 3}
       propertyPath: m_Name
       value: SettingsUI

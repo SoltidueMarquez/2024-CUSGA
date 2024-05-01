@@ -18,7 +18,8 @@ MonoBehaviour:
     money: 50
     maxRollTimes: 1
     shield: 0
-  halidomSOs: []
+  halidomSOs:
+  - {fileID: 11400000, guid: 2f0142e6bfa23e942be171af2fff235d, type: 2}
   playerDiceSOItems:
   - diceType: 0
     singleDiceModelSOs:
