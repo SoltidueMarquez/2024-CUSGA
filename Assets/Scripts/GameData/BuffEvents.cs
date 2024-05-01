@@ -344,9 +344,7 @@ namespace DesignerScripts
             {
                 BuffEventName.Add3ValueIfResultAbove4.ToString(),Add3ValueIfResultAbove4
             },
-            {
-                BuffEventName.Add1StackIfEnemyHaveBleed.ToString(),Add1StackIfEnemyHaveBleed
-            },
+            
             {
                 BuffEventName.EnhancePlayerStrength.ToString(),EnhancePlayerStrength
             },
@@ -512,9 +510,7 @@ namespace DesignerScripts
 
             
             //圣物buff
-            {
-                BuffEventName.Add1StackIfPlayerHaveStrength.ToString(),Add1StackIfPlayerHaveStrength
-            },
+            
             //骰子
             {
                 BuffEventName.Imitate.ToString(),Imitate
@@ -540,6 +536,13 @@ namespace DesignerScripts
         };
         public static Dictionary<string, OnAddBuff> onAddFunc = new Dictionary<string, OnAddBuff>()
         {
+            //普通圣物buff
+            {
+                BuffEventName.Add1StackIfPlayerHaveStrength.ToString(),Add1StackIfPlayerHaveStrength
+            },
+            {
+                BuffEventName.Add1StackIfEnemyHaveBleed.ToString(),Add1StackIfEnemyHaveBleed
+            },
             //稀有圣物buff
             {
                 BuffEventName.Add1StackIfEnemyHaveDebuff.ToString(),Add1StackIfEnemyHaveDebuff
@@ -985,38 +988,30 @@ namespace DesignerScripts
                 Debug.Log("骰子大于等于4，增加3点伤害");
             }
         }
-
-        public static void Add1StackIfEnemyHaveBleed(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
+        
+        //传入的是需要添加的buff而不是这个buff自身
+        public static void Add1StackIfEnemyHaveBleed(BuffInfo buffInfo)
         {
-            //4.1 放到Bleed的OnCreate中了
-            //找damageinfo中的addbuffs有没有流血
-            /*if (damageInfo.addBuffs != null)
+           if(buffInfo.target == BattleManager.Instance.parameter.enemyChaStates[0].gameObject)
             {
-                BuffInfo findBuffInfo = damageInfo.addBuffs.Find(x => x.buffData.id == "1_1");
-                if (findBuffInfo != null)
+                if(buffInfo.buffData.id == "1_01")
                 {
-                    findBuffInfo.curStack++;
-                    Debug.Log("敌人流血层数+1");
+                    buffInfo.curStack++;
+                    Debug.Log("敌方流血+1");
                 }
-            }*/
+            }
         }
 
-        public static SingleDiceObj Add1StackIfPlayerHaveStrength(BuffInfo buffInfo, SingleDiceObj singleDiceObj)
+        public static void Add1StackIfPlayerHaveStrength(BuffInfo buffInfo)
         {
-            //4.1 放到Strength的OnCreate中了
-            /*if (singleDiceObj.model.buffInfos != null)
+            if(buffInfo.target == BattleManager.Instance.parameter.playerChaState.gameObject)
             {
-                foreach(var  diceBuffInfo in singleDiceObj.model.buffInfos)
+                if(buffInfo.buffData.id =="1_06")
                 {
-                    //查询到力量buff
-                    if(diceBuffInfo.buffData.id == "1_6")
-                    {
-                        diceBuffInfo.curStack++;
-                        Debug.Log("玩家力量层数+1");
-                    }
+                    buffInfo.curStack++;
+                    Debug.Log("我方力量层数+1");
                 }
-            }*/
-            return singleDiceObj;
+            }
         }
 
         public static void EnhancePlayerStrength(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)

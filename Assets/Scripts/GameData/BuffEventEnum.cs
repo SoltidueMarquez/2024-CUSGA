@@ -187,6 +187,8 @@ public enum onAddBuffEnum
     None,
     Add1StackIfEnemyHaveDebuff,
     Add1StackIfPlayerHavePositiveBuff,
+    Add1StackIfEnemyHaveBleed,
+    Add1StackIfPlayerHaveStrength,
 }
 
 public enum onGetFinalDamageEnum

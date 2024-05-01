@@ -24,7 +24,15 @@ public class BuffHandler : MonoBehaviour
             if (findBuffInfo.curStack < findBuffInfo.buffData.maxStack)
             {
                 //findBuffInfo.curStack++;
-                findBuffInfo.curStack += buffInfo.curStack;
+                if (findBuffInfo.curStack + buffInfo.curStack > findBuffInfo.buffData.maxStack)
+                {
+                    findBuffInfo.curStack = buffInfo.buffData.maxStack;
+                }
+                else
+                {
+                    findBuffInfo.curStack += buffInfo.curStack;
+                }
+                
                 switch (findBuffInfo.buffData.buffUpdateEnum)
                 {
                     case BuffUpdateEnum.Add:
@@ -132,7 +140,7 @@ public class BuffHandler : MonoBehaviour
         //传入的是玩家并且当前是玩家的回合
         if (side == 0 && BattleManager.Instance.GetCurrentState() == BattleManager.Instance.GetStates()[GameState.PlayerRoundEndResolution])
         {
-            Debug.Log("传入的是玩家并且当前是玩家的回合a4s53da2s3d123wa1231sd231wa231s23d123a1w231s2d3");
+            
             //触发玩家身上的有OnMyTurnEnd的buff
             foreach (var buff in buffList)
             {
