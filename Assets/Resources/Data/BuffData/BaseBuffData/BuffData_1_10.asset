@@ -16,11 +16,9 @@ MonoBehaviour:
   dataName: 9
   tags:
   - Self
-  - Positive
-  - OnMyTurnEnd
-  maxStack: 0
+  maxStack: 100
   duringCount: 0
-  isPermanent: 0
+  isPermanent: 1
   buffUpdateEnum: 0
   removeStackUpdateEnum: 0
   onCreate: 0

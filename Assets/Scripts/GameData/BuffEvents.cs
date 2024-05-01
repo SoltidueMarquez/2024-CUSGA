@@ -725,23 +725,54 @@ namespace DesignerScripts
         //这里根据buffhandler的逻辑应该是判断是否为1，是1就变为4层
         public static void EnergyStorage(BuffInfo buffInfo)
         {
+            if(buffInfo.curStack == 1)
+            {
+                
+                buffInfo.curStack += 2;
+                var charac2 = (Character)buffInfo.target.GetComponent<ChaState>().side;
+                int index2 = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
+                BuffUIManager.Instance.UpdateBuffDurationTime(charac2, index2, buffInfo.curStack);
+                BuffInfo newAngerBuff = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Anger.ToString()], buffInfo.creator, buffInfo.target, 1, true);
+                buffInfo.target.GetComponent<ChaState>().AddBuff(newAngerBuff, buffInfo.target);
+                Debug.Log("蓄能生效，增加3层并获得怒气");
+            }
+            else
+            {
+                buffInfo.curStack--;
+                Debug.Log("buff层数-1");
+                //刷新ui
+                var charac1 = (Character)buffInfo.target.GetComponent<ChaState>().side;
+                int index1 = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
+                BuffUIManager.Instance.UpdateBuffDurationTime(charac1, index1, buffInfo.curStack);
+            }
+            
+
             //回合开始时-1层
-            buffInfo.target.GetComponent<ChaState>().RemoveBuff(buffInfo);
+            /*buffInfo.target.GetComponent<ChaState>().RemoveBuff(buffInfo);
             Debug.Log("buff层数-1");
             if (buffInfo.curStack == 1)
             {
                 buffInfo.curStack += 3;
+                BuffUIManager.Instance.UpdateBuffDurationTime((Character)buffInfo.target.GetComponent<ChaState>().side, buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo), buffInfo.curStack);
                 //获得一层怒气
-                BuffInfo newAngerBuff = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Anger.ToString()], buffInfo.creator, buffInfo.target);
+                BuffInfo newAngerBuff = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Anger.ToString()], buffInfo.creator, buffInfo.target,1,true);
                 buffInfo.target.GetComponent<ChaState>().AddBuff(newAngerBuff, buffInfo.target);
                 Debug.Log("蓄能生效，增加3层并获得怒气");
-            }
+            }*/
         }
 
         public static void Anger(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
-            damageInfo.addDamageArea += buffInfo.curStack * 5 * 0.1f;
-            Debug.Log("怒气生效，增加" + buffInfo.curStack * 5 * 0.1f + "伤害");
+            if (damageInfo.diceType == DiceType.Attack)
+            {
+                damageInfo.addDamageArea += buffInfo.curStack * 5 * 0.1f;
+                Debug.Log("怒气生效，增加" + buffInfo.curStack * 5 * 0.1f + "伤害");
+                //刷新ui
+                var charac1 = (Character)buffInfo.target.GetComponent<ChaState>().side;
+                int index1 = buffInfo.target.GetComponent<ChaState>().GetBuffHandler().buffList.IndexOf(buffInfo);
+                BuffUIManager.Instance.UpdateBuffDurationTime(charac1, index1, buffInfo.curStack);
+            }
+            
         }
 
         public static void LoseEnergy(BuffInfo buffInfo, DamageInfo damageInfo)

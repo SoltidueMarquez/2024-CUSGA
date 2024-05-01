@@ -16,11 +16,11 @@ MonoBehaviour:
   dataName: 8
   tags:
   - Self
-  - Positive
   - OnMyTurnEnd
+  - PlayerOnRoundStart
   maxStack: 5
   duringCount: 0
-  isPermanent: 0
+  isPermanent: 1
   buffUpdateEnum: 0
   removeStackUpdateEnum: 0
   onCreate: 0
