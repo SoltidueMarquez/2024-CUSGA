@@ -715,6 +715,19 @@ namespace DesignerScripts
             if (damageInfo.diceType == DiceType.Attack)
             {
                 damageInfo.damage.baseDamage = 0;
+                if (HalidomManager.Instance.halidomList != null)
+                {
+                    for (int i = 0; i < HalidomManager.Instance.halidomList.Length; i++)
+                    {
+                        if (HalidomManager.Instance.halidomList[i] != null)
+                        {
+                            if (HalidomManager.Instance.halidomList[i].id == "1_29" && damageInfo.defender == BattleManager.Instance.parameter.playerChaState.gameObject)
+                            {
+                                BattleManager.Instance.parameter.enemyChaStates[0].ModResources(new ChaResource(-5, 0, 0, 0));
+                            }
+                        }
+                    }
+                }
                 Debug.Log("闪避生效，伤害为0");
                 //触发后-1层
                 buffInfo.curStack--;
@@ -1405,12 +1418,12 @@ namespace DesignerScripts
 
         public static void Hit5AfterDodge(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
-            BuffInfo findBuffInfo = buffInfo.creator.GetComponent<BuffHandler>().buffList.Find(x => x.buffData.id == "1_08");
+            /*BuffInfo findBuffInfo = buffInfo.creator.GetComponent<BuffHandler>().buffList.Find(x => x.buffData.id == "1_08");
             if (findBuffInfo != null)
             {
                 damageInfo.attacker.GetComponent<ChaState>().ModResources(new ChaResource(-5, 0, 0, 0));
                 Debug.Log("恶毒嘲笑生效 敌方-5hp");
-            }
+            }*/
         }
 
 
@@ -1593,13 +1606,13 @@ namespace DesignerScripts
         {
             if (damageInfo.finalDamage > BattleManager.Instance.parameter.playerChaState.resource.currentShield && damageInfo.diceType == DiceType.Attack && damageInfo.defender == BattleManager.Instance.parameter.playerChaState.gameObject)
             {
-                int probability = Random.Range(1, 3);
-                //if (probability == 1)
-                //{
+                int probability = Random.Range(1, 11);
+                if (probability == 1)
+                {
                 BuffInfo newDodgeBuff = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target, 1, true);
                 buffInfo.creator.GetComponent<ChaState>().AddBuff(newDodgeBuff, buffInfo.creator);
                 Debug.Log("战斗开始获得1层闪避");
-                //}
+                }
             }
 
         }
