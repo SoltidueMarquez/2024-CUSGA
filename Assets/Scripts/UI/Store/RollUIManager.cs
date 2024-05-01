@@ -13,7 +13,8 @@ namespace UI.Store
         [SerializeField, Tooltip("旋转物体列表")] private List<RotateObject> rotateObjects;
         [SerializeField, Tooltip("出现结果列表")] private List<Transform> results;
         [SerializeField, Tooltip("出现时间间隔")] public float timeInterval;
-        [SerializeField, Tooltip("出现位置(Y)")] private float finalPosition;
+        [SerializeField, Tooltip("出现位置(Y)")] private Transform enterPosition;
+        [SerializeField, Tooltip("出现位置(Y)")] private Transform exitPosition;
         [SerializeField, Tooltip("投掷结果栏位")] private List<Column> columns;
         [SerializeField, Tooltip("生成模板")] private GameObject template;
         [SerializeField, Tooltip("结果列表")] private List<GameObject> resultList;
@@ -54,13 +55,13 @@ namespace UI.Store
             switch (state)
             {
                 case PlayerTurnState.PlayerTurnStart:
-                    position = finalPosition;
+                    position = enterPosition.position.y;
                     break;
                 case PlayerTurnState.PlayerTurnEnd:
-                    position = finalPosition * 2;
+                    position = exitPosition.position.y;
                     break;
                 default:
-                    position = finalPosition;
+                    position = enterPosition.position.y;
                     break;
             }
             float time = 0;

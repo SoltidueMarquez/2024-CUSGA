@@ -8,7 +8,7 @@ using UI.Store;
 using System;
 using Sirenix.OdinInspector;
 
-public class StoreManager : SingletonBase<StoreManager>
+public class StoreManager : PersistentSingleton<StoreManager>
 {
     public bool enableDebug = false;
     public GameObject StoreUIcanvas;
@@ -44,11 +44,6 @@ public class StoreManager : SingletonBase<StoreManager>
         StoreUIcanvas.SetActive(false);
 
 
-    }
-
-    protected override void OnDestroy()
-    {
-        base.OnDestroy();
     }
 
     // Start is called before the first frame update
