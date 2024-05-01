@@ -110,7 +110,7 @@ public static class ResourcesManager
             return null;
         }
         BuffUIData buffUIData = new BuffUIData();
-        buffUIData.name = buffDataSO.dataName.ToString();
+        buffUIData.name = buffDataSO.buffName;
         buffUIData.description = buffDataSO.description;
         buffUIData.sprite = buffDataSO.sprite;
         return buffUIData;

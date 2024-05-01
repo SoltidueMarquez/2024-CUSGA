@@ -187,6 +187,10 @@ public class ChaState : MonoBehaviour
     {
         this.ModResources(new ChaResource(0, 0, this.prop.maxRollTimes, 0));
     }
+    public void RefreshShield()
+    {
+        this.resource.currentShield = 0;
+    }
     /// <summary>
     /// 初始化
     /// </summary>
