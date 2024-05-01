@@ -135,6 +135,10 @@ public class SettingsManager : MonoSingleton<SettingsManager>
     public void OnClickBackToStart()
     {
         SceneManager.LoadScene("StartGame");
+        if (StoreManager.Instance != null)
+        {
+            StoreManager.Instance.OnExitStore.Invoke();//关闭商店
+        }
         CloseSettings();
     }
 
