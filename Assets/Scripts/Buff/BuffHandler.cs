@@ -128,17 +128,19 @@ public class BuffHandler : MonoBehaviour
     public void BuffRoundEndTick(int side)
     {
         List<BuffInfo> removeList = new List<BuffInfo>();
-
-        if(side ==0)
+        //因为buffhandler既不知道是给谁挂载的，也不知道是什么回合，所以需要两个参数来判断
+        //传入的是玩家并且当前是玩家的回合
+        if (side == 0 && BattleManager.Instance.GetCurrentState() == BattleManager.Instance.GetStates()[GameState.PlayerRoundEndResolution])
         {
-            
+            Debug.Log("传入的是玩家并且当前是玩家的回合a4s53da2s3d123wa1231sd231wa231s23d123a1w231s2d3");
+            //触发玩家身上的有OnMyTurnEnd的buff
             foreach (var buff in buffList)
             {
                 if (buff.buffData.tags.Contains("OnMyTurnEnd"))
                 {
                     buff.buffData.onRoundEnd?.Invoke(buff);
                 }
-                
+
             }
 
             for (int i = 0; i < buffList.Count; i++)
@@ -156,20 +158,17 @@ public class BuffHandler : MonoBehaviour
                         }
                     }
                 }
-                
+
             }
             for (int i = 0; i < removeList.Count; i++)
             {
-                if (buffList[i].buffData.tags.Contains("OnMyTurnEnd"))
-                {
-                    RemoveBuff(removeList[i]);
-                }
-                    
+                RemoveBuff(removeList[i]);
             }
         }
-
-        else if(side == 1)
+        //传入的是敌人 在玩家的回合结束
+        else if (side == 1 && BattleManager.Instance.GetCurrentState() == BattleManager.Instance.GetStates()[GameState.PlayerRoundEndResolution])
         {
+            Debug.Log("传入的是敌人 在玩家的回合结束");
             foreach (var buff in buffList)
             {
                 if (buff.buffData.tags.Contains("OnOtherTurnEnd"))
@@ -198,14 +197,81 @@ public class BuffHandler : MonoBehaviour
             }
             for (int i = 0; i < removeList.Count; i++)
             {
-                if (buffList[i].buffData.tags.Contains("OnOtherTurnEnd"))
+                RemoveBuff(removeList[i]);
+            }
+        }
+        //传入的是玩家 在敌人的回合结束
+        else if (side == 0 && BattleManager.Instance.GetCurrentState() == BattleManager.Instance.GetStates()[GameState.EnemyRoundEndResolution])
+        {
+            Debug.Log("传入的是玩家 在敌人的回合结束");
+            foreach (var buff in buffList)
+            {
+                if (buff.buffData.tags.Contains("OnOtherTurnEnd"))
                 {
-                    RemoveBuff(removeList[i]);
+                    buff.buffData.onRoundEnd?.Invoke(buff);
                 }
 
             }
+
+            for (int i = 0; i < buffList.Count; i++)
+            {
+                if (buffList[i].buffData.tags.Contains("OnOtherTurnEnd"))
+                {
+                    if (buffList[i].isPermanent == false)//非永久buff
+                    {
+                        buffList[i].roundCount--;
+
+                        buffList[i].roundCount = Mathf.Max(0, buffList[i].roundCount);//可能出现负数的情况
+                        if (buffList[i].roundCount == 0)
+                        {
+                            removeList.Add(buffList[i]);
+                        }
+                    }
+                }
+
+            }
+            for (int i = 0; i < removeList.Count; i++)
+            {
+                RemoveBuff(removeList[i]);
+            }
         }
 
+        //传入的是敌人 在敌人的回合结束
+        if (side == 1 && BattleManager.Instance.GetCurrentState() == BattleManager.Instance.GetStates()[GameState.EnemyRoundEndResolution])
+        {
+            Debug.Log("传入的是敌人 在敌人的回合结束");
+            //触发敌人身上的有OnMyTurnEnd的buff
+            foreach (var buff in buffList)
+            {
+                if (buff.buffData.tags.Contains("OnMyTurnEnd"))
+                {
+                    buff.buffData.onRoundEnd?.Invoke(buff);
+                }
+
+            }
+
+            for (int i = 0; i < buffList.Count; i++)
+            {
+                if (buffList[i].buffData.tags.Contains("OnMyTurnEnd"))
+                {
+                    if (buffList[i].isPermanent == false)//非永久buff
+                    {
+                        buffList[i].roundCount--;
+
+                        buffList[i].roundCount = Mathf.Max(0, buffList[i].roundCount);//可能出现负数的情况
+                        if (buffList[i].roundCount == 0)
+                        {
+                            removeList.Add(buffList[i]);
+                        }
+                    }
+                }
+
+            }
+            for (int i = 0; i < removeList.Count; i++)
+            {
+                RemoveBuff(removeList[i]);
+            }
+        }
     }
 
     public void BuffOnReRoll()
