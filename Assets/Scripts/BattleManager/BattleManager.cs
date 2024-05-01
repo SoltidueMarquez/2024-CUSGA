@@ -187,7 +187,7 @@ public class BattleManager : MonoBehaviour
         else
         {
             Debug.Log("敌人死亡");
-            if (!(this.currentState == states[GameState.PlayerWin]))
+            if (!(this.currentState == states[GameState.PlayerWin] || this.currentState == states[GameState.Reward]))
             {
                 TransitionState(GameState.PlayerWin);
             }
