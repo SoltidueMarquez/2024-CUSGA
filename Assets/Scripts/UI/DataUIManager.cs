@@ -34,7 +34,7 @@ namespace UI
         /// <param name="maxTime"></param>
         public void UpdateRerollText(int time, int maxTime)
         {
-            reRollText.text = $"重投{time}/{maxTime}";
+            reRollText.text = $"{time}/{maxTime}";
         }
 
         /// <summary>

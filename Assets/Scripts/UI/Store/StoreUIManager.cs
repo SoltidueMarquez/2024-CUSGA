@@ -39,6 +39,7 @@ namespace UI.Store
 
         public void EnterUpgradeUI()
         {
+            SettingsManager.Instance.FreezeMap(true);//停止地图的拖动监听
             EditableDiceUIManager.Instance.SetActivity(false);//设置侧边物UI不可交互
             strengthenPage.Init(strengthenBg);
             strengthenCanvas.SetActive(true);
