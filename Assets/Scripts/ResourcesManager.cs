@@ -168,6 +168,9 @@ public static class ResourcesManager
             case RareType.Legendary:
                 singleDiceUIData.level = "传说";
                 break;
+            case RareType.Enemy:
+                singleDiceUIData.level = "劣化骰面";
+                break;
             default:
                 break;
         }
