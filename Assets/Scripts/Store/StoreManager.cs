@@ -7,6 +7,7 @@ using Map;
 using UI.Store;
 using System;
 using Sirenix.OdinInspector;
+using UI.Tutorial;
 
 public class StoreManager : PersistentSingleton<StoreManager>
 {
@@ -34,6 +35,8 @@ public class StoreManager : PersistentSingleton<StoreManager>
     private int upgradePoint = 1;
 
     private ChaState player;
+
+    private int clickNum;
     protected override void Awake()
     {
         base.Awake();
@@ -56,7 +59,6 @@ public class StoreManager : PersistentSingleton<StoreManager>
         OnClickUpgrade.AddListener(ClickUpgrade);
 
         player = MapManager.Instance.playerChaState;
-        //DontDestroyOnLoad(this.gameObject);
     }
 
     // Update is called once per frame
@@ -325,7 +327,13 @@ public class StoreManager : PersistentSingleton<StoreManager>
     #region------强化商店------
     private void ClickUpgrade()
     {
-
+        //出现教程
+        if (clickNum == 0)
+        {
+            TutorialManager.Instance.EnterUI(TutorPage.Strength);
+        }
+        clickNum++;
+        
         StrengthenAreaManager.Instance.RefreshUpgradeText(upgradeCost);
 
         BattleDiceHandler handler = MapManager.Instance.playerChaState.GetBattleDiceHandler();
