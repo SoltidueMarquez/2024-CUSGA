@@ -1449,7 +1449,7 @@ namespace DesignerScripts
             if (BattleManager.Instance.parameter.turns == 1)
             {
                 //因为buff会在回合结束时-1层，所以这边要加三次
-                BuffInfo newToughBuff1 = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target, 3);
+                BuffInfo newToughBuff1 = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target, 2);
                 //BuffInfo newToughBuff2 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target);
                 //BuffInfo newToughBuff3 = new BuffInfo(BuffDataTable.buffData[BuffDataName.Tough.ToString()], buffInfo.creator, buffInfo.target);
                 buffInfo.creator.GetComponent<ChaState>().AddBuff(newToughBuff1, buffInfo.creator);

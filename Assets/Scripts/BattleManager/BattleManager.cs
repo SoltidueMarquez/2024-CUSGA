@@ -613,14 +613,14 @@ public class BattleManager : MonoBehaviour
     {
         this.parameter.playerChaState.RefreshRerollTimes();
         this.parameter.playerChaState.GetBuffHandler().BuffRoundEndTick(0);
-        this.parameter.enemyChaStates[0].GetBuffHandler().BuffRoundEndTick(0);
+        this.parameter.enemyChaStates[0].GetBuffHandler().BuffRoundEndTick(1);
         this.parameter.playerChaState.GetBattleDiceHandler().ClearBattleSingleDices();
     }
 
     public void OnEnemyRoundEnd()
     {
         this.parameter.enemyChaStates[0].RefreshRerollTimes();
-        this.parameter.playerChaState.GetBuffHandler().BuffRoundEndTick(1);
+        this.parameter.playerChaState.GetBuffHandler().BuffRoundEndTick(0);
         this.parameter.enemyChaStates[0].GetBuffHandler().BuffRoundEndTick(1);
         this.parameter.enemyChaStates[0].GetBattleDiceHandler().ClearBattleSingleDices();
     }
