@@ -118,5 +118,14 @@ public class GameManager : MonoBehaviour
         return playerDataSO.playerRoomData.bossIDs.Count > 0;
     }
     #endregion
-
+    #region 设置界面调用
+    public void NeedTutorial()
+    {
+        this.ifTutorial = true;
+    }
+    public void NoNeedTutorial()
+    {
+        this.ifTutorial = false;
+    }
+    #endregion
 }
