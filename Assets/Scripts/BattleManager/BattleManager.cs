@@ -581,6 +581,7 @@ public class BattleManager : MonoBehaviour
     public void EndBattle()
     {
         this.parameter.playerChaState.RefreshRerollTimes();
+        this.parameter.playerChaState.RefreshShield();
         this.parameter.playerDataSO.UpdatePlayerDataSO(parameter.playerChaState);
         this.parameter.playerDataSO.UpdataPlayerDataSoMap(GameManager.Instance.currentMap);
         this.parameter.playerDataSO.SaveData();

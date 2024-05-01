@@ -344,7 +344,7 @@ namespace DesignerScripts
             {
                 BuffEventName.Add3ValueIfResultAbove4.ToString(),Add3ValueIfResultAbove4
             },
-            
+
             {
                 BuffEventName.EnhancePlayerStrength.ToString(),EnhancePlayerStrength
             },
@@ -453,7 +453,7 @@ namespace DesignerScripts
             {
                 BuffEventName.Hit3DamageWhenLoseHealth.ToString(),Hit3DamageWhenLoseHealth
             },
-            
+
             {
                 BuffEventName.GainStrengthWhenLoseHealth.ToString(),GainStrengthWhenLoseHealth
             },
@@ -712,7 +712,7 @@ namespace DesignerScripts
 
         public static void Dodge(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
-            if(damageInfo.diceType == DiceType.Attack)
+            if (damageInfo.diceType == DiceType.Attack)
             {
                 damageInfo.damage.baseDamage = 0;
                 Debug.Log("闪避生效，伤害为0");
@@ -727,7 +727,7 @@ namespace DesignerScripts
                     BuffUIManager.Instance.RemoveBuffUIObject(characterSide, index);
                 }
             }
-            
+
         }
 
 
@@ -993,13 +993,13 @@ namespace DesignerScripts
                 Debug.Log("骰子大于等于4，增加3点伤害");
             }
         }
-        
+
         //传入的是需要添加的buff而不是这个buff自身
         public static void Add1StackIfEnemyHaveBleed(BuffInfo buffInfo)
         {
-           if(buffInfo.target == BattleManager.Instance.parameter.enemyChaStates[0].gameObject)
+            if (buffInfo.target == BattleManager.Instance.parameter.enemyChaStates[0].gameObject)
             {
-                if(buffInfo.buffData.id == "1_01")
+                if (buffInfo.buffData.id == "1_01")
                 {
                     buffInfo.curStack++;
                     Debug.Log("敌方流血+1");
@@ -1009,9 +1009,9 @@ namespace DesignerScripts
 
         public static void Add1StackIfPlayerHaveStrength(BuffInfo buffInfo)
         {
-            if(buffInfo.target == BattleManager.Instance.parameter.playerChaState.gameObject)
+            if (buffInfo.target == BattleManager.Instance.parameter.playerChaState.gameObject)
             {
-                if(buffInfo.buffData.id =="1_06")
+                if (buffInfo.buffData.id == "1_06")
                 {
                     buffInfo.curStack++;
                     Debug.Log("我方力量层数+1");
@@ -1265,7 +1265,7 @@ namespace DesignerScripts
             int count = (int)buffInfo.buffParam["Value"];
             if (count <= 2)
             {
-                buffInfo.creator.GetComponent<ChaState>().ModResources(new ChaResource(0,0,1,0));
+                buffInfo.creator.GetComponent<ChaState>().ModResources(new ChaResource(0, 0, 1, 0));
                 Debug.Log("不消耗重投次数");
                 count++;
                 buffInfo.buffParam["Value"] = count;
@@ -1577,28 +1577,31 @@ namespace DesignerScripts
 
         public static void Hit3DamageWhenLoseHealth(BuffInfo buffInfo, DamageInfo damageInfo, GameObject target)
         {
-            //获取地方的状态
-            ChaState tempChaState = buffInfo.target.GetComponent<ChaState>();
+            if (damageInfo.diceType == DiceType.Attack)
+            {
+                //获取地方的状态
+                ChaState tempChaState = buffInfo.target.GetComponent<ChaState>();
 
-            //因为buff的回调点不知道最终伤害，所以就暂且直接扣血
-            tempChaState.ModResources(new ChaResource(-3, 0, 0, 0));
-            Debug.Log("受到伤害时对方受到3点伤害");
+                //因为buff的回调点不知道最终伤害，所以就暂且直接扣血
+                tempChaState.ModResources(new ChaResource(-3, 0, 0, 0));
+                Debug.Log("受到伤害时对方受到3点伤害");
+            }
 
         }
 
         public static void GainDodgeWhenLoseHealth(BuffInfo buffInfo, DamageInfo damageInfo)
         {
-            if(damageInfo.finalDamage>BattleManager.Instance.parameter.playerChaState.resource.currentShield &&damageInfo.diceType==DiceType.Attack&&damageInfo.defender== BattleManager.Instance.parameter.playerChaState.gameObject)
+            if (damageInfo.finalDamage > BattleManager.Instance.parameter.playerChaState.resource.currentShield && damageInfo.diceType == DiceType.Attack && damageInfo.defender == BattleManager.Instance.parameter.playerChaState.gameObject)
             {
                 int probability = Random.Range(1, 3);
                 //if (probability == 1)
                 //{
-                    BuffInfo newDodgeBuff = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target, 1, true);
-                    buffInfo.creator.GetComponent<ChaState>().AddBuff(newDodgeBuff, buffInfo.creator);
-                    Debug.Log("战斗开始获得1层闪避");
+                BuffInfo newDodgeBuff = new BuffInfo(DataInitManager.Instance.buffDataTable.buffData[BuffDataName.Dodge.ToString()], buffInfo.creator, buffInfo.target, 1, true);
+                buffInfo.creator.GetComponent<ChaState>().AddBuff(newDodgeBuff, buffInfo.creator);
+                Debug.Log("战斗开始获得1层闪避");
                 //}
             }
-            
+
         }
 
 

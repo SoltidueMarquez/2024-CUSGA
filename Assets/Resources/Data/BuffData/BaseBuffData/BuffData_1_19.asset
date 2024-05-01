@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1_19
   dataName: 96
+  buffName: "\u52C7\u6562"
   tags:
   - OnMyTurnEnd
   maxStack: 5

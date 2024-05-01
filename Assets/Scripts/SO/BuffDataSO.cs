@@ -32,7 +32,7 @@ namespace DesignerScripts
 
         [Tooltip("buff的名字")]
         public BuffDataName dataName;
-
+        public string buffName;
         //[Tooltip("存储buff的icon图标图片的名字（Resources文件夹下）")]
         //public string icon;
 
