@@ -19,11 +19,14 @@ public class SettingsManager : MonoSingleton<SettingsManager>
     public GameObject SettingsCanvas;
     public GameObject backToStartButton;
     public Toggle gameSpeedToggle;
+    public Toggle tutorToggle;
     public float gameSpeed = 1;
 
     void Start()
     {
         gameSpeedToggle.isOn = (PlayerPrefs.GetInt("GameSpeedToggle") == 1) ? true : false;
+        tutorToggle.isOn = (GameManager.Instance.ifTutorial);
+        
         OnClickSpeedToggle(gameSpeedToggle.isOn);
         Time.timeScale = gameSpeed;
 
@@ -156,6 +159,18 @@ public class SettingsManager : MonoSingleton<SettingsManager>
         }
         PlayerPrefs.Save();
         //Debug.Log("OnClickSpeedToggle   " + gameSpeed);
+    }
+
+    public void OnclickTutorToggle()
+    {
+        if (tutorToggle.isOn)
+        {
+            
+        }
+        else
+        {
+            
+        }
     }
 
     [Button]
