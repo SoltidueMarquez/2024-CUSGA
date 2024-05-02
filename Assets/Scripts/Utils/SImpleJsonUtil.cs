@@ -84,9 +84,17 @@ public static class SImpleJsonUtil
     /// <param name="fileName"></param>
     public static void DeleteData(string fileName)
     {
+#if UNITY_EDITOR
         if (File.Exists(Application.streamingAssetsPath + "/" + fileName))
         {
             File.Delete(Application.streamingAssetsPath + "/" + fileName);
         }
+#endif
+#if !UNITY_EDITOR
+        if (File.Exists(Application.persistentDataPath + "/" + fileName))
+        {
+            File.Delete(Application.persistentDataPath + "/" + fileName);
+        }
+#endif
     }
 }
