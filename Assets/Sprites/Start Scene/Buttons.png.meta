@@ -134,12 +134,12 @@ TextureImporter:
       name: Btn_Exit
       rect:
         serializedVersion: 2
-        x: 119
-        y: 65
-        width: 448
-        height: 189
+        x: 111
+        y: 54
+        width: 463
+        height: 212
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -155,12 +155,12 @@ TextureImporter:
       name: Btn_NewGame
       rect:
         serializedVersion: 2
-        x: 643
-        y: 98
-        width: 405
-        height: 144
+        x: 621
+        y: 81
+        width: 446
+        height: 173
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -176,12 +176,12 @@ TextureImporter:
       name: Btn_Setting
       rect:
         serializedVersion: 2
-        x: 146
-        y: 409
-        width: 253
-        height: 156
+        x: 132
+        y: 402
+        width: 286
+        height: 171
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -197,12 +197,12 @@ TextureImporter:
       name: Btn_Continue
       rect:
         serializedVersion: 2
-        x: 119
-        y: 705
-        width: 327
-        height: 139
+        x: 100
+        y: 695
+        width: 358
+        height: 158
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
