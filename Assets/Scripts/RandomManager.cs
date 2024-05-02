@@ -182,11 +182,11 @@ public static class RandomManager
         }
         else if (sum >= 15 && sum < 24)
         {
-            return GetRandomHalidomObj(RareType.Rare,currentHalidomList);
+            return GetRandomHalidomObj(RareType.Common,currentHalidomList);
         }
         else
         {
-            return GetRandomHalidomObj(RareType.Legendary, currentHalidomList);
+            return GetRandomHalidomObj(RareType.Rare, currentHalidomList);
         }
     }
 
