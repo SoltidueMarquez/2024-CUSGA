@@ -238,6 +238,7 @@ namespace Map
                         GameManager.Instance.storeTurtorial = true;
                     }
                 }
+            StoreManager.Instance.SetPlayer(this.playerChaState);
                 playerDataSO.playerRoomData.roomNums++;
                 playerChaState.RefreshRerollTimes();
                 UpdatePlayerUI();

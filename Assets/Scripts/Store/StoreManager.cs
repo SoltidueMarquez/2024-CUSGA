@@ -438,6 +438,10 @@ public class StoreManager : PersistentSingleton<StoreManager>
     }
 
     #endregion
+    public void SetPlayer(ChaState chaState)
+    {
+        player = chaState;
+    }
 }
 
 /// <summary>
