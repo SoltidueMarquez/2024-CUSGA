@@ -53,6 +53,10 @@ public class GameManager : MonoBehaviour
     public void NewGame()
     {
         //playerDataSO.ifUseSaveData = false;//这样就会在进入地图的时候重新生成地图
+        if(HalidomManager.Instance != null)
+        {
+            HalidomManager.Instance.ClearHalidomList();
+        }
         playerDataSO = ScriptableObject.CreateInstance<PlayerDataSO>();
         Debug.Log("NewGame");
         playerDataSO.InitPlaydataSOInstance(playerDataSOTemplate);

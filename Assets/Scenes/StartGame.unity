@@ -810,6 +810,7 @@ GameObject:
   - component: {fileID: 405069054}
   - component: {fileID: 405069057}
   - component: {fileID: 405069053}
+  - component: {fileID: 405069058}
   m_Layer: 5
   m_Name: ContinueButton
   m_TagString: Untagged
@@ -944,6 +945,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ifDoScale: 1
+--- !u!114 &405069058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405069051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0848bff101191904ead4bb831f7084db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BlurFactor: 1
+  m_Style: 2
+  m_AdditionalShadows: []
+  m_EffectColor: {r: 1, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &505616593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1682,6 +1701,7 @@ GameObject:
   - component: {fileID: 1190863188}
   - component: {fileID: 1190863191}
   - component: {fileID: 1190863187}
+  - component: {fileID: 1190863192}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -1804,6 +1824,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ifDoScale: 1
+--- !u!114 &1190863192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190863185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0848bff101191904ead4bb831f7084db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BlurFactor: 1
+  m_Style: 2
+  m_AdditionalShadows: []
+  m_EffectColor: {r: 1, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!114 &1257428931 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7057153511179615915, guid: e367eb73afc2d674081a4078beff2ad4, type: 3}
@@ -1828,6 +1866,7 @@ GameObject:
   - component: {fileID: 1258747151}
   - component: {fileID: 1258747154}
   - component: {fileID: 1258747150}
+  - component: {fileID: 1258747155}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -1962,6 +2001,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ifDoScale: 1
+--- !u!114 &1258747155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258747148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0848bff101191904ead4bb831f7084db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BlurFactor: 1
+  m_Style: 2
+  m_AdditionalShadows: []
+  m_EffectColor: {r: 1, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1323571941
 GameObject:
   m_ObjectHideFlags: 0
@@ -2445,6 +2502,7 @@ GameObject:
   - component: {fileID: 1531729131}
   - component: {fileID: 1531729134}
   - component: {fileID: 1531729130}
+  - component: {fileID: 1531729135}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -2579,6 +2637,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ifDoScale: 1
+--- !u!114 &1531729135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531729128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0848bff101191904ead4bb831f7084db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BlurFactor: 1
+  m_Style: 2
+  m_AdditionalShadows: []
+  m_EffectColor: {r: 1, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &1534034055
 PrefabInstance:
   m_ObjectHideFlags: 0
