@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Audio_Manager;
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.Store
 {
@@ -19,6 +19,12 @@ namespace UI.Store
         [SerializeField, Tooltip("生成模板")] private GameObject template;
         [SerializeField, Tooltip("结果列表")] private List<GameObject> resultList;
         [Tooltip("使用动画时长")]public float animTime;
+        [SerializeField, Tooltip("")] private Text reRollText;
+
+        public Text GetReRollText()
+        {
+            return reRollText;
+        }
         
         #region 轮盘按钮与栏位动画
         /// <summary>
