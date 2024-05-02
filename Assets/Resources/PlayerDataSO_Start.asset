@@ -15,11 +15,10 @@ MonoBehaviour:
   ifUseSaveData: 0
   baseProp:
     health: 100
-    money: 50
+    money: 0
     maxRollTimes: 1
     shield: 0
-  halidomSOs:
-  - {fileID: 11400000, guid: 2f0142e6bfa23e942be171af2fff235d, type: 2}
+  halidomSOs: []
   playerDiceSOItems:
   - diceType: 0
     singleDiceModelSOs:
@@ -61,9 +60,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 97e6b3be624ac4644a7c0f6a6c64faed, type: 2}
     - {fileID: 11400000, guid: 97e6b3be624ac4644a7c0f6a6c64faed, type: 2}
     - {fileID: 11400000, guid: 97e6b3be624ac4644a7c0f6a6c64faed, type: 2}
-  bagDiceSOList:
-  - {fileID: 11400000, guid: ea923a92ec4ba684ba53a60344722c7f, type: 2}
-  - {fileID: 11400000, guid: ea923a92ec4ba684ba53a60344722c7f, type: 2}
+  bagDiceSOList: []
   maxBagDiceCount: 6
   halidomDataForSaves: []
   battleDiceList:
