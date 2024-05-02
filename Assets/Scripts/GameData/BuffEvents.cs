@@ -2040,8 +2040,8 @@ namespace DesignerScripts
                 buffInfo.buffParam["IsFirstDeal"] = true;
             }*/
 
-            if (!(bool)buffInfo.buffParam["IsFirstDeal"])
-            {
+            //if (!(bool)buffInfo.buffParam["IsFirstDeal"])
+            //{
                 //拼接一个新的damageinfo
                 Damage damage = singleDiceObj.model.damage;
                 damage.indexDamageRate = singleDiceObj.idInDice;
@@ -2053,7 +2053,8 @@ namespace DesignerScripts
                                                     BattleManager.Instance.parameter.enemyChaStates[0].gameObject,
                                                     damage, singleDiceObj.model.type, singleDiceObj.level, null);
                     DamageManager.Instance.DoDamage(damageInfo);
-
+                    Debug.Log("双击入队列");
+                    
                 }
                 else
                 {
@@ -2063,21 +2064,19 @@ namespace DesignerScripts
                     DamageManager.Instance.DoDamage(damageInfo);
 
                 }
-                buffInfo.buffParam["IsFirstDeal"] = true;
-            }
+                //buffInfo.buffParam["IsFirstDeal"] = true;
+            //}
             return singleDiceObj;
         }
 
         public static SingleDiceObj TripleHit(BuffInfo buffInfo, SingleDiceObj singleDiceObj)
         {
 
-            if (!(bool)buffInfo.buffParam["IsFirstDeal"])
-            {
-
-                /* DamageInfo damageInfoCopy1 = new DamageInfo(damageInfo.attacker, damageInfo.defender, damageInfo.damage, damageInfo.diceType, damageInfo.level, damageInfo.addBuffs);
-                 DamageInfo damageInfoCopy2 = new DamageInfo(damageInfo.attacker, damageInfo.defender, damageInfo.damage, damageInfo.diceType, damageInfo.level, damageInfo.addBuffs);
-                 DamageManager.Instance.DoDamage(damageInfoCopy1);
-                 DamageManager.Instance.DoDamage(damageInfoCopy2);*/
+            //if (!(bool)buffInfo.buffParam["IsFirstDeal"])
+            //{
+                
+                
+                //因为damageinfo的拼接在触发骰面上oncast回调点之后，所以需要手动拼接一个damageinfo
                 Damage damage = singleDiceObj.model.damage;
                 damage.indexDamageRate = singleDiceObj.idInDice;
                 //拼装buffInfo
@@ -2103,9 +2102,9 @@ namespace DesignerScripts
 
 
                 Debug.Log("重复打出");
-                buffInfo.buffParam["IsFirstDeal"] = true;
+                //buffInfo.buffParam["IsFirstDeal"] = true;
 
-            }
+            //}
             return singleDiceObj;
         }
 
@@ -2113,7 +2112,21 @@ namespace DesignerScripts
         {
             BattleDiceHandler tempBattleDiceHandler = buffInfo.creator.GetComponent<ChaState>().GetBattleDiceHandler();
             var stack = tempBattleDiceHandler.GetPreviousSingleDicesStack();
-            return stack.Pop();
+            var finalDice = stack.Pop();
+            //因为castsingledice执行顺序的问题，先触发一遍上一个骰面的oncast
+            for (int i = 0; i < finalDice.model.buffInfos.Length; i++)
+            {
+                var item = new BuffInfo(finalDice.model.buffInfos[i]);
+                item.creator = buffInfo.creator;
+                item.target = buffInfo.creator;
+                if(item.buffData.OnCast!=null)
+                {
+                    Debug.Log(item.buffData.buffName);
+                }
+                var result = item.buffData.OnCast?.Invoke(item, finalDice);
+            }
+            //返还上一个骰面
+            return finalDice;
         }
 
 

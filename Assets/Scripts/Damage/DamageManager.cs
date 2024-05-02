@@ -88,7 +88,7 @@ public class DamageManager : MonoSingleton<DamageManager>
             {
                 HalidomManager.Instance.OnBeKilled(damageInfo);
             }
-            HalidomManager.Instance.OnBeKilled(damageInfo);
+            
             if (attackerChaState != null)
             {
                 foreach (var buff in attackerChaState.GetBuffHandler().buffList)
