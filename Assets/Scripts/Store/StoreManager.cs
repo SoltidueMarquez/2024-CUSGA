@@ -330,7 +330,7 @@ public class StoreManager : PersistentSingleton<StoreManager>
     private void ClickUpgrade()
     {
         //出现教程
-        if (clickNum == 0)
+        if (clickNum == 0 && GameManager.Instance.ifTutorial)
         {
             TutorialManager.Instance.EnterUI(TutorPage.Strength);
         }
