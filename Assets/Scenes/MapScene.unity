@@ -740,6 +740,18 @@ PrefabInstance:
       propertyPath: background
       value: 
       objectReference: {fileID: 21300000, guid: 51c1a22fddb67a848bc459649cd4c1c1, type: 3}
+    - target: {fileID: 5337413451386887161, guid: 6dc8f4ee6004b5345a5925b01e34cb27, type: 3}
+      propertyPath: linePointsCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337413451386887161, guid: 6dc8f4ee6004b5345a5925b01e34cb27, type: 3}
+      propertyPath: visitedColor.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337413451386887161, guid: 6dc8f4ee6004b5345a5925b01e34cb27, type: 3}
+      propertyPath: lineVisitedColor.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 6173653652465991376, guid: 6dc8f4ee6004b5345a5925b01e34cb27, type: 3}
       propertyPath: m_Name
       value: MapObjects
