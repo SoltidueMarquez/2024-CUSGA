@@ -34,6 +34,10 @@ namespace UI
         /// <param name="maxTime"></param>
         public void UpdateRerollText(int time, int maxTime)
         {
+            if (reRollText == null)
+            {
+                reRollText = RollUIManager.Instance.GetReRollText();
+            }
             reRollText.text = $"{time}/{maxTime}";
         }
 

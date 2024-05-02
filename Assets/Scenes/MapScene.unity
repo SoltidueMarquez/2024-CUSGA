@@ -391,6 +391,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5401888551033480856, guid: ead795afd3ad01246b092637d1ea4c59, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -427
+      objectReference: {fileID: 0}
     - target: {fileID: 6839266465601079859, guid: ead795afd3ad01246b092637d1ea4c59, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -411,6 +415,10 @@ PrefabInstance:
       propertyPath: m_FontData.m_MinSize
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 7381485503643075250, guid: ead795afd3ad01246b092637d1ea4c59, type: 3}
+      propertyPath: reRollText
+      value: 
+      objectReference: {fileID: 466220012}
     m_RemovedComponents:
     - {fileID: 3833636923987222188, guid: ead795afd3ad01246b092637d1ea4c59, type: 3}
     m_RemovedGameObjects: []
