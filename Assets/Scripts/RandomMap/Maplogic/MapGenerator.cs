@@ -40,6 +40,7 @@ namespace Map
 
             RemoveCrossConnections();
 
+            CheckIfMapRational();
             // select all the nodes with connections:
             var nodesList = nodes.SelectMany(n => n).Where(n => n.incoming.Count > 0 || n.outgoing.Count > 0).ToList();
 
@@ -277,6 +278,36 @@ namespace Map
             return path;
         }
 
+        private static void CheckIfMapRational()
+        {
+            for(var i = 0; i < nodes.Count; i++)
+                for(var j = 0; j < nodes[i].Count; j++)
+                {
+                    var layer = config.layers[i];
+                    var node = nodes[i][j];
+                    bool ifHasIncomingStore = false;
+                    //如果节点是商店，则前面不能是商店
+                    if (node.nodeType == NodeType.Store)
+                    {
+                        //遍历节点的前面的节点
+                        foreach(var incoming in node.incoming)
+                        {
+                            var incomingNode = GetNode(incoming);
+                            if (incomingNode.nodeType == NodeType.Store)
+                            {
+                                ifHasIncomingStore = true;
+                                break;
+                            }
+                        }
+                        if (ifHasIncomingStore)
+                        {
+                            //Debug.LogWarning("Store node has incoming store node!" + node.point.x + " " +node.point.y);
+                            node.nodeType =layer.nodeType;
+                            node.blueprintName = config.nodeBlueprints.Where(b => b.nodeType == layer.nodeType).ToList().Random().name;
+                        }
+                    }
+                }
+        }
         private static NodeType GetRandomNode(NodeType[] nodeTypes)
         {
             return nodeTypes[Random.Range(0, nodeTypes.Length)];

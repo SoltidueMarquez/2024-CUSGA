@@ -12,8 +12,8 @@ namespace Map
         public readonly List<Point> incoming = new List<Point>();
         public readonly List<Point> outgoing = new List<Point>();
         [JsonConverter(typeof(StringEnumConverter))]
-        public readonly NodeType nodeType;
-        public readonly string blueprintName;
+        public  NodeType nodeType;
+        public  string blueprintName;
         /// <summary>
         /// 具体的位置
         /// </summary>
