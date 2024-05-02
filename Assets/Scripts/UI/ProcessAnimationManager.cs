@@ -41,7 +41,7 @@ namespace UI
             foreach (var rotateObject in rotateObjects)
             {
                 var v3 = new Vector3(0, 0, rotateObject.rotateAngle-offset);
-                rotateObject.transform.DOLocalRotate(v3, rotateObject.rotateTime, RotateMode.FastBeyond360);
+                rotateObject.transform.DOLocalRotate(v3, rotateObject.rotateTime, RotateMode.FastBeyond360).SetEase(Ease.InOutElastic);
             }
         }
 
