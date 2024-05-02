@@ -46,8 +46,7 @@ namespace Map
                     }
                 }
                 //一些其他东西的初始化
-                StoreManager.Instance.OnExitStore.RemoveListener(OnExitShop);
-                StoreManager.Instance.OnExitStore.AddListener(OnExitShop);
+                
             }
         }
 

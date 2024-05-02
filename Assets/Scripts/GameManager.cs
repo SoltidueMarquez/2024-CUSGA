@@ -63,6 +63,10 @@ public class GameManager : MonoBehaviour
     }
     public void ContinueGame()
     {
+        if (HalidomManager.Instance != null)
+        {
+            HalidomManager.Instance.ClearHalidomList();
+        }
         //playerDataSO.LoadData();
         playerDataSO.ifUseSaveData = true;
     }

@@ -124,6 +124,7 @@ public class StoreManager : PersistentSingleton<StoreManager>
     private void CloseStore()
     {
         StartCoroutine(LateCloseStore());
+        MapManager.Instance.OnExitShop();
     }
     IEnumerator LateCloseStore()
     {
