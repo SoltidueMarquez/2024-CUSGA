@@ -4592,60 +4592,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &993230906
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 993230910}
-  - component: {fileID: 993230909}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &993230909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 993230906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d798c69edc7851d4792c2d28017ca26f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyDataSO: {fileID: 0}
-  ifLoadedHalidom: 0
-  currentMap: 
-  playerDataSOTemplate: {fileID: 0}
-  playerDataSO: {fileID: 0}
-  ifTutorial: 0
-  mapTurtorial: 0
-  battleTurtorial: 0
-  storeTurtorial: 0
-  rewardTurtorial: 0
---- !u!4 &993230910
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 993230906}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1021686752
 GameObject:
   m_ObjectHideFlags: 0
@@ -6949,6 +6895,7 @@ MonoBehaviour:
     - {fileID: 341200663}
     playerDataSO: {fileID: 11400000, guid: 8ce36af94eb94754f908a1a0b2be156e, type: 2}
     enemyDataSO: {fileID: 11400000, guid: ca768467329733c49a3099706f2c2e47, type: 2}
+    ifUsingDice: 0
   currentSelectEnemy: {fileID: 341200662}
 --- !u!4 &1590396381
 Transform:
@@ -9283,6 +9230,5 @@ SceneRoots:
   - {fileID: 341200666}
   - {fileID: 1997646022}
   - {fileID: 1309330681}
-  - {fileID: 993230910}
   - {fileID: 1270852496}
   - {fileID: 1142513634}

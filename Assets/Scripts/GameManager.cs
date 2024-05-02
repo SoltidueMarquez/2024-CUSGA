@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Awake");
         playerDataSO = ScriptableObject.CreateInstance<PlayerDataSO>();
         playerDataSO.InitPlaydataSOInstance(playerDataSOTemplate);
-        //ifFirstEnterGame();
+        ifFirstEnterGame();
     }
     void Start()
     {

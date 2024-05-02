@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2_18
   dataName: 28
+  buffName: 
   tags: []
   maxStack: 5
   duringCount: 0
   isPermanent: 1
   buffUpdateEnum: 0
   removeStackUpdateEnum: 0
-  onCreate: 3
+  onCreate: 0
   onRemove: 0
   onRoundStart: 0
   onRoundEnd: 0
@@ -30,8 +31,21 @@ MonoBehaviour:
   onKill: 0
   onBeKilled: 0
   onCast: 0
+  onAddBuff: 0
+  onGetFinalDamage: 0
   stateMod:
     ifCanChangePosition: 1
     canUseDice: 1
     ifImmune: 0
-  propMod: []
+  propMod:
+  - health: 5
+    money: 0
+    maxRollTimes: 0
+    shield: 0
+  - health: 0
+    money: 0
+    maxRollTimes: 0
+    shield: 0
+  paramList: []
+  description: 
+  sprite: {fileID: 0}
