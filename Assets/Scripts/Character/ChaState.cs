@@ -78,6 +78,7 @@ public class ChaState : MonoBehaviour
     /// </summary>
     public void UseAllDice()
     {
+        if(BattleManager.Instance.parameter.ifUsingDice) { return; }
         if (this.controlState.canUseDice == false)//如果不能使用骰子
         {
             Debug.Log("不能使用骰子");

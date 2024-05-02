@@ -144,6 +144,7 @@ public class BattleDiceHandler : MonoBehaviour
                 }
                 if (BattleManager.Instance.GetCurrentState() == BattleManager.Instance.GetStates()[GameState.PlayerWin] || (BattleManager.Instance.GetCurrentState() == BattleManager.Instance.GetStates()[GameState.Reward]))
                 {
+                    BattleManager.Instance.parameter.ifUsingDice = false;
                     cancellationToken.Cancel();
                     //RollingResultUIManager.Instance.RemoveAllResultUI(Strategy.ReRoll);
                     return;
