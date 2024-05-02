@@ -62,7 +62,7 @@ MonoBehaviour:
     shield: 0
   enemyBuffs:
   - buffDataSO: {fileID: 11400000, guid: e5be8aa8e5d04204db1dcf3eb2bcf26d, type: 2}
-    buffStack: 1
+    buffStack: 3
     buffRound: 0
   enemySprite: {fileID: 21300000, guid: bfc927ad383847846ae409c70f45edf8, type: 3}
   enemyBackgroundSprite: {fileID: 21300000, guid: 1a5ae40a048c1cf4da411d91c3aa042c, type: 3}

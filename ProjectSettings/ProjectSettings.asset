@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: "\u6709\u7684\u662F\u5E15\u9C81"
   productName: DiceAbyss
-  defaultCursor: {fileID: 2800000, guid: 000379d003145944f9ebf14e6629cfd4, type: 3}
+  defaultCursor: {fileID: 2800000, guid: 9c26beae10f6be24a967988c3ad7a808, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
