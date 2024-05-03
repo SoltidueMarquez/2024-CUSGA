@@ -583,6 +583,7 @@ namespace DesignerScripts
         {
             int bleedDamage = 2 * buffInfo.curStack;
             //这边还没决定好，是直接扣血，还是调用伤害函数，因为可能在damageManager里会有接视觉表现，例如跳数字的效果，但是如果直接在这边扣血，那就需要在这边也调用视觉表现
+
             buffInfo.target.GetComponent<ChaState>().ModResources(new ChaResource(-bleedDamage, 0, 0, 0));
             Debug.Log("流血造成" + bleedDamage + "伤害");
 

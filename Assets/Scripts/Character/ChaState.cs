@@ -1,5 +1,6 @@
 using UI;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 /// <summary>
 /// 玩家和敌人共有的类，是玩家和敌人的的总控，敌人通过AI控制，玩家通过在战斗时对UI进行交互，调用chaState中的函数
 /// </summary>
@@ -127,6 +128,7 @@ public class ChaState : MonoBehaviour
     {
         //TODO:玩家死亡的逻辑
         Debug.Log(this.gameObject.name + "死亡");
+        
         BattleManager.Instance.EndGame(this.side);
     }
     /// <summary>
@@ -179,7 +181,42 @@ public class ChaState : MonoBehaviour
         {
             this.Kill();
         }
+    }
+    public void ModResources(ChaResource chaResource,DamageInfo damageInfo)
+    {
+        if(Mathf.Abs(chaResource.currentHp) > this.resource.currentHp)
+        {
+            //说明可以被杀死
+            if(this.side == 0)
+            {
+                HalidomManager.Instance.OnBeKilled(damageInfo);
+            }
+            else
+            {
+                HalidomManager.Instance.OnKill(damageInfo);
+            }
+            chaResource.currentHp = 0;
+        }
+        this.resource += chaResource;
+        this.resource.currentRollTimes = Mathf.Clamp(this.resource.currentRollTimes, 0, this.prop.maxRollTimes);
+        this.resource.currentShield = Mathf.Clamp(this.resource.currentShield, 0, this.resource.currentShield);
+        if (CharacterUIManager.Instance != null)
+        {
+            CharacterUIManager.Instance.UpdateShieldUI((Character)this.side, this.resource.currentShield);
+            CharacterUIManager.Instance.ChangeHealthSlider((Character)side, this.resource.currentHp, this.prop.health);
+        }
 
+        if (this.side == 0)
+        {
+            if (DataUIManager.Instance != null)
+            {
+                DataUIManager.Instance.UpdateMoneyText(this.resource.currentMoney, true);
+            }
+        }
+        if (this.resource.currentHp <= 0)
+        {
+            this.Kill();
+        }
 
     }
     //更新重投次数
