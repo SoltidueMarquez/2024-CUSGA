@@ -166,7 +166,7 @@ namespace Map
             public void InitializeHalidom()
             {
                 //如果1ifUseSaveData为true，那么就是使用存档数据，对宇圣物来说，就是存在圣物manager中的list,因为圣物manager DontDestroyOnLoad
-                if (playerDataSO.ifUseSaveData || GameManager.Instance.ifLoadedHalidom)
+                if (playerDataSO.ifUseSaveData)
                 {
                     HalidomManager.Instance.InitHalidomUI(GameScene.MapScene);
                     HalidomManager.Instance.InitHalidomInMapScene();

@@ -114,7 +114,7 @@ public class HalidomManager : MonoBehaviour
                 BattleManager.Instance.parameter.playerChaState.AttrAndResourceRecheck();
                 SacredObjectUIManager.Instance.CreateSacredUIObject(SellHalidom, halidomObject);
                 Debug.Log("<color=#3399FF>HalidomManager-添加圣物:</color>" + halidomObject.halidomName + "成功");
-                
+
                 //找到空的格子后就跳出循环
                 break;
             }
@@ -216,7 +216,7 @@ public class HalidomManager : MonoBehaviour
         for (var i = 0; i < buffProp.Length; i++)
         {
             buffProp[i].Zero();
-            
+
         }
         //遍历圣物数组
         foreach (var halidom in halidomList)
@@ -313,7 +313,7 @@ public class HalidomManager : MonoBehaviour
         }
         return halidomDataForSaveList;
     }
-    
+
     #endregion
     #region 圣物回调点
     public void OnRoundStart()
@@ -332,7 +332,7 @@ public class HalidomManager : MonoBehaviour
                         buffInfo.buffData.onRoundStart?.Invoke(buffInfo);
                         //触发圣物闪烁
                         SacredObjectUIManager.Instance.DoFlick(halidomList[i].id);
-                        
+
                     }
 
                     if (buffInfo.isPermanent == false)//非永久buff
@@ -485,11 +485,11 @@ public class HalidomManager : MonoBehaviour
                     {
                         buffInfo.buffData.onRoll?.Invoke(buffInfo);
                         //触发圣物闪烁
-                        if(SceneLoader.Instance.currentGameScene == GameScene.BattleScene)
+                        if (SceneLoader.Instance.currentGameScene == GameScene.BattleScene)
                         {
                             SacredObjectUIManager.Instance.DoFlick(halidomList[i].id);
                         }
-                        else if(SceneLoader.Instance.currentGameScene == GameScene.MapScene)
+                        else if (SceneLoader.Instance.currentGameScene == GameScene.MapScene)
                         {
                             MapSacredUIManager.Instance.DoFlick(halidomList[i].id);
                         }
@@ -533,8 +533,8 @@ public class HalidomManager : MonoBehaviour
                     //需要整体判断这个委托是否为空
                     if (buffInfo.buffData.onGetFinalDamage != null)
                     {
-                        buffInfo.buffData.onGetFinalDamage?.Invoke(buffInfo,damageInfo);
-                        
+                        buffInfo.buffData.onGetFinalDamage?.Invoke(buffInfo, damageInfo);
+
                     }
                 }
 
@@ -669,15 +669,29 @@ public class HalidomManager : MonoBehaviour
         }
         else if (currentScene == GameScene.MapScene)
         {
-            for (int i = 0; i < GameManager.Instance.playerDataSO.halidomDataForSaves.Count; i++)
+            if (!GameManager.Instance.ifLoadedHalidom)
             {
-                var halidomData = GameManager.Instance.playerDataSO.halidomDataForSaves[i];
-                HalidomObject halidomObject = new HalidomObject(DataInitManager.Instance.halidomDataTable.halidomDictionary[halidomData.halidomName]);
-                halidomObject.buffInfos[0].buffParam = halidomData.halidomDataParamsDict;
-                AddHalidomInMap(halidomObject);
+                for (int i = 0; i < GameManager.Instance.playerDataSO.halidomDataForSaves.Count; i++)
+                {
+                    var halidomData = GameManager.Instance.playerDataSO.halidomDataForSaves[i];
+                    HalidomObject halidomObject = new HalidomObject(DataInitManager.Instance.halidomDataTable.halidomDictionary[halidomData.halidomName]);
+                    halidomObject.buffInfos[0].buffParam = halidomData.halidomDataParamsDict;
+                    AddHalidomInMap(halidomObject);
+                }
+                GameManager.Instance.ifLoadedHalidom = true;
+            }
+            else
+            {
+                for (int i = 0; i < halidomList.Length; i++)
+                {
+                    if (halidomList[i] != null)
+                    {
+                        MapSacredUIManager.Instance.CreateSacredUIObject(SellHalidomInMap, halidomList[i]);
+                    }
+                }
             }
         }
-        
+
         UpdateHalidomDescription();
     }
     #endregion
@@ -704,19 +718,19 @@ public class HalidomManager : MonoBehaviour
     }
     public void UpdateHalidomDescription()
     {
-        for (int i = 0; i <halidomList.Length; i++)
+        for (int i = 0; i < halidomList.Length; i++)
         {
             if (halidomList[i] != null)
             {
                 string des = halidomList[i].description;
                 string result = ResourcesManager.GetHalidomDescription(halidomList[i].id);
                 //更新UI描述
-                if(SceneLoader.Instance.currentGameScene == GameScene.MapScene)
+                if (SceneLoader.Instance.currentGameScene == GameScene.MapScene)
                 {
                     Debug.Log("在地图执行");
                     MapSacredUIManager.Instance.UpdateDesc(halidomList[i].id, result);
                 }
-                else if(SceneLoader.Instance.currentGameScene == GameScene.BattleScene)
+                else if (SceneLoader.Instance.currentGameScene == GameScene.BattleScene)
                 {
                     Debug.Log("在战斗场景执行");
                     SacredObjectUIManager.Instance.UpdateDesc(halidomList[i].id, result);

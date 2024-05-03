@@ -159,7 +159,7 @@ public class ChaState : MonoBehaviour
         //this.resource.currentMoney = Mathf.Clamp(this.resource.currentMoney, 0, this.prop.money);
         this.resource.currentRollTimes = Mathf.Clamp(this.resource.currentRollTimes, 0, this.prop.maxRollTimes);
         //这边对盾条还是需要斟酌一下
-        //this.resource.currentShield = Mathf.Clamp(this.resource.currentShield, 0, this.prop.shield);
+        this.resource.currentShield = Mathf.Clamp(this.resource.currentShield, 0, this.resource.currentShield);
         this.resource.currentHp = Mathf.Clamp(this.resource.currentHp, 0, this.prop.health);
 
         if (CharacterUIManager.Instance != null)
