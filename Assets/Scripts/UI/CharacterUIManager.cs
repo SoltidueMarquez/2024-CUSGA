@@ -248,7 +248,6 @@ namespace UI
         /// </summary>
         public void UseOtherDice(Character character)
         {
-            Debug.LogWarning("角色动画");
             switch (character)
             {
                 case Character.Enemy:
