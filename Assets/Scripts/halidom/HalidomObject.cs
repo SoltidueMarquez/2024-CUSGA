@@ -54,7 +54,22 @@ public class HalidomObject
         this.buffInfos = buffinfo;
     }
 
-    
+    public HalidomObject(HalidomObject halidomObject)
+    {
+        this.rareType = halidomObject.rareType;
+        this.id = halidomObject.id;
+        this.halidomName = halidomObject.halidomName;
+        this.description = halidomObject.description;
+        this.value = halidomObject.value;
+        if(halidomObject.buffInfos == null)
+        {
+            this.buffInfos = new List<BuffInfo>();
+        }
+        else
+        {
+            this.buffInfos = new List<BuffInfo>(halidomObject.buffInfos);
+        }
+    }
 }
 
 

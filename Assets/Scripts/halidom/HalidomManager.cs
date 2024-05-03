@@ -657,20 +657,27 @@ public class HalidomManager : MonoBehaviour
     #region 初始化UI相关
     public void InitHalidomUI(GameScene currentScene)
     {
-        for (int i = 0; i < halidomList.Length; i++)
+        if (currentScene == GameScene.BattleScene)
         {
-            if (halidomList[i] != null)
+            for (int i = 0; i < halidomList.Length; i++)
             {
-                if (currentScene == GameScene.BattleScene)
+                if (halidomList[i] != null)
                 {
                     SacredObjectUIManager.Instance.CreateSacredUIObject(SellHalidom, halidomList[i]);
                 }
-                else if (currentScene == GameScene.MapScene)
-                {
-                    MapSacredUIManager.Instance.CreateSacredUIObject(SellHalidom, halidomList[i]);
-                }
             }
         }
+        else if (currentScene == GameScene.MapScene)
+        {
+            for (int i = 0; i < GameManager.Instance.playerDataSO.halidomDataForSaves.Count; i++)
+            {
+                var halidomData = GameManager.Instance.playerDataSO.halidomDataForSaves[i];
+                HalidomObject halidomObject = new HalidomObject(DataInitManager.Instance.halidomDataTable.halidomDictionary[halidomData.halidomName]);
+                halidomObject.buffInfos[0].buffParam = halidomData.halidomDataParamsDict;
+                AddHalidomInMap(halidomObject);
+            }
+        }
+        
         UpdateHalidomDescription();
     }
     #endregion

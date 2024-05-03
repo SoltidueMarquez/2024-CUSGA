@@ -155,6 +155,13 @@ public class PlayerDataSO : ScriptableObject
     {
         this.currentMap = mapString;
     }
+    public void UpdateHalidomDataInPlayerDataSO()
+    {
+        if (HalidomManager.Instance != null)
+        {
+            halidomDataForSaves = HalidomManager.Instance.GetHalidomDataForSaves();
+        }
+    }
     /// <summary>
     /// 根据敌人的类型更新玩家的房间数据
     /// </summary>
