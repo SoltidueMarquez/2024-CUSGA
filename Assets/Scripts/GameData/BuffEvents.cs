@@ -584,7 +584,7 @@ namespace DesignerScripts
             int bleedDamage = 2 * buffInfo.curStack;
             //这边还没决定好，是直接扣血，还是调用伤害函数，因为可能在damageManager里会有接视觉表现，例如跳数字的效果，但是如果直接在这边扣血，那就需要在这边也调用视觉表现
 
-            buffInfo.target.GetComponent<ChaState>().ModResources(new ChaResource(-bleedDamage, 0, 0, 0));
+            buffInfo.target.GetComponent<ChaState>().ModResources(new ChaResource(-bleedDamage, 0, 0, 0), new DamageInfo(buffInfo.creator, buffInfo.target, new Damage(5, 0), DiceType.Attack, 0, null));
             Debug.Log("流血造成" + bleedDamage + "伤害");
 
         }
@@ -872,7 +872,7 @@ namespace DesignerScripts
             {
                 //计算出超出护盾伤害
                 int damage = Mathf.Abs(damageInfo.finalDamage - damageInfo.attacker.GetComponent<ChaState>().resource.currentShield);
-                damageInfo.attacker.GetComponent<ChaState>().ModResources(new ChaResource(-damage, 0, 0, 0));
+                damageInfo.attacker.GetComponent<ChaState>().ModResources(new ChaResource(-damage, 0, 0, 0),new DamageInfo(damageInfo.defender,damageInfo.attacker,new Damage(damage,0),DiceType.Attack,0,null));
                 Debug.Log("反射造成" + damage + "伤害");
                 buffInfo.curStack--;
                 if (buffInfo.curStack == 0)
@@ -926,7 +926,7 @@ namespace DesignerScripts
                 if (tempChaState.resource.currentShield == 0)
                 {
                     int damage = (int)buffInfo.buffParam["Value"];
-                    tempChaState.ModResources(new ChaResource(-damage, 0, 0, 0));
+                    tempChaState.ModResources(new ChaResource(-damage, 0, 0, 0), new DamageInfo(damageInfo.defender, damageInfo.attacker, new Damage(damage, 0), DiceType.Attack, 0, null));
                     Debug.Log("尖刺生效，攻击方受到" + damage + "伤害");
                 }
             }
@@ -1818,7 +1818,7 @@ namespace DesignerScripts
             if (probability == 1)
             {
                 ChaState tempChaState = buffInfo.creator.GetComponent<ChaState>();
-                tempChaState.ModResources(new ChaResource(-50, 0, 0, 0));
+                tempChaState.ModResources(new ChaResource(-50, 0, 0, 0), new DamageInfo(buffInfo.creator, buffInfo.creator, new Damage(50, 0), DiceType.Attack, 0, null));
             }
         }
 
