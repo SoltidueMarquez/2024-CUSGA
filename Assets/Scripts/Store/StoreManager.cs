@@ -115,7 +115,7 @@ public class StoreManager : PersistentSingleton<StoreManager>
         OnRefreshStore?.Invoke();
 
         //重置刷新次数
-        player.resource.currentRollTimes = player.baseProp.maxRollTimes;
+        player.resource.currentRollTimes = player.prop.maxRollTimes;
 
         //重置强化费用
         upgradeCost = upgradeCostOrigin;
