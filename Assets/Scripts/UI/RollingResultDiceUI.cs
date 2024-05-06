@@ -45,10 +45,6 @@ namespace UI
             pageAndIndex = position;
             button?.onClick.AddListener(() =>
             {
-                if (AudioManager.Instance != null)
-                {
-                    AudioManager.Instance.PlayRandomSound("clickDown");
-                }
                 CostCheck();//检测费用是否足够使用
             });
             
@@ -88,14 +84,21 @@ namespace UI
         /// </summary>
         private void CostCheck()
         {
-            var currentCost = 0;
+            var currentCost = BattleManager.Instance.GetCurrentSumCost();
             if (currentCost < idInDice)//如果费用不够就播放动画
             {
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayRandomSound("lackCost");
+                }
                 costSequence.Restart();
-                Debug.LogWarning("费用不够");
             }
             else
             {
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayRandomSound("clickDown");
+                }
                 BattleManager.Instance.parameter.playerChaState.UseDice(index, BattleManager.Instance.currentSelectEnemy);
                 OnUseDestroy();//摧毁物体
             }
