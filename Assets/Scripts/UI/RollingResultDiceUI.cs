@@ -25,7 +25,10 @@ namespace UI
         private Vector3 moveOffset;
         private Image image;
         private Button button;
+        private float idInDice;
 
+        private Sequence costSequence;
+        
         /// <summary>
         /// 初始化函数
         /// </summary>
@@ -46,8 +49,7 @@ namespace UI
                 {
                     AudioManager.Instance.PlayRandomSound("clickDown");
                 }
-                BattleManager.Instance.parameter.playerChaState.UseDice(index, BattleManager.Instance.currentSelectEnemy);
-                OnUseDestroy();//摧毁物体
+                CostCheck();//检测费用是否足够使用
             });
             
             //根据id初始化信息
@@ -59,8 +61,44 @@ namespace UI
             infoText.text = $"{data.description}" ;
             this.GetComponent<Image>().sprite = data.sprite;
             idInDiceText.text = data.idInDice.ToString();
+            
+            idInDice = data.idInDice;
+            InitCostAnim();
+            costSequence.Pause();
         }
 
+        #region 费用相关
+        private void InitCostAnim()
+        {
+            costSequence = DOTween.Sequence();
+            Tween costTween1 = image.DOColor(Color.red, useDuration / 5f);
+            Tween costTween2 = image.DOColor(Color.white, useDuration / 5f);
+            costSequence.Append(costTween1);
+            costSequence.Append(costTween2);
+            costSequence.SetLoops(3);
+            costSequence.SetAutoKill(false);
+        }
+        
+        /// <summary>
+        /// 使用费用检测
+        /// </summary>
+        private void CostCheck()
+        {
+            var currentCost = 0;
+            if (currentCost < idInDice)//如果费用不够就播放动画
+            {
+                costSequence.Restart();
+                Debug.LogWarning("费用不够");
+            }
+            else
+            {
+                BattleManager.Instance.parameter.playerChaState.UseDice(index, BattleManager.Instance.currentSelectEnemy);
+                OnUseDestroy();//摧毁物体
+            }
+        }
+        #endregion
+
+        #region 销毁函数
         /// <summary>
         /// 使用时销毁函数
         /// </summary>
@@ -101,6 +139,7 @@ namespace UI
             yield return new WaitForSeconds(animTime);
             Destroy(gameObject);
         }
+        #endregion
         
         /// <summary>
         /// 点击无效化函数
@@ -118,9 +157,8 @@ namespace UI
             image.DOFade(1, animTime);
             idInDiceText.DOFade(1, useDuration / 2);
         }
-        
-        
-        
+
+        #region 跳转战斗骰面页
         private void JumpToPosition(Vector2Int position)
         {
             if (FightDicePageManager.Instance == null) { return;}
@@ -132,7 +170,9 @@ namespace UI
             if (FightDicePageManager.Instance == null) { return;}
             FightDicePageManager.Instance.RevertMarkColumn();
         }
+        #endregion
 
+        #region UI效果
         /// <summary>
         /// 骰面预览
         /// </summary>
@@ -156,5 +196,7 @@ namespace UI
             RevertMark();
             infoCanvas.SetActive(false);
         }
+        #endregion
+        
     }
 }
