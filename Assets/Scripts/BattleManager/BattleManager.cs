@@ -42,6 +42,8 @@ public class FSMParameter
     public EnemyDataSO enemyDataSO;
     //用于记录是否是否在使用骰子中，使用骰子中的时候，不会进行其他操作
     public bool ifUsingDice;
+
+    public int currentMaxCost;
 }
 
 public enum GameState
@@ -247,6 +249,8 @@ public class BattleManager : MonoBehaviour
         this.parameter.playerChaState.GetBattleDiceHandler().InitBagDiceUI(SellSingleDice);
         //直接用存档的数值覆盖playerChaState的数值
 
+        //给battleManager的变量赋值
+        this.parameter.currentMaxCost = this.parameter.playerChaState.resource.currentSumCost;
 
     }
     public void InitializeHalidom()
@@ -639,6 +643,19 @@ public class BattleManager : MonoBehaviour
     public Dictionary<GameState, IState> GetStates()
     {
         return states;
+    }
+    #endregion
+
+    #region UI调用
+    public int GetCurrentSumCost()
+    {
+        return this.parameter.playerChaState.resource.currentSumCost;
+    }
+    #endregion
+    #region 局内商店调用
+    public int GetCurrentMaxCost()
+    {
+        return this.parameter.currentMaxCost;
     }
     #endregion
 }
