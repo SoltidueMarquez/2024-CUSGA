@@ -354,6 +354,7 @@ public class PlayerWinState : IState
         Debug.Log("Enter PlayerWinState");
         //在这边进行一些数据的更新.和刷新
         this.manager.parameter.playerChaState.RefreshRerollTimes();//刷新玩家的重投次数
+        this.manager.RefreshCurrentMaxCost();//刷新玩家的最大使用点数和
         this.manager.parameter.playerDataSO.UpdatePlayerRoomData(this.manager.parameter.enemyDataSO);
         if (GameManager.Instance.CheckIfPassGame())
         {

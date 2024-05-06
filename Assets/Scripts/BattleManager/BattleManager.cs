@@ -42,6 +42,8 @@ public class FSMParameter
     public EnemyDataSO enemyDataSO;
     //用于记录是否是否在使用骰子中，使用骰子中的时候，不会进行其他操作
     public bool ifUsingDice;
+
+    public int currentMaxCost;
 }
 
 public enum GameState
@@ -247,6 +249,8 @@ public class BattleManager : MonoBehaviour
         this.parameter.playerChaState.GetBattleDiceHandler().InitBagDiceUI(SellSingleDice);
         //直接用存档的数值覆盖playerChaState的数值
 
+        //给battleManager的变量赋值
+        this.parameter.currentMaxCost = this.parameter.playerChaState.resource.currentSumCost;
 
     }
     public void InitializeHalidom()
@@ -584,7 +588,8 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void EndBattle()
     {
-        this.parameter.playerChaState.RefreshRerollTimes();
+        //this.parameter.playerChaState.RefreshRerollTimes();
+        //this.RefreshCurrentMaxCost();
         this.parameter.playerChaState.RefreshShield();
         this.parameter.playerDataSO.UpdatePlayerDataSO(parameter.playerChaState);
         this.parameter.playerDataSO.UpdataPlayerDataSoMap(GameManager.Instance.currentMap);
@@ -618,6 +623,7 @@ public class BattleManager : MonoBehaviour
     public void OnPlayerRoundEnd()
     {
         this.parameter.playerChaState.RefreshRerollTimes();
+        this.RefreshCurrentMaxCost();//在玩家回合结束时，将当前的玩家cost和设置为最大cost
         this.parameter.playerChaState.GetBuffHandler().BuffRoundEndTick(0);
         this.parameter.enemyChaStates[0].GetBuffHandler().BuffRoundEndTick(1);
         this.parameter.playerChaState.GetBattleDiceHandler().ClearBattleSingleDices();
@@ -641,6 +647,24 @@ public class BattleManager : MonoBehaviour
         return states;
     }
     #endregion
+
+    #region UI调用
+    public int GetCurrentSumCost()
+    {
+        return this.parameter.playerChaState.resource.currentSumCost;
+    }
+    #endregion
+    #region 局内商店调用
+    public int GetCurrentMaxCost()
+    {
+        return this.parameter.currentMaxCost;
+    }
+    #endregion
+    public void RefreshCurrentMaxCost()
+    {
+        this.parameter.playerChaState.resource.currentSumCost = this.parameter.currentMaxCost;
+        this.parameter.playerChaState.ModResources(new ChaResource(0, 0, 0, 0));
+    }
 }
 //定义了一个回调，用于在UI动画结束时调用
 public delegate void OnUIAnimFinished();

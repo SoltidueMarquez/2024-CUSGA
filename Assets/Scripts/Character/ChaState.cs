@@ -1,3 +1,4 @@
+using System;
 using UI;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
@@ -55,7 +56,7 @@ public class ChaState : MonoBehaviour
         string temp = this.side == 0 ? "当前玩家的buff数" : "当前敌人的buff数";
         Debug.Log(temp + this.buffHandler.buffList.Count);
     }
-
+    [Obsolete]
     public void OnRoundEnd()
     {
         RefreshRerollTimes();
@@ -163,7 +164,8 @@ public class ChaState : MonoBehaviour
         //这边对盾条还是需要斟酌一下
         this.resource.currentShield = Mathf.Clamp(this.resource.currentShield, 0, this.resource.currentShield);
         this.resource.currentHp = Mathf.Clamp(this.resource.currentHp, 0, this.prop.health);
-        this.resource.currentSumCost = Mathf.Clamp(this.resource.currentSumCost, 0, this.prop.maxCost);
+        //因为这边的currentSumCost并不是buff添加的，所以不需要clamp
+        this.resource.currentSumCost = Mathf.Clamp(this.resource.currentSumCost, 0, this.resource.currentSumCost);
         if (CharacterUIManager.Instance != null)
         {
             CharacterUIManager.Instance.UpdateShieldUI((Character)this.side, this.resource.currentShield);
@@ -225,6 +227,7 @@ public class ChaState : MonoBehaviour
     {
         this.ModResources(new ChaResource(0, 0, this.prop.maxRollTimes, 0));
     }
+    
     public void RefreshShield()
     {
         this.resource.currentShield = 0;
