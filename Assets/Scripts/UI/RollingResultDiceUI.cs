@@ -62,12 +62,16 @@ namespace UI
             this.GetComponent<Image>().sprite = data.sprite;
             idInDiceText.text = data.idInDice.ToString();
             
+            //用于费用检测
             idInDice = data.idInDice;
             InitCostAnim();
             costSequence.Pause();
         }
 
         #region 费用相关
+        /// <summary>
+        /// 缺费动画
+        /// </summary>
         private void InitCostAnim()
         {
             costSequence = DOTween.Sequence();
