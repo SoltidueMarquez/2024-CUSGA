@@ -588,7 +588,8 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void EndBattle()
     {
-        this.parameter.playerChaState.RefreshRerollTimes();
+        //this.parameter.playerChaState.RefreshRerollTimes();
+        //this.RefreshCurrentMaxCost();
         this.parameter.playerChaState.RefreshShield();
         this.parameter.playerDataSO.UpdatePlayerDataSO(parameter.playerChaState);
         this.parameter.playerDataSO.UpdataPlayerDataSoMap(GameManager.Instance.currentMap);
@@ -622,6 +623,7 @@ public class BattleManager : MonoBehaviour
     public void OnPlayerRoundEnd()
     {
         this.parameter.playerChaState.RefreshRerollTimes();
+        this.RefreshCurrentMaxCost();//在玩家回合结束时，将当前的玩家cost和设置为最大cost
         this.parameter.playerChaState.GetBuffHandler().BuffRoundEndTick(0);
         this.parameter.enemyChaStates[0].GetBuffHandler().BuffRoundEndTick(1);
         this.parameter.playerChaState.GetBattleDiceHandler().ClearBattleSingleDices();
@@ -658,6 +660,11 @@ public class BattleManager : MonoBehaviour
         return this.parameter.currentMaxCost;
     }
     #endregion
+    public void RefreshCurrentMaxCost()
+    {
+        this.parameter.playerChaState.resource.currentSumCost = this.parameter.currentMaxCost;
+        this.parameter.playerChaState.ModResources(new ChaResource(0, 0, 0, 0));
+    }
 }
 //定义了一个回调，用于在UI动画结束时调用
 public delegate void OnUIAnimFinished();
