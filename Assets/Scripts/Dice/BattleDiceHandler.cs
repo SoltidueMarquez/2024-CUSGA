@@ -47,10 +47,11 @@ public class BattleDiceHandler : MonoBehaviour
     {
         SingleDiceObj singleDiceObj = diceCardsInUse[index];
         if (singleDiceObj == null) return;//非空判断
-        if (chaState.resource.Enough(singleDiceObj.model.condition) == true)
+        if (chaState.resource.Enough(singleDiceObj.model.condition))
         {
             //减少资源
-            chaState.ModResources(-1 * singleDiceObj.model.cost);
+            ChaResource trueCost = singleDiceObj.model.cost + new ChaResource(0,0,0,0,singleDiceObj.idInDice);
+            chaState.ModResources(-1 * trueCost);
             diceCardsInUse[index] = null;
             //释放骰子
             if (singleDiceObj.model.buffInfos.Length > 0)
