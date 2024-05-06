@@ -31,7 +31,7 @@ public class ChaState : MonoBehaviour
     /// <summary>
     /// 玩家当前的资源,这个在全局的过程中都不变，可能在局外变化
     /// </summary>
-    public ChaResource resource = new();
+    public ChaResource resource = new(0,0,0,0,0);
     public ChaControlState controlState = new ChaControlState(true, true, false);
 
     /// <summary>
@@ -163,7 +163,7 @@ public class ChaState : MonoBehaviour
         //这边对盾条还是需要斟酌一下
         this.resource.currentShield = Mathf.Clamp(this.resource.currentShield, 0, this.resource.currentShield);
         this.resource.currentHp = Mathf.Clamp(this.resource.currentHp, 0, this.prop.health);
-
+        this.resource.currentSumCost = Mathf.Clamp(this.resource.currentSumCost, 0, this.prop.maxCost);
         if (CharacterUIManager.Instance != null)
         {
             CharacterUIManager.Instance.UpdateShieldUI((Character)this.side, this.resource.currentShield);
@@ -200,6 +200,7 @@ public class ChaState : MonoBehaviour
         this.resource += chaResource;
         this.resource.currentRollTimes = Mathf.Clamp(this.resource.currentRollTimes, 0, this.prop.maxRollTimes);
         this.resource.currentShield = Mathf.Clamp(this.resource.currentShield, 0, this.resource.currentShield);
+        this.resource.currentSumCost = Mathf.Clamp(this.resource.currentSumCost, 0, this.prop.maxCost);
         if (CharacterUIManager.Instance != null)
         {
             CharacterUIManager.Instance.UpdateShieldUI((Character)this.side, this.resource.currentShield);

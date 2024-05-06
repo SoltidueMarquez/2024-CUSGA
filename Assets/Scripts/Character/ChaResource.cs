@@ -25,6 +25,7 @@ public class ChaResource
     /// </summary>
     public int currentShield;
 
+    public int currentSumCost;
     public ChaResource(int currentHp = 0, int currentMoney = 0, int currentRollTimes = 0, int currentShield = 0)
     {
         this.currentHp = currentHp;
@@ -32,7 +33,14 @@ public class ChaResource
         this.currentRollTimes = currentRollTimes;
         this.currentShield = currentShield;
     }
-
+    public ChaResource(int currentHp = 0, int currentMoney = 0, int currentRollTimes = 0, int currentShield = 0, int currentSumCost = 0)
+    {
+        this.currentHp = currentHp;
+        this.currentMoney = currentMoney;
+        this.currentRollTimes = currentRollTimes;
+        this.currentShield = currentShield;
+        this.currentSumCost = currentSumCost;
+    }
     public static ChaResource zero = new ChaResource(0, 0, 0, 0);
 
     public static ChaResource operator +(ChaResource a, ChaResource b)
@@ -51,17 +59,19 @@ public class ChaResource
             {
                 resultHp = a.currentHp;
             }
-            return new ChaResource(resultHp, a.currentMoney + b.currentMoney, a.currentRollTimes + b.currentRollTimes, resultShield);
+            return new ChaResource(resultHp, a.currentMoney + b.currentMoney, a.currentRollTimes + b.currentRollTimes, resultShield,a.currentSumCost + b.currentSumCost);
         }
-        return new ChaResource(a.currentHp + b.currentHp, a.currentMoney + b.currentMoney, a.currentRollTimes + b.currentRollTimes, a.currentShield + b.currentShield);
+        return new ChaResource(a.currentHp + b.currentHp, a.currentMoney + b.currentMoney, a.currentRollTimes + b.currentRollTimes, a.currentShield + b.currentShield,a.currentSumCost + b.currentSumCost);
     }
+
+
     public static ChaResource operator -(ChaResource a, ChaResource b)
     {
-        return new ChaResource(a.currentHp - b.currentHp, a.currentMoney - b.currentMoney, a.currentRollTimes - b.currentRollTimes, a.currentShield - b.currentShield);
+        return new ChaResource(a.currentHp - b.currentHp, a.currentMoney - b.currentMoney, a.currentRollTimes - b.currentRollTimes, a.currentShield - b.currentShield,a.currentSumCost - b.currentSumCost);
     }
     public static ChaResource operator *(ChaResource a, int b)
     {
-        return new ChaResource(a.currentHp * b, a.currentMoney * b, a.currentRollTimes * b, a.currentShield * b);
+        return new ChaResource(a.currentHp * b, a.currentMoney * b, a.currentRollTimes * b, a.currentShield * b,a.currentSumCost * b);
 
     }
     public static ChaResource operator *(int a, ChaResource b)
@@ -70,6 +80,6 @@ public class ChaResource
     }
     public bool Enough(ChaResource cost)
     {
-        return currentHp >= cost.currentHp && currentMoney >= cost.currentMoney && currentRollTimes >= cost.currentRollTimes && currentShield >= cost.currentShield;
+        return currentHp >= cost.currentHp && currentMoney >= cost.currentMoney && currentRollTimes >= cost.currentRollTimes && currentShield >= cost.currentShield && currentSumCost >= cost.currentSumCost;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerData
 {
     //玩家当前的资源
-    public ChaResource chaResource = new();
+    public ChaResource chaResource = new(0,0,0,0,0);
     //玩家当前的战斗骰子
     public List<BattleDiceSOData> battleDiceList = new();
     //玩家当前的圣物

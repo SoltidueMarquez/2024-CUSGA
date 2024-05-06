@@ -192,7 +192,7 @@ public class PlayerDataSO : ScriptableObject
         this.halidomDataForSaves = new();
         this.battleDiceList = new();
         this.bagDiceList = new();
-        this.chaResource = new ChaResource();
+        this.chaResource = new ChaResource(0,0,0,0,0);
         this .ifHasMap = false;
         this.currentMap = "";
         this.playerRoomData = new PlayerRoomData();
