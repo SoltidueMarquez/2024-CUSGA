@@ -32,7 +32,7 @@ public class ChaState : MonoBehaviour
     /// <summary>
     /// 玩家当前的资源,这个在全局的过程中都不变，可能在局外变化
     /// </summary>
-    public ChaResource resource = new(0,0,0,0,0);
+    public ChaResource resource = new(0, 0, 0, 0, 0);
     public ChaControlState controlState = new ChaControlState(true, true, false);
 
     /// <summary>
@@ -80,7 +80,7 @@ public class ChaState : MonoBehaviour
     /// </summary>
     public void UseAllDice()
     {
-        if(BattleManager.Instance.parameter.ifUsingDice) { return; }
+        if (BattleManager.Instance.parameter.ifUsingDice) { return; }
         if (this.controlState.canUseDice == false)//如果不能使用骰子
         {
             Debug.Log("不能使用骰子");
@@ -129,7 +129,7 @@ public class ChaState : MonoBehaviour
     {
         //TODO:玩家死亡的逻辑
         Debug.Log(this.gameObject.name + "死亡");
-        
+
         BattleManager.Instance.EndGame(this.side);
     }
     /// <summary>
@@ -154,7 +154,8 @@ public class ChaState : MonoBehaviour
         //计算差值
         chaProperty = this.prop - chaProperty;
         //根据差值，重新计算资源,包括更新UI
-        this.ModResources(new ChaResource(chaProperty.health, chaProperty.money, chaProperty.maxRollTimes, chaProperty.shield));
+        Debug.Log("当前的属性" + chaProperty.maxCost);
+        this.ModResources(new ChaResource(chaProperty.health, chaProperty.money, chaProperty.maxRollTimes, chaProperty.shield, chaProperty.maxCost));
     }
     public void ModResources(ChaResource value)
     {
@@ -171,7 +172,7 @@ public class ChaState : MonoBehaviour
             CharacterUIManager.Instance.UpdateShieldUI((Character)this.side, this.resource.currentShield);
             CharacterUIManager.Instance.ChangeHealthSlider((Character)side, this.resource.currentHp, this.prop.health);
         }
-        
+
         if (this.side == 0)
         {
             if (DataUIManager.Instance != null)
@@ -184,12 +185,12 @@ public class ChaState : MonoBehaviour
             this.Kill();
         }
     }
-    public void ModResources(ChaResource chaResource,DamageInfo damageInfo)
+    public void ModResources(ChaResource chaResource, DamageInfo damageInfo)
     {
-        if(Mathf.Abs(chaResource.currentHp) > this.resource.currentHp)
+        if (Mathf.Abs(chaResource.currentHp) > this.resource.currentHp)
         {
             //说明可以被杀死
-            if(this.side == 0)
+            if (this.side == 0)
             {
                 HalidomManager.Instance.OnBeKilled(damageInfo);
             }
@@ -227,7 +228,7 @@ public class ChaState : MonoBehaviour
     {
         this.ModResources(new ChaResource(0, 0, this.prop.maxRollTimes, 0));
     }
-    
+
     public void RefreshShield()
     {
         this.resource.currentShield = 0;

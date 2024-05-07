@@ -239,7 +239,7 @@ public class BattleManager : MonoBehaviour
             this.parameter.playerChaState.GetBattleDiceHandler().InitDiceWithData(battleDiceSODatas);
             this.parameter.playerChaState.GetBattleDiceHandler().InitBagDiceWithData(playerDataSO.bagDiceList);
             ChaProperty chaProperty = playerDataSO.baseProp;
-            ChaResource resource = playerDataSO.chaResource - new ChaResource(chaProperty.health, chaProperty.money, chaProperty.maxRollTimes, 0);
+            ChaResource resource = playerDataSO.chaResource - new ChaResource(chaProperty.health, chaProperty.money, chaProperty.maxRollTimes, 0,chaProperty.maxCost);
             this.parameter.playerChaState.ModResources(resource);
 
         }
