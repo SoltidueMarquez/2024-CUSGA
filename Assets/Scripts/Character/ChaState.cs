@@ -178,6 +178,7 @@ public class ChaState : MonoBehaviour
             if (DataUIManager.Instance != null)
             {
                 DataUIManager.Instance.UpdateMoneyText(this.resource.currentMoney, true);
+                DataUIManager.Instance.UpdateCostText(this.resource.currentSumCost);
             }
         }
         if (this.resource.currentHp <= 0)

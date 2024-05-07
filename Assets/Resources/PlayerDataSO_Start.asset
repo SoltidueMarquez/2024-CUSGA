@@ -18,6 +18,7 @@ MonoBehaviour:
     money: 0
     maxRollTimes: 1
     shield: 0
+    maxCost: 10
   halidomSOs: []
   playerDiceSOItems:
   - diceType: 0
@@ -212,6 +213,7 @@ MonoBehaviour:
     currentMoney: 65
     currentRollTimes: 0
     currentShield: 2
+    currentSumCost: 0
   ifHasData: 0
   ifHasMap: 0
   currentMap: "{\r\n  \"nodes\": [\r\n    {\r\n      \"point\": {\r\n        \"x\":
