@@ -44,6 +44,10 @@ public class FSMParameter
     public bool ifUsingDice;
 
     public int currentMaxCost;
+    /// <summary>
+    /// 局内货币
+    /// </summary>
+    public int battleCurrency;
 }
 
 public enum GameState
@@ -166,6 +170,11 @@ public class BattleManager : MonoBehaviour
     public void ReducePlayerRerollCount()
     {
         this.parameter.playerChaState.ModResources(new ChaResource(0, 0, -1, 0));
+    }
+
+    public void ResetBattleCurrency()
+    {
+        this.parameter.battleCurrency = 0;
     }
     #endregion
     /// <summary>
