@@ -593,20 +593,24 @@ MonoBehaviour:
     money: 0
     maxRollTimes: 0
     shield: 0
+    maxCost: 0
   buffProp:
   - health: 0
     money: 0
     maxRollTimes: 0
     shield: 0
+    maxCost: 0
   - health: 0
     money: 0
     maxRollTimes: 0
     shield: 0
+    maxCost: 0
   resource:
     currentHp: 0
     currentMoney: 0
     currentRollTimes: 0
     currentShield: 0
+    currentSumCost: 0
   controlState:
     ifCanChangePosition: 1
     canUseDice: 1
@@ -855,6 +859,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2655630305047657240, guid: 2f7aa2b4309df7844aa89135b74879a3, type: 3}
+      propertyPath: m_Text
+      value: "\uFFE50"
+      objectReference: {fileID: 0}
     - target: {fileID: 3123530719100294073, guid: 2f7aa2b4309df7844aa89135b74879a3, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1073,25 +1081,30 @@ MonoBehaviour:
     money: 0
     maxRollTimes: 0
     shield: 0
+    maxCost: 0
   deltaCharacterProperty:
     health: 0
     money: 0
     maxRollTimes: 0
     shield: 0
+    maxCost: 0
   buffProp:
   - health: 0
     money: 0
     maxRollTimes: 0
     shield: 0
+    maxCost: 0
   - health: 0
     money: 0
     maxRollTimes: 0
     shield: 0
+    maxCost: 0
   baseProp:
     health: 0
     money: 0
     maxRollTimes: 0
     shield: 0
+    maxCost: 0
   OnSellHalidom:
     m_PersistentCalls:
       m_Calls: []

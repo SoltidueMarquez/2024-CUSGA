@@ -8,7 +8,8 @@ namespace UI
     public enum PlayerTurnState
     {
         PlayerTurnStart,
-        PlayerTurnEnd
+        PlayerTurnEnd,
+        PlayerWin
     }
     /// <summary>
     /// 战斗流程UI动画管理器
@@ -48,13 +49,20 @@ namespace UI
         private void ResultAppear(PlayerTurnState state)
         {
             float position = 0f;
+            float aValue = 0f;
             switch (state)
             {
                 case PlayerTurnState.PlayerTurnStart:
                     position = finalPosition;
+                    aValue = 1;
                     break;
                 case PlayerTurnState.PlayerTurnEnd:
                     position = -finalPosition * 2;
+                    aValue = 0;
+                    break;
+                case PlayerTurnState.PlayerWin:
+                    position = finalPosition;
+                    aValue = 0;
                     break;
                 default:
                     position = finalPosition;
@@ -66,6 +74,7 @@ namespace UI
                 time += timeInterval;
                 result.DOMoveY(position, time);
             }
+            DataUIManager.Instance.costText.DOFade(aValue, time/4);//费用文本
         }
 
         public void PlayerTurnStart()
@@ -83,7 +92,7 @@ namespace UI
         public void FightEnd()
         {
             RotateIn(PlayerTurnState.PlayerTurnStart);
-            ResultAppear(PlayerTurnState.PlayerTurnStart);
+            ResultAppear(PlayerTurnState.PlayerWin);
         }
     }
 

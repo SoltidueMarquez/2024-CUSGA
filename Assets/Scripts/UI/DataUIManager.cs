@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using Audio_Manager;
-using DG.Tweening;
 using UI.Store;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,9 +13,12 @@ namespace UI
         [SerializeField, Tooltip("剩余重投次数")] private Text reRollText;
         [SerializeField, Tooltip("金钱文本")] private Text moneyText;
         [SerializeField, Tooltip("血量文本")] private Text healthText;
+        [SerializeField, Tooltip("费用文本")] public Text costText;
         private int _currentMoney;//记录当前金币文本
         private int _newMoney;
-        
+        private int _currentCost;//记录当前金币文本
+        private int _newCost;
+
         /// <summary>
         /// 更新回合数
         /// </summary>
@@ -25,6 +26,45 @@ namespace UI
         public void UpdateRunTimeText(int run)
         {
             runText.text = $"{run}";
+        }
+
+        /// <summary>
+        /// 更新费用文本
+        /// </summary>
+        /// <param name="cost"></param>
+        public void UpdateCostText(int cost)
+        {
+            if (costText == null)
+            {
+                return;
+            }
+            StopCoroutine(ChangeCostText());
+            _newCost = cost;
+            var offset = _currentCost - cost;
+            StartCoroutine(ChangeCostText());
+        }
+        private IEnumerator ChangeCostText()
+        {
+            var offset = Mathf.Abs(_currentCost - _newCost);
+            var step = offset switch
+            {
+                < 10 => 0.1f,
+                < 100 => 0.01f,
+                _ => 0.01f
+            };
+            while (_currentCost != _newCost)
+            {
+                yield return new WaitForSeconds(step);
+                if (_currentCost < _newCost)
+                {
+                    _currentCost++;
+                }
+                else
+                {
+                    _currentCost--;
+                }
+                costText.text = $"Cost:{_currentCost}";
+            }
         }
 
         /// <summary>

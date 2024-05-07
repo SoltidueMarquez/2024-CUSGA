@@ -646,6 +646,7 @@ MonoBehaviour:
   reRollText: {fileID: 774827041}
   moneyText: {fileID: 1829682577}
   healthText: {fileID: 0}
+  costText: {fileID: 764944310}
 --- !u!114 &81981824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1832,20 +1833,24 @@ MonoBehaviour:
     money: 400
     maxRollTimes: 100
     shield: 0
+    maxCost: 0
   buffProp:
   - health: 0
     money: 0
     maxRollTimes: 0
     shield: 0
+    maxCost: 0
   - health: 0
     money: 0
     maxRollTimes: 0
     shield: 0
+    maxCost: 0
   resource:
     currentHp: 0
     currentMoney: 0
     currentRollTimes: 0
     currentShield: 0
+    currentSumCost: 0
   controlState:
     ifCanChangePosition: 1
     canUseDice: 1
@@ -3050,20 +3055,24 @@ MonoBehaviour:
     money: 400
     maxRollTimes: 4
     shield: 0
+    maxCost: 0
   buffProp:
   - health: 0
     money: 0
     maxRollTimes: 0
     shield: 0
+    maxCost: 0
   - health: 0
     money: 0
     maxRollTimes: 0
     shield: 0
+    maxCost: 0
   resource:
     currentHp: 0
     currentMoney: 0
     currentRollTimes: 0
     currentShield: 0
+    currentSumCost: 0
   controlState:
     ifCanChangePosition: 1
     canUseDice: 1
@@ -3760,6 +3769,85 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 742696116}
+  m_CullTransparentMesh: 1
+--- !u!1 &764944308
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 764944309}
+  - component: {fileID: 764944311}
+  - component: {fileID: 764944310}
+  m_Layer: 5
+  m_Name: Cost Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &764944309
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764944308}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1191907968}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -455, y: -295}
+  m_SizeDelta: {x: 160, y: 89.5695}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &764944310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764944308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 35
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Cost\uFF1A20"
+--- !u!222 &764944311
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764944308}
   m_CullTransparentMesh: 1
 --- !u!1 &768502846
 GameObject:
@@ -5428,6 +5516,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 764944309}
   - {fileID: 1545500035}
   - {fileID: 1689817606}
   - {fileID: 1375439855}
@@ -6896,6 +6985,7 @@ MonoBehaviour:
     playerDataSO: {fileID: 11400000, guid: 8ce36af94eb94754f908a1a0b2be156e, type: 2}
     enemyDataSO: {fileID: 11400000, guid: ca768467329733c49a3099706f2c2e47, type: 2}
     ifUsingDice: 0
+    currentMaxCost: 0
   currentSelectEnemy: {fileID: 341200662}
 --- !u!4 &1590396381
 Transform:
@@ -8179,7 +8269,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uFFE500000"
+  m_Text: "\uFFE50"
 --- !u!222 &1829682578
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8749,25 +8839,30 @@ MonoBehaviour:
     money: 0
     maxRollTimes: 0
     shield: 0
+    maxCost: 0
   deltaCharacterProperty:
     health: 0
     money: 0
     maxRollTimes: 0
     shield: 0
+    maxCost: 0
   buffProp:
   - health: 0
     money: 0
     maxRollTimes: 0
     shield: 0
+    maxCost: 0
   - health: 0
     money: 0
     maxRollTimes: 0
     shield: 0
+    maxCost: 0
   baseProp:
     health: 50
     money: 400
     maxRollTimes: 4
     shield: 0
+    maxCost: 0
   OnSellHalidom:
     m_PersistentCalls:
       m_Calls: []
