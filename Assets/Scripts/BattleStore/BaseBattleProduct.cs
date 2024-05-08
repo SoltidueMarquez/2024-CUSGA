@@ -25,20 +25,42 @@ public class BaseBattleProduct : ScriptableObject
     /// 使用so存储的productEffect
     /// </summary>
     public BaseProductEffect effect;
-
+    /// <summary>
+    /// 购买失败调用的事件，包含ui提示
+    /// </summary>
     public UnityEvent OnBuyFail;
+    /// <summary>
+    /// 购买成功调用的事件，包含ui提示
+    /// </summary>
+    public UnityEvent OnBuySuccess;
 
     public void TryBuy()
     {
         int battleCurrency=BattleManager.Instance.parameter.battleCurrency;
         if(battleCurrency>=value)
         {
-            effect.Use();
+            OnBuySuccess?.Invoke();
+            
         }
         else
         {
-            OnBuyFail.Invoke();
+            OnBuyFail?.Invoke();
         }
+    }
+
+    public void InitialProduct()
+    {
+        OnBuySuccess.RemoveAllListeners();
+        OnBuyFail.RemoveAllListeners();
+        OnBuySuccess.AddListener(ProductBrought);
+    }
+
+    public void ProductBrought()
+    {
+        //使用道具
+        effect.Use();
+        //扣除货币
+        BattleManager.Instance.parameter.battleCurrency -= value;
     }
 
 }
