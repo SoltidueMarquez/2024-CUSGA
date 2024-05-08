@@ -190,4 +190,18 @@ public static class RandomManager
         }
     }
 
+
+    public static BaseBattleProduct GetBattleProduct(BattleProductType type)
+    {
+        List<BaseBattleProduct> baseBattleProducts = new List<BaseBattleProduct>();
+        baseBattleProducts = DataInitManager.Instance.battleProductArray.ToList();
+
+        List<BaseBattleProduct> battleProductLegals = baseBattleProducts.Where((BaseBattleProduct battleProduct) =>
+        {
+            return battleProduct.type == type;
+        }).ToList();
+        
+        return battleProductLegals[UnityEngine.Random.Range(0, battleProductLegals.Count)];
+    }
 }
+

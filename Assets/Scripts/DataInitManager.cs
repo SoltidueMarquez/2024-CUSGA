@@ -15,6 +15,7 @@ public class DataInitManager : MonoBehaviour
     private BuffDataSO[] buffDataSos;
     private HalidomDataSO[] halidomDataSos;
     private SingleDiceModelSO[] singleDiceModelSOs;
+    public BaseBattleProduct[] battleProductArray;
     public static DataInitManager Instance { get; private set; }
     public void Awake()
     {
@@ -26,7 +27,7 @@ public class DataInitManager : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(this);
-        if(ifAsync)
+        if (ifAsync)
         {
             LoadGameDataAsync();
         }
@@ -40,6 +41,7 @@ public class DataInitManager : MonoBehaviour
         await LoadBuffDataAsync();
         await LoadHalidomDataAysnc();
         await LoadSingleDiceModelAsync();
+        await LoadBattleProductAsync();
         Debug.Log("success");
 
     }
@@ -48,6 +50,7 @@ public class DataInitManager : MonoBehaviour
         LoadBuffData();
         LoadSingleDiceModel();
         LoadHalidomData();
+        LoadBattleProduct();
         Debug.Log("success");
     }
     public async UniTask LoadBuffDataAsync()
@@ -59,7 +62,7 @@ public class DataInitManager : MonoBehaviour
             {
                 if (DataInitManager.Instance.buffDataTable.buffData.ContainsKey(buffDataSos[i].dataName.ToString()))
                 {
-                    Debug.LogWarning("BuffDataInitial:ÊÔÍ¼Ìí¼ÓÖØ¸´µÄbuff");
+                    Debug.LogWarning("BuffDataInitial:è¯•å›¾æ·»åŠ é‡å¤çš„buff");
                     continue;
                 }
                 DataInitManager.Instance.buffDataTable.buffData.Add(buffDataSos[i].dataName.ToString(),
@@ -105,7 +108,7 @@ public class DataInitManager : MonoBehaviour
         {
             if (DataInitManager.Instance.buffDataTable.buffData.ContainsKey(buffDataSos[i].dataName.ToString()))
             {
-                Debug.LogWarning("BuffDataInitial:ÊÔÍ¼Ìí¼ÓÖØ¸´µÄbuff");
+                Debug.LogWarning("BuffDataInitial:è¯•å›¾æ·»åŠ é‡å¤çš„buff");
                 continue;
             }
             DataInitManager.Instance.buffDataTable.buffData.Add(buffDataSos[i].dataName.ToString(),
@@ -136,7 +139,7 @@ public class DataInitManager : MonoBehaviour
                 );
         }
     }
-    #region ÷»Ãæ
+    #region éª°é¢
     public async UniTask LoadSingleDiceModelAsync()
     {
         try
@@ -146,7 +149,7 @@ public class DataInitManager : MonoBehaviour
             {
                 if (DataInitManager.Instance.singleDiceDataTable.diceDictionary.ContainsKey(singleDiceModelSOs[i].singleDiceModelName.ToString()))
                 {
-                    Debug.LogWarning("SingleDiceModelInitial:ÊÔÍ¼Ìí¼ÓÖØ¸´µÄSingleDiceModel");
+                    Debug.LogWarning("SingleDiceModelInitial:è¯•å›¾æ·»åŠ é‡å¤çš„SingleDiceModel");
                     continue;
                 }
                 DataInitManager.Instance.singleDiceDataTable.diceDictionary.Add(singleDiceModelSOs[i].singleDiceModelName.ToString(),
@@ -181,7 +184,7 @@ public class DataInitManager : MonoBehaviour
         {
             if (DataInitManager.Instance.singleDiceDataTable.diceDictionary.ContainsKey(singleDiceModelSOs[i].singleDiceModelName.ToString()))
             {
-                Debug.LogWarning("SingleDiceModelInitial:ÊÔÍ¼Ìí¼ÓÖØ¸´µÄSingleDiceModel");
+                Debug.LogWarning("SingleDiceModelInitial:è¯•å›¾æ·»åŠ é‡å¤çš„SingleDiceModel");
                 continue;
             }
             DataInitManager.Instance.singleDiceDataTable.diceDictionary.Add(singleDiceModelSOs[i].singleDiceModelName.ToString(),
@@ -201,16 +204,16 @@ public class DataInitManager : MonoBehaviour
             //Debug.Log(i);
         }
     }
-        /// <summary>
-        /// csy: create a new buffInfo list with buffDataSO list
-        /// </summary>
-        /// <param name="buffDataSOs"></param>
-        /// <returns></returns>
-        private BuffInfo[] GetBuffInfoList(List<BuffDataConfig> buffDataConfigs)
+    /// <summary>
+    /// csy: create a new buffInfo list with buffDataSO list
+    /// </summary>
+    /// <param name="buffDataSOs"></param>
+    /// <returns></returns>
+    private BuffInfo[] GetBuffInfoList(List<BuffDataConfig> buffDataConfigs)
     {
         if (buffDataConfigs == null)
         {
-            Debug.LogWarning("HalidomDataInitial:´«Èë²ÎÊıÎª¿Õ");
+            Debug.LogWarning("HalidomDataInitial:ä¼ å…¥å‚æ•°ä¸ºç©º");
             return null;
         }
 
@@ -252,7 +255,7 @@ public class DataInitManager : MonoBehaviour
         return buffInfos.ToArray();
     }
     #endregion
-    #region Ê¥Îï³õÊ¼»¯
+    #region åœ£ç‰©åˆå§‹åŒ–
     public async UniTask LoadHalidomDataAysnc()
     {
         try
@@ -262,7 +265,7 @@ public class DataInitManager : MonoBehaviour
             {
                 if (DataInitManager.Instance.halidomDataTable.halidomDictionary.ContainsKey(halidomDataSos[i].halidomName.ToString()))
                 {
-                    Debug.LogWarning("HalidomDataInitial:ÊÔÍ¼Ìí¼ÓÖØ¸´µÄHalidomData");
+                    Debug.LogWarning("HalidomDataInitial:è¯•å›¾æ·»åŠ é‡å¤çš„HalidomData");
                     continue;
                 }
                 DataInitManager.Instance.halidomDataTable.halidomDictionary.Add(halidomDataSos[i].halidomName.ToString(),
@@ -293,7 +296,7 @@ public class DataInitManager : MonoBehaviour
         {
             if (DataInitManager.Instance.halidomDataTable.halidomDictionary.ContainsKey(halidomDataSos[i].halidomName.ToString()))
             {
-                Debug.LogWarning("HalidomDataInitial:ÊÔÍ¼Ìí¼ÓÖØ¸´µÄHalidomData");
+                Debug.LogWarning("HalidomDataInitial:è¯•å›¾æ·»åŠ é‡å¤çš„HalidomData");
                 continue;
             }
             DataInitManager.Instance.halidomDataTable.halidomDictionary.Add(halidomDataSos[i].halidomName.ToString(),
@@ -307,16 +310,16 @@ public class DataInitManager : MonoBehaviour
                 );
         }
     }
-        /// <summary>
-        /// csy: create a new buffInfo list with buffDataSO list
-        /// </summary>
-        /// <param name="buffDataSOs"></param>
-        /// <returns></returns>
-        private List<BuffInfo> GetBuffInfoList(List<BuffDataSO> buffDataSOs)
+    /// <summary>
+    /// csy: create a new buffInfo list with buffDataSO list
+    /// </summary>
+    /// <param name="buffDataSOs"></param>
+    /// <returns></returns>
+    private List<BuffInfo> GetBuffInfoList(List<BuffDataSO> buffDataSOs)
     {
         if (buffDataSOs == null)
         {
-            Debug.LogWarning("HalidomDataInitial:´«Èë²ÎÊıÎª¿Õ");
+            Debug.LogWarning("HalidomDataInitial:ä¼ å…¥å‚æ•°ä¸ºç©º");
             return null;
         }
         List<BuffInfo> buffInfos = new List<BuffInfo>();
@@ -333,4 +336,26 @@ public class DataInitManager : MonoBehaviour
         return buffInfos;
     }
     #endregion
+
+    public async UniTask LoadBattleProductAsync()
+    {
+        try
+        {
+            battleProductArray = Resources.LoadAll<BaseBattleProduct>("Data/BattleStoreData");
+            
+            await UniTask.Delay(1);
+
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("An exception occurred: " + e.Message);
+        }
+
+    }
+
+    public void LoadBattleProduct()
+    {
+        battleProductArray = Resources.LoadAll<BaseBattleProduct>("Data/BattleStoreData");
+        
+    }
 }
