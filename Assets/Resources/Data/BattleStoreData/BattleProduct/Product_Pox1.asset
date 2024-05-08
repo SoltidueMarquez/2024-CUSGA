@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 999afd7c0638a5b40940c214faee271d, type: 3}
+  m_Name: Product_Pox1
+  m_EditorClassIdentifier: 
+  value: 10
+  type: 1
+  productName: "\u65BD\u52A0\u6C34\u75D8"
+  description: "\u654C\u65B9\u83B7\u5F97\u4E00\u5C42\u6C34\u75D8"
+  effect: {fileID: 11400000, guid: dbaf23b4b7c33e9419955e6b13cdc1e9, type: 2}
+  OnBuyFail:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBuySuccess:
+    m_PersistentCalls:
+      m_Calls: []

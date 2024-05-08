@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a086ba6d7dbcc04e9321ef34002e3ba, type: 3}
-  m_Name: DefendEffect
+  m_Script: {fileID: 11500000, guid: 468301443f6854c41a28864d698895df, type: 3}
+  m_Name: Weak2Stack
   m_EditorClassIdentifier: 
-  defendValue: 5
+  stack: 2
+  buffTarget: 1
+  buffEffect: 4
