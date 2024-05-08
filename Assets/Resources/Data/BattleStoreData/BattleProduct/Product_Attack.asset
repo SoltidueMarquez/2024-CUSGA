@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 999afd7c0638a5b40940c214faee271d, type: 3}
+  m_Name: Product_Attack
+  m_EditorClassIdentifier: 
+  value: 11
+  type: 0
+  productName: "\u653B\u51FB"
+  description: "\u5BF9\u654C\u65B9\u9020\u621010\u70B9\u4F24\u5BB3"
+  effect: {fileID: 11400000, guid: 009aabe39dbd6d24fb277b9aba5908f7, type: 2}
+  OnBuyFail:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBuySuccess:
+    m_PersistentCalls:
+      m_Calls: []

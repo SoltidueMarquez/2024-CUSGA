@@ -26,6 +26,8 @@ public class GameStartState : IState
         BattleManager.Instance.IntializeEnemy();
         //清空回合计数器
         manager.ResetTurns();
+        //重置局内货币
+        manager.ResetBattleCurrency();
     }
 
     public void OnExit()
