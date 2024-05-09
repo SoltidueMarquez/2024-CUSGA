@@ -851,6 +851,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 1679708234415811829, guid: 2f7aa2b4309df7844aa89135b74879a3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2170905778631896886, guid: 2f7aa2b4309df7844aa89135b74879a3, type: 3}
       propertyPath: m_Name
       value: PlayerResourceUI
@@ -1131,6 +1135,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1106908876470969820, guid: 8a51da7cf9ad6b54886ae2bf2c6bd3dc, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 1106908876470969820, guid: 8a51da7cf9ad6b54886ae2bf2c6bd3dc, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106908876470969820, guid: 8a51da7cf9ad6b54886ae2bf2c6bd3dc, type: 3}
+      propertyPath: m_SortingOrder
+      value: 101
+      objectReference: {fileID: 0}
     - target: {fileID: 3692068939265997741, guid: 8a51da7cf9ad6b54886ae2bf2c6bd3dc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 960

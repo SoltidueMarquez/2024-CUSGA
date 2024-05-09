@@ -115,6 +115,7 @@ namespace UI.Rest
         #region 唤醒界面相关
         private void EnterAnim()
         {
+            SettingsManager.Instance.FreezeMap(true);
             wordText.text = "";
             descText.text = "";
             descText.gameObject.SetActive(true);
@@ -132,6 +133,7 @@ namespace UI.Rest
             panel.GetComponent<Image>().DOFade(0, animTime).OnComplete(() =>
             {
                 panel.SetActive(false);
+                SettingsManager.Instance.FreezeMap(false);
             });
         }
         #endregion
