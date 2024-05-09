@@ -117,7 +117,7 @@ namespace Map
                 //根据存档进行骰子的数值初始化
                 this.playerChaState.GetBattleDiceHandler().InitDiceWithData(battleDiceSODatas);
                 ChaProperty chaProperty = playerDataSO.baseProp;
-                ChaResource resource = playerDataSO.chaResource - new ChaResource(chaProperty.health, chaProperty.money, chaProperty.maxRollTimes, 0);
+                ChaResource resource = playerDataSO.chaResource - new ChaResource(chaProperty.health, chaProperty.money, chaProperty.maxRollTimes, 0,chaProperty.maxCost);
                 this.playerChaState.ModResources(resource);
                 this.playerChaState.GetBattleDiceHandler().InitBagDiceWithData(playerDataSO.bagDiceList);
             }
