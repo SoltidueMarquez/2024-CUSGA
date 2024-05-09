@@ -260,6 +260,10 @@ namespace Map
         {
             return this.playerChaState.resource.currentSumCost;
         }
+        public int GetCurrentHealth()
+        {
+            return this.playerChaState.resource.currentHp;
+        }
         public void CurePlayer(int health)
         {
             this.playerChaState.ModResources(new ChaResource(health, 0, 0, 0, 0));
