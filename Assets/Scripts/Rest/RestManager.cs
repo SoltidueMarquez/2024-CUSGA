@@ -1,4 +1,5 @@
 using System;
+using Map;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,7 +11,7 @@ namespace Rest
         Rest,
         Bless
     }
-    public class RestManager : MonoBehaviour
+    public class RestManager : MonoSingleton<RestManager>
     {
         [Tooltip("进入休息界面事件")]public UnityEvent onEnterRest;
         [Tooltip("离开休息界面事件")]public UnityEvent onExitRest;
@@ -18,12 +19,6 @@ namespace Rest
         [Tooltip("选择祝福事件")] public UnityEvent onChooseBlessing;
         [Tooltip("更改描述")] public UnityEvent<RestType> changeDescText;
         [Tooltip("隐藏描述")] public UnityEvent hideDescText;
-        
-        public static RestManager Instance;
-        private void Awake()
-        {
-            Instance = this;
-        }
 
         private void Start()
         {
@@ -35,10 +30,12 @@ namespace Rest
             onChooseRest.AddListener(() =>
             {
                 Debug.Log("执行回血");
+                MapManager.Instance.CurePlayer(999);
             });
             onChooseBlessing.AddListener(() =>
             {
                 Debug.Log("执行加cost上限");
+                MapManager.Instance.EnhanceMaxCost(1);
             });
         }
         
