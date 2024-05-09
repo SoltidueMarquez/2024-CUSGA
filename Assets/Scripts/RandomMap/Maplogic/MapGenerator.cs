@@ -316,6 +316,7 @@ namespace Map
                 {
                     var layer = config.layers[i];
                     int nodeSum = layer.extraNodes.Length + 1;
+                    //总的该层的可选节点数
                     var node = nodes[i][j];
                     bool ifHasIncomingStore = false;
                     //如果节点是商店，则前面不能是商店
