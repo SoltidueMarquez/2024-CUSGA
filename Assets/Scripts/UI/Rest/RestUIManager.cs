@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Map;
 using Rest;
 using UnityEngine;
 using UnityEngine.UI;
@@ -100,7 +101,7 @@ namespace UI.Rest
             var tmpString = type switch
             {
                 RestType.Rest => beforeRestString,
-                RestType.Bless => beforeBlessString,
+                RestType.Bless => beforeBlessString+$"(当前cost上限:{MapManager.Instance.GetCurrentPlayerMaxCost()})",
                 _ => ""
             };
             descText.DOText(tmpString, animTime);
