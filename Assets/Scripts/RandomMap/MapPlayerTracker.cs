@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using DG.Tweening;
+using Rest;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -97,7 +98,8 @@ namespace Map
                 case NodeType.Boss:
                     EnterBattleNode(mapNode.transform, EnemyType.Boss);
                     break;
-                case NodeType.Mystery:
+                case NodeType.RestSite:
+                    RestManager.Instance.EnterRest();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
