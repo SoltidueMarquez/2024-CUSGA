@@ -6,6 +6,7 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "Product_", menuName = "BattleStore/BattleProduct")]
 public class BaseBattleProduct : ScriptableObject
 {
+    public bool isEmpty;
     /// <summary>
     /// 局内物品售价
     /// </summary>
@@ -53,14 +54,21 @@ public class BaseBattleProduct : ScriptableObject
         OnBuySuccess.RemoveAllListeners();
         OnBuyFail.RemoveAllListeners();
         OnBuySuccess.AddListener(ProductBrought);
+        isEmpty = false;
     }
 
     public void ProductBrought()
     {
-        //使用道具
-        effect.Use();
-        //扣除货币
-        BattleManager.Instance.parameter.battleCurrency -= value;
+        if(isEmpty == false)
+        {
+            //使用道具
+            effect.Use();
+            //扣除货币
+            BattleManager.Instance.parameter.battleCurrency -= value;
+            isEmpty = true;
+        }
+        
+        
     }
 
 }
