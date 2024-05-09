@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 5
   type: 1
-  productName: "\u4E00\u5C42\u5F3A\u5316"
+  productName: "\u83B7\u5F97\u5F3A\u5316"
   description: "\u83B7\u5F97\u4E00\u5C42\u5F3A\u5316"
   effect: {fileID: 11400000, guid: 4018e17a7c013fb45a1557fe938a8d80, type: 2}
   OnBuyFail:
