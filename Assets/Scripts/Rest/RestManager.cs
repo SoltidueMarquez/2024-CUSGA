@@ -55,6 +55,7 @@ namespace Rest
         public void ExitRest()
         {
             onExitRest.Invoke();
+            MapManager.Instance.OnExitRest();
         }
         public void ChooseRest()
         {

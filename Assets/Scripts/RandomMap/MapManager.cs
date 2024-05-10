@@ -274,6 +274,15 @@ namespace Map
             this.playerChaState.ModResources(new ChaResource(0, 0, 0, 0, cost));
             UpdatePlayerUI();
         }
+        public void OnExitRest()
+        {
+            this.playerDataSO.UpdatePlayerDataSO(this.playerChaState);
+            this.playerDataSO.UpdataPlayerDataSoMap(CurrentMap.ToJson());
+            UpdatePlayerUI();
+            this.playerDataSO.SaveData();
+            MapPlayerTracker.Instance.Locked = false;
+            view.SetAttainableNodes();
+        }
         #endregion
         #region 更新玩家UI信息
         public void UpdatePlayerUI()

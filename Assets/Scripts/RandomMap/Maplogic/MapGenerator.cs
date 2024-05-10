@@ -306,11 +306,9 @@ namespace Map
                         }
                         if (ifHasIncomingTheSame)
                         {
-                            Debug.LogWarning("Store node has incoming store node!" + node.point.x + " " +node.point.y);
+                            //Debug.LogWarning("Store node has incoming store node!" + node.point.x + " " +node.point.y);
                             var extraNodesWithoutThis = nodeTypes.Where(n => n != node.nodeType).ToList();
-                            Debug.Log(extraNodesWithoutThis.Count);
                             int Ran = Random.Range(0, extraNodesWithoutThis.Count);
-                            Debug.Log("Ran:"+Ran);
                             node.nodeType = extraNodesWithoutThis[Ran];
                             node.blueprintName = config.nodeBlueprints.Where(b => b.nodeType == node.nodeType).FirstOrDefault().name;
                         }

@@ -74,7 +74,7 @@ MonoBehaviour:
         max: 3
       nodesApartDistance: 2
       randomizePosition: 0.176
-      randomizeNodes: 0.7
+      randomizeNodes: 0.6
       extraNodes:
       - nodeType: 5
         probability: 0.6
@@ -86,12 +86,10 @@ MonoBehaviour:
         max: 3
       nodesApartDistance: 2
       randomizePosition: 0.649
-      randomizeNodes: 0.3
+      randomizeNodes: 0.9
       extraNodes:
       - nodeType: 5
-        probability: 0.6
-      - nodeType: 3
-        probability: 0.4
+        probability: 1
     - nodeType: 2
       distanceFromPreviousLayer:
         min: 2
