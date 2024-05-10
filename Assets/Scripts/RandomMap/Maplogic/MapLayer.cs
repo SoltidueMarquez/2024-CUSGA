@@ -17,7 +17,13 @@ namespace Map
         [Tooltip("Chance to get a random node that is different from the default node on this layer")]
         [Range(0f, 1f)] public float randomizeNodes;
         [Tooltip("extra nodes that can be choose as extra random node")]
-        public NodeType[] extraNodes;
+        public NodesAndProbability[] extraNodes;
 
+    }
+    [System.Serializable]
+    public class NodesAndProbability
+    {
+        public NodeType nodeType;
+        public float probability;
     }
 }

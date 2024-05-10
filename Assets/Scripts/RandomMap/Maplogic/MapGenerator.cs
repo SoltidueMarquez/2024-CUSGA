@@ -39,8 +39,8 @@ namespace Map
             SetUpConnections();
 
             RemoveCrossConnections();
-
-            CheckIfMapRational();
+            CheckIfParentRational();
+            //CheckIfMapRational();
             // select all the nodes with connections:
             var nodesList = nodes.SelectMany(n => n).Where(n => n.incoming.Count > 0 || n.outgoing.Count > 0).ToList();
 
@@ -278,35 +278,45 @@ namespace Map
             return path;
         }
 
-        private static void CheckIfMapRational()
+        private static void CheckIfParentRational()
         {
-            for(var i = 0; i < nodes.Count; i++)
-                for(var j = 0; j < nodes[i].Count; j++)
+            for (var i = 0; i < nodes.Count; i++)
+            {
+                List<NodeType> nodeTypes = new();
+                var layer = config.layers[i];
+                foreach (var extraNode in layer.extraNodes)
+                    nodeTypes.Add(extraNode.nodeType);
+                nodeTypes.Add(layer.nodeType);
+                for (var j = 0; j < nodes[i].Count; j++)
                 {
-                    var layer = config.layers[i];
                     var node = nodes[i][j];
-                    bool ifHasIncomingStore = false;
-                    //如果节点是商店，则前面不能是商店
-                    if (node.nodeType == NodeType.Store)
+                    bool ifHasIncomingTheSame = false;
+                    //如果是除了战斗节点之外的节点，前面不能是相同类型的节点
+                    if (node.nodeType != layer.nodeType)
                     {
                         //遍历节点的前面的节点
-                        foreach(var incoming in node.incoming)
+                        foreach (var incoming in node.incoming)
                         {
                             var incomingNode = GetNode(incoming);
-                            if (incomingNode.nodeType == NodeType.Store)
+                            if (incomingNode.nodeType == node.nodeType)
                             {
-                                ifHasIncomingStore = true;
+                                ifHasIncomingTheSame = true;
                                 break;
                             }
                         }
-                        if (ifHasIncomingStore)
+                        if (ifHasIncomingTheSame)
                         {
-                            //Debug.LogWarning("Store node has incoming store node!" + node.point.x + " " +node.point.y);
-                            node.nodeType =layer.nodeType;
-                            node.blueprintName = config.nodeBlueprints.Where(b => b.nodeType == layer.nodeType).ToList().Random().name;
+                            Debug.LogWarning("Store node has incoming store node!" + node.point.x + " " +node.point.y);
+                            var extraNodesWithoutThis = nodeTypes.Where(n => n != node.nodeType).ToList();
+                            Debug.Log(extraNodesWithoutThis.Count);
+                            int Ran = Random.Range(0, extraNodesWithoutThis.Count);
+                            Debug.Log("Ran:"+Ran);
+                            node.nodeType = extraNodesWithoutThis[Ran];
+                            node.blueprintName = config.nodeBlueprints.Where(b => b.nodeType == node.nodeType).FirstOrDefault().name;
                         }
                     }
                 }
+            }
         }
         //待定
         private static void CheckIfBrotherNodeLegal()
@@ -341,9 +351,22 @@ namespace Map
                     }
                 }
         }
-        private static NodeType GetRandomNode(NodeType[] nodeTypes)
+        private static NodeType GetRandomNode(NodesAndProbability[] nodeTypes)
         {
-            return nodeTypes[Random.Range(0, nodeTypes.Length)];
+            float sum = 0;
+            for (var i = 0; i < nodeTypes.Length; i++)
+            {
+                sum += nodeTypes[i].probability;
+            }
+            float random = Random.Range(0, sum);
+            float temp = 0;
+            for (var i = 0; i < nodeTypes.Length; i++)
+            {
+                temp += nodeTypes[i].probability;
+                if (random < temp)
+                    return nodeTypes[i].nodeType;
+            }
+            return nodeTypes[nodeTypes.Length - 1].nodeType;
         }
     }
 }

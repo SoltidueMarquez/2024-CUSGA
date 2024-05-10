@@ -34,7 +34,7 @@ MonoBehaviour:
       nodesApartDistance: 2
       randomizePosition: 0
       randomizeNodes: 0
-      extraNodes: 
+      extraNodes: []
     - nodeType: 0
       distanceFromPreviousLayer:
         min: 2
@@ -42,15 +42,19 @@ MonoBehaviour:
       nodesApartDistance: 2
       randomizePosition: 0.587
       randomizeNodes: 0
-      extraNodes: 
+      extraNodes: []
     - nodeType: 0
       distanceFromPreviousLayer:
         min: 2
         max: 3
       nodesApartDistance: 2
       randomizePosition: 0.333
-      randomizeNodes: 0.333
-      extraNodes: 05000000
+      randomizeNodes: 0.5
+      extraNodes:
+      - nodeType: 5
+        probability: 0.6
+      - nodeType: 3
+        probability: 0.4
     - nodeType: 1
       distanceFromPreviousLayer:
         min: 2
@@ -58,7 +62,11 @@ MonoBehaviour:
       nodesApartDistance: 2
       randomizePosition: 0.542
       randomizeNodes: 0.333
-      extraNodes: 05000000
+      extraNodes:
+      - nodeType: 5
+        probability: 0.6
+      - nodeType: 3
+        probability: 0.4
     - nodeType: 1
       distanceFromPreviousLayer:
         min: 2
@@ -66,7 +74,11 @@ MonoBehaviour:
       nodesApartDistance: 2
       randomizePosition: 0.176
       randomizeNodes: 0.333
-      extraNodes: 05000000
+      extraNodes:
+      - nodeType: 5
+        probability: 0.6
+      - nodeType: 3
+        probability: 0.4
     - nodeType: 1
       distanceFromPreviousLayer:
         min: 2
@@ -74,7 +86,11 @@ MonoBehaviour:
       nodesApartDistance: 2
       randomizePosition: 0.649
       randomizeNodes: 0.333
-      extraNodes: 05000000
+      extraNodes:
+      - nodeType: 5
+        probability: 0.6
+      - nodeType: 3
+        probability: 0.4
     - nodeType: 2
       distanceFromPreviousLayer:
         min: 2
@@ -82,7 +98,11 @@ MonoBehaviour:
       nodesApartDistance: 2
       randomizePosition: 0.176
       randomizeNodes: 0.333
-      extraNodes: 05000000
+      extraNodes:
+      - nodeType: 5
+        probability: 0.6
+      - nodeType: 3
+        probability: 0.4
     - nodeType: 2
       distanceFromPreviousLayer:
         min: 2
@@ -90,15 +110,21 @@ MonoBehaviour:
       nodesApartDistance: 2
       randomizePosition: 0.829
       randomizeNodes: 0.333
-      extraNodes: 05000000
+      extraNodes:
+      - nodeType: 5
+        probability: 0.6
+      - nodeType: 3
+        probability: 0.4
     - nodeType: 2
       distanceFromPreviousLayer:
         min: 2
         max: 3
       nodesApartDistance: 2
       randomizePosition: 0.524
-      randomizeNodes: 0.333
-      extraNodes: 05000000
+      randomizeNodes: 0.8
+      extraNodes:
+      - nodeType: 3
+        probability: 1
     - nodeType: 6
       distanceFromPreviousLayer:
         min: 4
@@ -106,4 +132,4 @@ MonoBehaviour:
       nodesApartDistance: 2
       randomizePosition: 0.194
       randomizeNodes: 0
-      extraNodes: 
+      extraNodes: []

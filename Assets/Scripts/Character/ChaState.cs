@@ -167,6 +167,13 @@ public class ChaState : MonoBehaviour
         this.resource.currentHp = Mathf.Clamp(this.resource.currentHp, 0, this.prop.health);
         //因为这边的currentSumCost并不是buff添加的，所以不需要clamp
         this.resource.currentSumCost = Mathf.Clamp(this.resource.currentSumCost, 0, this.resource.currentSumCost);
+        if (SceneLoader.Instance.currentGameScene == GameScene.BattleScene)
+        {
+            if (BattleManager.Instance.parameter.currentMaxCost != 0)
+            {
+                this.resource.currentSumCost = Mathf.Clamp(this.resource.currentSumCost, 0, BattleManager.Instance.parameter.currentMaxCost);
+            }
+        }
         if (CharacterUIManager.Instance != null)
         {
             CharacterUIManager.Instance.UpdateShieldUI((Character)this.side, this.resource.currentShield);
