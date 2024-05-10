@@ -6329,7 +6329,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1375439855}
   m_Layer: 5
-  m_Name: Use All Button
+  m_Name: Refresh Product Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7921,11 +7921,11 @@ RectTransform:
   - {fileID: 823332877}
   - {fileID: 849039271}
   - {fileID: 846694191}
-  - {fileID: 1957574793}
   - {fileID: 407586754}
   - {fileID: 1282716243}
   - {fileID: 1021686753}
   - {fileID: 1714525885}
+  - {fileID: 1957574793}
   - {fileID: 648844374}
   - {fileID: 1772109971}
   m_Father: {fileID: 0}
@@ -8666,7 +8666,7 @@ GameObject:
   - component: {fileID: 1949946011}
   - component: {fileID: 1949946014}
   m_Layer: 5
-  m_Name: Use All Button
+  m_Name: Refresh Product Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
