@@ -26,10 +26,8 @@ public class GameStartState : IState
         BattleManager.Instance.IntializeEnemy();
         //清空回合计数器
         manager.ResetTurns();
-        //重置局内货币
-        manager.ResetBattleCurrency();
-        //刷新局内商店重投次数
-        BattleStoreManager.Instance.RefreashRerollCount();
+        //初始化局内商店各项参数
+        BattleStoreManager.Instance.InitBattleStore();
     }
 
     public void OnExit()
@@ -105,7 +103,8 @@ public class PlayerRoundStartResolutionState : IState
         //TODO:敌人投骰子
         Debug.Log("敌人投骰子");
         ProcessPromptUIManager.Instance.ShowTip(Turn.Player, () => { manager.TransitionState(GameState.PlayerAction); });
-
+        //打开局内商店
+        BattleStoreManager.Instance.OnEnterStore?.Invoke();
 
     }
 
@@ -173,7 +172,8 @@ public class PlayerRoundEndResolutionState : IState
 
 
         Debug.Log("Enter PlayerRoundEndResolutionState");
-
+        //关闭商店
+        BattleStoreManager.Instance.OnExitStore?.Invoke();
 
     }
 

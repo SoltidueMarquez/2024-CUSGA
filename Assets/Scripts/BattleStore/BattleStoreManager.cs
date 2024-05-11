@@ -8,6 +8,18 @@ using UnityEngine.Events;
 public class BattleStoreManager : MonoBehaviour
 {
     /// <summary>
+    /// 使用几次骰面后增加一次刷新商店次数
+    /// </summary>
+    public int maxDiceUseCount=5;
+    /// <summary>
+    /// 使用了多少个骰面
+    /// </summary>
+    public int diceUseCount;
+    /// <summary>
+    /// 局内货币
+    /// </summary>
+    public int battleCurrency;
+    /// <summary>
     /// 局内商店刷新次数
     /// </summary>
     public int rerollCount;
@@ -84,6 +96,7 @@ public class BattleStoreManager : MonoBehaviour
         else if (isFristEnter == false && rerollCount > 0)
         {
             rerollCount--;
+            DataUIManager.Instance.UpdateRefreshStoreText(this.rerollCount);
             battleProducts.Clear();
             AddProduct();
             SideStoreUIManager.Instance.RefreshProductUI(battleProducts);
@@ -184,22 +197,42 @@ public class BattleStoreManager : MonoBehaviour
 
 
     }
-
-    public void RefreashRerollCount()
+    /// <summary>
+    /// 开始游戏时状态机调用，重置商店各项参数
+    /// </summary>
+    public void InitBattleStore()
     {
+        //重投次数重置
         this.rerollCount = 0;
         this.isFristEnter = true;
+        //局内货币重置
+        this.battleCurrency = 0;
+        //使用骰面重置
+        this.diceUseCount = 0;
     }
-
-    public bool IfCanRefeashUI()
+    /// <summary>
+    /// 每次使用骰面后增加局内货币
+    /// </summary>
+    /// <param name="singleDiceObj"></param>
+    public void AddBattleCurrency(SingleDiceObj singleDiceObj)
     {
-        if(this.rerollCount>0 ||this.isFristEnter )
+        this.battleCurrency += (6 - (int)singleDiceObj.idInDice);
+        DataUIManager.Instance.UpdateBargainText(this.battleCurrency);
+    }
+    /// <summary>
+    /// 每次使用骰面后增加使用骰面数，到5则加一次刷新商店次数
+    /// </summary>
+    public void AddRerollCount()
+    {
+        this.diceUseCount++;
+        SideStoreUIManager.Instance.UpdateSliderValue(diceUseCount, maxDiceUseCount);
+        if (diceUseCount% maxDiceUseCount == 0)
         {
-            Debug.Log("truetruetruetruetruetruetruetruetruetrue");
-            return true;
+            this.rerollCount++;
+            DataUIManager.Instance.UpdateRefreshStoreText(this.rerollCount);
+            this.diceUseCount = 0;
+            SideStoreUIManager.Instance.UpdateSliderValue(diceUseCount, maxDiceUseCount);
         }
-        Debug.Log("falsefalsefalsefalsefalsefalsefalsefalse");
-        return false;
     }
 
 }

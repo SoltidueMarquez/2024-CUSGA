@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -39,7 +40,7 @@ public class BaseBattleProduct : ScriptableObject
 
     public void TryBuy()
     {
-        int battleCurrency=BattleManager.Instance.parameter.battleCurrency;
+        int battleCurrency=BattleStoreManager.Instance.battleCurrency;
         if(battleCurrency>=value)
         {
             OnBuySuccess?.Invoke();
@@ -66,7 +67,8 @@ public class BaseBattleProduct : ScriptableObject
             //使用道具
             effect.Use();
             //扣除货币
-            BattleManager.Instance.parameter.battleCurrency -= value;
+            BattleStoreManager.Instance.battleCurrency -= value;
+            DataUIManager.Instance.UpdateBargainText(BattleStoreManager.Instance.battleCurrency);
             isEmpty = true;
         }
         

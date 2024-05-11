@@ -104,7 +104,13 @@ public class BattleDiceHandler : MonoBehaviour
             }
             //释放骰子
 
-
+            //局内商店相关
+            if (chaState == BattleManager.Instance.parameter.playerChaState)
+            {
+                BattleStoreManager.Instance.AddBattleCurrency(singleDiceObj);
+                BattleStoreManager.Instance.AddRerollCount();
+            }
+            
         }
         else
         {
