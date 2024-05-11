@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,21 @@ using UnityEngine.Events;
 
 public class BattleStoreManager : MonoSingleton<BattleStoreManager>
 {
+    /// <summary>
+    /// 局内商店刷新次数
+    /// </summary>
+    public int rerollCount;
+    /// <summary>
+    /// 是否是第一次进商店
+    /// </summary>
+    public bool isFristEnter;
+    /// <summary>
+    /// 商店的商品列表
+    /// </summary>
     public List<BaseBattleProduct> battleProducts = new List<BaseBattleProduct>();
+    /// <summary>
+    /// 已经买过的商品列表（后续可能会更新）
+    /// </summary>
     public List<BaseBattleProduct> broughtBattleProducts = new List<BaseBattleProduct>();
 
     [Header("事件")]
@@ -20,32 +35,47 @@ public class BattleStoreManager : MonoSingleton<BattleStoreManager>
     /// <summary>
     /// 刷新商品店时调用
     /// </summary>
-    public UnityEvent OnRefreshStore;
+    public UnityEvent<List<BaseBattleProduct>> OnRefreshStore;
 
     private void Start()
     {
-        OnEnterStore.AddListener(OpenStore);
-        OnExitStore.AddListener(CloseStore);
         OnRefreshStore.AddListener(RerollShop);
+        OnEnterStore.AddListener(OpenStore);
+        //OnExitStore.AddListener(CloseStore);
+        
+    }
+
+    public void InvokeOnRefreshStore()
+    {
+        OnRefreshStore?.Invoke(battleProducts);
     }
 
     
 
-    public void CloseStore()
-    {
-
-    }
-
 
     public void OpenStore()
     {
-
+        if(isFristEnter == true)
+        {
+            OnRefreshStore.Invoke(battleProducts);
+        }
+        
     }
 
-    public void RerollShop()
+    public void RerollShop(List<BaseBattleProduct> productList)
     {
-        battleProducts.Clear();
-        AddProduct();
+        if (isFristEnter == true)
+        {
+            isFristEnter = false;
+            battleProducts.Clear();
+            AddProduct();
+        }
+        else if (isFristEnter == false && rerollCount > 0)
+        {
+            rerollCount--;
+            battleProducts.Clear();
+            AddProduct();
+        }
     }
 
     public bool AlreadyHasProduct(BaseBattleProduct product)
@@ -53,9 +83,9 @@ public class BattleStoreManager : MonoSingleton<BattleStoreManager>
 
         foreach (var item in battleProducts)
         {
-            if(item.productName == product.productName)
+            if (item.productName == product.productName)
             {
-               return true;
+                return true;
             }
         }
         return false;
@@ -142,5 +172,11 @@ public class BattleStoreManager : MonoSingleton<BattleStoreManager>
 
 
     }
-    
+
+    public void RefreashRerollCount()
+    {
+        this.rerollCount = 0;
+        this.isFristEnter = true;
+    }
+
 }

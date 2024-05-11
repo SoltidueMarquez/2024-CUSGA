@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class SideStoreUIManager : MonoSingleton<SideStoreUIManager>
+    public class SideStoreUIManager : MonoBehaviour
     {
         [SerializeField, Tooltip("骰子栏位列表")] public List<Column> productColumns;
         [SerializeField, Tooltip("货币文本")] public List<Text> costTextList;
@@ -19,6 +19,23 @@ namespace UI
         [SerializeField, Tooltip("隐藏位置")] private Transform hidePosition;
         [SerializeField, Tooltip("出现位置")] private Transform showPosition;
         [SerializeField, Tooltip("遮罩")] private GameObject mask;
+
+        public static SideStoreUIManager Instance;
+
+        private void Awake()
+        {
+            if(Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(this);
+            }
+            BattleStoreManager.Instance.OnEnterStore.AddListener(OpenStore);
+            BattleStoreManager.Instance.OnExitStore.AddListener(CloseStore);
+            BattleStoreManager.Instance.OnRefreshStore.AddListener(RefreshProductUI);
+        }
         
         //创建商品
         private void CreateProductUI(int index, BaseBattleProduct product)
@@ -28,7 +45,7 @@ namespace UI
                 Debug.LogWarning("超出生成的栏位");
                 return;
             }
-            if (productColumns[index].bagObject != null) 
+            if (productColumns[index].bagObject != null)
             {
                 Debug.LogWarning("栏位已经有商品");
                 return;
@@ -37,17 +54,17 @@ namespace UI
             var tmp = Instantiate(productTemplate, parent, true);
             productColumns[index].bagObject = tmp;
             tmp.transform.position = parent.position;//更改位置
-            
+
             var tmpProduct = tmp.GetComponent<SideStoreProductUIObject>();
             tmpProduct.Init(animTime, previewSize, product);//初始化
-            
+
             //售价文本初始化
             costTextList[index].text = product.value.ToString();//售价文本初始化
-            
+
             tmp.SetActive(true);
             tmpProduct.DoAppearAnim(animTime); //出现动画
         }
-        
+
         //移除商品
         private void RemoveProductUI(int index)
         {
@@ -56,7 +73,7 @@ namespace UI
                 Debug.LogWarning("超出生成的栏位");
                 return;
             }
-            if (productColumns[index].bagObject == null) 
+            if (productColumns[index].bagObject == null)
             {
                 return;
             }
@@ -67,10 +84,14 @@ namespace UI
                 item.DoDestroyAnim(animTime, 0);
             }
         }
-        
+
         //刷新全部商品
         public void RefreshProductUI(List<BaseBattleProduct> productList)
         {
+            if(BattleStoreManager.Instance.rerollCount<=0)
+            {
+                return;
+            }
             for (int i = 0; i < productColumns.Count; i++)
             {
                 RemoveProductUI(i);
@@ -90,14 +111,14 @@ namespace UI
                 mask.SetActive(false);
             });
         }
-        
+
         //关闭商店
         public void CloseStore()
         {
             mask.SetActive(true);
             sideStoreUI.transform.DOMove(hidePosition.position, animTime);
         }
-        
+
         //更新进度条
         public void UpdateSliderValue(float value, float maxValue)
         {

@@ -28,6 +28,8 @@ public class GameStartState : IState
         manager.ResetTurns();
         //重置局内货币
         manager.ResetBattleCurrency();
+        //刷新局内商店重投次数
+        BattleStoreManager.Instance.RefreashRerollCount();
     }
 
     public void OnExit()
