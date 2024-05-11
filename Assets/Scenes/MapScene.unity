@@ -299,10 +299,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: StoreUI
       objectReference: {fileID: 0}
-    - target: {fileID: 3099756004248140214, guid: ead795afd3ad01246b092637d1ea4c59, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4247798331437191102, guid: ead795afd3ad01246b092637d1ea4c59, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -871,6 +867,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 4605262524291877557, guid: 2f7aa2b4309df7844aa89135b74879a3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 37f82f0f5b4d89a4fa88abd6d0382c48, type: 3}
     - target: {fileID: 4708744851513909187, guid: 2f7aa2b4309df7844aa89135b74879a3, type: 3}
       propertyPath: reRollText
       value: 
