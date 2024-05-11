@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class SideStoreUIManager : MonoBehaviour
+    public class SideStoreUIManager : MonoSingleton<SideStoreUIManager>
     {
         [SerializeField, Tooltip("骰子栏位列表")] public List<Column> productColumns;
         [SerializeField, Tooltip("货币文本")] public List<Text> costTextList;
@@ -20,23 +20,14 @@ namespace UI
         [SerializeField, Tooltip("出现位置")] private Transform showPosition;
         [SerializeField, Tooltip("遮罩")] private GameObject mask;
 
-        public static SideStoreUIManager Instance;
 
-        private void Awake()
+        private void Start()
         {
-            if(Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(this);
-            }
             BattleStoreManager.Instance.OnEnterStore.AddListener(OpenStore);
             BattleStoreManager.Instance.OnExitStore.AddListener(CloseStore);
-            BattleStoreManager.Instance.OnRefreshStore.AddListener(RefreshProductUI);
+            //BattleStoreManager.Instance.OnRefreshStore.AddListener(RefreshProductUI);
         }
-        
+
         //创建商品
         private void CreateProductUI(int index, BaseBattleProduct product)
         {
@@ -88,10 +79,6 @@ namespace UI
         //刷新全部商品
         public void RefreshProductUI(List<BaseBattleProduct> productList)
         {
-            if(BattleStoreManager.Instance.rerollCount<=0)
-            {
-                return;
-            }
             for (int i = 0; i < productColumns.Count; i++)
             {
                 RemoveProductUI(i);
@@ -101,6 +88,8 @@ namespace UI
                 if (productList[i] == null) { continue; }
                 CreateProductUI(i, productList[i]);
             }
+
+
         }
 
         //打开商店

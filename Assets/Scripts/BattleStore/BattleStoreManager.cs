@@ -1,10 +1,11 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class BattleStoreManager : MonoSingleton<BattleStoreManager>
+public class BattleStoreManager : MonoBehaviour
 {
     /// <summary>
     /// 局内商店刷新次数
@@ -37,8 +38,17 @@ public class BattleStoreManager : MonoSingleton<BattleStoreManager>
     /// </summary>
     public UnityEvent<List<BaseBattleProduct>> OnRefreshStore;
 
-    private void Start()
+    public static BattleStoreManager Instance;
+    private void Awake()
     {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
         OnRefreshStore.AddListener(RerollShop);
         OnEnterStore.AddListener(OpenStore);
         //OnExitStore.AddListener(CloseStore);
@@ -69,12 +79,14 @@ public class BattleStoreManager : MonoSingleton<BattleStoreManager>
             isFristEnter = false;
             battleProducts.Clear();
             AddProduct();
+            SideStoreUIManager.Instance.RefreshProductUI(battleProducts);
         }
         else if (isFristEnter == false && rerollCount > 0)
         {
             rerollCount--;
             battleProducts.Clear();
             AddProduct();
+            SideStoreUIManager.Instance.RefreshProductUI(battleProducts);
         }
     }
 
@@ -177,6 +189,17 @@ public class BattleStoreManager : MonoSingleton<BattleStoreManager>
     {
         this.rerollCount = 0;
         this.isFristEnter = true;
+    }
+
+    public bool IfCanRefeashUI()
+    {
+        if(this.rerollCount>0 ||this.isFristEnter )
+        {
+            Debug.Log("truetruetruetruetruetruetruetruetruetrue");
+            return true;
+        }
+        Debug.Log("falsefalsefalsefalsefalsefalsefalsefalse");
+        return false;
     }
 
 }
