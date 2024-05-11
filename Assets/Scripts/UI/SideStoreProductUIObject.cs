@@ -13,19 +13,24 @@ namespace UI
     public class SideStoreProductUIObject : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     {
         [Header("UI组件")]
-        [SerializeField,Tooltip("说明UI")]protected GameObject descriptionCanvas;
+        [SerializeField,Tooltip("说明UI")]private GameObject descriptionCanvas;
+        [SerializeField,Tooltip("名称文本")]private Text nameText;
         
         private float _animTime;
         private float _scale;
+        private BaseBattleProduct _product;
 
         #region 初始化
-        public void Init( float animTime,float scale, Action onBuy)
+
+        public void Init(float animTime, float scale, BaseBattleProduct product)
         {
             //大小初始化
             this.transform.localScale = new Vector3(1, 1, 1);
             _scale = scale;
             _animTime = animTime;
+            _product = product;
             //TODO:信息文本初始化
+            nameText.text = product.productName;
             
             //按钮事件绑定
             this.GetComponent<Button>().onClick.AddListener(()=>
@@ -34,20 +39,16 @@ namespace UI
                 {
                     AudioManager.Instance.PlayRandomSound("clickDown");
                 }
-                onBuy?.Invoke();
-                
-                //TODO:这边要注释掉写在Unity事件里
-                DoChosenAnim();
+                product.TryBuy();//调用购买函数
             });
-            
-            //OnBuySuccess.AddListener(DoChosenAnim);
-            //OnBuyFail.AddListener();
+            product.OnBuySuccess.AddListener(DoChosenAnim);
+            //product.OnBuyFail.AddListener();
         }
         
-        //TODO:删除监听事件
+        //删除监听事件
         private void RemoveListener()
         {
-            
+            _product.OnBuySuccess.AddListener(DoChosenAnim);
         }
         #endregion
 
