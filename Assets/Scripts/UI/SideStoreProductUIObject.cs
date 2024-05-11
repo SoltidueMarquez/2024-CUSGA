@@ -12,9 +12,10 @@ namespace UI
     [RequireComponent(typeof(Button))]
     public class SideStoreProductUIObject : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     {
-        [Header("UI组件")]
-        [SerializeField,Tooltip("说明UI")]private GameObject descriptionCanvas;
-        [SerializeField,Tooltip("名称文本")]private Text nameText;
+        [Header("UI组件")] [SerializeField, Tooltip("说明UI")] private GameObject descriptionCanvas;
+        [SerializeField, Tooltip("名称文本")] private Text nameText;
+        [SerializeField, Tooltip("名称文本")] private Text descText;
+        [SerializeField, Tooltip("图片")] private Image image;
         
         private float _animTime;
         private float _scale;
@@ -29,8 +30,10 @@ namespace UI
             _scale = scale;
             _animTime = animTime;
             _product = product;
-            //TODO:信息文本初始化
+            //信息文本初始化
             nameText.text = product.productName;
+            descText.text = product.description;
+            image.sprite = product.productSprite;
             
             //按钮事件绑定
             this.GetComponent<Button>().onClick.AddListener(()=>
