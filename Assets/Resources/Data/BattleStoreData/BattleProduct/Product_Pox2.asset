@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 999afd7c0638a5b40940c214faee271d, type: 3}
   m_Name: Product_Pox2
   m_EditorClassIdentifier: 
+  isEmpty: 0
   value: 18
   type: 2
   productName: "\u65BD\u52A0\u6C34\u75D8"
@@ -23,3 +24,4 @@ MonoBehaviour:
   OnBuySuccess:
     m_PersistentCalls:
       m_Calls: []
+  productSprite: {fileID: 198641221, guid: aa22c55a3819f6d4da669cc1b598577e, type: 3}

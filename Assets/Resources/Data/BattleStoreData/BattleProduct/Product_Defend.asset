@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 999afd7c0638a5b40940c214faee271d, type: 3}
   m_Name: Product_Defend
   m_EditorClassIdentifier: 
+  isEmpty: 0
   value: 12
   type: 0
   productName: "\u9632\u5FA1"
@@ -23,3 +24,4 @@ MonoBehaviour:
   OnBuySuccess:
     m_PersistentCalls:
       m_Calls: []
+  productSprite: {fileID: -78486233, guid: a3579de2edecde242a8cab02138cdbf4, type: 3}

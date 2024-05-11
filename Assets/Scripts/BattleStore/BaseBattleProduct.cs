@@ -35,6 +35,8 @@ public class BaseBattleProduct : ScriptableObject
     /// </summary>
     public UnityEvent OnBuySuccess;
 
+    public Sprite productSprite;
+
     public void TryBuy()
     {
         int battleCurrency=BattleManager.Instance.parameter.battleCurrency;
