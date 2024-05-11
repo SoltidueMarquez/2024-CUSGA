@@ -21,7 +21,7 @@ namespace UI
         [SerializeField, Tooltip("遮罩")] private GameObject mask;
         
         //创建商品
-        private void CreateProductUI(int index, Action onBuy)
+        private void CreateProductUI(int index, BaseBattleProduct product)
         {
             if (index > productColumns.Count)
             {
@@ -39,10 +39,10 @@ namespace UI
             tmp.transform.position = parent.position;//更改位置
             
             var tmpProduct = tmp.GetComponent<SideStoreProductUIObject>();
-            tmpProduct.Init(animTime, previewSize, onBuy);//初始化
+            tmpProduct.Init(animTime, previewSize, product);//初始化
             
-            //TODO:售价文本初始化
-            costTextList[index].text = "???";//售价文本初始化
+            //售价文本初始化
+            costTextList[index].text = product.value.ToString();//售价文本初始化
             
             tmp.SetActive(true);
             tmpProduct.DoAppearAnim(animTime); //出现动画
@@ -69,16 +69,16 @@ namespace UI
         }
         
         //刷新全部商品
-        public void RefreshProductUI()
+        public void RefreshProductUI(List<BaseBattleProduct> productList)
         {
             for (int i = 0; i < productColumns.Count; i++)
             {
                 RemoveProductUI(i);
             }
-
             for (int i = 0; i < productColumns.Count; i++)
             {
-                CreateProductUI(i, null);
+                if (productList[i] == null) { continue; }
+                CreateProductUI(i, productList[i]);
             }
         }
 
@@ -104,7 +104,7 @@ namespace UI
             updateSlider.value = value / maxValue;
         }
 
-        private void Update()
+        /*private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -118,6 +118,6 @@ namespace UI
             {
                 CloseStore();
             }
-        }
+        }*/
     }
 }
