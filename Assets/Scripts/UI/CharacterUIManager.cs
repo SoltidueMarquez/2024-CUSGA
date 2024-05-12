@@ -15,8 +15,14 @@ namespace UI
         Player,
         Enemy
     }
+    public enum EffectType
+    {
+        Shield,
+        Attack,
+        Cure
+    }
     /// <summary>
-    /// TODO:动画的顺序播放队列需要实现，因为之后的动画可能会打断之前的动画，但是要求是即选即用，感觉不能用队列，暂时先这样吧
+    /// 动画的顺序播放队列需要实现，因为之后的动画可能会打断之前的动画，但是要求是即选即用，感觉不能用队列，暂时先这样吧
     /// </summary>
     public class CharacterUIManager : MonoBehaviour
     {
@@ -54,7 +60,13 @@ namespace UI
         [SerializeField, Tooltip("玩家血条")] private Slider playerHealthSlider;
         [SerializeField, Tooltip("敌人血量Text")] private Text playerHealthText;
         [SerializeField, Tooltip("玩家护盾UI")] private ShieldUIObject playerShieldUI;
-
+        
+        [Header("特效")]
+        [SerializeField, Tooltip("特效")] private GameObject effectTemplate;
+        [SerializeField, Tooltip("护盾")] private Sprite shieldEffect;
+        [SerializeField, Tooltip("攻击")] private Sprite attackEffect;
+        [SerializeField, Tooltip("治疗")] private Sprite cureEffect;
+        
         private Vector3 offsetPosition;
         
         [Header("Boss相关")] 
@@ -65,8 +77,23 @@ namespace UI
         [SerializeField, Tooltip("Buff")] private Transform bossBuff;
         [SerializeField, Tooltip("意图")] private Transform bossIntention;
         [SerializeField, Tooltip("")] private Image bgImage;
-        
-        
+
+        #region 特效
+        private void CreateEffect(Transform parent, EffectType type, float time)
+        {
+            Sprite sprite = type switch
+            {
+                EffectType.Attack => attackEffect,
+                EffectType.Cure => cureEffect,
+                EffectType.Shield => shieldEffect,
+                _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+            };
+            var tmp = Instantiate(effectTemplate, parent, true);
+            tmp.transform.position = parent.position;//更改位置
+            tmp.GetComponent<CharacterEffects>().Init(time, sprite);//初始化
+            tmp.SetActive(true);
+        }
+        #endregion
 
         #region 攻击与受击
         /// <summary>
@@ -112,6 +139,7 @@ namespace UI
             character.DOPunchPosition(punchAmplitude, durationTime, punchTime);
             attackTextPosition += character.position;
             CreateAttackText(attackTextParent, hitNum, attackTextPosition);//创建伤害数字
+            CreateEffect(character, EffectType.Attack, durationTime);//创建特效
         }
 
         /// <summary>
@@ -187,6 +215,7 @@ namespace UI
                 case Character.Enemy:
                     attackTextPosition += enemy.position;
                     DoCure(attackTextPosition, num);
+                    CreateEffect(enemy, EffectType.Cure, attackTime);
                     break;
                 case Character.Player:
                     attackTextPosition += player.position;
@@ -209,6 +238,7 @@ namespace UI
         {
             yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
             DoCure(attackTextPosition, num);
+            CreateEffect(player, EffectType.Cure, attackTime);
         }
         #endregion
 
@@ -287,6 +317,7 @@ namespace UI
                 case Character.Enemy:
                     attackTextPosition += enemy.position;
                     CreateShieldText(attackTextParent, shieldNum, attackTextPosition);//创建护盾文字
+                    CreateEffect(enemy, EffectType.Shield, attackTime);//创建特效
                     break;
                 case Character.Player:
                     attackTextPosition += player.position;
@@ -298,6 +329,7 @@ namespace UI
         {
             yield return new WaitForSeconds(RollingResultUIManager.Instance.useTime * 0.75f);
             CreateShieldText(attackTextParent, shieldNum, position);//创建护盾文字
+            CreateEffect(player, EffectType.Shield, attackTime);//创建特效
         }
         
         /// <summary>

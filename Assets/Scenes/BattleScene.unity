@@ -622,6 +622,10 @@ MonoBehaviour:
   playerHealthSlider: {fileID: 987176127}
   playerHealthText: {fileID: 900775698}
   playerShieldUI: {fileID: 3410802820645819181}
+  effectTemplate: {fileID: 8659785027809783839, guid: 489de49dc4937604f81dcf11a79ce7a3, type: 3}
+  shieldEffect: {fileID: 21300000, guid: 353dda781f306ec4ea5b08d538cf651b, type: 3}
+  attackEffect: {fileID: 21300000, guid: 043620348b4dd7a46a18ae2fc45bb14a, type: 3}
+  cureEffect: {fileID: 21300000, guid: a5fcb97a076225c4094426661672090f, type: 3}
   boss: {fileID: 252022783}
   bossHealthSlider: {fileID: 1393705113}
   bossHealthText: {fileID: 1393705111}
@@ -7180,7 +7184,6 @@ MonoBehaviour:
     enemyDataSO: {fileID: 11400000, guid: ca768467329733c49a3099706f2c2e47, type: 2}
     ifUsingDice: 0
     currentMaxCost: 0
-    battleCurrency: 0
   currentSelectEnemy: {fileID: 341200662}
 --- !u!4 &1590396381
 Transform:
