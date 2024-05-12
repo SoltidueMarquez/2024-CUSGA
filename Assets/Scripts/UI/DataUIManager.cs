@@ -56,7 +56,7 @@ namespace UI
         public void UpdateRefreshStoreText(int time)
         {
             if (refreshStoreText == null) { return; }
-            refreshStoreText.text = $"{time}次";
+            refreshStoreText.text = $"×{time}";
         }
 
         #region 费用
@@ -95,7 +95,7 @@ namespace UI
                 {
                     _currentCost--;
                 }
-                costText.text = $"Cost:{_currentCost}";
+                costText.text = $"Cost:{_currentCost}/{BattleManager.Instance.GetCurrentMaxCost()}";
             }
         }
         #endregion

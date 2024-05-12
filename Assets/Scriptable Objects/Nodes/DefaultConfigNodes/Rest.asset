@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5f491b607b1cd948b5bc856850b2616, type: 3}
   m_Name: Rest
   m_EditorClassIdentifier: 
-  sprite: {fileID: 667978648, guid: f99e2eac10c3e574cb2a0705d209ed5b, type: 3}
+  sprite: {fileID: 21300000, guid: 280e611fd61efa74a876741b3852eaaa, type: 3}
   nodeType: 3

@@ -15,6 +15,8 @@ namespace UI
         [SerializeField, Tooltip("全部使用按钮")] private Button useAllButton;
         [SerializeField, Tooltip("动画时长")] private float animTime;
         [SerializeField, Tooltip("金钱文本")] private Text moneyText;
+        [SerializeField, Tooltip("费用")] private GameObject cost;
+        
         [Header("奖励骰面")]
         [SerializeField, Tooltip("骰子栏位列表")] public List<Column> diceColumns;
         [SerializeField, Tooltip("骰子模板")] private GameObject diceTemplate;
@@ -24,6 +26,7 @@ namespace UI
 
         public void ShowRewardUI(float waitSeconds)
         {
+            cost.SetActive(false);
             endButton.interactable = false;
             useAllButton.interactable = false;
             StartCoroutine(RewardUI(waitSeconds));
