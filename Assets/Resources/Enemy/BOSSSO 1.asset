@@ -25,12 +25,12 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
   - diceType: 0
     singleDiceModelSOs:
-    - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
-    - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
-    - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
-    - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
-    - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
-    - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
+    - {fileID: 11400000, guid: d97e936d87d58c74ca35b0aae6318dab, type: 2}
+    - {fileID: 11400000, guid: d97e936d87d58c74ca35b0aae6318dab, type: 2}
+    - {fileID: 11400000, guid: d97e936d87d58c74ca35b0aae6318dab, type: 2}
+    - {fileID: 11400000, guid: d97e936d87d58c74ca35b0aae6318dab, type: 2}
+    - {fileID: 11400000, guid: d97e936d87d58c74ca35b0aae6318dab, type: 2}
+    - {fileID: 11400000, guid: d97e936d87d58c74ca35b0aae6318dab, type: 2}
   - diceType: 1
     singleDiceModelSOs:
     - {fileID: 11400000, guid: c8d4ab81eb6b5a941a8e8cc06a4c171b, type: 2}
@@ -60,6 +60,7 @@ MonoBehaviour:
     money: 0
     maxRollTimes: 0
     shield: 0
+    maxCost: 0
   enemyBuffs:
   - buffDataSO: {fileID: 11400000, guid: e5be8aa8e5d04204db1dcf3eb2bcf26d, type: 2}
     buffStack: 3
