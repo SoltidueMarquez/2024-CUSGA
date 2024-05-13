@@ -1,5 +1,6 @@
 using System;
 using Map;
+using UI.Tutorial;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -50,7 +51,12 @@ namespace Rest
         }
         public void EnterRest()
         {
+            if (TutorialManager.Instance.ifFirstRest == true && GameManager.Instance.ifTutorial)
+            {
+                TutorialManager.Instance.EnterUI(TutorPage.Rest);
+            }
             onEnterRest.Invoke();
+            TutorialManager.Instance.ifFirstRest = false;
         }
         public void ExitRest()
         {

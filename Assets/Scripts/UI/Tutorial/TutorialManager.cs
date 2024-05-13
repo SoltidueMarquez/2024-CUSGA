@@ -11,16 +11,17 @@ namespace UI.Tutorial
         Reward,
         Map,
         Store,
-        Strength
+        Strength,
+        Rest
     }
     public class TutorialManager : PersistentSingleton<TutorialManager>
     {
         [SerializeField, Tooltip("教程页面列表")] private List<TutorialPage> tutorialPageList;
         [SerializeField, Tooltip("教程界面")] private GameObject panel;
         [Tooltip("离开教程界面事件")]public UnityEvent onExitTutorial;
-        
-        [Tooltip("测试打开的教程")]public TutorPage test;
 
+        public bool ifFirstRest;
+        
         private void Start()
         {
             onExitTutorial.AddListener(ExitUI);
