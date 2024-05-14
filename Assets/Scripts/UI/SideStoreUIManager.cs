@@ -19,13 +19,13 @@ namespace UI
         [SerializeField, Tooltip("隐藏位置")] private Transform hidePosition;
         [SerializeField, Tooltip("出现位置")] private Transform showPosition;
         [SerializeField, Tooltip("遮罩")] private GameObject mask;
+        [SerializeField, Tooltip("折叠按钮")] private Button slideButton;
 
 
         private void Start()
         {
             BattleStoreManager.Instance.OnEnterStore.AddListener(OpenStore);
             BattleStoreManager.Instance.OnExitStore.AddListener(CloseStore);
-            //BattleStoreManager.Instance.OnRefreshStore.AddListener(RefreshProductUI);
         }
 
         //创建商品
@@ -92,9 +92,23 @@ namespace UI
 
         }
 
+        public void SlideStore()
+        {
+            if (mask.activeSelf)
+            {
+                OpenStore();
+            }
+            else
+            {
+                mask.SetActive(true);
+                sideStoreUI.transform.DOMove(hidePosition.position, animTime);
+            }
+        }
+        
         //打开商店
         public void OpenStore()
         {
+            slideButton.interactable = true;
             sideStoreUI.transform.DOMove(showPosition.position, animTime).OnComplete(() =>
             {
                 mask.SetActive(false);
@@ -105,6 +119,7 @@ namespace UI
         public void CloseStore()
         {
             mask.SetActive(true);
+            slideButton.interactable = false;
             sideStoreUI.transform.DOMove(hidePosition.position, animTime);
         }
 
