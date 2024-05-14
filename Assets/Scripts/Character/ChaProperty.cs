@@ -58,6 +58,7 @@ public class ChaProperty
         this.money = chaProperty.money;
         this.maxRollTimes = chaProperty.maxRollTimes;
         this.shield = chaProperty.shield;
+        this.maxCost = chaProperty.maxCost;
     }
     public void Zero()
     {

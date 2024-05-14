@@ -28,7 +28,7 @@ public class ChaState : MonoBehaviour
     /// <summary>
     /// 计算buff后的属性上限
     /// </summary>
-    public ChaProperty prop { get; private set; } = ChaProperty.zero;
+    public ChaProperty prop  = ChaProperty.zero;
     /// <summary>
     /// 玩家当前的资源,这个在全局的过程中都不变，可能在局外变化
     /// </summary>
@@ -149,6 +149,7 @@ public class ChaState : MonoBehaviour
         buffHandler.RecheckBuff(buffProp, ref controlState);
         //获取玩家的圣物所有给的属性
         ChaProperty halidomProp = HalidomManager.Instance.deltaCharacterProperty;
+        Debug.Log("圣物的属性" + chaProperty.maxCost);
         //重新计算属性
         this.prop = (this.baseProp + buffProp[0]) * (this.buffProp[1]) + halidomProp;
         //计算差值
