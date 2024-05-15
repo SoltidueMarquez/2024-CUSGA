@@ -19,10 +19,10 @@ MonoBehaviour:
     singleDiceModelSOs:
     - {fileID: 11400000, guid: 5525e21d491814149850cdcec7f627c7, type: 2}
     - {fileID: 11400000, guid: 5525e21d491814149850cdcec7f627c7, type: 2}
-    - {fileID: 11400000, guid: 5525e21d491814149850cdcec7f627c7, type: 2}
+    - {fileID: 11400000, guid: d97e936d87d58c74ca35b0aae6318dab, type: 2}
     - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
     - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
-    - {fileID: 11400000, guid: f36c2e11a6587c64188a504bcb517f7b, type: 2}
+    - {fileID: 11400000, guid: d97e936d87d58c74ca35b0aae6318dab, type: 2}
   - diceType: 0
     singleDiceModelSOs:
     - {fileID: 11400000, guid: d97e936d87d58c74ca35b0aae6318dab, type: 2}
@@ -53,8 +53,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 97e6b3be624ac4644a7c0f6a6c64faed, type: 2}
     - {fileID: 11400000, guid: 97e6b3be624ac4644a7c0f6a6c64faed, type: 2}
     - {fileID: 11400000, guid: 97e6b3be624ac4644a7c0f6a6c64faed, type: 2}
-    - {fileID: 11400000, guid: 94a1ceb80d0e30044a3da6a7e178d822, type: 2}
-    - {fileID: 11400000, guid: 94a1ceb80d0e30044a3da6a7e178d822, type: 2}
+    - {fileID: 11400000, guid: d97e936d87d58c74ca35b0aae6318dab, type: 2}
+    - {fileID: 11400000, guid: d97e936d87d58c74ca35b0aae6318dab, type: 2}
   baseProp:
     health: 150
     money: 0
