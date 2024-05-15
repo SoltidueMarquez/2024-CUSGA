@@ -17,8 +17,8 @@ MonoBehaviour:
   EnemyBattleDiceList:
   - diceType: 0
     singleDiceModelSOs:
-    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
-    - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
+    - {fileID: 11400000, guid: 26e4756286b1d7244bd09508f32ac05e, type: 2}
+    - {fileID: 11400000, guid: 26e4756286b1d7244bd09508f32ac05e, type: 2}
     - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
     - {fileID: 11400000, guid: f985cb34feae51e40aa6e6db60f79d43, type: 2}
     - {fileID: 11400000, guid: 1e16898b43153b6448059271562ab1aa, type: 2}
@@ -52,8 +52,10 @@ MonoBehaviour:
     money: 0
     maxRollTimes: 0
     shield: 0
+    maxCost: 0
   enemyBuffs:
   - buffDataSO: {fileID: 11400000, guid: fdf6ae296227ce1448dbadb39f41ac3f, type: 2}
     buffStack: 1
     buffRound: 0
   enemySprite: {fileID: 21300000, guid: 62d5b45afcfb6c54d94f25b17aa95cd5, type: 3}
+  enemyBackgroundSprite: {fileID: 0}
